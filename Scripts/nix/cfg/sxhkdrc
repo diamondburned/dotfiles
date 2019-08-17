@@ -1,0 +1,3 @@
+XF86Audio{Lower,Raise}Volume
+    amixer -c 0 sset Master 1%{-,+}
+

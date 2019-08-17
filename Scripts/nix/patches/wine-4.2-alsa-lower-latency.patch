@@ -1,0 +1,77 @@
+--- a/dlls/winealsa.drv/mmdevdrv.c
++++ b/dlls/winealsa.drv/mmdevdrv.c
+@@ -53,9 +53,29 @@ WINE_DECLARE_DEBUG_CHANNEL(winediag);
+ 
+ #define NULL_PTR_ERR MAKE_HRESULT(SEVERITY_ERROR, FACILITY_WIN32, RPC_X_NULL_REF_POINTER)
+ 
+-static const REFERENCE_TIME DefaultPeriod = 100000;
+-static const REFERENCE_TIME MinimumPeriod = 50000;
+-#define                     EXTRA_SAFE_RT   40000
++static REFERENCE_TIME DefaultPeriod = 100000;
++static REFERENCE_TIME MinimumPeriod = 50000;
++static int ExtraSafeRT = 40000;
++
++static void set_env_vars(void)
++{
++    const char *periodenv = getenv("STAGING_ALSA_PERIOD_SIZE");
++    const char *rtenv = getenv("STAGING_ALSA_SAFE_RT");
++
++
++    if (periodenv) {
++        int periodval = atoi(periodenv);
++        MinimumPeriod = periodval;
++        DefaultPeriod = periodval;
++        printf("Set period size to %d (STAGING_ALSA_PERIOD_SIZE).\n", periodval);
++    }
++
++    if (rtenv) {
++        int rtval = atoi(rtenv);
++        ExtraSafeRT = rtval;
++        printf("Set ExtraSafeRT to %d (STAGING_ALSA_SAFE_RT).\n", rtval);
++    }
++}
+ 
+ struct ACImpl;
+ typedef struct ACImpl ACImpl;
+@@ -1248,6 +1268,10 @@ static HRESULT WINAPI AudioClient_Initialize(IAudioClient *iface,
+     int err, i;
+     HRESULT hr = S_OK;
+ 
++    const char *durationenv = getenv("STAGING_ALSA_DURATION");
++
++    set_env_vars();
++
+     TRACE("(%p)->(%x, %x, %s, %s, %p, %s)\n", This, mode, flags,
+           wine_dbgstr_longlong(duration), wine_dbgstr_longlong(period), fmt, debugstr_guid(sessionguid));
+ 
+@@ -1297,6 +1321,12 @@ static HRESULT WINAPI AudioClient_Initialize(IAudioClient *iface,
+         }
+     }
+ 
++    if (durationenv) {
++        int durationval = atoi(durationenv);
++        duration = durationval;
++        printf("Set duration to %d (STAGING_ALSA_DURATION)\n", durationval);
++    }
++
+     EnterCriticalSection(&This->lock);
+ 
+     if(This->initted){
+@@ -1445,7 +1475,7 @@ static HRESULT WINAPI AudioClient_Initialize(IAudioClient *iface,
+     if(mode == AUDCLNT_SHAREMODE_EXCLUSIVE)
+         This->bufsize_frames -= This->bufsize_frames % This->mmdev_period_frames;
+     This->hidden_frames = This->alsa_period_frames + This->mmdev_period_frames +
+-        MulDiv(fmt->nSamplesPerSec, EXTRA_SAFE_RT, 10000000);
++        MulDiv(fmt->nSamplesPerSec, ExtraSafeRT, 10000000);
+     /* leave no less than about 1.33ms or 256 bytes of data after a rewind */
+     This->safe_rewind_frames = max(256 / fmt->nBlockAlign, MulDiv(133, fmt->nSamplesPerSec, 100000));
+ 
+@@ -1881,6 +1911,8 @@ static HRESULT WINAPI AudioClient_GetDevicePeriod(IAudioClient *iface,
+ {
+     ACImpl *This = impl_from_IAudioClient(iface);
+ 
++    set_env_vars();
++
+     TRACE("(%p)->(%p, %p)\n", This, defperiod, minperiod);
+ 
+     if(!defperiod && !minperiod)

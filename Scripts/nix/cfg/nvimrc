@@ -1,0 +1,133 @@
+set nocompatible
+
+call plug#begin('~/.vim/bundle')
+
+"Plug 'vim-airline/vim-airline'
+"Plug 'vim-airline/vim-airline-themes'
+Plug 'dgraham/vim-eslint'
+Plug 'scrooloose/nerdtree'
+Plug 'scrooloose/nerdcommenter'
+Plug 'dylanaraps/fff.vim'
+Plug 'pangloss/vim-javascript'
+Plug 'airblade/vim-gitgutter'
+Plug 'posva/vim-vue'
+Plug 'LnL7/vim-nix'
+Plug 'plasticboy/vim-markdown'
+Plug 'godlygeek/tabular'
+Plug 'sheerun/vim-polyglot'
+Plug 'stevearc/vim-arduino'
+
+"Autocomplete brackets/parens/etc like vscode"
+Plug 'jiangmiao/auto-pairs'
+
+"neat stuff"
+"Plug 'bilalq/lite-dfm'
+"Plug 'junegunn/limelight.vim'
+
+"Autocompletion"
+Plug 'Shougo/deoplete.nvim', { 'do': ':UpdateRemotePlugins' }
+Plug 'w0rp/ale'
+Plug 'Shougo/neco-syntax'
+
+call plug#end()
+
+inoremap <f1> <Esc>
+
+set number
+set autoindent
+set clipboard=unnamedplus
+set mouse=a
+set tabstop=4
+set shiftwidth=4
+
+set linebreak
+nnoremap <Up>   gk
+nnoremap <Down> gj
+nnoremap <Home> g<Home>
+nnoremap <End>  g<End>
+
+vnoremap <C-c> "+y
+vnoremap <c-v> "+p
+
+"Go to last cursor on file open"
+autocmd BufReadPost *
+  \ if line("'\"") >= 1 && line("'\"") <= line("$") |
+  \   exe "normal! g`\"" |
+  \ endif
+
+"Auto-commands for type-specific files"
+"autocmd BufRead,BufNewFile *.nix    setlocal noautoindent
+"autocmd BufRead,BufNewFile *.nix    setlocal noexpandtab
+"autocmd BufRead,BufNewFile *.md     setlocal spell
+"autocmd BufRead,BufNewFile *.vue    syntax sync fromstart
+"autocmd BufRead,BufNewFile *.svelte setlocal filetype=html
+"autocmd BufRead,BufNewFile *.svelte setlocal syntax=html
+
+"Autoindent"
+set smartindent
+filetype indent on
+
+"Tab size 4"
+set tabstop=4
+set shiftwidth=4
+
+"Tweaks"
+filetype plugin indent on
+syntax on
+hi signcollumn ctermbg=0
+highlight SignColumn guibg=NONE ctermbg=NONE
+"highlight EndOfBuffer guifg=bg
+hi QuickFixLine gui=reverse
+set autoindent
+au InsertLeave * call cursor([getpos('.')[1], getpos('.')[2]+1])
+
+"Custom binds"
+nmap <Tab> :NERDTreeToggle<CR> <F23> <bar> :NERDTreeRefreshRoot<CR>
+nmap <C-_> <Plug>NERDCommenterToggle
+vmap <C-_> <Plug>NERDCommenterToggle<CR>gv
+nmap <C-j> =G
+nnoremap f :F<CR>
+
+set numberwidth=10
+set textwidth=80
+set number
+
+set fillchars=vert:\
+
+"Remove background"
+hi LineNr ctermbg=NONE
+hi SignColumn ctermbg=NONE
+hi VertSplit ctermbg=NONE cterm=NONE ctermfg=240
+hi CursorLineNr ctermbg=NONE ctermfg=7
+hi StatusLine ctermbg=NONE cterm=NONE
+hi StatusLineNC ctermbg=NONE cterm=NONE
+
+"Echodoc"
+let g:echodoc#enable_at_startup = 1
+"set cmdheight=2▏
+
+"ALE configs"
+highlight ALEWarningSign ctermbg=NONE
+let g:ale_virtualtext_cursor = 1
+let g:ale_sign_error = '!'
+let g:ale_sign_warning = '>'
+let g:ale_sign_column_always = 1
+"let g:ale_completion_enabled = 1
+let g:ale_fix_on_save = 1
+let g:ale_fixers = {
+        \ 'go': [ "goimports" ],
+        \ }
+let g:ale_linters = {
+        \ 'go': [ "gopls"  ],
+        \ 'c':  [ "cquery" ],
+        \ 'javascript': [ "prettier", "tsserver" ],
+        \ }
+nnoremap gd :ALEGoToDefinition<CR>
+nnoremap K :ALEHover<CR>
+
+"Deoplete+ALE integration"
+let g:deoplete#enable_at_startup = 1
+call deoplete#custom#option('sources', {
+        \ '_': [ 'ale' ],
+        \})
+
