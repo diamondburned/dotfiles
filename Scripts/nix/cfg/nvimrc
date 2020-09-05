@@ -2,66 +2,61 @@ set nocompatible
 
 call plug#begin('~/.vim/bundle')
 
-"Plug 'vim-airline/vim-airline'
-"Plug 'vim-airline/vim-airline-themes'
-Plug 'dgraham/vim-eslint'
+" Plug 'dgraham/vim-eslint'
+" Plug 'pangloss/vim-javascript'
+" Plug 'ziglang/zig.vim'
+Plug 'inkarkat/vim-SyntaxRange'
+Plug 'cespare/vim-toml'
 Plug 'scrooloose/nerdtree'
-Plug 'scrooloose/nerdcommenter'
-Plug 'dylanaraps/fff.vim'
-Plug 'pangloss/vim-javascript'
+Plug 'tpope/vim-commentary'
 Plug 'airblade/vim-gitgutter'
-Plug 'posva/vim-vue'
 Plug 'LnL7/vim-nix'
+Plug 'arp242/gopher.vim'
 Plug 'plasticboy/vim-markdown'
 Plug 'godlygeek/tabular'
-Plug 'sheerun/vim-polyglot'
-Plug 'stevearc/vim-arduino'
+Plug 'bogado/file-line'
+Plug 'rhysd/conflict-marker.vim'
 
 "Autocomplete brackets/parens/etc like vscode"
 Plug 'jiangmiao/auto-pairs'
 
-"neat stuff"
-"Plug 'bilalq/lite-dfm'
-"Plug 'junegunn/limelight.vim'
+"Icons"
+Plug 'ryanoasis/vim-devicons'
 
 "Autocompletion"
-Plug 'Shougo/deoplete.nvim', { 'do': ':UpdateRemotePlugins' }
-Plug 'w0rp/ale'
-Plug 'Shougo/neco-syntax'
+Plug 'dense-analysis/ale'
 
 call plug#end()
 
-inoremap <f1> <Esc>
-
-set number
-set autoindent
-set clipboard=unnamedplus
+"Better mouse support"
 set mouse=a
-set tabstop=4
-set shiftwidth=4
-
-set linebreak
-nnoremap <Up>   gk
-nnoremap <Down> gj
-nnoremap <Home> g<Home>
-nnoremap <End>  g<End>
-
 vnoremap <C-c> "+y
-vnoremap <c-v> "+p
+vnoremap <C-v> "+p
+inoremap <C-v> "+p
+map - dd
+
+" Make comments italiced
+hi Comment cterm=italic
+
+"Auto-commands for type-specific files"
+autocmd BufRead,BufNewFile *.nix    setlocal noautoindent
+autocmd BufRead,BufNewFile *.nix    setlocal noexpandtab
+autocmd BufRead,BufNewFile *.nix    setlocal shiftwidth=4
+autocmd BufRead,BufNewFile *.md     setlocal spell
+autocmd BufRead,BufNewFile *.vue    syntax sync fromstart
+autocmd BufRead,BufNewFile *.vugu   setlocal filetype=html
+autocmd BufRead,BufNewFile *.svelte setlocal filetype=html
+autocmd BufRead,BufNewFile *.svelte setlocal syntax=html
+autocmd BufRead,BufNewFile .env*    setlocal syntax=sh
+
+"Special highlighting for Vugu"
+call SyntaxRange#Include('<script type="application/x-go">', '</script>', 'go')
 
 "Go to last cursor on file open"
 autocmd BufReadPost *
-  \ if line("'\"") >= 1 && line("'\"") <= line("$") |
-  \   exe "normal! g`\"" |
-  \ endif
-
-"Auto-commands for type-specific files"
-"autocmd BufRead,BufNewFile *.nix    setlocal noautoindent
-"autocmd BufRead,BufNewFile *.nix    setlocal noexpandtab
-"autocmd BufRead,BufNewFile *.md     setlocal spell
-"autocmd BufRead,BufNewFile *.vue    syntax sync fromstart
-"autocmd BufRead,BufNewFile *.svelte setlocal filetype=html
-"autocmd BufRead,BufNewFile *.svelte setlocal syntax=html
+	\ if line("'\"") >= 1 && line("'\"") <= line("$") |
+	\   exe "normal! g`\"" |
+	\ endif
 
 "Autoindent"
 set smartindent
@@ -71,40 +66,213 @@ filetype indent on
 set tabstop=4
 set shiftwidth=4
 
+"Better colors and highlighting"
+let g:material_terminal_italics = 1
+let g:material_theme_style='lighter'
+set background=light
+"Transparent background"
+hi Normal guibg=NONE ctermbg=NONE
+
 "Tweaks"
 filetype plugin indent on
 syntax on
-hi signcollumn ctermbg=0
-highlight SignColumn guibg=NONE ctermbg=NONE
-"highlight EndOfBuffer guifg=bg
-hi QuickFixLine gui=reverse
-set autoindent
+
+"Custom colors"
+hi Todo     ctermbg=14
+hi Search   ctermbg=14   ctermfg=0
+hi SpellBad ctermbg=NONE cterm=undercurl guisp=#FF6961
+
+hi StatusLine   ctermfg=5
+hi StatusLineNC ctermfg=13
+
+hi Comment ctermfg=4
+
+hi Constant ctermfg=15
+hi Number   ctermfg=5
+hi Boolean  ctermfg=5
+
+hi Identifier ctermfg=6
+hi Function   ctermfg=15
+
+hi Statement ctermfg=3
+hi Operator  ctermfg=15
+
+hi Type ctermfg=2
+
+hi SignColumn   ctermbg=NONE
+hi EndOfBuffer  ctermfg=7
+hi QuickFixLine cterm=reverse
+
+"Change NERDTree's colors"
+hi CursorLine    ctermbg=7 cterm=NONE
+hi Directory     ctermfg=14
+hi NERDTreeFlags ctermfg=6
+
+"NERDTree executable highlight but also something else"
+hi Title ctermfg=10
+
+"Hide the trailing slash next to the directories"
+augroup nerdtreehidecwd
+	autocmd!
+	autocmd FileType nerdtree setlocal conceallevel=3 | syntax match NERDTreeDirSlash #/$# containedin=NERDTreeDir conceal contained
+augroup end
+
+"Hide the cursor for NERDTree; rely on the background"
+autocmd FileType nerdtree hi Cursor 
+
+"Custom cursor mode: normal-visual block, insert-command IBeam"
+set guicursor=n-v-sm:block
+set guicursor+=i-c-ci-ve:ver25
+set guicursor+=r-cr-o:hor20
+
+"Change completion colors"
+hi Pmenu    ctermbg=2 ctermfg=0
+hi PmenuSel ctermfg=15
+
+"Extra Go colors"
+hi goParamName       ctermfg=15
+hi goReceiverType    ctermfg=15
+hi goTypeConstructor ctermfg=15
+hi goTypeName        ctermfg=15
+hi goFunctionCall    ctermfg=15
+
+"Resume past cursor location on open"
 au InsertLeave * call cursor([getpos('.')[1], getpos('.')[2]+1])
 
-"Custom binds"
-nmap <Tab> :NERDTreeToggle<CR> <F23> <bar> :NERDTreeRefreshRoot<CR>
-nmap <C-_> <Plug>NERDCommenterToggle
-vmap <C-_> <Plug>NERDCommenterToggle<CR>gv
+"Autoindentation"
+set autoindent
+
+"Give ALE errors red undercurls"
+hi ALEError cterm=undercurl gui=undercurl guisp=#FF6961
+
+"Hide NERDTree arrows"
+let g:NERDTreeDirArrowExpandable = ''
+let g:NERDTreeDirArrowCollapsible = ''
+
+"ToggleWrap from the vim wiki"
+set linebreak
+nnoremap <Up>   gk
+nnoremap <Down> gj
+nnoremap <Home> g<Home>
+nnoremap <End>  g<End>
+
+"Backups"
+"Turn on backup option
+set backup
+set backupdir=~/.vim/backup/
+set writebackup
+set backupcopy=no
+au BufWritePre * let &bex = '@' . strftime("%F.%H:%M")
+
+"Better highlighting, less broken"
+autocmd BufEnter * :syntax sync fromstart
+syntax sync minlines=100
+
+"Custom keybinds"
+map <Tab> :NERDTreeToggle<CR> <bar> :NERDTreeRefreshRoot<CR>
+nmap <C-_> gcc
+vmap <C-_> gc<CR>gv
 nmap <C-j> =G
 nnoremap f :F<CR>
 
+"NERDTree"
+"let g:NERDTreeMapOpenInTab = <rightmouse>
+let g:nerdtree_tabs_focus_on_files=1
+
+"Echodoc"
+let g:echodoc#enable_at_startup = 1
+set cmdheight=2
+
+"Markdown stuff"
+let g:vim_markdown_folding_disabled = 1
+
+"START shit I stole from Sacul"
+
+"Remove background"
+hi LineNr       guibg=NONE ctermbg=NONE
+hi SignColumn   guibg=NONE ctermbg=NONE
+hi VertSplit    guibg=NONE ctermbg=NONE gui=NONE      cterm=NONE ctermfg=240
+hi CursorLineNr guibg=NONE ctermbg=NONE guifg=#585858 ctermfg=7
+hi StatusLine   guibg=NONE ctermbg=NONE gui=NONE      cterm=NONE
+hi StatusLineNC guibg=NONE ctermbg=NONE gui=NONE      cterm=NONE
+
+"Set wildmenu colors"
+hi WildMenu ctermbg=12
+hi WildMenu ctermfg=21
+
+"Nicer vertical separators"
+"set fillchars+=vert:┃
+set fillchars=vert:\▏
+
+"Indentation guide"
+"hi indentGuide ctermfg=248
+"match indentGuide /\t/
+"set list lcs=tab:\▏\ 
+"set list
+
+
+"END shit I stole from Sacul"
+
+"Cooler git diffs"
+let g:gitgutter_sign_added='▓'
+let g:gitgutter_sign_modified='░'
+let g:gitgutter_sign_removed='_'
+let g:gitgutter_sign_removed_first_line='_'
+let g:gitgutter_sign_modified_removed='_'
+let g:gitgutter_override_sign_column_highlight = 0
+
+hi! GitGutterAdd          guibg=NONE ctermbg=NONE guifg=#6c6c6c ctermfg=242
+hi! GitGutterChange       guibg=NONE ctermbg=NONE guifg=#6c6c6c ctermfg=242
+hi! GitGutterDelete       guibg=NONE ctermbg=NONE guifg=#6c6c6c ctermfg=242
+hi! GitGutterChangeDelete guibg=NONE ctermbg=NONE guifg=#6c6c6c ctermfg=242
+
+"Cooler git conflicts"
+let g:conflict_marker_highlight_group = ''
+let g:conflict_marker_begin = '^<<<<<<< .*$'
+let g:conflict_marker_end   = '^>>>>>>> .*$'
+
+highlight ConflictMarkerBegin guibg=#2f7366
+highlight ConflictMarkerOurs guibg=#2e5049
+highlight ConflictMarkerTheirs guibg=#344f69
+highlight ConflictMarkerEnd guibg=#2f628e
+
+"Line number color to match Limelight"
+highlight LineNr guifg=#6c6c6c ctermfg=242
+
+"New file in buffer directory"
+command -nargs=1 New :e %:p:h/<args>
+
+"Goyo and stuff config"
+"let g:goyo_height="95%"
+"let g:limelight_conceal_ctermfg = 248
+"let g:limelight_paragraph_span = 0
+
+"Dynamic formats"
+"if &filetype ==# "vim" 
+"let g:limelight_bop = '^\s'
+"let g:limelight_eop = '\ze\n^\s'
+"elseif <another condition> 
+"else
+"let g:limelight_bop = '\(\(?<=\n\n\)^\/\/ \p*\n\|^\w.*\(:\|{\|(\|)\)\n\|\(?<=\n\n\)\p\)'
+"let g:limelight_eop = '\(\n\n\/\/\|^\p\n\n\|.\n\n\S\)'
+"endif
+
+"Autorun Goyo"
+"autocmd VimEnter * :LiteDFMToggle<CR>i<Esc>`^
+
+"autocmd VimEnter * Limelight
 set numberwidth=10
 set textwidth=80
 set number
 
-set fillchars=vert:\
+"TITTY FAST"
+set ttyfast
+set lazyredraw
 
-"Remove background"
-hi LineNr ctermbg=NONE
-hi SignColumn ctermbg=NONE
-hi VertSplit ctermbg=NONE cterm=NONE ctermfg=240
-hi CursorLineNr ctermbg=NONE ctermfg=7
-hi StatusLine ctermbg=NONE cterm=NONE
-hi StatusLineNC ctermbg=NONE cterm=NONE
+"Undo history"
+set undofile
 
-"Echodoc"
-let g:echodoc#enable_at_startup = 1
-"set cmdheight=2▏
+"let g:go_fmt_command = "goimports"
 
 "ALE configs"
 highlight ALEWarningSign ctermbg=NONE
@@ -112,22 +280,58 @@ let g:ale_virtualtext_cursor = 1
 let g:ale_sign_error = '!'
 let g:ale_sign_warning = '>'
 let g:ale_sign_column_always = 1
-"let g:ale_completion_enabled = 1
+let g:ale_completion_enabled = 1
 let g:ale_fix_on_save = 1
 let g:ale_fixers = {
-        \ 'go': [ "goimports" ],
-        \ }
+			\ 'go': [ "goimports" ],
+			\ 'javascript': [ "prettier" ],
+			\ }
 let g:ale_linters = {
-        \ 'go': [ "gopls"  ],
-        \ 'c':  [ "cquery" ],
-        \ 'javascript': [ "prettier", "tsserver" ],
-        \ }
+			\ 'go': [ "gopls"  ],
+			\ 'c':  [ "clangd" ],
+			\ 'javascript': [ "eslint", "tsserver" ],
+			\ }
 nnoremap gd :ALEGoToDefinition<CR>
 nnoremap K :ALEHover<CR>
 
-"Deoplete+ALE integration"
-let g:deoplete#enable_at_startup = 1
-call deoplete#custom#option('sources', {
-        \ '_': [ 'ale' ],
-        \})
+"Fix ALE from aggressively completing ahead"
+set completeopt+=noselect
 
+"Assistive LSP bindings"
+function! ToggleQf()
+	for buffer in tabpagebuflist()
+		if bufname(buffer) == ''
+			cclose
+			return
+		endif
+	endfor
+	botright copen
+	wincmd p
+endfunction
+
+"Next error"
+nnoremap <M-n> :cnext<CR>zz
+"Show errors"
+nnoremap <silent><M-c> :call ToggleQf()<CR>
+"Previous error"
+nnoremap <M-p> :cprev<CR>zz
+
+"Deoplete+ALE integration"
+" let g:deoplete#enable_at_startup = 1
+" call deoplete#custom#option('sources', {
+" 	\ '_': [ 'ale', 'neco-syntax', 'deoplete-emoji' ],
+" 	\})
+
+"vim-lsp configuration"
+"Golang stuff"
+"autocmd! CompleteDone * if pumvisible() == 0 | pclose | endif
+"au User lsp_setup call lsp#register_server({
+			"\ 'name': 'gopls',
+			"\ 'cmd': {server_info->['gopls', '-mode', 'stdio']},
+			"\ 'whitelist': ['go'],
+			"\ })
+"autocmd BufWritePre *.go LspDocumentFormatSync
+
+"let g:LanguageClient_serverCommands = {
+"	\ 'go': [ 'bingo', '-freeosmemory', '5' , '-maxparallelism', '4', '-cache-style', 'on-demand' ]
+"	\ }

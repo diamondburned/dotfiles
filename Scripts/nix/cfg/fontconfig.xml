@@ -2,6 +2,24 @@
 <!DOCTYPE fontconfig SYSTEM "fonts.dtd">
 <!--Requirements: Noto Fonts set (CJK+Emojis+Extra), Noto Sans CJK JP, Unifont and OpenSymbol-->
 <fontconfig>
+	<!-- GIMP font AA fix -->
+	<match target="font">
+		<edit name="rgba" mode="assign">
+			<const>none</const>
+		</edit>
+	</match>
+
+	<!-- fuck DejaVu Sans -->
+	<selectfont>
+		<rejectfont>
+			<pattern>
+				<patelt name="family">
+					<string>DejaVu Sans</string>
+				</patelt>
+			</pattern>
+		</rejectfont>
+	</selectfont>
+
 	<alias binding="strong">
 		<family>lucy tewi</family>
 		<prefer>
@@ -9,51 +27,90 @@
 			<family>WenQuanYi WenQuanYi Bitmap Song</family>
 		</prefer>
 	</alias>
+
+	<alias binding="strong">
+		<family>monospace</family>
+		<prefer>
+			<family>Inconsolata</family>
+		</prefer>
+	</alias>
+
+	<alias binding="strong">
+		<family>Inconsolata</family>
+		<prefer>
+			<family>Inconsolata</family>
+			<family>Symbols Nerd Font</family>
+			<family>Source Code Pro</family> <!-- used for the heart icon -->
+			<family>Noto Sans Mono</family>
+			<family>Noto Sans Mono CJK JP</family>
+			<family>Noto Sans Mono CJK KR</family>
+			<family>Noto Sans Mono CJK SC</family>
+			<family>Noto Sans Mono CJK TC</family>
+			<!-- <family>emoji</family> -->
+			<!-- <family>symbol</family> -->
+			<family>Unifont</family>
+			<family>Unifont Upper</family>
+		</prefer>
+	</alias>
+
 	<match target="pattern">
-		<test name="family" qual="any">
-			<string>Helvetica</string>
+		<test compare="eq" name="family">
+			<string>Inconsolata</string>
 		</test>
-		<edit name="family" mode="assign" binding="same">
-			<string>Source Sans Pro</string>
+		<!-- Force Inconsolata to be Bold -->
+		<edit name="weight" mode="assign" binding="strong">
+			<int>200</int>
+		</edit>
+		<!-- Inconsolata is kind of small, so we scale it up -->
+		<edit name="scale" mode="assign" binding="strong">
+			<!-- doesn't actually work, fuck -->
+			<times>
+				<name>pixelsize</name>
+				<double>1.1</double>
+			</times>
 		</edit>
 	</match>
+
 	<match target="pattern">
-		<test name="family" qual="any">
-			<string>DejaVu Sans</string>
+		<test compare="eq" name="family">
+			<string>monospace</string>
 		</test>
-		<edit name="family" mode="assign" binding="same">
-			<string>Sans</string>
+		<edit name="family" mode="assign" binding="strong">
+			<string>Inconsolata</string>
+		</edit>
+		<!-- dump copypaste because fontconfig is retarded -->
+		<!-- Force Inconsolata to be Bold -->
+		<edit name="weight" mode="assign" binding="strong">
+			<int>200</int>
+		</edit>
+		<!-- Inconsolata is kind of small, so we scale it up -->
+		<edit name="scale" mode="assign" binding="strong">
+			<!-- doesn't actually work, fuck -->
+			<times>
+				<name>pixelsize</name>
+				<double>1.1</double>
+			</times>
 		</edit>
 	</match>
-	<match target="pattern">
-		<test name="family" qual="any">
-			<string>Nimbus Sans</string>
-		</test>
-		<edit name="family" mode="assign" binding="same">
-			<string>Sans</string>
-		</edit>
-	</match>
+
 	<match>
 		<test compare="contains" name="lang">
-				<string>en</string>
+			<string>en</string>
 		</test>
 		<test name="family">
-				<string>cursive</string>
+			<string>cursive</string>
 		</test>
 		<edit mode="delete_all" name="lang"/>
 		<edit mode="prepend" name="family">
-				<string>Comic Neue</string>
+			<string>Comic Neue</string>
 		</edit>
 	</match>
+
 	<alias binding="strong">
 		<family>sans-serif</family>
-		<default><family>Source Sans Pro</family></default>
 		<prefer>
 			<family>Source Sans Pro</family>
-			<family>Segoe UI</family>
 			<family>Noto Sans</family>
-			<family>Blobmoji</family>
-			<family>Noto Color Emoji</family>
 			<family>Noto Sans Armenian</family>
 			<family>Noto Sans Avestan</family>
 			<family>Noto Sans Balinese</family>
@@ -127,6 +184,7 @@
 			<family>Noto Sans Sundanese</family>
 			<family>Noto Sans Syloti Nagri</family>
 			<family>Noto Sans Symbols</family>
+			<family>Noto Sans Symbols2</family>
 			<family>Noto Sans Syriac Eastern</family>
 			<family>Noto Sans Syriac Estrangela</family>
 			<family>Noto Sans Syriac Western</family>
@@ -144,24 +202,16 @@
 			<family>Noto Sans Ugaritic</family>
 			<family>Noto Sans Vai</family>
 			<family>Noto Sans Yi</family>
-			<family>Arial Unicode MS</family>
-			<family>OpenSymbol</family>
+			<!-- <family>emoji</family> -->
+			<!-- <family>symbol</family> -->
 		</prefer>
 	</alias>
-	<alias binding="strong">
-		<family>sans</family>
-		<default><family>sans-serif</family></default>
-		<prefer>
-			<family>sans-serif</family>
-		</prefer>
-	</alias>
+
 	<alias binding="strong">
 		<family>serif</family>
 		<default><family>Noto Serif</family></default>
 		<prefer>
 			<family>Noto Serif</family>
-			<family>Blobmoji</family>
-			<family>Noto Color Emoji</family>
 			<family>Noto Serif Armenian</family>
 			<family>Noto Serif Bengali</family>
 			<family>Noto Serif CJK JP</family>
@@ -178,215 +228,93 @@
 			<family>Noto Serif Tamil</family>
 			<family>Noto Serif Telugu</family>
 			<family>Noto Serif Thai</family>
-			<family>OpenSymbol</family>
+			<!-- <family>emoji</family> -->
+			<!-- <family>symbol</family> -->
 		</prefer>
 	</alias>
-	<alias binding="strong">
-		<family>monospace</family>
-		<default><family>Fira Code Retina</family></default>
-		<prefer>
-			<family>Noto Sans Mono</family>
-			<family>Noto Sans Mono CJK JP</family>
-			<family>Noto Sans Mono CJK KR</family>
-			<family>Noto Sans Mono CJK SC</family>
-			<family>Noto Sans Mono CJK TC</family>
-			<family>OpenSymbol</family>
-			<family>Noto Color Emoji</family>
-			<family>Unifont</family>
-			<family>Unifont Upper</family>
-		</prefer>
-	</alias>
-<!--
-	<alias binding="strong">
-		<family>FreeSans</family>
-		<default><family>Noto Sans</family></default>
-		<prefer>
-			<family>Segoe UI</family>
-			<family>Noto Sans</family>
-			<family>Noto Color Emoji</family>
-			<family>Noto Sans Armenian</family>
-			<family>Noto Sans Avestan</family>
-			<family>Noto Sans Balinese</family>
-			<family>Noto Sans Bamum</family>
-			<family>Noto Sans Batak</family>
-			<family>Noto Sans Bengali</family>
-			<family>Noto Sans Brahmi</family>
-			<family>Noto Sans Buginese</family>
-			<family>Noto Sans Buhid</family>
-			<family>Noto Sans Canadian Aboriginal</family>
-			<family>Noto Sans Carian</family>
-			<family>Noto Sans Cham</family>
-			<family>Noto Sans Cherokee</family>
-			<family>Noto Sans CJK JP</family>
-			<family>Noto Sans CJK KR</family>
-			<family>Noto Sans CJK SC</family>
-			<family>Noto Sans CJK TC</family>
-			<family>Noto Sans Coptic</family>
-			<family>Noto Sans Cuneiform</family>
-			<family>Noto Sans Cypriot</family>
-			<family>Noto Sans Deseret</family>
-			<family>Noto Sans Devanagari</family>
-			<family>Noto Sans Egyptian Hieroglyphs</family>
-			<family>Noto Sans Ethiopic</family>
-			<family>Noto Sans Georgian</family>
-			<family>Noto Sans Glagolitic</family>
-			<family>Noto Sans Gothic</family>
-			<family>Noto Sans Gujarati</family>
-			<family>Noto Sans Gurmukhi</family>
-			<family>Noto Sans Hanunoo</family>
-			<family>Noto Sans Hebrew</family>
-			<family>Noto Sans Imperial Aramaic</family>
-			<family>Noto Sans Inscriptional Pahlavi</family>
-			<family>Noto Sans Inscriptional Parthian</family>
-			<family>Noto Sans Javanese</family>
-			<family>Noto Sans Kaithi</family>
-			<family>Noto Sans Kannada</family>
-			<family>Noto Sans Kayah Li</family>
-			<family>Noto Sans Kharoshthi</family>
-			<family>Noto Sans Khmer</family>
-			<family>Noto Sans Lao</family>
-			<family>Noto Sans Lepcha</family>
-			<family>Noto Sans Limbu</family>
-			<family>Noto Sans Linear B</family>
-			<family>Noto Sans Lisu</family>
-			<family>Noto Sans Lycian</family>
-			<family>Noto Sans Lydian</family>
-			<family>Noto Sans Malayalam</family>
-			<family>Noto Sans Mandaic</family>
-			<family>Noto Sans Meetei Mayek</family>
-			<family>Noto Sans Mongolian</family>
-			<family>Noto Sans Myanmar</family>
-			<family>Noto Sans New Tai Lue</family>
-			<family>Noto Sans NKo</family>
-			<family>Noto Sans Ogham</family>
-			<family>Noto Sans Ol Chiki</family>
-			<family>Noto Sans Old Italic</family>
-			<family>Noto Sans Old Persian</family>
-			<family>Noto Sans Old South Arabian</family>
-			<family>Noto Sans Old Turkic</family>
-			<family>Noto Sans Oriya</family>
-			<family>Noto Sans Osmanya</family>
-			<family>Noto Sans Phags Pa</family>
-			<family>Noto Sans Phoenician</family>
-			<family>Noto Sans Rejang</family>
-			<family>Noto Sans Runic</family>
-			<family>Noto Sans Samaritan</family>
-			<family>Noto Sans Saurashtra</family>
-			<family>Noto Sans Shavian</family>
-			<family>Noto Sans Sinhala</family>
-			<family>Noto Sans Sundanese</family>
-			<family>Noto Sans Syloti Nagri</family>
-			<family>Noto Sans Symbols</family>
-			<family>Noto Sans Syriac Eastern</family>
-			<family>Noto Sans Syriac Estrangela</family>
-			<family>Noto Sans Syriac Western</family>
-			<family>Noto Sans Tagalog</family>
-			<family>Noto Sans Tagbanwa</family>
-			<family>Noto Sans Tai Le</family>
-			<family>Noto Sans Tai Tham</family>
-			<family>Noto Sans Tai Viet</family>
-			<family>Noto Sans Tamil</family>
-			<family>Noto Sans Telugu</family>
-			<family>Noto Sans Thaana</family>
-			<family>Noto Sans Thai</family>
-			<family>Noto Sans Tibetan</family>
-			<family>Noto Sans Tifinagh</family>
-			<family>Noto Sans Ugaritic</family>
-			<family>Noto Sans Vai</family>
-			<family>Noto Sans Yi</family>
-			<family>Arial Unicode MS</family>
-			<family>OpenSymbol</family>
-		</prefer>
-	</alias>
--->
-
-	<!-- Default font (no fc-match pattern) -->
-	<match>
-		<edit mode="prepend" name="family">
-			<string>Sans</string>
-		</edit>
-	</match>
-
-	<!-- Default font for the ja_JP locale (no fc-match pattern) -->
-	<match>
-		<test compare="contains" name="lang">
-			<string>ja</string>
-		</test>
-		<edit mode="prepend" name="family">
-			<string>Noto Sans CJK JP</string>
-		</edit>
-	</match>
 
 	<!-- Add emoji generic family -->
-	<alias binding="strong">
-		<family>emoji</family>
-		<prefer><family>Noto Color Emoji</family></prefer>
-		<default>
-			<family>Noto Color Emoji</family>
-			<family>Blobmoji</family>
-		</default>
-	</alias>
-	<match>
-		<test name="family"><string>emoji</string></test>
-		<edit name="family" mode="prepend" binding="strong">
-			<string>Blobmoji</string>
-		</edit>
-	</match>
+	<!-- <alias binding="strong"> -->
+	<!-- 	<family>emoji</family> -->
+	<!-- 	<default><family>Blobmoji</family></default> -->
+	<!-- 	<prefer> -->
+	<!-- 		<family>Blobmoji</family> -->
+	<!-- 		<family>OpenMoji Color</family> -->
+	<!-- 		<family>Noto Color Emoji</family> -->
+	<!-- 	</prefer> -->
+	<!-- </alias> -->
+
+	<!-- Add symbol generic family -->
 	<alias binding="strong">
 		<family>symbol</family>
-		<prefer><family>Noto Sans Symbols</family>
-		<family>OpenSymbol</family></prefer>
+		<prefer>
+			<family>Noto Sans Symbols</family>
+			<family>Noto Sans Symbols2</family>
+			<family>Symbols Nerd Font</family>
+			<family>OpenSymbol</family>
+		</prefer>
 	</alias>
-	<!--
+
+	<!-- Just in case -->
+	<alias binding="strong">
+		<family>sans</family>
+		<default><family>sans-serif</family></default>
+		<prefer><family>sans-serif</family></prefer>
+	</alias>
+	<!-- Alias requests for the other fonts -->
+	<alias binding="strong">
+		<family>Sans</family>
+		<prefer><family>sans-serif</family></prefer>
+	</alias>
+
+	<!-- Default font (no fc-match pattern) -->
+	<!-- <match> -->
+	<!-- 	<edit mode="prepend" name="family"> -->
+	<!-- 		<string>sans-serif</string> -->
+	<!-- 	</edit> -->
+	<!-- </match> -->
+
+	<!-- Replacing VL Gothic for osu! -->
 	<alias binding="strong">
 		<family>VL Gothic</family>
-		<prefer><family>Noto Sans CJK JP</family></prefer>
-		<default><family>sans-serif</family></default>
+		<prefer><family>sans-serif</family></prefer>
 	</alias>
-	-->
-	<!-- Replacing WebQuanYi Zen Hei-->
+
+	<!-- Replacing WebQuanYi Zen Hei for TF2 -->
 	<alias binding="strong">
 		<family>WenQuanYi Zen Hei</family>
-		<prefer><family>Noto Sans CJK JP</family></prefer>
-		<default><family>sans-serif</family></default>
+		<prefer><family>sans-serif</family></prefer>
 	</alias>
 	<alias binding="strong">
 		<family>WenQuanYi Zen Hei Sharp</family>
-		<prefer><family>Noto Sans CJK JP</family></prefer>
-		<default><family>sans-serif</family></default>
+		<prefer><family>sans-serif</family></prefer>
 	</alias>
+
 	<!-- Alias requests for the other emoji fonts -->
 	<alias binding="strong">
-		<family>Apple Color Emoji</family>
-		<prefer><family>Noto Color Emoji</family></prefer>
-		<default><family>sans-serif</family></default>
-	</alias>
-	<match>
-		<test name="family"><string>Apple Color Emoji</string></test>
-		<edit name="family" mode="prepend" binding="strong">
-			<string>Noto Color Emoji</string>
-		</edit>
-	</match>
-	<alias binding="strong">
-		<family>Segoe UI Emoji</family>
-		<prefer><family>Noto Color Emoji</family></prefer>
-		<default><family>sans-serif</family></default>
-	</alias>
-	<alias binding="strong">
 		<family>Noto Color Emoji</family>
-		<prefer><family>Noto Color Emoji</family></prefer>
-		<default><family>sans-serif</family></default>
+		<prefer><family>emoji</family></prefer>
 	</alias>
 	<alias binding="strong">
-		<family>Emoji One Color</family>
-		<prefer><family>Noto Color Emoji</family></prefer>
-		<default><family>sans-serif</family></default>
+		<family>Apple Color Emoji</family>
+		<prefer><family>emoji</family></prefer>
 	</alias>
-	<alias binding="strong">
-		<family>Symbola</family>
-		<prefer><family>Noto Color Emoji</family>
-		<family>Noto Sans Symbols</family></prefer>
-	</alias>
+	<!-- <match> -->
+	<!-- 	<test name="family"><string>Apple Color Emoji</string></test> -->
+	<!-- 	<edit name="family" mode="prepend" binding="strong"> -->
+	<!-- 		<string>Noto Color Emoji</string> -->
+	<!-- 	</edit> -->
+	<!-- </match> -->
+	<!-- <alias binding="strong"> -->
+	<!-- 	<family>Emoji One Color</family> -->
+	<!-- 	<prefer><family>Noto Color Emoji</family></prefer> -->
+	<!-- 	<default><family>sans-serif</family></default> -->
+	<!-- </alias> -->
+	<!-- <alias binding="strong"> -->
+	<!-- 	<family>Symbola</family> -->
+	<!-- 	<prefer><family>Noto Color Emoji</family> -->
+	<!-- 	<family>Noto Sans Symbols</family></prefer> -->
+	<!-- </alias> -->
 
 	<!-- Bitmap font scaling -->
 
@@ -401,58 +329,59 @@
 			</divide>
 		</edit>
 	</match>
-	<match target="font">
-		<test name="outline" compare="eq">
-			<bool>false</bool>
-		</test>
-		<test name="scalable" compare="eq">
-			<bool>false</bool>
-		</test>
-		<test name="hinting" compare="eq">
-			<bool>true</bool>
-		</test>
-		<edit name="scalingnotneeded" mode="assign">
-			<and>
-				<less>
-					<name>pixelsizefixupfactor</name>
-					<double>1.2</double>
-				</less>
-				<more>
-					<name>pixelsizefixupfactor</name>
-					<double>0.8</double>
-				</more>
-			</and>
-		</edit>
-	</match>
-	<match target="font">
-		<test name="scalingnotneeded" compare="eq">
-			<bool>true</bool>
-		</test>
-		<edit name="pixelsizefixupfactor" mode="assign">
-			<double>1.0</double>
-		</edit>
-	</match>
-	<match target="font">
-		<test name="outline" compare="eq">
-			<bool>false</bool>
-		</test>
-		<test name="pixelsizefixupfactor" compare="not_eq">
-			<double>1.0</double>
-		</test>
-		<edit name="matrix" mode="assign">
-			<times>
-				<name>matrix</name>
-				<matrix>
-					<name>pixelsizefixupfactor</name> <double>0</double>
-					<double>0</double> <name>pixelsizefixupfactor</name>
-				 </matrix>
-			</times>
-		</edit>
-		<edit name="size" mode="assign">
-			<divide>
-				<name>size</name>
-				<name>pixelsizefixupfactor</name>
-			</divide>
-		</edit>
-	</match>
+
+<!-- 	<match target="font"> -->
+<!-- 		<test name="outline" compare="eq"> -->
+<!-- 			<bool>false</bool> -->
+<!-- 		</test> -->
+<!-- 		<test name="scalable" compare="eq"> -->
+<!-- 			<bool>false</bool> -->
+<!-- 		</test> -->
+<!-- 		<test name="hinting" compare="eq"> -->
+<!-- 			<bool>false</bool> -->
+<!-- 		</test> -->
+<!-- 		<edit name="scalingnotneeded" mode="assign"> -->
+<!-- 			<and> -->
+<!-- 				<less> -->
+<!-- 					<name>pixelsizefixupfactor</name> -->
+<!-- 					<double>1.2</double> -->
+<!-- 				</less> -->
+<!-- 				<more> -->
+<!-- 					<name>pixelsizefixupfactor</name> -->
+<!-- 					<double>0.8</double> -->
+<!-- 				</more> -->
+<!-- 			</and> -->
+<!-- 		</edit> -->
+<!-- 	</match> -->
+<!-- 	<match target="font"> -->
+<!-- 		<test name="scalingnotneeded" compare="eq"> -->
+<!-- 			<bool>true</bool> -->
+<!-- 		</test> -->
+<!-- 		<edit name="pixelsizefixupfactor" mode="assign"> -->
+<!-- 			<double>1.0</double> -->
+<!-- 		</edit> -->
+<!-- 	</match> -->
+<!-- 	<match target="font"> -->
+<!-- 		<test name="outline" compare="eq"> -->
+<!-- 			<bool>false</bool> -->
+<!-- 		</test> -->
+<!-- 		<test name="pixelsizefixupfactor" compare="not_eq"> -->
+<!-- 			<double>1.0</double> -->
+<!-- 		</test> -->
+<!-- 		<edit name="matrix" mode="assign"> -->
+<!-- 			<times> -->
+<!-- 				<name>matrix</name> -->
+<!-- 				<matrix> -->
+<!-- 					<name>pixelsizefixupfactor</name> <double>0</double> -->
+<!-- 					<double>0</double> <name>pixelsizefixupfactor</name> -->
+<!-- 				 </matrix> -->
+<!-- 			</times> -->
+<!-- 		</edit> -->
+<!-- 		<edit name="size" mode="assign"> -->
+<!-- 			<divide> -->
+<!-- 				<name>size</name> -->
+<!-- 				<name>pixelsizefixupfactor</name> -->
+<!-- 			</divide> -->
+<!-- 		</edit> -->
+<!-- 	</match> -->
 </fontconfig>
