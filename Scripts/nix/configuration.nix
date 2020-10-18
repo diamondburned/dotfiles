@@ -6,8 +6,13 @@
 
 let home-manager = builtins.fetchGit {
 		url = "https://github.com/rycee/home-manager.git";
-		rev = "b1d8c0f9c38589dc777699425b3952452c8165eb";
+		rev = "249650a07ee2d949fa599f3177a8c234adbd1bee";
 		ref = "master";
+	};
+
+	lsoc-overlay = builtins.fetchGit {
+		url = "https://github.com/diamondburned/lsoc-overlay.git";
+		rev = "09d41b0a6f574390d6edc0271be459bd1390ea8d";
 	};
 
 	utils = import ./utils.nix { inherit lib; };
@@ -17,12 +22,16 @@ let home-manager = builtins.fetchGit {
 		rev = "0d05c53204da3b576f810ef2e1312b19bf2420b7";
 	});
 
-	diamond = import ../nix-overlays;
+	diamond = ../nix-overlays;
+
+	nixpkgs_19_09 = import (builtins.fetchGit {
+		url = "https://github.com/NixOS/nixpkgs-channels.git";
+		ref = "nixos-19.09";
+	}) {};
 
 	nixpkgs_20_03 = import (builtins.fetchGit {
 		url = "https://github.com/NixOS/nixpkgs-channels.git";
-		rev = "05195accdc596c6c9eadfa7d283d7b780f87f96f";
-		ref = "nixos-20.03-small";
+		ref = "nixos-20.03";
 	}) {};
 
 in
@@ -31,14 +40,13 @@ in
 	imports = [
 		 ./hardware-configuration.nix
 		 ./hardware-custom.nix
-		../nix-overlays/services.nix
+		"${diamond}"
 		"${home-manager}/nixos"
 	];
 
 	# Overlays
-	nixpkgs.overlays = [ 
+	nixpkgs.overlays = [
 		(tdeo)
-		(diamond)
 		(self: super: {
 			# glib = super.glib.overrideDerivation(old: {
 			# 	mesonFlags = old.mesonFlags ++ [
@@ -85,7 +93,7 @@ in
 		buildMachines = [{
 			hostName = "hanaharu";
 			systems = [ "x86_64-linux" "i686-linux" ];
-			maxJobs = 7; # thread-1
+			maxJobs = 6; # thread-1
 			speedFactor = 10;
 			supportedFeatures = [ "nixos-test" "benchmark" "big-parallel" "kvm" ];
 		}];
@@ -104,19 +112,33 @@ in
 			ServerAliveCountMax 10
 	'';
 
-	services.diamondburned.caddy = {
+	# services.diamondburned.caddy = {
+	# 	enable = true;
+	# 	config = ''
+
+	# 	'';
+	# 	modSha256 = "1lc26jkjfw1cridymic82lk3zdwhlccs7s5mhkdnz7cbcwllyy54";
+	# };
+
+	# Enable MySQL
+	services.postgresql = {
 		enable = true;
-		config = ''
-			http://192.168.1.105:42069 {
-				log
-				reverse_proxy * unix//tmp/smolboard.sock
-			}
+		enableTCPIP = false;
+		ensureDatabases = ["facechat"];
+		ensureUsers = [{
+			name = "diamond";
+			ensurePermissions = {
+				"DATABASE facechat" = "ALL PRIVILEGES";
+			};
+		}];
+		initialScript = pkgs.writeText "init.sql" ''
+			CREATE USER diamond;
+			ALTER  USER diamond WITH SUPERUSER;
 		'';
-		modSha256 = "1lc26jkjfw1cridymic82lk3zdwhlccs7s5mhkdnz7cbcwllyy54";
 	};
 
 	# Latest kernel.
-	boot.kernelPackages = pkgs.linuxPackages_latest;
+	# boot.kernelPackages = pkgs.linuxPackages_latest;
 
     # NTFS support
     boot.supportedFilesystems = [ "exfat" "ntfs" ];
@@ -125,7 +147,7 @@ in
 	boot.loader.systemd-boot.enable = true;
 	boot.loader.efi.canTouchEfiVariables = true;
 
-# zramSwap = {
+	# zramSwap = {
 	# 	enable = true;
 	# 	algorithm = "lz4";
 	# 	memoryPercent = 25;
@@ -143,7 +165,7 @@ in
 	i18n = {
 		inputMethod = {
 			enabled	= "fcitx";
-			fcitx.engines = with nixpkgs_20_03.fcitx-engines; [ mozc unikey ];
+			fcitx.engines = with nixpkgs_19_09.fcitx-engines; [ mozc unikey ];
 		};
 
 		defaultLocale = "en_US.UTF-8";
@@ -231,7 +253,7 @@ in
 			log-target = "newfile:/tmp/pulseaudio.log";
 			daemonize = "yes";
 
-			flat-volumes = "yes";
+			flat-volumes = "no";
 
 			high-priority = "yes";
 			nice-level = -15;
@@ -243,8 +265,8 @@ in
 
 			# resample-method = "speex-fixed-0";
 			# resample-method = "copy";
-			resample-method = "src-zero-order-hold";
-			default-sample-format = "s16le";
+			resample-method = "speex-float-8";
+			default-sample-format = "float32le";
 			default-sample-rate = "44100";
 			alternate-sample-rate = "48000";
 
@@ -276,6 +298,10 @@ in
 		hinting.enable = false;
 	};
 
+	security.sudo.extraConfig = ''
+		Defaults env_reset,pwfeedback
+	'';
+
 	# Enable touchpad support.
 	services.xserver.libinput.enable = true;
 
@@ -306,11 +332,10 @@ in
 	};
 
 	xdg.portal.extraPortals = with pkgs; [ xdg-desktop-portal-gtk ];
-	services.flatpak.enable = true;
+	services.flatpak.enable = false;
 
 	environment.gnome3.excludePackages = with pkgs.gnome3; [
 		totem
-		geary
 		gnome-maps
 		gnome-contacts
 	];
@@ -345,11 +370,11 @@ in
     virtualisation.docker.enable = true;
     */
 
-	virtualisation.libvirtd = {
-		enable = true;
-		qemuPackage = pkgs.qemu_kvm;
-		qemuRunAsRoot = false;
-	};
+	# virtualisation.libvirtd = {
+	# 	enable = true;
+	# 	qemuPackage = nixpkgs_19_09.qemu_kvm;
+	# 	qemuRunAsRoot = false;
+	# };
 
 	# Define a user account. Don't forget to set a password with ‘passwd’.
 	users.users.diamond = {
@@ -358,11 +383,45 @@ in
 	};
 
 	home-manager.users.diamond = {
+		imports = [
+			"${lsoc-overlay}"
+			"${diamond}/home-manager"
+		];
+
+		nixpkgs.config = {
+			allowUnfree = true;
+		};
+
+		programs.direnv = {
+			enable = true;
+			enableNixDirenvIntegration = true;
+		};
+
+		services.lsoc-overlay = {
+			enable = true;
+			config = {
+				red_blink_ms = 1000;
+				polling_ms   = 1200;
+				num_scanners = 1;
+				hidden_procs = [ "ffmpeg" ];
+				window = {
+					x = 5;
+					y = 5;
+					passthrough = true;
+				};
+			};
+		};
+
 		programs.git = {
 			enable = true;
 			userName  = "diamondburned";
 			userEmail = "datutbrus@gmail.com";
 			extraConfig = {
+				core = {
+					excludesfile = "${pkgs.writeText "gitignore" ''
+						.envrc
+					''}";
+				};
 				url = {
 					"ssh://git@github.com/" = { insteadOf = "https://github.com/"; };
 					"ssh://git@gitlab.com/" = { insteadOf = "https://gitlab.com/"; };
@@ -373,16 +432,22 @@ in
 			};
 		};
 
-		programs.neovim = {
-			enable = true;
-			vimAlias = true;
-			withPython3 = true;
-			withNodeJs = true;
-		};
-	
 		programs.bash = {
 			enable = true;
 			initExtra = builtins.readFile ./cfg/bashrc;
+		};
+
+		programs.vscode-css = {
+			files = [ ./cfg/vscode.css ];
+		};
+		programs.vscode = {
+			enable = true;
+			# userSettings = {
+			# 	"telemetry.enableTelemetry" = false;
+			# 	"window.menuBarVisibility"  = "toggle";
+			# 	"breadcrumbs.enabled"       = false;
+			# 	"editor.minimap.enabled"    = false;
+			# };
 		};
 
 		# programs.mpv = {
@@ -436,31 +501,63 @@ in
 			};
 		};
 
+		pam.sessionVariables = {
+			NIX_AUTO_RUN = "1";
+			GOPATH = "/home/diamond/.go";
+			GOBIN  = "/home/diamond/.go/bin";
+
+			# osu settings.
+			WINE_RT = "89";
+			WINE_SRV_RT = "99";
+			STAGING_SHARED_MEMORY = "1";
+			STAGING_RT_PRIORITY_BASE = "89";
+			STAGING_RT_PRIORITY_SERVER = "99";
+			STAGING_PA_DURATION = "250000";
+			STAGING_PA_PERIOD = "8192";
+		   	STAGING_PA_LATENCY_USEC = "128";
+		};
+
 		home = {
-			sessionVariables = {
-				NIX_AUTO_RUN = "1";
-				GOPATH = "/home/diamond/.go";
-				GOBIN  = "/home/diamond/.go/bin";
+			packages = ([
+				# Custom overrides.
 
-				# osu settings.
-				WINE_RT = "89";
-				WINE_SRV_RT = "99";
-				STAGING_SHARED_MEMORY = "1";
-				STAGING_RT_PRIORITY_BASE = "89";
-				STAGING_RT_PRIORITY_SERVER = "99";
-				STAGING_PA_DURATION = "275000";
-				STAGING_PA_PERIOD = "8192";
-			   	STAGING_PA_LATENCY_USEC = "128";
-			};
+				# Neovim with yarn
+				(
+					let neovim-nightly = pkgs.neovim-unwrapped.overrideAttrs(old: {
+						version = "0.5.0";
+						src = builtins.fetchGit {
+							url = "https://github.com/neovim/neovim.git";
+							ref = "nightly";
+							rev = "4f8d98e583beb4c1abd5d57b9898548396633030";
+						};
+					});
+				
+					in pkgs.wrapNeovim neovim-nightly {
+						viAlias     = true;
+						vimAlias    = true;
+						withPython  = true;
+						withPython3 = true;
+						withNodeJs  = true;
+						extraMakeWrapperArgs = "--suffix PATH : ${lib.makeBinPath (
+							with pkgs; [ yarn ]
+						)}";
+					}
+				)
 
-			packages = with pkgs; [
+			]) ++ (with nixpkgs_19_09; [
+
+
+			]) ++ (with nixpkgs_20_03; [
                 # Personal stuff
-                gimp-with-plugins
+
+			]) ++ (with pkgs; [
+                # Personal stuff
 				gnome3.gnome-usage
 				gnome3.polari
 				keepassx-community
 				gnupg
 				bookworm
+				gimp-with-plugins
 
 				# Multimedia
 				(enableDebugging ffmpeg)
@@ -481,9 +578,20 @@ in
 				# Web browser(s)
 				google-chrome
 				fractal # lol
+				tdesktop
 
 				# Office
 				evince
+				typora
+				bookworm
+
+				# Dictionaries
+				nuspell
+				hunspell
+				aspell
+				aspellDicts.en
+				aspellDicts.en-science
+				aspellDicts.en-computers
 
 				# Applications
 				gcolor3
@@ -507,9 +615,22 @@ in
 				gnome3.gnome-disk-utility
 
 				# GNOME extensions
+				gnomeExtensions.gsconnect
 				gnomeExtensions.dash-to-panel
 				gnomeExtensions.remove-dropdown-arrows
-			];
+			]);
+		};
+
+		programs.alacritty = {
+			enable = true;
+			settings = {
+				font = let font = { family = "monospace"; }; in {
+					normal = font;
+					bold   = font;
+					italic = font;
+					size   = 11;
+				};
+			};
 		};
 
 		programs.gnome-terminal.enable  = true;
@@ -519,7 +640,7 @@ in
 				showScrollbar = false;
 				default = true;
 
-				font	= "Inconsolata Bold 11";
+				font	= "Inconsolata Bold 10";
 				colors  = {
 					backgroundColor = "#1D1D1D";
 					foregroundColor = "#E5E5E5";
@@ -536,7 +657,7 @@ in
 				visibleName  = "Google Light";
 				showScrollbar = false;
 
-				font   = "Inconsolata Bold 11";
+				font   = "Inconsolata Bold 10";
 				colors = {
 					backgroundColor = "#FEFEFE";
 					foregroundColor = "#373B41";
@@ -551,6 +672,20 @@ in
 			};
 		};
 
+		systemd.user.services.giomount = {
+			Unit = {
+				Description = "Auto-mount gio sftp mounts";
+				After = "suspend.target";
+			};
+			Install = {
+				WantedBy = [ "multi-user.target" ];
+			};
+			Service = {
+				Type = "oneshot";
+				ExecStart   = "${./bin/giomountall}";
+				Environment = "PATH=${pkgs.gnugrep}/bin:${pkgs.bash}/bin:${pkgs.glib}/bin";
+			};
+		};
 
 		xdg = {
 			enable = true;

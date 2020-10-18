@@ -1,0 +1,342 @@
+.linux {
+	font-family: "Inconsolata" !important;
+	font-weight: 600 !important;
+	font-size: 15px !important;
+}
+
+.monaco-workbench * {
+    font-size: 15px !important;
+}
+
+.titlebar {
+	background: linear-gradient(
+		to right,
+		rgba(85,  205, 252, 1) 0%,
+		rgba(147, 194, 255, 1) 25%,
+		rgba(200, 181, 245, 1) 50%,
+		rgba(234, 171, 217, 1) 75%,
+		rgba(247, 168, 184, 1) 100%
+	);
+
+	color: black !important;
+	padding-left: 10px !important; /* extra space for title */
+}
+
+.statusbar {
+	background: transparent !important;
+	font-size: 1em !important;
+}
+
+div#vscodevim\.vim > a {
+    font-family: "Sans", sans-serif;
+    font-size: .9em !important;
+    font-weight: normal;
+    -webkit-text-stroke: .2px;
+}
+
+.window-title, .title .tab-label a {
+    font-family: "Sans", sans-serif;
+    font-size: 15px !important;
+}
+.window-title {
+    font-weight: 700;
+}
+.title .tab-label a {
+	font-weight: normal;
+	-webkit-text-stroke: .2px;
+}
+
+/* Hide the tab icon */
+.tab .file-icon::before {
+	display: none;
+}
+/* .file-icon::before {
+	opacity: 0 !important;
+} */
+
+/* Extra tab paddings */
+.title .tabs-container>.tab {
+	padding-left: 1em !important;
+}
+.title .tabs-container>.tab .tab-close {
+    padding-left: 8px;
+    padding-right: 8px;
+}
+
+/* Fix the slight offset vertical align of the tab close button */
+.codicon-close:before, .codicon-remove-close:before, .codicon-x:before {
+	line-height: 18px;
+	font-weight: 1000 !important;
+}
+
+/* Hide the 3 buttons on the right of the tab bar */
+.editor-actions {
+	transition: linear 50ms opacity;
+	opacity: 0.25;
+}
+.editor-actions:hover {
+	opacity: 1;
+}
+
+/* Hide the maximize button */
+.window-max-restore {
+    display: none !important;
+}
+
+/* Hack to make the statusbar items expand properly */
+.monaco-workbench .part.statusbar>.left-items {
+	flex: 1 !important;
+	overflow: hidden;
+}
+
+/* Hack to make currentProblem expand as wide as allowed */
+div#statusbar\.currentProblem {
+	display: inline-grid; /* awkward but works */
+	max-width: unset !important;
+}
+div#statusbar\.currentProblem > a {
+	display: block;
+	white-space: nowrap;
+	text-overflow: ellipsis;
+	overflow: hidden;
+	/* We don't really need those, status already has them */
+	padding: 0;
+	margin: 0;
+}
+/* Above inline-block misaligns the icon vertically, this fixes it */
+.monaco-workbench .part.statusbar>.items-container>.statusbar-item span.codicon {
+	vertical-align: sub;
+}
+/* The problems counter should always be on the right */
+div#status\.problems {
+	margin-left: auto;
+}
+
+/* Define status bar orders */
+div#vscodevim\.vim			{ order:  0; }
+div#statusbar\.currentProblem { order:  5; }
+div#status\.problems		  { order: 10; }
+
+/* Disable padding for some of above items */
+.monaco-workbench .part.statusbar>.items-container>.statusbar-item.left.first-visible-item {
+	padding: 0px !important;
+}
+
+/* Hide the vscodium logo */
+.window-appicon {
+	display: none !important;
+}
+
+.window-icon {
+    font-size: 12px !important;
+    font-weight: 900 !important;
+    width: 38px !important;
+    color: white !important;
+}
+.window-controls-container {
+	width: auto !important;
+}
+
+/* Move the number column a bit to the right */
+/*
+.monaco-editor .margin {
+	margin-left: 18px;
+}
+*/
+
+/* Move the editor to the right for the gutter */
+.editor-instance .monaco-editor .editor-scrollable {
+	left: 50px !important;
+}
+/* Move the line number a bit to the right */
+.editor-instance .monaco-editor .margin {
+	width: 52px !important;
+}
+.monaco-editor .line-numbers {
+	position: sticky  !important;
+    margin-left: 20px !important;
+}
+/* Move the gutter to the left of the number column and make the gutter lines a bit thicker */
+.dirty-diff-modified, .dirty-diff-added, .dirty-diff-deleted {
+	border-left-width: 0.5em !important;
+	opacity: 0.75 !important;
+    left: 0px !important;
+}
+/* Fix vertical offset */
+.monaco-editor .margin-view-overlays .line-numbers.lh-odd {
+	margin-top: 0px;
+}
+
+/* Enforce consistent font size on the "run test" thing */
+.monaco-editor .codelens-decoration {
+    font-size: inherit !important;
+}
+/* Fix the offset to align it onto a line */
+.monaco-editor .codelens-decoration > * {
+    top: -2px;
+    position: relative;
+}
+
+.monaco-workbench .part.editor>.content .editor-group-container>.title {
+	background-color: transparent !important;
+	border-bottom: 1px solid #575757;
+}
+
+/* Add a border on the right of the sidebars */
+.sidebar.left, .activitybar.left {
+    border-right: 1px solid #5D5D5D;
+	height: 100% !important;
+}
+
+/* Left activity bar tweaks */
+.action-item a {
+    -webkit-mask-size: 1em !important; /* some extensions do this */
+    font-size: 1em !important; /* make things small and nice */
+	padding-bottom: 2px; /* Fix a minor vertical misalignment */
+}
+.active-item-indicator {
+	display: none; /* Hide the highlight left border */
+}
+.monaco-action-bar .action-item.checked .active-item-indicator:before {
+	border-left: 0px; /* get rid of border, use bg instead */
+}
+.action-item.checked {
+    background-color: #565656;
+}
+/* Style up the badge counter a bit */
+.action-item.checked .badge .badge-content {
+	color: inherit !important;
+}
+.action-item .badge .badge-content {
+	color: rgba(255, 255, 255, 0.4) !important;
+    background-color: transparent !important;
+    position: relative !important;
+    text-align: right !important;
+    top: 16px !important;
+    padding: 0 !important;
+    font-size: 15px !important;
+    font-weight: 500 !important;
+}
+
+/* Hide the scrollbars */
+canvas.decorationsOverviewRuler {
+    display: none !important;
+}
+
+/* Color the background of the body and the ^^ line */
+.monaco-workbench,
+.editor-group-container.active::after {
+	background: #1D1D1D !important;
+}
+
+.pane-header {
+	background-color: transparent !important;
+	font-weight: bolder !important;
+}
+
+.tab.close-button-right.sizing-fit.has-icon-theme {
+	background-color: transparent !important;
+	border: none !important;
+	border-bottom: 2px solid transparent !important;
+}
+.tab.close-button-right.sizing-fit.has-icon-theme.active {
+	background: rgba(255, 255, 255, 0.075) !important;
+	border-bottom: 2px solid #8AB4F8 !important;
+}
+
+/* This bugs out so we remove it */
+.sidebar.left > .title {
+	display: none !important;
+}
+
+.suggest-input-container,
+.suggest-input-placeholder,
+.monaco-inputbox, textarea.input,
+.monaco-count-badge,
+.monaco-list-rows,
+.monaco-list-row.selected,
+.monaco-list-row.selected:hover,
+.monaco-list.list_id_3:not(.drop-target) .monaco-list-row:hover:not(.selected):not(.focused) {
+	background-color: transparent !important;
+}
+
+.monaco-list-row.selected .label-name,
+.monaco-list.list_id_3:not(.drop-target) .monaco-list-row:hover:not(.selected):not(.focused) .label-name {
+	text-decoration: underline;
+}
+
+.content,
+.sidebar.left,
+.activitybar.left,
+.monaco-list.list_id_3 .monaco-list-rows,
+.monaco-editor-background,
+.monaco-editor,
+.monaco-editor .inputarea.ime-input,
+.monaco-editor .margin,
+.editor-container {
+	background-color: transparent !important;
+}
+
+/* Hide the top box-shadow thing */
+.scroll-decoration {
+	display: none !important;
+}
+.shadow {
+	display: none !important;
+}
+
+/* VVVVVV */
+.editor-group-container.active::after {
+	content: "^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^";
+	width: 100%;
+	height: 1em;
+	position: absolute;
+	bottom: 0;
+	left: 1px; /* don't go over the left sidebar border */
+	overflow: hidden;
+}
+
+/* .monaco-workbench::before { */
+/* 	content: " "; */
+/* 	height: 100%; */
+/* 	width: 100%; */
+/* 	position: absolute; */
+/* 	background-image: */
+/* 		linear-gradient(to right, rgba(0, 0, 0, 0.85), rgba(0, 0, 0, 0.5)), */
+/* 		url(file:///home/diamond/Scripts/nix/assets/vscode_bg.png) !important; */
+/* 	background-size: cover; */
+/* } */
+
+/* .activitybar.left::before, */
+.sidebar.left::before,
+.monaco-workbench .part.editor>.content .editor-group-container>.title::before {
+	content: " ";
+	position: absolute;
+	width: 100%;
+	height: 100%;
+	/* backdrop-filter: blur(25px); */
+}
+
+div.monaco-list-row[aria-level="1"] .monaco-tl-twistie {
+	padding-left: 0rem !important;
+}
+
+div.monaco-list-row[aria-level="2"] .monaco-tl-twistie {
+	padding-left: 1rem !important;
+}
+
+div.monaco-list-row[aria-level="3"] .monaco-tl-twistie {
+	padding-left: 2rem !important;
+}
+
+div.monaco-list-row[aria-level="4"] .monaco-tl-twistie {
+	padding-left: 3rem !important;
+}
+
+div.monaco-list-row[aria-level="5"] .monaco-tl-twistie {
+	padding-left: 4rem !important;
+}
+
+div.monaco-list-row[aria-level="6"] .monaco-tl-twistie {
+	padding-left: 5rem !important;
+}

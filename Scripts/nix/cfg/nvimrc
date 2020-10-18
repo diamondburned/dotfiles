@@ -5,6 +5,7 @@ call plug#begin('~/.vim/bundle')
 " Plug 'dgraham/vim-eslint'
 " Plug 'pangloss/vim-javascript'
 " Plug 'ziglang/zig.vim'
+Plug 'gioele/vim-autoswap'
 Plug 'inkarkat/vim-SyntaxRange'
 Plug 'cespare/vim-toml'
 Plug 'scrooloose/nerdtree'
@@ -16,6 +17,9 @@ Plug 'plasticboy/vim-markdown'
 Plug 'godlygeek/tabular'
 Plug 'bogado/file-line'
 Plug 'rhysd/conflict-marker.vim'
+
+"Markdown preview w/ math support"
+Plug 'iamcco/markdown-preview.nvim', { 'do': 'cd app && yarn install &> /tmp/mdp'  }
 
 "Autocomplete brackets/parens/etc like vscode"
 Plug 'jiangmiao/auto-pairs'
@@ -30,12 +34,15 @@ call plug#end()
 
 "Better mouse support"
 set mouse=a
-vnoremap <C-c> "+y
-vnoremap <C-v> "+p
-inoremap <C-v> "+p
+vmap <C-c> "+y
+vmap <C-v> "+p
+imap <C-v> "+p
 map - dd
 
-" Make comments italiced
+"Speed"
+set updatetime=100
+
+"Make comments italiced
 hi Comment cterm=italic
 
 "Auto-commands for type-specific files"
@@ -185,6 +192,11 @@ set cmdheight=2
 
 "Markdown stuff"
 let g:vim_markdown_folding_disabled = 1
+let g:mkdp_browser = 'xdg-open'
+let g:mkdp_preview_options = {
+	\ 'katex': {},
+	\ }
+let g:mkdp_page_title = '${name}'
 
 "START shit I stole from Sacul"
 
@@ -272,7 +284,8 @@ set lazyredraw
 "Undo history"
 set undofile
 
-"let g:go_fmt_command = "goimports"
+"Make nvim show changes done by commands in real-time"
+set inccommand=nosplit
 
 "ALE configs"
 highlight ALEWarningSign ctermbg=NONE
@@ -287,8 +300,9 @@ let g:ale_fixers = {
 			\ 'javascript': [ "prettier" ],
 			\ }
 let g:ale_linters = {
-			\ 'go': [ "gopls"  ],
-			\ 'c':  [ "clangd" ],
+			\ 'go':  [ "gopls"  ],
+			\ 'c':   [ "clangd" ],
+			\ 'cpp': [ "clangd" ],
 			\ 'javascript': [ "eslint", "tsserver" ],
 			\ }
 nnoremap gd :ALEGoToDefinition<CR>

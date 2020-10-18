@@ -1,0 +1,44 @@
+vte-terminal {
+	padding: 4px 6px;
+}
+
+.sidebar-row {
+	margin: -1px 0;
+	margin-right: 8px;
+	padding-left: 4px;
+	border-radius: 0 9999px 9999px 0;
+}
+
+.titlebar * {
+	color: black;
+	opacity: 1;
+	font-weight: 600;
+}
+
+/*
+button.titlebutton       { opacity: 0.65; transition: opacity 80ms linear; }
+button.titlebutton:hover { opacity: 1.00; }
+*/
+
+/* .titlebar, headerbar { */
+/* 	background: transparent; */
+/* } */
+
+/* Hopefully Chrome can catch up to this. */
+/* .titlebar:only-child, headerbar:only-child { */
+
+/* Chrome could not. */
+.titlebar, headerbar {
+	background: linear-gradient(
+		to right,
+		rgba(85,  205, 252, 1) 0%,
+		rgba(147, 194, 255, 1) 25%,
+		rgba(200, 181, 245, 1) 50%,
+		rgba(234, 171, 217, 1) 75%,
+		rgba(247, 168, 184, 1) 100%
+	);
+}
+
+decoration {
+	padding: 0;
+}

@@ -1,0 +1,20 @@
+.katex-display > .katex {
+	text-align: left !important;
+}
+
+eqn {
+	font-size: 1.15em;
+}
+
+body > section .katex-display {
+    margin: 0 2.5em;
+    margin-bottom: 1em;
+}
+
+ol ~ p {
+	margin: 0 2.5em;
+}
+
+ol {
+	list-style-type: lower-alpha;
+}

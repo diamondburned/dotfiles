@@ -1,0 +1,51 @@
+#!/usr/bin/env bash
+set -e
+
+heads=(
+	"DP-1-1 1920 1080 45"
+	"DP-1-2 2560 1440 75"
+)
+
+# setmode DP-1-1 1920 1080 45 -> void
+setmode() {
+	local disp=$1
+	local wres=$2
+	local hres=$3
+	local rate=$4
+
+	# Add the mode.
+	modename=$(addmode $wres $hres $rate)
+
+	# Guess the modename.
+	xrandr --output $disp --mode $modename
+}
+
+# addmode 1920 1080 45 -> 1920x1080_45.00
+addmode() {
+	local wres=$1
+	local hres=$2
+	local rate=$3
+
+	local mode=$(cvt $wres $hres $rate | grep -Po 'Modeline .+"\s+\K.+')
+	local name=$(modename $wres $hres $rate)
+	xrandr --newmode $name $mode > /dev/null # intentional expansion
+
+	echo -n $name
+}
+
+# modename 1920 1080 45 -> 1920x1080_45.00
+modename() {
+	local wres=$1
+	local hres=$2
+	local rate=$3
+
+	echo -n "${wres}x${hres}_${rate}.00"
+}
+
+main() {
+	for display in "${heads[@]}"; {
+		setmode $display
+	}
+}
+
+main "$@"

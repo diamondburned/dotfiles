@@ -1,0 +1,99 @@
+#!/usr/bin/env bash
+set -e
+
+main() {
+	# Read all hosts into the array.
+	local hosts=(
+		"sftp://diamond@192.168.1.169:1337/"
+	)
+
+	# Temporary name to be used as the mount name.
+	local tmpname="tmp"
+
+	for host in "${hosts[@]}"; {
+		mounts::ParseSFTP "$tmpname" "$host"
+
+		mounts::Print "$tmpname" user -v username
+		echo "Checking $username..."
+
+		mounts::IsMounted "$tmpname" || {
+			gio mount -u "$host" || echo "Failed to unmount $host"
+			gio mount    "$host" || echo "Failed to mount $host"
+		}
+	}
+}
+
+# mounts -> $name::host -> string
+#        -> $name::port -> int
+#        -> $name::user -> string
+declare -A mounts
+
+# ReadList "arrayVar:string" -> (void)?status
+# ReadList reads a list of hosts into the given array.
+mounts::ReadList() {
+	local arrayVar="$1"
+	# Accept no matches as a pass.
+	local mounts="$(gio mount -l | grep -oP 'sftp://.*' || return 0)"
+
+	# Accept read fails; treat as no results.
+	IFS=$'\n' read -r -d '' -a "$arrayVar" <<< "$mounts" || return 0
+}
+
+# enumIsValid "mountKey:enum" -> (void)?status
+mounts::enumIsValid() {
+	local mountKey="$1"
+
+	case "$mountKey" in
+	host) ;&
+	port) ;&
+	user) return 0 ;;
+	   *) return 1
+	esac
+}
+
+# ParseSFTP "mountName:string" "mountURL:'sftp://(user)@(IP:port)/'" -> (void)?status
+mounts::ParseSFTP() {
+	local mountName="$1" mountURL="$2"
+
+	if [[ "$mountURL" =~ sftp://([[:alnum:]]+)@([0-9.]+):([0-9]+)/ ]]; then
+		mounts["$mountName::user"]="${BASH_REMATCH[1]}"
+		mounts["$mountName::host"]="${BASH_REMATCH[2]}"
+		mounts["$mountName::port"]="${BASH_REMATCH[3]}"
+	else
+		return 1
+	fi
+}
+
+# Print "mountName:string" "mountKey:enum" "...args:any" -> (any)?status
+mounts::Print() {
+	local mountName="$1" mountKey="$2"
+	mounts::enumIsValid "$mountKey"
+
+	printf "${@:3}" "%s" "${mounts["$mountName::$mountKey"]}"
+}
+
+# Dir "mountName:string" "...args:any" -> (string)?status
+# Dir returns the path to the mount point.
+mounts::PrintDir() {
+	local mountName="$1"
+	local dirpath
+
+	printf -v dirpath "/run/user/1000/gvfs/sftp:host=%s,port=%s,user=%s/" \
+		"${mounts["$mountName::host"]}" \
+		"${mounts["$mountName::port"]}" \
+		"${mounts["$mountName::user"]}"
+
+	printf "${@:2}" "%s" "$dirpath"
+}
+
+# IsMounted "mountName:string" -> (void)?status
+mounts::IsMounted() {
+	local mountName="$1"
+	local mountPoint
+	mounts::PrintDir "$mountName" -v mountPoint
+
+	[[ -d "$mountPoint" ]]
+	return $?
+}
+
+main "$@"
