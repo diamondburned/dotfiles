@@ -18,6 +18,9 @@ Plug 'godlygeek/tabular'
 Plug 'bogado/file-line'
 Plug 'rhysd/conflict-marker.vim'
 
+"Firefox Neovim client mumbo-jumbo"
+Plug 'raghur/vim-ghost', {'do': ':GhostInstall'}
+
 "Markdown preview w/ math support"
 Plug 'iamcco/markdown-preview.nvim', { 'do': 'cd app && yarn install &> /tmp/mdp'  }
 
@@ -296,7 +299,8 @@ let g:ale_sign_column_always = 1
 let g:ale_completion_enabled = 1
 let g:ale_fix_on_save = 1
 let g:ale_fixers = {
-			\ 'go': [ "goimports" ],
+			\ 'go':  [ "goimports"    ],
+			\ 'cpp': [ "clang-format" ],
 			\ 'javascript': [ "prettier" ],
 			\ }
 let g:ale_linters = {

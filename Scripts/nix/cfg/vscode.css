@@ -1,11 +1,11 @@
 .linux {
 	font-family: "Inconsolata" !important;
 	font-weight: 600 !important;
-	font-size: 15px !important;
+	font-size: 10pt !important;
 }
 
 .monaco-workbench * {
-    font-size: 15px !important;
+    font-size: 10pt !important;
 }
 
 .titlebar {
@@ -29,14 +29,14 @@
 
 div#vscodevim\.vim > a {
     font-family: "Sans", sans-serif;
-    font-size: .9em !important;
+    font-size: 1em !important;
     font-weight: normal;
     -webkit-text-stroke: .2px;
 }
 
 .window-title, .title .tab-label a {
     font-family: "Sans", sans-serif;
-    font-size: 15px !important;
+    font-size: 10pt !important;
 }
 .window-title {
     font-weight: 700;
@@ -214,7 +214,7 @@ div#status\.problems		  { order: 10; }
     text-align: right !important;
     top: 16px !important;
     padding: 0 !important;
-    font-size: 15px !important;
+    font-size: 10pt !important;
     font-weight: 500 !important;
 }
 

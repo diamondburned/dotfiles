@@ -10,16 +10,6 @@ let utils = import ./utils.nix { inherit lib; };
 		rev = "6c3f31772c639f50f893c25fb4ee75bb0cd92c98";
 	};
 
-	nixpkgs_20_09 = import (builtins.fetchGit {
-		url = "https://github.com/NixOS/nixpkgs-channels.git";
-		ref = "nixos-20.03-small";
-		rev = "041a24254ea6e3faa096505b489c9360827bf200";
-	}) {
-		overlays = [
-			(import "${musnix}/overlay.nix")
-		];
-	};
-
 	blurcam = builtins.fetchGit {
 		url = "https://github.com/diamondburned/blurcam.git";
 		rev = "79a35253e6d81b840c3d9db8f3b0095e8a449b81";
@@ -32,17 +22,15 @@ in {
 	];
 
 	services.blurcam = {
-		input  = "/dev/video0";
-		output = "/dev/video4";
-		preamble = ''
-			 ctl="${pkgs.v4l_utils}/bin/v4l2-ctl"
-			$ctl -d /dev/video0 --set-fmt-video "width=640,height=480"
-			$ctl -d /dev/video0 -c "power_line_frequency=0,sharpness=100,saturation=25,contrast=40,brightness=100"
-		'';
-		sigma  = 0.5;
-		width  =  -2;
-		height = 120;
+		input  = "";
+		output = "";
 	};
+
+    # Battery saver thing
+    services.tlp.enable = true;
+
+	# Do not suspend on lid close.
+	services.logind.lidSwitch = "ignore";
 
 	hardware.cpu.intel.updateMicrocode = true;
 
@@ -55,10 +43,10 @@ in {
 		];
 	};
 
-	# Add the camera loopback drivers.
-	boot.extraModulePackages = with config.boot.kernelPackages; [
-		v4l2loopback
-	];
+	# # Add the camera loopback drivers.
+	# boot.extraModulePackages = with config.boot.kernelPackages; [
+	# 	v4l2loopback
+	# ];
 
 	# Enable the Thunderbolt 3 daemon.
 	services.hardware.bolt.enable = true;
@@ -70,13 +58,14 @@ in {
 		kernel = {
 			optimize = true;
 			realtime = true;
-			packages = nixpkgs_20_09.linuxPackages_latest_rt;
+			packages = pkgs.linuxPackages_5_6_rt;
 		};
+		rtirq.enable = true;
 		das_watchdog.enable = true;
 	};
 
 	# We don't want to sacrifice battery for the above.
-	powerManagement.cpuFreqGovernor = lib.mkForce null;
+	powerManagement.cpuFreqGovernor = lib.mkForce "ondemand";
 
 	services.blueman.enable = true;
 	hardware.bluetooth = {
@@ -88,7 +77,7 @@ in {
 	services.undervolt = {
 		enable = false;
 		coreOffset = -50; # mV
-		gpuOffset  = -25;
+		gpuOffset  = -5;
 	};
 
 	fileSystems."/run/media/diamond/Data" = {
@@ -133,7 +122,7 @@ in {
 			Driver "intel"
 			Option "TearFree"        "true"
 			Option "AccelMethod"     "sna"
-			Option "SwapBuffersWait" "false"
+			Option "SwapBuffersWait" "true"
 		EndSection
 	'';
 
@@ -164,5 +153,5 @@ in {
 	# 	'';
 	# };
 
-	nix.maxJobs = lib.mkForce 6;
+	nix.maxJobs = lib.mkForce 4;
 }

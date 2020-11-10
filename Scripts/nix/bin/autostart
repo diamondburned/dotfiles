@@ -1,3 +1,5 @@
 #!/usr/bin/env bash
 xrandr --output DP1-1 --set "Broadcast RGB" "Full"
 
+v4l2-ctl -d /dev/video0 --set-fmt-video "width=640,height=480"
+v4l2-ctl -d /dev/video0 -c "power_line_frequency=0,sharpness=100,saturation=25,contrast=40,brightness=100"

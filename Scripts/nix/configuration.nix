@@ -24,22 +24,12 @@ let home-manager = builtins.fetchGit {
 
 	diamond = ../nix-overlays;
 
-	nixpkgs_19_09 = import (builtins.fetchGit {
-		url = "https://github.com/NixOS/nixpkgs-channels.git";
-		ref = "nixos-19.09";
-	}) {};
-
-	nixpkgs_20_03 = import (builtins.fetchGit {
-		url = "https://github.com/NixOS/nixpkgs-channels.git";
-		ref = "nixos-20.03";
-	}) {};
-
 in
 
 {
 	imports = [
-		 ./hardware-configuration.nix
-		 ./hardware-custom.nix
+		./hardware-configuration.nix
+		./hardware-custom.nix
 		"${diamond}"
 		"${home-manager}/nixos"
 	];
@@ -48,12 +38,6 @@ in
 	nixpkgs.overlays = [
 		(tdeo)
 		(self: super: {
-			# glib = super.glib.overrideDerivation(old: {
-			# 	mesonFlags = old.mesonFlags ++ [
-			# 		"--buildtype=debug"
-			# 	];
-			# 	doCheck = false; # wouldn't build otherwise
-			# });
 			vte = super.vte.overrideAttrs(oldAttrs: {
 				patches = oldAttrs.patches or [] ++ [ ./patches/vte-fast.patch ];
 			});
@@ -66,6 +50,8 @@ in
 				};
 			});
 			osu-wine = super.osu-wine.override {
+				# Use Nixpkgs' 20.03 wine just so we don't have to recompile
+				# lots.
 				wine = super.wineStaging.overrideDerivation(old: {
 					NIX_CFLAGS_COMPILE = (old.NIX_CFLAGS_COMPILE or "") + " -DNDEBUG -Ofast -mfpmath=sse -mtune=intel -march=skylake";
 					postPatch = (old.postPatch or "") + ''
@@ -74,13 +60,13 @@ in
 					'';
 				});
 			};
-			pulseaudio =
-				let overrideFn = old: {
-					NIX_CFLAGS_COMPILE = (old.NIX_CFLAGS_COMPILE or "") + " -DNDEBUG -Ofast -mfpmath=sse -mtune=intel -march=skylake";
-				};
-				in           (super.pulseaudio.overrideAttrs(overrideFn)).override {
-					speexdsp = (super.speexdsp.overrideAttrs(overrideFn));
-				};
+			# pulseaudio =
+			# 	let overrideFn = old: {
+			# 		NIX_CFLAGS_COMPILE = (old.NIX_CFLAGS_COMPILE or "") + " -DNDEBUG -Ofast -mfpmath=sse -mtune=intel -march=skylake";
+			# 	};
+			# 	in           (super.pulseaudio.overrideAttrs(overrideFn)).override {
+			# 		speexdsp = (super.speexdsp.overrideAttrs(overrideFn));
+			# 	};
 		})
 	];
 
@@ -93,7 +79,7 @@ in
 		buildMachines = [{
 			hostName = "hanaharu";
 			systems = [ "x86_64-linux" "i686-linux" ];
-			maxJobs = 6; # thread-1
+			maxJobs = 8; # thread-1
 			speedFactor = 10;
 			supportedFeatures = [ "nixos-test" "benchmark" "big-parallel" "kvm" ];
 		}];
@@ -102,8 +88,11 @@ in
 	};
 
 	programs.ssh.extraConfig = ''
-		Host hanaharu
+		Match Host hanaharu exec "nc -z 192.168.1.169 %p"
+			HostName 192.168.1.169
+		Match Host hanaharu
 			HostName home.arikawa-hi.me
+		Host hanaharu
 			Port 1337
 			User diamond
 			IdentityFile   /home/diamond/.ssh/id_rsa
@@ -115,30 +104,34 @@ in
 	# services.diamondburned.caddy = {
 	# 	enable = true;
 	# 	config = ''
-
+	# 		http://127.0.0.1:28475 {
+	# 			reverse_proxy * unix:///tmp/ghproxy.sock
+	# 		}
 	# 	'';
-	# 	modSha256 = "1lc26jkjfw1cridymic82lk3zdwhlccs7s5mhkdnz7cbcwllyy54";
+	# 	modSha256 = "07skcp85xvwak3pn7gavvclw9svps30yqgrsyfikhl6yspa9c45q";
+	# };
+
+	# services.ghproxy = {
+	# 	username = "diamondburned";
+	# 	address  = "unix:///tmp/ghproxy.sock";
 	# };
 
 	# Enable MySQL
-	services.postgresql = {
-		enable = true;
-		enableTCPIP = false;
-		ensureDatabases = ["facechat"];
-		ensureUsers = [{
-			name = "diamond";
-			ensurePermissions = {
-				"DATABASE facechat" = "ALL PRIVILEGES";
-			};
-		}];
-		initialScript = pkgs.writeText "init.sql" ''
-			CREATE USER diamond;
-			ALTER  USER diamond WITH SUPERUSER;
-		'';
-	};
-
-	# Latest kernel.
-	# boot.kernelPackages = pkgs.linuxPackages_latest;
+	# services.postgresql = {
+	# 	enable = true;
+	# 	enableTCPIP = false;
+	# 	ensureDatabases = ["facechat"];
+	# 	ensureUsers = [{
+	# 		name = "diamond";
+	# 		ensurePermissions = {
+	# 			"DATABASE facechat" = "ALL PRIVILEGES";
+	# 		};
+	# 	}];
+	# 	initialScript = pkgs.writeText "init.sql" ''
+	# 		CREATE USER diamond;
+	# 		ALTER  USER diamond WITH SUPERUSER;
+	# 	'';
+	# };
 
     # NTFS support
     boot.supportedFilesystems = [ "exfat" "ntfs" ];
@@ -146,12 +139,6 @@ in
 	# Use the systemd-boot EFI boot loader.
 	boot.loader.systemd-boot.enable = true;
 	boot.loader.efi.canTouchEfiVariables = true;
-
-	# zramSwap = {
-	# 	enable = true;
-	# 	algorithm = "lz4";
-	# 	memoryPercent = 25;
-	# };
 
 	networking.hostName = "hackadoll3"; # Define your hostname.
 	networking.networkmanager = {
@@ -161,12 +148,23 @@ in
 	networking.nameservers = [
 		"1.1.1.1" "1.0.0.1"
 	];
+	networking.firewall = {
+		enable = false;
+		allowedTCPPortRanges = [
+			{ from = 1714; to = 1764; } # GSConnect
+		];
+		allowedUDPPortRanges = [
+			{ from = 1714; to = 1764; } # GSConnect;
+		];
+		allowedTCPPorts = [ 22 ];
+		allowedUDPPorts = [ 22 ];
+	};
 
 	i18n = {
-		inputMethod = {
-			enabled	= "fcitx";
-			fcitx.engines = with nixpkgs_19_09.fcitx-engines; [ mozc unikey ];
-		};
+		# inputMethod = {
+		# 	enabled	= "fcitx";
+		# 	fcitx.engines = with nixpkgs_19_09.fcitx-engines; [ mozc unikey ];
+		# };
 
 		defaultLocale = "en_US.UTF-8";
 		supportedLocales = [
@@ -206,18 +204,10 @@ in
 		blobmoji
 	];
 
-    # Battery saver thing
-    services.tlp.enable = true;
-
-	# Do not suspend on lid close.
-	services.logind.lidSwitch = "ignore";
-
 	# Some programs need SUID wrappers, can be configured further or are
 	# started in user sessions.
 	programs.mtr.enable = true;
 	programs.gnupg.agent = { enable = true; enableSSHSupport = true; };
-
-    programs.adb.enable = true;
 
 	# List services that you want to enable:
 
@@ -237,9 +227,6 @@ in
 			# Canon
 			cnijfilter2
 			canon-cups-ufr2
-
-			# Brother
-			dsseries
 		];
 	};
 
@@ -265,7 +252,7 @@ in
 
 			# resample-method = "speex-fixed-0";
 			# resample-method = "copy";
-			resample-method = "speex-float-8";
+			resample-method = "speex-float-2";
 			default-sample-format = "float32le";
 			default-sample-rate = "44100";
 			alternate-sample-rate = "48000";
@@ -308,12 +295,13 @@ in
 	# Enable the GNOME desktop environment
 	services.xserver.displayManager.gdm = {
 		enable = true;
-		wayland = false;
+		wayland = true;
 	};
 	services.xserver.desktopManager.gnome3 = {
 		enable = true;
-		sessionPath = with pkgs; [ gnome3.gpaste ];
+		# sessionPath = with pkgs; [ gnome3.gpaste ];
 	};
+	# programs.xwayland.enable = true;
 
 	# More GNOME things
 	services.gnome3 = {
@@ -329,6 +317,8 @@ in
 
 		gnome-user-share.enable = true;
 		chrome-gnome-shell.enable = true;
+
+		# experimental-features.realtime-scheduling = true;
 	};
 
 	xdg.portal.extraPortals = with pkgs; [ xdg-desktop-portal-gtk ];
@@ -343,13 +333,11 @@ in
     programs.seahorse.enable = true;
 
     services.gvfs.enable = true;
-    programs.gpaste.enable = true;
+    programs.gpaste.enable = false;
     programs.gnome-disks.enable = true;
     programs.file-roller.enable = true;
 
 	# dbus things
-	services.xserver.startDbusSession = true;
-	services.dbus.socketActivated = true;
 	services.dbus.packages = with pkgs; [ gnome3.dconf ];
 
 	# Enable Polkit
@@ -375,6 +363,16 @@ in
 	# 	qemuPackage = nixpkgs_19_09.qemu_kvm;
 	# 	qemuRunAsRoot = false;
 	# };
+
+	services.mpd = {
+		enable = true;
+		user = "diamond";
+		group = "users";
+		startWhenNeeded = true;
+		dataDir = "/home/diamond/.local/share/mpd";
+		musicDirectory = "/run/user/1000/gvfs/sftp:host=192.168.1.169,port=1337,user=diamond/mnt/Music";
+		playlistDirectory = "/home/diamond/Music/playlists";
+	};
 
 	# Define a user account. Don't forget to set a password with ‘passwd’.
 	users.users.diamond = {
@@ -403,7 +401,6 @@ in
 				red_blink_ms = 1000;
 				polling_ms   = 1200;
 				num_scanners = 1;
-				hidden_procs = [ "ffmpeg" ];
 				window = {
 					x = 5;
 					y = 5;
@@ -412,15 +409,17 @@ in
 			};
 		};
 
+		services.mpd = {
+			enable = true;
+		};
+
 		programs.git = {
 			enable = true;
 			userName  = "diamondburned";
 			userEmail = "datutbrus@gmail.com";
 			extraConfig = {
 				core = {
-					excludesfile = "${pkgs.writeText "gitignore" ''
-						.envrc
-					''}";
+					excludesfile = "${pkgs.writeText "gitignore" ".envrc"}";
 				};
 				url = {
 					"ssh://git@github.com/" = { insteadOf = "https://github.com/"; };
@@ -450,19 +449,31 @@ in
 			# };
 		};
 
-		# programs.mpv = {
-		# 	enable = true;
-		# 	config = {
-		# 		osd-font = "Sans";
-		# 		profile = "gpu-hq";
-		# 		gpu-api = "opengl";
-		# 		gpu-context = "auto";
-		# 		vo = "gpu";
-		# 		dither-depth = 8;
-		# 		fbo-format = "rgba32f";
-		# 		scale = "ewa_lanczos";
-		# 	};
-		# };
+		programs.rhythmbox = {
+			enable = true;
+			plugins = with pkgs; [
+				rhythmbox-alternative-toolbar
+			];
+		};
+
+		programs.mpv = {
+			enable = true;
+			config = {
+				osd-font = "Sans";
+				# profile = "gpu-hq";
+				gpu-api = "auto";
+				gpu-context = "auto";
+				vo = "gpu";
+				dither-depth = 8;
+				fbo-format = "rgba32f";
+				scale = "lanczos";
+			};
+		};
+
+		programs.firefox = {
+			enable = true;
+			profiles.default = import ./cfg/firefox;
+		};
 
 		gtk = {
 			enable = true;
@@ -499,12 +510,23 @@ in
 				delay = 200;
 				repeat-interval = 15;
 			};
+			"org/gnome/desktop/peripherals/mouse" = {
+				middle-click-emulation = true;
+			};
 		};
 
 		pam.sessionVariables = {
 			NIX_AUTO_RUN = "1";
 			GOPATH = "/home/diamond/.go";
 			GOBIN  = "/home/diamond/.go/bin";
+
+			# Disable VSync.
+			vblank_mode = "0";
+
+			# Enforce Wayland.
+			QT_QPA_PLATFORM = "wayland";
+			SDL_VIDEODRIVER = "wayland";
+			MOZ_ENABLE_WAYLAND = "1";
 
 			# osu settings.
 			WINE_RT = "89";
@@ -518,37 +540,32 @@ in
 		};
 
 		home = {
-			packages = ([
-				# Custom overrides.
-
-				# Neovim with yarn
-				(
-					let neovim-nightly = pkgs.neovim-unwrapped.overrideAttrs(old: {
-						version = "0.5.0";
-						src = builtins.fetchGit {
-							url = "https://github.com/neovim/neovim.git";
-							ref = "nightly";
-							rev = "4f8d98e583beb4c1abd5d57b9898548396633030";
-						};
-					});
-				
-					in pkgs.wrapNeovim neovim-nightly {
-						viAlias     = true;
-						vimAlias    = true;
-						withPython  = true;
-						withPython3 = true;
-						withNodeJs  = true;
-						extraMakeWrapperArgs = "--suffix PATH : ${lib.makeBinPath (
-							with pkgs; [ yarn ]
-						)}";
-					}
-				)
-
-			]) ++ (with nixpkgs_19_09; [
-
-
-			]) ++ (with nixpkgs_20_03; [
-                # Personal stuff
+			# Custom overrides.
+			packages = ([(
+			# Neovim with yarn
+				let neovim-nightly = pkgs.neovim-unwrapped.overrideAttrs(old: {
+					version = "0.5.0";
+					src = builtins.fetchGit {
+						url = "https://github.com/neovim/neovim.git";
+						ref = "nightly";
+						rev = "4f8d98e583beb4c1abd5d57b9898548396633030";
+					};
+				});
+			
+				in pkgs.wrapNeovim neovim-nightly {
+					viAlias     = true;
+					vimAlias    = true;
+					withPython  = true;
+					withPython3 = true;
+					withNodeJs  = true;
+					extraMakeWrapperArgs = "--suffix PATH : ${lib.makeBinPath (
+						with pkgs; [ yarn ]
+					)}";
+				}
+			)]) ++ (with pkgs.aspellDicts; [
+				en
+				en-science
+				en-computers
 
 			]) ++ (with pkgs; [
                 # Personal stuff
@@ -556,13 +573,17 @@ in
 				gnome3.polari
 				keepassx-community
 				gnupg
+				zoom-us
 				bookworm
 				gimp-with-plugins
 
 				# Multimedia
 				(enableDebugging ffmpeg)
-				mpv
-				audacious
+				v4l_utils
+				# mpv
+				# audacious
+				ymuse
+				audacious-3-5
 				pavucontrol
 				pulseeffects
 
@@ -576,7 +597,8 @@ in
 				virt-manager
 
 				# Web browser(s)
-				google-chrome
+				# firefox
+				google-chrome-dev
 				fractal # lol
 				tdesktop
 
@@ -589,9 +611,6 @@ in
 				nuspell
 				hunspell
 				aspell
-				aspellDicts.en
-				aspellDicts.en-science
-				aspellDicts.en-computers
 
 				# Applications
 				gcolor3
@@ -616,7 +635,8 @@ in
 
 				# GNOME extensions
 				gnomeExtensions.gsconnect
-				gnomeExtensions.dash-to-panel
+				# gnomeExtensions.dash-to-panel
+				gnomeExtensions.easyscreencast
 				gnomeExtensions.remove-dropdown-arrows
 			]);
 		};
@@ -689,6 +709,13 @@ in
 
 		xdg = {
 			enable = true;
+			mime.enable = true;
+			# mimeApps = {
+			# 	enable = true;
+			# 	defaultApplications = {
+			# 		"default-web-browser" = [ "firefox.desktop" ];
+			# 	};
+			# };
 			configFile = {
 				"fontconfig/fonts.conf".source = ./cfg/fontconfig.xml;
 				"nvim/init.vim".source = ./cfg/nvimrc;

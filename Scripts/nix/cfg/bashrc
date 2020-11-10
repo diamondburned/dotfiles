@@ -6,10 +6,6 @@ xset r rate 200 50 &> /dev/null
 gsettings set org.gnome.desktop.peripherals.keyboard repeat-interval 25
 gsettings set org.gnome.desktop.peripherals.keyboard delay 200
 
-# Unlimited history filesize
-HISTSIZE=-1
-HISTFILESIZE=-1
-
 export INPUTRC="${HOME}/.inputrc"
 # shopt -s direxpand
 export SSH_ASKPASS=""
@@ -54,8 +50,8 @@ EDITOR=nvim
 
 #xinput set-button-map "MICROSOFT SAM Pen (0)" 1 3 2 &> /dev/null 
 
-unset HISTFILESIZE
-unset HISTSIZE
+HISTFILESIZE=2147483647 # fuck
+HISTSIZE=1000
 shopt -s histappend
 
 grepr() {
@@ -475,5 +471,8 @@ _shell_calc() {
 # Direnv.
 export DIRENV_LOG_FORMAT= # quiet mode
 eval "$(direnv hook bash)"
+
+alias vi="nvim"
+alias vim="nvim"
 
 echo Welcome
