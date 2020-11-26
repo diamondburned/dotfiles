@@ -1,0 +1,581 @@
+@import url("https://cdn.discordapp.com/attachments/729185721771884623/761309112591188028/style_part00.css");
+@import url("https://cdn.discordapp.com/attachments/729185721771884623/761309118920261662/style_part01.css");
+@import url("https://cdn.discordapp.com/attachments/729185721771884623/761309124230381568/style_part02.css");
+@import url("https://cdn.discordapp.com/attachments/729185721771884623/761309128218902549/style_part03.css");
+body {
+    font-family: sans-serif;
+}
+
+.theme-dark {
+    --header-primary: #fff;
+    --header-secondary: #b9bbbe;
+    --text-normal: #dcddde;
+    --text-muted: #72767d;
+    --text-link: #3F7CE0;
+    --channels-default: #8e9297;
+    --interactive-normal: #b9bbbe;
+    --interactive-hover: #dcddde;
+    --interactive-active: #fff;
+    --interactive-muted: #4f545c;
+    --background-primary: #303030;
+    --background-secondary: #2C2C2C;
+    --background-secondary-alt: #2C2C2C;
+    --background-tertiary: #383838;
+    --background-accent: #3F7CE0;
+    --background-floating: #18191c;
+    --background-modifier-hover: rgba(79, 84, 92, 0.16);
+    --background-modifier-active: rgba(79, 84, 92, 0.24);
+    --background-modifier-selected: rgba(79, 84, 92, 0.66);
+    --background-modifier-accent: hsla(0, 0%, 100%, 0.06);
+    /* --elevation-low: 0 1px 0 rgba(4, 4, 5, 0.2), 0 1.5px 0 rgba(6, 6, 7, 0.05), 0 2px 0 rgba(4, 4, 5, 0.05); */
+    --elevation-low: 0 0px 4px 0px rgba(4, 4, 5, 0.45);
+    --elevation-high: 0 8px 16px rgba(0, 0, 0, 0.24);
+    --guild-header-text-shadow: 0 1px 1px rgba(0, 0, 0, 0.4);
+    --channeltextarea-background: #40444b;
+    --activity-card-background: #202225;
+    --deprecated-panel-background: #2C2C2C;
+}
+
+/* Pill color */
+div[class^="pill"] > span {
+    background-color: rgba(200, 181, 245, 1);
+}
+
+/* Guild bar tweaks */
+ul[data-list-id="guildsnav"] > div[class^="scroller"] {
+    padding: 0 !important;
+}
+
+/* Hide scrollbar in the guild container */
+ul[data-list-id="guildsnav"] * {
+    scrollbar-width: none;
+}
+
+ul[data-list-id="guildsnav"] ::-webkit-scrollbar {
+    display: none;
+}
+
+/* Hide the useless 3 last icons in the guild bar */
+ul[data-list-id="guildsnav"] div[class^="tutorial"]:not(:first-child),
+ul[data-list-id="guildsnav"] div[class^="tutorial"]:not(:first-child) ~ div {
+    display: none;
+}
+
+/* Re-add the padding of the last guild */
+ul[data-list-id="guildsnav"] div[aria-label="Servers"] {
+    padding-bottom: 6px;
+}
+
+/* Discord logo tweaks */
+/* Make the logo always visible */
+ul[data-list-id="guildsnav"] div[class^="tutorial"] {
+    position: sticky;
+    top: 0;
+    left: 0;
+    width: 72px;
+    height: 42px;
+    z-index: 9999;
+}
+
+/* Hide the separator, pill and Discord logo */
+ul[data-list-id="guildsnav"] div[class^="tutorial"] > div[class^="listItem"] > div[class^="pill"] {
+    display: none;
+}
+
+ul[data-list-id="guildsnav"] div[class^="guildSeparator"],
+ul[data-list-id="guildsnav"] div[class^="tutorial"] div[class^="listItemWrapper"] div[class^="wrapper"] > svg {
+    opacity: 0;
+}
+
+/* Stretch the button, including the hidden Discord logo which triggers the DM page */
+ul[data-list-id="guildsnav"] div[class^="tutorial"] div[class^="listItem"],
+ul[data-list-id="guildsnav"] div[class^="tutorial"] div[class^="listItemWrapper"] div[class^="wrapper"],
+ul[data-list-id="guildsnav"] div[class^="tutorial"] div[class^="listItemWrapper"] div[class^="wrapper"] > svg,
+ul[data-list-id="guildsnav"] div[class^="tutorial"] div[class^="listItemWrapper"] div[class^="wrapper"] > svg * {
+    width: 100% !important;
+    margin: 0;
+}
+
+/* Hack to actually stretch the clickable area */
+ul[data-list-id="guildsnav"] div[class^="tutorial"] div[class^="listItemWrapper"] div[class^="wrapper"] > svg,
+ul[data-list-id="guildsnav"] div[class^="tutorial"] div[class^="listItemWrapper"] div[class^="wrapper"] > svg * {
+    width: 72px !important;
+    x: -12px !important;
+}
+
+ul[data-list-id="guildsnav"] div[class^="tutorial"] div[class^="listItem"] {
+    background-image: url("https://media.discordapp.net/attachments/495716043273273374/780653353901883422/astolfo_badge.png");
+    background-size: cover;
+    box-shadow: var(--elevation-low);
+}
+
+ul[data-list-id="guildsnav"] div[class^="tutorial"] div[class^="listItemWrapper"] div[class^="wrapper"] > svg > foreignObject > div > div {
+    background-color: transparent;
+}
+
+/* Search bar tweaks */
+div[class^="toolbar"] div[class^="searchBar"] {
+    border-radius: 99px;
+    padding: 0 6px;
+}
+
+[class^="option"]:after {
+    background: none !important;
+}
+
+[id^="search-result"],
+[class^="searchResultsWrap"] > *,
+[class^="searchResultsWrap"] span,
+[class^="searchResult"] > * {
+    background-color: var(--background-secondary) !important;
+}
+
+[class^="searchResultMessage"] {
+    border: none !important;
+    opacity: 0.75 !important;
+}
+
+[class^="searchResult"]::before,
+[class^="searchResult"]::after {
+    background-image: none !important;
+}
+
+[class^="searchResult"] [class*="hit"] {
+    box-shadow: 0 0 4px -1px rgba(0, 0, 0, 0.75) !important;
+    border-radius: 0;
+    opacity: 1 !important;
+}
+
+[class^="messagesWrapper"]::before {
+    /* background: url(https://cdn.discordapp.com/attachments/393586125827997696/620818631902887936/astolfo_pose.png); */
+    background-attachment: fixed;
+    background-repeat: no-repeat;
+    background-size: 200px;
+    /* background-position-x: right; */
+    /* background-position-y: bottom; */
+    background-position: bottom right;
+    content: " ";
+    position: absolute;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    opacity: 0.27;
+}
+
+[class^="chatContent"] > form {
+    background-image: linear-gradient(transparent, rgba(10, 10, 10, 0.35));
+    margin: 0;
+    padding: 0 12px;
+    display: flex;
+    flex-direction: column;
+    align-items: initial;
+}
+
+[class^="chatContent"] > form button[class^="attach"] {
+    padding: 10px 12px !important;
+    padding-right: 18px !important;
+}
+
+[class^="chatContent"] > form button[aria-label="Send a gift"],
+[class^="chatContent"] > form button[aria-label="Open GIF picker"] {
+    display: none;
+}
+
+[class^="chatContent"] > form button div[class^="sprite"] {
+    transform: scale(1) !important;
+}
+
+.theme-light [class^="chatContent"] > form {
+    background: white;
+}
+
+[class^="chatContent"] > div > div > div > div,
+[class^="chatContent"] [class^="channelTextArea"] {
+    max-width: 1000px;
+    width: 100%;
+    margin: 0 auto;
+}
+
+[class^="chatContent"] [class^="channelTextArea"] {
+    margin-bottom: 20px;
+    background-color: transparent;
+}
+
+[class^="chatContent"] div[class^="typing"] {
+    max-width: 1000px;
+    width: 100%;
+    transition: all 150ms linear;
+    background-color: transparent !important;
+    top: -10px;
+    height: 0;
+    position: relative;
+    overflow: visible;
+}
+
+.theme-dark [class^="membersWrap"] [class^="member"] * {
+    color: #FAFBFC;
+}
+
+.theme-light [class^="membersWrap"] [class^="member"] * {
+    color: #3f3f3f;
+}
+
+[class^="membersWrap"] [class^="member"] {
+    max-width: 100% !important;
+}
+
+[class^="membersWrap"] > div > div > * * {
+    z-index: 5;
+}
+
+[class^="membersWrap"] > div {
+    background: url(https://cdn.discordapp.com/attachments/393586125827997696/620822633927409690/Snow_is_-_70546791_1_1.png);
+    background-position: 50% 35%;
+    background-size: cover;
+    width: 300px;
+}
+
+[class^="membersWrap"] > div > div,
+[class^="membersWrap"] ::-webkit-scrollbar {
+    width: 100%;
+    background: #0000009e;
+}
+
+.theme-light [class^="membersWrap"] > div > div,
+.theme-light [class^="membersWrap"] ::-webkit-scrollbar {
+    background: #FFFFFF33;
+}
+
+[class^="bannerImage"] {
+    box-shadow: inset 0px -12px 8px -12px rgba(0, 0, 0, 0.5);
+}
+
+/* DM search tweak; this is just a button, so we style it like one */
+nav > div[class^="searchBar"] > button {
+    background: none !important;
+    padding: 0px 12px !important;
+}
+
+/* Discord logo, DM search, guild and channel header height tweak */
+ul[data-list-id="guildsnav"] div[class^="tutorial"] div[class^="listItemWrapper"] div[class^="wrapper"],
+nav > div[class^="searchBar"],
+nav > div > header,
+section[aria-label="Channel header"] {
+    height: 42px !important;
+}
+
+/* Channel list */
+div#channels > div > div div[class^="content"] {
+    margin-left: 0;
+    border-radius: 0 16px 16px 0;
+}
+
+[class*="autocomplete-"] {
+    background-color: var(--background-primary) !important;
+    border-radius: 8px !important;
+    margin: 10px 20px;
+    box-shadow: var(--elevation-high);
+    overflow: visible;
+}
+
+[class^="blockquoteContainer"] > div {
+    display: none;
+}
+
+[class^="blockquoteContainer"] {
+    display: flex;
+    overflow: hidden;
+    color: #789922;
+    padding: 0;
+    margin: 0;
+}
+
+[class^="blockquoteContainer"] > blockquote {
+    padding: 0;
+    margin: 0;
+}
+
+[class^="blockquoteContainer"]:before {
+    content: ">\A>\A>\A>\A>\A>\A>\A>\A>\A>\A>\A>\A>\A>\A>\A>\A>\A>\A>\A>\A>\A>\A>\A>\A>\A>\A>\A>\A>\A>\A>\A>\A>\A>\A>\A>\A>\A>\A>\A>\A>\A>\A>\A>\A>\A>\A>\A>\A>\A>\A>\A>\A>\A>\A>\A>\A>\A>\A>\A>\A>\A>\A>\A>\A>\A>\A>\A>\A>\A>\A>\A>\A>\A>\A>\A>\A>\A>\A>\A>\A>\A>\A>\A>\A>\A>\A>\A>\A>\A>\A>\A>\A>\A>\A>\A>\A>\A>\A>\A>\A>\A>\A>\A>\A>\A>\A>\A>\A>\A>\A>\A>\A>\A>\A>\A>\A>\A>\A>\A>\A>\A>\A>\A>\A>\A>\A>\A>\A>\A>\A>\A>\A>\A>\A>\A>\A>\A>\A>\A>\A>";
+    color: #789922;
+    height: 10px;
+    padding-right: 2px;
+}
+
+/* Emoji picker v Parent of the emoji box */
+div[class^="channelTextArea"] > section[class^="positionContainer"] * {
+    background-color: transparent;
+}
+
+/* Emoji picker blur backdrop */
+div[class^="channelTextArea"] > section[class^="positionContainer"] > div[class^="drawerSizingWrapper"] {
+    backdrop-filter: blur(8px);
+}
+
+/* Hide the emoji navigator bar because it sucks. Since this is in
+   a grid, we have to set the grid template after setting display to
+   none.
+*/
+div[class^="channelTextArea"] > section[class^="positionContainer"] > div[class^="drawerSizingWrapper"] > div[class^="contentWrapper"] {
+    grid-template-rows: auto;
+}
+
+div[class^="channelTextArea"] > section[class^="positionContainer"] > div[class^="drawerSizingWrapper"] > div[class^="contentWrapper"] > nav {
+    display: none;
+}
+
+.theme-dark div[class^="channelTextArea"] > section[class^="positionContainer"] > * {
+    background-color: #00000022;
+    backdrop-filter: blur(8px);
+}
+
+.theme-light div[class^="channelTextArea"] > section[class^="positionContainer"] > * {
+    background-color: #FFFFFF44;
+}
+
+/*
+[class*="emojiPicker"] {
+    background: #00000022;
+    border: 1px solid #FFFFFF15;
+}
+
+[class*="emojiPicker"] [class^="searchBar"] {
+    background: #00000022;
+}
+*/
+::-webkit-scrollbar-thumb {
+    border: 1px solid transparent !important;
+    border-radius: 1px !important;
+    background: var(--background-tertiary) !important;
+    transition: all 1s cubic-bezier(0, 0, 0.2, 1) !important;
+}
+
+::-webkit-scrollbar {
+    width: 3px !important;
+    position: fixed !important;
+    transition: width 1s cubic-bezier(0, 0, 0.2, 1) !important;
+}
+
+::-webkit-scrollbar-track-piece,
+::-webkit-scrollbar-track {
+    background: transparent !important;
+    border: none !important;
+}
+
+[id^="chat-messages"] [class^="buttonContainer"] [class*="separator"] {
+    display: none;
+}
+
+/* Reply "spine" */
+[id^="chat-messages"] > [class^="repliedMessage"]::before {
+    --spine-width: 2px;
+    --gutter: 12px;
+    border-top-left-radius: 0px !important;
+}
+
+/* Reply "badge" (avatar) */
+[id^="chat-messages"] > [class^="repliedMessage"] > [class^="replyAvatar"] {
+    width: 24px;
+    height: 24px;
+}
+
+[id^="chat-messages"] > [class^="repliedMessage"] > [class^="replied"],
+[id^="chat-messages"] > [class^="repliedMessage"] > [class^="replied"]:hover {
+    opacity: 1;
+}
+
+[id^="chat-messages"] > [class^="repliedMessage"] > [class^="replied"] > div {
+    transition: color 60ms linear;
+}
+
+[id^="chat-messages"] > [class^="repliedMessage"] > [class^="replied"]:hover > div {
+    color: var(--text-link);
+}
+
+/* All messages */
+[data-list-id="chat-messages"] > [class^="message"],
+/* Block messages small bar */
+[data-list-id="chat-messages"] > [class^="groupStart"] > [class^="wrapper"] {
+    line-height: 1.2em;
+    padding-left: 68px !important;
+    padding-top: 0px !important;
+}
+
+/* All messages */
+[data-list-id="chat-messages"] > [class^="message"] {
+    padding-bottom: 4px;
+}
+
+/* All large/expanded messages */
+[data-list-id="chat-messages"] [class*="groupStart"] {
+    padding-top: 6px !important;
+    margin-top: 0px !important;
+    border-top: 0px solid #00000012 !important;
+    line-height: 1.2em !important;
+}
+
+/* Exception for blocked messages */
+[data-list-id="chat-messages"] > [class^="groupStart"],
+[data-list-id="chat-messages"] > [class^="groupStart"] > *:nth-child(2) {
+    padding-top: 0 !important;
+    margin-top: 0 !important;
+    min-height: unset;
+}
+
+[data-list-id="chat-messages"] > [class^="groupStart"][class*="expanded"] {
+    padding-bottom: 4px;
+}
+
+[class^="blockedSystemMessage"] {
+    opacity: 0.5;
+    padding: 0;
+}
+
+[class^="blockedSystemMessage"] [class^="blockedIcon"] {
+    display: none;
+}
+
+[class^="blockedSystemMessage"] [class^="blockedMessageText"] {
+    font-size: 0.9em !important;
+    line-height: 1.5em !important;
+    margin: auto;
+}
+
+[data-list-id="chat-messages"] > [id*="messages-bar"][class*="divider"],
+[data-list-id="chat-messages"] > [class^="divider"] {
+    margin: 0px !important;
+    top: 0px !important;
+}
+
+[id^="chat-messages"] span[class*="timestampVisibleOnHover"] {
+    text-align: center !important;
+    margin-left: 16px !important;
+    width: 42px !important;
+}
+
+/* Author container: username */
+[id^="chat-messages"] h2 span[class^="username"] {
+    font-size: 0.95em;
+    font-weight: 500;
+    -webkit-text-stroke: 0.2px;
+}
+
+[id^="chat-messages"] [class*="markup-"] {
+    padding-top: 0px;
+    font-weight: 500 !important;
+}
+
+[id^="chat-messages"] [class*="markup-"] code.inline {
+    background: none !important;
+    padding: 0;
+    margin:  0;
+}
+
+[id*="messages-bar"][class*="isUnread"] {
+    border-color: #f0474773 !important;
+}
+
+/* Hide the Create Invite button */
+div#channels div[aria-label="Create Invite"] {
+    display: none;
+}
+
+/* Unread bar in channel list */
+div[class^="unreadBottom"] > div {
+    background-color: var(--interactive-muted);
+}
+
+/* Channel title tweaks */
+div[class^="topic"] strong {
+    font-weight: 500 !important;
+}
+
+h3[class^="title"] + div[class^="divider"] {
+    display: none;
+}
+
+/* Hide the Mute button */
+div[class^="toolbar"] div[aria-label^="Mute"],
+/* Hide Discord support links and buttons on the toolbar */
+div[class^="toolbar"] a[href="https://support.discord.com"] {
+    display: none;
+}
+
+/* New message hover */
+[data-list-id="chat-messages"] [class*="mouse-mode"]:hover,
+[data-list-id="chat-messages"] [class*="selected"] {
+    box-shadow: 0px 0px 6px 0px rgba(0, 0, 0, 0.2);
+}
+
+/* Message action buttons */
+[data-list-id="chat-messages"] [class^="buttonContainer"] [class*="wrapper"] {
+    background-color: rgba(0, 0, 0, 0.2);
+    box-shadow: none;
+    border-radius: 999px;
+}
+
+[data-list-id="chat-messages"] [class^="buttonContainer"] div[class*="button-"] {
+    padding-left: 4px;
+    padding-right: 4px;
+}
+
+[data-list-id="chat-messages"] [class^="buttonContainer"] div[class*="button-"]:hover {
+    background-color: var(--background-tertiary);
+}
+
+[class^="channelTextArea"] {
+    padding-top: 0;
+    border-top: 0 !important;
+    margin-bottom: 9px;
+}
+
+[class^="channelTextArea"] > * {
+    background-color: transparent !important;
+}
+
+[class^="spacer"][class*="vertical"][class*="flex"][class*="directionColumn"] > form {
+    background-color: #00000011;
+    margin: 0;
+    padding: 0 5px;
+    box-shadow: 0px 1px 4px 1px rgba(0, 0, 0, 0.25);
+    border-top: 1px solid #00000011;
+}
+
+[class^="spacer"][class*="vertical"][class*="flex"][class*="directionColumn"] > form [class^="attachButtonDivider"] {
+    display: none;
+}
+
+[class^="panels"] {
+    box-shadow: 0px 1px 4px 1px rgba(0, 0, 0, 0.25);
+    border-top: 1px solid #00000011;
+}
+
+[class^="panels"] > div {
+    display: flex;
+    justify-content: space-evenly;
+}
+
+[class^="panels"] > div button {
+    margin: 0 6px;
+}
+
+[class^="nameTag"] {
+    display: none;
+}
+
+.emoji.jumboable {
+    width: 3em;
+    height: 3em;
+}
+
+.emoji:not([class*="icon"]) {
+    transition: all 100ms cubic-bezier(0, 1.12, 0.73, 1);
+    transition-delay: 400ms;
+}
+
+.emoji:not([class*="icon"]):hover {
+    width: 4em;
+    height: 4em;
+    transition-delay: 0s;
+}

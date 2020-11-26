@@ -15,7 +15,7 @@ let home-manager = builtins.fetchGit {
 		rev = "09d41b0a6f574390d6edc0271be459bd1390ea8d";
 	};
 
-	utils = import ./utils.nix { inherit lib; };
+	utils = import ./utils.nix { inherit pkgs lib; };
 
 	tdeo = import (builtins.fetchGit {
 		url = "https://github.com/tadeokondrak/nix-overlay";
@@ -23,6 +23,14 @@ let home-manager = builtins.fetchGit {
 	});
 
 	diamond = ../nix-overlays;
+
+	# PR #101194
+	aspellPkgs = import (pkgs.fetchFromGitHub {
+		owner  = "NixOS";
+		repo   = "nixpkgs";
+		rev    = "8db271b98f7264f4d08358ade84402a56e82b294";
+		sha256 = "0l6ppknn8jm25561w6yc97j7313jn0f7zkb8milg1aqf95wyr7ds";
+	}) {};
 
 in
 
@@ -38,9 +46,15 @@ in
 	nixpkgs.overlays = [
 		(tdeo)
 		(self: super: {
+			aspell      = aspellPkgs.aspell;
+			aspellDicts = aspellPkgs.aspellDicts;
+
 			vte = super.vte.overrideAttrs(oldAttrs: {
 				patches = oldAttrs.patches or [] ++ [ ./patches/vte-fast.patch ];
 			});
+			steam = super.steam.override {
+				extraLibraries = pkgs: with pkgs; [ SDL2 ];
+			};
 			morph = super.morph.overrideAttrs(_: {
 				version = "1.4.0";
 				src = builtins.fetchGit {
@@ -87,19 +101,13 @@ in
 		extraOptions = "builders-use-substitutes = true";
 	};
 
-	programs.ssh.extraConfig = ''
-		Match Host hanaharu exec "nc -z 192.168.1.169 %p"
-			HostName 192.168.1.169
-		Match Host hanaharu
-			HostName home.arikawa-hi.me
-		Host hanaharu
-			Port 1337
-			User diamond
-			IdentityFile   /home/diamond/.ssh/id_rsa
-			IdentitiesOnly yes
-			ServerAliveInterval 60
-			ServerAliveCountMax 10
-	'';
+	programs.ssh.extraConfig = utils.sshFallback {
+		tryAddr  = "192.168.1.169";
+		elseAddr = "home.arikawa-hi.me";
+		host = "hanaharu";
+		user = "diamond";
+		port = "1337";
+	};
 
 	# services.diamondburned.caddy = {
 	# 	enable = true;
@@ -156,8 +164,9 @@ in
 		allowedUDPPortRanges = [
 			{ from = 1714; to = 1764; } # GSConnect;
 		];
-		allowedTCPPorts = [ 22 ];
-		allowedUDPPorts = [ 22 ];
+		#                      v  Steam  v
+		allowedTCPPorts = [ 22 27036 27037 ];
+		allowedUDPPorts = [ 22 27031 27036 ];
 	};
 
 	i18n = {
@@ -364,15 +373,7 @@ in
 	# 	qemuRunAsRoot = false;
 	# };
 
-	services.mpd = {
-		enable = true;
-		user = "diamond";
-		group = "users";
-		startWhenNeeded = true;
-		dataDir = "/home/diamond/.local/share/mpd";
-		musicDirectory = "/run/user/1000/gvfs/sftp:host=192.168.1.169,port=1337,user=diamond/mnt/Music";
-		playlistDirectory = "/home/diamond/Music/playlists";
-	};
+	services.ratbagd.enable = true;
 
 	# Define a user account. Don't forget to set a password with ‘passwd’.
 	users.users.diamond = {
@@ -384,6 +385,8 @@ in
 		imports = [
 			"${lsoc-overlay}"
 			"${diamond}/home-manager"
+
+			./cfg/firefox
 		];
 
 		nixpkgs.config = {
@@ -470,11 +473,6 @@ in
 			};
 		};
 
-		programs.firefox = {
-			enable = true;
-			profiles.default = import ./cfg/firefox;
-		};
-
 		gtk = {
 			enable = true;
 			font.name = "Sans";
@@ -524,7 +522,7 @@ in
 			vblank_mode = "0";
 
 			# Enforce Wayland.
-			QT_QPA_PLATFORM = "wayland";
+			QT_QPA_PLATFORM = "wayland-egl";
 			SDL_VIDEODRIVER = "wayland";
 			MOZ_ENABLE_WAYLAND = "1";
 
@@ -539,107 +537,106 @@ in
 		   	STAGING_PA_LATENCY_USEC = "128";
 		};
 
-		home = {
+		home.packages = ([(
 			# Custom overrides.
-			packages = ([(
 			# Neovim with yarn
-				let neovim-nightly = pkgs.neovim-unwrapped.overrideAttrs(old: {
-					version = "0.5.0";
-					src = builtins.fetchGit {
-						url = "https://github.com/neovim/neovim.git";
-						ref = "nightly";
-						rev = "4f8d98e583beb4c1abd5d57b9898548396633030";
-					};
-				});
-			
-				in pkgs.wrapNeovim neovim-nightly {
-					viAlias     = true;
-					vimAlias    = true;
-					withPython  = true;
-					withPython3 = true;
-					withNodeJs  = true;
-					extraMakeWrapperArgs = "--suffix PATH : ${lib.makeBinPath (
-						with pkgs; [ yarn ]
-					)}";
-				}
-			)]) ++ (with pkgs.aspellDicts; [
-				en
-				en-science
-				en-computers
+			let neovim-nightly = pkgs.neovim-unwrapped.overrideAttrs(old: {
+				version = "0.5.0";
+				src = builtins.fetchGit {
+					url = "https://github.com/neovim/neovim.git";
+					ref = "nightly";
+					rev = "4f8d98e583beb4c1abd5d57b9898548396633030";
+				};
+			});
+		
+			in pkgs.wrapNeovim neovim-nightly {
+				viAlias     = true;
+				vimAlias    = true;
+				withPython  = true;
+				withPython3 = true;
+				withNodeJs  = true;
+				extraMakeWrapperArgs = "--suffix PATH : ${lib.makeBinPath (
+					with pkgs; [ yarn ]
+				)}";
+			}
+		)]) ++ (with pkgs.aspellDicts; [
+			en
+			en-science
+			en-computers
 
-			]) ++ (with pkgs; [
-                # Personal stuff
-				gnome3.gnome-usage
-				gnome3.polari
-				keepassx-community
-				gnupg
-				zoom-us
-				bookworm
-				gimp-with-plugins
+		]) ++ (with pkgs; [
+            # Personal stuff
+			gnome3.gnome-usage
+			gnome3.polari
+			keepassx-community
+			gnupg
+			zoom-us
+			darktable
+			gimp-with-plugins
 
-				# Multimedia
-				(enableDebugging ffmpeg)
-				v4l_utils
-				# mpv
-				# audacious
-				ymuse
-				audacious-3-5
-				pavucontrol
-				pulseeffects
+			# Multimedia
+			(enableDebugging ffmpeg)
+			v4l_utils
+			# mpv
+			# audacious
+			ymuse
+			audacious-3-5
+			pavucontrol
+			pulseeffects
 
-				# Development tools
-				go
-				clang-tools
-				gotools
-				nodePackages.eslint
-				nodePackages.prettier
-				xclip
-				virt-manager
+			# Development tools
+			go
+			clang-tools
+			gotools
+			nodePackages.eslint
+			nodePackages.prettier
+			xclip
+			virt-manager
 
-				# Web browser(s)
-				# firefox
-				google-chrome-dev
-				fractal # lol
-				tdesktop
+			# Web browser(s)
+			# firefox
+			google-chrome-dev
+			fractal # lol
+			tdesktop
 
-				# Office
-				evince
-				typora
-				bookworm
+			# Office
+			evince
+			typora
+			bookworm
 
-				# Dictionaries
-				nuspell
-				hunspell
-				aspell
+			# Dictionaries
+			nuspell
+			hunspell
+			aspell
 
-				# Applications
-				gcolor3
-				simplescreenrecorder
+			# Applications
+			gcolor3
+			simplescreenrecorder
 
-				# Themes
-				materia-theme
-				material-design-icons
+			# Themes
+			materia-theme
+			material-design-icons
 
-				# Games
-				osu-wine
-				steam
+			# Games
+			osu-wine
+			steam
 
-				# GNOME things
-				gnome-mpv
-				gnome3.gnome-tweaks
-				gnome3.glib-networking
-				gnome3.file-roller
-				gnome3.nautilus
-				gnome3.gnome-boxes
-				gnome3.gnome-disk-utility
+			# GNOME things
+			gnome-mpv
+			gnome3.vinagre
+			gnome3.gnome-tweaks
+			gnome3.glib-networking
+			gnome3.file-roller
+			gnome3.nautilus
+			gnome3.gnome-boxes
+			gnome3.gnome-disk-utility
 
-				# GNOME extensions
-				gnomeExtensions.gsconnect
-				# gnomeExtensions.dash-to-panel
-				gnomeExtensions.easyscreencast
-				gnomeExtensions.remove-dropdown-arrows
-			]);
-		};
+			# GNOME extensions
+			gnomeExtensions.gsconnect
+			# gnomeExtensions.dash-to-panel
+			gnomeExtensions.easyscreencast
+			gnomeExtensions.remove-dropdown-arrows
+		]);
 
 		programs.alacritty = {
 			enable = true;

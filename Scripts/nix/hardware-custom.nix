@@ -48,6 +48,10 @@ in {
 	# 	v4l2loopback
 	# ];
 
+	boot.extraModulePackages = with config.boot.kernelPackages; [
+		rtl88x2bu
+	];
+
 	# Enable the Thunderbolt 3 daemon.
 	services.hardware.bolt.enable = true;
 
