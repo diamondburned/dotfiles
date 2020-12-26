@@ -2,9 +2,7 @@ set nocompatible
 
 call plug#begin('~/.vim/bundle')
 
-" Plug 'dgraham/vim-eslint'
-" Plug 'pangloss/vim-javascript'
-" Plug 'ziglang/zig.vim'
+Plug 'ziglang/zig.vim'
 Plug 'gioele/vim-autoswap'
 Plug 'inkarkat/vim-SyntaxRange'
 Plug 'cespare/vim-toml'
@@ -12,20 +10,19 @@ Plug 'scrooloose/nerdtree'
 Plug 'tpope/vim-commentary'
 Plug 'airblade/vim-gitgutter'
 Plug 'LnL7/vim-nix'
-Plug 'arp242/gopher.vim'
 Plug 'plasticboy/vim-markdown'
 Plug 'godlygeek/tabular'
 Plug 'bogado/file-line'
 Plug 'rhysd/conflict-marker.vim'
 
-"Firefox Neovim client mumbo-jumbo"
-Plug 'raghur/vim-ghost', {'do': ':GhostInstall'}
-
-"Markdown preview w/ math support"
-Plug 'iamcco/markdown-preview.nvim', { 'do': 'cd app && yarn install &> /tmp/mdp'  }
+"Better highlighting"
+Plug 'nvim-treesitter/nvim-treesitter', {'do': ':TSUpdate'}
 
 "Autocomplete brackets/parens/etc like vscode"
 Plug 'jiangmiao/auto-pairs'
+
+"GoCoverage and such"
+Plug 'arp242/gopher.vim'
 
 "Icons"
 Plug 'ryanoasis/vim-devicons'
@@ -59,9 +56,6 @@ autocmd BufRead,BufNewFile *.svelte setlocal filetype=html
 autocmd BufRead,BufNewFile *.svelte setlocal syntax=html
 autocmd BufRead,BufNewFile .env*    setlocal syntax=sh
 
-"Special highlighting for Vugu"
-call SyntaxRange#Include('<script type="application/x-go">', '</script>', 'go')
-
 "Go to last cursor on file open"
 autocmd BufReadPost *
 	\ if line("'\"") >= 1 && line("'\"") <= line("$") |
@@ -87,7 +81,19 @@ hi Normal guibg=NONE ctermbg=NONE
 filetype plugin indent on
 syntax on
 
+"Tree-sitter config"
+lua <<EOF
+require'nvim-treesitter.configs'.setup {
+  indent    = { enable = false },
+  highlight = { enable = true  },
+}
+EOF
+
 "Custom colors"
+hi TabLine     cterm=NONE ctermfg=15 ctermbg=NONE
+hi TabLineSel  ctermbg=15 ctermfg=0
+hi TabLineFill cterm=NONE
+
 hi Todo     ctermbg=14
 hi Search   ctermbg=14   ctermfg=0
 hi SpellBad ctermbg=NONE cterm=undercurl guisp=#FF6961
@@ -95,17 +101,17 @@ hi SpellBad ctermbg=NONE cterm=undercurl guisp=#FF6961
 hi StatusLine   ctermfg=5
 hi StatusLineNC ctermfg=13
 
+hi Special ctermfg=15
+hi SpecialChar ctermfg=5
 hi Comment ctermfg=4
-
 hi Constant ctermfg=15
-hi Number   ctermfg=5
-hi Boolean  ctermfg=5
-
-hi Identifier ctermfg=6
-hi Function   ctermfg=15
-
-hi Statement ctermfg=3
-hi Operator  ctermfg=15
+hi String  ctermfg=13
+hi Number  ctermfg=13
+hi Boolean ctermfg=13
+hi Identifier ctermfg=15
+hi Function ctermfg=14
+hi Statement ctermfg=6
+hi Operator ctermfg=12
 
 hi Type ctermfg=2
 
@@ -120,6 +126,10 @@ hi NERDTreeFlags ctermfg=6
 
 "NERDTree executable highlight but also something else"
 hi Title ctermfg=10
+
+"Custom negative number highlighting"
+syntax match negativeNumber '[-+]\d\+\(\.\d*\)\?'
+hi def link  negativeNumber NUmber
 
 "Hide the trailing slash next to the directories"
 augroup nerdtreehidecwd
@@ -140,11 +150,11 @@ hi Pmenu    ctermbg=2 ctermfg=0
 hi PmenuSel ctermfg=15
 
 "Extra Go colors"
-hi goParamName       ctermfg=15
-hi goReceiverType    ctermfg=15
-hi goTypeConstructor ctermfg=15
-hi goTypeName        ctermfg=15
-hi goFunctionCall    ctermfg=15
+"hi goParamName       ctermfg=15
+"hi goReceiverType    ctermfg=15
+"hi goTypeConstructor ctermfg=15
+"hi goTypeName        ctermfg=15
+"hi goFunctionCall    ctermfg=15
 
 "Resume past cursor location on open"
 au InsertLeave * call cursor([getpos('.')[1], getpos('.')[2]+1])
@@ -245,10 +255,10 @@ let g:conflict_marker_highlight_group = ''
 let g:conflict_marker_begin = '^<<<<<<< .*$'
 let g:conflict_marker_end   = '^>>>>>>> .*$'
 
-highlight ConflictMarkerBegin guibg=#2f7366
-highlight ConflictMarkerOurs guibg=#2e5049
-highlight ConflictMarkerTheirs guibg=#344f69
-highlight ConflictMarkerEnd guibg=#2f628e
+highlight ConflictMarkerBegin  ctermbg=28
+highlight ConflictMarkerOurs   ctermbg=22
+highlight ConflictMarkerTheirs ctermbg=23
+highlight ConflictMarkerEnd    ctermbg=30
 
 "Line number color to match Limelight"
 highlight LineNr guifg=#6c6c6c ctermfg=242
@@ -287,7 +297,8 @@ set lazyredraw
 set undofile
 
 "Make nvim show changes done by commands in real-time"
-set inccommand=nosplit
+"Actually very buggy"
+" set inccommand=nosplit
 
 "ALE configs"
 highlight ALEWarningSign ctermbg=NONE
@@ -298,12 +309,14 @@ let g:ale_sign_column_always = 1
 let g:ale_completion_enabled = 1
 let g:ale_fix_on_save = 1
 let g:ale_fixers = {
-			\ 'go':  [ "goimports"    ],
-			\ 'cpp': [ "clang-format" ],
+			\ 'go':   [ "goimports"    ],
+			\ 'cpp':  [ "clang-format" ],
+			\ 'json': [ "jq" ],
 			\ 'javascript': [ "prettier" ],
 			\ }
 let g:ale_linters = {
 			\ 'go':  [ "gopls"  ],
+			\ 'zig': [ "zls" ],
 			\ 'c':   [ "clangd" ],
 			\ 'cpp': [ "clangd" ],
 			\ 'javascript': [ "eslint", "tsserver" ],

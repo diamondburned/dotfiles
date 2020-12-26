@@ -36,18 +36,28 @@ in
 
 {
 	imports = [
-		./hardware-configuration.nix
-		./hardware-custom.nix
 		"${diamond}"
 		"${home-manager}/nixos"
+		./hardware-configuration.nix
+		./hardware-custom.nix
+		./cfg/sway
 	];
 
 	# Overlays
-	nixpkgs.overlays = [
+	nixpkgs.overlays =
+	let nostrip = pkg: pkg.overrideAttrs(_: { dontStrip = true; });
+	in [
 		(tdeo)
 		(self: super: {
 			aspell      = aspellPkgs.aspell;
 			aspellDicts = aspellPkgs.aspellDicts;
+
+			# orca hate
+			orca = super.orca.overrideAttrs(old: {
+				postInstall = (old.postInstall or "") + ''
+					:> $out/etc/xdg/autostart/orca-autostart.desktop
+				'';
+			});
 
 			vte = super.vte.overrideAttrs(oldAttrs: {
 				patches = oldAttrs.patches or [] ++ [ ./patches/vte-fast.patch ];
@@ -97,6 +107,7 @@ in
 			speedFactor = 10;
 			supportedFeatures = [ "nixos-test" "benchmark" "big-parallel" "kvm" ];
 		}];
+		trustedUsers = [ "root" "diamond" ];
 		distributedBuilds = true;
 		extraOptions = "builders-use-substitutes = true";
 	};
@@ -108,6 +119,10 @@ in
 		user = "diamond";
 		port = "1337";
 	};
+
+	# Group to change SSH keys to.
+	users.groups.ssh-trusted.members = [ "diamond" "root" ] ++
+		(utils.formatInts 1 32 (i: "nixbld${toString i}"));
 
 	# services.diamondburned.caddy = {
 	# 	enable = true;
@@ -144,6 +159,11 @@ in
     # NTFS support
     boot.supportedFilesystems = [ "exfat" "ntfs" ];
 
+	# Tired of this.
+	systemd.extraConfig = ''
+		DefaultTimeoutStopSec=5s
+	'';
+
 	# Use the systemd-boot EFI boot loader.
 	boot.loader.systemd-boot.enable = true;
 	boot.loader.efi.canTouchEfiVariables = true;
@@ -170,10 +190,10 @@ in
 	};
 
 	i18n = {
-		# inputMethod = {
-		# 	enabled	= "fcitx";
-		# 	fcitx.engines = with nixpkgs_19_09.fcitx-engines; [ mozc unikey ];
-		# };
+		inputMethod = {
+			enabled	= "fcitx";
+			fcitx.engines = with pkgs.fcitx-engines; [ mozc unikey ];
+		};
 
 		defaultLocale = "en_US.UTF-8";
 		supportedLocales = [
@@ -198,6 +218,12 @@ in
 		# Utilities
 		htop
 		git
+
+		# GNOME things, in case they need to add desktop files and such.
+		gnome3.nautilus
+		gnome3.gpaste
+		gnome3.glib-networking
+		gnome3.file-roller
 	];
 
 	# Install global fonts
@@ -212,8 +238,7 @@ in
 		comic-neue
 		blobmoji
 	];
-
-	# Some programs need SUID wrappers, can be configured further or are
+# Some programs need SUID wrappers, can be configured further or are
 	# started in user sessions.
 	programs.mtr.enable = true;
 	programs.gnupg.agent = { enable = true; enableSSHSupport = true; };
@@ -278,9 +303,7 @@ in
 	nixpkgs.config.pulseaudio = true;
 
 	# Enable the X11 windowing system.
-	services.xserver.enable = true;
 	services.xserver.layout = "us";
-	services.xserver.xkbOptions = "caps:swapescape";
 
 	fonts.fontconfig = {
 		enable = true;
@@ -302,47 +325,38 @@ in
 	services.xserver.libinput.enable = true;
 
 	# Enable the GNOME desktop environment
-	services.xserver.displayManager.gdm = {
-		enable = true;
-		wayland = true;
-	};
-	services.xserver.desktopManager.gnome3 = {
-		enable = true;
-		# sessionPath = with pkgs; [ gnome3.gpaste ];
-	};
-	# programs.xwayland.enable = true;
+	services.xserver.desktopManager.gnome3.enable = true;
 
 	# More GNOME things
 	services.gnome3 = {
-		# I like sushi (the food)
-		# sushi.enable = true;
-
 		# Enable the Keyring for password managing
 		gnome-keyring.enable = true;
 
 		# Online stuff
 		gnome-online-accounts.enable = true;
 		gnome-online-miners.enable = true;
-
 		gnome-user-share.enable = true;
 		chrome-gnome-shell.enable = true;
 
-		# experimental-features.realtime-scheduling = true;
+		# Disable garbage
+		tracker.enable = false;
+		gnome-initial-setup.enable = false;
 	};
 
-	xdg.portal.extraPortals = with pkgs; [ xdg-desktop-portal-gtk ];
 	services.flatpak.enable = false;
 
 	environment.gnome3.excludePackages = with pkgs.gnome3; [
+		orca
 		totem
 		gnome-maps
 		gnome-contacts
+		gnome-initial-setup
 	];
 
     programs.seahorse.enable = true;
 
     services.gvfs.enable = true;
-    programs.gpaste.enable = false;
+    programs.gpaste.enable = true;
     programs.gnome-disks.enable = true;
     programs.file-roller.enable = true;
 
@@ -387,6 +401,7 @@ in
 			"${diamond}/home-manager"
 
 			./cfg/firefox
+			./cfg/hm-gnome-terminal.nix
 		];
 
 		nixpkgs.config = {
@@ -412,17 +427,18 @@ in
 			};
 		};
 
-		services.mpd = {
-			enable = true;
-		};
-
 		programs.git = {
 			enable = true;
 			userName  = "diamondburned";
 			userEmail = "datutbrus@gmail.com";
 			extraConfig = {
 				core = {
-					excludesfile = "${pkgs.writeText "gitignore" ".envrc"}";
+					excludesfile = "${pkgs.writeText "gitignore" (
+						builtins.concatStringsSep "\n" [
+							".envrc"
+							".direnv"
+						]
+					)}";
 				};
 				url = {
 					"ssh://git@github.com/" = { insteadOf = "https://github.com/"; };
@@ -500,19 +516,6 @@ in
 			platformTheme = "gnome";
 		};
 
-		dconf.settings = {
-			"org/gnome/desktop/background" = {
-				picture-uri = "${./background.jpg}";
-			};
-			"org/gnome/desktop/peripherals/keyboard" = {
-				delay = 200;
-				repeat-interval = 15;
-			};
-			"org/gnome/desktop/peripherals/mouse" = {
-				middle-click-emulation = true;
-			};
-		};
-
 		pam.sessionVariables = {
 			NIX_AUTO_RUN = "1";
 			GOPATH = "/home/diamond/.go";
@@ -522,8 +525,6 @@ in
 			vblank_mode = "0";
 
 			# Enforce Wayland.
-			QT_QPA_PLATFORM = "wayland-egl";
-			SDL_VIDEODRIVER = "wayland";
 			MOZ_ENABLE_WAYLAND = "1";
 
 			# osu settings.
@@ -539,18 +540,20 @@ in
 
 		home.packages = ([(
 			# Custom overrides.
-			# Neovim with yarn
+			# Neovim with yarn.
 			let neovim-nightly = pkgs.neovim-unwrapped.overrideAttrs(old: {
-				version = "0.5.0";
-				src = builtins.fetchGit {
-					url = "https://github.com/neovim/neovim.git";
-					ref = "nightly";
-					rev = "4f8d98e583beb4c1abd5d57b9898548396633030";
+				version = "v0.5.0-dev+965-gd0668b36a";
+				src = pkgs.fetchFromGitHub {
+					owner  = "neovim";
+					repo   = "neovim";
+					rev    = "d0668b36a3e2d0683059baead45bea27e2358e9c";
+					sha256 = "0mmb7aw2lcxqlbjkb3ivillisr1gfh3cfcbg6cj80p2a1zm2gi51";
 				};
+				buildInputs = old.buildInputs ++ [ pkgs.tree-sitter ];
 			});
 		
 			in pkgs.wrapNeovim neovim-nightly {
-				viAlias     = true;
+				viAlias     = false; # in case
 				vimAlias    = true;
 				withPython  = true;
 				withPython3 = true;
@@ -577,8 +580,6 @@ in
 			# Multimedia
 			(enableDebugging ffmpeg)
 			v4l_utils
-			# mpv
-			# audacious
 			ymuse
 			audacious-3-5
 			pavucontrol
@@ -586,12 +587,15 @@ in
 
 			# Development tools
 			go
+			jq
+			vimHugeX
 			clang-tools
 			gotools
 			nodePackages.eslint
 			nodePackages.prettier
 			xclip
 			virt-manager
+			xorg.xauth
 
 			# Web browser(s)
 			# firefox
@@ -628,14 +632,10 @@ in
 			gnome3.glib-networking
 			gnome3.file-roller
 			gnome3.nautilus
+			gnome3.gpaste
 			gnome3.gnome-boxes
 			gnome3.gnome-disk-utility
-
-			# GNOME extensions
-			gnomeExtensions.gsconnect
-			# gnomeExtensions.dash-to-panel
-			gnomeExtensions.easyscreencast
-			gnomeExtensions.remove-dropdown-arrows
+			gnome3.gtk.dev
 		]);
 
 		programs.alacritty = {
@@ -646,45 +646,6 @@ in
 					bold   = font;
 					italic = font;
 					size   = 11;
-				};
-			};
-		};
-
-		programs.gnome-terminal.enable  = true;
-		programs.gnome-terminal.profile = {
-			"f2afd3c7-cb35-4d08-b6c2-523b444be64d" = {
-				visibleName   = "pastel";
-				showScrollbar = false;
-				default = true;
-
-				font	= "Inconsolata Bold 10";
-				colors  = {
-					backgroundColor = "#1D1D1D";
-					foregroundColor = "#E5E5E5";
-					palette = [
-						"#272224" "#FF473D" "#3DCCB2" "#FF9600"
-						"#3B7ECB" "#F74C6D" "#00B5FC" "#3E3E3E"
-
-						"#52494C" "#FF6961" "#85E6D4" "#FFB347"
-						"#779ECB" "#F7A8B8" "#55CDFC" "#EEEEEC"
-					];
-				};
-			};
-			"bade9a23-9fab-4bbb-9798-3dacbccd8e6c" = {
-				visibleName  = "Google Light";
-				showScrollbar = false;
-
-				font   = "Inconsolata Bold 10";
-				colors = {
-					backgroundColor = "#FEFEFE";
-					foregroundColor = "#373B41";
-					palette = [
-						"#1d1f21" "#cc342b" "#198844" "#fba922"
-						"#3971ed" "#a36ac7" "#3971ed" "#c5c8c6"
-
-						"#969896" "#cc342b" "#198844" "#fba922"
-						"#3971ed" "#a36ac7" "#3971ed" "#252525"
-					];
 				};
 			};
 		};
@@ -714,6 +675,13 @@ in
 			# 	};
 			# };
 			configFile = {
+				"zls.json".text = builtins.toJSON {
+					enable_snippets = false;
+					zig_exe_path = "${pkgs.zig}/bin/zig";
+					zig_lib_path = "${pkgs.zig}/lib/zig";
+					warn_style = true;
+					enable_semantic_tokens = true;
+				};
 				"fontconfig/fonts.conf".source = ./cfg/fontconfig.xml;
 				"nvim/init.vim".source = ./cfg/nvimrc;
 				"autostart/autostart.desktop".text = utils.mkDesktopFile {

@@ -64,10 +64,10 @@
 		<!-- Inconsolata is kind of small, so we scale it up -->
 		<edit name="scale" mode="assign" binding="strong">
 			<!-- doesn't actually work, fuck -->
-			<times>
-				<name>pixelsize</name>
-				<double>1.1</double>
-			</times>
+			<!-- <times> -->
+			<!-- 	<name>pixelsize</name> -->
+			<!-- 	<double>1.1</double> -->
+			<!-- </times> -->
 		</edit>
 	</match>
 
@@ -86,10 +86,10 @@
 		<!-- Inconsolata is kind of small, so we scale it up -->
 		<edit name="scale" mode="assign" binding="strong">
 			<!-- doesn't actually work, fuck -->
-			<times>
-				<name>pixelsize</name>
-				<double>1.1</double>
-			</times>
+			<!-- <times> -->
+			<!-- 	<name>pixelsize</name> -->
+			<!-- 	<double>1.1</double> -->
+			<!-- </times> -->
 		</edit>
 	</match>
 

@@ -1,0 +1,82 @@
+/* Fix for the weird white line on Wayland(?) */
+body > box {
+	margin-bottom: -1px !important;
+}
+
+/* Chrome-rounded-style URL bar */
+#urlbar:not([breakout-extend="true"]) #urlbar-background {
+	border-radius: 9999px !important;
+}
+
+#browser vbox#appcontent tabbrowser,
+#content,
+#tabbrowser-tabpanels,
+browser[type=content-primary],
+browser[type=content] > html {
+    background: #2C2C2C !important;
+}
+
+/* Gradient-compatible colors */
+tabs#tabbrowser-tabs tab:not([selected]),
+tabs#tabbrowser-tabs toolbarbutton       .toolbarbutton-icon,
+tabs#tabbrowser-tabs toolbarbutton:hover .toolbarbutton-icon {
+	color: black !important;
+}
+
+/* Remove the waste of space */
+toolbar#TabsToolbar > .titlebar-spacer {
+	display: none !important;
+}
+/* Waste our own space, but smaller */
+toolbar#TabsToolbar > .toolbar-items {
+	margin: 0 1em !important;
+}
+/* Chrome mode */
+toolbar#TabsToolbar tab.tabbrowser-tab {
+	border-radius: 6px 6px 0 0 !important;
+	overflow: hidden !important;
+}
+/* Hide the border on top of the tabs */
+toolbar#TabsToolbar tab.tabbrowser-tab .tab-line {
+	display: none !important;
+}
+
+/* Slight tweak: lighten the tab separator */
+toolbar#TabsToolbar .tabbrowser-tab::after, .tabbrowser-tab::before {
+	opacity: 0.2 !important;
+}
+
+/* Pack tightly the address bar buttons */
+toolbar#nav-bar toolbarbutton:not(:first-child):not(:last-child) {
+	padding: 2px !important;
+}
+toolbarbutton:hover > stack {
+	border-radius: 6px !important;
+	background-color: rgba(255, 255 ,255, 0.15) !important;
+}
+
+/* Add a bit of padding */
+#urlbar-container {
+	margin:  0px !important;
+	padding: 1px !important; /* magic number */
+}
+/* Hide the Pocket button */
+#urlbar-input-container #pocket-button {
+	display: none;
+}
+/* Left-most button in the address bar */
+#urlbar-input-container #tracking-protection-icon-container {
+	border-radius: 999px 0 0 999px;
+}
+/* Right-most */
+#urlbar-input-container #star-button-box {
+	border-radius: 0 999px 999px 0;
+}
+
+.webextension-browser-action {
+	opacity: 0.25;
+	transition: linear 50ms opacity;
+}
+.webextension-browser-action:hover {
+	opacity: 1 !important;
+}

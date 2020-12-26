@@ -33,13 +33,14 @@ image/x-icns=org.gnome.eog.desktop
 x-scheme-handler/discord-529050037532098580=discord-529050037532098580.desktop
 audio/flac=io.github.celluloid_player.Celluloid.desktop
 audio/aac=io.github.celluloid_player.Celluloid.desktop
+text/markdown=nvim.desktop
 
 [Added Associations]
 application/zip=org.gnome.FileRoller.desktop;
 application/x-bzip=org.gnome.FileRoller.desktop;
 image/x-xcf=gimp.desktop;
 audio/mpeg=io.github.celluloid_player.Celluloid.desktop;
-image/svg+xml=inkscape.desktop;org.gnome.eog.desktop;
+image/svg+xml=inkscape.desktop;org.gnome.eog.desktop;gimp.desktop;firefox.desktop;
 image/jpeg=gimp.desktop;
 image/png=gimp.desktop;org.gnome.eog.desktop;
 application/x-compressed-tar=org.gnome.FileRoller.desktop;
@@ -83,3 +84,4 @@ text/plain=nvim.desktop;
 x-scheme-handler/sms=org.gnome.Shell.Extensions.GSConnect.desktop;
 x-scheme-handler/tel=org.gnome.Shell.Extensions.GSConnect.desktop;
 application/xml=nvim.desktop;
+text/markdown=nvim.desktop;

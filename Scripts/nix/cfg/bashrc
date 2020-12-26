@@ -1,6 +1,9 @@
 #!/usr/bin/env bash
+
 # ~/.bashrc
 . ~/.bash_aliases
+
+[[ $- != *i* ]] && exit
 
 xset r rate 200 50 &> /dev/null
 gsettings set org.gnome.desktop.peripherals.keyboard repeat-interval 25
@@ -64,21 +67,50 @@ grepr() {
 #fi
 #unset PID
 
+# traverse traverses the parent directory to find the given file.
+__traverse() {
+	local basename="$1" path pieces
+
+	IFS="/" read -ra pieces <<< "${PWD:1}"
+
+	for ((i = ${#pieces[@]}; i >= 0; i--)); {
+		printf -v path "%s/" "" "${pieces[@]:0:$i}"
+		path+="$basename"
+
+		[[ -e "$path" ]] && {
+			echo -n "$path"
+			return
+		}
+	}
+
+	return 1
+}
+
+# git_ps1 returns the name of the current branch, or empty string and sig 1 if
+# none.
+__git_ps1() {
+	local IFS=' '
+	local path head
+
+	path="$(__traverse .git)" || return 1
+
+	read -r prefix head < "$path/HEAD"
+
+	[[ "$head" == "" ]]        \
+		&& echo -n "${prefix}" \
+		|| echo -n "${head/refs\/heads\//}"
+}
+
 ## NIX SHIT
 
 export NIX_AUTO_RUN=1
 nixsh() {
+	local path
+
 	if (( $# == 0 )); then
-		IFS="/" read -ra pieces <<< "${PWD:1}"
-
-		for ((i = ${#pieces[@]}; i >= 0; i--)); {
-			printf -v path "%s/" "" "${pieces[@]:0:$i}"
-			path+="shell.nix"
-
-			[[ -f "$path" ]] && {
-				nix-shell --run bash "$path"
-				return
-			}
+		path="$(__traverse shell.nix)" && {
+			nix-shell --run bash "$path"
+			return
 		}
 
 		nix-shell --run bash -p
@@ -194,7 +226,7 @@ alias gp="git push origin"
 
 gm() {
 	[[ $1 ]] && {
-		printf -v _msg "%s\n" "$@"
+		printf -v _msg "%s\n\n" "$@"
 		git commit -m "$_msg"
 	} || {
 		git commit
@@ -296,20 +328,19 @@ __lineprompt_init() {
 
 __lineprompt_redraw() {
 	# git branch
-	git_branch="$(__git_ps1)"
+	git_branch=" : ($(__git_ps1))" || git_branch=
 
 	# Count number of jobs.
 	local j=( $(jobs -p) )
-	JOBS="${#j[@]}"
+	(( ${#j[@]} > 0 )) && JOBS=" (${#j[@]} jobs)" || JOBS=
 
 	# Calculate direnv status.
-	local direnv_status=
 	[[ "$DIRENV_DIR" ]] && direnv_status="+ direnv"
 
 	# rainbow prompt
 	__lineprompt_cmps COLUMNS PWD SHLVL JOBS git_branch direnv_status || {
 		__shlvl="$[ (SHLVL + 1) / 2 ]" # account for nix-shell --run bash
-		_prompt="$(lineprompt "$ $HOSTNAME > $__shlvl ($JOBS) @ $PWD :$git_branch $direnv_status")"
+		_prompt="$(lineprompt "$ $HOSTNAME ~ ${__shlvl}$JOBS @ ${PWD}$git_branch $direnv_status")"
 	}
 
 	# set PS1
@@ -472,7 +503,6 @@ _shell_calc() {
 export DIRENV_LOG_FORMAT= # quiet mode
 eval "$(direnv hook bash)"
 
-alias vi="nvim"
 alias vim="nvim"
 
 echo Welcome

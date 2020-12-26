@@ -1,0 +1,112 @@
+diff --git a/include/sway/commands.h b/include/sway/commands.h
+index 964b3661..6b80e60e 100644
+--- a/include/sway/commands.h
++++ b/include/sway/commands.h
+@@ -131,6 +131,7 @@ sway_cmd cmd_floating_modifier;
+ sway_cmd cmd_floating_scroll;
+ sway_cmd cmd_focus;
+ sway_cmd cmd_focus_follows_mouse;
++sway_cmd cmd_raise_floating;
+ sway_cmd cmd_focus_on_window_activation;
+ sway_cmd cmd_focus_wrapping;
+ sway_cmd cmd_font;
+diff --git a/include/sway/config.h b/include/sway/config.h
+index 59f22ae2..286637f3 100644
+--- a/include/sway/config.h
++++ b/include/sway/config.h
+@@ -500,6 +500,7 @@ struct sway_config {
+ 	enum focus_follows_mouse_mode focus_follows_mouse;
+ 	enum mouse_warping_mode mouse_warping;
+ 	enum focus_wrapping_mode focus_wrapping;
++	bool raise_floating;
+ 	bool active;
+ 	bool failed;
+ 	bool reloading;
+diff --git a/sway/commands.c b/sway/commands.c
+index fe1e98b5..aab56f9c 100644
+--- a/sway/commands.c
++++ b/sway/commands.c
+@@ -80,6 +80,7 @@ static struct cmd_handler handlers[] = {
+ 	{ "no_focus", cmd_no_focus },
+ 	{ "output", cmd_output },
+ 	{ "popup_during_fullscreen", cmd_popup_during_fullscreen },
++	{ "raise_floating", cmd_raise_floating },
+ 	{ "seat", cmd_seat },
+ 	{ "set", cmd_set },
+ 	{ "show_marks", cmd_show_marks },
+diff --git a/sway/commands/raise_floating.c b/sway/commands/raise_floating.c
+new file mode 100644
+index 00000000..930299a1
+--- /dev/null
++++ b/sway/commands/raise_floating.c
+@@ -0,0 +1,14 @@
++#include <string.h>
++#include <strings.h>
++#include "sway/commands.h"
++#include "util.h"
++
++struct cmd_results *cmd_raise_floating(int argc, char **argv) {
++	struct cmd_results *error = NULL;
++	if ((error = checkarg(argc, "raise_floating", EXPECTED_EQUAL_TO, 1))) {
++		return error;
++	}
++	config->raise_floating =
++		parse_boolean(argv[0], config->raise_floating);
++	return cmd_results_new(CMD_SUCCESS, NULL, NULL);
++}
+diff --git a/sway/config.c b/sway/config.c
+index 71382b86..7b9915f9 100644
+--- a/sway/config.c
++++ b/sway/config.c
+@@ -254,6 +254,7 @@ static void config_defaults(struct sway_config *config) {
+ 
+ 	// Flags
+ 	config->focus_follows_mouse = FOLLOWS_YES;
++	config->raise_floating = false;
+ 	config->mouse_warping = WARP_OUTPUT;
+ 	config->focus_wrapping = WRAP_YES;
+ 	config->validating = false;
+diff --git a/sway/input/seat.c b/sway/input/seat.c
+index f899483d..a6e79c7c 100644
+--- a/sway/input/seat.c
++++ b/sway/input/seat.c
+@@ -1184,6 +1184,11 @@ void seat_set_focus(struct sway_seat *seat, struct sway_node *node) {
+ 		}
+ 	}
+ 
++	// If we've focused a floating container, bring it to the front.
++	if (container && config->raise_floating) {
++		container_raise_floating(container);
++	}
++
+ 	if (new_output_last_ws) {
+ 		workspace_consider_destroy(new_output_last_ws);
+ 	}
+diff --git a/sway/meson.build b/sway/meson.build
+index 6e138101..90820595 100644
+--- a/sway/meson.build
++++ b/sway/meson.build
+@@ -56,6 +56,7 @@ sway_sources = files(
+ 	'commands/floating_modifier.c',
+ 	'commands/focus.c',
+ 	'commands/focus_follows_mouse.c',
++	'commands/raise_floating.c',
+ 	'commands/focus_on_window_activation.c',
+ 	'commands/focus_wrapping.c',
+ 	'commands/font.c',
+diff --git a/sway/sway.5.scd b/sway/sway.5.scd
+index 02592b5f..2e5566bc 100644
+--- a/sway/sway.5.scd
++++ b/sway/sway.5.scd
+@@ -678,6 +678,11 @@ The default colors are:
+ 	devices. A list of input device names may be obtained via *swaymsg -t
+ 	get_inputs*.
+ 
++*raise\_floating* yes|no
++	Controls the behaviour of floating windows. A _yes_ (the default) will
++	raise windows on gaining focus. A _no_ will only raise floating windows
++	by clicking anywhere in the window.
++
+ *seat* <seat> <seat-subcommands...>
+ 	For details on seat subcommands, see *sway-input*(5).
+ 

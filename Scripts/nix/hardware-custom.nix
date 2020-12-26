@@ -80,7 +80,7 @@ in {
 	# Undervolting.
 	services.undervolt = {
 		enable = false;
-		coreOffset = -50; # mV
+		coreOffset = -45; # mV
 		gpuOffset  = -5;
 	};
 
@@ -111,10 +111,12 @@ in {
 		''
 	];
 
-	# Trivial graphics options.
-	boot.extraModprobeConfig = ''
-		options i915 fastboot=1 enable_fbc=1 enable_psr=0
-	'';
+	boot.kernelParams = [ "mitigations=off" ];
+
+	# # Trivial graphics options.
+	# boot.extraModprobeConfig = ''
+	# 	options i915 fastboot=1 enable_fbc=1 enable_psr=0
+	# '';
 
 	# Enable the Intel driver with a fallback to the current modesetting driver.
 	services.xserver.videoDrivers = [ "intel" "modesetting" ];
@@ -130,32 +132,8 @@ in {
 		EndSection
 	'';
 
-	# Fix crappy secondary display.
-	powerManagement.powerUpCommands = ''
-		xrandr --output DP1-1 --set "Broadcast RGB" "Full"
-	'';
-
 	# Powertop is bad because of its aggressive power saving.
 	powerManagement.powertop.enable = false;
-
-	# Multihead setup.
-	# services.xserver.xrandrHeads = utils.outputConfig {
-	# 	"eDP-1" = ''
-	# 		Identifier "Laptop Screen"
-	# 		Position 0 360
-	# 	'';
-	# 	"DP-1-1" = ''
-	# 		Identifier "Secondary Monitor"
-	# 		Primary true
-	# 		Position 4480 360
-	# 		ModeLine "1080p45" 125.50 1920 2024 2216 2512 1080 1083 1088 1111 -hsync +vsync
-	# 	'';
-	# 	"DP-1-2" = ''
-	# 		Identifier "Primary Monitor"
-	# 		Position 1920 0
-	# 		ModeLine "1440p75" 397.25 2560 2760 3040 3520 1440 1443 1448 1506 -hsync +vsync
-	# 	'';
-	# };
 
 	nix.maxJobs = lib.mkForce 4;
 }
