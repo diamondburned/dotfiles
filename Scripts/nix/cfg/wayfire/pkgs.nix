@@ -10,12 +10,13 @@ let waylandOverlays = import (pkgs.fetchFromGitHub {
 	customOverlays = self: super: {
 		wayfire  = super.wayfire.overrideAttrs (old: {
 			src  = super.fetchFromGitHub {
-				owner  = "WayfireWM";
+				owner  = "diamondburned";
 				repo   = "wayfire";
-				rev    = "0.6.0";
-				sha256 = "1glrfzz0dk1xgljk71vl138zpsdc765w29ik9x5dqcnwjj2sq4px";
+				rev    = "2af834aa65b68fe9bec3a676da99066dd1bdec70";
+				sha256 = "10agwd131dj2skd9jcgbqqlrbh1g39c7vqlgy27q4g74bwyqyifb";
 				fetchSubmodules = true;
 			};
+			buildInputs = old.buildInputs ++ [ pkgs.libuuid ];
 			version = "0.6.0";
 		});
 		wf-shell = super.wayfire.overrideAttrs (old: {

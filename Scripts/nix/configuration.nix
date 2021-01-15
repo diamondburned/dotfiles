@@ -40,7 +40,8 @@ in
 		"${home-manager}/nixos"
 		./hardware-configuration.nix
 		./hardware-custom.nix
-		./cfg/sway
+		# ./cfg/sway
+		./cfg/wayfire
 	];
 
 	# Overlays
@@ -64,6 +65,35 @@ in
 			});
 			steam = super.steam.override {
 				extraLibraries = pkgs: with pkgs; [ SDL2 ];
+				extraPkgs      = pkgs: with pkgs; [ gamescope ];
+			};
+			gamescope = super.stdenv.mkDerivation rec {
+				pname = "gamescope";
+				version = "3.7.1";
+		
+				src = super.fetchgit {
+					url = "https://github.com/Plagman/gamescope.git";
+					rev = "c9d0b5db4c21f4a783b6fbe7da1bc97c11694b02";
+					sha256 = "0l3rrjq743zm5bi8b942rr41gccg8nvc7m47xj3db7slsj2zp99h";
+					fetchSubmodules = true;
+				};
+		
+				nativeBuildInputs = with super; [
+					pkgconfig meson ninja vulkan-headers cmake pixman wayland-protocols
+				];
+		
+				buildInputs = with super; [
+					wayland xwayland libdrm libinput libxkbcommon libcap libpng glslang
+					vulkan-loader SDL2 wlroots
+				] ++ (with super.xorg; [
+					libXcomposite
+					libxcb
+					libXrender
+					libXtst
+					libXdamage
+					libXi
+					libXxf86vm
+				]);
 			};
 			morph = super.morph.overrideAttrs(_: {
 				version = "1.4.0";
@@ -516,7 +546,7 @@ in
 			platformTheme = "gnome";
 		};
 
-		pam.sessionVariables = {
+		home.sessionVariables = {
 			NIX_AUTO_RUN = "1";
 			GOPATH = "/home/diamond/.go";
 			GOBIN  = "/home/diamond/.go/bin";
@@ -526,6 +556,7 @@ in
 
 			# Enforce Wayland.
 			MOZ_ENABLE_WAYLAND = "1";
+			QT_QPA_PLATFORM    = "wayland";
 
 			# osu settings.
 			WINE_RT = "89";
@@ -580,7 +611,6 @@ in
 			# Multimedia
 			(enableDebugging ffmpeg)
 			v4l_utils
-			ymuse
 			audacious-3-5
 			pavucontrol
 			pulseeffects
@@ -606,7 +636,6 @@ in
 			# Office
 			evince
 			typora
-			bookworm
 
 			# Dictionaries
 			nuspell
@@ -633,7 +662,6 @@ in
 			gnome3.file-roller
 			gnome3.nautilus
 			gnome3.gpaste
-			gnome3.gnome-boxes
 			gnome3.gnome-disk-utility
 			gnome3.gtk.dev
 		]);
@@ -664,6 +692,8 @@ in
 				Environment = "PATH=${pkgs.gnugrep}/bin:${pkgs.bash}/bin:${pkgs.glib}/bin";
 			};
 		};
+
+		fonts.fontconfig.enable = lib.mkForce true;
 
 		xdg = {
 			enable = true;

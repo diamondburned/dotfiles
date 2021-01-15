@@ -16,6 +16,16 @@ let waylandPkgs = import ./waylandpkgs.nix;
 		wlsunset
 	]);
 
+	winscrot = utils.writeBashScript "winscrot.sh" ''
+		monitor_sel="$(swaymsg -t get_outputs | jq -r '.[] | select(.active) | .rect | "\(.x),\(.y) \(.width)x\(.height)"')"
+		window_sel="$(swaymsg -t get_tree | jq -r '.. | select(.pid? and .visible?) | .rect | "\(.x),\(.y) \(.width)x\(.height)"')"
+		exec printf '%s\n' "$monitor_sel" "$window_sel" | slurp "$@"
+	'' (with pkgs; [
+		jq
+		sway
+		slurp
+	]);
+
 in {
 	# Enable GDM.
 	services.xserver = {
@@ -114,7 +124,7 @@ in {
 						mode  = "2560x1440@69.928Hz";
 						scale = "1.07";
 						subpixel = "none";
-						max_render_time = "10";
+						max_render_time = "12";
 					};
 				};
 				modifier = "Mod4"; # Super
@@ -139,8 +149,9 @@ in {
 					"Mod1+Tab"    = "focus next";
 					"Mod1+Escape" = "focus prev";
 					# Screenshooting
-					"Print"       = "exec  grim -t jpeg -s 1 -q 100 - | wl-copy";
-					"Shift+Print" = "exec slurp | grim -s 1 -g - -c - | wl-copy";
+					"Print"       =   "exec grim -t jpeg -s 1 -q 100 - | wl-copy";
+					"Alt+Print" = "exec ${winscrot} | grim -s 1 -g - - | wl-copy";
+					"Shift+Print" =     "exec slurp | grim -s 1 -g - - | wl-copy";
 					# Media
 					"XF86AudioPlay" = "exec playerctl play-pause";
 					"XF86AudioNext" = "exec playerctl next";
@@ -166,7 +177,7 @@ in {
 			extraSessionCommands = "";
 			extraConfig = ''
 				seat seat0 {
-					xcursor_theme Ardoise_shadow_87
+					xcursor_theme Ardoise_shadow_87 52
 				}
 
 				floating_maximum_size -1 x -1

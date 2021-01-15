@@ -46,8 +46,8 @@
 			<family>Noto Sans Mono CJK KR</family>
 			<family>Noto Sans Mono CJK SC</family>
 			<family>Noto Sans Mono CJK TC</family>
-			<!-- <family>emoji</family> -->
-			<!-- <family>symbol</family> -->
+			<family>emoji</family>
+			<family>symbol</family>
 			<family>Unifont</family>
 			<family>Unifont Upper</family>
 		</prefer>
@@ -202,8 +202,8 @@
 			<family>Noto Sans Ugaritic</family>
 			<family>Noto Sans Vai</family>
 			<family>Noto Sans Yi</family>
-			<!-- <family>emoji</family> -->
-			<!-- <family>symbol</family> -->
+			<family>emoji</family>
+			<family>symbol</family>
 		</prefer>
 	</alias>
 
@@ -228,21 +228,21 @@
 			<family>Noto Serif Tamil</family>
 			<family>Noto Serif Telugu</family>
 			<family>Noto Serif Thai</family>
-			<!-- <family>emoji</family> -->
-			<!-- <family>symbol</family> -->
+			<family>emoji</family>
+			<family>symbol</family>
 		</prefer>
 	</alias>
 
 	<!-- Add emoji generic family -->
-	<!-- <alias binding="strong"> -->
-	<!-- 	<family>emoji</family> -->
-	<!-- 	<default><family>Blobmoji</family></default> -->
-	<!-- 	<prefer> -->
-	<!-- 		<family>Blobmoji</family> -->
-	<!-- 		<family>OpenMoji Color</family> -->
-	<!-- 		<family>Noto Color Emoji</family> -->
-	<!-- 	</prefer> -->
-	<!-- </alias> -->
+	<alias binding="strong">
+		<family>emoji</family>
+		<default><family>Blobmoji</family></default>
+		<prefer>
+			<family>Blobmoji</family>
+			<family>OpenMoji Color</family>
+			<family>Noto Color Emoji</family>
+		</prefer>
+	</alias>
 
 	<!-- Add symbol generic family -->
 	<alias binding="strong">
@@ -264,15 +264,16 @@
 	<!-- Alias requests for the other fonts -->
 	<alias binding="strong">
 		<family>Sans</family>
+		<default><family>sans-serif</family></default>
 		<prefer><family>sans-serif</family></prefer>
 	</alias>
 
 	<!-- Default font (no fc-match pattern) -->
-	<!-- <match> -->
-	<!-- 	<edit mode="prepend" name="family"> -->
-	<!-- 		<string>sans-serif</string> -->
-	<!-- 	</edit> -->
-	<!-- </match> -->
+	<match>
+		<edit mode="prepend" name="family">
+			<string>sans-serif</string>
+		</edit>
+	</match>
 
 	<!-- Replacing VL Gothic for osu! -->
 	<alias binding="strong">

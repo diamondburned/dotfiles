@@ -34,6 +34,7 @@ x-scheme-handler/discord-529050037532098580=discord-529050037532098580.desktop
 audio/flac=io.github.celluloid_player.Celluloid.desktop
 audio/aac=io.github.celluloid_player.Celluloid.desktop
 text/markdown=nvim.desktop
+video/x-matroska=io.github.celluloid_player.Celluloid.desktop
 
 [Added Associations]
 application/zip=org.gnome.FileRoller.desktop;

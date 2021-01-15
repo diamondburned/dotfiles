@@ -26,6 +26,8 @@ in {
 		output = "";
 	};
 
+	services.fstrim.enable = true;
+
     # Battery saver thing
     services.tlp.enable = true;
 

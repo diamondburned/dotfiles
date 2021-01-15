@@ -53,13 +53,21 @@ EDITOR=nvim
 
 #xinput set-button-map "MICROSOFT SAM Pen (0)" 1 3 2 &> /dev/null 
 
+# Auto-start wf-panel and nautilus
+
+
 HISTFILESIZE=2147483647 # fuck
 HISTSIZE=1000
 shopt -s histappend
 
 grepr() {
-	grep "$@" -R '.'
+	# -n show line number
+	# -R grep recursively
+	grep "$@" -nR '.'
 }
+
+# always show line number
+alias grep="grep -n"
 
 #PID=`pgrep -n -u $USER gnome-session`
 #if [ -n "$PID" ]; then
@@ -107,16 +115,18 @@ export NIX_AUTO_RUN=1
 nixsh() {
 	local path
 
-	if (( $# == 0 )); then
-		path="$(__traverse shell.nix)" && {
-			nix-shell --run bash "$path"
-			return
-		}
+	(( $# > 0 )) && {
+		[[ -f $1 ]] && nix-shell --run bash "$1" \
+			        || nix-shell --run bash '<nixpkgs>' -p "$@"
+		return
+	}
 
-		nix-shell --run bash -p
-	else
-		nix-shell '<nixpkgs>' --run bash -p "$@"
-	fi
+	path="$(__traverse shell.nix)" && {
+		nix-shell --run bash "$path"
+		return
+	}
+
+	nix-shell --run bash -p
 }
 
 nix_exec() {
