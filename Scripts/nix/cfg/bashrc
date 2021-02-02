@@ -509,6 +509,11 @@ _shell_calc() {
 	bc -l <<< "$even_previous" 2> /dev/null
 }
 
+# Because I'm careless.
+rm() {
+	[[ $- == *i* ]] && gio trash "$@" || command rm "$@"
+}
+
 # Direnv.
 export DIRENV_LOG_FORMAT= # quiet mode
 eval "$(direnv hook bash)"

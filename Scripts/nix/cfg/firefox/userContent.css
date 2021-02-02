@@ -1,3 +1,4 @@
+/*
 pre,
 code,
 textarea,
@@ -28,9 +29,9 @@ textarea,
     line-height: 1em;
     vertical-align: middle;
 }
+*/
 
 body {
-    /* font-family: "Sans", sans-serif !important; */
     -webkit-text-stroke: 0.2px !important;
 }
 

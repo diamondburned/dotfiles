@@ -22,7 +22,7 @@ Plug 'nvim-treesitter/nvim-treesitter', {'do': ':TSUpdate'}
 Plug 'jiangmiao/auto-pairs'
 
 "GoCoverage and such"
-Plug 'arp242/gopher.vim'
+"Plug 'arp242/gopher.vim'
 
 "Icons"
 Plug 'ryanoasis/vim-devicons'
@@ -65,6 +65,13 @@ autocmd BufReadPost *
 "Autoindent"
 set smartindent
 filetype indent on
+
+set numberwidth=10
+set textwidth=80
+set number
+
+"Special cases for special formats"
+autocmd BufRead,BufNewFile *.html setlocal textwidth=100
 
 "Tab size 4"
 set tabstop=4
@@ -225,15 +232,7 @@ hi WildMenu ctermbg=12
 hi WildMenu ctermfg=21
 
 "Nicer vertical separators"
-"set fillchars+=vert:┃
 set fillchars=vert:\▏
-
-"Indentation guide"
-"hi indentGuide ctermfg=248
-"match indentGuide /\t/
-"set list lcs=tab:\▏\ 
-"set list
-
 
 "END shit I stole from Sacul"
 
@@ -266,29 +265,6 @@ highlight LineNr guifg=#6c6c6c ctermfg=242
 "New file in buffer directory"
 command -nargs=1 New :e %:p:h/<args>
 
-"Goyo and stuff config"
-"let g:goyo_height="95%"
-"let g:limelight_conceal_ctermfg = 248
-"let g:limelight_paragraph_span = 0
-
-"Dynamic formats"
-"if &filetype ==# "vim" 
-"let g:limelight_bop = '^\s'
-"let g:limelight_eop = '\ze\n^\s'
-"elseif <another condition> 
-"else
-"let g:limelight_bop = '\(\(?<=\n\n\)^\/\/ \p*\n\|^\w.*\(:\|{\|(\|)\)\n\|\(?<=\n\n\)\p\)'
-"let g:limelight_eop = '\(\n\n\/\/\|^\p\n\n\|.\n\n\S\)'
-"endif
-
-"Autorun Goyo"
-"autocmd VimEnter * :LiteDFMToggle<CR>i<Esc>`^
-
-"autocmd VimEnter * Limelight
-set numberwidth=10
-set textwidth=80
-set number
-
 "TITTY FAST"
 set ttyfast
 set lazyredraw
@@ -301,6 +277,24 @@ set undofile
 " set inccommand=nosplit
 
 "ALE configs"
+"https://github.com/dense-analysis/ale/issues/3023"
+function! DenoProjectRoot(buffer) abort
+    return expand('#' . a:buffer . ':p:h')
+endfunction
+
+execute ale#linter#Define('javascript', {
+\   'name': 'deno',
+\   'lsp': 'stdio',
+\   'initialization_options': {
+\       'enable': v:true,
+\       'lint': v:true,
+\       'unstable': v:true,
+\   },
+\   'executable': 'deno',
+\   'command': '%e lsp -q',
+\   'project_root': function('DenoProjectRoot'),
+\})
+
 highlight ALEWarningSign ctermbg=NONE
 let g:ale_virtualtext_cursor = 1
 let g:ale_sign_error = '!'
@@ -308,6 +302,7 @@ let g:ale_sign_warning = '>'
 let g:ale_sign_column_always = 1
 let g:ale_completion_enabled = 1
 let g:ale_fix_on_save = 1
+let g:ale_linters_explicit = 1
 let g:ale_fixers = {
 			\ 'go':   [ "goimports"    ],
 			\ 'cpp':  [ "clang-format" ],
@@ -319,7 +314,7 @@ let g:ale_linters = {
 			\ 'zig': [ "zls" ],
 			\ 'c':   [ "clangd" ],
 			\ 'cpp': [ "clangd" ],
-			\ 'javascript': [ "eslint", "tsserver" ],
+			\ 'javascript': [ "deno", "tsserver" ],
 			\ }
 nnoremap gd :ALEGoToDefinition<CR>
 nnoremap K :ALEHover<CR>

@@ -93,10 +93,7 @@ in {
 	};
 
 	# Tablet drivers.
-	services.xserver.wacom.enable = true;
-	environment.systemPackages = with pkgs; [
-		xf86_input_wacom
-	];
+	hardware.opentabletdriver.enable = true;
 
 	# Mouse settings.
 	services.xserver.inputClassSections = [

@@ -7,6 +7,7 @@ let waylandPkgs  = import ./pkgs.nix { inherit lib pkgs; };
 		# Essentials
 		dbus-update-activation-environment --all
 		dex -a
+		systemctl --user import-environment
 		${pkgs.xdg-desktop-portal-wlr}/libexec/xdg-desktop-portal-wlr &
 
 		# Userspace Utilities
@@ -28,6 +29,10 @@ let waylandPkgs  = import ./pkgs.nix { inherit lib pkgs; };
 	scrot = utils.writeBashScript "scrot.sh" ''
 		export WAYLAND_DISPLAY=wayland-1
 
+		slurp() {
+			command slurp -w 1 -b '#00000000' -c '#FFFFFFFF' -s '#00000000'
+		}
+
 		[[ $1 == -a ]] && \
 			{ slurp | grim -g - -c - | wl-copy; } || \
 			{ grim -t jpeg -q 100 -  | wl-copy; }
@@ -48,7 +53,11 @@ in {
 		"https://nixpkgs-wayland.cachix.org"
 	];
 
-	xdg.portal.extraPortals = with pkgs; [ xdg-desktop-portal-wlr ];
+	xdg.portal.extraPortals = with pkgs; [
+		xdg-desktop-portal-wlr
+		xdg-desktop-portal-gtk
+	];
+	xdg.portal.gtkUsePortal = true;
 
 	nixpkgs.overlays = [ (import ./overlay.nix) ];
 
@@ -98,6 +107,8 @@ in {
 					src = ./wf-shell.ini;
 					css = ./wf-panel.css;
 					menu_icon = ./menu.png;
+
+					inherit scrot;
 				};
 			};
 		};
@@ -116,8 +127,19 @@ in {
 			};
 		};
 
-		programs.mako = {
-			enable = true;
+		programs.mako = let f = ''<b>%s</b>\n%b''; in {
+			enable   = true;
+			font     = "Sans 11";
+			anchor   = "top-center";
+			format   = f;
+			width    = 400;
+			borderSize = 2;
+			defaultTimeout = 10000;
+			iconPath = "${pkgs.papirus-icon-theme}/share/icons/Papirus-Dark";
+			groupBy  = "app-name";
+			extraConfig = 
+				"[grouped]\n" +
+				"format=\"${f}\"";
 		};
 	};
 

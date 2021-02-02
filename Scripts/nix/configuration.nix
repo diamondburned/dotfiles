@@ -6,7 +6,7 @@
 
 let home-manager = builtins.fetchGit {
 		url = "https://github.com/rycee/home-manager.git";
-		rev = "249650a07ee2d949fa599f3177a8c234adbd1bee";
+		rev = "cb136f37c7c760cbc39bc334702e4d814b8920b1";
 		ref = "master";
 	};
 
@@ -24,13 +24,21 @@ let home-manager = builtins.fetchGit {
 
 	diamond = ../nix-overlays;
 
-	# PR #101194
+	# PR #101194 and more.
 	aspellPkgs = import (pkgs.fetchFromGitHub {
 		owner  = "NixOS";
 		repo   = "nixpkgs";
 		rev    = "8db271b98f7264f4d08358ade84402a56e82b294";
 		sha256 = "0l6ppknn8jm25561w6yc97j7313jn0f7zkb8milg1aqf95wyr7ds";
 	}) {};
+
+	# # GIMP v2.99 Nixpkgs
+	# gimpMesonPkgs = import (pkgs.fetchFromGitHub {
+	# 	owner  = "jtojnar";
+	# 	repo   = "nixpkgs";
+	# 	rev    = "dc2786744e50290e290d591a75f6cc512cf31a1b";
+	# 	sha256 = "0c5im5dzrs5a25x6g2njd4k48qirv48iavwvl5ylyvwkmfhqk9f9";
+	# }) {};
 
 in
 
@@ -40,7 +48,6 @@ in
 		"${home-manager}/nixos"
 		./hardware-configuration.nix
 		./hardware-custom.nix
-		# ./cfg/sway
 		./cfg/wayfire
 	];
 
@@ -51,7 +58,11 @@ in
 		(tdeo)
 		(self: super: {
 			aspell      = aspellPkgs.aspell;
+			gspell      = aspellPkgs.gspell;
 			aspellDicts = aspellPkgs.aspellDicts;
+
+			# GIMP v2.99
+			# gimp = gimpMesonPkgs.gimp;
 
 			# orca hate
 			orca = super.orca.overrideAttrs(old: {
@@ -103,10 +114,9 @@ in
 					rev = "a3ef469edf1613b8ab51de87e043c3c57d12a4a9";
 				};
 			});
+			# Omitted because it's too much to compile.
 			osu-wine = super.osu-wine.override {
-				# Use Nixpkgs' 20.03 wine just so we don't have to recompile
-				# lots.
-				wine = super.wineStaging.overrideDerivation(old: {
+				wine = aspellPkgs.wineStaging.overrideDerivation(old: {
 					NIX_CFLAGS_COMPILE = (old.NIX_CFLAGS_COMPILE or "") + " -DNDEBUG -Ofast -mfpmath=sse -mtune=intel -march=skylake";
 					postPatch = (old.postPatch or "") + ''
 						patch -Np1 < ${./patches/wine-4.2-alsa-lower-latency.patch}
@@ -114,13 +124,20 @@ in
 					'';
 				});
 			};
-			# pulseaudio =
-			# 	let overrideFn = old: {
-			# 		NIX_CFLAGS_COMPILE = (old.NIX_CFLAGS_COMPILE or "") + " -DNDEBUG -Ofast -mfpmath=sse -mtune=intel -march=skylake";
-			# 	};
-			# 	in           (super.pulseaudio.overrideAttrs(overrideFn)).override {
-			# 		speexdsp = (super.speexdsp.overrideAttrs(overrideFn));
-			# 	};
+			xwayland = super.xwayland.overrideAttrs (old: {
+				preConfigure = (old.preConfigure or "") + ''
+					patch -p1 < ${./patches/xwayland-fps.patch}
+				'';
+			});
+			pulseeffects = super.pulseeffects.overrideAttrs (old: {
+				src = super.fetchFromGitHub {
+					owner  = "wwmm";
+					repo   = "pulseeffects";
+					rev    = "b24b511df49a3a42b006131e7d6080b742341deb";
+					sha256 = "0fp0z8d2hmz65f90qqyvvb801yv3dhbg3yji5mm4c025q47av639";
+				};
+				buildInputs = old.buildInputs ++ (with pkgs; [ pipewire ]);
+			});
 		})
 	];
 
@@ -248,12 +265,6 @@ in
 		# Utilities
 		htop
 		git
-
-		# GNOME things, in case they need to add desktop files and such.
-		gnome3.nautilus
-		gnome3.gpaste
-		gnome3.glib-networking
-		gnome3.file-roller
 	];
 
 	# Install global fonts
@@ -296,41 +307,49 @@ in
 
 	# Enable sound.
 	sound.enable = true;
-	hardware.pulseaudio = {
+	hardware.pulseaudio.enable = false;
+	# hardware.pulseaudio = {
+	# 	enable = true;
+	# 	support32Bit = true;
+	# 	configFile = ./cfg/pulse_default.pa;
+	# 	daemon.config = {
+	# 		log-target = "newfile:/tmp/pulseaudio.log";
+	# 		daemonize = "yes";
+
+	# 		flat-volumes = "no";
+
+	# 		high-priority = "yes";
+	# 		nice-level = -15;
+
+	# 		realtime-scheduling = "yes";
+	# 		realtime-priority = 50;
+	# 		avoid-resampling = "yes";
+	# 		enable-lfe-remixing = "no";
+
+	# 		# resample-method = "speex-fixed-0";
+	# 		# resample-method = "copy";
+	# 		resample-method = "speex-float-2";
+	# 		default-sample-format = "float32le";
+	# 		default-sample-rate = "44100";
+	# 		alternate-sample-rate = "48000";
+
+	# 		default-fragments = 2;
+	# 		default-fragment-size-msec = 4;
+	# };
+	# 	# Bluetooth shit
+	# 	package = pkgs.pulseaudioFull;
+	# 	extraModules = with pkgs; [
+	# 		pulseaudio-modules-bt
+	# 	];
+	# };
+	# nixpkgs.config.pulseaudio = true;
+
+	services.pipewire = {
 		enable = true;
-		support32Bit = true;
-		configFile = ./cfg/pulse_default.pa;
-		daemon.config = {
-			log-target = "newfile:/tmp/pulseaudio.log";
-			daemonize = "yes";
-
-			flat-volumes = "no";
-
-			high-priority = "yes";
-			nice-level = -15;
-
-			realtime-scheduling = "yes";
-			realtime-priority = 50;
-			avoid-resampling = "yes";
-			enable-lfe-remixing = "no";
-
-			# resample-method = "speex-fixed-0";
-			# resample-method = "copy";
-			resample-method = "speex-float-2";
-			default-sample-format = "float32le";
-			default-sample-rate = "44100";
-			alternate-sample-rate = "48000";
-
-			default-fragments = 2;
-			default-fragment-size-msec = 4;
-  		};
-		# Bluetooth shit
-		package = pkgs.pulseaudioFull;
-		extraModules = with pkgs; [
-			pulseaudio-modules-bt
-		];
+		pulse.enable = true;
+		alsa.enable = true;
+		alsa.support32Bit = true;
 	};
-	nixpkgs.config.pulseaudio = true;
 
 	# Enable the X11 windowing system.
 	services.xserver.layout = "us";
@@ -386,7 +405,6 @@ in
     programs.seahorse.enable = true;
 
     services.gvfs.enable = true;
-    programs.gpaste.enable = true;
     programs.gnome-disks.enable = true;
     programs.file-roller.enable = true;
 
@@ -606,6 +624,7 @@ in
 			gnupg
 			zoom-us
 			darktable
+			# gimp
 			gimp-with-plugins
 
 			# Multimedia
@@ -613,6 +632,7 @@ in
 			v4l_utils
 			audacious-3-5
 			pavucontrol
+			pulseaudio
 			pulseeffects
 
 			# Development tools
@@ -637,11 +657,6 @@ in
 			evince
 			typora
 
-			# Dictionaries
-			nuspell
-			hunspell
-			aspell
-
 			# Applications
 			gcolor3
 			simplescreenrecorder
@@ -651,8 +666,10 @@ in
 			material-design-icons
 
 			# Games
+			opentabletdriver
 			osu-wine
 			steam
+			lutris
 
 			# GNOME things
 			gnome-mpv
@@ -661,7 +678,6 @@ in
 			gnome3.glib-networking
 			gnome3.file-roller
 			gnome3.nautilus
-			gnome3.gpaste
 			gnome3.gnome-disk-utility
 			gnome3.gtk.dev
 		]);
