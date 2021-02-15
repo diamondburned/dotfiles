@@ -13,7 +13,8 @@
 			font	= "Inconsolata Bold 10";
 			colors  = {
 				backgroundColor = "#1D1D1D";
-				foregroundColor = "#E5E5E5";
+				foregroundColor = "#FFFFFF";
+				# foregroundColor = "#E5E5E5";
 				palette = [
 					"#272224" "#FF473D" "#3DCCB2" "#FF9600"
 					"#3B7ECB" "#F74C6D" "#00B5FC" "#3E3E3E"

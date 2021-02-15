@@ -276,7 +276,13 @@ set undofile
 "Actually very buggy"
 " set inccommand=nosplit
 
-"ALE configs"
+"Autocompletion"
+"Fix aggressive preemptive completion with noselect"
+set completeopt=menuone,noselect
+"Enter triggers completion"
+inoremap <expr> <CR> pumvisible() ? "\<C-y>" : "\<C-g>u\<CR>"
+
+""ALE configs"
 "https://github.com/dense-analysis/ale/issues/3023"
 function! DenoProjectRoot(buffer) abort
     return expand('#' . a:buffer . ':p:h')
@@ -295,22 +301,25 @@ execute ale#linter#Define('javascript', {
 \   'project_root': function('DenoProjectRoot'),
 \})
 
+set omnifunc=ale#completion#OmniFunc
+
 highlight ALEWarningSign ctermbg=NONE
 let g:ale_virtualtext_cursor = 1
 let g:ale_sign_error = '!'
 let g:ale_sign_warning = '>'
 let g:ale_sign_column_always = 1
-let g:ale_completion_enabled = 1
 let g:ale_fix_on_save = 1
-let g:ale_linters_explicit = 1
+let g:ale_linters_explicit = 0
+let g:ale_completion_autoimport = 1
 let g:ale_fixers = {
-			\ 'go':   [ "goimports"    ],
-			\ 'cpp':  [ "clang-format" ],
+			\ 'go':   [ "goimports" ],
+			\ 'cpp':  [ "uncrustify", "clang-format" ],
 			\ 'json': [ "jq" ],
 			\ 'javascript': [ "prettier" ],
 			\ }
+let g:ale_completion_enabled = 1
 let g:ale_linters = {
-			\ 'go':  [ "gopls"  ],
+			\ 'go':  [ "gopls" ],
 			\ 'zig': [ "zls" ],
 			\ 'c':   [ "clangd" ],
 			\ 'cpp': [ "clangd" ],
@@ -319,27 +328,24 @@ let g:ale_linters = {
 nnoremap gd :ALEGoToDefinition<CR>
 nnoremap K :ALEHover<CR>
 
-"Fix ALE from aggressively completing ahead"
-set completeopt+=noselect
+""Assistive LSP bindings"
+"function! ToggleQf()
+"	for buffer in tabpagebuflist()
+"		if bufname(buffer) == ''
+"			cclose
+"			return
+"		endif
+"	endfor
+"	botright copen
+"	wincmd p
+"endfunction
 
-"Assistive LSP bindings"
-function! ToggleQf()
-	for buffer in tabpagebuflist()
-		if bufname(buffer) == ''
-			cclose
-			return
-		endif
-	endfor
-	botright copen
-	wincmd p
-endfunction
-
-"Next error"
-nnoremap <M-n> :cnext<CR>zz
-"Show errors"
-nnoremap <silent><M-c> :call ToggleQf()<CR>
-"Previous error"
-nnoremap <M-p> :cprev<CR>zz
+""Next error"
+"nnoremap <M-n> :cnext<CR>zz
+""Show errors"
+"nnoremap <silent><M-c> :call ToggleQf()<CR>
+""Previous error"
+"nnoremap <M-p> :cprev<CR>zz
 
 "Deoplete+ALE integration"
 " let g:deoplete#enable_at_startup = 1

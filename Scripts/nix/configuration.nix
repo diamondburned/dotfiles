@@ -32,13 +32,13 @@ let home-manager = builtins.fetchGit {
 		sha256 = "0l6ppknn8jm25561w6yc97j7313jn0f7zkb8milg1aqf95wyr7ds";
 	}) {};
 
-	# # GIMP v2.99 Nixpkgs
-	# gimpMesonPkgs = import (pkgs.fetchFromGitHub {
-	# 	owner  = "jtojnar";
-	# 	repo   = "nixpkgs";
-	# 	rev    = "dc2786744e50290e290d591a75f6cc512cf31a1b";
-	# 	sha256 = "0c5im5dzrs5a25x6g2njd4k48qirv48iavwvl5ylyvwkmfhqk9f9";
-	# }) {};
+	# GIMP v2.99 Nixpkgs
+	gimpMesonPkgs = import (pkgs.fetchFromGitHub {
+		owner  = "jtojnar";
+		repo   = "nixpkgs";
+		rev    = "dc2786744e50290e290d591a75f6cc512cf31a1b";
+		sha256 = "0c5im5dzrs5a25x6g2njd4k48qirv48iavwvl5ylyvwkmfhqk9f9";
+	}) {};
 
 in
 
@@ -46,6 +46,7 @@ in
 	imports = [
 		"${diamond}"
 		"${home-manager}/nixos"
+		./packages/pipewire/pipewire.nix
 		./hardware-configuration.nix
 		./hardware-custom.nix
 		./cfg/wayfire
@@ -53,16 +54,34 @@ in
 
 	# Overlays
 	nixpkgs.overlays =
-	let nostrip = pkg: pkg.overrideAttrs(_: { dontStrip = true; });
+	let vte = pkgs: pkgs.vte.overrideAttrs(old: {
+			version = "0.63.91"; # rev without SIXEL reversion commit.
+			src = builtins.fetchGit {
+				url = "https://gitlab.gnome.org/GNOME/vte.git";
+				rev = "35b0a8dc9776300bd33c8106e500436b6c11fccc";
+			};
+			postPatch = (old.postPatch or "") + ''
+				patchShebangs src/*.py
+			'';
+			nativeBuildInputs = old.nativeBuildInputs ++ (with pkgs; [
+				python3
+				python3Full
+			]);
+			patches = (old.patches or []) ++ [
+				./patches/vte-fast.patch
+			];
+		});
 	in [
 		(tdeo)
 		(self: super: {
+			vte = vte super;
+
 			aspell      = aspellPkgs.aspell;
 			gspell      = aspellPkgs.gspell;
 			aspellDicts = aspellPkgs.aspellDicts;
 
 			# GIMP v2.99
-			# gimp = gimpMesonPkgs.gimp;
+			gimp = gimpMesonPkgs.gimp;
 
 			# orca hate
 			orca = super.orca.overrideAttrs(old: {
@@ -71,8 +90,20 @@ in
 				'';
 			});
 
-			vte = super.vte.overrideAttrs(oldAttrs: {
-				patches = oldAttrs.patches or [] ++ [ ./patches/vte-fast.patch ];
+			gnome3 = super.gnome3.overrideScope' (self: supergnome3: {
+				gnome-terminal = supergnome3.gnome-terminal.override {
+					vte = vte super;
+				};
+			});
+			mpv-unwrapped = super.mpv-unwrapped.overrideAttrs (old: {
+				version = "0.33.1-0";
+				patches = [];
+				src = super.fetchFromGitHub {
+					owner  = "mpv-player";
+					repo   = "mpv";
+					rev    = "93066ff12f06d47e7a1a79e69a4cda95631a1553";
+					sha256 = "0cw9qh41lynfx25pxpd13r8kyqj1zh86n0sxyqz3f39fpljr9w4r";
+				};
 			});
 			steam = super.steam.override {
 				extraLibraries = pkgs: with pkgs; [ SDL2 ];
@@ -307,49 +338,9 @@ in
 
 	# Enable sound.
 	sound.enable = true;
-	hardware.pulseaudio.enable = false;
-	# hardware.pulseaudio = {
-	# 	enable = true;
-	# 	support32Bit = true;
-	# 	configFile = ./cfg/pulse_default.pa;
-	# 	daemon.config = {
-	# 		log-target = "newfile:/tmp/pulseaudio.log";
-	# 		daemonize = "yes";
-
-	# 		flat-volumes = "no";
-
-	# 		high-priority = "yes";
-	# 		nice-level = -15;
-
-	# 		realtime-scheduling = "yes";
-	# 		realtime-priority = 50;
-	# 		avoid-resampling = "yes";
-	# 		enable-lfe-remixing = "no";
-
-	# 		# resample-method = "speex-fixed-0";
-	# 		# resample-method = "copy";
-	# 		resample-method = "speex-float-2";
-	# 		default-sample-format = "float32le";
-	# 		default-sample-rate = "44100";
-	# 		alternate-sample-rate = "48000";
-
-	# 		default-fragments = 2;
-	# 		default-fragment-size-msec = 4;
-	# };
-	# 	# Bluetooth shit
-	# 	package = pkgs.pulseaudioFull;
-	# 	extraModules = with pkgs; [
-	# 		pulseaudio-modules-bt
-	# 	];
-	# };
-	# nixpkgs.config.pulseaudio = true;
-
-	services.pipewire = {
-		enable = true;
-		pulse.enable = true;
-		alsa.enable = true;
-		alsa.support32Bit = true;
-	};
+	# Refer to import ./packages/pipewire/
+	services.pipewire.enable   = lib.mkForce false;
+	hardware.pulseaudio.enable = lib.mkForce false;
 
 	# Enable the X11 windowing system.
 	services.xserver.layout = "us";
@@ -564,7 +555,7 @@ in
 			platformTheme = "gnome";
 		};
 
-		home.sessionVariables = {
+		systemd.user.sessionVariables = {
 			NIX_AUTO_RUN = "1";
 			GOPATH = "/home/diamond/.go";
 			GOBIN  = "/home/diamond/.go/bin";
@@ -591,12 +582,12 @@ in
 			# Custom overrides.
 			# Neovim with yarn.
 			let neovim-nightly = pkgs.neovim-unwrapped.overrideAttrs(old: {
-				version = "v0.5.0-dev+965-gd0668b36a";
+				version = "v0.5.0-dev+1062-gcc1851c9f";
 				src = pkgs.fetchFromGitHub {
 					owner  = "neovim";
 					repo   = "neovim";
-					rev    = "d0668b36a3e2d0683059baead45bea27e2358e9c";
-					sha256 = "0mmb7aw2lcxqlbjkb3ivillisr1gfh3cfcbg6cj80p2a1zm2gi51";
+					rev    = "cc1851c9fdd6d777338bea2272d2a02c8baa0fb1";
+					sha256 = "05659gqaczsschrhbr9q1xbq6bgqai97jpkb2axp3rb2hxv30d1c";
 				};
 				buildInputs = old.buildInputs ++ [ pkgs.tree-sitter ];
 			});
@@ -624,8 +615,8 @@ in
 			gnupg
 			zoom-us
 			darktable
-			# gimp
-			gimp-with-plugins
+			gimp
+			# gimp-with-plugins
 
 			# Multimedia
 			(enableDebugging ffmpeg)
@@ -638,6 +629,7 @@ in
 			# Development tools
 			go
 			jq
+			foot
 			vimHugeX
 			clang-tools
 			gotools

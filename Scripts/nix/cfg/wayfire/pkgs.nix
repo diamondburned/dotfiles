@@ -10,14 +10,37 @@ let waylandOverlays = import (pkgs.fetchFromGitHub {
 	customOverlays = self: super: {
 		wayfire  = super.wayfire.overrideAttrs (old: {
 			src  = super.fetchFromGitHub {
-				owner  = "diamondburned";
+				owner  = "WayfireWM";
 				repo   = "wayfire";
-				rev    = "2af834aa65b68fe9bec3a676da99066dd1bdec70";
-				sha256 = "10agwd131dj2skd9jcgbqqlrbh1g39c7vqlgy27q4g74bwyqyifb";
+				rev    = "v0.7.0";
+				sha256 = "0cnq06fyzvhbf9a8vs6ifhjjkvqgjjh2d39x58chiv84cm3wza6d";
 				fetchSubmodules = true;
 			};
-			buildInputs = old.buildInputs ++ [ pkgs.libuuid ];
-			version = "0.6.0";
+			version = "0.7.0";
+			passthru.providedSessions = [ "wayfire" ];
+			buildInputs = old.buildInputs ++ (with pkgs; [
+				libuuid
+				gdk-pixbuf
+				gnome3.glib
+				gnome3.gtk3
+			]);
+			postInstall = ''
+				mkdir -p "$out/share/wayland-sessions"
+				cp ${./wayfire.desktop} \
+					"$out/share/wayland-sessions/wayfire.desktop"
+			'';
+			# nativeBuildInputs = with pkgs; [ wrapGAppsHook ];
+			# # dontWrapGApps = true;
+			# # postFixup = ''
+			# # 	ls $out/bin
+			# # 	gappsWrapperArgsHook
+			# # 	wrapProgram $out/bin/wayfire "''${gappsWrapperArgs[@]}"
+			# # '';
+		});
+		wlroots = super.wlroots.overrideAttrs (old: {
+			patches = (old.patches or []) ++ [
+				../../patches/wlroots-10bit.patch
+			];
 		});
 		wf-shell = super.wayfire.overrideAttrs (old: {
 			src  = super.fetchFromGitHub {

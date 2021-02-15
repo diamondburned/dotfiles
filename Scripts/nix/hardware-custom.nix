@@ -77,6 +77,11 @@ in {
 	hardware.bluetooth = {
 		enable = true;
 		package = pkgs.bluezFull;
+		config = {
+			General = {
+				Enable = "Source,Sink,Media,Socket";
+			};
+		};
 	};
 
 	# Undervolting.
@@ -110,6 +115,7 @@ in {
 		''
 	];
 
+	security.rtkit.enable = true;
 	boot.kernelParams = [ "mitigations=off" ];
 
 	# # Trivial graphics options.
@@ -119,6 +125,7 @@ in {
 
 	# Enable the Intel driver with a fallback to the current modesetting driver.
 	services.xserver.videoDrivers = [ "intel" "modesetting" ];
+	boot.initrd.kernelModules = [ "i915" ];
 
 	# Enable VSync in the driver.
 	services.xserver.config = ''
