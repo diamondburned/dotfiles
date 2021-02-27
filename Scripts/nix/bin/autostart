@@ -4,4 +4,4 @@
 gnome-terminal &> /dev/null & disown
 
 v4l2-ctl -d /dev/video2 --set-fmt-video "width=640,height=480"
-v4l2-ctl -d /dev/video2 -c "power_line_frequency=0,sharpness=100,saturation=25,contrast=40,brightness=100"
+v4l2-ctl -d /dev/video2 -c "power_line_frequency=0,sharpness=100,saturation=45,contrast=40,brightness=100"

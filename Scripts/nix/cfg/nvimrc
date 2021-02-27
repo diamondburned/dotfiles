@@ -2,14 +2,11 @@ set nocompatible
 
 call plug#begin('~/.vim/bundle')
 
-Plug 'ziglang/zig.vim'
 Plug 'gioele/vim-autoswap'
 Plug 'inkarkat/vim-SyntaxRange'
-Plug 'cespare/vim-toml'
 Plug 'scrooloose/nerdtree'
 Plug 'tpope/vim-commentary'
 Plug 'airblade/vim-gitgutter'
-Plug 'LnL7/vim-nix'
 Plug 'plasticboy/vim-markdown'
 Plug 'godlygeek/tabular'
 Plug 'bogado/file-line'
@@ -21,14 +18,18 @@ Plug 'nvim-treesitter/nvim-treesitter', {'do': ':TSUpdate'}
 "Autocomplete brackets/parens/etc like vscode"
 Plug 'jiangmiao/auto-pairs'
 
-"GoCoverage and such"
-"Plug 'arp242/gopher.vim'
-
 "Icons"
 Plug 'ryanoasis/vim-devicons'
 
 "Autocompletion"
 Plug 'dense-analysis/ale'
+
+"Languages"
+"Plug 'arp242/gopher.vim'
+Plug 'cespare/vim-toml'
+Plug 'LnL7/vim-nix'
+Plug 'evanleck/vim-svelte'
+Plug 'ziglang/zig.vim'
 
 call plug#end()
 
@@ -311,18 +312,23 @@ let g:ale_sign_column_always = 1
 let g:ale_fix_on_save = 1
 let g:ale_linters_explicit = 0
 let g:ale_completion_autoimport = 1
+let g:ale_linter_aliases = {
+			\ 'svelte': ['css', 'javascript'],
+			\ }
 let g:ale_fixers = {
-			\ 'go':   [ "goimports" ],
-			\ 'cpp':  [ "uncrustify", "clang-format" ],
-			\ 'json': [ "jq" ],
+			\ 'go':         [ "goimports" ],
+			\ 'cpp':        [ "uncrustify", "clang-format" ],
+			\ 'json':       [ "jq" ],
+			\ 'svelte':     [ "prettier" ],
 			\ 'javascript': [ "prettier" ],
 			\ }
 let g:ale_completion_enabled = 1
 let g:ale_linters = {
-			\ 'go':  [ "gopls" ],
-			\ 'zig': [ "zls" ],
-			\ 'c':   [ "clangd" ],
-			\ 'cpp': [ "clangd" ],
+			\ 'go':         [ "gopls" ],
+			\ 'zig':        [ "zls" ],
+			\ 'c':          [ "clangd" ],
+			\ 'cpp':        [ "clangd" ],
+			\ 'svelte':     [ "tsserver" ],
 			\ 'javascript': [ "deno", "tsserver" ],
 			\ }
 nnoremap gd :ALEGoToDefinition<CR>

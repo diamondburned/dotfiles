@@ -40,6 +40,13 @@ let home-manager = builtins.fetchGit {
 		sha256 = "0c5im5dzrs5a25x6g2njd4k48qirv48iavwvl5ylyvwkmfhqk9f9";
 	}) {};
 
+	go_1_16Pkgs = import (pkgs.fetchFromGitHub {
+		owner  = "c00w";
+		repo   = "nixpkgs";
+		rev    = "d203aa458c88ef7d913789fa57354ca48dab79ec"; # go_1_16;
+		sha256 = "1026xm0nf1087ypskbra5x9xn07wkaxszzzi2vl05wk3zfm7s7jv";
+	}) {};
+
 in
 
 {
@@ -81,7 +88,10 @@ in
 			aspellDicts = aspellPkgs.aspellDicts;
 
 			# GIMP v2.99
-			gimp = gimpMesonPkgs.gimp;
+			# gimp = gimpMesonPkgs.gimp;
+
+			# Go 1.16
+			go = go_1_16Pkgs.go_1_16;
 
 			# orca hate
 			orca = super.orca.overrideAttrs(old: {
@@ -309,6 +319,7 @@ in
 		inconsolata
 		comic-neue
 		blobmoji
+		tewi-font
 	];
 # Some programs need SUID wrappers, can be configured further or are
 	# started in user sessions.
@@ -615,8 +626,8 @@ in
 			gnupg
 			zoom-us
 			darktable
-			gimp
-			# gimp-with-plugins
+			# gimp
+			gimp-with-plugins
 
 			# Multimedia
 			(enableDebugging ffmpeg)
@@ -642,6 +653,7 @@ in
 			# Web browser(s)
 			# firefox
 			google-chrome-dev
+			srain
 			fractal # lol
 			tdesktop
 

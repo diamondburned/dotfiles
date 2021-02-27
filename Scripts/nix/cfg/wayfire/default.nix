@@ -134,7 +134,9 @@ in {
 					})
 				];
 				"normal".outputs = [
-					(enable "eDP-1" {})
+					(enable "eDP-1" {
+						scale = 1.2;
+					})
 				];
 			};
 		};
