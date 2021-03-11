@@ -641,6 +641,8 @@ in
 			go
 			jq
 			foot
+			graphviz
+			gnuplot
 			vimHugeX
 			clang-tools
 			gotools
@@ -660,6 +662,7 @@ in
 			# Office
 			evince
 			typora
+			marker
 
 			# Applications
 			gcolor3

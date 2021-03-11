@@ -9,13 +9,21 @@ let waylandOverlays = import (pkgs.fetchFromGitHub {
 
 	customOverlays = self: super: {
 		wayfire  = super.wayfire.overrideAttrs (old: {
-			src  = super.fetchFromGitHub {
-				owner  = "WayfireWM";
+			# src  = super.fetchFromGitHub {
+			# 	owner  = "WayfireWM";
+			# 	repo   = "wayfire";
+			# 	rev    = "v0.7.0";
+			# 	sha256 = "0cnq06fyzvhbf9a8vs6ifhjjkvqgjjh2d39x58chiv84cm3wza6d";
+			# 	fetchSubmodules = true;
+			# };
+			src = super.fetchFromGitHub {
+				owner  = "diamondburned";
 				repo   = "wayfire";
-				rev    = "v0.7.0";
-				sha256 = "0cnq06fyzvhbf9a8vs6ifhjjkvqgjjh2d39x58chiv84cm3wza6d";
+				rev    = "135b07c0eb16f0cf85a65f2981c2257fedd34ce3";
+				sha256 = "1pm4sjidzs3kqbqn87176sn4ab5x1f0gvig90xmrvcb555vifc7g";
 				fetchSubmodules = true;
 			};
+
 			version = "0.7.0";
 			passthru.providedSessions = [ "wayfire" ];
 			buildInputs = old.buildInputs ++ (with pkgs; [
