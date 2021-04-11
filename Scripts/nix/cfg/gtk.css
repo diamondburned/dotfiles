@@ -3,6 +3,7 @@ vte-terminal {
 }
 
 terminal-window,
+terminal-window stack,
 terminal-window vte-terminal {
 	background-color: transparent;
 }

@@ -63,7 +63,7 @@ shopt -s histappend
 grepr() {
 	# -n show line number
 	# -R grep recursively
-	grep "$@" -nR '.'
+	grep "$@" --color -nR '.'
 }
 
 # always show line number

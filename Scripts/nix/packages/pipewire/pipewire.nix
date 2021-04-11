@@ -9,6 +9,11 @@ let
 		sha256 = "1r3yj1l0bqdyigzv15ajjyv20gj8fxgdrnnqg08888hg6cyp70nr";
 	};
 
+	jack-libs = pkgs.runCommand "jack-libs" {} ''
+		mkdir -p "$out/lib"
+		ln -s "${pkgs.pipewire.jack}/lib" "$out/lib/pipewire"
+	'';
+
 in
 {
 	nixpkgs.overlays = [(self: super: {
@@ -36,7 +41,7 @@ in
 			});
 	})];
 
-	environment.systemPackages = with pkgs; [ pipewire pulseaudio pavucontrol alsaUtils ];
+	environment.systemPackages = with pkgs; [ pipewire pulseaudio pavucontrol alsaUtils jack-libs ];
 	systemd.packages = with pkgs; [ pipewire pipewire.pulse ];
 	services.udev.packages = with pkgs; [ pipewire ];
 	systemd.user.sockets.pipewire.wantedBy = [ "sockets.target" ];

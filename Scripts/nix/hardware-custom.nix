@@ -5,9 +5,11 @@
 
 let utils = import ./utils.nix { inherit lib; };
 
+	unstable = import <nixos-unstable> {};
+
 	musnix = builtins.fetchGit {
 		url = "https://github.com/musnix/musnix.git";
-		rev = "6c3f31772c639f50f893c25fb4ee75bb0cd92c98";
+		rev = "f5053e85b0a578a335a78fa45517a8843154f46b";
 	};
 
 	blurcam = builtins.fetchGit {
@@ -45,27 +47,34 @@ in {
 		];
 	};
 
-	# # Add the camera loopback drivers.
-	# boot.extraModulePackages = with config.boot.kernelPackages; [
-	# 	v4l2loopback
-	# ];
-
 	boot.extraModulePackages = with config.boot.kernelPackages; [
-		rtl88x2bu
+		# Add the camera loopback drivers.
+		v4l2loopback
+
+		# Driver for the TP-Link Archer T3U.
+		(rtl88x2bu.overrideAttrs (old: {
+			src = pkgs.fetchFromGitHub {
+				owner  = "RinCat";
+				repo   = "RTL88x2BU-Linux-Driver";
+				rev    = "657b7cfde9958e273febdeaeac579902e407f577";
+				sha256 = "15gkgwp2ghg1wdp8n04a047kd8kp73y566fdc254dgxbk3ggz4xa";
+			};
+			patches = [];
+		}))
 	];
 
-	# Enable the Thunderbolt 3 daemon.
-	services.hardware.bolt.enable = true;
+	# Refer to unstable.nix.
+	# boot.kernelPackages = pkgs.linuxPackages_5_10;
 
 	# Kernel tweaks and such for real-time audio.
 	musnix = {
 		enable = true;
 		soundcardPciId = "00:1f.3";
-		kernel = {
-			optimize = true;
-			realtime = true;
-			packages = pkgs.linuxPackages_5_6_rt;
-		};
+		# kernel = {
+		# 	optimize = true;
+		# 	realtime = true;
+		# 	packages = pkgs.linuxPackages_5_9_rt; # TODO: update.
+		# };
 		rtirq.enable = true;
 		das_watchdog.enable = true;
 	};
@@ -77,6 +86,7 @@ in {
 	hardware.bluetooth = {
 		enable = true;
 		package = pkgs.bluezFull;
+		# settings = {
 		config = {
 			General = {
 				Enable = "Source,Sink,Media,Socket";
@@ -98,7 +108,7 @@ in {
 	};
 
 	# Tablet drivers.
-	hardware.opentabletdriver.enable = true;
+	# hardware.opentabletdriver.enable = true;
 
 	# Mouse settings.
 	services.xserver.inputClassSections = [
@@ -115,8 +125,10 @@ in {
 		''
 	];
 
-	security.rtkit.enable = true;
 	boot.kernelParams = [ "mitigations=off" ];
+
+	# Requires the real-time kernel patches in Musnix.
+	security.rtkit.enable = true;
 
 	# # Trivial graphics options.
 	# boot.extraModprobeConfig = ''
@@ -142,4 +154,57 @@ in {
 	powerManagement.powertop.enable = false;
 
 	nix.maxJobs = lib.mkForce 4;
+
+	# Tweaks to give users more control over resource priorities to allow
+	# smoother audio processing and such in lower latency.
+	security.pam.loginLimits = [
+		{
+			domain = "@users";
+			item = "memlock";
+			type = "soft";
+			value = "1048576";
+		}
+		{
+			domain = "@users";
+			item = "memlock";
+			type = "hard";
+			value = "unlimited";
+		}
+		{
+			domain = "@users";
+			item = "rtprio";
+			type = "hard";
+			value = "49";
+		}
+		{
+			domain = "@users";
+			item = "rtprio";
+			type = "soft";
+			value = "46";
+		}
+		{
+			domain = "@users";
+			item = "priority";
+			type = "hard";
+			value = "-2";
+		}
+		{
+			domain = "@users";
+			item = "nice";
+			type = "soft";
+			value = "-19";
+		}
+		{
+			domain = "@users";
+			item = "nice";
+			type = "hard";
+			value = "-20";
+		}
+		{
+			domain = "@messagebus";
+			item = "priority";
+			type = "soft";
+			value = "-10";
+		}
+	];
 }

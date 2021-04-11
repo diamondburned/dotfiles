@@ -5,9 +5,8 @@
 { config, pkgs, lib, ... }:
 
 let home-manager = builtins.fetchGit {
-		url = "https://github.com/rycee/home-manager.git";
-		rev = "cb136f37c7c760cbc39bc334702e4d814b8920b1";
-		ref = "master";
+		url = "https://github.com/nix-community/home-manager.git";
+		ref = "release-20.09";
 	};
 
 	lsoc-overlay = builtins.fetchGit {
@@ -53,9 +52,9 @@ in
 	imports = [
 		"${diamond}"
 		"${home-manager}/nixos"
-		./packages/pipewire/pipewire.nix
 		./hardware-configuration.nix
 		./hardware-custom.nix
+		./unstable.nix
 		./cfg/wayfire
 	];
 
@@ -81,72 +80,33 @@ in
 	in [
 		(tdeo)
 		(self: super: {
-			vte = vte super;
+			# This might be causing painful rebuilds.
+			# vte = vte super;
 
-			aspell      = aspellPkgs.aspell;
-			gspell      = aspellPkgs.gspell;
-			aspellDicts = aspellPkgs.aspellDicts;
+			# aspell      = aspellPkgs.aspell;
+			# gspell      = aspellPkgs.gspell;
+			# aspellDicts = aspellPkgs.aspellDicts;
 
 			# GIMP v2.99
 			# gimp = gimpMesonPkgs.gimp;
 
-			# Go 1.16
-			go = go_1_16Pkgs.go_1_16;
+			# # orca hate
+			# orca = super.orca.overrideAttrs(old: {
+			# 	postInstall = (old.postInstall or "") + ''
+			# 		:> $out/etc/xdg/autostart/orca-autostart.desktop
+			# 	'';
+			# });
 
-			# orca hate
-			orca = super.orca.overrideAttrs(old: {
-				postInstall = (old.postInstall or "") + ''
-					:> $out/etc/xdg/autostart/orca-autostart.desktop
-				'';
-			});
-
-			gnome3 = super.gnome3.overrideScope' (self: supergnome3: {
-				gnome-terminal = supergnome3.gnome-terminal.override {
-					vte = vte super;
-				};
-			});
-			mpv-unwrapped = super.mpv-unwrapped.overrideAttrs (old: {
-				version = "0.33.1-0";
-				patches = [];
-				src = super.fetchFromGitHub {
-					owner  = "mpv-player";
-					repo   = "mpv";
-					rev    = "93066ff12f06d47e7a1a79e69a4cda95631a1553";
-					sha256 = "0cw9qh41lynfx25pxpd13r8kyqj1zh86n0sxyqz3f39fpljr9w4r";
-				};
-			});
-			steam = super.steam.override {
-				extraLibraries = pkgs: with pkgs; [ SDL2 ];
-				extraPkgs      = pkgs: with pkgs; [ gamescope ];
-			};
-			gamescope = super.stdenv.mkDerivation rec {
-				pname = "gamescope";
-				version = "3.7.1";
-		
-				src = super.fetchgit {
-					url = "https://github.com/Plagman/gamescope.git";
-					rev = "c9d0b5db4c21f4a783b6fbe7da1bc97c11694b02";
-					sha256 = "0l3rrjq743zm5bi8b942rr41gccg8nvc7m47xj3db7slsj2zp99h";
-					fetchSubmodules = true;
-				};
-		
-				nativeBuildInputs = with super; [
-					pkgconfig meson ninja vulkan-headers cmake pixman wayland-protocols
-				];
-		
-				buildInputs = with super; [
-					wayland xwayland libdrm libinput libxkbcommon libcap libpng glslang
-					vulkan-loader SDL2 wlroots
-				] ++ (with super.xorg; [
-					libXcomposite
-					libxcb
-					libXrender
-					libXtst
-					libXdamage
-					libXi
-					libXxf86vm
-				]);
-			};
+			# mpv-unwrapped = super.mpv-unwrapped.overrideAttrs (old: {
+			# 	version = "0.33.1-0";
+			# 	patches = [];
+			# 	src = super.fetchFromGitHub {
+			# 		owner  = "mpv-player";
+			# 		repo   = "mpv";
+			# 		rev    = "93066ff12f06d47e7a1a79e69a4cda95631a1553";
+			# 		sha256 = "0cw9qh41lynfx25pxpd13r8kyqj1zh86n0sxyqz3f39fpljr9w4r";
+			# 	};
+			# });
 			morph = super.morph.overrideAttrs(_: {
 				version = "1.4.0";
 				src = builtins.fetchGit {
@@ -155,30 +115,24 @@ in
 					rev = "a3ef469edf1613b8ab51de87e043c3c57d12a4a9";
 				};
 			});
-			# Omitted because it's too much to compile.
-			osu-wine = super.osu-wine.override {
-				wine = aspellPkgs.wineStaging.overrideDerivation(old: {
-					NIX_CFLAGS_COMPILE = (old.NIX_CFLAGS_COMPILE or "") + " -DNDEBUG -Ofast -mfpmath=sse -mtune=intel -march=skylake";
-					postPatch = (old.postPatch or "") + ''
-						patch -Np1 < ${./patches/wine-4.2-alsa-lower-latency.patch}
-						patch -Np1 < ${./patches/wine-4.2-pulseaudio-lower-latency.patch}
-					'';
-				});
+			steam = super.steam.override {
+				extraLibraries = pkgs: with pkgs; [ SDL2 ];
 			};
-			xwayland = super.xwayland.overrideAttrs (old: {
-				preConfigure = (old.preConfigure or "") + ''
-					patch -p1 < ${./patches/xwayland-fps.patch}
-				'';
-			});
-			pulseeffects = super.pulseeffects.overrideAttrs (old: {
-				src = super.fetchFromGitHub {
-					owner  = "wwmm";
-					repo   = "pulseeffects";
-					rev    = "b24b511df49a3a42b006131e7d6080b742341deb";
-					sha256 = "0fp0z8d2hmz65f90qqyvvb801yv3dhbg3yji5mm4c025q47av639";
-				};
-				buildInputs = old.buildInputs ++ (with pkgs; [ pipewire ]);
-			});
+			# Omitted because it's too much to compile.
+			# osu-wine = super.osu-wine.override {
+			# 	wine = aspellPkgs.wineStaging.overrideDerivation(old: {
+			# 		NIX_CFLAGS_COMPILE = (old.NIX_CFLAGS_COMPILE or "") + " -DNDEBUG -Ofast -mfpmath=sse -mtune=intel -march=skylake";
+			# 		postPatch = (old.postPatch or "") + ''
+			# 			patch -Np1 < ${./patches/wine-4.2-alsa-lower-latency.patch}
+			# 			patch -Np1 < ${./patches/wine-4.2-pulseaudio-lower-latency.patch}
+			# 		'';
+			# 	});
+			# };
+			# xwayland = super.xwayland.overrideAttrs (old: {
+			# 	preConfigure = (old.preConfigure or "") + ''
+			# 		patch -p1 < ${./patches/xwayland-fps.patch}
+			# 	'';
+			# });
 		})
 	];
 
@@ -191,7 +145,7 @@ in
 		buildMachines = [{
 			hostName = "hanaharu";
 			systems = [ "x86_64-linux" "i686-linux" ];
-			maxJobs = 8; # thread-1
+			maxJobs = 2; # max 8
 			speedFactor = 10;
 			supportedFeatures = [ "nixos-test" "benchmark" "big-parallel" "kvm" ];
 		}];
@@ -280,7 +234,8 @@ in
 	i18n = {
 		inputMethod = {
 			enabled	= "fcitx";
-			fcitx.engines = with pkgs.fcitx-engines; [ mozc unikey ];
+			# TODO re-enable fcitx5
+			# fcitx.engines = with pkgs.fcitx-engines; [ mozc unikey ];
 		};
 
 		defaultLocale = "en_US.UTF-8";
@@ -313,6 +268,9 @@ in
 		noto-fonts
 		noto-fonts-cjk
 		noto-fonts-emoji
+		source-code-pro
+		source-sans-pro
+		source-serif-pro
 		fira-code
 		nerdfonts
 		material-design-icons
@@ -321,7 +279,7 @@ in
 		blobmoji
 		tewi-font
 	];
-# Some programs need SUID wrappers, can be configured further or are
+	# Some programs need SUID wrappers, can be configured further or are
 	# started in user sessions.
 	programs.mtr.enable = true;
 	programs.gnupg.agent = { enable = true; enableSSHSupport = true; };
@@ -335,11 +293,10 @@ in
 	services.printing = {
 		enable = true;
 		drivers = with pkgs; [
-			gutenprint
-			hplip
-			cups-filters
-			cups-bjnp
-			cups-googlecloudprint
+			# gutenprint
+			# hplip
+			# cups-filters
+			# cups-bjnp
 
 			# Canon
 			cnijfilter2
@@ -350,8 +307,14 @@ in
 	# Enable sound.
 	sound.enable = true;
 	# Refer to import ./packages/pipewire/
-	services.pipewire.enable   = lib.mkForce false;
 	hardware.pulseaudio.enable = lib.mkForce false;
+	services.pipewire = {
+		enable = true;
+		alsa.enable = true;
+		alsa.support32Bit = true;
+		jack.enable = true;
+		pulse.enable = true;
+	};
 
 	# Enable the X11 windowing system.
 	services.xserver.layout = "us";
@@ -375,7 +338,7 @@ in
 	# Enable touchpad support.
 	services.xserver.libinput.enable = true;
 
-	# Enable the GNOME desktop environment
+	# Disable the GNOME desktop environment
 	services.xserver.desktopManager.gnome3.enable = true;
 
 	# More GNOME things
@@ -384,13 +347,14 @@ in
 		gnome-keyring.enable = true;
 
 		# Online stuff
+		gnome-user-share.enable = true;
 		gnome-online-accounts.enable = true;
 		gnome-online-miners.enable = true;
-		gnome-user-share.enable = true;
 		chrome-gnome-shell.enable = true;
 
 		# Disable garbage
 		tracker.enable = false;
+		tracker-miners.enable = false;
 		gnome-initial-setup.enable = false;
 	};
 
@@ -437,12 +401,16 @@ in
 	# 	qemuRunAsRoot = false;
 	# };
 
-	services.ratbagd.enable = true;
-
 	# Define a user account. Don't forget to set a password with ‘passwd’.
 	users.users.diamond = {
 		isNormalUser = true;
 		extraGroups = [ "wheel" "networkmanager" "docker" "audio" "libvirtd" ];
+	};
+
+	qt5 = {
+		enable = true;
+		style = "adwaita-dark";
+		platformTheme = "gnome";
 	};
 
 	home-manager.users.diamond = {
@@ -461,20 +429,6 @@ in
 		programs.direnv = {
 			enable = true;
 			enableNixDirenvIntegration = true;
-		};
-
-		services.lsoc-overlay = {
-			enable = true;
-			config = {
-				red_blink_ms = 1000;
-				polling_ms   = 1200;
-				num_scanners = 1;
-				window = {
-					x = 5;
-					y = 5;
-					passthrough = true;
-				};
-			};
 		};
 
 		programs.git = {
@@ -518,13 +472,6 @@ in
 			# };
 		};
 
-		programs.rhythmbox = {
-			enable = true;
-			plugins = with pkgs; [
-				rhythmbox-alternative-toolbar
-			];
-		};
-
 		programs.mpv = {
 			enable = true;
 			config = {
@@ -537,6 +484,14 @@ in
 				fbo-format = "rgba32f";
 				scale = "lanczos";
 			};
+		};
+
+		programs.obs-studio = {
+			enable  = true;
+			plugins = with pkgs; [
+				obs-wlrobs
+				# obs-v4l2sink
+			];
 		};
 
 		gtk = {
@@ -561,12 +516,7 @@ in
 			};
 		};
 
-		qt = {
-			enable = true;
-			platformTheme = "gnome";
-		};
-
-		systemd.user.sessionVariables = {
+		home.sessionVariables = {
 			NIX_AUTO_RUN = "1";
 			GOPATH = "/home/diamond/.go";
 			GOBIN  = "/home/diamond/.go/bin";
@@ -589,31 +539,9 @@ in
 		   	STAGING_PA_LATENCY_USEC = "128";
 		};
 
-		home.packages = ([(
-			# Custom overrides.
-			# Neovim with yarn.
-			let neovim-nightly = pkgs.neovim-unwrapped.overrideAttrs(old: {
-				version = "v0.5.0-dev+1062-gcc1851c9f";
-				src = pkgs.fetchFromGitHub {
-					owner  = "neovim";
-					repo   = "neovim";
-					rev    = "cc1851c9fdd6d777338bea2272d2a02c8baa0fb1";
-					sha256 = "05659gqaczsschrhbr9q1xbq6bgqai97jpkb2axp3rb2hxv30d1c";
-				};
-				buildInputs = old.buildInputs ++ [ pkgs.tree-sitter ];
-			});
-		
-			in pkgs.wrapNeovim neovim-nightly {
-				viAlias     = false; # in case
-				vimAlias    = true;
-				withPython  = true;
-				withPython3 = true;
-				withNodeJs  = true;
-				extraMakeWrapperArgs = "--suffix PATH : ${lib.makeBinPath (
-					with pkgs; [ yarn ]
-				)}";
-			}
-		)]) ++ (with pkgs.aspellDicts; [
+		home.packages = ([
+
+		]) ++ (with pkgs.aspellDicts; [
 			en
 			en-science
 			en-computers
@@ -624,69 +552,62 @@ in
 			gnome3.polari
 			keepassx-community
 			gnupg
-			zoom-us
 			darktable
-			# gimp
 			gimp-with-plugins
-
-			# Multimedia
-			(enableDebugging ffmpeg)
-			v4l_utils
-			audacious-3-5
-			pavucontrol
-			pulseaudio
-			pulseeffects
 
 			# Development tools
 			go
-			jq
+			gotools
+			neovim
 			foot
+			jq
 			graphviz
 			gnuplot
 			vimHugeX
 			clang-tools
-			gotools
-			nodePackages.eslint
-			nodePackages.prettier
 			xclip
 			virt-manager
 			xorg.xauth
 
-			# Web browser(s)
-			# firefox
+			# Multimedia
+			ffmpeg
+			v4l_utils
+			pavucontrol
+			pulseaudio
+			pulseeffects-pw
+
+			# Browsers
 			google-chrome-dev
-			srain
-			fractal # lol
-			tdesktop
+
+			# Chat/Social
+			zoom-us
+			# tdesktop
+			# fractal # lol
 
 			# Office
+			libreoffice # takes a while to build
 			evince
-			typora
-			marker
 
 			# Applications
 			gcolor3
-			simplescreenrecorder
 
 			# Themes
 			materia-theme
 			material-design-icons
 
 			# Games
-			opentabletdriver
-			osu-wine
 			steam
-			lutris
 
 			# GNOME things
 			gnome-mpv
+			gnome3.eog
 			gnome3.vinagre
-			gnome3.gnome-tweaks
 			gnome3.glib-networking
 			gnome3.file-roller
 			gnome3.nautilus
 			gnome3.gnome-disk-utility
 			gnome3.gtk.dev
+			gnome3.gnome-tweaks
 		]);
 
 		programs.alacritty = {

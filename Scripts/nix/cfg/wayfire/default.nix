@@ -1,25 +1,6 @@
 { config, lib, pkgs, ... }: 
 
-let waylandPkgs  = import ./pkgs.nix { inherit lib pkgs; };
-	utils   = import ../../utils.nix { inherit lib pkgs; };
-
-	# autostart = utils.writeBashScript "autostart.sh" ''
-	# 	# Essentials
-	# 	dbus-update-activation-environment --all --systemd
-	# 	dex -a &
-	# 	# ${pkgs.xdg-desktop-portal-wlr}/libexec/xdg-desktop-portal-wlr &
-
-	# 	# Userspace Utilities
-	# 	wf-panel &
-	# 	wf-background &
-	# 	wlsunset -l 33.8 -L -117.9 &
-	# 	mako &
-
-	# '' (
-	# 	with waylandPkgs; [
-
-	# 	]
-	# );
+let utils = import ../../utils.nix { inherit lib pkgs; };
 
 	scrot = utils.writeBashScript "scrot.sh" ''
 		export WAYLAND_DISPLAY=wayland-1
@@ -38,17 +19,18 @@ let waylandPkgs  = import ./pkgs.nix { inherit lib pkgs; };
 	);
 
 in {
-	# I hate GDM; it doesn't work. Use a dummy display manager.
-	services.xserver.displayManager = {
-		gdm = {
-			enable  = true;
-			wayland = true;
-		};
-		defaultSession  = "wayfire";
-		sessionPackages = with waylandPkgs; [
-			wayfire
-		];
-	};
+	# services.xserver.displayManager = {
+	# 	gdm = {
+	# 		enable  = true;
+	# 		wayland = true;
+	# 	};
+	# 	defaultSession  = "wayfire";
+	# 	sessionPackages = with pkgs; [ wayfire ];
+	# };
+
+	# I hate GDM; it drags in dumb build dependencies. Use a dummy display
+	# manager.
+	services.xserver.displayManager.startx.enable = true;
 
 	nix.binaryCachePublicKeys = [
 		"nixpkgs-wayland.cachix.org-1:3lwxaILxMRkVhehr5StQprHdEo4IrE8sRho9R9HOLYA="
@@ -59,14 +41,17 @@ in {
 
 	xdg.portal.extraPortals = with pkgs; [
 		xdg-desktop-portal-wlr
-		xdg-desktop-portal-gtk
 	];
 	xdg.portal.gtkUsePortal = true;
 
 	nixpkgs.overlays = [ (import ./overlay.nix) ];
 
-	environment.systemPackages = with waylandPkgs; [
+	# Extracted from Unstable's programs.xwayland.
+	environment.pathsToLink = [ "/share/X11" ];
+
+	environment.systemPackages = with pkgs; [
 		wayfire
+		xwayland
 		polkit_gnome
 	];
 
@@ -78,32 +63,30 @@ in {
 			playerctl
 			wl-clipboard
 			wf-shell
+			kanshi
 			dex
 			dbus
 			mako
 			wlsunset
-
-		] ++ (with waylandPkgs; [
 			wlogout
-		]);
+		];
 
-		# programs.bash.profileExtra = ''
-		# 	[[ ! $WAYLAND_DISPLAY && $- = *i* && $(tty) = /dev/tty1 ]] && {
-		# 		# Add binutils for addr2line.
-		# 		PATH="${pkgs.binutils}/bin:$PATH"
+		programs.bash.profileExtra = ''
+			[[ ! $WAYLAND_DISPLAY && $- = *i* && $(tty) = /dev/tty1 ]] && {
+				# Add binutils for addr2line.
+				PATH="${pkgs.binutils}/bin:$PATH"
 	
-		# 		if [[ "$DBUS_SESSION_BUS_ADDRESS" ]]; then
-		# 			exec wayfire &> /tmp/wayfire.log
-		# 		else
-		# 			exec dbus-launch --exit-with-session wayfire &> /tmp/wayfire.log
-		# 		fi
-		# 	}
+				if [[ "$DBUS_SESSION_BUS_ADDRESS" ]]; then
+					exec wayfire &> /tmp/wayfire.log
+				else
+					exec dbus-launch --exit-with-session wayfire &> /tmp/wayfire.log
+				fi
+			}
 
-		# 	[[ $WAYLAND_DISPLAY && $(ps aux) != *"wf-panel"* ]] && {
-		# 		nautilus --gapplication-service &> /dev/null & disown
-		# 		# wf-panel &> /tmp/autostart-wf-panel.log      & disown
-		# 	}
-		# '';
+			[[ $WAYLAND_DISPLAY && $(ps aux) != *"nautilus"* ]] && {
+				nautilus --gapplication-service &> /dev/null & disown
+			}
+		'';
 
 		xdg.configFile = {
 			"wayfire.ini" = {
@@ -151,12 +134,11 @@ in {
 			defaultTimeout = 10000;
 			iconPath = "${pkgs.papirus-icon-theme}/share/icons/Papirus-Dark";
 			groupBy  = "app-name";
-			extraConfig = 
-				"[grouped]\n" +
-				"format=\"${f}\"";
+			# extraConfig = 
+			# 	"[grouped]\n" +
+			# 	"format=\"${f}\"";
 		};
 	};
 
 	services.xserver.enable  = true;
-	programs.xwayland.enable = true;
 }

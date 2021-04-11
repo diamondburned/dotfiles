@@ -317,10 +317,11 @@ let g:ale_linter_aliases = {
 			\ }
 let g:ale_fixers = {
 			\ 'go':         [ "goimports" ],
+			\ 'css':        [ "prettier" ],
 			\ 'cpp':        [ "uncrustify", "clang-format" ],
 			\ 'json':       [ "jq" ],
-			\ 'svelte':     [ "prettier" ],
-			\ 'javascript': [ "prettier" ],
+			\ 'svelte':     [ "prettier", "prettier_standard", "eslint" ],
+			\ 'javascript': [ "prettier", "prettier_standard", "eslint" ],
 			\ }
 let g:ale_completion_enabled = 1
 let g:ale_linters = {
@@ -328,7 +329,7 @@ let g:ale_linters = {
 			\ 'zig':        [ "zls" ],
 			\ 'c':          [ "clangd" ],
 			\ 'cpp':        [ "clangd" ],
-			\ 'svelte':     [ "tsserver" ],
+			\ 'svelte':     [ "tsserver", "eslint" ],
 			\ 'javascript': [ "deno", "tsserver" ],
 			\ }
 nnoremap gd :ALEGoToDefinition<CR>
