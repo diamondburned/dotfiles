@@ -511,7 +511,17 @@ _shell_calc() {
 
 # Because I'm careless.
 rm() {
-	[[ $- == *i* ]] && gio trash "$@" || command rm "$@"
+	[[ $1 == "-"* ]] && {
+		echo "Stop using flags!"
+		return
+	}
+
+	gio trash "$@" 2> /dev/null && return
+
+	read -p "gio failed, remove without trash? (y/N) " answ
+	[[ $answ != "y" ]] && return
+
+	command rm -rf "$@"
 }
 
 # Direnv.

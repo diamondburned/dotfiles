@@ -6,7 +6,7 @@ let utils = import ../../utils.nix { inherit lib pkgs; };
 		export WAYLAND_DISPLAY=wayland-1
 
 		slurp() {
-			command slurp -w 1 -b '#00000000' -c '#FFFFFFFF' -s '#00000000'
+			command slurp -w 0 -b '#00000088' -s '#00000000'
 		}
 
 		[[ $1 == -a ]] && \

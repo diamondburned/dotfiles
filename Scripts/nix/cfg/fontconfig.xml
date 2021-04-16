@@ -100,7 +100,6 @@
 		<test name="family">
 			<string>cursive</string>
 		</test>
-		<edit mode="delete_all" name="lang"/>
 		<edit mode="prepend" name="family">
 			<string>Comic Neue</string>
 		</edit>
