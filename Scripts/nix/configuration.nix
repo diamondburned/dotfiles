@@ -516,7 +516,10 @@ in
 			};
 		};
 
-		home.sessionVariables = {
+		# Home is for no DM, PAM is for gdm.
+		# home.sessionVariables = {
+
+		pam.sessionVariables = {
 			NIX_AUTO_RUN = "1";
 			GOPATH = "/home/diamond/.go";
 			GOBIN  = "/home/diamond/.go/bin";
@@ -597,6 +600,7 @@ in
 
 			# Games
 			steam
+			osu-wine
 
 			# GNOME things
 			gnome-mpv

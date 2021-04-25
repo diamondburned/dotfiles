@@ -1,3 +1,10 @@
+/* Variables */
+:root {
+	--tab-min-height: 32px !important;
+	--tab-min-width:  60px !important;
+	/* --toolbarbutton-icon-fill-attention: red !important; */
+}
+
 /* Fix for the weird white line on Wayland(?) */
 body > box {
 	margin-bottom: -1px !important;
@@ -13,64 +20,102 @@ body > box {
 #tabbrowser-tabpanels,
 browser[type=content-primary],
 browser[type=content] > html {
-    background: #2C2C2C !important;
+	background: #2C2C2C !important;
+}
+
+/* Tab height - restore compact */
+#tabbrowser-tabs {
+	height: 38px;
 }
 
 /* Gradient-compatible colors */
 tabs#tabbrowser-tabs tab:not([selected]),
-tabs#tabbrowser-tabs toolbarbutton       .toolbarbutton-icon,
+tabs#tabbrowser-tabs toolbarbutton	   .toolbarbutton-icon,
 tabs#tabbrowser-tabs toolbarbutton:hover .toolbarbutton-icon {
 	color: black !important;
 }
 
 /* Remove the waste of space */
-toolbar#TabsToolbar > .titlebar-spacer {
+#TabsToolbar > .titlebar-spacer {
 	display: none !important;
 }
 /* Waste our own space, but smaller */
-toolbar#TabsToolbar > .toolbar-items {
-	margin: 0 1em !important;
+#TabsToolbar > .toolbar-items {
+	margin:  0 0.5em !important;
+	display: flex; /* Need this for child to fill height, unsure why. */
+	flex-direction: row;
 }
-/* Chrome mode */
-toolbar#TabsToolbar tab.tabbrowser-tab {
-	border-radius: 6px 6px 0 0 !important;
-	overflow: hidden !important;
+
+/* Slight padding. */
+#TabsToolbar tab.tabbrowser-tab .tab-stack {
+	margin: 0 var(--toolbarbutton-outer-padding) !important
 }
 /* Hide the border on top of the tabs */
-toolbar#TabsToolbar tab.tabbrowser-tab .tab-line {
+#TabsToolbar tab.tabbrowser-tab .tab-line {
 	display: none !important;
 }
 
+/* Fix a slight padding offset on tab hover. */
+#TabsToolbar tab.tabbrowser-tab .tab-close-button {
+	width:  16px !important;
+	height: 16px !important;
+	padding: 3px !important;
+	margin-left: 0px !important;
+}
+
 /* Slight tweak: lighten the tab separator */
-toolbar#TabsToolbar .tabbrowser-tab::after, .tabbrowser-tab::before {
+#TabsToolbar .tabbrowser-tab::after, .tabbrowser-tab::before {
 	opacity: 0.2 !important;
 }
 
-/* Pack tightly the address bar buttons */
-toolbar#nav-bar toolbarbutton:not(:first-child):not(:last-child) {
-	padding: 2px !important;
-}
-toolbarbutton:hover > stack {
-	border-radius: 6px !important;
-	background-color: rgba(255, 255 ,255, 0.15) !important;
+/* SHADOWS!!! */
+#TabsToolbar .tabbrowser-tab[visuallyselected="true"] .tab-background {
+	box-shadow: 0px 0px 4px 0px rgba(0, 0, 0, 0.75) !important;
 }
 
 /* Add a bit of padding */
 #urlbar-container {
-	margin:  0px !important;
-	padding: 1px !important; /* magic number */
+	margin:  0px var(--toolbarbutton-outer-padding) !important;
+	padding: 1px var(--toolbarbutton-outer-padding) !important;
 }
 /* Hide the Pocket button */
 #urlbar-input-container #pocket-button {
 	display: none;
 }
+/* Default buttons to not have border radiuses. */
+#urlbar-input-container box[role="button"] {
+	border-radius: 0 !important;
+}
 /* Left-most button in the address bar */
 #urlbar-input-container #tracking-protection-icon-container {
-	border-radius: 999px 0 0 999px;
+	border-radius: 999px 0 0 999px !important;
 }
 /* Right-most */
 #urlbar-input-container #star-button-box {
-	border-radius: 0 999px 999px 0;
+	border-radius: 0 999px 999px 0 !important;
+}
+
+/* Bigger avatar so we can admire it more. */
+#fxa-avatar-image {
+	width:  20px !important;
+	height: 20px !important;
+}
+/* Reduce padding to account for the above change. */
+#fxa-toolbar-menu-button > stack {
+	--toolbarbutton-inner-padding: 6px !important;
+}
+
+/* Hide tab left/right buttons since I never use them. */
+#scrollbutton-up,
+#scrollbutton-down {
+	display: none;
+}
+
+/* Hide the New Tab button. */
+#alltabs-button,
+#new-tab-button,
+#tabs-newtab-button {
+	display: none !important;
 }
 
 .webextension-browser-action {
@@ -79,4 +124,92 @@ toolbarbutton:hover > stack {
 }
 .webextension-browser-action:hover {
 	opacity: 1 !important;
+}
+
+/* Popup tweaks. */
+.notification-message {
+	padding-block: 0px !important;
+}
+.container.infobar {
+	align-items: center !important;
+}
+
+/* Bruh.
+ * This is too much to comment individually, but it is the unholy code to style
+ * the tab and address bar to be on the same line. It may break with the
+ * bookmark bar.
+ *
+ * It also forces the headerbar's height to be the same as the compact Materia
+ * theme, because that's what I use.
+ */
+
+#navigator-toolbox {
+	height:  41px !important; /* No idea why. */
+	display: flex;
+	flex-direction: row-reverse;
+
+	border-radius: 4px 4px 0 0;
+	background: linear-gradient(
+		to right,
+		rgba(85,  205, 252, 1) 0%,
+		rgba(147, 194, 255, 1) 25%,
+		rgba(200, 181, 245, 1) 50%,
+		rgba(234, 171, 217, 1) 75%,
+		rgba(247, 168, 184, 1) 100%
+	);
+}
+#tab-notification-deck *,
+#BrowserToolbarPalette * {
+	background-color: transparent;
+}
+#titlebar {
+	flex: 1;
+	appearance: none !important;
+	border-left: 1px solid #0005;
+}
+#TabsToolbar {
+	color: black !important;
+}
+#TabsToolbar-customization-target {
+	flex: 1;
+}
+#nav-bar {
+	color: black !important;
+	background: transparent !important;
+
+	transition: all 300ms cubic-bezier(.45,.05,.55,.95);
+	transition-delay: 0.5s;
+
+	max-width:  400px;
+	box-shadow: inset -20px 0px 20px -20px rgba(0,0,0,0.35) !important;
+}
+#nav-bar:hover,
+#nav-bar[urlbar-exceeds-toolbar-bounds="true"] {
+	max-width:  100%;
+	box-shadow: none;
+	transition-delay: 0s;
+}
+#urlbar {
+	top: 4px !important; /* Magic constant. */
+}
+spacer[part^="overflow-"] {
+	width: 10px !important;
+
+	background-image: linear-gradient(to right,
+		rgba(0, 0, 0, 0.35) 0%,
+		rgba(0, 0, 0, 0.15) 15%,
+		rgba(0, 0, 0, 0.00) 100%
+	);
+}
+spacer[part="overflow-start-indicator"] {
+	margin-inline: -0.5px -9.25px !important;
+}
+spacer[part="overflow-end-indicator"] {
+	margin-inline: -8.5px -0.5px !important;
+}
+spacer.closing-tabs-spacer {
+	width: 5px !important;
+}
+.tabbrowser-tab {
+	padding-inline: 0px !important;
 }

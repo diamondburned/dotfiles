@@ -87,3 +87,4 @@ x-scheme-handler/tel=org.gnome.Shell.Extensions.GSConnect.desktop;
 application/xml=nvim.desktop;
 text/markdown=nvim.desktop;
 text/x-shellscript=nvim.desktop;
+application/x-bittorrent=nvim.desktop;

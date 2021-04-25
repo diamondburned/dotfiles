@@ -22,6 +22,12 @@ let unstable = import <unstable> {
 		buildInputs = old.buildInputs ++ [ unstable.tree-sitter ];
 	});
 
+	ff-nightly =
+		let moz-url = builtins.fetchTarball {
+			url = "https://github.com/mozilla/nixpkgs-mozilla/archive/master.tar.gz";
+		};
+		in (import "${moz-url}/firefox-overlay.nix"); 
+
 in {
 	imports = [
 		<unstable/nixos/modules/services/desktops/pipewire/pipewire.nix>
@@ -39,13 +45,23 @@ in {
 	};
 
 	# Real-time Linux 5.11.
-	# boot.kernelPackages = pkgs.linuxPackages-rt_5_11;
+	boot.kernelPackages = unstable.linuxPackages-rt_5_11;
 
 	home-manager.users.diamond = {
 		programs.mpv.package = unstable.mpv;
+		programs.firefox.package = pkgs.latest.firefox-nightly-bin // {
+			browserName = "firefox";
+		};
+
+		home.packages = with unstable; [
+			sage
+		];
 	};
 
 	nixpkgs.overlays = [
+		# Use the Firefox Nightly overlay with the latest unstable packages.
+		(self: super: (ff-nightly self unstable))
+
 		(self: super: {
 			jack = super.jack2;
 		})

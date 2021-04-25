@@ -1,7 +1,8 @@
-@import url("https://cdn.discordapp.com/attachments/729185721771884623/761309112591188028/style_part00.css");
-@import url("https://cdn.discordapp.com/attachments/729185721771884623/761309118920261662/style_part01.css");
-@import url("https://cdn.discordapp.com/attachments/729185721771884623/761309124230381568/style_part02.css");
-@import url("https://cdn.discordapp.com/attachments/729185721771884623/761309128218902549/style_part03.css");
+@import url("https://cdn.discordapp.com/attachments/729185721771884623/814391168854130718/style_part00.css");
+@import url("https://cdn.discordapp.com/attachments/729185721771884623/814391176450408448/style_part01.css");
+@import url("https://cdn.discordapp.com/attachments/729185721771884623/814391183940780042/style_part02.css");
+@import url("https://cdn.discordapp.com/attachments/729185721771884623/814391190362390578/style_part03.css");
+
 body {
     font-family: sans-serif;
 }
@@ -34,6 +35,26 @@ body {
     --channeltextarea-background: #40444b;
     --activity-card-background: #202225;
     --deprecated-panel-background: #2C2C2C;
+}
+
+/* display info about code blocks */
+code.hljs:not(.inline)::before {
+    content: attr(class) !important;
+    min-width: auto;
+    color: inherit;
+    opacity: 0.6;
+    font-size: 0.8rem;
+    position: absolute;
+    white-space: nowrap;
+    right: 1em;
+    top: .5em;
+    clip: rect(auto, auto, auto, 330px);
+}
+/* subtle code block styling */
+code.hljs:not(.inline) {
+    padding: 12px;
+    border: none;
+    position: relative;
 }
 
 /* Pill color */
@@ -151,9 +172,7 @@ div[class^="toolbar"] div[class^="searchBar"] {
     background-attachment: fixed;
     background-repeat: no-repeat;
     background-size: 200px;
-    /* background-position-x: right; */
-    /* background-position-y: bottom; */
-    background-position: bottom right;
+    background-position: bottom 50px right 0;
     content: " ";
     position: absolute;
     left: 0;
@@ -380,6 +399,10 @@ div[class^="channelTextArea"] > section[class^="positionContainer"] > div[class^
     height: 24px;
 }
 
+[id^="chat-messages"] > [class^="repliedMessage"] > [class^="username"]::after {
+    content: ":";
+}
+
 [id^="chat-messages"] > [class^="repliedMessage"] > [class^="replied"],
 [id^="chat-messages"] > [class^="repliedMessage"] > [class^="replied"]:hover {
     opacity: 1;
@@ -394,16 +417,16 @@ div[class^="channelTextArea"] > section[class^="positionContainer"] > div[class^
 }
 
 /* All messages */
-[data-list-id="chat-messages"] > [class^="message"],
+[data-list-id="chat-messages"] [class^="message-"],
 /* Block messages small bar */
-[data-list-id="chat-messages"] > [class^="groupStart"] > [class^="wrapper"] {
+[data-list-id="chat-messages"] [class^="groupStart"] > [class^="wrapper"] {
     line-height: 1.2em;
     padding-left: 68px !important;
     padding-top: 0px !important;
 }
 
 /* All messages */
-[data-list-id="chat-messages"] > [class^="message"] {
+[data-list-id="chat-messages"] [class^="message"] {
     padding-bottom: 4px;
 }
 
@@ -416,14 +439,14 @@ div[class^="channelTextArea"] > section[class^="positionContainer"] > div[class^
 }
 
 /* Exception for blocked messages */
-[data-list-id="chat-messages"] > [class^="groupStart"],
-[data-list-id="chat-messages"] > [class^="groupStart"] > *:nth-child(2) {
+[data-list-id="chat-messages"] [class^="groupStart"],
+[data-list-id="chat-messages"] [class^="groupStart"] > *:nth-child(2) {
     padding-top: 0 !important;
     margin-top: 0 !important;
     min-height: unset;
 }
 
-[data-list-id="chat-messages"] > [class^="groupStart"][class*="expanded"] {
+[data-list-id="chat-messages"] [class^="groupStart"][class*="expanded"] {
     padding-bottom: 4px;
 }
 
@@ -442,8 +465,8 @@ div[class^="channelTextArea"] > section[class^="positionContainer"] > div[class^
     margin: auto;
 }
 
-[data-list-id="chat-messages"] > [id*="messages-bar"][class*="divider"],
-[data-list-id="chat-messages"] > [class^="divider"] {
+[data-list-id="chat-messages"] [id*="messages-bar"][class*="divider"],
+[data-list-id="chat-messages"] [class^="divider"] {
     margin: 0px !important;
     top: 0px !important;
 }
@@ -469,7 +492,7 @@ div[class^="channelTextArea"] > section[class^="positionContainer"] > div[class^
 [id^="chat-messages"] [class*="markup-"] code.inline {
     background: none !important;
     padding: 0;
-    margin:  0;
+    margin: 0;
 }
 
 [id*="messages-bar"][class*="isUnread"] {
@@ -530,8 +553,13 @@ div[class^="toolbar"] a[href="https://support.discord.com"] {
     margin-bottom: 9px;
 }
 
-[class^="channelTextArea"] > * {
+[class^="channelTextArea"] > [class^="scrollableContainer"] {
     background-color: transparent !important;
+}
+
+[class^="channelTextArea"] > [class^="autocomplete"] {
+    background-color: rgba(16, 16, 16, 0.15) !important;
+    backdrop-filter: blur(24px);
 }
 
 [class^="spacer"][class*="vertical"][class*="flex"][class*="directionColumn"] > form {

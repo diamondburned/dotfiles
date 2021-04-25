@@ -2463,6 +2463,44 @@
 /run/user/1000/gvfs/sftp:host=192.168.1.169,port=1337,user=diamond/mnt/Music/Lush - Split (1994) [FLAC]/11 Starlust.flac
 #EXTINF:259,When I Die
 /run/user/1000/gvfs/sftp:host=192.168.1.169,port=1337,user=diamond/mnt/Music/Lush - Split (1994) [FLAC]/12 When I Die.flac
+#EXTINF:207,Adult Diversion
+/run/user/1000/gvfs/sftp:host=192.168.1.169,port=1337,user=diamond/mnt/Music/(2013) Alvvays/01 Adult Diversion.flac
+#EXTINF:196,Archie, Marry Me
+/run/user/1000/gvfs/sftp:host=192.168.1.169,port=1337,user=diamond/mnt/Music/(2013) Alvvays/02 Archie, Marry Me.flac
+#EXTINF:227,Ones Who Love You
+/run/user/1000/gvfs/sftp:host=192.168.1.169,port=1337,user=diamond/mnt/Music/(2013) Alvvays/03 Ones Who Love You.flac
+#EXTINF:228,Next of Kin
+/run/user/1000/gvfs/sftp:host=192.168.1.169,port=1337,user=diamond/mnt/Music/(2013) Alvvays/04 Next of Kin.flac
+#EXTINF:227,Party Police
+/run/user/1000/gvfs/sftp:host=192.168.1.169,port=1337,user=diamond/mnt/Music/(2013) Alvvays/05 Party Police.flac
+#EXTINF:271,The Agency Group
+/run/user/1000/gvfs/sftp:host=192.168.1.169,port=1337,user=diamond/mnt/Music/(2013) Alvvays/06 The Agency Group.flac
+#EXTINF:176,Dives
+/run/user/1000/gvfs/sftp:host=192.168.1.169,port=1337,user=diamond/mnt/Music/(2013) Alvvays/07 Dives.flac
+#EXTINF:199,Atop a Cake
+/run/user/1000/gvfs/sftp:host=192.168.1.169,port=1337,user=diamond/mnt/Music/(2013) Alvvays/08 Atop a Cake.flac
+#EXTINF:238,Red Planet
+/run/user/1000/gvfs/sftp:host=192.168.1.169,port=1337,user=diamond/mnt/Music/(2013) Alvvays/09 Red Planet.flac
+#EXTINF:197,In Undertow
+/run/user/1000/gvfs/sftp:host=192.168.1.169,port=1337,user=diamond/mnt/Music/Alvvays - Antisocialites (2017)(FLAC HD)/01. In Undertow.flac
+#EXTINF:196,Dreams Tonite
+/run/user/1000/gvfs/sftp:host=192.168.1.169,port=1337,user=diamond/mnt/Music/Alvvays - Antisocialites (2017)(FLAC HD)/02. Dreams Tonite.flac
+#EXTINF:289,Plimsoll Punks
+/run/user/1000/gvfs/sftp:host=192.168.1.169,port=1337,user=diamond/mnt/Music/Alvvays - Antisocialites (2017)(FLAC HD)/03. Plimsoll Punks.flac
+#EXTINF:123,Your Type
+/run/user/1000/gvfs/sftp:host=192.168.1.169,port=1337,user=diamond/mnt/Music/Alvvays - Antisocialites (2017)(FLAC HD)/04. Your Type.flac
+#EXTINF:256,Not My Baby
+/run/user/1000/gvfs/sftp:host=192.168.1.169,port=1337,user=diamond/mnt/Music/Alvvays - Antisocialites (2017)(FLAC HD)/05. Not My Baby.flac
+#EXTINF:197,Lollipop (Ode to Jim)
+/run/user/1000/gvfs/sftp:host=192.168.1.169,port=1337,user=diamond/mnt/Music/Alvvays - Antisocialites (2017)(FLAC HD)/07. Lollipop (Ode To Jim).flac
+#EXTINF:183,Already Gone
+/run/user/1000/gvfs/sftp:host=192.168.1.169,port=1337,user=diamond/mnt/Music/Alvvays - Antisocialites (2017)(FLAC HD)/08. Already Gone.flac
+#EXTINF:179,Saved by a Waif
+/run/user/1000/gvfs/sftp:host=192.168.1.169,port=1337,user=diamond/mnt/Music/Alvvays - Antisocialites (2017)(FLAC HD)/09. Saved By A Waif.flac
+#EXTINF:162,Forget About Life
+/run/user/1000/gvfs/sftp:host=192.168.1.169,port=1337,user=diamond/mnt/Music/Alvvays - Antisocialites (2017)(FLAC HD)/10. Forget About Life.flac
+#EXTINF:168,Hey
+/run/user/1000/gvfs/sftp:host=192.168.1.169,port=1337,user=diamond/mnt/Music/Alvvays - Antisocialites (2017)(FLAC HD)/06. Hey.flac
 #EXTINF:220,Law of Attraction
 /run/user/1000/gvfs/sftp:host=192.168.1.169,port=1337,user=diamond/mnt/Music/She Her Her Hers - location (2019-11-13) [WEB FLAC]/1.01. Law of Attraction.flac
 #EXTINF:273,SPIRAL

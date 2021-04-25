@@ -82,11 +82,12 @@ in {
 	# We don't want to sacrifice battery for the above.
 	powerManagement.cpuFreqGovernor = lib.mkForce "ondemand";
 
-	services.blueman.enable = true;
+	# Blueman sucks; use bluetoothctl.
+	# services.blueman.enable = true;
+
 	hardware.bluetooth = {
 		enable = true;
 		package = pkgs.bluezFull;
-		# settings = {
 		config = {
 			General = {
 				Enable = "Source,Sink,Media,Socket";

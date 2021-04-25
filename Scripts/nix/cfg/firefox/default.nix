@@ -7,6 +7,7 @@ let profileName = "default";
 
 in {
 	programs.firefox.enable = true;
+	# programs.firefox.package = pkgs.firefox-bin;
 
 	programs.firefox.profiles."Tunneled" = {
 		id = 1;

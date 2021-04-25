@@ -19,18 +19,18 @@ let utils = import ../../utils.nix { inherit lib pkgs; };
 	);
 
 in {
-	# services.xserver.displayManager = {
-	# 	gdm = {
-	# 		enable  = true;
-	# 		wayland = true;
-	# 	};
-	# 	defaultSession  = "wayfire";
-	# 	sessionPackages = with pkgs; [ wayfire ];
-	# };
+	services.xserver.displayManager = {
+		gdm = {
+			enable  = true;
+			wayland = true;
+		};
+		defaultSession  = "wayfire";
+		sessionPackages = with pkgs; [ wayfire ];
+	};
 
-	# I hate GDM; it drags in dumb build dependencies. Use a dummy display
-	# manager.
-	services.xserver.displayManager.startx.enable = true;
+# 	# I hate GDM; it drags in dumb build dependencies. Use a dummy display
+# 	# manager.
+# 	services.xserver.displayManager.startx.enable = true;
 
 	nix.binaryCachePublicKeys = [
 		"nixpkgs-wayland.cachix.org-1:3lwxaILxMRkVhehr5StQprHdEo4IrE8sRho9R9HOLYA="
@@ -112,8 +112,13 @@ in {
 				"docked".outputs = [
 					(disable "eDP-1")
 					(enable "Acer Technologies V277U TDCAA002852A" {
-						position = "0,0";
+						position = "0,1270";
 						mode     = "2560x1440@69.928001";
+					})
+					(enable "Unknown Sceptre F24 0x00000001" {
+						position = "151,0";
+						mode     = "1920x1080@74.973000";
+						scale    = 0.85;
 					})
 				];
 				"normal".outputs = [
