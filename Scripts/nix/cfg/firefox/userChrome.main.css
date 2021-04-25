@@ -178,7 +178,7 @@ tabs#tabbrowser-tabs toolbarbutton:hover .toolbarbutton-icon {
 	background: transparent !important;
 
 	transition: all 300ms cubic-bezier(.45,.05,.55,.95);
-	transition-delay: 0.5s;
+	transition-delay: 300ms;
 
 	max-width:  400px;
 	box-shadow: inset -20px 0px 20px -20px rgba(0,0,0,0.35) !important;
@@ -187,7 +187,7 @@ tabs#tabbrowser-tabs toolbarbutton:hover .toolbarbutton-icon {
 #nav-bar[urlbar-exceeds-toolbar-bounds="true"] {
 	max-width:  100%;
 	box-shadow: none;
-	transition-delay: 0s;
+	transition-delay: 150ms;
 }
 #urlbar {
 	top: 4px !important; /* Magic constant. */

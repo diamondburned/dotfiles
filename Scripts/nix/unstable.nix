@@ -59,11 +59,14 @@ in {
 	};
 
 	nixpkgs.overlays = [
-		# Use the Firefox Nightly overlay with the latest unstable packages.
-		(self: super: (ff-nightly self unstable))
-
 		(self: super: {
 			jack = super.jack2;
+
+			firefox-bin-unwrapped = super.firefox-bin-unwrapped.overrideAttrs(old: {
+				buildInputs = old.buildInputs ++ (with self; [
+					ffmpeg
+				]);
+			});
 		})
 
 		(self: super: {
@@ -86,5 +89,8 @@ in {
 				)}";
 			};
 		})
+
+		# Use the Firefox Nightly overlay with the latest unstable packages.
+		(ff-nightly)
 	];
 }
