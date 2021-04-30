@@ -39,10 +39,11 @@ in {
 		"https://nixpkgs-wayland.cachix.org"
 	];
 
-	xdg.portal.extraPortals = with pkgs; [
-		xdg-desktop-portal-wlr
-	];
-	xdg.portal.gtkUsePortal = true;
+	xdg.portal = {
+		enable = true;
+		extraPortals = with pkgs; [ xdg-desktop-portal-wlr ];
+		gtkUsePortal = false;
+	};
 
 	nixpkgs.overlays = [ (import ./overlay.nix) ];
 

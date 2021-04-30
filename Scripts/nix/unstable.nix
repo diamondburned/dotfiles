@@ -45,7 +45,7 @@ in {
 	};
 
 	# Real-time Linux 5.11.
-	boot.kernelPackages = unstable.linuxPackages-rt_5_11;
+	# boot.kernelPackages = unstable.linuxPackages-rt_5_11;
 
 	home-manager.users.diamond = {
 		programs.mpv.package = unstable.mpv;
@@ -55,6 +55,7 @@ in {
 
 		home.packages = with unstable; [
 			sage
+			darktable
 		];
 	};
 

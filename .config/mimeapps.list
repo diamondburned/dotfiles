@@ -88,3 +88,4 @@ application/xml=nvim.desktop;
 text/markdown=nvim.desktop;
 text/x-shellscript=nvim.desktop;
 application/x-bittorrent=nvim.desktop;
+image/webp=org.gnome.eog.desktop;

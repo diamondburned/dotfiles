@@ -41,3 +41,7 @@ body {
 	/* FIREFOX MADE ME DO THIS!!! */
 	scrollbar-width: none !important;
 }
+
+/* Blank Firefox Home page. */
+body[lwt-newtab-brighttext]     { background: #242424 !important; }
+body[lwt-newtab-brighttext] > * { display: none; }

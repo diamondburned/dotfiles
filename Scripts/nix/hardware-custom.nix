@@ -129,7 +129,7 @@ in {
 	boot.kernelParams = [ "mitigations=off" ];
 
 	# Requires the real-time kernel patches in Musnix.
-	security.rtkit.enable = true;
+	# security.rtkit.enable = true;
 
 	# # Trivial graphics options.
 	# boot.extraModprobeConfig = ''
@@ -156,56 +156,56 @@ in {
 
 	nix.maxJobs = lib.mkForce 4;
 
-	# Tweaks to give users more control over resource priorities to allow
-	# smoother audio processing and such in lower latency.
-	security.pam.loginLimits = [
-		{
-			domain = "@users";
-			item = "memlock";
-			type = "soft";
-			value = "1048576";
-		}
-		{
-			domain = "@users";
-			item = "memlock";
-			type = "hard";
-			value = "unlimited";
-		}
-		{
-			domain = "@users";
-			item = "rtprio";
-			type = "hard";
-			value = "49";
-		}
-		{
-			domain = "@users";
-			item = "rtprio";
-			type = "soft";
-			value = "46";
-		}
-		{
-			domain = "@users";
-			item = "priority";
-			type = "hard";
-			value = "-2";
-		}
-		{
-			domain = "@users";
-			item = "nice";
-			type = "soft";
-			value = "-19";
-		}
-		{
-			domain = "@users";
-			item = "nice";
-			type = "hard";
-			value = "-20";
-		}
-		{
-			domain = "@messagebus";
-			item = "priority";
-			type = "soft";
-			value = "-10";
-		}
-	];
+	# # Tweaks to give users more control over resource priorities to allow
+	# # smoother audio processing and such in lower latency.
+	# security.pam.loginLimits = [
+	# 	{
+	# 		domain = "@users";
+	# 		item = "memlock";
+	# 		type = "soft";
+	# 		value = "1048576";
+	# 	}
+	# 	{
+	# 		domain = "@users";
+	# 		item = "memlock";
+	# 		type = "hard";
+	# 		value = "unlimited";
+	# 	}
+	# 	{
+	# 		domain = "@users";
+	# 		item = "rtprio";
+	# 		type = "hard";
+	# 		value = "49";
+	# 	}
+	# 	{
+	# 		domain = "@users";
+	# 		item = "rtprio";
+	# 		type = "soft";
+	# 		value = "46";
+	# 	}
+	# 	{
+	# 		domain = "@users";
+	# 		item = "priority";
+	# 		type = "hard";
+	# 		value = "-2";
+	# 	}
+	# 	{
+	# 		domain = "@users";
+	# 		item = "nice";
+	# 		type = "soft";
+	# 		value = "-19";
+	# 	}
+	# 	{
+	# 		domain = "@users";
+	# 		item = "nice";
+	# 		type = "hard";
+	# 		value = "-20";
+	# 	}
+	# 	{
+	# 		domain = "@messagebus";
+	# 		item = "priority";
+	# 		type = "soft";
+	# 		value = "-10";
+	# 	}
+	# ];
 }

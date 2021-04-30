@@ -521,6 +521,8 @@ in
 
 		pam.sessionVariables = {
 			NIX_AUTO_RUN = "1";
+			XDG_CURRENT_DESKTOP = "sway";
+
 			GOPATH = "/home/diamond/.go";
 			GOBIN  = "/home/diamond/.go/bin";
 
@@ -555,7 +557,6 @@ in
 			gnome3.polari
 			keepassx-community
 			gnupg
-			darktable
 			gimp-with-plugins
 
 			# Development tools

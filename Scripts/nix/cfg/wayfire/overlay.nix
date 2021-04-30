@@ -8,7 +8,7 @@ let nixosPkgs = import <nixos> {};
 		sha256 = "060jpzhylysxqlv1qfl2bl5if71lkn217ss44b0w9nyxc1286sww";
 	});
 
-	waylandPkgs = import <nixos> {
+	waylandPkgs = import <unstable> {
 		overlays = [ waylandOverlays ];
 	};
 
@@ -23,21 +23,33 @@ in self: super: {
 	# });
 
 	wayfire = waylandPkgs.wayfire.overrideAttrs (old: {
+		# src = super.fetchFromGitHub {
+		# 	owner  = "diamondburned";
+		# 	repo   = "wayfire";
+		# 	rev    = "41633719868dfb76dad7a7564d4184d7894f7e76";
+		# 	sha256 = "0h6zfr6a5k90hnrw0hmmgig5v17xhry0vzyf7lgw057c4lqrvqjc";
+		# 	fetchSubmodules = true;
+		# };
+
+		# version = "0.7.0";
+
 		src = super.fetchFromGitHub {
-			owner  = "diamondburned";
+			owner  = "WayfireWM";
 			repo   = "wayfire";
-			rev    = "41633719868dfb76dad7a7564d4184d7894f7e76";
-			sha256 = "0h6zfr6a5k90hnrw0hmmgig5v17xhry0vzyf7lgw057c4lqrvqjc";
+			rev    = "6095d3aae7d4b4f58a98b6ef6ea7cdbbceaeba61";
+			sha256 = "0gy5qadwkfm6v8yhdgvgylc4kiz355k6jw1lpjp4cdwnfn31p1zv";
 			fetchSubmodules = true;
 		};
 
-		version = "0.7.0";
+		version = "0.7.1";
 		passthru.providedSessions = [ "wayfire" ];
 		buildInputs = old.buildInputs ++ (with super; [
 			libuuid
 			gdk-pixbuf
 			gnome3.glib
 			gnome3.gtk3
+			xorg.xcbutilrenderutil
+			xwayland
 		]);
 		postInstall = ''
 			mkdir -p "$out/share/wayland-sessions"
