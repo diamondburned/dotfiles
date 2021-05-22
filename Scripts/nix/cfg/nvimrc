@@ -4,7 +4,8 @@ call plug#begin('~/.vim/bundle')
 
 Plug 'gioele/vim-autoswap'
 Plug 'inkarkat/vim-SyntaxRange'
-Plug 'scrooloose/nerdtree'
+Plug 'kyazdani42/nvim-tree.lua'
+Plug 'antoinemadec/FixCursorHold.nvim'
 Plug 'tpope/vim-commentary'
 Plug 'airblade/vim-gitgutter'
 Plug 'plasticboy/vim-markdown'
@@ -14,22 +15,20 @@ Plug 'rhysd/conflict-marker.vim'
 
 "Better highlighting"
 Plug 'nvim-treesitter/nvim-treesitter', {'do': ':TSUpdate'}
+Plug 'nvim-treesitter/nvim-treesitter-refactor'
 
 "Autocomplete brackets/parens/etc like vscode"
 Plug 'jiangmiao/auto-pairs'
 
-"Icons"
-Plug 'ryanoasis/vim-devicons'
-
 "Autocompletion"
 Plug 'dense-analysis/ale'
+Plug 'neovim/nvim-lspconfig'
+Plug 'nvim-lua/completion-nvim'
 
 "Languages"
-"Plug 'arp242/gopher.vim'
 Plug 'cespare/vim-toml'
 Plug 'LnL7/vim-nix'
 Plug 'evanleck/vim-svelte'
-Plug 'ziglang/zig.vim'
 
 call plug#end()
 
@@ -39,9 +38,6 @@ vmap <C-c> "+y
 vmap <C-v> "+p
 imap <C-v> "+p
 map - dd
-
-"Speed"
-set updatetime=100
 
 "Make comments italiced
 hi Comment cterm=italic
@@ -67,7 +63,8 @@ autocmd BufReadPost *
 set smartindent
 filetype indent on
 
-set numberwidth=10
+"Thick gutter"
+set numberwidth=8
 set textwidth=80
 set number
 
@@ -92,8 +89,11 @@ syntax on
 "Tree-sitter config"
 lua <<EOF
 require'nvim-treesitter.configs'.setup {
-  indent    = { enable = false },
-  highlight = { enable = true  },
+	indent    = { enable = false },
+	highlight = { enable = true  },
+	refactor  = {
+		highlight_definitions = { enable = true },
+	},
 }
 EOF
 
@@ -128,7 +128,6 @@ hi EndOfBuffer  ctermfg=7
 hi QuickFixLine cterm=reverse
 
 "Change NERDTree's colors"
-hi CursorLine    ctermbg=7 cterm=NONE
 hi Directory     ctermfg=14
 hi NERDTreeFlags ctermfg=6
 
@@ -139,14 +138,14 @@ hi Title ctermfg=10
 syntax match negativeNumber '[-+]\d\+\(\.\d*\)\?'
 hi def link  negativeNumber NUmber
 
-"Hide the trailing slash next to the directories"
-augroup nerdtreehidecwd
-	autocmd!
-	autocmd FileType nerdtree setlocal conceallevel=3 | syntax match NERDTreeDirSlash #/$# containedin=NERDTreeDir conceal contained
-augroup end
+""Hide the trailing slash next to the directories"
+"augroup nerdtreehidecwd
+"	autocmd!
+"	autocmd FileType nerdtree setlocal conceallevel=3 | syntax match NERDTreeDirSlash #/$# containedin=NERDTreeDir conceal contained
+"augroup end
 
-"Hide the cursor for NERDTree; rely on the background"
-autocmd FileType nerdtree hi Cursor 
+""Hide the cursor for NERDTree; rely on the background"
+"autocmd FileType nerdtree hi Cursor 
 
 "Custom cursor mode: normal-visual block, insert-command IBeam"
 set guicursor=n-v-sm:block
@@ -197,18 +196,81 @@ autocmd BufEnter * :syntax sync fromstart
 syntax sync minlines=100
 
 "Custom keybinds"
-map <Tab> :NERDTreeToggle<CR> <bar> :NERDTreeRefreshRoot<CR>
+map <Tab> :NvimTreeToggle<CR> <bar> :NvimTreeRefresh<CR>
 nmap <C-_> gcc
 vmap <C-_> gc<CR>gv
 nmap <C-j> =G
 nnoremap f :F<CR>
 
-"NERDTree"
-"let g:NERDTreeMapOpenInTab = <rightmouse>
-let g:nerdtree_tabs_focus_on_files=1
+"Better Vim regexes"
+set smartcase
+nnoremap / /\v
+vnoremap / /\v
+cnoremap %s/ %smagic/
+cnoremap \>s/ \>smagic/
+nnoremap :g/ :g/\v
+nnoremap :g// :g//
 
-"Echodoc"
-let g:echodoc#enable_at_startup = 1
+"Nvim Tree configs"
+let g:nvim_tree_hijack_netrw = 1
+let g:nvim_tree_ignore = [ '.git', 'node_modules' ]
+let g:nvim_tree_tab_open = 1
+let g:nvim_tree_auto_open = 1
+let g:nvim_tree_auto_close = 1
+let g:nvim_tree_add_trailing = 1
+let g:nvim_tree_git_hl = 1
+let g:nvim_tree_follow = 1
+let g:nvim_tree_hide_dotfiles = 0
+let g:nvim_tree_gitignore = 0
+let g:nvim_tree_show_icons = {
+	\	'git': 1,
+	\	'folders': 1,
+	\	'files': 1,
+	\ }
+let g:nvim_tree_icons = {
+	\	'default': "  ",
+	\	'symlink': "  ",
+	\	'git': {
+	\		'unstaged': "M",
+	\		'staged': "M",
+	\		'unmerged': "U",
+	\		'renamed': "R",
+	\		'untracked': "U",
+	\		'deleted': "D",
+	\		'ignored': "I",
+	\	},
+	\	'folder': {
+	\		'default': ">",
+	\		'open': "v",
+	\		'empty': ">",
+	\		'empty_open': "v",
+	\		'symlink': ">",
+	\		'symlink_open': "v",
+	\	},
+	\	'lsp': {
+	\		'hint': ">",
+	\		'info': "!",
+	\		'warning': "!",
+	\		'error': "!",
+	\	}
+	\ }
+
+"Return the Tab bind"
+lua << EOF
+	vim.g.nvim_tree_bindings = {
+		["<Tab>"] = nil,
+	}
+EOF
+
+hi NvimTreeCursorLine ctermbg=7
+hi NvimTreeFolderName ctermfg=NONE
+hi NvimTreeFolderIcon ctermfg=14
+hi NvimTreeExecFile   ctermfg=12
+hi NvimTreeGitDirty   ctermfg=9
+hi NvimTreeGitStaged  ctermfg=2
+hi NvimTreeGitRenamed ctermfg=6
+hi NvimTreeGitDeleted ctermfg=1
+hi NvimTreeGitIgnored ctermfg=8
 
 "Markdown stuff"
 let g:vim_markdown_folding_disabled = 1
@@ -218,37 +280,42 @@ let g:mkdp_preview_options = {
 	\ }
 let g:mkdp_page_title = '${name}'
 
-"START shit I stole from Sacul"
-
 "Remove background"
 hi LineNr       guibg=NONE ctermbg=NONE
 hi SignColumn   guibg=NONE ctermbg=NONE
-hi VertSplit    guibg=NONE ctermbg=NONE gui=NONE      cterm=NONE ctermfg=240
-hi CursorLineNr guibg=NONE ctermbg=NONE guifg=#585858 ctermfg=7
-hi StatusLine   guibg=NONE ctermbg=NONE gui=NONE      cterm=NONE
-hi StatusLineNC guibg=NONE ctermbg=NONE gui=NONE      cterm=NONE
+hi VertSplit    guibg=NONE ctermbg=NONE gui=NONE cterm=NONE ctermfg=240
+hi StatusLine   guibg=NONE ctermbg=NONE gui=NONE cterm=NONE
+hi StatusLineNC guibg=NONE ctermbg=NONE gui=NONE cterm=NONE
 
 "Set wildmenu colors"
 hi WildMenu ctermbg=12
 hi WildMenu ctermfg=21
 
+"Current Line highlighting"
+" hi CursorLine    ctermbg=7 cterm=NONE
+set cursorline
+hi clear CursorLine
+hi CursorLineNR ctermfg=14
+
 "Nicer vertical separators"
 set fillchars=vert:\▏
 
-"END shit I stole from Sacul"
-
 "Cooler git diffs"
-let g:gitgutter_sign_added='▓'
-let g:gitgutter_sign_modified='░'
-let g:gitgutter_sign_removed='_'
-let g:gitgutter_sign_removed_first_line='_'
-let g:gitgutter_sign_modified_removed='_'
+" let g:gitgutter_sign_added='▓'
+" let g:gitgutter_sign_modified='░'
+" let g:gitgutter_sign_removed_first_line='_'
+" let g:gitgutter_sign_modified_removed='_'
+let g:gitgutter_sign_added='+'
+let g:gitgutter_sign_modified='¦'
+let g:gitgutter_sign_removed='-'
+let g:gitgutter_sign_removed_first_line='-'
+let g:gitgutter_sign_modified_removed='-'
 let g:gitgutter_override_sign_column_highlight = 0
 
-hi! GitGutterAdd          guibg=NONE ctermbg=NONE guifg=#6c6c6c ctermfg=242
-hi! GitGutterChange       guibg=NONE ctermbg=NONE guifg=#6c6c6c ctermfg=242
-hi! GitGutterDelete       guibg=NONE ctermbg=NONE guifg=#6c6c6c ctermfg=242
-hi! GitGutterChangeDelete guibg=NONE ctermbg=NONE guifg=#6c6c6c ctermfg=242
+hi! GitGutterAdd          guibg=NONE ctermbg=NONE guifg=#6c6c6c ctermfg=2
+hi! GitGutterChange       guibg=NONE ctermbg=NONE guifg=#6c6c6c ctermfg=6
+hi! GitGutterDelete       guibg=NONE ctermbg=NONE guifg=#6c6c6c ctermfg=1
+hi! GitGutterChangeDelete guibg=NONE ctermbg=NONE guifg=#6c6c6c ctermfg=1
 
 "Cooler git conflicts"
 let g:conflict_marker_highlight_group = ''
@@ -266,52 +333,66 @@ highlight LineNr guifg=#6c6c6c ctermfg=242
 "New file in buffer directory"
 command -nargs=1 New :e %:p:h/<args>
 
-"TITTY FAST"
+"Optimized drawing"
 set ttyfast
 set lazyredraw
+
+"Configuring the update delay after buffer updates"
+set updatetime=150
+let g:cursorhold_updatetime = 150
 
 "Undo history"
 set undofile
 
 "Make nvim show changes done by commands in real-time"
 "Actually very buggy"
-" set inccommand=nosplit
+set inccommand=nosplit
+
+"Better scrolloff"
+set scrolloff=7
+"Better sidescroll"
+set sidescroll=1
+set sidescrolloff=5
+
+"Auto-reload changed files"
+set autoread
+au CursorHold * checktime
 
 "Autocompletion"
 "Fix aggressive preemptive completion with noselect"
 set completeopt=menuone,noselect
-"Enter triggers completion"
-inoremap <expr> <CR> pumvisible() ? "\<C-y>" : "\<C-g>u\<CR>"
 
-""ALE configs"
-"https://github.com/dense-analysis/ale/issues/3023"
-function! DenoProjectRoot(buffer) abort
-    return expand('#' . a:buffer . ':p:h')
-endfunction
+lua<<EOF
+	local on_attach = function(client, bufnr)
+		require('completion').on_attach(client, bufnr)
 
-execute ale#linter#Define('javascript', {
-\   'name': 'deno',
-\   'lsp': 'stdio',
-\   'initialization_options': {
-\       'enable': v:true,
-\       'lint': v:true,
-\       'unstable': v:true,
-\   },
-\   'executable': 'deno',
-\   'command': '%e lsp -q',
-\   'project_root': function('DenoProjectRoot'),
-\})
+		local opts = { noremap = true, silent = true }
+		local keym = function(...) vim.api.nvim_buf_set_keymap(bufnr, ...) end
+		keym('n', 'gD', '<Cmd>lua vim.lsp.buf.declaration()<CR>', opts)
+		keym('n', 'gd', '<Cmd>lua vim.lsp.buf.definition()<CR>', opts)
+		keym('n', 'K', '<Cmd>lua vim.lsp.buf.hover()<CR>', opts)
+	end
 
-set omnifunc=ale#completion#OmniFunc
+	local servers = { "gopls", "tsserver", "clangd", "zls", "denols" }
+	local nvim_lsp = require('lspconfig')
 
+	for _, server in ipairs(servers) do
+		nvim_lsp[server].setup { on_attach = on_attach }
+	end
+EOF
+
+"ALE configs"
 highlight ALEWarningSign ctermbg=NONE
 let g:ale_virtualtext_cursor = 1
 let g:ale_sign_error = '!'
 let g:ale_sign_warning = '>'
 let g:ale_sign_column_always = 1
 let g:ale_fix_on_save = 1
-let g:ale_linters_explicit = 0
-let g:ale_completion_autoimport = 1
+let g:ale_linters_explicit = 1
+
+let g:ale_completion_enabled = 0
+let g:ale_completion_autoimport = 0
+
 let g:ale_linter_aliases = {
 			\ 'svelte': ['css', 'javascript'],
 			\ }
@@ -323,17 +404,6 @@ let g:ale_fixers = {
 			\ 'svelte':     [ "prettier", "prettier_standard", "eslint" ],
 			\ 'javascript': [ "prettier", "prettier_standard", "eslint" ],
 			\ }
-let g:ale_completion_enabled = 1
-let g:ale_linters = {
-			\ 'go':         [ "gopls" ],
-			\ 'zig':        [ "zls" ],
-			\ 'c':          [ "clangd" ],
-			\ 'cpp':        [ "clangd" ],
-			\ 'svelte':     [ "tsserver", "eslint" ],
-			\ 'javascript': [ "deno", "tsserver" ],
-			\ }
-nnoremap gd :ALEGoToDefinition<CR>
-nnoremap K :ALEHover<CR>
 
 ""Assistive LSP bindings"
 "function! ToggleQf()
@@ -353,23 +423,3 @@ nnoremap K :ALEHover<CR>
 "nnoremap <silent><M-c> :call ToggleQf()<CR>
 ""Previous error"
 "nnoremap <M-p> :cprev<CR>zz
-
-"Deoplete+ALE integration"
-" let g:deoplete#enable_at_startup = 1
-" call deoplete#custom#option('sources', {
-" 	\ '_': [ 'ale', 'neco-syntax', 'deoplete-emoji' ],
-" 	\})
-
-"vim-lsp configuration"
-"Golang stuff"
-"autocmd! CompleteDone * if pumvisible() == 0 | pclose | endif
-"au User lsp_setup call lsp#register_server({
-			"\ 'name': 'gopls',
-			"\ 'cmd': {server_info->['gopls', '-mode', 'stdio']},
-			"\ 'whitelist': ['go'],
-			"\ })
-"autocmd BufWritePre *.go LspDocumentFormatSync
-
-"let g:LanguageClient_serverCommands = {
-"	\ 'go': [ 'bingo', '-freeosmemory', '5' , '-maxparallelism', '4', '-cache-style', 'on-demand' ]
-"	\ }

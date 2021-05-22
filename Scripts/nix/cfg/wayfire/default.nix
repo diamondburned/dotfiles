@@ -1,6 +1,6 @@
 { config, lib, pkgs, ... }: 
 
-let utils = import ../../utils.nix { inherit lib pkgs; };
+let utils = import ../../utils.nix { inherit config lib pkgs; };
 
 	scrot = utils.writeBashScript "scrot.sh" ''
 		export WAYLAND_DISPLAY=wayland-1
@@ -57,6 +57,8 @@ in {
 	];
 
 	home-manager.users.diamond = {
+		pam.sessionVariables.XDG_CURRENT_DESKTOP = "Wayfire";
+
 		home.packages = with pkgs; [
 			slurp
 			grim
@@ -64,6 +66,7 @@ in {
 			playerctl
 			wl-clipboard
 			wf-shell
+			wf-recorder
 			kanshi
 			dex
 			dbus

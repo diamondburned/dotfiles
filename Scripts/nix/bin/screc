@@ -1,0 +1,31 @@
+#!/usr/bin/env bash
+set -e
+
+record() {
+	local video_devices=( /dev/video* )
+	local v4l2_device=${video_devices[-1]}
+
+	wf-recorder -x yuyv422 -c rawvideo -m v4l2 -f "$v4l2_device" "$@"
+}
+
+main() {
+	# Ensure wf-recorder.
+	command -v wf-recorder &> /dev/null || {
+		echo "Missing wf-recorder."
+		return 1
+	}
+
+	# Ensure v4l2loopback.
+	lsmod | grep v4l2loopback &> /dev/null || {
+		echo "Missing v4l2loopback module."
+		return 1
+	}
+
+	case $1 in
+	-r) record -g "$(slurp)";;
+	-a) record;;
+	 *) echo "Usage: screc [-r|-a]";;
+	esac
+}
+
+main "$@"

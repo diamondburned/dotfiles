@@ -35,6 +35,7 @@ audio/flac=io.github.celluloid_player.Celluloid.desktop
 audio/aac=io.github.celluloid_player.Celluloid.desktop
 text/markdown=nvim.desktop
 video/x-matroska=io.github.celluloid_player.Celluloid.desktop
+application/vnd.openxmlformats-officedocument.wordprocessingml.document=writer.desktop
 
 [Added Associations]
 application/zip=org.gnome.FileRoller.desktop;
@@ -89,3 +90,7 @@ text/markdown=nvim.desktop;
 text/x-shellscript=nvim.desktop;
 application/x-bittorrent=nvim.desktop;
 image/webp=org.gnome.eog.desktop;
+application/vnd.openxmlformats-officedocument.wordprocessingml.document=abiword.desktop;writer.desktop;
+application/vnd.oasis.opendocument.text=writer.desktop;
+text/x-go=org.gnome.gedit.desktop;
+text/x-c++src=nvim.desktop;

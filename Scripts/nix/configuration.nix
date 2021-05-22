@@ -14,14 +14,14 @@ let home-manager = builtins.fetchGit {
 		rev = "09d41b0a6f574390d6edc0271be459bd1390ea8d";
 	};
 
-	utils = import ./utils.nix { inherit pkgs lib; };
-
 	tdeo = import (builtins.fetchGit {
 		url = "https://github.com/tadeokondrak/nix-overlay";
 		rev = "0d05c53204da3b576f810ef2e1312b19bf2420b7";
 	});
 
 	diamond = ../nix-overlays;
+
+	utils = import ./utils.nix { inherit config pkgs lib; };
 
 	# PR #101194 and more.
 	aspellPkgs = import (pkgs.fetchFromGitHub {
@@ -56,6 +56,7 @@ in
 		./hardware-custom.nix
 		./unstable.nix
 		./cfg/wayfire
+		./cfg/localhost
 	];
 
 	# Overlays
@@ -165,16 +166,6 @@ in
 	# Group to change SSH keys to.
 	users.groups.ssh-trusted.members = [ "diamond" "root" ] ++
 		(utils.formatInts 1 32 (i: "nixbld${toString i}"));
-
-	# services.diamondburned.caddy = {
-	# 	enable = true;
-	# 	config = ''
-	# 		http://127.0.0.1:28475 {
-	# 			reverse_proxy * unix:///tmp/ghproxy.sock
-	# 		}
-	# 	'';
-	# 	modSha256 = "07skcp85xvwak3pn7gavvclw9svps30yqgrsyfikhl6yspa9c45q";
-	# };
 
 	# services.ghproxy = {
 	# 	username = "diamondburned";
@@ -418,6 +409,8 @@ in
 			"${lsoc-overlay}"
 			"${diamond}/home-manager"
 
+			./cfg/kak
+			./cfg/tilix
 			./cfg/firefox
 			./cfg/hm-gnome-terminal.nix
 		];
@@ -521,7 +514,7 @@ in
 
 		pam.sessionVariables = {
 			NIX_AUTO_RUN = "1";
-			XDG_CURRENT_DESKTOP = "sway";
+			XDG_CURRENT_DESKTOP = "Wayfire";
 
 			GOPATH = "/home/diamond/.go";
 			GOBIN  = "/home/diamond/.go/bin";
@@ -589,7 +582,7 @@ in
 			# fractal # lol
 
 			# Office
-			libreoffice # takes a while to build
+			libreoffice
 			evince
 
 			# Applications
@@ -627,18 +620,22 @@ in
 			};
 		};
 
-		systemd.user.services.giomount = {
-			Unit = {
-				Description = "Auto-mount gio sftp mounts";
-				After = "suspend.target";
-			};
-			Install = {
-				WantedBy = [ "multi-user.target" ];
-			};
-			Service = {
-				Type = "oneshot";
-				ExecStart   = "${./bin/giomountall}";
-				Environment = "PATH=${pkgs.gnugrep}/bin:${pkgs.bash}/bin:${pkgs.glib}/bin";
+		systemd.user.services = {
+			terminal = utils.waylandService "gnome-terminal";
+			nautilus = utils.waylandService "nautilus --gapplication-service";
+			giomount = {
+				Unit = {
+					Description = "Auto-mount gio sftp mounts";
+					After = [ "default.target" "suspend.target" ];
+				};
+				Install = {
+					WantedBy = [ "multi-user.target" ];
+				};
+				Service = {
+					Type = "oneshot";
+					ExecStart   = "${./bin/giomountall}";
+					Environment = "PATH=${utils.globalPaths}";
+				};
 			};
 		};
 

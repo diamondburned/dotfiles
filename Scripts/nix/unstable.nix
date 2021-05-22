@@ -28,6 +28,51 @@ let unstable = import <unstable> {
 		};
 		in (import "${moz-url}/firefox-overlay.nix"); 
 
+	overlays = [
+		(ff-nightly)
+
+		(self: super: {
+			jack = super.jack2;
+
+			firefox-bin-unwrapped = super.firefox-bin-unwrapped.overrideAttrs(old: {
+				buildInputs = old.buildInputs ++ (with self; [
+					ffmpeg
+				]);
+			});
+			# firefox-beta-bin-unwrapped = super.latest.firefox-beta-bin-unwrapped.overrideAttrs(old: {
+			# 	buildInputs = old.buildInputs ++ (with self; [
+			# 		ffmpeg
+			# 	]);
+			# });
+		})
+
+		(self: super: {
+			inherit (unstable)
+				go
+				gotools
+				pulseeffects-pw
+				wf-config
+				materia-theme
+			;
+
+			# pkgs.unstable
+			# Doesn't work for some dumb reason.
+			unstable = unstable;
+			kakouneUtils = unstable.kakouneUtils;
+
+			neovim = unstable.wrapNeovim neovim-nightly {
+				viAlias     = false; # in case
+				vimAlias    = false;
+				withPython  = true;
+				withPython3 = true;
+				withNodeJs  = true;
+				extraMakeWrapperArgs = "--suffix PATH : ${lib.makeBinPath (
+					with super; [ yarn ]
+				)}";
+			};
+		})
+	];
+
 in {
 	imports = [
 		<unstable/nixos/modules/services/desktops/pipewire/pipewire.nix>
@@ -49,49 +94,25 @@ in {
 
 	home-manager.users.diamond = {
 		programs.mpv.package = unstable.mpv;
-		programs.firefox.package = pkgs.latest.firefox-nightly-bin // {
+		programs.firefox.package = pkgs.latest.firefox-beta-bin // {
 			browserName = "firefox";
 		};
+		programs.vscode-css.package = unstable.vscode.overrideAttrs(old: {
+			buildInputs = old.buildInputs ++ [ pkgs.makeWrapper ];
+			postInstall = ''
+				wrapProgram $out/bin/code --add-flags \
+					"--enable-features=UseOzonePlatform --ozone-platform=wayland"
+			'';
+		});
+
+		nixpkgs.overlays = overlays;
 
 		home.packages = with unstable; [
 			sage
+			abiword
 			darktable
 		];
 	};
 
-	nixpkgs.overlays = [
-		(self: super: {
-			jack = super.jack2;
-
-			firefox-bin-unwrapped = super.firefox-bin-unwrapped.overrideAttrs(old: {
-				buildInputs = old.buildInputs ++ (with self; [
-					ffmpeg
-				]);
-			});
-		})
-
-		(self: super: {
-			inherit (unstable)
-				go
-				gotools
-				pulseeffects-pw
-				wf-config
-				materia-theme
-			;
-		
-			neovim = unstable.wrapNeovim neovim-nightly {
-				viAlias     = false; # in case
-				vimAlias    = true;
-				withPython  = true;
-				withPython3 = true;
-				withNodeJs  = true;
-				extraMakeWrapperArgs = "--suffix PATH : ${lib.makeBinPath (
-					with super; [ yarn ]
-				)}";
-			};
-		})
-
-		# Use the Firefox Nightly overlay with the latest unstable packages.
-		(ff-nightly)
-	];
+	nixpkgs.overlays = overlays;
 }

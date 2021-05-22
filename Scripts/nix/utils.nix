@@ -1,4 +1,13 @@
-{ pkgs, lib, ... }: {
+{ pkgs, lib, config, ... }:
+
+let globalPaths = lib.makeBinPath (
+		config.home-manager.users.diamond.home.packages ++
+		config.environment.systemPackages
+	);
+
+in {
+	inherit globalPaths;
+
 	mkDesktopFile = { 
 	    name,
 	    type ? "Application", 
@@ -62,4 +71,28 @@ ${text}
 			else formatInts' (from + 1) to fn (list ++ [ "${fn from}" ]);
 
 		in from: to: fn: formatInts' from to fn [];
+
+
+
+	waylandService = exec: {
+		Unit = {
+			Description = exec;
+			After  = [ "default.target" ];
+			PartOf = [ "default.target" ];
+		};
+		Install = {
+			WantedBy = [ "default.target" ];
+		};
+		Service = {
+			Type = "simple";
+			Restart = "on-failure";
+			ExecStart = exec;
+			Environment = [
+				"PATH=${globalPaths}"
+				"WAYLAND_DISPLAY=wayland-1"
+			];
+			StartLimitIntervalSec = 30;
+			StartLimitBurst = 5; 
+		};
+	}; 
 }
