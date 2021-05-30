@@ -1,0 +1,105 @@
+#EXTM3U
+#EXTINF:258,Tokyo%20Flash
+/run/user/1000/gvfs/sftp:host=192.168.1.169,port=1337,user=diamond/mnt/Music/Tokyo Flash/01 東京フラッシュ.flac
+#EXTINF:74,doublet
+/run/user/1000/gvfs/sftp:host=192.168.1.169,port=1337,user=diamond/mnt/Music/Eve - Smile (2020)/01. doublet.mp3
+#EXTINF:247,LEO
+/run/user/1000/gvfs/sftp:host=192.168.1.169,port=1337,user=diamond/mnt/Music/Eve - Smile (2020)/02. LEO.mp3
+#EXTINF:222,%E3%83%AC%E3%83%BC%E3%82%BE%E3%83%B3%E3%83%87%E3%83%BC%E3%83%88%E3%83%AB
+/run/user/1000/gvfs/sftp:host=192.168.1.169,port=1337,user=diamond/mnt/Music/Eve - Smile (2020)/03. レーゾンデートル.mp3
+#EXTINF:229,%E8%99%9A%E3%81%AE%E8%A8%98%E6%86%B6
+/run/user/1000/gvfs/sftp:host=192.168.1.169,port=1337,user=diamond/mnt/Music/Eve - Smile (2020)/04. 虚の記憶.mp3
+#EXTINF:224,%E3%81%84%E3%81%AE%E3%81%A1%E3%81%AE%E9%A3%9F%E3%81%B9%E6%96%B9
+/run/user/1000/gvfs/sftp:host=192.168.1.169,port=1337,user=diamond/mnt/Music/Eve - Smile (2020)/05. いのちの食べ方.mp3
+#EXTINF:230,%E9%97%87%E5%A4%9C
+/run/user/1000/gvfs/sftp:host=192.168.1.169,port=1337,user=diamond/mnt/Music/Eve - Smile (2020)/06. 闇夜.mp3
+#EXTINF:244,%E6%9C%9D%E3%81%8C%E9%99%8D%E3%82%8B
+/run/user/1000/gvfs/sftp:host=192.168.1.169,port=1337,user=diamond/mnt/Music/Eve - Smile (2020)/07. 朝が降る.mp3
+#EXTINF:199,%E5%BF%83%E4%BA%88%E5%A0%B1
+/run/user/1000/gvfs/sftp:host=192.168.1.169,port=1337,user=diamond/mnt/Music/Eve - Smile (2020)/08. 心予報.mp3
+#EXTINF:245,%E7%99%BD%E9%8A%80
+/run/user/1000/gvfs/sftp:host=192.168.1.169,port=1337,user=diamond/mnt/Music/Eve - Smile (2020)/09. 白銀.mp3
+#EXTINF:209,%E3%83%90%E3%82%A6%E3%83%A0%E3%82%AF%E3%83%BC%E3%83%98%E3%83%B3%E3%82%A8%E3%83%B3%E3%83%89
+/run/user/1000/gvfs/sftp:host=192.168.1.169,port=1337,user=diamond/mnt/Music/Eve - Smile (2020)/10. バウムクーヘンエンド.mp3
+#EXTINF:286,mellow
+/run/user/1000/gvfs/sftp:host=192.168.1.169,port=1337,user=diamond/mnt/Music/Eve - Smile (2020)/11. mellow.mp3
+#EXTINF:45,ognanje
+/run/user/1000/gvfs/sftp:host=192.168.1.169,port=1337,user=diamond/mnt/Music/Eve - Smile (2020)/12. ognanje.mp3
+#EXTINF:118,%E8%83%A1%E4%B9%B1%E3%81%AA%E9%A3%9F%E5%8D%93
+/run/user/1000/gvfs/sftp:host=192.168.1.169,port=1337,user=diamond/mnt/Music/Eve - Smile (2020)/13. 胡乱な食卓.mp3
+#EXTINF:196,Doushiyou%20mo%20Nai%20Kurai%20ni%20Kimi%20ga%20Suki
+/run/user/1000/gvfs/sftp:host=192.168.1.169,port=1337,user=diamond/mnt/Music/Eve – Official Number (3rd Album)/01. Dou Shiyou Mo Nai Cry Ni Kimi Ga Suki.mp3
+#EXTINF:278,Caravan
+/run/user/1000/gvfs/sftp:host=192.168.1.169,port=1337,user=diamond/mnt/Music/Eve – Official Number (3rd Album)/02. Kyaraban.mp3
+#EXTINF:207,Wakusei%20Loop
+/run/user/1000/gvfs/sftp:host=192.168.1.169,port=1337,user=diamond/mnt/Music/Eve – Official Number (3rd Album)/03. Wakusei Loop.mp3
+#EXTINF:240,Demon%20Dance%20Tokyo
+/run/user/1000/gvfs/sftp:host=192.168.1.169,port=1337,user=diamond/mnt/Music/Eve – Official Number (3rd Album)/04. Demon Dance tokyo.mp3
+#EXTINF:206,Fuuyuukan
+/run/user/1000/gvfs/sftp:host=192.168.1.169,port=1337,user=diamond/mnt/Music/Eve – Official Number (3rd Album)/05. Fuyuu Kan.mp3
+#EXTINF:188,Short%20Umbrella
+/run/user/1000/gvfs/sftp:host=192.168.1.169,port=1337,user=diamond/mnt/Music/Eve – Official Number (3rd Album)/06. Short Umbrella.mp3
+#EXTINF:221,Rabbit%20Gray
+/run/user/1000/gvfs/sftp:host=192.168.1.169,port=1337,user=diamond/mnt/Music/Eve – Official Number (3rd Album)/07. Rabbit Gray.mp3
+#EXTINF:184,Perfect%20Seimei
+/run/user/1000/gvfs/sftp:host=192.168.1.169,port=1337,user=diamond/mnt/Music/Eve – Official Number (3rd Album)/08. Perfect Seimei.mp3
+#EXTINF:236,Mel%20Factory%28Rearrange%20Ver.%29
+/run/user/1000/gvfs/sftp:host=192.168.1.169,port=1337,user=diamond/mnt/Music/Eve – Official Number (3rd Album)/09. Mel Factory.mp3
+#EXTINF:247,sister%28Rearrange%20Ver.%29
+/run/user/1000/gvfs/sftp:host=192.168.1.169,port=1337,user=diamond/mnt/Music/Eve – Official Number (3rd Album)/10. Sister(Rearrange Ver.).mp3
+#EXTINF:256,Hacking%20to%20the%20Gate
+/run/user/1000/gvfs/sftp:host=192.168.1.169,port=1337,user=diamond/mnt/Music/Kanako Itou - Vector/01 Hacking to the Gate.mp3
+#EXTINF:279,Fetishism%20Ark
+/run/user/1000/gvfs/sftp:host=192.168.1.169,port=1337,user=diamond/mnt/Music/Kanako Itou - Vector/02 Fetishism Ark.mp3
+#EXTINF:326,Fetishism%20Ark
+/run/user/1000/gvfs/sftp:host=192.168.1.169,port=1337,user=diamond/mnt/Music/Kanako Itou - Vector/03 Empety This Beyond.mp3
+#EXTINF:269,A.R.
+/run/user/1000/gvfs/sftp:host=192.168.1.169,port=1337,user=diamond/mnt/Music/Kanako Itou - Vector/04 A.R..mp3
+#EXTINF:316,Star-Crossed
+/run/user/1000/gvfs/sftp:host=192.168.1.169,port=1337,user=diamond/mnt/Music/Kanako Itou - Vector/05 Star-Crossed.mp3
+#EXTINF:271,Star-Crossed
+/run/user/1000/gvfs/sftp:host=192.168.1.169,port=1337,user=diamond/mnt/Music/Kanako Itou - Vector/06 Kizunanomirai.mp3
+#EXTINF:240,%E8%8B%83%EB%A7%82%E8%8F%83%EB%AF%82%E8%8B%83%EA%93%82%E8%8F%83%EB%BF%AF%EC%8E%BD%EC%8A%82%EC%8E%A4%EC%8A%82%EC%8E%B7%EC%8A%82%EC%8E%A4%EE%BE%83%EB%B6%BF%E8%8B%83%EA%93%82%E8%8B%83%EA%93%82%E8%8F%83%EB%BF%AF%E6%BA%BD%E8%8B%83%EB%BF%82%E8%8F%83%EB%BF%AF%EC%8E%BD%EC%8A%82%EC%8E%A4%EE%BE%83%EB%B6%BF%E2%80%AC%EA%9B%83%EB%BF%AF%EE%BE%BD%EB%B6%BF%EA%8F%83%EB%BF%AF%EC%8A%BD%EC%8E%A6%EE%BE%A3%EB%B6%BF%EB%BF%AF%EC%8E%BD%EE%BE%A3%EB%B6%BF%EA%AB%82%EA%8F%83%EB%BF%AF%EE%BE%BD%EB%B6%BF%EA%A3%83%EB%BF%AF%EC%8A%BD%EC%8E%BC%EC%8A%A7%EC%8A%A9%EC%8E%BA%EE%BE%A3%EB%B6%BF%EB%A3%82
+/run/user/1000/gvfs/sftp:host=192.168.1.169,port=1337,user=diamond/mnt/Music/Kanako Itou - Vector/07 Blue Sky to Endless.mp3
+#EXTINF:289,%E8%8B%83%EB%A7%82%E8%8F%83%EB%AF%82%E8%8B%83%EA%93%82%E8%8F%83%EB%BF%AF%EC%8E%BD%EC%8A%82%EC%8E%A4%EC%8A%82%EC%8E%B7%EC%8A%82%EC%8E%A4%EE%BE%83%EB%B6%BF%E8%8B%83%EA%93%82%E8%8B%83%EA%93%82%E8%8F%83%EB%BF%AF%E6%BA%BD%E8%8B%83%EB%BF%82%E8%8F%83%EB%BF%AF%EC%8E%BD%EC%8A%82%EC%8E%A4%EE%BE%83%EB%B6%BF%E2%80%AC%EA%9B%83%EB%BF%AF%EE%BE%BD%EB%B6%BF%EA%8F%83%EB%BF%AF%EC%8A%BD%EC%8E%A6%EE%BE%A3%EB%B6%BF%EB%BF%AF%EC%8E%BD%EE%BE%A3%EB%B6%BF%EA%AB%82%EA%8F%83%EB%BF%AF%EE%BE%BD%EB%B6%BF%EA%A3%83%EB%BF%AF%EC%8A%BD%EC%8E%BC%EC%8A%A7%EC%8A%A9%EC%8E%BA%EE%BE%A3%EB%B6%BF%EB%A3%82
+/run/user/1000/gvfs/sftp:host=192.168.1.169,port=1337,user=diamond/mnt/Music/Kanako Itou - Vector/08 Vector Eternal.mp3
+#EXTINF:223,%E8%8B%83%EB%A7%82%E8%8F%83%EB%AF%82%E8%8B%83%EA%93%82%E8%8F%83%EB%BF%AF%EC%8E%BD%EC%8A%82%EC%8E%A4%EC%8A%82%EC%8E%B7%EC%8A%82%EC%8E%A4%EE%BE%83%EB%B6%BF%E8%8B%83%EA%93%82%E8%8B%83%EA%93%82%E8%8F%83%EB%BF%AF%E6%BA%BD%E8%8B%83%EB%BF%82%E8%8F%83%EB%BF%AF%EC%8E%BD%EC%8A%82%EC%8E%A4%EE%BE%83%EB%B6%BF%E2%80%AC%EA%9B%83%EB%BF%AF%EE%BE%BD%EB%B6%BF%EA%8F%83%EB%BF%AF%EC%8A%BD%EC%8E%A6%EE%BE%A3%EB%B6%BF%EB%BF%AF%EC%8E%BD%EE%BE%A3%EB%B6%BF%EA%AB%82%EA%8F%83%EB%BF%AF%EE%BE%BD%EB%B6%BF%EA%A3%83%EB%BF%AF%EC%8A%BD%EC%8E%BC%EC%8A%A7%EC%8A%A9%EC%8E%BA%EE%BE%A3%EB%B6%BF%EB%A3%82
+/run/user/1000/gvfs/sftp:host=192.168.1.169,port=1337,user=diamond/mnt/Music/Kanako Itou - Vector/09 Space engineers.mp3
+#EXTINF:313,%E8%8B%83%EA%97%82%E8%8F%83%EA%AB%82%E8%8B%83%EA%97%82%E8%8F%83%EA%A7%82%E8%8B%83%EA%97%82%E8%8B%83%EA%93%82%E8%8B%83%EA%97%82%E8%8B%83%EA%8B%82%E8%8B%83%EA%97%82%E8%8F%83%EB%8F%82%E8%8B%83%EA%97%82%E8%8B%83%EB%A7%82%E2%80%AC%EA%8F%83%EB%BF%AF%EC%8A%BD%EC%8E%AA%EE%BE%A3%EB%B6%BF%EA%A7%82%EA%8F%83%EB%BF%AF%EC%8A%BD%EC%8E%A4%EE%BE%A3%EB%B6%BF%EA%8B%82%EA%8F%83%EB%BF%AF%EC%8A%BD%EC%8E%B3%EE%BE%A3%EB%B6%BF%EB%A7%82
+/run/user/1000/gvfs/sftp:host=192.168.1.169,port=1337,user=diamond/mnt/Music/Kanako Itou - Vector/10 Reliance.mp3
+#EXTINF:323,Fly%20to%20the%20sky
+/run/user/1000/gvfs/sftp:host=192.168.1.169,port=1337,user=diamond/mnt/Music/Kanako Itou - Vector/11 Fly to the sky.mp3
+#EXTINF:231,Fly%20to%20the%20sky
+/run/user/1000/gvfs/sftp:host=192.168.1.169,port=1337,user=diamond/mnt/Music/Kanako Itou - Vector/12 Clad Sky Observer -Remix-.mp3
+#EXTINF:367,Amaranthine
+/run/user/1000/gvfs/sftp:host=192.168.1.169,port=1337,user=diamond/mnt/Music/Kanako Itou - Vector/13 Amaranthine.mp3
+#EXTINF:322,%E8%8F%83%EB%BF%AF%EC%8E%BD%EE%BE%83%EB%B6%BF%E8%8F%83%EA%BB%82%E8%8B%83%EB%BF%AF%EC%8E%BD%EC%8A%82%EC%8E%A4%EE%BE%83%EB%B6%BF%E8%8B%83%EA%93%82%E8%8F%83%EB%BF%AF%EC%8E%BD%EC%8A%82%EC%8E%A4%EE%BE%83%EB%B6%BF%E8%8B%83%EA%93%82%E8%8F%83%EB%BF%AF%E2%B2%BD%EC%8C%A0%EC%8A%A7%EC%8A%B4%EC%8E%A0%EC%8A%A9%EE%BE%A1%EB%B6%BF%EA%8F%83%EB%BF%AF%EC%8A%BD%EC%8E%AE%EE%BE%A3%EB%B6%BF%EB%BB%82%EA%8F%83%EB%BF%AF%EC%8A%BD%EC%8E%BE%EE%BE%A3%EB%B6%BF%EA%9F%82
+/run/user/1000/gvfs/sftp:host=192.168.1.169,port=1337,user=diamond/mnt/Music/Kanako Itou - Vector/14 Striptease.mp3
+#EXTINF:271,Reactor
+/run/user/1000/gvfs/sftp:host=192.168.1.169,port=1337,user=diamond/mnt/Music/[얼티메이트] [150527] いとうかなこ - Reactor (320K)/MP3/01. Reactor.mp3
+#EXTINF:242,%E9%9D%9E%E5%AE%9F%E5%9C%A8%E9%9D%92%E5%B0%91%E5%B9%B4
+/run/user/1000/gvfs/sftp:host=192.168.1.169,port=1337,user=diamond/mnt/Music/[얼티메이트] [150527] いとうかなこ - Reactor (320K)/MP3/02. 非実在青少年.mp3
+#EXTINF:283,Operation%20Babel
+/run/user/1000/gvfs/sftp:host=192.168.1.169,port=1337,user=diamond/mnt/Music/[얼티메이트] [150527] いとうかなこ - Reactor (320K)/MP3/03. Operation Babel.mp3
+#EXTINF:279,Brave%20the%20Sky%20%28%E3%81%84%E3%81%A8%E3%81%86%E3%81%8B%E3%81%AA%E3%81%93%20Ver.%29
+/run/user/1000/gvfs/sftp:host=192.168.1.169,port=1337,user=diamond/mnt/Music/[얼티메이트] [150527] いとうかなこ - Reactor (320K)/MP3/04. Brave the Sky (いとうかなこ Ver.).mp3
+#EXTINF:290,Dive%20into%20Elyusion
+/run/user/1000/gvfs/sftp:host=192.168.1.169,port=1337,user=diamond/mnt/Music/[얼티메이트] [150527] いとうかなこ - Reactor (320K)/MP3/05. Dive into Elyusion.mp3
+#EXTINF:248,%E5%90%9B%E3%81%AE%E5%90%8D%E5%89%8D%E3%81%AE%E9%A2%A8%E3%81%8C%E5%90%B9%E3%81%8F
+/run/user/1000/gvfs/sftp:host=192.168.1.169,port=1337,user=diamond/mnt/Music/[얼티메이트] [150527] いとうかなこ - Reactor (320K)/MP3/06. 君の名前の風が吹く.mp3
+#EXTINF:260,%E6%82%A0%E4%B9%85%E3%83%8E%E7%A9%BA%E5%92%B2%E3%82%AF%E8%8A%B1
+/run/user/1000/gvfs/sftp:host=192.168.1.169,port=1337,user=diamond/mnt/Music/[얼티메이트] [150527] いとうかなこ - Reactor (320K)/MP3/07. 悠久ノ空咲ク花.mp3
+#EXTINF:249,%E8%8A%B1%E3%83%8E%E8%BC%AA%E8%88%9E%E6%9B%B2
+/run/user/1000/gvfs/sftp:host=192.168.1.169,port=1337,user=diamond/mnt/Music/[얼티메이트] [150527] いとうかなこ - Reactor (320K)/MP3/08. 花ノ輪舞曲.mp3
+#EXTINF:284,morning%20glory
+/run/user/1000/gvfs/sftp:host=192.168.1.169,port=1337,user=diamond/mnt/Music/[얼티메이트] [150527] いとうかなこ - Reactor (320K)/MP3/09. morning glory.mp3
+#EXTINF:253,Fantastisk%20udsigt
+/run/user/1000/gvfs/sftp:host=192.168.1.169,port=1337,user=diamond/mnt/Music/[얼티메이트] [150527] いとうかなこ - Reactor (320K)/MP3/10. Fantastisk udsigt.mp3
+#EXTINF:298,BY%20MY%20SIDE
+/run/user/1000/gvfs/sftp:host=192.168.1.169,port=1337,user=diamond/mnt/Music/[얼티메이트] [150527] いとうかなこ - Reactor (320K)/MP3/11. BY MY SIDE.mp3
+#EXTINF:294,Lullaby%20Blue
+/run/user/1000/gvfs/sftp:host=192.168.1.169,port=1337,user=diamond/mnt/Music/[얼티메이트] [150527] いとうかなこ - Reactor (320K)/MP3/12. Lullaby Blue.mp3
+#EXTINF:311,%E9%99%90%E7%95%8C%E7%AA%81%E7%A0%B4-Powered%20LOVE-
+/run/user/1000/gvfs/sftp:host=192.168.1.169,port=1337,user=diamond/mnt/Music/[얼티메이트] [150527] いとうかなこ - Reactor (320K)/MP3/14. 限界突破-Powered LOVE-.mp3
+#EXTINF:300,%E5%B9%BE%E5%8D%83%E3%81%AE%E5%A4%9C%E3%82%92%E8%B6%8A%E3%81%88%E3%81%A6
+/run/user/1000/gvfs/sftp:host=192.168.1.169,port=1337,user=diamond/mnt/Music/[얼티메이트] [150527] いとうかなこ - Reactor (320K)/MP3/13. 幾千の夜を越えて.mp3

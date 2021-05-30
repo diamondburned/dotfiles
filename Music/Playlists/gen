@@ -1,0 +1,11 @@
+#!/usr/bin/env bash
+rm -rf *.m3u
+
+for f in ~/.config/audacious/playlists/*.audpl; {
+	a3u -o "$PWD/" "$f"
+}
+
+oldPath="sftp://diamond@192.168.1.169:1337"
+newPath="/run/user/1000/gvfs/sftp:host=192.168.1.169,port=1337,user=diamond/mnt/Music"
+
+sed -i "s|$oldPath|$newPath|g" *.m3u

@@ -695,6 +695,26 @@
 /run/user/1000/gvfs/sftp:host=192.168.1.169,port=1337,user=diamond/mnt/Music/SPiCYSOL - Mellow Yellow (2018) [WEB FLAC]/08 Melody.flac
 #EXTINF:277,Hero
 /run/user/1000/gvfs/sftp:host=192.168.1.169,port=1337,user=diamond/mnt/Music/SPiCYSOL - Mellow Yellow (2018) [WEB FLAC]/09 Hero.flac
+#EXTINF:164,おまえ
+/run/user/1000/gvfs/sftp:host=192.168.1.169,port=1337,user=diamond/mnt/Music/tricot - 10 (2020-10-21) [WEB FLAC]/1.01. おまえ.flac
+#EXTINF:252,サマーナイトタウン
+/run/user/1000/gvfs/sftp:host=192.168.1.169,port=1337,user=diamond/mnt/Music/tricot - 10 (2020-10-21) [WEB FLAC]/1.02. サマーナイトタウン.flac
+#EXTINF:204,WARP
+/run/user/1000/gvfs/sftp:host=192.168.1.169,port=1337,user=diamond/mnt/Music/tricot - 10 (2020-10-21) [WEB FLAC]/1.03. WARP.flac
+#EXTINF:220,箱
+/run/user/1000/gvfs/sftp:host=192.168.1.169,port=1337,user=diamond/mnt/Music/tricot - 10 (2020-10-21) [WEB FLAC]/1.04. 箱.flac
+#EXTINF:238,炒飯
+/run/user/1000/gvfs/sftp:host=192.168.1.169,port=1337,user=diamond/mnt/Music/tricot - 10 (2020-10-21) [WEB FLAC]/1.05. 炒飯.flac
+#EXTINF:170,あげない
+/run/user/1000/gvfs/sftp:host=192.168.1.169,port=1337,user=diamond/mnt/Music/tricot - 10 (2020-10-21) [WEB FLAC]/1.06. あげない.flac
+#EXTINF:225,悪戯
+/run/user/1000/gvfs/sftp:host=192.168.1.169,port=1337,user=diamond/mnt/Music/tricot - 10 (2020-10-21) [WEB FLAC]/1.07. 悪戯.flac
+#EXTINF:245,幽霊船
+/run/user/1000/gvfs/sftp:host=192.168.1.169,port=1337,user=diamond/mnt/Music/tricot - 10 (2020-10-21) [WEB FLAC]/1.08. 幽霊船.flac
+#EXTINF:282,Laststep
+/run/user/1000/gvfs/sftp:host=192.168.1.169,port=1337,user=diamond/mnt/Music/tricot - 10 (2020-10-21) [WEB FLAC]/1.09. Laststep.flac
+#EXTINF:201,體
+/run/user/1000/gvfs/sftp:host=192.168.1.169,port=1337,user=diamond/mnt/Music/tricot - 10 (2020-10-21) [WEB FLAC]/1.10. 體.flac
 #EXTINF:93,混ぜるな危険
 /run/user/1000/gvfs/sftp:host=192.168.1.169,port=1337,user=diamond/mnt/Music/真っ黒 [320]/1-01 混ぜるな危険.mp3
 #EXTINF:207,右脳左脳

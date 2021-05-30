@@ -1,0 +1,299 @@
+#EXTM3U
+#EXTINF:271,ZERO%20COMMA.IROTORIDORI%20NO%20SEKAI
+/run/user/1000/gvfs/sftp:host=192.168.1.169,port=1337,user=diamond/mnt/Music/Zero Comma /01 ゼロコンマ、色とりどりの世界.flac
+#EXTINF:201,Made
+/run/user/1000/gvfs/sftp:host=192.168.1.169,port=1337,user=diamond/mnt/Music/Zero Comma /02 まで。情熱ミックス.flac
+#EXTINF:177,OWARI%20NO%20HAJIMARI
+/run/user/1000/gvfs/sftp:host=192.168.1.169,port=1337,user=diamond/mnt/Music/Zero Comma /03 終わりのはじまり.flac
+#EXTINF:197,RAT
+/run/user/1000/gvfs/sftp:host=192.168.1.169,port=1337,user=diamond/mnt/Music/Zero Comma /04 RAT.flac
+#EXTINF:306,ONEDAY
+/run/user/1000/gvfs/sftp:host=192.168.1.169,port=1337,user=diamond/mnt/Music/Zero Comma /05 ONEDAY.flac
+#EXTINF:212,CIDER%20TO%20KIMI
+/run/user/1000/gvfs/sftp:host=192.168.1.169,port=1337,user=diamond/mnt/Music/Zero Comma /06 サイダーと君.flac
+#EXTINF:204,ZURERU
+/run/user/1000/gvfs/sftp:host=192.168.1.169,port=1337,user=diamond/mnt/Music/Zero Comma /07 ズレる.flac
+#EXTINF:256,HIKIZURU%20BEAT
+/run/user/1000/gvfs/sftp:host=192.168.1.169,port=1337,user=diamond/mnt/Music/Zero Comma /08 ひきずるビート.flac
+#EXTINF:295,SANZAMEKU
+/run/user/1000/gvfs/sftp:host=192.168.1.169,port=1337,user=diamond/mnt/Music/Zero Comma /09 さんざめく.flac
+#EXTINF:219,Delusionalism
+/run/user/1000/gvfs/sftp:host=192.168.1.169,port=1337,user=diamond/mnt/Music/Mass Of The Fermenting Dregs - Mass Of The Fermenting Dregs/01 - Delusionalism.flac
+#EXTINF:228,%E3%83%8F%E3%82%A4%E3%83%A9%E3%82%A4%E3%83%88
+/run/user/1000/gvfs/sftp:host=192.168.1.169,port=1337,user=diamond/mnt/Music/Mass Of The Fermenting Dregs - Mass Of The Fermenting Dregs/02 - ハイライト.flac
+#EXTINF:284,Skabetty
+/run/user/1000/gvfs/sftp:host=192.168.1.169,port=1337,user=diamond/mnt/Music/Mass Of The Fermenting Dregs - Mass Of The Fermenting Dregs/03 - Skabetty.flac
+#EXTINF:565,%E3%82%A8%E3%83%B3%E3%83%89%E3%83%AD%E3%83%BC%E3%83%AB
+/run/user/1000/gvfs/sftp:host=192.168.1.169,port=1337,user=diamond/mnt/Music/Mass Of The Fermenting Dregs - Mass Of The Fermenting Dregs/04 - エンドロール.flac
+#EXTINF:218,I%20F%20A%20Surfer
+/run/user/1000/gvfs/sftp:host=192.168.1.169,port=1337,user=diamond/mnt/Music/Mass Of The Fermenting Dregs - Mass Of The Fermenting Dregs/05 - I F A Surfer.flac
+#EXTINF:286,%E3%83%99%E3%82%A2%E3%83%BC%E3%82%BA
+/run/user/1000/gvfs/sftp:host=192.168.1.169,port=1337,user=diamond/mnt/Music/Mass Of The Fermenting Dregs - Mass Of The Fermenting Dregs/06 - ベアーズ.flac
+#EXTINF:204,%E3%81%93%E3%81%AE%E3%82%B9%E3%83%94%E3%83%BC%E3%83%89%E3%81%AE%E5%85%88%E3%81%B8
+/run/user/1000/gvfs/sftp:host=192.168.1.169,port=1337,user=diamond/mnt/Music/MASS OF THE FERMENTING DREGS - ワールド イズ ユアーズ/01 - このスピードの先へ.flac
+#EXTINF:282,%E9%9D%92%E3%81%84%E3%80%81%E6%BF%83%E3%81%84%E3%80%81%E6%A9%99%E8%89%B2%E3%81%AE%E6%97%A5
+/run/user/1000/gvfs/sftp:host=192.168.1.169,port=1337,user=diamond/mnt/Music/MASS OF THE FERMENTING DREGS - ワールド イズ ユアーズ/02 - 青い、濃い、橙色の日.flac
+#EXTINF:243,%E3%81%8B%E3%81%8F%E3%81%84%E3%81%86%E3%82%82%E3%81%AE
+/run/user/1000/gvfs/sftp:host=192.168.1.169,port=1337,user=diamond/mnt/Music/MASS OF THE FERMENTING DREGS - ワールド イズ ユアーズ/03 - かくいうもの.flac
+#EXTINF:173,She%20is%20inside%2C%20He%20is%20outside
+/run/user/1000/gvfs/sftp:host=192.168.1.169,port=1337,user=diamond/mnt/Music/MASS OF THE FERMENTING DREGS - ワールド イズ ユアーズ/04 - She is inside, He is outside.flac
+#EXTINF:219,%E3%81%AA%E3%82%93%E3%81%AA%E3%82%93
+/run/user/1000/gvfs/sftp:host=192.168.1.169,port=1337,user=diamond/mnt/Music/MASS OF THE FERMENTING DREGS - ワールド イズ ユアーズ/05 - なんなん.flac
+#EXTINF:211,%E3%83%AF%E3%83%BC%E3%83%AB%E3%83%89%20%E3%82%A4%E3%82%BA%20%E3%83%A6%E3%82%A2%E3%83%BC%E3%82%BA
+/run/user/1000/gvfs/sftp:host=192.168.1.169,port=1337,user=diamond/mnt/Music/MASS OF THE FERMENTING DREGS - ワールド イズ ユアーズ/06 - ワールド イズ ユアーズ.flac
+#EXTINF:207,New%20Order
+/run/user/1000/gvfs/sftp:host=192.168.1.169,port=1337,user=diamond/mnt/Music/Mass of the Fermenting Dregs [2018] No New World [Flake Records, WEB] [FLAC]/01. New Order.flac
+#EXTINF:259,Asahinagu%20%28%E3%81%82%E3%81%95%E3%81%B2%E3%81%AA%E3%81%90%29
+/run/user/1000/gvfs/sftp:host=192.168.1.169,port=1337,user=diamond/mnt/Music/Mass of the Fermenting Dregs [2018] No New World [Flake Records, WEB] [FLAC]/02. Asahinagu.flac
+#EXTINF:224,If%20Only%20%28%E3%81%A0%E3%81%A3%E3%81%9F%E3%82%89%E3%81%84%E3%81%84%E3%81%AE%E3%81%AB%E3%81%AA%29
+/run/user/1000/gvfs/sftp:host=192.168.1.169,port=1337,user=diamond/mnt/Music/Mass of the Fermenting Dregs [2018] No New World [Flake Records, WEB] [FLAC]/03. If Only.flac
+#EXTINF:50,Yah%20Yah%20Yah
+/run/user/1000/gvfs/sftp:host=192.168.1.169,port=1337,user=diamond/mnt/Music/Mass of the Fermenting Dregs [2018] No New World [Flake Records, WEB] [FLAC]/04. Yah Yah Yah.flac
+#EXTINF:179,No%20New%20World
+/run/user/1000/gvfs/sftp:host=192.168.1.169,port=1337,user=diamond/mnt/Music/Mass of the Fermenting Dregs [2018] No New World [Flake Records, WEB] [FLAC]/05. No New World.flac
+#EXTINF:160,HuHuHu
+/run/user/1000/gvfs/sftp:host=192.168.1.169,port=1337,user=diamond/mnt/Music/Mass of the Fermenting Dregs [2018] No New World [Flake Records, WEB] [FLAC]/06. HuHuHu.flac
+#EXTINF:307,Sugar
+/run/user/1000/gvfs/sftp:host=192.168.1.169,port=1337,user=diamond/mnt/Music/Mass of the Fermenting Dregs [2018] No New World [Flake Records, WEB] [FLAC]/07. Sugar.flac
+#EXTINF:217,Slow-Motion%20Replay%20%28%E3%82%B9%E3%83%AD%E3%83%BC%E3%83%A2%E3%83%BC%E3%82%B7%E3%83%A7%E3%83%B3%E3%83%AA%E3%83%97%E3%83%AC%E3%82%A4%29
+/run/user/1000/gvfs/sftp:host=192.168.1.169,port=1337,user=diamond/mnt/Music/Mass of the Fermenting Dregs [2018] No New World [Flake Records, WEB] [FLAC]/08. Slow-Motion Replay.flac
+#EXTINF:285,%E5%98%98%E3%81%A8%E7%B5%B5%E7%94%BB
+/run/user/1000/gvfs/sftp:host=192.168.1.169,port=1337,user=diamond/mnt/Music/[2012] V.A. - mikgazer vol.1 [FLAC]/01. 嘘と絵画.flac
+#EXTINF:233,Parachute
+/run/user/1000/gvfs/sftp:host=192.168.1.169,port=1337,user=diamond/mnt/Music/[2012] V.A. - mikgazer vol.1 [FLAC]/02. Parachute.flac
+#EXTINF:203,Alchemy
+/run/user/1000/gvfs/sftp:host=192.168.1.169,port=1337,user=diamond/mnt/Music/[2012] V.A. - mikgazer vol.1 [FLAC]/03. Alchemy.flac
+#EXTINF:214,Twilight
+/run/user/1000/gvfs/sftp:host=192.168.1.169,port=1337,user=diamond/mnt/Music/[2012] V.A. - mikgazer vol.1 [FLAC]/04. Twilight.flac
+#EXTINF:237,flash%20back%2C0217
+/run/user/1000/gvfs/sftp:host=192.168.1.169,port=1337,user=diamond/mnt/Music/[2012] V.A. - mikgazer vol.1 [FLAC]/05. flash back,0217.flac
+#EXTINF:215,%E3%83%8F%E3%82%AF%E3%82%B8%E3%83%84
+/run/user/1000/gvfs/sftp:host=192.168.1.169,port=1337,user=diamond/mnt/Music/[2012] V.A. - mikgazer vol.1 [FLAC]/06. ハクジツ.flac
+#EXTINF:203,submarine
+/run/user/1000/gvfs/sftp:host=192.168.1.169,port=1337,user=diamond/mnt/Music/[2012] V.A. - mikgazer vol.1 [FLAC]/07. submarine.flac
+#EXTINF:374,choco-mint%20flavor
+/run/user/1000/gvfs/sftp:host=192.168.1.169,port=1337,user=diamond/mnt/Music/[2012] V.A. - mikgazer vol.1 [FLAC]/08. choco-mint flavor.flac
+#EXTINF:204,Reincarnation
+/run/user/1000/gvfs/sftp:host=192.168.1.169,port=1337,user=diamond/mnt/Music/[2012] V.A. - mikgazer vol.1 [FLAC]/09. Reincarnation.flac
+#EXTINF:275,%E6%88%B8%E6%83%91%E3%81%84%E3%81%A8%E4%B8%8D%E5%8D%94%E5%92%8C
+/run/user/1000/gvfs/sftp:host=192.168.1.169,port=1337,user=diamond/mnt/Music/[2012] V.A. - mikgazer vol.1 [FLAC]/10. 戸惑いと不協和.flac
+#EXTINF:306,%E5%8D%83%E5%B9%B4%E3%81%AE%E9%9B%A8%E3%81%AE%E7%B5%82%E3%82%8F%E3%82%8A%E3%81%AB
+/run/user/1000/gvfs/sftp:host=192.168.1.169,port=1337,user=diamond/mnt/Music/[2012] V.A. - mikgazer vol.1 [FLAC]/11. 千年の雨の終わりに.flac
+#EXTINF:365,%E3%83%8F%E3%83%AB%E3%82%AB
+/run/user/1000/gvfs/sftp:host=192.168.1.169,port=1337,user=diamond/mnt/Music/[2012] V.A. - mikgazer vol.1 [FLAC]/12. ハルカ.flac
+#EXTINF:400,%E6%9C%AC%E9%9F%B3
+/mnt/Music/Mega Shinnosuke (2019) HONNE [FLAC] {MGSN-1001}/05 - 本音.flac
+#EXTINF:336,%E3%82%B5%E3%83%86%E3%83%A9%E3%82%A4%E3%83%88
+/run/user/1000/gvfs/sftp:host=192.168.1.169,port=1337,user=diamond/mnt/Music/Dots - Shuwa Shuwa EP (2017) 320/01_サテライト.mp3
+#EXTINF:280,%E3%82%B5%E3%82%A4%E3%83%80%E3%83%BC
+/run/user/1000/gvfs/sftp:host=192.168.1.169,port=1337,user=diamond/mnt/Music/Dots - Shuwa Shuwa EP (2017) 320/02_サイダー.mp3
+#EXTINF:327,%E3%81%AD%E3%81%87
+/run/user/1000/gvfs/sftp:host=192.168.1.169,port=1337,user=diamond/mnt/Music/Dots - Shuwa Shuwa EP (2017) 320/03_ねぇ.mp3
+#EXTINF:355,Reciting%20Dawn%20After%20the%20Bonfire
+/run/user/1000/gvfs/sftp:host=192.168.1.169,port=1337,user=diamond/mnt/Music/[2012.11.14] (Album) Cosodorokitsune/01 Reciting Dawn After the Bonfire.mp3
+#EXTINF:254,Glory%20of%20the%20Snow
+/run/user/1000/gvfs/sftp:host=192.168.1.169,port=1337,user=diamond/mnt/Music/[2012.11.14] (Album) Cosodorokitsune/02 Glory of the Snow.mp3
+#EXTINF:577,Kamome
+/run/user/1000/gvfs/sftp:host=192.168.1.169,port=1337,user=diamond/mnt/Music/[2012.11.14] (Album) Cosodorokitsune/03 Kamome.mp3
+#EXTINF:386,Arisu
+/run/user/1000/gvfs/sftp:host=192.168.1.169,port=1337,user=diamond/mnt/Music/[2012.11.14] (Album) Cosodorokitsune/04 Arisu.mp3
+#EXTINF:387,Light%20%26%20Delight
+/run/user/1000/gvfs/sftp:host=192.168.1.169,port=1337,user=diamond/mnt/Music/[2012.11.14] (Album) Cosodorokitsune/05 Light & Delight.mp3
+#EXTINF:221,Mitsubachi
+/run/user/1000/gvfs/sftp:host=192.168.1.169,port=1337,user=diamond/mnt/Music/[2012.11.14] (Album) Cosodorokitsune/06 Mitsubachi.mp3
+#EXTINF:276,Newspaper
+/run/user/1000/gvfs/sftp:host=192.168.1.169,port=1337,user=diamond/mnt/Music/[2012.11.14] (Album) Cosodorokitsune/07 Newspaper.mp3
+#EXTINF:266,Tedukurinotori
+/run/user/1000/gvfs/sftp:host=192.168.1.169,port=1337,user=diamond/mnt/Music/[2012.11.14] (Album) Cosodorokitsune/08 Tedukurinotori.mp3
+#EXTINF:492,Makura
+/run/user/1000/gvfs/sftp:host=192.168.1.169,port=1337,user=diamond/mnt/Music/[2012.11.14] (Album) Cosodorokitsune/09 Makura.mp3
+#EXTINF:356,Calmly
+/run/user/1000/gvfs/sftp:host=192.168.1.169,port=1337,user=diamond/mnt/Music/[2012.11.14] (Album) Cosodorokitsune/10 Calmly.mp3
+#EXTINF:541,Faba%20Bean%20Thought%20To%20Be%20Abstract
+/run/user/1000/gvfs/sftp:host=192.168.1.169,port=1337,user=diamond/mnt/Music/[2012.11.14] (Album) Cosodorokitsune/11 Faba Bean Thought To Be Abstract.mp3
+#EXTINF:274,%E5%BD%BC%E5%A5%B3%E3%81%8C%E5%86%B7%E3%81%9F%E3%81%8F%E7%AC%91%E3%81%A3%E3%81%9F%E3%82%89%20%28prologue%20to%20the%20nine%20stages%20of%20change%20at%20the%20deceased%20remains%29
+/run/user/1000/gvfs/sftp:host=192.168.1.169,port=1337,user=diamond/mnt/Music/My Dead Girlfriend - hades (the nine stages of change at the deceased remains) [2015.06.03]/01 彼女が冷たく笑ったら (prologue to the nine stages of change at the deceased remains).mp3
+#EXTINF:227,%E6%89%8B%E3%82%92%E6%8C%AF%E3%81%A3%E3%81%A6
+/run/user/1000/gvfs/sftp:host=192.168.1.169,port=1337,user=diamond/mnt/Music/My Dead Girlfriend - hades (the nine stages of change at the deceased remains) [2015.06.03]/02 手を振って.mp3
+#EXTINF:331,hades%20in%20the%20dead%20of%20winter
+/run/user/1000/gvfs/sftp:host=192.168.1.169,port=1337,user=diamond/mnt/Music/My Dead Girlfriend - hades (the nine stages of change at the deceased remains) [2015.06.03]/03 hades in the dead of winter.mp3
+#EXTINF:272,danke
+/run/user/1000/gvfs/sftp:host=192.168.1.169,port=1337,user=diamond/mnt/Music/My Dead Girlfriend - hades (the nine stages of change at the deceased remains) [2015.06.03]/04 danke.mp3
+#EXTINF:241,Hong%20Kong%20Police
+/run/user/1000/gvfs/sftp:host=192.168.1.169,port=1337,user=diamond/mnt/Music/My Dead Girlfriend - hades (the nine stages of change at the deceased remains) [2015.06.03]/05 Hong Kong Police.mp3
+#EXTINF:396,I%20think%20about%20Mary%20Poppins
+/run/user/1000/gvfs/sftp:host=192.168.1.169,port=1337,user=diamond/mnt/Music/My Dead Girlfriend - hades (the nine stages of change at the deceased remains) [2015.06.03]/06 I think about Mary Poppins.mp3
+#EXTINF:296,incarnation%20of%20pessimism
+/run/user/1000/gvfs/sftp:host=192.168.1.169,port=1337,user=diamond/mnt/Music/My Dead Girlfriend - hades (the nine stages of change at the deceased remains) [2015.06.03]/07 incarnation of pessimism.mp3
+#EXTINF:270,%E5%BD%BC%E5%A5%B3%E3%81%8C%E6%9A%91%E3%81%8F%E3%81%A6%E8%85%90%E3%81%A3%E3%81%9F%E3%82%89
+/run/user/1000/gvfs/sftp:host=192.168.1.169,port=1337,user=diamond/mnt/Music/My Dead Girlfriend - hades (the nine stages of change at the deceased remains) [2015.06.03]/08 彼女が暑くて腐ったら.mp3
+#EXTINF:224,yurikago%20kara%20hakaba%20made
+/run/user/1000/gvfs/sftp:host=192.168.1.169,port=1337,user=diamond/mnt/Music/My Dead Girlfriend - hades (the nine stages of change at the deceased remains) [2015.06.03]/09 yurikago kara hakaba made.mp3
+#EXTINF:389,%E5%90%90%E3%81%8F%E6%81%AF%20%28the%20last%20stage%20of%20change%20at%20the%20deceased%20remains%29
+/run/user/1000/gvfs/sftp:host=192.168.1.169,port=1337,user=diamond/mnt/Music/My Dead Girlfriend - hades (the nine stages of change at the deceased remains) [2015.06.03]/10 吐く息 (the last stage of change at the deceased remains).mp3
+#EXTINF:357,Tiger%27s%20Eye
+/run/user/1000/gvfs/sftp:host=192.168.1.169,port=1337,user=diamond/mnt/Music/Niz - Stone (Zankyo Record, 2009) flac/01 - Tiger's Eye.flac
+#EXTINF:285,Iolite
+/run/user/1000/gvfs/sftp:host=192.168.1.169,port=1337,user=diamond/mnt/Music/Niz - Stone (Zankyo Record, 2009) flac/02 - Iolite.flac
+#EXTINF:270,Lapislazuli
+/run/user/1000/gvfs/sftp:host=192.168.1.169,port=1337,user=diamond/mnt/Music/Niz - Stone (Zankyo Record, 2009) flac/03 - Lapislazuli.flac
+#EXTINF:370,Turquoise
+/run/user/1000/gvfs/sftp:host=192.168.1.169,port=1337,user=diamond/mnt/Music/Niz - Stone (Zankyo Record, 2009) flac/04 - Turquoise.flac
+#EXTINF:385,Whitegold
+/run/user/1000/gvfs/sftp:host=192.168.1.169,port=1337,user=diamond/mnt/Music/Niz - Stone (Zankyo Record, 2009) flac/05 - Whitegold.flac
+#EXTINF:358,Pigeonblood
+/run/user/1000/gvfs/sftp:host=192.168.1.169,port=1337,user=diamond/mnt/Music/Niz - Stone (Zankyo Record, 2009) flac/06 - Pigeonblood.flac
+#EXTINF:404,%E3%81%97%E3%81%A5%E3%81%8B%E3%81%AE%E6%B5%B7
+/run/user/1000/gvfs/sftp:host=192.168.1.169,port=1337,user=diamond/mnt/Music/Points mp3/01 - Shizuka no Umi.mp3
+#EXTINF:265,Can%20You%20Feel%20The%20Change%20Of%20Seasons%3F
+/run/user/1000/gvfs/sftp:host=192.168.1.169,port=1337,user=diamond/mnt/Music/Points mp3/02 - Can You Feel The Change Of Seasons.mp3
+#EXTINF:279,%E3%81%B5%E3%81%9F%E3%82%8A%E3%81%AE%E3%83%80%E3%82%A4%E3%82%A2%E3%83%AA%E3%83%BC
+/run/user/1000/gvfs/sftp:host=192.168.1.169,port=1337,user=diamond/mnt/Music/Points mp3/03 - Futari no Diary.mp3
+#EXTINF:387,%E3%82%B5%E3%82%A4%E3%83%B3
+/run/user/1000/gvfs/sftp:host=192.168.1.169,port=1337,user=diamond/mnt/Music/Points mp3/04 - Sign.mp3
+#EXTINF:255,YOLO%20no%20taki
+/run/user/1000/gvfs/sftp:host=192.168.1.169,port=1337,user=diamond/mnt/Music/Points mp3/05 - YOLO no taki.mp3
+#EXTINF:234,%E3%82%AF%E3%83%AA%E3%83%BC%E3%83%A0%E3%82%BD%E3%83%BC%E3%83%80%E3%81%AE%E3%82%86%E3%81%86%E3%81%86%E3%81%A4
+/run/user/1000/gvfs/sftp:host=192.168.1.169,port=1337,user=diamond/mnt/Music/Points mp3/06 - Cream Soda no Yuuutsu.mp3
+#EXTINF:317,%E3%81%84%E3%81%8F%E3%81%A4%E3%81%8B%E3%81%AE%E5%A4%9C%E3%80%81%E3%81%84%E3%81%8F%E3%81%A4%E3%81%8B%E3%81%AE%E3%81%95%E3%82%88%E3%81%AA%E3%82%89
+/run/user/1000/gvfs/sftp:host=192.168.1.169,port=1337,user=diamond/mnt/Music/Points mp3/07 - Ikutsu ka no Yoru, Ikutsu ka no Sayonara.mp3
+#EXTINF:157,Born%20Again
+/run/user/1000/gvfs/sftp:host=192.168.1.169,port=1337,user=diamond/mnt/Music/Asian Shoegaze Compilation Vol. 1 [V0]/01. Oeil - Born Again.mp3
+#EXTINF:169,Iridenscence
+/run/user/1000/gvfs/sftp:host=192.168.1.169,port=1337,user=diamond/mnt/Music/Asian Shoegaze Compilation Vol. 1 [V0]/02. Oeil - Iridenscence.mp3
+#EXTINF:250,Happy%20%E5%BF%AB%E4%B9%90
+/run/user/1000/gvfs/sftp:host=192.168.1.169,port=1337,user=diamond/mnt/Music/Asian Shoegaze Compilation Vol. 1 [V0]/03. The Pillow Man 枕头人 - Happy 快乐.mp3
+#EXTINF:220,Air%20Crash%20Song%20%E5%9D%A0%E6%9C%BA%E6%AD%8C
+/run/user/1000/gvfs/sftp:host=192.168.1.169,port=1337,user=diamond/mnt/Music/Asian Shoegaze Compilation Vol. 1 [V0]/04. The Pillow Man 枕头人 - Air Crash Song 坠机歌.mp3
+#EXTINF:360,Candence
+/run/user/1000/gvfs/sftp:host=192.168.1.169,port=1337,user=diamond/mnt/Music/Asian Shoegaze Compilation Vol. 1 [V0]/05. Sea of Tranquility - Candence.mp3
+#EXTINF:261,Interstellar
+/run/user/1000/gvfs/sftp:host=192.168.1.169,port=1337,user=diamond/mnt/Music/Asian Shoegaze Compilation Vol. 1 [V0]/06. Sea of Tranquility - Interstellar.mp3
+#EXTINF:380,Bright%20Fantasy%20%E5%85%89%E6%98%8E%E7%9A%84%E5%B9%BB%E6%83%B3
+/run/user/1000/gvfs/sftp:host=192.168.1.169,port=1337,user=diamond/mnt/Music/Asian Shoegaze Compilation Vol. 1 [V0]/07. Endless White 百白  - Bright Fantasy 光明的幻想.mp3
+#EXTINF:324,Uproot%20Dream%20%E9%94%84%E6%A2%A6
+/run/user/1000/gvfs/sftp:host=192.168.1.169,port=1337,user=diamond/mnt/Music/Asian Shoegaze Compilation Vol. 1 [V0]/08. Endless White 百白  - Uproot Dream 锄梦.mp3
+#EXTINF:250,%E3%82%AB%E3%82%AF%E3%83%A1%E3%82%A4
+/run/user/1000/gvfs/sftp:host=192.168.1.169,port=1337,user=diamond/mnt/Music/ナガレモノノ儀/01. カクメイ.mp3
+#EXTINF:264,%E3%83%9B%E3%82%BF%E3%83%AB%E3%83%93
+/run/user/1000/gvfs/sftp:host=192.168.1.169,port=1337,user=diamond/mnt/Music/ナガレモノノ儀/02. ホタルビ.mp3
+#EXTINF:201,%E3%82%AF%E3%83%81%E3%83%8A%E3%83%AF
+/run/user/1000/gvfs/sftp:host=192.168.1.169,port=1337,user=diamond/mnt/Music/ナガレモノノ儀/03. クチナワ.mp3
+#EXTINF:302,%E3%83%88%E3%82%B3%E3%83%A4%E3%83%9F
+/run/user/1000/gvfs/sftp:host=192.168.1.169,port=1337,user=diamond/mnt/Music/ナガレモノノ儀/04. トコヤミ.mp3
+#EXTINF:359,%E3%82%B7%E3%83%B3%E3%82%AB%E3%82%A4
+/run/user/1000/gvfs/sftp:host=192.168.1.169,port=1337,user=diamond/mnt/Music/ナガレモノノ儀/05. シンカイ.mp3
+#EXTINF:253,%E3%82%B3%E3%82%AC%E3%83%AC%E3%83%AB
+/run/user/1000/gvfs/sftp:host=192.168.1.169,port=1337,user=diamond/mnt/Music/ナガレモノノ儀/06. コガレル.mp3
+#EXTINF:223,%E3%82%A2%E3%82%AB%E3%82%AC%E3%83%8D
+/run/user/1000/gvfs/sftp:host=192.168.1.169,port=1337,user=diamond/mnt/Music/ナガレモノノ儀/07. アカガネ.mp3
+#EXTINF:256,%E3%82%AB%E3%83%AA%E3%82%AB%E3%83%9F
+/run/user/1000/gvfs/sftp:host=192.168.1.169,port=1337,user=diamond/mnt/Music/ナガレモノノ儀/08. カリカミ.mp3
+#EXTINF:250,%E3%83%92%E3%82%A4%E3%83%A9%E5%84%80
+/run/user/1000/gvfs/sftp:host=192.168.1.169,port=1337,user=diamond/mnt/Music/ナガレモノノ儀/09. ヒイラ儀.mp3
+#EXTINF:991,%E3%82%B3%E3%82%A6%E3%83%9F%E3%83%A3%E3%82%AF
+/run/user/1000/gvfs/sftp:host=192.168.1.169,port=1337,user=diamond/mnt/Music/ナガレモノノ儀/10. コウミャク.mp3
+#EXTINF:256,%E3%82%AB%E3%82%AF%E3%83%A1%E3%82%A4
+/run/user/1000/gvfs/sftp:host=192.168.1.169,port=1337,user=diamond/mnt/Music/[2014.01.08] nakanoise band - otomenoinori (Album) [FLAC]/01 kakumei.flac
+#EXTINF:214,%E3%83%8F%E3%82%AF%E3%82%B8%E3%83%84
+/run/user/1000/gvfs/sftp:host=192.168.1.169,port=1337,user=diamond/mnt/Music/[2014.01.08] nakanoise band - otomenoinori (Album) [FLAC]/02 hakujitsu.flac
+#EXTINF:336,%E3%83%9E%E3%83%84%E3%83%A6%E3%82%AD
+/run/user/1000/gvfs/sftp:host=192.168.1.169,port=1337,user=diamond/mnt/Music/[2014.01.08] nakanoise band - otomenoinori (Album) [FLAC]/03 matsuyuki.flac
+#EXTINF:290,%E3%82%BD%E3%83%AC%E3%82%AB%E3%83%A9
+/run/user/1000/gvfs/sftp:host=192.168.1.169,port=1337,user=diamond/mnt/Music/[2014.01.08] nakanoise band - otomenoinori (Album) [FLAC]/04 sorekara.flac
+#EXTINF:226,%E3%82%A2%E3%82%AB%E3%82%AC%E3%83%8D
+/run/user/1000/gvfs/sftp:host=192.168.1.169,port=1337,user=diamond/mnt/Music/[2014.01.08] nakanoise band - otomenoinori (Album) [FLAC]/05 akagane.flac
+#EXTINF:325,%E3%83%88%E3%82%B3%E3%83%A4%E3%83%9F
+/run/user/1000/gvfs/sftp:host=192.168.1.169,port=1337,user=diamond/mnt/Music/[2014.01.08] nakanoise band - otomenoinori (Album) [FLAC]/06 tokoyami.flac
+#EXTINF:381,%E3%83%8F%E3%83%8B%E3%82%AB%E5%A4%A2
+/run/user/1000/gvfs/sftp:host=192.168.1.169,port=1337,user=diamond/mnt/Music/[2014.01.08] nakanoise band - otomenoinori (Album) [FLAC]/07 hanika yume.flac
+#EXTINF:297,%E3%82%B7%E3%83%A9%E3%83%88%E3%83%AA
+/run/user/1000/gvfs/sftp:host=192.168.1.169,port=1337,user=diamond/mnt/Music/[2014.01.08] nakanoise band - otomenoinori (Album) [FLAC]/08 shiratori.flac
+#EXTINF:239,%E3%83%92%E3%82%A4%E3%83%A9%E3%82%AE
+/run/user/1000/gvfs/sftp:host=192.168.1.169,port=1337,user=diamond/mnt/Music/[2014.01.08] nakanoise band - otomenoinori (Album) [FLAC]/09 hiiragi.flac
+#EXTINF:130,Chime
+/run/user/1000/gvfs/sftp:host=192.168.1.169,port=1337,user=diamond/mnt/Music/Lucie,Too - Chime/01. Chime .mp3
+#EXTINF:160,%E3%81%82%E3%81%AA%E3%81%9F%E3%81%AE%E5%85%89%20
+/run/user/1000/gvfs/sftp:host=192.168.1.169,port=1337,user=diamond/mnt/Music/Lucie,Too - Chime/02. あなたの光 .mp3
+#EXTINF:139,%E3%82%86%E3%82%89%E3%82%86%E3%82%89
+/run/user/1000/gvfs/sftp:host=192.168.1.169,port=1337,user=diamond/mnt/Music/Lucie,Too - Chime/03. ゆらゆら .mp3
+#EXTINF:55,%E3%82%AB%E3%83%A9%E3%83%BC
+/run/user/1000/gvfs/sftp:host=192.168.1.169,port=1337,user=diamond/mnt/Music/Lucie,Too - Chime/04. カラー .mp3
+#EXTINF:158,%E3%83%8F%E3%83%9F%E3%83%B3%E3%82%B0
+/run/user/1000/gvfs/sftp:host=192.168.1.169,port=1337,user=diamond/mnt/Music/Lucie,Too - 2020-06-17 - ハミング - flac/1.01. ハミング.flac
+#EXTINF:32,%E7%9B%AE%E6%AC%A1
+/run/user/1000/gvfs/sftp:host=192.168.1.169,port=1337,user=diamond/mnt/Music/itsue (イツエ) - Ikutsu mo no e (いくつもの絵) [320 - 2012]/01 - 目次.mp3
+#EXTINF:231,%E9%9D%92%E3%81%84%E9%B3%A5
+/run/user/1000/gvfs/sftp:host=192.168.1.169,port=1337,user=diamond/mnt/Music/itsue (イツエ) - Ikutsu mo no e (いくつもの絵) [320 - 2012]/02 - 青い鳥.mp3
+#EXTINF:191,%E8%A8%80%E8%91%89%E3%81%AF%E5%98%98%E3%82%92%E3%81%A4%E3%81%8F
+/run/user/1000/gvfs/sftp:host=192.168.1.169,port=1337,user=diamond/mnt/Music/itsue (イツエ) - Ikutsu mo no e (いくつもの絵) [320 - 2012]/03 - 言葉は嘘をつく.mp3
+#EXTINF:287,%E4%BE%B5%E7%B7%91
+/run/user/1000/gvfs/sftp:host=192.168.1.169,port=1337,user=diamond/mnt/Music/itsue (イツエ) - Ikutsu mo no e (いくつもの絵) [320 - 2012]/04 - 侵緑.mp3
+#EXTINF:251,%E3%82%A8%E3%83%B3%E3%83%89%E3%82%AA%E3%83%96%E3%82%BD%E3%83%AD%E3%82%A6
+/run/user/1000/gvfs/sftp:host=192.168.1.169,port=1337,user=diamond/mnt/Music/itsue (イツエ) - Ikutsu mo no e (いくつもの絵) [320 - 2012]/05 - エンドオブソロウ.mp3
+#EXTINF:426,%E3%83%A9%E3%83%96%E3%83%AC%E3%82%BF%E3%83%BC%E3%83%95%E3%83%AD%E3%83%A0
+/run/user/1000/gvfs/sftp:host=192.168.1.169,port=1337,user=diamond/mnt/Music/itsue (イツエ) - Ikutsu mo no e (いくつもの絵) [320 - 2012]/06 - ラブレターフロム.mp3
+#EXTINF:296,%E7%94%9F%E6%B4%BB
+/run/user/1000/gvfs/sftp:host=192.168.1.169,port=1337,user=diamond/mnt/Music/itsue (イツエ) - Ikutsu mo no e (いくつもの絵) [320 - 2012]/07 - 生活.mp3
+#EXTINF:81,%E3%82%A8%E3%83%94%E3%82%BD%E3%83%BC%E3%83%89
+/run/user/1000/gvfs/sftp:host=192.168.1.169,port=1337,user=diamond/mnt/Music/itsue (イツエ) - Konya Zettai (「今夜絶対」) [320 - 2015]/01 - エピソード.mp3
+#EXTINF:218,%E5%91%8A%E7%99%BD
+/run/user/1000/gvfs/sftp:host=192.168.1.169,port=1337,user=diamond/mnt/Music/itsue (イツエ) - Konya Zettai (「今夜絶対」) [320 - 2015]/02 - 告白.mp3
+#EXTINF:295,%E3%83%8D%E3%83%A2%E3%83%95%E3%82%A3%E3%83%A9
+/run/user/1000/gvfs/sftp:host=192.168.1.169,port=1337,user=diamond/mnt/Music/itsue (イツエ) - Konya Zettai (「今夜絶対」) [320 - 2015]/03 - ネモフィラ.mp3
+#EXTINF:226,56%E7%95%AA%E7%B7%9A
+/run/user/1000/gvfs/sftp:host=192.168.1.169,port=1337,user=diamond/mnt/Music/itsue (イツエ) - Konya Zettai (「今夜絶対」) [320 - 2015]/04 - 56番線.mp3
+#EXTINF:193,%E3%83%88%E3%83%A9%E3%83%B3%E3%82%B7%E3%83%BC%E3%83%90%E3%83%BC
+/run/user/1000/gvfs/sftp:host=192.168.1.169,port=1337,user=diamond/mnt/Music/itsue (イツエ) - Konya Zettai (「今夜絶対」) [320 - 2015]/05 - トランシーバー.mp3
+#EXTINF:131,%E8%9E%BA%E6%97%8B
+/run/user/1000/gvfs/sftp:host=192.168.1.169,port=1337,user=diamond/mnt/Music/itsue (イツエ) - Konya Zettai (「今夜絶対」) [320 - 2015]/06 - 螺旋.mp3
+#EXTINF:271,10%E7%95%AA%E7%9B%AE%E3%81%AE%E6%9C%88
+/run/user/1000/gvfs/sftp:host=192.168.1.169,port=1337,user=diamond/mnt/Music/itsue (イツエ) - Konya Zettai (「今夜絶対」) [320 - 2015]/07 - 10番目の月.mp3
+#EXTINF:282,%E3%82%B0%E3%83%83%E3%83%89%E3%83%8A%E3%82%A4%E3%83%88
+/run/user/1000/gvfs/sftp:host=192.168.1.169,port=1337,user=diamond/mnt/Music/itsue (イツエ) - Konya Zettai (「今夜絶対」) [320 - 2015]/08 - グッドナイト.mp3
+#EXTINF:350,%E5%90%8D%E5%89%8D%E3%81%AE%E3%81%AA%E3%81%84%E8%8A%B1%E6%9D%9F
+/run/user/1000/gvfs/sftp:host=192.168.1.169,port=1337,user=diamond/mnt/Music/itsue (イツエ) - Konya Zettai (「今夜絶対」) [320 - 2015]/09 - 名前のない花束.mp3
+#EXTINF:341,%E3%82%A8%E3%83%B3%E3%83%87%E3%82%A3%E3%83%B3%E3%82%B0
+/run/user/1000/gvfs/sftp:host=192.168.1.169,port=1337,user=diamond/mnt/Music/(2018.07.25) Wakamono Tachi E/01-エンディング.mp3
+#EXTINF:178,%E5%A4%A9%E5%9B%BD
+/run/user/1000/gvfs/sftp:host=192.168.1.169,port=1337,user=diamond/mnt/Music/(2018.07.25) Wakamono Tachi E/02-天国.mp3
+#EXTINF:225,%E7%B5%B5%E6%97%A5%E8%A8%98
+/run/user/1000/gvfs/sftp:host=192.168.1.169,port=1337,user=diamond/mnt/Music/(2018.07.25) Wakamono Tachi E/03-絵日記.mp3
+#EXTINF:319,%E5%A4%8F%E3%81%AE%E3%82%88%E3%81%86
+/run/user/1000/gvfs/sftp:host=192.168.1.169,port=1337,user=diamond/mnt/Music/(2018.07.25) Wakamono Tachi E/04-夏のよう.mp3
+#EXTINF:215,%E3%83%89%E3%83%A9%E3%83%9E
+/run/user/1000/gvfs/sftp:host=192.168.1.169,port=1337,user=diamond/mnt/Music/(2018.07.25) Wakamono Tachi E/05-ドラマ.mp3
+#EXTINF:373,RED
+/run/user/1000/gvfs/sftp:host=192.168.1.169,port=1337,user=diamond/mnt/Music/(2018.07.25) Wakamono Tachi E/06-RED.mp3
+#EXTINF:337,Step
+/run/user/1000/gvfs/sftp:host=192.168.1.169,port=1337,user=diamond/mnt/Music/(2018.07.25) Wakamono Tachi E/07-Step.mp3
+#EXTINF:265,%E3%82%B3%E3%83%BC%E3%83%AA%E3%83%B3%E3%82%B0
+/run/user/1000/gvfs/sftp:host=192.168.1.169,port=1337,user=diamond/mnt/Music/(2018.07.25) Wakamono Tachi E/08-コーリング.mp3
+#EXTINF:271,%E6%B6%99%E3%81%AE%E8%A1%8C%E6%96%B9
+/run/user/1000/gvfs/sftp:host=192.168.1.169,port=1337,user=diamond/mnt/Music/(2018.07.25) Wakamono Tachi E/09-涙の行方.mp3
+#EXTINF:489,%E8%8B%A5%E8%80%85%E3%81%9F%E3%81%A1
+/run/user/1000/gvfs/sftp:host=192.168.1.169,port=1337,user=diamond/mnt/Music/(2018.07.25) Wakamono Tachi E/10-若者たち.mp3
+#EXTINF:282,%E5%A4%A9%E6%B0%97%E4%BA%88%E5%A0%B1
+/run/user/1000/gvfs/sftp:host=192.168.1.169,port=1337,user=diamond/mnt/Music/(2018.07.25) Wakamono Tachi E/11-天気予報.mp3
+#EXTINF:238,%E4%BA%BA%E9%96%93%E3%81%A0%E3%81%A3%E3%81%9F
+/run/user/1000/gvfs/sftp:host=192.168.1.169,port=1337,user=diamond/mnt/Music/(2020.02.05) Zawameki/01-人間だった.mp3
+#EXTINF:240,%E3%82%B5%E3%82%A4%E3%83%AC%E3%83%B3
+/run/user/1000/gvfs/sftp:host=192.168.1.169,port=1337,user=diamond/mnt/Music/(2020.02.05) Zawameki/02-サイレン.mp3
+#EXTINF:356,%E5%A4%95%E5%87%AA
+/run/user/1000/gvfs/sftp:host=192.168.1.169,port=1337,user=diamond/mnt/Music/(2020.02.05) Zawameki/03-夕凪.mp3
+#EXTINF:368,%E7%A5%88%E3%82%8A
+/run/user/1000/gvfs/sftp:host=192.168.1.169,port=1337,user=diamond/mnt/Music/(2020.02.05) Zawameki/04-祈り.mp3
+#EXTINF:246,%E6%81%8B%E3%81%AA%E3%82%93%E3%81%A6
+/run/user/1000/gvfs/sftp:host=192.168.1.169,port=1337,user=diamond/mnt/Music/(2020.02.05) Zawameki/05-恋なんて.mp3
+#EXTINF:286,%E9%9B%A8
+/run/user/1000/gvfs/sftp:host=192.168.1.169,port=1337,user=diamond/mnt/Music/(2017.10.04) Tunnel Wo Nuketara/01-雨.mp3
+#EXTINF:307,%E6%98%A5
+/run/user/1000/gvfs/sftp:host=192.168.1.169,port=1337,user=diamond/mnt/Music/(2017.10.04) Tunnel Wo Nuketara/02-春.mp3
+#EXTINF:370,%E3%81%86%E3%81%AD%E3%82%8A
+/run/user/1000/gvfs/sftp:host=192.168.1.169,port=1337,user=diamond/mnt/Music/(2017.10.04) Tunnel Wo Nuketara/03-うねり.mp3
+#EXTINF:221,%E8%B8%8A%E3%82%89%E3%81%AA%E3%81%84
+/run/user/1000/gvfs/sftp:host=192.168.1.169,port=1337,user=diamond/mnt/Music/(2017.10.04) Tunnel Wo Nuketara/04-踊らない.mp3
+#EXTINF:344,Blue.2
+/run/user/1000/gvfs/sftp:host=192.168.1.169,port=1337,user=diamond/mnt/Music/(2017.10.04) Tunnel Wo Nuketara/05-Blue.2.mp3
+#EXTINF:337,Step
+/run/user/1000/gvfs/sftp:host=192.168.1.169,port=1337,user=diamond/mnt/Music/(2017.10.04) Tunnel Wo Nuketara/06-Step.mp3

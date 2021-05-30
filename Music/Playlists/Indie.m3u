@@ -1,0 +1,91 @@
+#EXTM3U
+#EXTINF:240,Zoom
+/run/user/1000/gvfs/sftp:host=192.168.1.169,port=1337,user=diamond/mnt/Music/Last Dinosaurs - In a Million Years (2012) [320]/01 - Zoom.mp3
+#EXTINF:229,I%20Can%27t%20Help%20You
+/run/user/1000/gvfs/sftp:host=192.168.1.169,port=1337,user=diamond/mnt/Music/Last Dinosaurs - In a Million Years (2012) [320]/02 - I Can't Help You.mp3
+#EXTINF:235,Sunday%20Night
+/run/user/1000/gvfs/sftp:host=192.168.1.169,port=1337,user=diamond/mnt/Music/Last Dinosaurs - In a Million Years (2012) [320]/03 - Sunday Night.mp3
+#EXTINF:197,Time%20%26%20Place
+/run/user/1000/gvfs/sftp:host=192.168.1.169,port=1337,user=diamond/mnt/Music/Last Dinosaurs - In a Million Years (2012) [320]/04 - Time & Place.mp3
+#EXTINF:229,Andy
+/run/user/1000/gvfs/sftp:host=192.168.1.169,port=1337,user=diamond/mnt/Music/Last Dinosaurs - In a Million Years (2012) [320]/05 - Andy.mp3
+#EXTINF:107,Satellites
+/run/user/1000/gvfs/sftp:host=192.168.1.169,port=1337,user=diamond/mnt/Music/Last Dinosaurs - In a Million Years (2012) [320]/06 - Satellites.mp3
+#EXTINF:256,Weekend
+/run/user/1000/gvfs/sftp:host=192.168.1.169,port=1337,user=diamond/mnt/Music/Last Dinosaurs - In a Million Years (2012) [320]/07 - Weekend.mp3
+#EXTINF:198,I%20Can%27t%20Decide
+/run/user/1000/gvfs/sftp:host=192.168.1.169,port=1337,user=diamond/mnt/Music/Last Dinosaurs - In a Million Years (2012) [320]/08 - I Can't Decide.mp3
+#EXTINF:329,Used%20to%20Be%20Mine
+/run/user/1000/gvfs/sftp:host=192.168.1.169,port=1337,user=diamond/mnt/Music/Last Dinosaurs - In a Million Years (2012) [320]/09 - Used to Be Mine.mp3
+#EXTINF:251,Honolulu
+/run/user/1000/gvfs/sftp:host=192.168.1.169,port=1337,user=diamond/mnt/Music/Last Dinosaurs - In a Million Years (2012) [320]/10 - Honolulu.mp3
+#EXTINF:301,Repair
+/run/user/1000/gvfs/sftp:host=192.168.1.169,port=1337,user=diamond/mnt/Music/Last Dinosaurs - In a Million Years (2012) [320]/11 - Repair.mp3
+#EXTINF:206,Eleven
+/run/user/1000/gvfs/sftp:host=192.168.1.169,port=1337,user=diamond/mnt/Music/Last Dinosaurs - Yumeno Garden (2018) [WEB 320]/01 Eleven.mp3
+#EXTINF:210,Dominos
+/run/user/1000/gvfs/sftp:host=192.168.1.169,port=1337,user=diamond/mnt/Music/Last Dinosaurs - Yumeno Garden (2018) [WEB 320]/02 Dominos.mp3
+#EXTINF:241,Bass%20God
+/run/user/1000/gvfs/sftp:host=192.168.1.169,port=1337,user=diamond/mnt/Music/Last Dinosaurs - Yumeno Garden (2018) [WEB 320]/03 Bass God.mp3
+#EXTINF:259,Sense
+/run/user/1000/gvfs/sftp:host=192.168.1.169,port=1337,user=diamond/mnt/Music/Last Dinosaurs - Yumeno Garden (2018) [WEB 320]/04 Sense.mp3
+#EXTINF:220,Happy
+/run/user/1000/gvfs/sftp:host=192.168.1.169,port=1337,user=diamond/mnt/Music/Last Dinosaurs - Yumeno Garden (2018) [WEB 320]/05 Happy.mp3
+#EXTINF:227,Forget%20About
+/run/user/1000/gvfs/sftp:host=192.168.1.169,port=1337,user=diamond/mnt/Music/Last Dinosaurs - Yumeno Garden (2018) [WEB 320]/06 Forget About.mp3
+#EXTINF:226,Italo%20Disco
+/run/user/1000/gvfs/sftp:host=192.168.1.169,port=1337,user=diamond/mnt/Music/Last Dinosaurs - Yumeno Garden (2018) [WEB 320]/07 Italo Disco.mp3
+#EXTINF:196,Everything%20Relative
+/run/user/1000/gvfs/sftp:host=192.168.1.169,port=1337,user=diamond/mnt/Music/Last Dinosaurs - Yumeno Garden (2018) [WEB 320]/08 Everything Relative.mp3
+#EXTINF:201,Shallow%20Boy
+/run/user/1000/gvfs/sftp:host=192.168.1.169,port=1337,user=diamond/mnt/Music/Last Dinosaurs - Yumeno Garden (2018) [WEB 320]/09 Shallow Boy.mp3
+#EXTINF:241,Non%20Lo%20So
+/run/user/1000/gvfs/sftp:host=192.168.1.169,port=1337,user=diamond/mnt/Music/Last Dinosaurs - Yumeno Garden (2018) [WEB 320]/10 Non Lo So.mp3
+#EXTINF:181,Only%20Friend
+/run/user/1000/gvfs/sftp:host=192.168.1.169,port=1337,user=diamond/mnt/Music/Wallows - Nothing Happens [2019] (CD - MP3 - V0)/01 Only Friend.mp3
+#EXTINF:163,Treacherous%20Doctor
+/run/user/1000/gvfs/sftp:host=192.168.1.169,port=1337,user=diamond/mnt/Music/Wallows - Nothing Happens [2019] (CD - MP3 - V0)/02 Treacherous Doctor.mp3
+#EXTINF:180,Sidelines
+/run/user/1000/gvfs/sftp:host=192.168.1.169,port=1337,user=diamond/mnt/Music/Wallows - Nothing Happens [2019] (CD - MP3 - V0)/03 Sidelines.mp3
+#EXTINF:178,Are%20You%20Bored%20Yet%3F%20%28feat.%20Clairo%29
+/run/user/1000/gvfs/sftp:host=192.168.1.169,port=1337,user=diamond/mnt/Music/Wallows - Nothing Happens [2019] (CD - MP3 - V0)/04  Are You Bored Yet (feat. Clairo).mp3
+#EXTINF:166,Scrawny
+/run/user/1000/gvfs/sftp:host=192.168.1.169,port=1337,user=diamond/mnt/Music/Wallows - Nothing Happens [2019] (CD - MP3 - V0)/05 Scrawny.mp3
+#EXTINF:237,Ice%20Cold%20Pool
+/run/user/1000/gvfs/sftp:host=192.168.1.169,port=1337,user=diamond/mnt/Music/Wallows - Nothing Happens [2019] (CD - MP3 - V0)/06 Ice Cold Pool.mp3
+#EXTINF:254,Worlds%20Apart
+/run/user/1000/gvfs/sftp:host=192.168.1.169,port=1337,user=diamond/mnt/Music/Wallows - Nothing Happens [2019] (CD - MP3 - V0)/07 Worlds Apart.mp3
+#EXTINF:201,What%20You%20Like
+/run/user/1000/gvfs/sftp:host=192.168.1.169,port=1337,user=diamond/mnt/Music/Wallows - Nothing Happens [2019] (CD - MP3 - V0)/08 What You Like.mp3
+#EXTINF:155,Remember%20When
+/run/user/1000/gvfs/sftp:host=192.168.1.169,port=1337,user=diamond/mnt/Music/Wallows - Nothing Happens [2019] (CD - MP3 - V0)/09 Remember When.mp3
+#EXTINF:222,I%27m%20Full
+/run/user/1000/gvfs/sftp:host=192.168.1.169,port=1337,user=diamond/mnt/Music/Wallows - Nothing Happens [2019] (CD - MP3 - V0)/10 I'm Full.mp3
+#EXTINF:390,Do%20Not%20Wait
+/run/user/1000/gvfs/sftp:host=192.168.1.169,port=1337,user=diamond/mnt/Music/Wallows - Nothing Happens [2019] (CD - MP3 - V0)/11 Do Not Wait.mp3
+#EXTINF:162,Metamodernity
+/run/user/1000/gvfs/sftp:host=192.168.1.169,port=1337,user=diamond/mnt/Music/[MP3 320] Vansire - Metamodernity (2019)/01. Metamodernity.mp3
+#EXTINF:277,False%20Direction
+/run/user/1000/gvfs/sftp:host=192.168.1.169,port=1337,user=diamond/mnt/Music/Dayglow [2018] Fuzzybrain [Self-Released, WEB] [V0]/01. False Direction.mp3
+#EXTINF:278,Can%20I%20Call%20You%20Tonight%3F
+/run/user/1000/gvfs/sftp:host=192.168.1.169,port=1337,user=diamond/mnt/Music/Dayglow [2018] Fuzzybrain [Self-Released, WEB] [V0]/02. Can I Call You Tonight.mp3
+#EXTINF:204,Hot%20Rod
+/run/user/1000/gvfs/sftp:host=192.168.1.169,port=1337,user=diamond/mnt/Music/Dayglow [2018] Fuzzybrain [Self-Released, WEB] [V0]/03. Hot Rod.mp3
+#EXTINF:176,Run%20the%20World%21%21%21
+/run/user/1000/gvfs/sftp:host=192.168.1.169,port=1337,user=diamond/mnt/Music/Dayglow [2018] Fuzzybrain [Self-Released, WEB] [V0]/04. Run the World!!!.mp3
+#EXTINF:262,Fair%20Game
+/run/user/1000/gvfs/sftp:host=192.168.1.169,port=1337,user=diamond/mnt/Music/Dayglow [2018] Fuzzybrain [Self-Released, WEB] [V0]/05. Fair Game.mp3
+#EXTINF:142,Dear%20Friend%2C
+/run/user/1000/gvfs/sftp:host=192.168.1.169,port=1337,user=diamond/mnt/Music/Dayglow [2018] Fuzzybrain [Self-Released, WEB] [V0]/06. Dear Friend,.mp3
+#EXTINF:219,Fuzzybrain
+/run/user/1000/gvfs/sftp:host=192.168.1.169,port=1337,user=diamond/mnt/Music/Dayglow [2018] Fuzzybrain [Self-Released, WEB] [V0]/07. Fuzzybrain.mp3
+#EXTINF:252,Junior%20Varsity
+/run/user/1000/gvfs/sftp:host=192.168.1.169,port=1337,user=diamond/mnt/Music/Dayglow [2018] Fuzzybrain [Self-Released, WEB] [V0]/08. Junior Varsity.mp3
+#EXTINF:236,Lover%20Boy
+/run/user/1000/gvfs/sftp:host=192.168.1.169,port=1337,user=diamond/mnt/Music/Phum Viphurit - Bangkok Balter Club (2019) {Rats Records} [WEB FLAC]/01 - Lover Boy.flac
+#EXTINF:266,Softly%20Spoken
+/run/user/1000/gvfs/sftp:host=192.168.1.169,port=1337,user=diamond/mnt/Music/Phum Viphurit - Bangkok Balter Club (2019) {Rats Records} [WEB FLAC]/02 - Softly Spoken.flac
+#EXTINF:264,Pluto
+/run/user/1000/gvfs/sftp:host=192.168.1.169,port=1337,user=diamond/mnt/Music/Phum Viphurit - Bangkok Balter Club (2019) {Rats Records} [WEB FLAC]/03 - Pluto.flac
+#EXTINF:264,Hello%2C%20Anxiety
+/run/user/1000/gvfs/sftp:host=192.168.1.169,port=1337,user=diamond/mnt/Music/Phum Viphurit - Bangkok Balter Club (2019) {Rats Records} [WEB FLAC]/04 - Hello, Anxiety.flac

@@ -1,0 +1,37 @@
+#EXTM3U
+#EXTINF:197,%E3%83%8E%E3%83%BC%E3%83%99%E3%83%AB
+/run/user/1000/gvfs/sftp:host=192.168.1.169,port=1337,user=diamond/mnt/Music/mol-74 - mol-74 [320K]/01. ノーベル.mp3
+#EXTINF:291,%E3%82%A8%E3%82%A4%E3%83%97%E3%83%AA%E3%83%AB
+/run/user/1000/gvfs/sftp:host=192.168.1.169,port=1337,user=diamond/mnt/Music/mol-74 - mol-74 [320K]/02. エイプリル.mp3
+#EXTINF:147,%EF%BC%85
+/run/user/1000/gvfs/sftp:host=192.168.1.169,port=1337,user=diamond/mnt/Music/mol-74 - mol-74 [320K]/03. ％.mp3
+#EXTINF:240,%E3%83%95%E3%83%AD%E3%83%BC%E3%82%A4%E3%83%B3%E3%82%B0
+/run/user/1000/gvfs/sftp:host=192.168.1.169,port=1337,user=diamond/mnt/Music/mol-74 - mol-74 [320K]/04. フローイング.mp3
+#EXTINF:372,%E3%82%A2%E3%83%AB%E3%82%AB%E3%83%AC%E3%83%9F%E3%82%A2
+/run/user/1000/gvfs/sftp:host=192.168.1.169,port=1337,user=diamond/mnt/Music/mol-74 - mol-74 [320K]/05. アルカレミア.mp3
+#EXTINF:299,%E8%B5%A4%E3%81%84%E9%A0%AC
+/run/user/1000/gvfs/sftp:host=192.168.1.169,port=1337,user=diamond/mnt/Music/mol-74 - mol-74 [320K]/06. 赤い頬.mp3
+#EXTINF:256,%E7%9E%BC
+/run/user/1000/gvfs/sftp:host=192.168.1.169,port=1337,user=diamond/mnt/Music/mol-74 - mol-74 [320K]/07. 瞼.mp3
+#EXTINF:206,%E5%BE%85%E3%81%A1%E3%82%8F%E3%81%B3%E3%81%9F%E9%9F%B3%E8%89%B2
+/run/user/1000/gvfs/sftp:host=192.168.1.169,port=1337,user=diamond/mnt/Music/mol-74 - mol-74 [320K]/08. 待ちわびた音色.mp3
+#EXTINF:276,%E3%81%82%E3%81%84%E3%81%93%E3%81%A8%E3%81%B0
+/run/user/1000/gvfs/sftp:host=192.168.1.169,port=1337,user=diamond/mnt/Music/mol-74 - mol-74 [320K]/09. あいことば.mp3
+#EXTINF:243,hazel%20%2B
+/run/user/1000/gvfs/sftp:host=192.168.1.169,port=1337,user=diamond/mnt/Music/mol-74 - mol-74 [320K]/10. hazel +.mp3
+#EXTINF:214,Saisei
+/run/user/1000/gvfs/sftp:host=192.168.1.169,port=1337,user=diamond/mnt/Music/mol-74 - mol-74 [320K]/11. Saisei.mp3
+#EXTINF:226,Morning%20Is%20Coming
+/run/user/1000/gvfs/sftp:host=192.168.1.169,port=1337,user=diamond/mnt/Music/mol-74 - mol-74 [320K]/12. Morning Is Coming.mp3
+#EXTINF:379,%E3%82%B9%E3%82%A6%E3%82%A3%E3%83%BC%E3%83%88%E3%82%BD%E3%82%A6%E3%83%AB
+/run/user/1000/gvfs/sftp:host=192.168.1.169,port=1337,user=diamond/mnt/Music/Sweet Soul - EP (Album)/01 スウィートソウル.flac
+#EXTINF:306,%E3%83%96%E3%83%A9%E3%82%A4%E3%83%B3%E3%83%89%E3%82%BF%E3%83%83%E3%83%81%E3%81%AE%E7%B9%94%E5%A7%AB
+/run/user/1000/gvfs/sftp:host=192.168.1.169,port=1337,user=diamond/mnt/Music/Sweet Soul - EP (Album)/02 ブラインドタッチの織姫.flac
+#EXTINF:336,%E6%84%9B%E3%81%AECoda
+/run/user/1000/gvfs/sftp:host=192.168.1.169,port=1337,user=diamond/mnt/Music/Sweet Soul - EP (Album)/03 愛のCoda.flac
+#EXTINF:301,%E3%82%B6%E3%83%BB%E3%83%81%E3%83%A3%E3%83%B3%E3%82%B9
+/run/user/1000/gvfs/sftp:host=192.168.1.169,port=1337,user=diamond/mnt/Music/Sweet Soul - EP (Album)/04 ザ・チャンス.flac
+#EXTINF:349,%E6%82%AA%E3%81%84%E7%BF%92%E6%85%A3
+/run/user/1000/gvfs/sftp:host=192.168.1.169,port=1337,user=diamond/mnt/Music/Sweet Soul - EP (Album)/05 悪い習慣.flac
+#EXTINF:305,%E3%82%AF%E3%83%AC%E3%82%A4%E3%82%B8%E3%83%BC%E3%83%BB%E3%82%B5%E3%83%9E%E3%83%BC
+/run/user/1000/gvfs/sftp:host=192.168.1.169,port=1337,user=diamond/mnt/Music/Sweet Soul - EP (Album)/06 クレイジー・サマー.flac
