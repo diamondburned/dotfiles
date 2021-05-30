@@ -12,12 +12,12 @@ let unstable = import <unstable> {
 	# Custom overrides.
 	# Neovim with yarn.
 	neovim-nightly = unstable.neovim-unwrapped.overrideAttrs(old: {
-		version = "v0.5.0-dev+1233-g82ac44d01";
+		version = "v0.5.0-dev+1345-g6dd04ed5f";
 		src = pkgs.fetchFromGitHub {
 			owner  = "neovim";
 			repo   = "neovim";
-			rev    = "82ac44d01f0e92546f43c804595c14a139af77bd";
-			sha256 = "1n89wb18zg89dya4fcd345kmkbflh9jl571adffzy4psn6zqq1c9";
+			rev    = "6dd04ed5f6c0b68eed38aeb2a3f930d8d6353678";
+			sha256 = "02cc98s7kgxg8g2zp9d80s8a853h4b3vm5zxby1rcg85rfpkmab7";
 		};
 		buildInputs = old.buildInputs ++ [ unstable.tree-sitter ];
 	});
@@ -39,11 +39,6 @@ let unstable = import <unstable> {
 					ffmpeg
 				]);
 			});
-			# firefox-beta-bin-unwrapped = super.latest.firefox-beta-bin-unwrapped.overrideAttrs(old: {
-			# 	buildInputs = old.buildInputs ++ (with self; [
-			# 		ffmpeg
-			# 	]);
-			# });
 		})
 
 		(self: super: {

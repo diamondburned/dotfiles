@@ -96,6 +96,8 @@ in {
 			"wayfire.ini" = {
 				source = pkgs.substituteAll {
 					src = ./wayfire.ini;
+					polkit_gnome = pkgs.polkit_gnome;
+
 					inherit scrot;
 				};
 			};

@@ -1,0 +1,5 @@
+#!/usr/bin/env bash
+xhost +SI:localuser:root
+sudo $@
+xhost -SI:localuser:root
+xhost

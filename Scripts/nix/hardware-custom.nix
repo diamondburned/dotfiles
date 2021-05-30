@@ -108,7 +108,13 @@ in {
 	fileSystems."/run/media/diamond/Data" = {
 		device  = "/dev/disk/by-uuid/1cdd8e08-846d-42b1-8fef-500cf4398c4b";
 		fsType  = "auto";
-		options = [ "nofail" ];
+		options = [ "nosuid" "nodev" "nofail" ];
+	};
+
+	fileSystems."/run/media/diamond/Secondary" = {
+		device  = "/dev/disk/by-uuid/1660b20d-97e1-43ab-acf3-4723d8022dec";
+		fsType  = "auto";
+		options = [ "nosuid" "nodev" "nofail" "x-gvfs-show" "x-gvfs-name=Secondary" ];
 	};
 
 	# Tablet drivers.

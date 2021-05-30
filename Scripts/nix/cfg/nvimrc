@@ -3,7 +3,6 @@ set nocompatible
 call plug#begin('~/.vim/bundle')
 
 Plug 'gioele/vim-autoswap'
-Plug 'inkarkat/vim-SyntaxRange'
 Plug 'kyazdani42/nvim-tree.lua'
 Plug 'antoinemadec/FixCursorHold.nvim'
 Plug 'tpope/vim-commentary'
@@ -46,12 +45,15 @@ hi Comment cterm=italic
 autocmd BufRead,BufNewFile *.nix    setlocal noautoindent
 autocmd BufRead,BufNewFile *.nix    setlocal noexpandtab
 autocmd BufRead,BufNewFile *.nix    setlocal shiftwidth=4
+autocmd BufRead,BufNewFile *.nix    setlocal textwidth=100
 autocmd BufRead,BufNewFile *.md     setlocal spell
+autocmd BufRead,BufNewFile *.txt    setlocal spell
 autocmd BufRead,BufNewFile *.vue    syntax sync fromstart
 autocmd BufRead,BufNewFile *.vugu   setlocal filetype=html
 autocmd BufRead,BufNewFile *.svelte setlocal filetype=html
 autocmd BufRead,BufNewFile *.svelte setlocal syntax=html
 autocmd BufRead,BufNewFile .env*    setlocal syntax=sh
+autocmd BufRead,BufNewFile *.html   setlocal textwidth=100
 
 "Go to last cursor on file open"
 autocmd BufReadPost *
@@ -65,11 +67,14 @@ filetype indent on
 
 "Thick gutter"
 set numberwidth=8
-set textwidth=80
 set number
 
-"Special cases for special formats"
-autocmd BufRead,BufNewFile *.html setlocal textwidth=100
+"80/100 column styling"
+set textwidth=80
+hi Column80  ctermfg=3
+hi Column100 ctermbg=1
+au BufWinEnter * let w:m1=matchadd("Column80",  '\%<101v.\%>81v', -1)
+au BufWinEnter * let w:m1=matchadd("Column100", '\%>100v.\+', -1)
 
 "Tab size 4"
 set tabstop=4
@@ -88,13 +93,13 @@ syntax on
 
 "Tree-sitter config"
 lua <<EOF
-require'nvim-treesitter.configs'.setup {
-	indent    = { enable = false },
-	highlight = { enable = true  },
-	refactor  = {
-		highlight_definitions = { enable = true },
-	},
-}
+	require'nvim-treesitter.configs'.setup {
+		indent    = { enable = true },
+		highlight = { enable = true },
+		refactor  = {
+			highlight_definitions = { enable = true },
+		},
+	}
 EOF
 
 "Custom colors"
@@ -153,8 +158,8 @@ set guicursor+=i-c-ci-ve:ver25
 set guicursor+=r-cr-o:hor20
 
 "Change completion colors"
-hi Pmenu    ctermbg=2 ctermfg=0
-hi PmenuSel ctermfg=15
+hi Pmenu    ctermfg=15 ctermbg=8
+hi PmenuSel ctermfg=13 ctermbg=0
 
 "Extra Go colors"
 "hi goParamName       ctermfg=15
@@ -183,6 +188,11 @@ nnoremap <Down> gj
 nnoremap <Home> g<Home>
 nnoremap <End>  g<End>
 
+"Disable line-wrap; use ellipsis"
+set nowrap
+set list
+set listchars=tab:\ \ \,extends:…
+
 "Backups"
 "Turn on backup option
 set backup
@@ -210,67 +220,6 @@ cnoremap %s/ %smagic/
 cnoremap \>s/ \>smagic/
 nnoremap :g/ :g/\v
 nnoremap :g// :g//
-
-"Nvim Tree configs"
-let g:nvim_tree_hijack_netrw = 1
-let g:nvim_tree_ignore = [ '.git', 'node_modules' ]
-let g:nvim_tree_tab_open = 1
-let g:nvim_tree_auto_open = 1
-let g:nvim_tree_auto_close = 1
-let g:nvim_tree_add_trailing = 1
-let g:nvim_tree_git_hl = 1
-let g:nvim_tree_follow = 1
-let g:nvim_tree_hide_dotfiles = 0
-let g:nvim_tree_gitignore = 0
-let g:nvim_tree_show_icons = {
-	\	'git': 1,
-	\	'folders': 1,
-	\	'files': 1,
-	\ }
-let g:nvim_tree_icons = {
-	\	'default': "  ",
-	\	'symlink': "  ",
-	\	'git': {
-	\		'unstaged': "M",
-	\		'staged': "M",
-	\		'unmerged': "U",
-	\		'renamed': "R",
-	\		'untracked': "U",
-	\		'deleted': "D",
-	\		'ignored': "I",
-	\	},
-	\	'folder': {
-	\		'default': ">",
-	\		'open': "v",
-	\		'empty': ">",
-	\		'empty_open': "v",
-	\		'symlink': ">",
-	\		'symlink_open': "v",
-	\	},
-	\	'lsp': {
-	\		'hint': ">",
-	\		'info': "!",
-	\		'warning': "!",
-	\		'error': "!",
-	\	}
-	\ }
-
-"Return the Tab bind"
-lua << EOF
-	vim.g.nvim_tree_bindings = {
-		["<Tab>"] = nil,
-	}
-EOF
-
-hi NvimTreeCursorLine ctermbg=7
-hi NvimTreeFolderName ctermfg=NONE
-hi NvimTreeFolderIcon ctermfg=14
-hi NvimTreeExecFile   ctermfg=12
-hi NvimTreeGitDirty   ctermfg=9
-hi NvimTreeGitStaged  ctermfg=2
-hi NvimTreeGitRenamed ctermfg=6
-hi NvimTreeGitDeleted ctermfg=1
-hi NvimTreeGitIgnored ctermfg=8
 
 "Markdown stuff"
 let g:vim_markdown_folding_disabled = 1
@@ -312,10 +261,11 @@ let g:gitgutter_sign_removed_first_line='-'
 let g:gitgutter_sign_modified_removed='-'
 let g:gitgutter_override_sign_column_highlight = 0
 
-hi! GitGutterAdd          guibg=NONE ctermbg=NONE guifg=#6c6c6c ctermfg=2
-hi! GitGutterChange       guibg=NONE ctermbg=NONE guifg=#6c6c6c ctermfg=6
-hi! GitGutterDelete       guibg=NONE ctermbg=NONE guifg=#6c6c6c ctermfg=1
-hi! GitGutterChangeDelete guibg=NONE ctermbg=NONE guifg=#6c6c6c ctermfg=1
+"245 is a grey-ish shade."
+hi! GitGutterAdd          guibg=NONE ctermbg=NONE guifg=#6c6c6c ctermfg=245
+hi! GitGutterChange       guibg=NONE ctermbg=NONE guifg=#6c6c6c ctermfg=245
+hi! GitGutterDelete       guibg=NONE ctermbg=NONE guifg=#6c6c6c ctermfg=245
+hi! GitGutterChangeDelete guibg=NONE ctermbg=NONE guifg=#6c6c6c ctermfg=245
 
 "Cooler git conflicts"
 let g:conflict_marker_highlight_group = ''
@@ -336,10 +286,11 @@ command -nargs=1 New :e %:p:h/<args>
 "Optimized drawing"
 set ttyfast
 set lazyredraw
+set redrawtime=2000
 
 "Configuring the update delay after buffer updates"
-set updatetime=150
-let g:cursorhold_updatetime = 150
+set updatetime=240
+let g:cursorhold_updatetime = 240
 
 "Undo history"
 set undofile
@@ -358,9 +309,87 @@ set sidescrolloff=5
 set autoread
 au CursorHold * checktime
 
+"Nvim Tree configs"
+let g:nvim_tree_hijack_netrw = 1
+let g:nvim_tree_ignore = [ '.git', 'node_modules' ]
+let g:nvim_tree_tab_open = 1
+let g:nvim_tree_auto_open = 1
+let g:nvim_tree_auto_close = 1
+let g:nvim_tree_add_trailing = 1
+let g:nvim_tree_lsp_diagnostics = 1
+let g:nvim_tree_git_hl = 1
+let g:nvim_tree_follow = 1
+let g:nvim_tree_hide_dotfiles = 0
+let g:nvim_tree_disable_window_picker = 0
+let g:nvim_tree_gitignore = 0
+let g:nvim_tree_show_icons = {
+	\	'git': 1,
+	\	'folders': 1,
+	\	'files': 1,
+	\ }
+let g:nvim_tree_icons = {
+	\	'default': "  ",
+	\	'symlink': "  ",
+	\	'git': {
+	\		'unstaged': "M",
+	\		'staged': "M",
+	\		'unmerged': "U",
+	\		'renamed': "R",
+	\		'untracked': "U",
+	\		'deleted': "D",
+	\		'ignored': "I",
+	\	},
+	\	'folder': {
+	\		'default': ">",
+	\		'open': "v",
+	\		'empty': ">",
+	\		'empty_open': "v",
+	\		'symlink': ">",
+	\		'symlink_open': "v",
+	\	},
+	\	'lsp': {
+	\		'hint': ">",
+	\		'info': "?",
+	\		'warning': "!",
+	\		'error': "!",
+	\	}
+	\ }
+
+"Return the Tab bind"
+lua << EOF
+	vim.g.nvim_tree_bindings = {
+		["<Tab>"] = nil,
+	}
+EOF
+
+hi NvimTreeCursorLine ctermbg=7
+hi NvimTreeFolderName ctermfg=NONE
+hi NvimTreeFolderIcon ctermfg=14
+hi NvimTreeExecFile   ctermfg=12
+hi NvimTreeGitDirty   ctermfg=9
+hi NvimTreeGitStaged  ctermfg=2
+hi NvimTreeGitRenamed ctermfg=6
+hi NvimTreeGitDeleted ctermfg=1
+hi NvimTreeGitIgnored ctermfg=8
+
 "Autocompletion"
 "Fix aggressive preemptive completion with noselect"
 set completeopt=menuone,noselect
+
+sign define LspDiagnosticsSignError       text=! texthl=LspDiagnosticsSignError
+sign define LspDiagnosticsSignWarning     text=! texthl=LspDiagnosticsSignWarning
+sign define LspDiagnosticsSignInformation text=? texthl=LspDiagnosticsSignInformation
+sign define LspDiagnosticsSignHint        text=> texthl=LspDiagnosticsSignHint
+
+hi LspDiagnosticsSignError       ctermbg=1    ctermfg=15
+hi LspDiagnosticsSignWarning     ctermbg=NONE ctermfg=3
+hi LspDiagnosticsSignInformation ctermbg=NONE ctermfg=4
+hi LspDiagnosticsSignHint        ctermbg=NONE ctermfg=15
+
+hi LspDiagnosticsDefaultError       ctermfg=1
+hi LspDiagnosticsDefaultWarning     ctermfg=3
+hi LspDiagnosticsDefaultInformation ctermfg=4
+hi LspDiagnosticsDefaultHint        ctermfg=15
 
 lua<<EOF
 	local on_attach = function(client, bufnr)
@@ -383,19 +412,16 @@ EOF
 
 "ALE configs"
 highlight ALEWarningSign ctermbg=NONE
+" let g:ale_sign_error = '!'
+" let g:ale_sign_warning = '>'
+" let g:ale_sign_column_always = 1
 let g:ale_virtualtext_cursor = 1
-let g:ale_sign_error = '!'
-let g:ale_sign_warning = '>'
-let g:ale_sign_column_always = 1
 let g:ale_fix_on_save = 1
-let g:ale_linters_explicit = 1
 
+let g:ale_linters_explicit = 1
 let g:ale_completion_enabled = 0
 let g:ale_completion_autoimport = 0
 
-let g:ale_linter_aliases = {
-			\ 'svelte': ['css', 'javascript'],
-			\ }
 let g:ale_fixers = {
 			\ 'go':         [ "goimports" ],
 			\ 'css':        [ "prettier" ],

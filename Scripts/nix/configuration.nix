@@ -23,27 +23,12 @@ let home-manager = builtins.fetchGit {
 
 	utils = import ./utils.nix { inherit config pkgs lib; };
 
-	# PR #101194 and more.
-	aspellPkgs = import (pkgs.fetchFromGitHub {
-		owner  = "NixOS";
-		repo   = "nixpkgs";
-		rev    = "8db271b98f7264f4d08358ade84402a56e82b294";
-		sha256 = "0l6ppknn8jm25561w6yc97j7313jn0f7zkb8milg1aqf95wyr7ds";
-	}) {};
-
 	# GIMP v2.99 Nixpkgs
 	gimpMesonPkgs = import (pkgs.fetchFromGitHub {
 		owner  = "jtojnar";
 		repo   = "nixpkgs";
 		rev    = "dc2786744e50290e290d591a75f6cc512cf31a1b";
 		sha256 = "0c5im5dzrs5a25x6g2njd4k48qirv48iavwvl5ylyvwkmfhqk9f9";
-	}) {};
-
-	go_1_16Pkgs = import (pkgs.fetchFromGitHub {
-		owner  = "c00w";
-		repo   = "nixpkgs";
-		rev    = "d203aa458c88ef7d913789fa57354ca48dab79ec"; # go_1_16;
-		sha256 = "1026xm0nf1087ypskbra5x9xn07wkaxszzzi2vl05wk3zfm7s7jv";
 	}) {};
 
 in
@@ -551,6 +536,10 @@ in
 			keepassx-community
 			gnupg
 			gimp-with-plugins
+
+			# System
+			(writeScriptBin "wsudo" (builtins.readFile ./bin/wsudo))
+			xorg.xhost # dependency for wsudo
 
 			# Development tools
 			go
