@@ -15,6 +15,120 @@ body > box {
 	border-radius: 16px !important;
 }
 
+/* Hide the bookmarks bar, always. */
+#PersonalToolbar {
+	display: none;
+}
+
+#sidebar-header {
+	display: none;
+}
+
+.sidebar-splitter {
+	display: none;
+/*
+	width:  0;
+	border: 0;
+	border-right: 1px solid #515151;
+*/
+}
+
+/* Shrink sidebar until hovered when using Sidebery. */
+/* CSS from https://github.com/mbnuqw/sidebery/issues/426. */
+:root {
+    --thin-tab-width: 85px;
+    --wide-tab-width: 250px;
+}
+#sidebar-box {
+    position: relative !important;
+	/* Transitions don't work for some reason. */
+    min-width: var(--thin-tab-width) !important;
+    max-width: var(--thin-tab-width) !important;
+}
+#sidebar-box:hover {
+    min-width: var(--wide-tab-width) !important;
+    max-width: var(--wide-tab-width) !important;
+    margin-right: calc((var(--wide-tab-width) - var(--thin-tab-width)) * -1) !important;
+    z-index: 1;
+	box-shadow: 0px 0px 15px 3px rgba(0, 0, 0, 0.45);
+}
+
+#navigator-toolbox {
+	position: relative !important;
+	z-index: 2 !important;
+	border-bottom: 0 !important;
+}
+
+/* Hide the tab bar and use Sidebery. */
+#TabsToolbar > .toolbar-items {
+	display: none !important;
+}
+
+#navigator-toolbox {
+	height:  40px !important;
+	display: flex;
+	align-items: center;
+	flex-direction: row-reverse;
+
+	border-radius: 4px 4px 0 0;
+	background: linear-gradient(
+		to right,
+		rgba(85,  205, 252, 1) 0%,
+		rgba(147, 194, 255, 1) 25%,
+		rgba(200, 181, 245, 1) 50%,
+		rgba(234, 171, 217, 1) 75%,
+		rgba(247, 168, 184, 1) 100%
+	);
+}
+#titlebar {
+	appearance: none !important;
+}
+#nav-bar {
+	flex: 1;
+	color: black !important;
+	background: transparent !important;
+	box-shadow: none !important;
+}
+#nav-bar * {
+	-moz-window-dragging: drag !important;
+}
+#urlbar {
+	color: black !important;
+	top: 1px !important;
+}
+#urlbar-background {
+	border: none !important;
+	background-color: transparent !important;
+}
+#urlbar[focused="true"] > #urlbar-background {
+	box-shadow: none !important;
+}
+#nav-bar[urlbar-exceeds-toolbar-bounds="true"] #urlbar {
+	color: white !important;
+}
+#nav-bar[urlbar-exceeds-toolbar-bounds="true"] #urlbar-background {
+	background-color: var(--toolbar--field-non-lwt-bgcolor, Field) !important;
+}
+
+/* Some alignment tweaks to do with the URL popout. */
+#urlbar[breakout][breakout-extend] {
+	top: 0px !important;
+	margin-top: -5px !important;
+}
+#urlbar[breakout][breakout-extend] > #urlbar-input-container {
+	margin: 2px 0 !important;
+}
+
+/* Ugly fallback for the menubar, only for when I actually need it. */
+#toolbar-menubar {
+    position: sticky !important;
+    top: 0 !important;
+    left: 0 !important;
+    width: 0 !important;
+    margin-left: -50vw;
+    background-color: black;
+}
+
 #browser vbox#appcontent tabbrowser,
 #content,
 #tabbrowser-tabpanels,
@@ -133,135 +247,4 @@ tabs#tabbrowser-tabs toolbarbutton:hover .toolbarbutton-icon {
 }
 .container.infobar {
 	align-items: center !important;
-}
-
-/* Bruh.
- * This is too much to comment individually, but it is the unholy code to style
- * the tab and address bar to be on the same line. It may break with the
- * bookmark bar.
- *
- * It also forces the headerbar's height to be the same as the compact Materia
- * theme, because that's what I use.
- */
-
-#navigator-toolbox {
-	height:  41px !important; /* No idea why. */
-	display: flex;
-	flex-direction: row-reverse;
-
-	border-radius: 4px 4px 0 0;
-	background: linear-gradient(
-		to right,
-		rgba(85,  205, 252, 1) 0%,
-		rgba(147, 194, 255, 1) 25%,
-		rgba(200, 181, 245, 1) 50%,
-		rgba(234, 171, 217, 1) 75%,
-		rgba(247, 168, 184, 1) 100%
-	);
-}
-#tab-notification-deck *,
-#BrowserToolbarPalette * {
-	background-color: transparent;
-}
-#titlebar {
-	flex: 1;
-	appearance: none !important;
-	border-left: 1px solid #0005;
-}
-#TabsToolbar {
-	color: black !important;
-}
-#TabsToolbar-customization-target {
-	flex: 1;
-}
-
-/* Selectors for common transitions. */
-#nav-bar {
-	transition: 300ms cubic-bezier(.45,.05,.55,.95);
-	transition-delay: 300ms;
-	transition-property: max-width, box-shadow, color, background-color;
-}
-
-#nav-bar:hover,
-#nav-bar[urlbar-exceeds-toolbar-bounds="true"] {
-	transition-delay: 100ms;
-}
-
-#nav-bar {
-	color: black !important;
-	background: transparent !important;
-
-	max-width:  400px;
-	box-shadow: inset -20px 0px 20px -20px rgba(0,0,0,0.35) !important;
-}
-#nav-bar:hover,
-#nav-bar[urlbar-exceeds-toolbar-bounds="true"] {
-	max-width:  100%;
-	box-shadow: none;
-}
-
-#urlbar {
-	color: black !important;
-}
-#urlbar-background {
-	border: none !important;
-	background-color: transparent !important;
-}
-
-#nav-bar[urlbar-exceeds-toolbar-bounds="true"] #urlbar {
-	color: white !important;
-}
-#nav-bar[urlbar-exceeds-toolbar-bounds="true"] #urlbar-background {
-	background-color: var(--toolbar--field-non-lwt-bgcolor, Field) !important;
-}
-
-/* TODO: this is garbage and stuttery. */
-
-/* /1* Show only the address bar by default. *1/ */
-/* #PanelUI-button, */
-/* #nav-bar-customization-target > *:not(#urlbar-container) { */
-/* 	display: none; */
-/* } */
-/* #nav-bar:hover                                 #PanelUI-button, */
-/* #nav-bar[urlbar-exceeds-toolbar-bounds="true"] #PanelUI-button, */
-/* #nav-bar:hover                                 #nav-bar-customization-target > *, */
-/* #nav-bar[urlbar-exceeds-toolbar-bounds="true"] #nav-bar-customization-target > * { */
-/* 	display: inherit; */
-/* } */
-
-/* Show the lhs and drhs buttons only when hovering above the address bar. */
-#nav-bar [id^="pageAction-"],
-#nav-bar #identity-permission-box {
-	display: none !important;
-}
-#nav-bar:hover [id^="pageAction-"],
-#nav-bar:hover #identity-permission-box {
-	display: inherit !important;
-}
-
-#urlbar {
-	top: 4px !important; /* Magic constant. */
-}
-
-spacer[part^="overflow-"] {
-	width: 10px !important;
-
-	background-image: linear-gradient(to right,
-		rgba(0, 0, 0, 0.35) 0%,
-		rgba(0, 0, 0, 0.15) 15%,
-		rgba(0, 0, 0, 0.00) 100%
-	);
-}
-spacer[part="overflow-start-indicator"] {
-	margin-inline: -0.5px -9.25px !important;
-}
-spacer[part="overflow-end-indicator"] {
-	margin-inline: -8.5px -0.5px !important;
-}
-spacer.closing-tabs-spacer {
-	width: 5px !important;
-}
-
-.tabbrowser-tab {
-	padding-inline: 0px !important;
 }

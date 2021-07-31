@@ -12,6 +12,9 @@ Plug 'godlygeek/tabular'
 Plug 'bogado/file-line'
 Plug 'rhysd/conflict-marker.vim'
 
+Plug 'junegunn/fzf'
+Plug 'junegunn/fzf.vim'
+
 "Better highlighting"
 Plug 'nvim-treesitter/nvim-treesitter', {'do': ':TSUpdate'}
 Plug 'nvim-treesitter/nvim-treesitter-refactor'
@@ -20,9 +23,8 @@ Plug 'nvim-treesitter/nvim-treesitter-refactor'
 Plug 'jiangmiao/auto-pairs'
 
 "Autocompletion"
-Plug 'dense-analysis/ale'
-Plug 'neovim/nvim-lspconfig'
-Plug 'nvim-lua/completion-nvim'
+"Plug 'dense-analysis/ale'
+Plug 'diamondburned/ale'
 
 "Languages"
 Plug 'cespare/vim-toml'
@@ -73,8 +75,12 @@ set number
 set textwidth=80
 hi Column80  ctermfg=3
 hi Column100 ctermbg=1
-au BufWinEnter * let w:m1=matchadd("Column80",  '\%<101v.\%>81v', -1)
-au BufWinEnter * let w:m1=matchadd("Column100", '\%>100v.\+', -1)
+
+function! HighlightLong() abort
+	call matchadd("Column80",  '\%<101v.\%>81v')
+	call matchadd("Column100", '\%>100v.\+')
+endfunction
+au BufNew * call HighlightLong()
 
 "Tab size 4"
 set tabstop=4
@@ -114,17 +120,17 @@ hi SpellBad ctermbg=NONE cterm=undercurl guisp=#FF6961
 hi StatusLine   ctermfg=5
 hi StatusLineNC ctermfg=13
 
-hi Special ctermfg=15
+hi Special     ctermfg=15
 hi SpecialChar ctermfg=5
-hi Comment ctermfg=4
-hi Constant ctermfg=15
-hi String  ctermfg=13
-hi Number  ctermfg=13
-hi Boolean ctermfg=13
-hi Identifier ctermfg=15
-hi Function ctermfg=14
-hi Statement ctermfg=6
-hi Operator ctermfg=12
+hi Comment     ctermfg=4
+hi Constant    ctermfg=15
+hi String      ctermfg=13
+hi Number      ctermfg=13
+hi Boolean     ctermfg=13
+hi Identifier  ctermfg=15
+hi Function    ctermfg=14
+hi Statement   ctermfg=6
+hi Operator    ctermfg=12
 
 hi Type ctermfg=2
 
@@ -141,16 +147,7 @@ hi Title ctermfg=10
 
 "Custom negative number highlighting"
 syntax match negativeNumber '[-+]\d\+\(\.\d*\)\?'
-hi def link  negativeNumber NUmber
-
-""Hide the trailing slash next to the directories"
-"augroup nerdtreehidecwd
-"	autocmd!
-"	autocmd FileType nerdtree setlocal conceallevel=3 | syntax match NERDTreeDirSlash #/$# containedin=NERDTreeDir conceal contained
-"augroup end
-
-""Hide the cursor for NERDTree; rely on the background"
-"autocmd FileType nerdtree hi Cursor 
+hi def link  negativeNumber Number
 
 "Custom cursor mode: normal-visual block, insert-command IBeam"
 set guicursor=n-v-sm:block
@@ -173,13 +170,6 @@ au InsertLeave * call cursor([getpos('.')[1], getpos('.')[2]+1])
 
 "Autoindentation"
 set autoindent
-
-"Give ALE errors red undercurls"
-hi ALEError cterm=undercurl gui=undercurl guisp=#FF6961
-
-"Hide NERDTree arrows"
-let g:NERDTreeDirArrowExpandable = ''
-let g:NERDTreeDirArrowCollapsible = ''
 
 "ToggleWrap from the vim wiki"
 set linebreak
@@ -214,12 +204,6 @@ nnoremap f :F<CR>
 
 "Better Vim regexes"
 set smartcase
-nnoremap / /\v
-vnoremap / /\v
-cnoremap %s/ %smagic/
-cnoremap \>s/ \>smagic/
-nnoremap :g/ :g/\v
-nnoremap :g// :g//
 
 "Markdown stuff"
 let g:vim_markdown_folding_disabled = 1
@@ -286,11 +270,14 @@ command -nargs=1 New :e %:p:h/<args>
 "Optimized drawing"
 set ttyfast
 set lazyredraw
-set redrawtime=2000
+
+"Use a low redraw time, because these times may accumulate each keypress, which
+"is annoying."
+set redrawtime=500
 
 "Configuring the update delay after buffer updates"
-set updatetime=240
-let g:cursorhold_updatetime = 240
+set updatetime=150
+let g:cursorhold_updatetime = 150
 
 "Undo history"
 set undofile
@@ -316,7 +303,7 @@ let g:nvim_tree_tab_open = 1
 let g:nvim_tree_auto_open = 1
 let g:nvim_tree_auto_close = 1
 let g:nvim_tree_add_trailing = 1
-let g:nvim_tree_lsp_diagnostics = 1
+let g:nvim_tree_lsp_diagnostics = 0
 let g:nvim_tree_git_hl = 1
 let g:nvim_tree_follow = 1
 let g:nvim_tree_hide_dotfiles = 0
@@ -346,12 +333,6 @@ let g:nvim_tree_icons = {
 	\		'empty_open': "v",
 	\		'symlink': ">",
 	\		'symlink_open': "v",
-	\	},
-	\	'lsp': {
-	\		'hint': ">",
-	\		'info': "?",
-	\		'warning': "!",
-	\		'error': "!",
 	\	}
 	\ }
 
@@ -376,52 +357,22 @@ hi NvimTreeGitIgnored ctermfg=8
 "Fix aggressive preemptive completion with noselect"
 set completeopt=menuone,noselect
 
-sign define LspDiagnosticsSignError       text=! texthl=LspDiagnosticsSignError
-sign define LspDiagnosticsSignWarning     text=! texthl=LspDiagnosticsSignWarning
-sign define LspDiagnosticsSignInformation text=? texthl=LspDiagnosticsSignInformation
-sign define LspDiagnosticsSignHint        text=> texthl=LspDiagnosticsSignHint
-
-hi LspDiagnosticsSignError       ctermbg=1    ctermfg=15
-hi LspDiagnosticsSignWarning     ctermbg=NONE ctermfg=3
-hi LspDiagnosticsSignInformation ctermbg=NONE ctermfg=4
-hi LspDiagnosticsSignHint        ctermbg=NONE ctermfg=15
-
-hi LspDiagnosticsDefaultError       ctermfg=1
-hi LspDiagnosticsDefaultWarning     ctermfg=3
-hi LspDiagnosticsDefaultInformation ctermfg=4
-hi LspDiagnosticsDefaultHint        ctermfg=15
-
-lua<<EOF
-	local on_attach = function(client, bufnr)
-		require('completion').on_attach(client, bufnr)
-
-		local opts = { noremap = true, silent = true }
-		local keym = function(...) vim.api.nvim_buf_set_keymap(bufnr, ...) end
-		keym('n', 'gD', '<Cmd>lua vim.lsp.buf.declaration()<CR>', opts)
-		keym('n', 'gd', '<Cmd>lua vim.lsp.buf.definition()<CR>', opts)
-		keym('n', 'K', '<Cmd>lua vim.lsp.buf.hover()<CR>', opts)
-	end
-
-	local servers = { "gopls", "tsserver", "clangd", "zls", "denols" }
-	local nvim_lsp = require('lspconfig')
-
-	for _, server in ipairs(servers) do
-		nvim_lsp[server].setup { on_attach = on_attach }
-	end
-EOF
-
 "ALE configs"
-highlight ALEWarningSign ctermbg=NONE
-" let g:ale_sign_error = '!'
-" let g:ale_sign_warning = '>'
-" let g:ale_sign_column_always = 1
+set omnifunc=ale#completion#OmniFunc
+
+hi ALEError cterm=undercurl gui=undercurl guisp=#FF6961
+hi ALEWarningSign ctermbg=NONE
+
 let g:ale_virtualtext_cursor = 1
+let g:ale_sign_error = '!'
+let g:ale_sign_warning = '>'
+let g:ale_sign_column_always = 1
 let g:ale_fix_on_save = 1
-
-let g:ale_linters_explicit = 1
-let g:ale_completion_enabled = 0
-let g:ale_completion_autoimport = 0
-
+let g:ale_linters_explicit = 0
+let g:ale_completion_autoimport = 1
+let g:ale_linter_aliases = {
+			\ 'svelte': ['css', 'javascript'],
+			\ }
 let g:ale_fixers = {
 			\ 'go':         [ "goimports" ],
 			\ 'css':        [ "prettier" ],
@@ -430,6 +381,18 @@ let g:ale_fixers = {
 			\ 'svelte':     [ "prettier", "prettier_standard", "eslint" ],
 			\ 'javascript': [ "prettier", "prettier_standard", "eslint" ],
 			\ }
+let g:ale_completion_enabled = 1
+let g:ale_linters = {
+			\ 'go':         [ "gopls" ],
+			\ 'zig':        [ "zls" ],
+			\ 'c':          [ "clangd" ],
+			\ 'cpp':        [ "clangd" ],
+			\ 'svelte':     [ "tsserver", "eslint" ],
+			\ 'javascript': [ "deno", "tsserver" ],
+			\ }
+nnoremap gd :ALEGoToDefinition<CR>
+nnoremap K :ALEHover<CR>
+
 
 ""Assistive LSP bindings"
 "function! ToggleQf()

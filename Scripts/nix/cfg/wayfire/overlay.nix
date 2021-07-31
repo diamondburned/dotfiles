@@ -2,15 +2,27 @@ let nixosPkgs = import <nixos> {};
 	lib = nixosPkgs.lib;
 
 	waylandOverlays = import (nixosPkgs.fetchFromGitHub {
-		owner  = "colemickens";
+		owner  = "nix-community";
 		repo   = "nixpkgs-wayland";
-		rev    = "e90c00ca1ddd295ecb53d9059be92c5ca7d75748";
-		sha256 = "060jpzhylysxqlv1qfl2bl5if71lkn217ss44b0w9nyxc1286sww";
+		rev    = "5a8d934666de00b7e3ad78967350ad0a1f2ed4c7";
+		sha256 = "1007wzy1lgj86g2yw7kbgxrzrl288cj29b3bwmmxv7zs0r3qqb7z";
 	});
 
 	waylandPkgs = import <unstable> {
 		overlays = [ waylandOverlays ];
 	};
+
+	wf-config = waylandPkgs.wayfire.overrideAttrs (old: {
+		name = "wf-config";
+		version = "0.8.0";
+
+		src = builtins.fetchGit {
+			url = "git@github.com:WayfireWM/wf-config.git";
+			rev = "145470ddd0d1c3b7080220e4f30cc78f377d5dc0";
+		};
+
+		# mesonFlags = [ "-Dwlroots:x11-backend=disabled" ];
+	});
 
 in self: super: {
 	inherit (waylandPkgs) wlogout wlsunset;
@@ -23,34 +35,15 @@ in self: super: {
 	# });
 
 	wayfire = waylandPkgs.wayfire.overrideAttrs (old: {
+		# version = "0.7.2";
 		# src = super.fetchFromGitHub {
-		# 	owner  = "diamondburned";
+		# 	owner  = "WayfireWM";
 		# 	repo   = "wayfire";
-		# 	rev    = "41633719868dfb76dad7a7564d4184d7894f7e76";
-		# 	sha256 = "0h6zfr6a5k90hnrw0hmmgig5v17xhry0vzyf7lgw057c4lqrvqjc";
+		# 	rev    = "7a69c1e3c0fe0cd0134db6d8fe581d9d831f648e";
+		# 	sha256 = "${super.lib.fakeSha256}";
 		# 	fetchSubmodules = true;
 		# };
-
-		# version = "0.7.0";
-
-		src = super.fetchFromGitHub {
-			owner  = "WayfireWM";
-			repo   = "wayfire";
-			rev    = "6095d3aae7d4b4f58a98b6ef6ea7cdbbceaeba61";
-			sha256 = "0gy5qadwkfm6v8yhdgvgylc4kiz355k6jw1lpjp4cdwnfn31p1zv";
-			fetchSubmodules = true;
-		};
-
-		version = "0.7.1";
 		passthru.providedSessions = [ "wayfire" ];
-		buildInputs = old.buildInputs ++ (with super; [
-			libuuid
-			gdk-pixbuf
-			gnome3.glib
-			gnome3.gtk3
-			xorg.xcbutilrenderutil
-			xwayland
-		]);
 		postInstall = ''
 			mkdir -p "$out/share/wayland-sessions"
 			cp ${./wayfire.desktop} \
@@ -58,41 +51,43 @@ in self: super: {
 		'';
 	});
 
-	wf-shell = super.stdenv.mkDerivation rec {
-		name = "wf-shell-3e31442-css-patched";
-		src  = super.fetchFromGitHub {
-			owner  = "WayfireWM";
-			repo   = "wf-shell";
-			rev    = "v0.7.0";
-			sha256 = "1q54ivzb81wxbmyyggsi45jcbhdhilp49g8fskwyfrnvv2w021c9";
-			fetchSubmodules = true;
-		};
+	wf-shell = waylandPkgs.wayfirePlugins.wf-shell;
 
-		enableParallelBuilding = true;
+	# wf-shell = super.stdenv.mkDerivation rec {
+	# 	name = "wf-shell-0.7.0";
+	# 	src  = super.fetchFromGitHub {
+	# 		owner  = "WayfireWM";
+	# 		repo   = "wf-shell";
+	# 		rev    = "v0.7.0";
+	# 		sha256 = "1q54ivzb81wxbmyyggsi45jcbhdhilp49g8fskwyfrnvv2w021c9";
+	# 		fetchSubmodules = true;
+	# 	};
 
-		nativeBuildInputs = with super; [
-			meson
-			ninja
-			pkgconfig
-		];
+	# 	enableParallelBuilding = true;
 
-		buildInputs = with super; [
-			self.wf-config
-			self.wayfire
+	# 	nativeBuildInputs = with super; [
+	# 		meson
+	# 		ninja
+	# 		pkgconfig
+	# 	];
 
-			wayland
-			wayland-protocols
-			wayland-utils
-			waylandpp
-			gnome3.gtkmm3.dev
-			gnome3.gtk.dev
-			gtk-layer-shell
-			libpulseaudio
-			alsaLib.dev
-			graphviz
-			glm
-		];
-	};
+	# 	buildInputs = with super; [
+	# 		self.wf-config
+	# 		self.wayfire
+
+	# 		wayland
+	# 		wayland-protocols
+	# 		wayland-utils
+	# 		waylandpp
+	# 		gnome3.gtkmm3.dev
+	# 		gnome3.gtk.dev
+	# 		gtk-layer-shell
+	# 		libpulseaudio
+	# 		alsaLib.dev
+	# 		graphviz
+	# 		glm
+	# 	];
+	# };
 
 # 	sway-unwrapped = super.sway-unwrapped.overrideAttrs (old: {
 # 		patches = (old.patches or []) ++ [ ../sway/raise_floating.diff ];

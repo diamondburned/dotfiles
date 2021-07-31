@@ -6,7 +6,7 @@
 
 let home-manager = builtins.fetchGit {
 		url = "https://github.com/nix-community/home-manager.git";
-		ref = "release-20.09";
+		ref = "master";
 	};
 
 	lsoc-overlay = builtins.fetchGit {
@@ -14,6 +14,7 @@ let home-manager = builtins.fetchGit {
 		rev = "09d41b0a6f574390d6edc0271be459bd1390ea8d";
 	};
 
+	# TODO: fix this.
 	tdeo = import (builtins.fetchGit {
 		url = "https://github.com/tadeokondrak/nix-overlay";
 		rev = "0d05c53204da3b576f810ef2e1312b19bf2420b7";
@@ -27,9 +28,37 @@ let home-manager = builtins.fetchGit {
 	gimpMesonPkgs = import (pkgs.fetchFromGitHub {
 		owner  = "jtojnar";
 		repo   = "nixpkgs";
-		rev    = "dc2786744e50290e290d591a75f6cc512cf31a1b";
+		rev	= "dc2786744e50290e290d591a75f6cc512cf31a1b";
 		sha256 = "0c5im5dzrs5a25x6g2njd4k48qirv48iavwvl5ylyvwkmfhqk9f9";
 	}) {};
+
+	userEnv = {
+		NIX_AUTO_RUN = "1";
+		STEAM_RUNTIME = "0";
+		# XDG_CURRENT_DESKTOP = "Wayfire";
+
+		GOPATH = "/home/diamond/.go";
+		GOBIN  = "/home/diamond/.go/bin";
+		CGO_ENABLED = "0";
+
+		# Disable VSync.
+		vblank_mode = "0";
+
+		# Enforce Wayland.
+		MOZ_ENABLE_WAYLAND = "1";
+		SDL_VIDEODRIVER	= "wayland";
+		QT_QPA_PLATFORM	= "wayland";
+
+		# osu settings.
+		WINE_RT = "89";
+		WINE_SRV_RT = "99";
+		STAGING_SHARED_MEMORY = "1";
+		STAGING_RT_PRIORITY_BASE = "89";
+		STAGING_RT_PRIORITY_SERVER = "99";
+		STAGING_PA_DURATION = "250000";
+		STAGING_PA_PERIOD = "8192";
+	   	STAGING_PA_LATENCY_USEC = "128";
+	};
 
 in
 
@@ -69,8 +98,8 @@ in
 			# This might be causing painful rebuilds.
 			# vte = vte super;
 
-			# aspell      = aspellPkgs.aspell;
-			# gspell      = aspellPkgs.gspell;
+			# aspell	  = aspellPkgs.aspell;
+			# gspell	  = aspellPkgs.gspell;
 			# aspellDicts = aspellPkgs.aspellDicts;
 
 			# GIMP v2.99
@@ -89,7 +118,7 @@ in
 			# 	src = super.fetchFromGitHub {
 			# 		owner  = "mpv-player";
 			# 		repo   = "mpv";
-			# 		rev    = "93066ff12f06d47e7a1a79e69a4cda95631a1553";
+			# 		rev	= "93066ff12f06d47e7a1a79e69a4cda95631a1553";
 			# 		sha256 = "0cw9qh41lynfx25pxpd13r8kyqj1zh86n0sxyqz3f39fpljr9w4r";
 			# 	};
 			# });
@@ -101,9 +130,6 @@ in
 					rev = "a3ef469edf1613b8ab51de87e043c3c57d12a4a9";
 				};
 			});
-			steam = super.steam.override {
-				extraLibraries = pkgs: with pkgs; [ SDL2 ];
-			};
 			# Omitted because it's too much to compile.
 			# osu-wine = super.osu-wine.override {
 			# 	wine = aspellPkgs.wineStaging.overrideDerivation(old: {
@@ -119,12 +145,25 @@ in
 			# 		patch -p1 < ${./patches/xwayland-fps.patch}
 			# 	'';
 			# });
+			steam = let pkgs = pkgs: with pkgs; [
+					SDL2
+					pkgsi686Linux.SDL2
+				];
+				in super.steam.override {
+					extraPkgs = pkgs;
+					extraLibraries = pkgs;
+					extraProfile = ''
+						export STEAM_RUNTIME=0
+						export STEAM_RUNTIME_PREFER_HOST_LIBRARIES=1
+						export LD_LIBRARY_PATH="${super.SDL2}/lib:$LD_LIBRARY_PATH"
+					'';
+				};
 		})
 	];
 
 	nixpkgs.config = {
-	    allowUnfree = true;
-    };
+		allowUnfree = true;
+	};
 
 	# Remote build server.
 	nix = {
@@ -174,8 +213,8 @@ in
 	# 	'';
 	# };
 
-    # NTFS support
-    boot.supportedFilesystems = [ "exfat" "ntfs" ];
+	# NTFS support
+	boot.supportedFilesystems = [ "exfat" "ntfs" ];
 
 	# Tired of this.
 	systemd.extraConfig = ''
@@ -202,7 +241,7 @@ in
 		allowedUDPPortRanges = [
 			{ from = 1714; to = 1764; } # GSConnect;
 		];
-		#                      v  Steam  v
+		#					  v  Steam  v
 		allowedTCPPorts = [ 22 27036 27037 ];
 		allowedUDPPorts = [ 22 27031 27036 ];
 	};
@@ -211,7 +250,7 @@ in
 		inputMethod = {
 			enabled	= "fcitx";
 			# TODO re-enable fcitx5
-			# fcitx.engines = with pkgs.fcitx-engines; [ mozc unikey ];
+			fcitx.engines = with pkgs.fcitx-engines; [ mozc unikey ];
 		};
 
 		defaultLocale = "en_US.UTF-8";
@@ -235,8 +274,11 @@ in
 		nix-index
 
 		# Utilities
-		htop
+		# htop
 		git
+
+		qgnomeplatform
+		adwaita-qt
 	];
 
 	# Install global fonts
@@ -282,7 +324,6 @@ in
 
 	# Enable sound.
 	sound.enable = true;
-	# Refer to import ./packages/pipewire/
 	hardware.pulseaudio.enable = lib.mkForce false;
 	services.pipewire = {
 		enable = true;
@@ -290,6 +331,21 @@ in
 		alsa.support32Bit = true;
 		jack.enable = true;
 		pulse.enable = true;
+
+		# https://nixos.wiki/wiki/PipeWire
+		media-session.config.bluez-monitor.rules = [
+			{
+				# Match all.
+				matches = [ { "device.name" = "~bluez_card.*"; } ];
+				actions = {
+					"update-props" = {
+						"bluez5.reconnect-profiles" = [ "hfp_hf" "hsp_hs" "a2dp_sink" ];
+						"bluez5.msbc-support" = true;
+						"bluez5.sbc-xq-support" = true;
+					};
+				};
+			}
+		];
 	};
 
 	# Enable the X11 windowing system.
@@ -311,14 +367,20 @@ in
 		Defaults env_reset,pwfeedback
 	'';
 
+	services.xserver.enable = true;
+
 	# Enable touchpad support.
 	services.xserver.libinput.enable = true;
 
 	# Disable the GNOME desktop environment
-	services.xserver.desktopManager.gnome3.enable = true;
+	services.xserver.desktopManager.gnome.enable = true;
 
 	# More GNOME things
-	services.gnome3 = {
+	services.gnome = {
+		core-shell.enable = true;
+		core-os-services.enable = true;
+		gnome-settings-daemon.enable = true;
+
 		# Enable the Keyring for password managing
 		gnome-keyring.enable = true;
 
@@ -336,7 +398,7 @@ in
 
 	services.flatpak.enable = false;
 
-	environment.gnome3.excludePackages = with pkgs.gnome3; [
+	environment.gnome.excludePackages = with pkgs.gnome3; [
 		orca
 		totem
 		gnome-maps
@@ -344,11 +406,11 @@ in
 		gnome-initial-setup
 	];
 
-    programs.seahorse.enable = true;
+	programs.seahorse.enable = true;
 
-    services.gvfs.enable = true;
-    programs.gnome-disks.enable = true;
-    programs.file-roller.enable = true;
+	services.gvfs.enable = true;
+	programs.gnome-disks.enable = true;
+	programs.file-roller.enable = true;
 
 	# dbus things
 	services.dbus.packages = with pkgs; [ gnome3.dconf ];
@@ -356,20 +418,20 @@ in
 	# Enable Polkit
 	security.polkit.enable = true;
 
-    /*
+	/*
 	# Enable MySQL
 	services.mysql = {
 		enable = true;
 		package = pkgs.mariadb;
-    };
+	};
 
-    services.mysql = {
-        enable = true;
-        package = pkgs.mariadb;
-    };
+	services.mysql = {
+		enable = true;
+		package = pkgs.mariadb;
+	};
 
-    virtualisation.docker.enable = true;
-    */
+	virtualisation.docker.enable = true;
+	*/
 
 	# virtualisation.libvirtd = {
 	# 	enable = true;
@@ -377,10 +439,13 @@ in
 	# 	qemuRunAsRoot = false;
 	# };
 
+	# Enable the Android debug bridge.
+	programs.adb.enable = true;
+
 	# Define a user account. Don't forget to set a password with ‘passwd’.
 	users.users.diamond = {
 		isNormalUser = true;
-		extraGroups = [ "wheel" "networkmanager" "docker" "audio" "libvirtd" ];
+		extraGroups = [ "wheel" "networkmanager" "docker" "storage" "audio" "adbusers" "libvirtd" ];
 	};
 
 	qt5 = {
@@ -389,12 +454,17 @@ in
 		platformTheme = "gnome";
 	};
 
+	xdg.portal = {
+		enable = true;
+		extraPortals = with pkgs; [ xdg-desktop-portal-gtk ];
+		gtkUsePortal = true;
+	};
+
 	home-manager.users.diamond = {
 		imports = [
 			"${lsoc-overlay}"
 			"${diamond}/home-manager"
 
-			./cfg/kak
 			./cfg/tilix
 			./cfg/firefox
 			./cfg/hm-gnome-terminal.nix
@@ -406,7 +476,7 @@ in
 
 		programs.direnv = {
 			enable = true;
-			enableNixDirenvIntegration = true;
+			nix-direnv.enable = true;
 		};
 
 		programs.git = {
@@ -445,8 +515,8 @@ in
 			# userSettings = {
 			# 	"telemetry.enableTelemetry" = false;
 			# 	"window.menuBarVisibility"  = "toggle";
-			# 	"breadcrumbs.enabled"       = false;
-			# 	"editor.minimap.enabled"    = false;
+			# 	"breadcrumbs.enabled"	   = false;
+			# 	"editor.minimap.enabled"	= false;
 			# };
 		};
 
@@ -467,7 +537,7 @@ in
 		programs.obs-studio = {
 			enable  = true;
 			plugins = with pkgs; [
-				obs-wlrobs
+				# obs-wlrobs
 				# obs-v4l2sink
 			];
 		};
@@ -475,16 +545,8 @@ in
 		gtk = {
 			enable = true;
 			font.name = "Sans";
-
-			theme = {
-				package = pkgs.materia-theme;
-				name = "Materia-dark-compact";
-			};
-
-			iconTheme = {
-				package = pkgs.papirus-icon-theme;
-				name = "Papirus-Dark";
-			};
+			theme.name = "Materia-dark-compact";
+			iconTheme.name = "Papirus-Dark";
 
 			gtk3 = {
 				extraConfig = {
@@ -495,32 +557,8 @@ in
 		};
 
 		# Home is for no DM, PAM is for gdm.
-		# home.sessionVariables = {
-
-		pam.sessionVariables = {
-			NIX_AUTO_RUN = "1";
-			XDG_CURRENT_DESKTOP = "Wayfire";
-
-			GOPATH = "/home/diamond/.go";
-			GOBIN  = "/home/diamond/.go/bin";
-
-			# Disable VSync.
-			vblank_mode = "0";
-
-			# Enforce Wayland.
-			MOZ_ENABLE_WAYLAND = "1";
-			QT_QPA_PLATFORM    = "wayland";
-
-			# osu settings.
-			WINE_RT = "89";
-			WINE_SRV_RT = "99";
-			STAGING_SHARED_MEMORY = "1";
-			STAGING_RT_PRIORITY_BASE = "89";
-			STAGING_RT_PRIORITY_SERVER = "99";
-			STAGING_PA_DURATION = "250000";
-			STAGING_PA_PERIOD = "8192";
-		   	STAGING_PA_LATENCY_USEC = "128";
-		};
+		home.sessionVariables = userEnv;
+		pam.sessionVariables = userEnv;
 
 		home.packages = ([
 
@@ -530,9 +568,10 @@ in
 			en-computers
 
 		]) ++ (with pkgs; [
-            # Personal stuff
+			# Personal stuff
 			gnome3.gnome-usage
 			gnome3.polari
+			gnome3.pomodoro
 			keepassx-community
 			gnupg
 			gimp-with-plugins
@@ -542,11 +581,11 @@ in
 			xorg.xhost # dependency for wsudo
 
 			# Development tools
-			go
-			gotools
 			neovim
 			foot
 			jq
+			gtk4.dev
+			fzf
 			graphviz
 			gnuplot
 			vimHugeX
@@ -560,14 +599,14 @@ in
 			v4l_utils
 			pavucontrol
 			pulseaudio
-			pulseeffects-pw
+			easyeffects
 
 			# Browsers
-			google-chrome-dev
+			google-chrome
 
 			# Chat/Social
 			zoom-us
-			# tdesktop
+			tdesktop
 			# fractal # lol
 
 			# Office
@@ -582,8 +621,7 @@ in
 			material-design-icons
 
 			# Games
-			steam
-			osu-wine
+			# osu-wine
 
 			# GNOME things
 			gnome-mpv
@@ -610,22 +648,8 @@ in
 		};
 
 		systemd.user.services = {
-			terminal = utils.waylandService "gnome-terminal";
-			nautilus = utils.waylandService "nautilus --gapplication-service";
-			giomount = {
-				Unit = {
-					Description = "Auto-mount gio sftp mounts";
-					After = [ "default.target" "suspend.target" ];
-				};
-				Install = {
-					WantedBy = [ "multi-user.target" ];
-				};
-				Service = {
-					Type = "oneshot";
-					ExecStart   = "${./bin/giomountall}";
-					Environment = "PATH=${utils.globalPaths}";
-				};
-			};
+			# terminal = utils.waylandService "gnome-terminal";
+			# nautilus = utils.waylandService "nautilus --gapplication-service";
 		};
 
 		fonts.fontconfig.enable = lib.mkForce true;

@@ -9,7 +9,7 @@ let utils = import ./utils.nix { inherit lib; };
 
 	musnix = builtins.fetchGit {
 		url = "https://github.com/musnix/musnix.git";
-		rev = "f5053e85b0a578a335a78fa45517a8843154f46b";
+		rev = "fcad5573eba0a9d1ec3ed1e8e1413f601fec35fe";
 	};
 
 	blurcam = builtins.fetchGit {
@@ -30,8 +30,14 @@ in {
 
 	services.fstrim.enable = true;
 
-    # Battery saver thing
-    services.tlp.enable = true;
+	# This conflicts with GNOME's thing.
+	# services.tlp = {
+		# enable = true;
+		# settings = {
+			# START_CHARGE_THRESH_CMB0 = 85;
+			# STOP_CHARGE_THRESH_CMB0  = 95;
+		# };
+	# };
 
 	# Do not suspend on lid close.
 	services.logind.lidSwitch = "ignore";
@@ -40,10 +46,15 @@ in {
 
 	hardware.opengl = {
 		enable = true;
+		driSupport      = true;
 		driSupport32Bit = true;
 		extraPackages = with pkgs; [
 			vaapiIntel
 			intel-media-driver
+		];
+		extraPackages32 = with pkgs.pkgsi686Linux; [
+			libva
+			pipewire.lib
 		];
 	};
 
@@ -67,7 +78,7 @@ in {
 	];
 
 	# Refer to unstable.nix.
-	# boot.kernelPackages = pkgs.linuxPackages_5_10;
+	boot.kernelPackages = pkgs.linuxPackages_5_13;
 
 	# Kernel tweaks and such for real-time audio.
 	musnix = {
@@ -91,12 +102,14 @@ in {
 	hardware.bluetooth = {
 		enable = true;
 		package = pkgs.bluezFull;
-		config = {
+		settings = {
 			General = {
 				Enable = "Source,Sink,Media,Socket";
 			};
 		};
 	};
+
+	hardware.steam-hardware.enable = true;
 
 	# Undervolting.
 	services.undervolt = {
@@ -115,6 +128,12 @@ in {
 		device  = "/dev/disk/by-uuid/1660b20d-97e1-43ab-acf3-4723d8022dec";
 		fsType  = "auto";
 		options = [ "nosuid" "nodev" "nofail" "x-gvfs-show" "x-gvfs-name=Secondary" ];
+	};
+
+	fileSystems."/run/media/diamond/Encrypted" = {
+		device  = "/dev/disk/by-uuid/90265a61-e52e-4c34-b5e4-addc58cfc68c";
+		fsType  = "auto";
+		options = [ "nosuid" "nodev" "nofail" "x-gvfs-show" "noauto" ];
 	};
 
 	# Tablet drivers.
@@ -148,22 +167,66 @@ in {
 	# Enable the Intel driver with a fallback to the current modesetting driver.
 	services.xserver.videoDrivers = [ "intel" "modesetting" ];
 	boot.initrd.kernelModules = [ "i915" ];
+	# Crypto modules.
+	boot.initrd.availableKernelModules = [
+		"aesni_intel" "cryptd"
+	];
 
-	# Enable VSync in the driver.
-	services.xserver.config = ''
-		Section "Device"
-			Identifier "Intel Graphics"
-			Driver "intel"
-			Option "TearFree"        "true"
-			Option "AccelMethod"     "sna"
-			Option "SwapBuffersWait" "true"
-		EndSection
-	'';
+	boot.initrd.luks.cryptoModules = [
+		# Added above.
+		"aesni_intel" "cryptd"
+		# Default ones.
+		"aes" "aes_generic" "blowfish" "twofish" "serpent" "cbc" "xts" "lrw"
+		"sha1" "sha256" "sha512" "af_alg" "algif_skcipher"
+	];
+
+	boot.initrd.luks.reusePassphrases = true;
+	boot.initrd.luks.devices = {
+		tertiary = {
+			device = "/dev/disk/by-uuid/ecd642fd-9c6e-40b0-a43a-ff05bb2b671c";
+		};
+	};
+
+	environment.etc."crypttab" = {
+		enable = true;
+		text = ''
+			tertiary-luks UUID=ecd642fd-9c6e-40b0-a43a-ff05bb2b671c none nofail
+		'';
+	};
 
 	# Powertop is bad because of its aggressive power saving.
 	powerManagement.powertop.enable = false;
 
 	nix.maxJobs = lib.mkForce 4;
+
+	# These patches taken from cidkid's config.
+	# le9db patchset to prevent I/O thrasing on high memory loads.
+	boot.kernelPatches = [ 
+		{
+			## Prevent OOM from crashing computer hard
+			name  = "pf-le9-unevictable-file";
+			patch = builtins.fetchurl {
+				url    = "https://gitlab.com/post-factum/pf-kernel/-/commit/ec357403078bcf24c42c468c8d4059680f383883.diff";
+				sha256 = "sha256:0s6wbjag3qc5c84b6ddpzlzr7pvpj58zzs5qxmpb8r9gd37npmdc";
+			};
+		}
+		{
+			name  = "pf-le9-unevictable-anon";
+			patch = builtins.fetchurl {
+				url    = "https://gitlab.com/post-factum/pf-kernel/-/commit/0af9a997d0386ded3414f73e29d7119eedfaf624.diff";
+				sha256 = "sha256:1ca9z90d8hvlyv55h6qn83f6737in3mvzv4ijssg453qqvxvnbym";
+			};
+		}
+	];
+
+	boot.kernel.sysctl = {
+		# Anon-patch
+		"vm.unevictable_anon_kbytes_low" = 65536;
+		"vm.unevictable_anon_kbytes_min" = 32768;
+		# Regular-patch
+		"vm.unevictable_file_kbytes_low" = 262144;
+		"vm.unevictable_file_kbytes_min" = 131072;
+	};
 
 	# # Tweaks to give users more control over resource priorities to allow
 	# # smoother audio processing and such in lower latency.
