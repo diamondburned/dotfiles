@@ -89,7 +89,10 @@ body > box {
 	background: transparent !important;
 	box-shadow: none !important;
 }
-#nav-bar * {
+#navigator-toolbox,
+#titlebar *,
+#nav-bar toolbarbutton,
+#nav-bar toolbaritem:not(#urlbar) {
 	-moz-window-dragging: drag !important;
 }
 #urlbar {
@@ -116,7 +119,12 @@ body > box {
 	margin-top: -5px !important;
 }
 #urlbar[breakout][breakout-extend] > #urlbar-input-container {
-	margin: 2px 0 !important;
+	margin: 4px 0 !important;
+}
+
+findbar {
+	z-index: 2;
+	position: absolute;
 }
 
 /* Ugly fallback for the menubar, only for when I actually need it. */

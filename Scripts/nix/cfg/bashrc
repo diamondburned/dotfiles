@@ -57,7 +57,6 @@ EDITOR=nvim
 
 
 HISTFILESIZE=2147483647 # fuck
-HISTSIZE=1000
 shopt -s histappend
 
 grepr() {
