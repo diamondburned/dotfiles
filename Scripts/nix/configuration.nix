@@ -266,6 +266,8 @@ in
 	# Set your time zone.
 	time.timeZone = "America/Los_Angeles";
 
+	environment.enableDebugInfo = true;
+
 	# List packages installed in system profile. To search, run:
 	# $ nix search wget
 	environment.systemPackages = with pkgs; [
@@ -579,6 +581,7 @@ in
 			# System
 			(writeScriptBin "wsudo" (builtins.readFile ./bin/wsudo))
 			xorg.xhost # dependency for wsudo
+			powertop
 
 			# Development tools
 			neovim

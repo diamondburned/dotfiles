@@ -30,14 +30,15 @@ in {
 
 	services.fstrim.enable = true;
 
-	# This conflicts with GNOME's thing.
-	# services.tlp = {
-		# enable = true;
-		# settings = {
-			# START_CHARGE_THRESH_CMB0 = 85;
-			# STOP_CHARGE_THRESH_CMB0  = 95;
-		# };
-	# };
+	# Disable GNOME's thing in favor of TLP.
+	services.power-profiles-daemon.enable = lib.mkForce false;
+	services.tlp = {
+		enable = true;
+		settings = {
+			START_CHARGE_THRESH_CMB0 = 85;
+			STOP_CHARGE_THRESH_CMB0  = 95;
+		};
+	};
 
 	# Do not suspend on lid close.
 	services.logind.lidSwitch = "ignore";
