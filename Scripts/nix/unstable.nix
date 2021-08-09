@@ -184,7 +184,6 @@ in {
 
 			# Compilers
 			go
-			gotools
 
 			playerctl
 			wl-clipboard

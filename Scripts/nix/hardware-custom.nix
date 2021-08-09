@@ -37,6 +37,7 @@ in {
 		settings = {
 			START_CHARGE_THRESH_CMB0 = 85;
 			STOP_CHARGE_THRESH_CMB0  = 95;
+			USB_AUTOSUSPEND = "0";
 		};
 	};
 
@@ -95,7 +96,7 @@ in {
 	};
 
 	# We don't want to sacrifice battery for the above.
-	powerManagement.cpuFreqGovernor = lib.mkForce "ondemand";
+	powerManagement.cpuFreqGovernor = lib.mkForce "powersave";
 
 	# Blueman sucks; use bluetoothctl.
 	# services.blueman.enable = true;
@@ -196,7 +197,8 @@ in {
 	};
 
 	# Powertop is bad because of its aggressive power saving.
-	powerManagement.powertop.enable = false;
+	# Or not.
+	powerManagement.powertop.enable = true;
 
 	nix.maxJobs = lib.mkForce 4;
 

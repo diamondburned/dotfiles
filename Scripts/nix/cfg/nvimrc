@@ -12,6 +12,9 @@ Plug 'godlygeek/tabular'
 Plug 'bogado/file-line'
 Plug 'rhysd/conflict-marker.vim'
 
+Plug 'hhhapz/firenvim', { 'do': { _ -> firenvim#install(0) } }
+Plug 'andreypopp/vim-colors-plain'
+
 Plug 'junegunn/fzf'
 Plug 'junegunn/fzf.vim'
 
@@ -89,7 +92,8 @@ set shiftwidth=4
 "Better colors and highlighting"
 let g:material_terminal_italics = 1
 let g:material_theme_style='lighter'
-set background=light
+set background=dark
+
 "Transparent background"
 hi Normal guibg=NONE ctermbg=NONE
 
@@ -107,6 +111,14 @@ lua <<EOF
 		},
 	}
 EOF
+
+if exists('g:started_by_firenvim')
+	colorscheme plain
+	hi Normal guibg=#242424 guifg=#EEEEEE
+
+	set guifont=Monospace:b
+	set linespace=-2
+endif
 
 "Custom colors"
 hi TabLine     cterm=NONE ctermfg=15 ctermbg=NONE
@@ -383,7 +395,7 @@ let g:ale_fixers = {
 			\ }
 let g:ale_completion_enabled = 1
 let g:ale_linters = {
-			\ 'go':         [ "gopls" ],
+			\ 'go':         [ "gopls", "go vet", "staticcheck", "gotype", "go build" ],
 			\ 'zig':        [ "zls" ],
 			\ 'c':          [ "clangd" ],
 			\ 'cpp':        [ "clangd" ],

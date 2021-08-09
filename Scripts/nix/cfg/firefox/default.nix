@@ -3,6 +3,14 @@
 let profileName = "default";
 	profilePath = "q1f740f8.default";
 
+	firefox = pkgs.writeShellScriptBin "firefox" ''
+		${pkgs.firefox-devedition-bin}/bin/firefox-devedition -P default "$@"
+	'' // {
+		# satisfy home-manager
+		meta.description = "";
+		inherit (pkgs) gtk3;
+	};
+
 in {
 	# nixpkgs.overlays = [ (self: super: {
 	# 	firefox-unwrapped = super.firefoxPackages.firefox.override {
@@ -14,6 +22,9 @@ in {
 	# }) ];
 
 	programs.firefox.enable = true;
+	programs.firefox.package = firefox // {
+		browserName = "firefox";
+	};
 
 	programs.firefox.profiles."Tunneled" = {
 		id = 1;
@@ -37,6 +48,7 @@ in {
 			${builtins.readFile ./userChrome.main.css}
 		'';
 		settings = {
+			"xpinstall.signatures.required" = false;
 			"dom.ipc.plugins.enabled" = false;
 			"security.dialog_enable_delay" = 0;
 			"dom.dialog_element.enabled" = true;

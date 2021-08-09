@@ -486,6 +486,9 @@ in
 			userName  = "diamondburned";
 			userEmail = "datutbrus@gmail.com";
 			extraConfig = {
+				http = {
+					cookieFile = "/home/diamond/.gitcookies";
+				};
 				core = {
 					excludesfile = "${pkgs.writeText "gitignore" (
 						builtins.concatStringsSep "\n" [
