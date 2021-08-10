@@ -1,6 +1,4 @@
 #!/usr/bin/env bash
 [[ $PWD == "/run/user/1000/firenvim"* ]] && {
-	set -- play.golang.org*.txt
+	exec $GOBIN/gotype -c=gc play.golang.org*.txt
 }
-
-exec $GOBIN/gotype -c=gc "$@"
