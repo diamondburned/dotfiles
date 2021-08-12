@@ -3,13 +3,28 @@
 let profileName = "default";
 	profilePath = "q1f740f8.default";
 
+	nativeMessagingHosts = {
+		"org.gnome.shell.extensions.gsconnect" = pkgs.gnomeExtensions.gsconnect;
+		"org.gnome.chrome_gnome_shell"         = pkgs.chrome-gnome-shell;
+	};
+
+	firefox-attrs = {
+		browserName = "firefox";
+		forceWayland = true;
+		extraNativeMessagingHosts = lib.attrValues nativeMessagingHosts;
+	};
+
+	firefox-devedition = pkgs.wrapFirefox pkgs.firefox-devedition-bin-unwrapped firefox-attrs;
+
 	firefox = pkgs.writeShellScriptBin "firefox" ''
-		${pkgs.firefox-devedition-bin}/bin/firefox-devedition -P default "$@"
+		${firefox-devedition}/bin/firefox -P default "$@"
 	'' // {
 		# satisfy home-manager
-		meta.description = "";
 		inherit (pkgs) gtk3;
+		inherit (firefox-attrs) browserName;
+		inherit (firefox-devedition) meta;
 	};
+
 
 in {
 	# nixpkgs.overlays = [ (self: super: {
@@ -21,10 +36,17 @@ in {
 	# 	};
 	# }) ];
 
+	# Thanks, Firefox. Seriously.
+	# See https://github.com/NixOS/nixpkgs/issues/47340#issuecomment-440645870.
+	home.file = lib.flip lib.mapAttrs' nativeMessagingHosts (name: pkg: {
+		name  = ".mozilla/native-messaging-hosts/${name}.json";
+		value = {
+			source = "${pkg}/lib/mozilla/native-messaging-hosts/${name}.json";
+		};
+	});
+
 	programs.firefox.enable = true;
-	programs.firefox.package = firefox // {
-		browserName = "firefox";
-	};
+	programs.firefox.package = firefox;
 
 	programs.firefox.profiles."Tunneled" = {
 		id = 1;

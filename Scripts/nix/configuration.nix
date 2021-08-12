@@ -374,7 +374,7 @@ in
 	# Enable touchpad support.
 	services.xserver.libinput.enable = true;
 
-	# Disable the GNOME desktop environment
+	# Enable the GNOME desktop environment
 	services.xserver.desktopManager.gnome.enable = true;
 
 	# More GNOME things
@@ -396,6 +396,11 @@ in
 		tracker.enable = false;
 		tracker-miners.enable = false;
 		gnome-initial-setup.enable = false;
+	};
+
+	programs.kdeconnect = {
+		enable  = true;
+		package = pkgs.gnomeExtensions.gsconnect;
 	};
 
 	services.flatpak.enable = false;
@@ -577,6 +582,7 @@ in
 			gnome3.gnome-usage
 			gnome3.polari
 			gnome3.pomodoro
+			gnomeExtensions.gsconnect
 			keepassx-community
 			gnupg
 			gimp-with-plugins
@@ -590,6 +596,7 @@ in
 			neovim
 			foot
 			jq
+			tree
 			gtk4.dev
 			fzf
 			graphviz
