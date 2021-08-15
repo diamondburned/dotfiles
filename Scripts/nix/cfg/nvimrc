@@ -112,12 +112,23 @@ lua <<EOF
 	}
 EOF
 
+let g:nvim_tree_auto_open = 1
+
 if exists('g:started_by_firenvim')
 	colorscheme plain
 	hi Normal guibg=#242424 guifg=#EEEEEE
 
 	set guifont=Monospace:b
 	set linespace=-2
+
+	let g:firenvim_config = {
+	\	'localSettings': {
+	\		'.*discord\.com.*': { 'takeover': 'never', 'priority': 1 },
+	\		'.*ponies\.im.*'  : { 'takeover': 'never', 'priority': 1 },
+	\	},
+	\ }
+
+	let g:nvim_tree_auto_open = 0
 endif
 
 "Custom colors"
@@ -312,7 +323,6 @@ au CursorHold * checktime
 let g:nvim_tree_hijack_netrw = 1
 let g:nvim_tree_ignore = [ '.git', 'node_modules' ]
 let g:nvim_tree_tab_open = 1
-let g:nvim_tree_auto_open = 1
 let g:nvim_tree_auto_close = 1
 let g:nvim_tree_add_trailing = 1
 let g:nvim_tree_lsp_diagnostics = 0

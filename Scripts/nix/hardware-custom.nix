@@ -35,11 +35,16 @@ in {
 	services.tlp = {
 		enable = true;
 		settings = {
-			START_CHARGE_THRESH_CMB0 = 85;
-			STOP_CHARGE_THRESH_CMB0  = 95;
 			USB_AUTOSUSPEND = "0";
 		};
 	};
+
+	# LG Gram tweaks.
+	systemd.tmpfiles.rules = [
+		# https://01.org/linuxgraphics/gfx-docs/drm/admin-guide/laptops/lg-laptop.html
+		"w /sys/devices/platform/lg-laptop/battery_care_limit - - - - 80"
+		"w /sys/devices/platform/lg-laptop/fan_mode - - - - 1"
+	];
 
 	# Do not suspend on lid close.
 	services.logind.lidSwitch = "ignore";
@@ -197,8 +202,7 @@ in {
 	};
 
 	# Powertop is bad because of its aggressive power saving.
-	# Or not.
-	powerManagement.powertop.enable = true;
+	# powerManagement.powertop.enable = true;
 
 	nix.maxJobs = lib.mkForce 4;
 

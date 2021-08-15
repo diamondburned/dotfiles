@@ -28,8 +28,8 @@ let home-manager = builtins.fetchGit {
 	gimpMesonPkgs = import (pkgs.fetchFromGitHub {
 		owner  = "jtojnar";
 		repo   = "nixpkgs";
-		rev	= "dc2786744e50290e290d591a75f6cc512cf31a1b";
-		sha256 = "0c5im5dzrs5a25x6g2njd4k48qirv48iavwvl5ylyvwkmfhqk9f9";
+		rev    = "6cb2cce589e1effb0f9983d99132c4f8cc2f4d32"; # gimp-meson
+		sha256 = "0wg44l0lkrymsp68s10sx1r4fqd3yvn0lswkhn1zkd3qv6s42nmd";
 	}) {};
 
 	userEnv = {
@@ -571,6 +571,7 @@ in
 		pam.sessionVariables = userEnv;
 
 		home.packages = ([
+			gimpMesonPkgs.gimp-with-plugins
 
 		]) ++ (with pkgs.aspellDicts; [
 			en
@@ -585,7 +586,6 @@ in
 			gnomeExtensions.gsconnect
 			keepassx-community
 			gnupg
-			gimp-with-plugins
 
 			# System
 			(writeScriptBin "wsudo" (builtins.readFile ./bin/wsudo))
