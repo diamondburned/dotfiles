@@ -57,6 +57,7 @@ EDITOR=nvim
 
 
 HISTFILESIZE=2147483647 # fuck
+HISTSIZE=100000
 shopt -s histappend
 
 grepr() {
@@ -177,6 +178,12 @@ alias cr="cargo run"
 function gr() {
 	# [[ -f ./pkged.go ]] && pkger
 	go run . "$@"
+}
+
+function goplsno() {
+	gopls=$(command -v gopls) &> /dev/null \
+		&& mv "$gopls" "$gopls.bak" \
+		|| mv "$GOBIN/gopls.bak" "$GOBIN/gopls"
 }
 
 function wp() {

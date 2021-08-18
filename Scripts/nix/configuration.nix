@@ -571,7 +571,7 @@ in
 		pam.sessionVariables = userEnv;
 
 		home.packages = ([
-			gimpMesonPkgs.gimp-with-plugins
+			# gimpMesonPkgs.gimp-with-plugins
 
 		]) ++ (with pkgs.aspellDicts; [
 			en
@@ -585,6 +585,7 @@ in
 			gnome3.pomodoro
 			gnomeExtensions.gsconnect
 			keepassx-community
+			gimp-with-plugins
 			gnupg
 
 			# System
