@@ -2,3 +2,4 @@
 [[ $PWD == "/run/user/1000/firenvim"* ]] && {
 	exec $GOBIN/gotype -c=gc play.golang.org*.txt
 }
+exit 0

@@ -43,7 +43,11 @@ in {
 	systemd.tmpfiles.rules = [
 		# https://01.org/linuxgraphics/gfx-docs/drm/admin-guide/laptops/lg-laptop.html
 		"w /sys/devices/platform/lg-laptop/battery_care_limit - - - - 80"
-		"w /sys/devices/platform/lg-laptop/fan_mode - - - - 1"
+		# fan_mode is very mysterious, but setting it to 1 brings the CPU down to 900MHz.
+		"w /sys/devices/platform/lg-laptop/fan_mode - - - - 0"
+		# Enable Turbo mode, but throttle it at 2.2GHz because of overheating.
+		"w /sys/devices/system/cpu/intel_pstate/no_turbo - - - - 0"
+		"w /sys/devices/system/cpu/*/cpufreq/scaling_max_freq - - - - 2200000"
 	];
 
 	# Do not suspend on lid close.

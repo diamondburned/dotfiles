@@ -436,9 +436,9 @@ in
 		enable = true;
 		package = pkgs.mariadb;
 	};
+	*/
 
 	virtualisation.docker.enable = true;
-	*/
 
 	# virtualisation.libvirtd = {
 	# 	enable = true;
@@ -472,6 +472,7 @@ in
 			"${lsoc-overlay}"
 			"${diamond}/home-manager"
 
+			./cfg/wyze
 			./cfg/tilix
 			./cfg/firefox
 			./cfg/hm-gnome-terminal.nix
@@ -587,6 +588,7 @@ in
 			keepassx-community
 			gimp-with-plugins
 			gnupg
+			gnuplot
 
 			# System
 			(writeScriptBin "wsudo" (builtins.readFile ./bin/wsudo))
