@@ -14,11 +14,11 @@ let home-manager = builtins.fetchGit {
 		rev = "09d41b0a6f574390d6edc0271be459bd1390ea8d";
 	};
 
-	# TODO: fix this.
-	tdeo = import (builtins.fetchGit {
-		url = "https://github.com/tadeokondrak/nix-overlay";
-		rev = "0d05c53204da3b576f810ef2e1312b19bf2420b7";
-	});
+	# # TODO: fix this.
+	# tdeo = import (builtins.fetchGit {
+	# 	url = "https://github.com/tadeokondrak/nix-overlay";
+	# 	rev = "0d05c53204da3b576f810ef2e1312b19bf2420b7";
+	# });
 
 	diamond = ../nix-overlays;
 
@@ -93,7 +93,7 @@ in
 			];
 		});
 	in [
-		(tdeo)
+		# (tdeo)
 		(self: super: {
 			# This might be causing painful rebuilds.
 			# vte = vte super;
@@ -158,6 +158,25 @@ in
 						export LD_LIBRARY_PATH="${super.SDL2}/lib:$LD_LIBRARY_PATH"
 					'';
 				};
+			materia-theme = super.materia-theme.overrideAttrs(old: {
+				version = "20210322";
+				src = super.fetchFromGitHub {
+					owner  = "nana-4";
+					repo   = "materia-theme";
+					rev    = "v20210322";
+					sha256 = "1fsicmcni70jkl4jb3fvh7yv0v9jhb8nwjzdq8vfwn256qyk0xvl";
+				};
+			});
+			vscode = super.vscode.overrideAttrs(old: {
+				nativeBuildsInputs = (old.nativeBuildInputs or []) ++ [
+					super.makeWrapper
+				];
+				postFixup = (old.postFixup or "") + ''
+					wrapProgram $out/bin/code \
+						--add-flags "--enable-features=UseOzonePlatform" \
+						--add-flags "--ozone-platform=wayland"
+				'';
+			});
 		})
 	];
 
@@ -518,11 +537,12 @@ in
 			initExtra = builtins.readFile ./cfg/bashrc;
 		};
 
-		programs.vscode-css = {
-			files = [ ./cfg/vscode.css ];
-		};
+		# programs.vscode-css = {
+		# 	files = [ ./cfg/vscode.css ];
+		# };
 		programs.vscode = {
 			enable = true;
+			package = pkgs.vscode;
 			# userSettings = {
 			# 	"telemetry.enableTelemetry" = false;
 			# 	"window.menuBarVisibility"  = "toggle";
@@ -556,8 +576,15 @@ in
 		gtk = {
 			enable = true;
 			font.name = "Sans";
-			theme.name = "Materia-dark-compact";
-			iconTheme.name = "Papirus-Dark";
+
+			theme = {
+				name = "Materia-dark-compact";
+				package = pkgs.materia-theme;
+			};
+			iconTheme = {
+				name = "Papirus-Dark";
+				package = pkgs.papirus-icon-theme;
+			};
 
 			gtk3 = {
 				extraConfig = {
@@ -611,6 +638,7 @@ in
 			xorg.xauth
 
 			# Multimedia
+			catnip-gtk
 			ffmpeg
 			v4l_utils
 			pavucontrol
@@ -637,7 +665,7 @@ in
 			material-design-icons
 
 			# Games
-			# osu-wine
+			osu-wine
 
 			# GNOME things
 			gnome-mpv

@@ -18,13 +18,50 @@ let utils = import ../../utils.nix { inherit config lib pkgs; };
 		with pkgs; [ slurp grim wl-clipboard ]
 	);
 
+	gnomeSession = pkgs.writeShellScript "gnome-session" ''
+		export XDG_SESSION_TYPE=wayland
+		export XDG_SESSION_DESKTOP=gnome
+		export XDG_CURRENT_DESKTOP=GNOME
+
+		systemd-cat --identifier=gnome ${pkgs.gnome.gnome-session}/bin/gnome-session "$@"
+	'';
+
 in {
+	# services.greetd = {
+	# 	enable  = true;
+	# 	restart = true;
+	# 	settings = {
+	# 		default_session = {
+	# 			command =
+	# 				"${pkgs.cage}/bin/cage " +
+	# 				"${pkgs.greetd.gtkgreet}/bin/gtkgreet -c ${gnomeSession}";
+	# 		};
+	# 	};
+	# };
+
 	services.xserver.displayManager = {
 		gdm = {
 			enable  = true;
 			wayland = true;
 		};
-		# defaultSession  = "wayfire";
+		# lightdm.greeters.gtk = {
+		# 	enable = true;
+		# 	iconTheme = {
+		# 		package = pkgs.papirus-icon-theme;
+		# 		name    = "Papirus-Dark";
+		# 	};
+		# 	theme = {
+		# 		package = pkgs.materia-theme;
+		# 		name    = "Materia-dark-compact";
+		# 	};
+		# 	extraConfig = ''
+		# 		[greeter]
+		# 		background=${../../background.jpg}
+		# 		active-monitor=0
+		# 		position=75%,center 50%,center
+		# 	'';
+		# };
+		defaultSession = "gnome";
 		# sessionPackages = with pkgs; [ wayfire ];
 	};
 

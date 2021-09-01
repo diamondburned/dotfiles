@@ -40,8 +40,10 @@ call plug#end()
 set mouse=a
 vmap <C-c> "+y
 vmap <C-v> "+p
-imap <C-v> "+p
+imap <C-v> <Esc>"+pi<Right>
 map - dd
+
+set clipboard+=unnamedplus
 
 "Make comments italiced
 hi Comment cterm=italic

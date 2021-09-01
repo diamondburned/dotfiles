@@ -19,12 +19,7 @@ terminal-window vte-terminal {
 	border-radius: 0 9999px 9999px 0;
 }
 
-.titlebar * {
-	color: black;
-	opacity: 1;
-	font-weight: 600;
-}
-
+/*
 .background.csd,
 .background.csd > * {
 	border: none;
@@ -38,6 +33,7 @@ terminal-window vte-terminal {
 placessidebar {
 	background-color: alpha(@theme_bg_color, 0.75);
 }
+*/
 
 /*
 button.titlebutton       { opacity: 0.65; transition: opacity 80ms linear; }
@@ -53,7 +49,7 @@ button.titlebutton:hover { opacity: 1.00; }
 
 /* Chrome could not. */
 .titlebar, headerbar {
-	opacity: 0.95;
+	/* opacity: 0.95; */
 	background: linear-gradient(
 		to right,
 		rgba(85,  205, 252, 1) 0%,
@@ -62,6 +58,12 @@ button.titlebutton:hover { opacity: 1.00; }
 		rgba(234, 171, 217, 1) 75%,
 		rgba(247, 168, 184, 1) 100%
 	);
+}
+
+.titlebar * {
+	color: black;
+	opacity: 1;
+	font-weight: 600;
 }
 
 decoration {
