@@ -22,7 +22,7 @@
 		};
 		Service = {
 			Type = "oneshot";
-			ExecStart = command;
+			ExecStart = "${pkgs.writeShellScript "${name}.sh" command}";
 		};
 	};
 }

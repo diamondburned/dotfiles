@@ -1,5 +1,5 @@
 #!/usr/bin/env bash
 [[ $PWD == "/run/user/1000/firenvim"* ]] && {
-	exec $GOBIN/gotype -c=gc play.golang.org*.txt
+	exec $GOBIN/gotype-intern -c=gc play.golang.org*.txt
 }
 exit 0

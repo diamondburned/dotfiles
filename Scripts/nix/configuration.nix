@@ -22,7 +22,7 @@ let home-manager = builtins.fetchGit {
 
 	diamond = ../nix-overlays;
 
-	utils = import ./utils.nix { inherit config pkgs lib; };
+	utils = import ./utils { inherit config pkgs lib; };
 
 	# GIMP v2.99 Nixpkgs
 	gimpMesonPkgs = import (pkgs.fetchFromGitHub {
@@ -495,6 +495,14 @@ in
 			./cfg/tilix
 			./cfg/firefox
 			./cfg/hm-gnome-terminal.nix
+
+			# Automatically push dotfiles.
+			(import ./utils/schedule.nix {
+				name        = "dotfiles-pusher";
+				description = "Automatically push dotfiles";
+				calendar    = "hourly";
+				command     = "cd ~/ && git add -A && git commit -m Update && git push origin";
+			})
 		];
 
 		nixpkgs.config = {

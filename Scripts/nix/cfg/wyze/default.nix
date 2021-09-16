@@ -10,5 +10,5 @@ let ip = "192.168.1.7";
 	};
 
 in {
-	imports = [ (import ./schedule.nix schedule) ];
+	imports = [ (import ../../utils/schedule.nix schedule) ];
 }

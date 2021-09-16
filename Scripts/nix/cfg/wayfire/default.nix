@@ -1,6 +1,6 @@
 { config, lib, pkgs, ... }: 
 
-let utils = import ../../utils.nix { inherit config lib pkgs; };
+let utils = import ../../utils { inherit config lib pkgs; };
 
 	scrot = utils.writeBashScript "scrot.sh" ''
 		export WAYLAND_DISPLAY=wayland-1

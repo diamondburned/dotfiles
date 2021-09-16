@@ -3,7 +3,7 @@
 # to /etc/nixos/configuration.nix instead.
 { config, lib, pkgs, ... }:
 
-let utils = import ./utils.nix { inherit lib; };
+let utils = import ./utils { inherit lib; };
 
 	unstable = import <nixos-unstable> {};
 
@@ -55,11 +55,16 @@ in {
 
 	hardware.cpu.intel.updateMicrocode = true;
 
+	environment.systemPackages = with pkgs; [
+		vkmark
+	];
+
 	hardware.opengl = {
 		enable = true;
 		driSupport      = true;
 		driSupport32Bit = true;
 		extraPackages = with pkgs; [
+			mesa
 			vaapiIntel
 			intel-media-driver
 		];

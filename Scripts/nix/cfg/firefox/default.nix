@@ -9,7 +9,7 @@ let profileName = "default";
 	};
 
 	firefox-attrs = {
-		browserName = "firefox";
+		applicationName = "firefox";
 		forceWayland = true;
 		extraNativeMessagingHosts = lib.attrValues nativeMessagingHosts;
 	};
@@ -21,7 +21,7 @@ let profileName = "default";
 	'' // {
 		# satisfy home-manager
 		inherit (pkgs) gtk3;
-		inherit (firefox-attrs) browserName;
+		inherit (firefox-attrs) applicationName extraNativeMessagingHosts;
 		inherit (firefox-devedition) meta;
 	};
 
@@ -82,6 +82,7 @@ in {
 			"font.minimum-size.x-western" = 9;
 			"font.name.monospace.ja" = "monospace";
 			"font.name.monospace.x-western" = "monospace";
+			"dom.webgpu.enabled" = true;
 			"gfx.webrender.all" = true;
 			"gfx.webrender.compositor" = true;
 			"media.ffmpeg.vaapi.enabled" = true;
