@@ -145,19 +145,6 @@ in
 			# 		patch -p1 < ${./patches/xwayland-fps.patch}
 			# 	'';
 			# });
-			steam = let pkgs = pkgs: with pkgs; [
-					SDL2
-					pkgsi686Linux.SDL2
-				];
-				in super.steam.override {
-					extraPkgs = pkgs;
-					extraLibraries = pkgs;
-					extraProfile = ''
-						export STEAM_RUNTIME=0
-						export STEAM_RUNTIME_PREFER_HOST_LIBRARIES=1
-						export LD_LIBRARY_PATH="${super.SDL2}/lib:$LD_LIBRARY_PATH"
-					'';
-				};
 			materia-theme = super.materia-theme.overrideAttrs(old: {
 				version = "20210322";
 				src = super.fetchFromGitHub {
