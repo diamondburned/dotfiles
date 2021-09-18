@@ -504,7 +504,11 @@ in
 		programs.git = {
 			enable = true;
 			userName  = "diamondburned";
-			userEmail = "datutbrus@gmail.com";
+			userEmail = "diamond@arikawa-hi.me";
+			signing = {
+				key = "D78C4471CE776659";
+				signByDefault = true;
+			};
 			extraConfig = {
 				http = {
 					cookieFile = "/home/diamond/.gitcookies";
