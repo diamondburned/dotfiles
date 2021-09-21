@@ -153,7 +153,7 @@ in {
 	};
 
 	# Tablet drivers.
-	# hardware.opentabletdriver.enable = true;
+	hardware.opentabletdriver.enable = true;
 
 	# Mouse settings.
 	services.xserver.inputClassSections = [

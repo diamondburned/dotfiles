@@ -69,6 +69,7 @@ in
 		./hardware-configuration.nix
 		./hardware-custom.nix
 		./unstable.nix
+		./cfg/udev
 		./cfg/wayfire
 		./cfg/localhost
 	];
