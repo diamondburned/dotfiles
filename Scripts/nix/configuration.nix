@@ -611,6 +611,7 @@ in
 
 		]) ++ (with pkgs; [
 			# Personal stuff
+			gnome.pomodoro
 			gnome3.gnome-usage
 			gnome3.polari
 			gnome3.pomodoro
