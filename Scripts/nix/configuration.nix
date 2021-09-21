@@ -489,7 +489,10 @@ in
 				name        = "dotfiles-pusher";
 				description = "Automatically push dotfiles";
 				calendar    = "hourly";
-				command     = "cd ~/ && git add -A && git commit -m Update && git push origin";
+				command     = ''
+					cd ~/ && git add -A && git commit -m Update && git push origin
+					exit 0
+				'';
 			})
 		];
 
