@@ -141,11 +141,11 @@ in
 			# 		'';
 			# 	});
 			# };
-			# xwayland = super.xwayland.overrideAttrs (old: {
-			# 	preConfigure = (old.preConfigure or "") + ''
-			# 		patch -p1 < ${./patches/xwayland-fps.patch}
-			# 	'';
-			# });
+			xwayland = super.xwayland.overrideAttrs (old: {
+				preConfigure = (old.preConfigure or "") + ''
+					patch -p1 < ${./patches/xwayland-fps.patch}
+				'';
+			});
 			materia-theme = super.materia-theme.overrideAttrs(old: {
 				version = "20210322";
 				src = super.fetchFromGitHub {
