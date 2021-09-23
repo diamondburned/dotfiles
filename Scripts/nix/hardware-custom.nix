@@ -206,7 +206,7 @@ in {
 	environment.etc."crypttab" = {
 		enable = true;
 		text = ''
-			tertiary-luks UUID=ecd642fd-9c6e-40b0-a43a-ff05bb2b671c none nofail noauto
+			tertiary-luks UUID=ecd642fd-9c6e-40b0-a43a-ff05bb2b671c none nofail,noauto
 		'';
 	};
 
