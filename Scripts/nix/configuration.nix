@@ -653,6 +653,7 @@ in
 			xorg.xauth
 
 			# Multimedia
+			aqours
 			catnip-gtk
 			ffmpeg
 			v4l_utils
