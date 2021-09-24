@@ -160,6 +160,11 @@ in
 						--add-flags "--ozone-platform=wayland"
 				'';
 			});
+  discord = self.discord.overrideAttrs (
+    _: {
+      src = builtins.fetchTarball "https://dl.discordapp.net/apps/linux/0.0.16/discord-0.0.16.tar.gz";
+    }
+  );
 		})
 	];
 
@@ -659,6 +664,7 @@ in
 			# Chat/Social
 			zoom-us
 			tdesktop
+			discord
 			# fractal # lol
 
 			# Office
