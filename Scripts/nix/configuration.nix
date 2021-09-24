@@ -95,6 +95,7 @@ in
 		});
 	in [
 		# (tdeo)
+		(import ./discord.nix)
 		(self: super: {
 			# This might be causing painful rebuilds.
 			# vte = vte super;
@@ -160,11 +161,6 @@ in
 						--add-flags "--ozone-platform=wayland"
 				'';
 			});
-  discord = self.discord.overrideAttrs (
-    _: {
-      src = builtins.fetchTarball "https://dl.discordapp.net/apps/linux/0.0.16/discord-0.0.16.tar.gz";
-    }
-  );
 		})
 	];
 
@@ -226,6 +222,11 @@ in
 	# Tired of this.
 	systemd.extraConfig = ''
 		DefaultTimeoutStopSec=5s
+	'';
+
+	services.journald.extraConfig = ''
+		SystemMaxUse=2G
+		MaxRetentionSec=3month
 	'';
 
 	# Use the systemd-boot EFI boot loader.
