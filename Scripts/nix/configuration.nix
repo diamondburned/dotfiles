@@ -628,6 +628,7 @@ in
 			gnomeExtensions.gsconnect
 			keepassx-community
 			gimp-with-plugins
+			git-crypt
 			gnupg
 			gnuplot
 
