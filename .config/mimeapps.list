@@ -104,3 +104,4 @@ text/x-go=org.gnome.gedit.desktop;
 text/x-c++src=nvim.desktop;
 x-scheme-handler/tg=userapp-Telegram Desktop-EPSI50.desktop;userapp-Telegram Desktop-OFDD80.desktop;userapp-Telegram Desktop-K1DY90.desktop;
 application/x-trash=nvim.desktop;
+application/x-x509-ca-cert=nvim.desktop;
