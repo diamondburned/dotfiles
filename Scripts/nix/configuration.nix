@@ -474,7 +474,7 @@ in
 
 	qt5 = {
 		enable = true;
-		style = "adwaita-dark";
+		style = "Adwaita-Dark";
 		platformTheme = "gnome";
 	};
 
