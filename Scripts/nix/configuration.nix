@@ -474,7 +474,7 @@ in
 
 	qt5 = {
 		enable = true;
-		style = "Adwaita-Dark";
+		style = "adwaita-dark";
 		platformTheme = "gnome";
 	};
 
@@ -606,6 +606,16 @@ in
 				extraCss = builtins.readFile ./cfg/gtk.css;
 			};
 		};
+
+		# xsession.pointerCursor = {
+			# package = 
+		# };
+		home.file.".icons/default/index.theme".text = ''
+			[icon theme]
+			Name=Default
+			Comment=Default Cursor Theme
+			Inherits=Ardoise_shadow_87
+		'';
 
 		# Home is for no DM, PAM is for gdm.
 		home.sessionVariables = userEnv;
