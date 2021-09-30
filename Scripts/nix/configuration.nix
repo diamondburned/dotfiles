@@ -32,6 +32,13 @@ let home-manager = builtins.fetchGit {
 		sha256 = "0wg44l0lkrymsp68s10sx1r4fqd3yvn0lswkhn1zkd3qv6s42nmd";
 	}) {};
 
+	gnome-41 = import (pkgs.fetchFromGitHub {
+		owner  = "NixOS";
+		repo   = "nixpkgs";
+		rev    = "3fdd780";
+		sha256 = lib.fakeSha256;
+	}) {};
+
 	userEnv = {
 		NIX_AUTO_RUN = "1";
 		STEAM_RUNTIME = "0";
