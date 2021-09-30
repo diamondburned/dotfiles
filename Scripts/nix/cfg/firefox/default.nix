@@ -70,6 +70,7 @@ in {
 			${builtins.readFile ./userChrome.main.css}
 		'';
 		settings = {
+			"browser.send_pings" = false;
 			"xpinstall.signatures.required" = false;
 			"dom.ipc.plugins.enabled" = false;
 			"security.dialog_enable_delay" = 0;
