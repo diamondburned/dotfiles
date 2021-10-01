@@ -119,14 +119,16 @@ let g:nvim_tree_auto_open = 1
 if exists('g:started_by_firenvim')
 	colorscheme plain
 	hi Normal guibg=#242424 guifg=#EEEEEE
+	hi Comment gui=NONE
 
-	set guifont=Monospace:b
+	set guifont=Monospace:h10.5:b
 	set linespace=-2
 
 	let g:firenvim_config = {
 	\	'localSettings': {
 	\		'.*discord\.com.*': { 'takeover': 'never', 'priority': 1 },
 	\		'.*ponies\.im.*'  : { 'takeover': 'never', 'priority': 1 },
+	\		'.*element\.io.*' : { 'takeover': 'never', 'priority': 1 },
 	\	},
 	\ }
 
