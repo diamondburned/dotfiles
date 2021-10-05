@@ -83,9 +83,9 @@ in {
 			"font.minimum-size.x-western" = 9;
 			"font.name.monospace.ja" = "monospace";
 			"font.name.monospace.x-western" = "monospace";
-			"dom.webgpu.enabled" = true;
-			"gfx.webrender.all" = true;
-			"gfx.webrender.compositor" = true;
+			# "dom.webgpu.enabled" = true;
+			# "gfx.webrender.all" = true;
+			# "gfx.webrender.compositor" = true;
 			"media.ffmpeg.vaapi.enabled" = true;
 			"devtools.styleeditor.autocompletion-enabled" = false;
 			"devtools.theme" = "dark";
