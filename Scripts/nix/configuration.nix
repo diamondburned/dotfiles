@@ -42,6 +42,7 @@ let home-manager = builtins.fetchGit {
 	userEnv = {
 		NIX_AUTO_RUN = "1";
 		STEAM_RUNTIME = "0";
+		GTK_THEME = "Materia-dark-compact";
 		# XDG_CURRENT_DESKTOP = "Wayfire";
 
 		GOPATH = "/home/diamond/.go";
