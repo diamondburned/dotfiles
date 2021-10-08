@@ -158,8 +158,12 @@ in {
 	} ];
 
 	zramSwap = {
-		enable = true;
+		enable    = true;
 		algorithm = "lz4";
+	};
+
+	boot.kernel.sysctl = {
+		"vm.swappiness" = lib.mkForce 60;
 	};
 
 	# Tablet drivers.
