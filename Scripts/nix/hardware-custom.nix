@@ -152,6 +152,16 @@ in {
 		options = [ "nosuid" "nodev" "nofail" "x-gvfs-show" "noauto" ];
 	};
 
+	swapDevices = [ {
+		device = "/swapfile";
+		options = [ "nofail" ];
+	} ];
+
+	zramSwap = {
+		enable = true;
+		algorithm = "lz4";
+	};
+
 	# Tablet drivers.
 	hardware.opentabletdriver.enable = true;
 
