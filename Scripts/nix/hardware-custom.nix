@@ -158,8 +158,9 @@ in {
 	} ];
 
 	zramSwap = {
-		enable    = true;
-		algorithm = "lz4";
+		enable        = true;
+		algorithm     = "zstd";
+		memoryPercent = 70; # %
 	};
 
 	boot.kernel.sysctl = {
