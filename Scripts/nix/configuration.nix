@@ -350,6 +350,15 @@ in
 		jack.enable = true;
 		pulse.enable = true;
 
+		config.pipewire = {
+			"context.properties" = {
+				"default.clock.rate" = 48000;
+				"default.clock.quantum" = 2048;
+				"default.clock.min-quantum" = 64;
+				"default.clock.max-quantum" = 10240;
+			};
+		};
+
 		# https://nixos.wiki/wiki/PipeWire
 		media-session.config.bluez-monitor.rules = [
 			{
