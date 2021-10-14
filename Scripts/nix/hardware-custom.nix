@@ -157,11 +157,12 @@ in {
 		options = [ "nofail" ];
 	} ];
 
-	zramSwap = {
-		enable        = true;
-		algorithm     = "lz4";
-		memoryPercent = 110; # %
-	};
+	# My NVMe SSD is just faster than decompressing this.
+	# zramSwap = {
+	# 	enable        = true;
+	# 	algorithm     = "lz4";
+	# 	memoryPercent = 110; # %
+	# };
 
 	boot.kernel.sysctl = {
 		"vm.swappiness" = lib.mkForce 60;
