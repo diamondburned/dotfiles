@@ -644,8 +644,9 @@ in
 		'';
 
 		# Home is for no DM, PAM is for gdm.
-		home.sessionVariables = userEnv;
-		pam.sessionVariables = userEnv;
+		home.sessionVariables = userEnv;         # for no DM.
+		pam.sessionVariables = userEnv;          # for GDM + GNOME.
+		systemd.user.sessionVariables = userEnv; # for GDM + Wayfire.
 
 		home.packages = ([
 			# gimpMesonPkgs.gimp-with-plugins

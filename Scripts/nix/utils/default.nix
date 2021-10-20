@@ -5,6 +5,17 @@ let globalPaths = lib.makeBinPath (
 		config.environment.systemPackages
 	);
 
+	writeBashScript' = pkg: name: text: pkgList: pkg name ''
+#!${pkgs.bash}/bin/bash
+for deriv in ${lib.concatStringsSep " " pkgList}; {
+	export PATH="$deriv/bin:$PATH"
+}
+
+{
+${text}
+} &> /tmp/nix-${name}.out
+	'';
+
 in {
 	inherit globalPaths;
 
@@ -34,16 +45,8 @@ ${if hide then "NotShowIn=desktop-name" else ""}
 ${extraEntries}
 	'';
 
-	writeBashScript = name: text: pkgList: pkgs.writeScript name ''
-#!${pkgs.bash}/bin/bash
-for deriv in ${lib.concatStringsSep " " pkgList}; {
-	export PATH="$deriv/bin:$PATH"
-}
-
-{
-${text}
-} &> /tmp/nix-${name}.out
-	'';
+	writeBashScript    = writeBashScript' pkgs.writeScript;
+	writeBashScriptBin = writeBashScript' pkgs.writeScriptBin;
 
 	outputConfig = attrs: (
 		lib.attrsets.mapAttrsToList

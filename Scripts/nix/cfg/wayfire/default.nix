@@ -14,9 +14,12 @@ let utils = import ../../utils { inherit config lib pkgs; };
 			{ grim -t jpeg -q 100 -  | wl-copy; }
 
 		echo "Executed on $(date)."
-	'' (
-		with pkgs; [ slurp grim wl-clipboard ]
-	);
+	'' (with pkgs; [ slurp grim wl-clipboard ]);
+
+	screenrec = utils.writeBashScriptBin "screenrec" ''
+		region=( -g "$(slurp)" ) || region=()
+		wf-recorder -f "screenrec_$(date +"%Y-%m-%d_%H:%M:%S").mp4" "''${region[@]}" "$@"
+	'' (with pkgs; [ wf-recorder slurp ]);
 
 in {
 	services.xserver.displayManager = {
@@ -85,6 +88,7 @@ in {
 			wl-clipboard
 			wf-shell
 			wf-recorder
+			screenrec
 			kanshi
 			dex
 			dbus
