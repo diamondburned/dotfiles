@@ -164,7 +164,7 @@ in {
 			enable   = true;
 			font     = "Sans 11";
 			anchor   = "top-center";
-			format   = "<b>%s</b>\n%b";
+			format   = "<b>%s</b>\\n%b";
 			width    = 400;
 			borderSize = 2;
 			defaultTimeout = 10000;
