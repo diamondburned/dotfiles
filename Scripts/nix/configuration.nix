@@ -501,6 +501,15 @@ in
 		gtkUsePortal = true;
 	};
 
+	# Enable PAM user environments for GDM.
+	security.pam.services.gdm-password.text = ''
+        auth      substack      login
+        account   include       login
+        password  substack      login
+        session   include       login
+		session   required      pam_env.so user_readenv=1
+	'';
+
 	home-manager.users.diamond = {
 		imports = [
 			"${lsoc-overlay}"

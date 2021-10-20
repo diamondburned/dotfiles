@@ -19,13 +19,13 @@ terminal-window vte-terminal {
 	border-radius: 0 9999px 9999px 0;
 }
 
-/*
 .background.csd,
 .background.csd > * {
 	border: none;
 	box-shadow: none;
 }
 
+/*
 .csd.nautilus-window {
 	background-color: transparent;
 }

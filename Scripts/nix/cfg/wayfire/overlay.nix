@@ -34,24 +34,40 @@ in self: super: {
 	# 	];
 	# });
 
-	wayfire = waylandPkgs.wayfire.overrideAttrs (old: {
-		# version = "0.7.2";
-		# src = super.fetchFromGitHub {
-		# 	owner  = "WayfireWM";
-		# 	repo   = "wayfire";
-		# 	rev    = "7a69c1e3c0fe0cd0134db6d8fe581d9d831f648e";
-		# 	sha256 = "${super.lib.fakeSha256}";
-		# 	fetchSubmodules = true;
-		# };
+	wayfire-session = super.runCommand "wayfire-session" {
 		passthru.providedSessions = [ "wayfire" ];
-		postInstall = ''
-			mkdir -p "$out/share/wayland-sessions"
-			cp ${./wayfire.desktop} \
-				"$out/share/wayland-sessions/wayfire.desktop"
-		'';
-	});
+	} ''
+		mkdir -p "$out/share/wayland-sessions"
+		cp ${./wayfire.desktop} \
+			"$out/share/wayland-sessions/wayfire.desktop"	
+	'';
 
-	wf-shell = waylandPkgs.wayfirePlugins.wf-shell;
+	# wayfire-unwrapped = super.wayfireApplications-unwrapped.wayfire.overrideAttrs (old: {
+	# 	# version = "0.7.2";
+	# 	# src = super.fetchFromGitHub {
+	# 	# 	owner  = "WayfireWM";
+	# 	# 	repo   = "wayfire";
+	# 	# 	rev    = "7a69c1e3c0fe0cd0134db6d8fe581d9d831f648e";
+	# 	# 	sha256 = "${super.lib.fakeSha256}";
+	# 	# 	fetchSubmodules = true;
+	# 	# };
+	# 	passthru.providedSessions = [ "wayfire" ];
+	# 	postInstall = ''
+	# 		mkdir -p "$out/share/wayland-sessions"
+	# 		cp ${./wayfire.desktop} \
+	# 			"$out/share/wayland-sessions/wayfire.desktop"
+	# 	'';
+	# });
+
+	# wayfireApplications-unwrapped = super.wayfireApplications-unwrapped // {
+	# 	wayfire = self.wayfire-unwrapped;
+	# };
+	# wayfire = self.wayfire-unwrapped;
+
+	wf-shell = super.wayfirePlugins.wf-shell.overrideAttrs(old: {
+		nativeBuildInputs = old.nativeBuildInputs ++ (with super; [ wrapGAppsHook ]);
+	});
+	# wf-shell = waylandPkgs.wayfirePlugins.wf-shell;
 
 	# wf-shell = super.stdenv.mkDerivation rec {
 	# 	name = "wf-shell-0.7.0";

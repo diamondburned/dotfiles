@@ -31,5 +31,5 @@ let waylandOverlays = import (pkgs.fetchFromGitHub {
 	};
 
 in import <nixos> {
-	overlays = [ waylandOverlays customOverlays ];
+	# overlays = [ waylandOverlays customOverlays ];
 }
