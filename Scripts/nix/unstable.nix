@@ -1,15 +1,14 @@
 { config, lib, pkgs, ... }:
 
 let 
-	/*
-	unstable = import <unstable> {
+	unstable = import <nixpkgs> {
 		config.allowUnfree = true;
 		overlays = [(self: super: {
 			go = super.go.overrideAttrs (old: {
-				version = "1.17beta1";
+				version = "1.17.2";
 				src = builtins.fetchurl {
-					url    = "https://golang.org/dl/go1.17rc1.linux-arm64.tar.gz";
-					sha256 = "sha256:0kps5kw9yymxawf57ps9xivqrkx2p60bpmkisahr8jl1rqkf963l";
+					url    = "https://golang.org/dl/go1.17.2.src.tar.gz";
+					sha256 = "sha256:0cgla9vw2d3a12qnym1f663c2wa3af27ybnwzkaxfkc29qzfnm92";
 				};
 				doCheck = false;
 			});
@@ -29,7 +28,6 @@ let
 			});
 		})];
 	};
-	*/
 
 	# home-manager-master = builtins.fetchGit {
 	# 	url = "https://github.com/nix-community/home-manager.git";
@@ -183,7 +181,7 @@ in {
 			fcitx5-gtk
 
 			# Compilers
-			go
+			unstable.go
 
 			playerctl
 			wl-clipboard
