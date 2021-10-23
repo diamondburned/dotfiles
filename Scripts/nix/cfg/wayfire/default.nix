@@ -95,6 +95,7 @@ in {
 			mako
 			wlsunset
 			wlogout
+			gappdash
 		];
 
 		programs.bash.profileExtra = ''
