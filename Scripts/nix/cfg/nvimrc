@@ -394,7 +394,7 @@ let g:ale_sign_error = '!'
 let g:ale_sign_warning = '>'
 let g:ale_sign_column_always = 1
 let g:ale_fix_on_save = 1
-let g:ale_linters_explicit = 0
+let g:ale_linters_explicit = 1
 let g:ale_completion_autoimport = 1
 let g:ale_linter_aliases = {
 			\ 'svelte': ['css', 'javascript'],
@@ -408,8 +408,9 @@ let g:ale_fixers = {
 			\ 'javascript': [ "prettier", "prettier_standard", "eslint" ],
 			\ }
 let g:ale_completion_enabled = 1
+"Previously for Go: staticcheck and go vet"
 let g:ale_linters = {
-			\ 'go':         [ "gopls", "go vet", "staticcheck", "gotype" ],
+			\ 'go':         [ "gopls", "gotype" ],
 			\ 'zig':        [ "zls" ],
 			\ 'c':          [ "clangd" ],
 			\ 'cpp':        [ "clangd" ],
