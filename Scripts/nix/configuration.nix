@@ -103,7 +103,6 @@ in
 		});
 	in [
 		# (tdeo)
-		(import ./discord.nix)
 		(self: super: {
 			# This might be causing painful rebuilds.
 			# vte = vte super;

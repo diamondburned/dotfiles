@@ -2,7 +2,7 @@
 
 let utils = import ../../utils { inherit config lib pkgs; };
 
-	scrot = utils.writeBashScript "scrot.sh" ''
+	scrot = utils.writeBashScriptBin "scrot.sh" ''
 		export WAYLAND_DISPLAY=wayland-1
 
 		slurp() {
@@ -81,6 +81,7 @@ in {
 		pam.sessionVariables.XDG_CURRENT_DESKTOP = "Wayfire";
 
 		home.packages = with pkgs; [
+			scrot
 			slurp
 			grim
 			wofi
@@ -119,18 +120,16 @@ in {
 			"wayfire.ini" = {
 				source = pkgs.substituteAll {
 					src = ./wayfire.ini;
+					scrot = "${scrot}/bin/scrot.sh";
 					polkit_gnome = pkgs.polkit_gnome;
-
-					inherit scrot;
 				};
 			};
 			"wf-shell.ini" = {
 				source = pkgs.substituteAll {
 					src = ./wf-shell.ini;
 					css = ./wf-panel.css;
+					scrot = "${scrot}/bin/scrot.sh";
 					menu_icon = ./menu.png;
-
-					inherit scrot;
 				};
 			};
 		};
