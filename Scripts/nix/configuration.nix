@@ -709,6 +709,7 @@ in
 			# Office
 			libreoffice
 			evince
+			aspell
 
 			# Applications
 			gcolor3
