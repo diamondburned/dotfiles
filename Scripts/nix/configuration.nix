@@ -170,7 +170,7 @@ in
 			});
 			octave-soft = super.writeShellScriptBin "octave" ''
 				export LIBGL_ALWAYS_SOFTWARE=true
-				${super.octave}/bin/octave "$@"
+				${super.octaveFull}/bin/octave "$@"
 			'';
 			# octave-soft = super.buildEnv {
 			# 	name = "octave-soft";
