@@ -168,6 +168,25 @@ in
 						--add-flags "--ozone-platform=wayland"
 				'';
 			});
+			octave-soft = super.writeShellScriptBin "octave" ''
+				export LIBGL_ALWAYS_SOFTWARE=true
+				${super.octave}/bin/octave "$@"
+			'';
+			# octave-soft = super.buildEnv {
+			# 	name = "octave-soft";
+			# 	paths = with super; [ octave ];
+			# 	nativeBuildInputs = with super; [ makeWrapper ];
+			# 	postBuild = ''
+			# 		wrapProgram $out/bin/octave --set LIBGL_ALWAYS_SOFTWARE true
+			# 	'';
+			# };
+			# octave-soft = super.octave.overrideAttrs(old: {
+			# 	# Workaround for working anti-aliasing.
+			# 	# https://savannah.gnu.org/bugs/?55224
+			# 	postFixup = (old.postFixup or "") + ''
+			# 		wrapProgram $out/bin/octave --set LIBGL_ALWAYS_SOFTWARE true
+			# 	'';
+			# });
 		})
 	];
 
@@ -687,6 +706,7 @@ in
 			xclip
 			virt-manager
 			xorg.xauth
+			octave-soft
 
 			# Multimedia
 			aqours
