@@ -40,10 +40,12 @@ textarea,
 body[lwt-newtab-brighttext]     { background: #242424 !important; }
 body[lwt-newtab-brighttext] > * { display: none; }
 
-/* Light-themed documentation pages give me headache. */
+/* Light-themed documentation pages give me headache. Doesn't work. */
+/*
 @-moz-document domain("developer.mozilla.com") {
 	* {
 		color: white !important;
 		background-color: black !important;
 	}
 }
+*/
