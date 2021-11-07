@@ -735,6 +735,7 @@ in
 			gcolor3
 
 			# Themes
+			papirus-icon-theme
 			materia-theme
 			material-design-icons
 
