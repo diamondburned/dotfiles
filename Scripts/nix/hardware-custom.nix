@@ -65,11 +65,15 @@ in {
 		driSupport32Bit = true;
 		extraPackages = with pkgs; [
 			mesa
+			libva
+			libva-utils
 			vaapiIntel
 			intel-media-driver
 		];
 		extraPackages32 = with pkgs.pkgsi686Linux; [
 			libva
+			libva-utils
+			vaapiIntel
 			pipewire.lib
 		];
 	};
