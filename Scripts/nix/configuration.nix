@@ -686,6 +686,7 @@ in
 			git-crypt
 			gnupg
 			gnuplot
+			intiface-cli
 
 			# System
 			(writeScriptBin "wsudo" (builtins.readFile ./bin/wsudo))
