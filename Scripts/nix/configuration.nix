@@ -528,6 +528,11 @@ in
 		session   required      pam_env.so user_readenv=1
 	'';
 
+	# programs.wireshark = {
+	# 	enable  = true;
+	# 	package = pkgs.wireshark-qt;
+	# };
+
 	home-manager.users.diamond = {
 		imports = [
 			"${lsoc-overlay}"
@@ -744,7 +749,7 @@ in
 			osu-wine
 
 			# GNOME things
-			thunar
+			xfce.thunar
 			gnome-mpv
 			gnome3.eog
 			gnome3.vinagre
