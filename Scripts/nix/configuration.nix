@@ -744,6 +744,7 @@ in
 			osu-wine
 
 			# GNOME things
+			thunar
 			gnome-mpv
 			gnome3.eog
 			gnome3.vinagre
