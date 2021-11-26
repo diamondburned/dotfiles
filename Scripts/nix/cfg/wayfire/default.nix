@@ -19,7 +19,7 @@ let utils = import ../../utils { inherit config lib pkgs; };
 	screenrec = utils.writeBashScriptBin "screenrec" ''
 		region=( -g "$(slurp)" ) || region=()
 		wf-recorder \
-			-c hevc_vaapi -d /dev/dri/renderD128 --bframes 0 \
+			-c h264_vaapi -d /dev/dri/renderD128 --bframes 0 \
 			-f "screenrec_$(date +"%Y-%m-%d_%H:%M:%S").mp4"  \
 			"''${region[@]}" "$@"
 	'' (with pkgs; [ wf-recorder slurp ]);
