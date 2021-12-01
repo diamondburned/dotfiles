@@ -2,10 +2,13 @@
 <!DOCTYPE fontconfig SYSTEM "fonts.dtd">
 <!--Requirements: Noto Fonts set (CJK+Emojis+Extra), Noto Sans CJK JP, Unifont and OpenSymbol-->
 <fontconfig>
-	<!-- GIMP font AA fix -->
 	<match target="font">
-		<edit name="rgba" mode="assign">
-			<const>none</const>
+		<!-- GIMP font AA fix -->
+		<!-- <edit name="rgba" mode="assign"> -->
+		<!-- 	<const>none</const> -->
+		<!-- </edit> -->
+		<edit name="hintstyle" mode="assign">
+			<const>hintslight</const>
 		</edit>
 	</match>
 

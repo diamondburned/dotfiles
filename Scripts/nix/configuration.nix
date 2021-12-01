@@ -401,16 +401,20 @@ in
 		allowBitmaps = true;
 		useEmbeddedBitmaps = true; # emojis
 		subpixel = {
+			# http://www.spasche.net/files/lcdfiltering/
 			lcdfilter = "default";
-			rgba = "none";
+			rgba = "rgb";
 		};
 		includeUserConf = true;
-		hinting.enable = false;
+		hinting.enable = true;
 	};
 
 	security.sudo.extraConfig = ''
 		Defaults env_reset,pwfeedback
 	'';
+
+	# gnu = true;
+	gtk.iconCache.enable = true;
 
 	services.xserver.enable = true;
 
