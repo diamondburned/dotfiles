@@ -405,11 +405,11 @@ in
 		useEmbeddedBitmaps = true; # emojis
 		subpixel = {
 			# http://www.spasche.net/files/lcdfiltering/
-			lcdfilter = "default";
+			lcdfilter = "legacy";
 			rgba = "none";
 		};
 		includeUserConf = true;
-		hinting.enable = true;
+		hinting.enable = false;
 	};
 
 	security.sudo.extraConfig = ''
