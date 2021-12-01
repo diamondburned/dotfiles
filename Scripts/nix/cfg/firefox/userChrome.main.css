@@ -5,6 +5,10 @@
 	/* --toolbarbutton-icon-fill-attention: red !important; */
 }
 
+* {
+	font-size: 13pt !important;
+}
+
 /* Fix for the weird white line on Wayland(?) */
 body > box {
 	margin-bottom: -1px !important;

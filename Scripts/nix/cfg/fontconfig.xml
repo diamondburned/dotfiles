@@ -17,7 +17,7 @@
 			<const>hintnone</const>
 		</edit>
 		<edit name="hinting" mode="assign">
-			<bool>true</bool>
+			<bool>false</bool>
 		</edit>
 		<edit name="lcdfilter" mode="assign">
 			<const>lcdnone</const>

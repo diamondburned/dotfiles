@@ -70,12 +70,17 @@ in {
 			${builtins.readFile ./userChrome.main.css}
 		'';
 		settings = {
+			"browser.sessionhistory.max_entries" = 15;
 			"browser.send_pings" = false;
+			"browser.cache.offline.enable" = true;
+			"browser.cache.memory.capacity" = 14336;
 			"xpinstall.signatures.required" = false;
 			"dom.ipc.plugins.enabled" = false;
 			"security.dialog_enable_delay" = 0;
 			"dom.dialog_element.enabled" = true;
 			"toolkit.legacyUserProfileCustomizations.stylesheets" = true;
+			"layout.frame_rate" = 70;
+			"layout.css.devPixelsPerPx" = "0.9";
 			"layout.css.backdrop-filter.enabled" = true;
 			"intl.accept_languages" = "en-us,en,vi";
 			"findbar.highlightAll" = true;
@@ -84,8 +89,9 @@ in {
 			"font.name.monospace.ja" = "monospace";
 			"font.name.monospace.x-western" = "monospace";
 			# "dom.webgpu.enabled" = true;
-			# "gfx.webrender.all" = true;
-			# "gfx.webrender.compositor" = true;
+			"gfx.webrender.all" = true;
+			"gfx.webrender.compositor" = true;
+			"gfx.webrender.compositor.force-enabled" = false;
 			"media.ffmpeg.vaapi.enabled" = true;
 			"devtools.styleeditor.autocompletion-enabled" = false;
 			"devtools.theme" = "dark";
