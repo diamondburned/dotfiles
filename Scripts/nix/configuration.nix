@@ -319,6 +319,9 @@ in
 
 	# Install global fonts
 	fonts.fonts = with pkgs; [
+		open-sans
+		roboto
+		roboto-slab # serif
 		noto-fonts
 		noto-fonts-cjk
 		noto-fonts-emoji
@@ -403,7 +406,7 @@ in
 		subpixel = {
 			# http://www.spasche.net/files/lcdfiltering/
 			lcdfilter = "default";
-			rgba = "rgb";
+			rgba = "none";
 		};
 		includeUserConf = true;
 		hinting.enable = true;
