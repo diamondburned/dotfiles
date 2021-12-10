@@ -352,8 +352,8 @@ in
 		drivers = with pkgs; [
 			# gutenprint
 			# hplip
-			# cups-filters
-			# cups-bjnp
+			cups-filters
+			cups-bjnp
 
 			# Canon
 			cnijfilter2
