@@ -98,7 +98,8 @@ in {
 	];
 
 	# Refer to unstable.nix.
-	boot.kernelPackages = pkgs.linuxPackages_5_13;
+	# boot.kernelPackages = pkgs.linuxPackages_5_13;
+	boot.kernelPackages = pkgs.linuxPackages_xanmod;
 
 	# Kernel tweaks and such for real-time audio.
 	musnix = {
@@ -237,23 +238,23 @@ in {
 
 	# These patches taken from cidkid's config.
 	# le9db patchset to prevent I/O thrasing on high memory loads.
-	boot.kernelPatches = [ 
-		{
-			## Prevent OOM from crashing computer hard
-			name  = "pf-le9-unevictable-file";
-			patch = builtins.fetchurl {
-				url    = "https://gitlab.com/post-factum/pf-kernel/-/commit/ec357403078bcf24c42c468c8d4059680f383883.diff";
-				sha256 = "sha256:0s6wbjag3qc5c84b6ddpzlzr7pvpj58zzs5qxmpb8r9gd37npmdc";
-			};
-		}
-		{
-			name  = "pf-le9-unevictable-anon";
-			patch = builtins.fetchurl {
-				url    = "https://gitlab.com/post-factum/pf-kernel/-/commit/0af9a997d0386ded3414f73e29d7119eedfaf624.diff";
-				sha256 = "sha256:1ca9z90d8hvlyv55h6qn83f6737in3mvzv4ijssg453qqvxvnbym";
-			};
-		}
-	];
+	# boot.kernelPatches = [ 
+	# 	{
+	# 		## Prevent OOM from crashing computer hard
+	# 		name  = "pf-le9-unevictable-file";
+	# 		patch = builtins.fetchurl {
+	# 			url    = "https://gitlab.com/post-factum/pf-kernel/-/commit/ec357403078bcf24c42c468c8d4059680f383883.diff";
+	# 			sha256 = "sha256:0s6wbjag3qc5c84b6ddpzlzr7pvpj58zzs5qxmpb8r9gd37npmdc";
+	# 		};
+	# 	}
+	# 	{
+	# 		name  = "pf-le9-unevictable-anon";
+	# 		patch = builtins.fetchurl {
+	# 			url    = "https://gitlab.com/post-factum/pf-kernel/-/commit/0af9a997d0386ded3414f73e29d7119eedfaf624.diff";
+	# 			sha256 = "sha256:1ca9z90d8hvlyv55h6qn83f6737in3mvzv4ijssg453qqvxvnbym";
+	# 		};
+	# 	}
+	# ];
 
 	boot.kernel.sysctl = {
 		# Anon-patch
