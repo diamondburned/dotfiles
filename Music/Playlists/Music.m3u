@@ -3161,6 +3161,48 @@
 /run/user/1000/gvfs/sftp:host=192.168.1.169,port=1337,user=diamond/mnt/Music/[2018.10.10] Total Feedback 2018/12. This Sound Is To You.flac
 #EXTINF:247,風花
 /run/user/1000/gvfs/sftp:host=192.168.1.169,port=1337,user=diamond/mnt/Music/[2018.10.10] Total Feedback 2018/09. 風花.flac
+#EXTINF:178,Chamomile
+/run/user/1000/gvfs/sftp:host=192.168.1.169,port=1337,user=diamond/mnt/Music/Hikes (2014)/Chamomile.mp3
+#EXTINF:180,Like Ripples, Part 2
+/run/user/1000/gvfs/sftp:host=192.168.1.169,port=1337,user=diamond/mnt/Music/Hikes (2014)/Like Ripples, Part 2.mp3
+#EXTINF:365,Tinker Creek
+/run/user/1000/gvfs/sftp:host=192.168.1.169,port=1337,user=diamond/mnt/Music/Hikes (2014)/Tinker Creek.mp3
+#EXTINF:521,Quilt
+/run/user/1000/gvfs/sftp:host=192.168.1.169,port=1337,user=diamond/mnt/Music/Hikes (2014)/Quilt.mp3
+#EXTINF:256,Tenth Walk
+/run/user/1000/gvfs/sftp:host=192.168.1.169,port=1337,user=diamond/mnt/Music/Hikes (2014)/Tenth Walk.mp3
+#EXTINF:352,Spring Forward (Ashe acoustic)
+/run/user/1000/gvfs/sftp:host=192.168.1.169,port=1337,user=diamond/mnt/Music/Hikes (2014)/Spring Forward (Ashe acoustic).mp3
+#EXTINF:268,Like Ripples
+/run/user/1000/gvfs/sftp:host=192.168.1.169,port=1337,user=diamond/mnt/Music/Hikes (2014)/Like Ripples.mp3
+#EXTINF:440,Spring Forward
+/run/user/1000/gvfs/sftp:host=192.168.1.169,port=1337,user=diamond/mnt/Music/Hikes (2014)/Spring Forward.mp3
+#EXTINF:240,Habit
+/run/user/1000/gvfs/sftp:host=192.168.1.169,port=1337,user=diamond/mnt/Music/Lilt/03 Habit.mp3
+#EXTINF:345,Granddad
+/run/user/1000/gvfs/sftp:host=192.168.1.169,port=1337,user=diamond/mnt/Music/Lilt/01 Granddad.mp3
+#EXTINF:257,Timothy
+/run/user/1000/gvfs/sftp:host=192.168.1.169,port=1337,user=diamond/mnt/Music/Lilt/04 Timothy.mp3
+#EXTINF:216,Onset
+/run/user/1000/gvfs/sftp:host=192.168.1.169,port=1337,user=diamond/mnt/Music/Lilt/02 Onset.mp3
+#EXTINF:167,Mauve Rinsed
+/run/user/1000/gvfs/sftp:host=192.168.1.169,port=1337,user=diamond/mnt/Music/Hikes - Mahal Kita/1-08 Mauve Rinsed.m4a
+#EXTINF:224,Extra Mile (feat. The Kraken Quartet)
+/run/user/1000/gvfs/sftp:host=192.168.1.169,port=1337,user=diamond/mnt/Music/Hikes - Mahal Kita/1-02 Extra Mile (feat. The Kraken Qu.m4a
+#EXTINF:226,Jejune
+/run/user/1000/gvfs/sftp:host=192.168.1.169,port=1337,user=diamond/mnt/Music/Hikes - Mahal Kita/1-07 Jejune.m4a
+#EXTINF:160,Graying (feat. Atlys)
+/run/user/1000/gvfs/sftp:host=192.168.1.169,port=1337,user=diamond/mnt/Music/Hikes - Mahal Kita/1-05 Graying (feat. Atlys).m4a
+#EXTINF:165,Empathy
+/run/user/1000/gvfs/sftp:host=192.168.1.169,port=1337,user=diamond/mnt/Music/Hikes - Mahal Kita/1-06 Empathy.m4a
+#EXTINF:189,Aurora
+/run/user/1000/gvfs/sftp:host=192.168.1.169,port=1337,user=diamond/mnt/Music/Hikes - Mahal Kita/1-04 Aurora.m4a
+#EXTINF:227,Been Thinkin'
+/run/user/1000/gvfs/sftp:host=192.168.1.169,port=1337,user=diamond/mnt/Music/Hikes - Mahal Kita/1-01 Been Thinkin'.m4a
+#EXTINF:237,Mahal Kita
+/run/user/1000/gvfs/sftp:host=192.168.1.169,port=1337,user=diamond/mnt/Music/Hikes - Mahal Kita/1-03 Mahal Kita.m4a
+#EXTINF:249,Beauty, Again
+/run/user/1000/gvfs/sftp:host=192.168.1.169,port=1337,user=diamond/mnt/Music/Hikes - Mahal Kita/1-09 Beauty, Again.m4a
 #EXTINF:466,Let It Happen
 /run/user/1000/gvfs/sftp:host=192.168.1.169,port=1337,user=diamond/mnt/Music/Tame Impala - Currents (2015) [24-44.1] (Web)/1.1 - Let It Happen (1676kbs) (93,46Mb).flac
 #EXTINF:107,Nangs
@@ -3211,6 +3253,34 @@
 /run/user/1000/gvfs/sftp:host=192.168.1.169,port=1337,user=diamond/mnt/Music/kaiser chiefs - yours truly, angry mob (2007)/12 - Try Your Best.mp3
 #EXTINF:233,Retirement
 /run/user/1000/gvfs/sftp:host=192.168.1.169,port=1337,user=diamond/mnt/Music/kaiser chiefs - yours truly, angry mob (2007)/13 - Retirement.mp3
+#EXTINF:164,Take My Temperature
+/run/user/1000/gvfs/sftp:host=192.168.1.169,port=1337,user=diamond/mnt/Music/2005  Employment/13 - Take My Temperature.flac
+#EXTINF:243,Modern Way
+/run/user/1000/gvfs/sftp:host=192.168.1.169,port=1337,user=diamond/mnt/Music/2005  Employment/03 - Modern Way.flac
+#EXTINF:204,Team-mate
+/run/user/1000/gvfs/sftp:host=192.168.1.169,port=1337,user=diamond/mnt/Music/2005  Employment/12 - Team-mate.flac
+#EXTINF:233,Wrecking Ball
+/run/user/1000/gvfs/sftp:host=192.168.1.169,port=1337,user=diamond/mnt/Music/2005  Employment/14 - Wrecking Ball.flac
+#EXTINF:276,You Can Have It All
+/run/user/1000/gvfs/sftp:host=192.168.1.169,port=1337,user=diamond/mnt/Music/2005  Employment/05 - You Can Have It All.flac
+#EXTINF:250,Caroline, Yes
+/run/user/1000/gvfs/sftp:host=192.168.1.169,port=1337,user=diamond/mnt/Music/2005  Employment/11 - Caroline, Yes.flac
+#EXTINF:250,What Did I Ever Give You
+/run/user/1000/gvfs/sftp:host=192.168.1.169,port=1337,user=diamond/mnt/Music/2005  Employment/09 - What Did I Ever Give You.flac
+#EXTINF:165,Time Honoured Tradition
+/run/user/1000/gvfs/sftp:host=192.168.1.169,port=1337,user=diamond/mnt/Music/2005  Employment/10 - Time Honoured Tradition.flac
+#EXTINF:217,Everyday I Love You Less and Less
+/run/user/1000/gvfs/sftp:host=192.168.1.169,port=1337,user=diamond/mnt/Music/2005  Employment/01 - Everyday I Love You Less and Less.flac
+#EXTINF:211,Born To Be A Dancer
+/run/user/1000/gvfs/sftp:host=192.168.1.169,port=1337,user=diamond/mnt/Music/2005  Employment/07 - Born To Be A Dancer.flac
+#EXTINF:233,I Predict A Riot
+/run/user/1000/gvfs/sftp:host=192.168.1.169,port=1337,user=diamond/mnt/Music/2005  Employment/02 - I Predict A Riot.flac
+#EXTINF:214,Oh My God
+/run/user/1000/gvfs/sftp:host=192.168.1.169,port=1337,user=diamond/mnt/Music/2005  Employment/06 - Oh My God.flac
+#EXTINF:206,Saturday Night
+/run/user/1000/gvfs/sftp:host=192.168.1.169,port=1337,user=diamond/mnt/Music/2005  Employment/08 - Saturday Night.flac
+#EXTINF:180,Na Na Na Na Naa
+/run/user/1000/gvfs/sftp:host=192.168.1.169,port=1337,user=diamond/mnt/Music/2005  Employment/04 - Na Na Na Na Naa.flac
 #EXTINF:17,Introduction
 /run/user/1000/gvfs/sftp:host=192.168.1.169,port=1337,user=diamond/mnt/Music/Elevator/1-01 Introduction.flac
 #EXTINF:165,Running Out of Time
@@ -3525,6 +3595,32 @@
 /run/user/1000/gvfs/sftp:host=192.168.1.169,port=1337,user=diamond/mnt/Music/(2009) Humbug/1-11 I Haven't Got My Strange.flac
 #EXTINF:257,Red Right Hand
 /run/user/1000/gvfs/sftp:host=192.168.1.169,port=1337,user=diamond/mnt/Music/(2009) Humbug/1-12 Red Right Hand.flac
+#EXTINF:134,Riot Van
+/run/user/1000/gvfs/sftp:host=192.168.1.169,port=1337,user=diamond/mnt/Music/Whatever People Say I Am, That's What I'm Not/07 Riot Van.flac
+#EXTINF:200,When the Sun Goes Down
+/run/user/1000/gvfs/sftp:host=192.168.1.169,port=1337,user=diamond/mnt/Music/Whatever People Say I Am, That's What I'm Not/11 When the Sun Goes Down.flac
+#EXTINF:175,Mardy Bum
+/run/user/1000/gvfs/sftp:host=192.168.1.169,port=1337,user=diamond/mnt/Music/Whatever People Say I Am, That's What I'm Not/09 Mardy Bum.flac
+#EXTINF:141,Dancing Shoes
+/run/user/1000/gvfs/sftp:host=192.168.1.169,port=1337,user=diamond/mnt/Music/Whatever People Say I Am, That's What I'm Not/04 Dancing Shoes.flac
+#EXTINF:130,You Probably Couldn't See for the Lights but You Were Staring Straight at Me
+/run/user/1000/gvfs/sftp:host=192.168.1.169,port=1337,user=diamond/mnt/Music/Whatever People Say I Am, That's What I'm Not/05 You Probably Couldn't See for the Lights but You Were Staring Straight at Me.flac
+#EXTINF:331,A Certain Romance
+/run/user/1000/gvfs/sftp:host=192.168.1.169,port=1337,user=diamond/mnt/Music/Whatever People Say I Am, That's What I'm Not/13 A Certain Romance.flac
+#EXTINF:173,Still Take You Home
+/run/user/1000/gvfs/sftp:host=192.168.1.169,port=1337,user=diamond/mnt/Music/Whatever People Say I Am, That's What I'm Not/06 Still Take You Home.flac
+#EXTINF:173,I Bet You Look Good on the Dancefloor
+/run/user/1000/gvfs/sftp:host=192.168.1.169,port=1337,user=diamond/mnt/Music/Whatever People Say I Am, That's What I'm Not/02 I Bet You Look Good on the Dancefloor.flac
+#EXTINF:143,Red Light Indicates Doors Are Secured
+/run/user/1000/gvfs/sftp:host=192.168.1.169,port=1337,user=diamond/mnt/Music/Whatever People Say I Am, That's What I'm Not/08 Red Light Indicates Doors Are Secured.flac
+#EXTINF:193,From the Ritz to the Rubble
+/run/user/1000/gvfs/sftp:host=192.168.1.169,port=1337,user=diamond/mnt/Music/Whatever People Say I Am, That's What I'm Not/12 From the Ritz to the Rubble.flac
+#EXTINF:177,Fake Tales of San Francisco
+/run/user/1000/gvfs/sftp:host=192.168.1.169,port=1337,user=diamond/mnt/Music/Whatever People Say I Am, That's What I'm Not/03 Fake Tales of San Francisco.flac
+#EXTINF:218,The View From the Afternoon
+/run/user/1000/gvfs/sftp:host=192.168.1.169,port=1337,user=diamond/mnt/Music/Whatever People Say I Am, That's What I'm Not/01 The View From the Afternoon.flac
+#EXTINF:268,Perhaps Vampires Is a Bit Strong But...
+/run/user/1000/gvfs/sftp:host=192.168.1.169,port=1337,user=diamond/mnt/Music/Whatever People Say I Am, That's What I'm Not/10 Perhaps Vampires Is a Bit Strong But....flac
 #EXTINF:258,Two Receivers
 /run/user/1000/gvfs/sftp:host=192.168.1.169,port=1337,user=diamond/mnt/Music/[2007] Myths of the Near Future/01 Two Receivers.flac
 #EXTINF:198,Atlantis to Interzone
@@ -3547,3 +3643,23 @@
 /run/user/1000/gvfs/sftp:host=192.168.1.169,port=1337,user=diamond/mnt/Music/[2007] Myths of the Near Future/10 It’s Not Over Yet.flac
 #EXTINF:1182,Four Horsemen of 2012 / [untitled]
 /run/user/1000/gvfs/sftp:host=192.168.1.169,port=1337,user=diamond/mnt/Music/[2007] Myths of the Near Future/11 Four Horsemen of 2012 _ [untitled].flac
+#EXTINF:187,Black Widow
+/run/user/1000/gvfs/sftp:host=192.168.1.169,port=1337,user=diamond/mnt/Music/Cage The Elephant - Melophobia/07 - Black Widow.flac
+#EXTINF:210,It's Just Forever
+/run/user/1000/gvfs/sftp:host=192.168.1.169,port=1337,user=diamond/mnt/Music/Cage The Elephant - Melophobia/04 - It's Just Forever.flac
+#EXTINF:229,Come a Little Closer
+/run/user/1000/gvfs/sftp:host=192.168.1.169,port=1337,user=diamond/mnt/Music/Cage The Elephant - Melophobia/02 - Come a Little Closer.flac
+#EXTINF:228,Telescope
+/run/user/1000/gvfs/sftp:host=192.168.1.169,port=1337,user=diamond/mnt/Music/Cage The Elephant - Melophobia/03 - Telescope.flac
+#EXTINF:207,Take It or Leave It
+/run/user/1000/gvfs/sftp:host=192.168.1.169,port=1337,user=diamond/mnt/Music/Cage The Elephant - Melophobia/05 - Take It or Leave It.flac
+#EXTINF:177,Halo
+/run/user/1000/gvfs/sftp:host=192.168.1.169,port=1337,user=diamond/mnt/Music/Cage The Elephant - Melophobia/06 - Halo.flac
+#EXTINF:222,Spiderhead
+/run/user/1000/gvfs/sftp:host=192.168.1.169,port=1337,user=diamond/mnt/Music/Cage The Elephant - Melophobia/01 - Spiderhead.flac
+#EXTINF:208,Cigarette Daydreams
+/run/user/1000/gvfs/sftp:host=192.168.1.169,port=1337,user=diamond/mnt/Music/Cage The Elephant - Melophobia/10 - Cigarette Daydreams.flac
+#EXTINF:248,Hypocrite
+/run/user/1000/gvfs/sftp:host=192.168.1.169,port=1337,user=diamond/mnt/Music/Cage The Elephant - Melophobia/08 - Hypocrite.flac
+#EXTINF:327,Teeth
+/run/user/1000/gvfs/sftp:host=192.168.1.169,port=1337,user=diamond/mnt/Music/Cage The Elephant - Melophobia/09 - Teeth.flac
