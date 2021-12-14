@@ -65,10 +65,12 @@ in {
 		driSupport32Bit = true;
 		extraPackages = with pkgs; [
 			mesa
-			libva
+			libva-full
 			libva-utils
 			vaapiIntel
+			vaapi-intel-hybrid
 			intel-media-driver
+			libvdpau-va-gl
 		];
 		extraPackages32 = with pkgs.pkgsi686Linux; [
 			libva
