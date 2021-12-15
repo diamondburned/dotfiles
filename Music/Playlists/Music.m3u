@@ -3161,46 +3161,46 @@
 /run/user/1000/gvfs/sftp:host=192.168.1.169,port=1337,user=diamond/mnt/Music/[2018.10.10] Total Feedback 2018/12. This Sound Is To You.flac
 #EXTINF:247,風花
 /run/user/1000/gvfs/sftp:host=192.168.1.169,port=1337,user=diamond/mnt/Music/[2018.10.10] Total Feedback 2018/09. 風花.flac
-#EXTINF:178,Chamomile
-/run/user/1000/gvfs/sftp:host=192.168.1.169,port=1337,user=diamond/mnt/Music/Hikes (2014)/Chamomile.mp3
-#EXTINF:180,Like Ripples, Part 2
-/run/user/1000/gvfs/sftp:host=192.168.1.169,port=1337,user=diamond/mnt/Music/Hikes (2014)/Like Ripples, Part 2.mp3
 #EXTINF:365,Tinker Creek
 /run/user/1000/gvfs/sftp:host=192.168.1.169,port=1337,user=diamond/mnt/Music/Hikes (2014)/Tinker Creek.mp3
-#EXTINF:521,Quilt
-/run/user/1000/gvfs/sftp:host=192.168.1.169,port=1337,user=diamond/mnt/Music/Hikes (2014)/Quilt.mp3
-#EXTINF:256,Tenth Walk
-/run/user/1000/gvfs/sftp:host=192.168.1.169,port=1337,user=diamond/mnt/Music/Hikes (2014)/Tenth Walk.mp3
-#EXTINF:352,Spring Forward (Ashe acoustic)
-/run/user/1000/gvfs/sftp:host=192.168.1.169,port=1337,user=diamond/mnt/Music/Hikes (2014)/Spring Forward (Ashe acoustic).mp3
 #EXTINF:268,Like Ripples
 /run/user/1000/gvfs/sftp:host=192.168.1.169,port=1337,user=diamond/mnt/Music/Hikes (2014)/Like Ripples.mp3
+#EXTINF:180,Like Ripples, Part 2
+/run/user/1000/gvfs/sftp:host=192.168.1.169,port=1337,user=diamond/mnt/Music/Hikes (2014)/Like Ripples, Part 2.mp3
+#EXTINF:256,Tenth Walk
+/run/user/1000/gvfs/sftp:host=192.168.1.169,port=1337,user=diamond/mnt/Music/Hikes (2014)/Tenth Walk.mp3
 #EXTINF:440,Spring Forward
 /run/user/1000/gvfs/sftp:host=192.168.1.169,port=1337,user=diamond/mnt/Music/Hikes (2014)/Spring Forward.mp3
-#EXTINF:240,Habit
-/run/user/1000/gvfs/sftp:host=192.168.1.169,port=1337,user=diamond/mnt/Music/Lilt/03 Habit.mp3
+#EXTINF:178,Chamomile
+/run/user/1000/gvfs/sftp:host=192.168.1.169,port=1337,user=diamond/mnt/Music/Hikes (2014)/Chamomile.mp3
+#EXTINF:521,Quilt
+/run/user/1000/gvfs/sftp:host=192.168.1.169,port=1337,user=diamond/mnt/Music/Hikes (2014)/Quilt.mp3
+#EXTINF:352,Spring Forward (Ashe acoustic)
+/run/user/1000/gvfs/sftp:host=192.168.1.169,port=1337,user=diamond/mnt/Music/Hikes (2014)/Spring Forward (Ashe acoustic).mp3
 #EXTINF:345,Granddad
 /run/user/1000/gvfs/sftp:host=192.168.1.169,port=1337,user=diamond/mnt/Music/Lilt/01 Granddad.mp3
-#EXTINF:257,Timothy
-/run/user/1000/gvfs/sftp:host=192.168.1.169,port=1337,user=diamond/mnt/Music/Lilt/04 Timothy.mp3
 #EXTINF:216,Onset
 /run/user/1000/gvfs/sftp:host=192.168.1.169,port=1337,user=diamond/mnt/Music/Lilt/02 Onset.mp3
-#EXTINF:167,Mauve Rinsed
-/run/user/1000/gvfs/sftp:host=192.168.1.169,port=1337,user=diamond/mnt/Music/Hikes - Mahal Kita/1-08 Mauve Rinsed.m4a
+#EXTINF:240,Habit
+/run/user/1000/gvfs/sftp:host=192.168.1.169,port=1337,user=diamond/mnt/Music/Lilt/03 Habit.mp3
+#EXTINF:257,Timothy
+/run/user/1000/gvfs/sftp:host=192.168.1.169,port=1337,user=diamond/mnt/Music/Lilt/04 Timothy.mp3
+#EXTINF:227,Been Thinkin'
+/run/user/1000/gvfs/sftp:host=192.168.1.169,port=1337,user=diamond/mnt/Music/Hikes - Mahal Kita/1-01 Been Thinkin'.m4a
 #EXTINF:224,Extra Mile (feat. The Kraken Quartet)
 /run/user/1000/gvfs/sftp:host=192.168.1.169,port=1337,user=diamond/mnt/Music/Hikes - Mahal Kita/1-02 Extra Mile (feat. The Kraken Qu.m4a
-#EXTINF:226,Jejune
-/run/user/1000/gvfs/sftp:host=192.168.1.169,port=1337,user=diamond/mnt/Music/Hikes - Mahal Kita/1-07 Jejune.m4a
+#EXTINF:237,Mahal Kita
+/run/user/1000/gvfs/sftp:host=192.168.1.169,port=1337,user=diamond/mnt/Music/Hikes - Mahal Kita/1-03 Mahal Kita.m4a
+#EXTINF:189,Aurora
+/run/user/1000/gvfs/sftp:host=192.168.1.169,port=1337,user=diamond/mnt/Music/Hikes - Mahal Kita/1-04 Aurora.m4a
 #EXTINF:160,Graying (feat. Atlys)
 /run/user/1000/gvfs/sftp:host=192.168.1.169,port=1337,user=diamond/mnt/Music/Hikes - Mahal Kita/1-05 Graying (feat. Atlys).m4a
 #EXTINF:165,Empathy
 /run/user/1000/gvfs/sftp:host=192.168.1.169,port=1337,user=diamond/mnt/Music/Hikes - Mahal Kita/1-06 Empathy.m4a
-#EXTINF:189,Aurora
-/run/user/1000/gvfs/sftp:host=192.168.1.169,port=1337,user=diamond/mnt/Music/Hikes - Mahal Kita/1-04 Aurora.m4a
-#EXTINF:227,Been Thinkin'
-/run/user/1000/gvfs/sftp:host=192.168.1.169,port=1337,user=diamond/mnt/Music/Hikes - Mahal Kita/1-01 Been Thinkin'.m4a
-#EXTINF:237,Mahal Kita
-/run/user/1000/gvfs/sftp:host=192.168.1.169,port=1337,user=diamond/mnt/Music/Hikes - Mahal Kita/1-03 Mahal Kita.m4a
+#EXTINF:226,Jejune
+/run/user/1000/gvfs/sftp:host=192.168.1.169,port=1337,user=diamond/mnt/Music/Hikes - Mahal Kita/1-07 Jejune.m4a
+#EXTINF:167,Mauve Rinsed
+/run/user/1000/gvfs/sftp:host=192.168.1.169,port=1337,user=diamond/mnt/Music/Hikes - Mahal Kita/1-08 Mauve Rinsed.m4a
 #EXTINF:249,Beauty, Again
 /run/user/1000/gvfs/sftp:host=192.168.1.169,port=1337,user=diamond/mnt/Music/Hikes - Mahal Kita/1-09 Beauty, Again.m4a
 #EXTINF:466,Let It Happen
