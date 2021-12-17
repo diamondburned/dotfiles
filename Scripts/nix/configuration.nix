@@ -172,6 +172,15 @@ in
 				export LIBGL_ALWAYS_SOFTWARE=true
 				${super.octaveFull}/bin/octave "$@"
 			'';
+			blueberry = super.blueberry.override {
+				gnome = super.gnome.overrideScope' (gself: gsuper: {
+					gnome-bluetooth = gsuper.gnome-bluetooth.overrideAttrs(old: {
+						postPatch = (old.postPatch or "") + ''
+				 			patch -Np1 < ${./patches/gnome-bluetooth-connectall.patch}
+						'';
+					});
+				});
+			};
 			# octave-soft = super.buildEnv {
 			# 	name = "octave-soft";
 			# 	paths = with super; [ octave ];
@@ -704,6 +713,7 @@ in
 			(writeScriptBin "wsudo" (builtins.readFile ./bin/wsudo))
 			xorg.xhost # dependency for wsudo
 			powertop
+			blueberry
 
 			# Development tools
 			neovim

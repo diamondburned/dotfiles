@@ -76,7 +76,6 @@ in {
 	environment.systemPackages = with pkgs; [
 		wayfire
 		wayfire-session
-		xwayland
 		polkit_gnome
 	];
 
