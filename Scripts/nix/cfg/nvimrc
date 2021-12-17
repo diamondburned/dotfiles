@@ -33,6 +33,7 @@ Plug 'diamondburned/ale'
 Plug 'cespare/vim-toml'
 Plug 'LnL7/vim-nix'
 Plug 'evanleck/vim-svelte'
+Plug 'mattn/vim-gotmpl'
 
 call plug#end()
 
