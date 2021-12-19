@@ -403,6 +403,7 @@ let g:ale_linter_aliases = {
 let g:ale_fixers = {
 			\ 'go':         [ "goimports" ],
 			\ 'css':        [ "prettier" ],
+			\ 'c':          [ "clang-format" ],
 			\ 'cpp':        [ "uncrustify", "clang-format" ],
 			\ 'json':       [ "jq" ],
 			\ 'svelte':     [ "prettier", "prettier_standard", "eslint" ],
