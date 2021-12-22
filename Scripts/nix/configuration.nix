@@ -139,6 +139,9 @@ in
 					rev = "a3ef469edf1613b8ab51de87e043c3c57d12a4a9";
 				};
 			});
+			osu-wine-realistik = super.writeShellScriptBin "osu-realistik" ''
+				${self.osu-wine}/bin/osu -devserver ussr.pl "$@"
+			'';
 			# Omitted because it's too much to compile.
 			# osu-wine = super.osu-wine.override {
 			# 	wine = aspellPkgs.wineStaging.overrideDerivation(old: {
@@ -764,6 +767,7 @@ in
 
 			# Games
 			osu-wine
+			osu-wine-realistik
 
 			# GNOME things
 			xfce.thunar
