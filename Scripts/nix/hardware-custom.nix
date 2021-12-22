@@ -30,24 +30,12 @@ in {
 
 	services.fstrim.enable = true;
 
-	# Disable GNOME's thing in favor of TLP.
-	services.power-profiles-daemon.enable = lib.mkForce false;
-	services.tlp = {
-		enable = true;
-		settings = {
-			USB_AUTOSUSPEND = "0";
-		};
-	};
-
 	# LG Gram tweaks.
 	systemd.tmpfiles.rules = [
 		# https://01.org/linuxgraphics/gfx-docs/drm/admin-guide/laptops/lg-laptop.html
 		"w /sys/devices/platform/lg-laptop/battery_care_limit - - - - 80"
 		# fan_mode is very mysterious, but setting it to 1 brings the CPU down to 900MHz.
 		"w /sys/devices/platform/lg-laptop/fan_mode - - - - 0"
-		# Enable Turbo mode, but throttle it at 2.0GHz because of overheating.
-		"w /sys/devices/system/cpu/intel_pstate/no_turbo - - - - 0"
-		"w /sys/devices/system/cpu/*/cpufreq/scaling_max_freq - - - - 2000000"
 	];
 
 	# Do not suspend on lid close.
@@ -136,10 +124,28 @@ in {
 
 	# Undervolting.
 	services.undervolt = {
-		enable = false;
-		coreOffset = -45; # mV
-		gpuOffset  = -5;
+		enable   = true;
+		useTimer = true;
+
+		temp = 95; # Celsius
+		coreOffset = -10; # mV
 	};
+
+	powerManagement.cpufreq = {
+		max = 2800000; # prevent overheating
+		min =  400000;
+	};
+
+	# Use auto-cpufreq instead of TLP.
+	services.auto-cpufreq.enable = true;
+
+	# services.power-profiles-daemon.enable = lib.mkForce false;
+	# services.tlp = {
+	# 	enable = true;
+	# 	settings = {
+	# 		USB_AUTOSUSPEND = "0";
+	# 	};
+	# };
 
 	fileSystems."/run/media/diamond/Data" = {
 		device  = "/dev/disk/by-uuid/1cdd8e08-846d-42b1-8fef-500cf4398c4b";
