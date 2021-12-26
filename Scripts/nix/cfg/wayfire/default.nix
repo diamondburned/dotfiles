@@ -71,7 +71,10 @@ in {
 	nixpkgs.overlays = [ (import ./overlay.nix) ];
 
 	# Extracted from Unstable's programs.xwayland.
-	environment.pathsToLink = [ "/share/X11" ];
+	environment.pathsToLink = [
+		"/share/X11"
+		"/libexec" # polkit
+	];
 
 	environment.systemPackages = with pkgs; [
 		wayfire
@@ -123,7 +126,7 @@ in {
 				source = pkgs.substituteAll {
 					src = ./wayfire.ini;
 					scrot = "${scrot}/bin/scrot.sh";
-					polkit_gnome = pkgs.polkit_gnome;
+					polkit_gnome = "${pkgs.polkit_gnome}/libexec/polkit-gnome-authentication-agent-1";
 				};
 			};
 			"wf-shell.ini" = {
