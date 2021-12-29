@@ -229,7 +229,7 @@ MYSQL_TEST_ADDR="127.0.0.1"
 #alias hex2dec=$"printf '%d' \"0x$1\""
 function hex2dec() { printf '%d' "0x$1"; }
 
-
+export GOPROXY=direct
 export GOPATH=$HOME/.go
 export GOBIN=$GOPATH/bin
 export PATH="$GOBIN:$PATH"
