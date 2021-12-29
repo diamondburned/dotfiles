@@ -144,6 +144,7 @@ in {
 
 	environment.systemPackages = with pkgs; [
 		htop
+		gamescope
 
 		materia-theme
 		papirus-icon-theme
