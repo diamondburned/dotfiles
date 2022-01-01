@@ -20,11 +20,31 @@ let vte = pkgs: pkgs.vte.overrideAttrs(old: {
 	nur = import
 		(builtins.fetchTarball "https://github.com/nix-community/NUR/archive/master.tar.gz")
 		{pkgs = super;};
+	spicetify = builtins.fetchTarball https://github.com/pietdevries94/spicetify-nix/archive/master.tar.gz;
 
 in {
 	# NUR
 	gamescope = nur.repos.dukzcry.gamescope;
 	spotify-adblock = nur.repos.instantos.spotify-adblock;
+
+	# Spotify
+	spotify-unwrapped = self.callPackage ./packages/spotify-adblocked.nix {
+		curl = super.curl.override {
+			gnutlsSupport = true;
+			sslSupport    = false;
+		};
+	};
+	spotify = self.callPackage (import "${spicetify}/package.nix") {
+		theme = "Fluent";
+		colorScheme = "Dark";
+	};
+	# spotify = self.callPackage "${super.path}/pkgs/applications/audio/spotify/wrapper.nix" {
+	# 	inherit (self) spotify-unwrapped;
+	# };
+	# spotify = super.writeShellScriptBin "spotify" ''
+	# 	export LD_PRELOAD=${self.spotify-adblock}/lib/spotify-adblock.so
+	# 	${super.spotify}/bin/spotify "$@"
+	# '';
 
 	# This might be causing painful rebuilds.
 	# vte = vte super;

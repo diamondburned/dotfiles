@@ -622,6 +622,7 @@ in
 
 			# Multimedia
 			aqours
+			spotify
 			catnip-gtk
 			ffmpeg
 			v4l_utils
