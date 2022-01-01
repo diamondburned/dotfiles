@@ -63,7 +63,7 @@ let
     xorg.libxshmfence
     xorg.libXtst
     zlib
-	# spotify-adblock
+	spotify-adblock
   ];
 
 in
