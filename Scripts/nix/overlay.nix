@@ -20,7 +20,9 @@ let vte = pkgs: pkgs.vte.overrideAttrs(old: {
 	nur = import
 		(builtins.fetchTarball "https://github.com/nix-community/NUR/archive/master.tar.gz")
 		{pkgs = super;};
+
 	spicetify = builtins.fetchTarball https://github.com/pietdevries94/spicetify-nix/archive/master.tar.gz;
+	spicetify-themes = builtins.fetchTarball https://github.com/morpheusthewhite/spicetify-themes/archive/master.tar.gz;
 
 in {
 	# NUR
@@ -34,17 +36,18 @@ in {
 			sslSupport    = false;
 		};
 	};
-	spotify = self.callPackage (import "${spicetify}/package.nix") {
-		theme = "Fluent";
-		colorScheme = "Dark";
+	spotify = self.callPackage "${super.path}/pkgs/applications/audio/spotify/wrapper.nix" {
+		inherit (self) spotify-unwrapped;
 	};
-	# spotify = self.callPackage "${super.path}/pkgs/applications/audio/spotify/wrapper.nix" {
-	# 	inherit (self) spotify-unwrapped;
+
+	# Broken
+	# spotify = self.callPackage (import "${spicetify}/package.nix") {
+	# 	theme = "Fluent";
+	# 	colorScheme = "Dark";
+	# 	thirdParyThemes = {
+	# 		"Fluent" = "${spicetify-themes}/Fluent";
+	# 	};
 	# };
-	# spotify = super.writeShellScriptBin "spotify" ''
-	# 	export LD_PRELOAD=${self.spotify-adblock}/lib/spotify-adblock.so
-	# 	${super.spotify}/bin/spotify "$@"
-	# '';
 
 	# This might be causing painful rebuilds.
 	# vte = vte super;
