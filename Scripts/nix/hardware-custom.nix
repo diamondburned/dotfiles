@@ -225,17 +225,17 @@ in {
 		"sha1" "sha256" "sha512" "af_alg" "algif_skcipher"
 	];
 
-	boot.initrd.luks.reusePassphrases = true;
-	boot.initrd.luks.devices = {
-		tertiary = {
-			device = "/dev/disk/by-uuid/ecd642fd-9c6e-40b0-a43a-ff05bb2b671c";
-		};
-	};
+	# boot.initrd.luks.reusePassphrases = true;
+	# boot.initrd.luks.devices = {
+	# 	tertiary = {
+	# 		device = "/dev/disk/by-uuid/ecd642fd-9c6e-40b0-a43a-ff05bb2b671c";
+	# 	};
+	# };
 
 	environment.etc."crypttab" = {
 		enable = true;
 		text = ''
-			tertiary-luks UUID=ecd642fd-9c6e-40b0-a43a-ff05bb2b671c none nofail,noauto
+			tertiary UUID=ecd642fd-9c6e-40b0-a43a-ff05bb2b671c none nofail,noauto
 		'';
 	};
 

@@ -80,7 +80,6 @@ in {
 			"dom.dialog_element.enabled" = true;
 			"toolkit.legacyUserProfileCustomizations.stylesheets" = true;
 			"layout.frame_rate" = 70;
-			"layout.css.devPixelsPerPx" = "0.9";
 			"layout.css.backdrop-filter.enabled" = true;
 			"intl.accept_languages" = "en-us,en,vi";
 			"findbar.highlightAll" = true;
