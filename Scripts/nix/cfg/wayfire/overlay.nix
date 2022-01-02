@@ -46,6 +46,14 @@ in self: super: {
 			"$out/share/wayland-sessions/wayfire.desktop"	
 	'';
 
+	labwc-session = super.runCommand "labwc-session" {
+		passthru.providedSessions = [ "labwc" ];
+	} ''
+		mkdir -p "$out/share/wayland-sessions"
+		cp ${./labwc.desktop} \
+			"$out/share/wayland-sessions/labwc.desktop"	
+	'';
+
 	wf-shell = makeGApp super super.wayfirePlugins.wf-shell;
 	wayfire  = makeGApp super super.wayfire;
 }

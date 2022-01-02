@@ -48,7 +48,10 @@ in {
 		# 	'';
 		# };
 		# defaultSession = "gnome";
-		sessionPackages = with pkgs; [ wayfire-session ];
+		sessionPackages = with pkgs; [
+			wayfire-session
+			# labwc-session
+		];
 	};
 
 # 	# I hate GDM; it drags in dumb build dependencies. Use a dummy display
@@ -77,6 +80,8 @@ in {
 	];
 
 	environment.systemPackages = with pkgs; [
+		# labwc
+		# labwc-session
 		wayfire
 		wayfire-session
 		polkit_gnome
