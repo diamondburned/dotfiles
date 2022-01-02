@@ -105,7 +105,7 @@ in {
 	};
 
 	# We don't want to sacrifice battery for the above.
-	powerManagement.cpuFreqGovernor = lib.mkForce "powersave";
+	powerManagement.cpuFreqGovernor = lib.mkForce "ondemand";
 
 	# Blueman sucks; use bluetoothctl.
 	# services.blueman.enable = true;
@@ -139,7 +139,7 @@ in {
 	# Use auto-cpufreq instead of TLP.
 	services.auto-cpufreq.enable = true;
 
-	# services.power-profiles-daemon.enable = lib.mkForce false;
+	services.power-profiles-daemon.enable = lib.mkForce false;
 	# services.tlp = {
 	# 	enable = true;
 	# 	settings = {
