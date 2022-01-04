@@ -251,6 +251,8 @@ gm() {
 
 alias gagm="git add -A && gm"
 
+alias gamend="git commit --amend"
+
 # Get go completion if missing.
 command -v gotab &> /dev/null || {
 	(
