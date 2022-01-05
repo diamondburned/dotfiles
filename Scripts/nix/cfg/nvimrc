@@ -412,7 +412,7 @@ let g:ale_fixers = {
 let g:ale_completion_enabled = 1
 "Previously for Go: staticcheck and go vet"
 let g:ale_linters = {
-			\ 'go':         [ "gopls", "gotype" ],
+			\ 'go':         [ "gopls", "staticcheck", "go vet", "gotype" ],
 			\ 'zig':        [ "zls" ],
 			\ 'c':          [ "clangd" ],
 			\ 'cpp':        [ "clangd" ],
