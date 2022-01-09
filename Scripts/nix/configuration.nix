@@ -193,9 +193,7 @@ in
 		];
 	};
 
-	security.pki.certificateFiles = [
-		"/home/diamond/Scripts/nix/secrets/ssl/local.crt"
-	];
+	security.pki.certificateFiles = [ ./secrets/ssl/local.crt ];
 
 	i18n = {
 		inputMethod = {
