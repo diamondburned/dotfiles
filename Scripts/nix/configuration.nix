@@ -193,7 +193,9 @@ in
 		];
 	};
 
-	security.pki.certificateFiles = [ ./secrets/ssl/local.crt ];
+	security.pki.certificateFiles = [
+		./secrets/ssl/otokonoko.local/otokonoko.local+1.pem
+	];
 
 	i18n = {
 		inputMethod = {
