@@ -173,10 +173,29 @@ in
 		allowedUDPPortRanges = [
 			{ from = 1714; to = 1764; } # GSConnect;
 		];
-		#					  v  Steam  v
+		#                      v  Steam  v
 		allowedTCPPorts = [ 22 27036 27037 ];
 		allowedUDPPorts = [ 22 27031 27036 ];
 	};
+
+	services.avahi = {
+		enable = true;
+		nssmdns = true;
+		publish = {
+			enable = true;
+			domain = true;
+			addresses = true;
+			workstation = true;
+		};
+		interfaces = [
+			# USB-C Ethernet dock.
+			"enp0s20f0u2u1"
+		];
+	};
+
+	security.pki.certificateFiles = [
+		"/home/diamond/Scripts/nix/secrets/ssl/local.crt"
+	];
 
 	i18n = {
 		inputMethod = {
