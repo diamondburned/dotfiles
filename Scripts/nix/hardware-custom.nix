@@ -12,21 +12,21 @@ let utils = import ./utils { inherit lib; };
 		rev = "fcad5573eba0a9d1ec3ed1e8e1413f601fec35fe";
 	};
 
-	blurcam = builtins.fetchGit {
-		url = "https://github.com/diamondburned/blurcam.git";
-		rev = "79a35253e6d81b840c3d9db8f3b0095e8a449b81";
-	};
+	# blurcam = builtins.fetchGit {
+	# 	url = "https://github.com/diamondburned/blurcam.git";
+	# 	rev = "79a35253e6d81b840c3d9db8f3b0095e8a449b81";
+	# };
 
 in {
 	imports = [
 		"${musnix }"
-		"${blurcam}"
+		# "${blurcam}"
 	];
 
-	services.blurcam = {
-		input  = "";
-		output = "";
-	};
+	# services.blurcam = {
+	# 	input  = "";
+	# 	output = "";
+	# };
 
 	services.fstrim.enable = true;
 

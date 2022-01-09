@@ -32,8 +32,9 @@ in {
 	# Spotify
 	spotify-unwrapped = self.callPackage ./packages/spotify-adblocked.nix {
 		curl = super.curl.override {
-			gnutlsSupport = true;
-			sslSupport    = false;
+			gnutlsSupport  = true;
+			# sslSupport = false;
+			opensslSupport = false;
 		};
 	};
 	spotify = self.callPackage "${super.path}/pkgs/applications/audio/spotify/wrapper.nix" {

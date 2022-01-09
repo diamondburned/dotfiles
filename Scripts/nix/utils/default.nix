@@ -54,28 +54,12 @@ ${extraEntries}
 			attrs
 	);
 
-	sshFallback = { tryAddr, elseAddr, host, user, port }: ''
-		Match Host ${host} exec "${pkgs.libressl.nc}/bin/nc -w 1 -z ${tryAddr} ${port}"
-			HostName ${tryAddr}
-		Match Host ${host}
-			HostName ${elseAddr}
-		Host ${host}
-			Port ${port}
-			User ${user}
-			IdentityFile /home/${user}/.ssh/id_server
-			IdentitiesOnly yes
-			ServerAliveInterval 60
-			ServerAliveCountMax 10
-	'';
-
 	formatInts =
 		let formatInts' = from: to: fn: list:
 			if from > to then list
 			else formatInts' (from + 1) to fn (list ++ [ "${fn from}" ]);
 
 		in from: to: fn: formatInts' from to fn [];
-
-
 
 	waylandService = exec: {
 		Unit = {

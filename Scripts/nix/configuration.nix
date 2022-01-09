@@ -9,9 +9,11 @@ let home-manager = builtins.fetchGit {
 		ref = "master";
 	};
 
-	lsoc-overlay = builtins.fetchGit {
-		url = "https://github.com/diamondburned/lsoc-overlay.git";
-		rev = "09d41b0a6f574390d6edc0271be459bd1390ea8d";
+	lsoc-overlay = pkgs.fetchFromGitHub {
+		owner = "diamondburned";
+		repo  = "lsoc-overlay";
+		rev   = "09d41b0a6f574390d6edc0271be459bd1390ea8d";
+		hash  = "sha256:0a27vwknk442k6wz29xk0gs4m8nhjwalq642xrcac45v97z5glc3";
 	};
 
 	# # TODO: fix this.
@@ -77,6 +79,7 @@ in
 		./hardware-configuration.nix
 		./hardware-custom.nix
 		./unstable.nix
+		./secrets
 		./cfg/udev
 		./cfg/wayfire
 		./cfg/localhost
@@ -94,24 +97,25 @@ in
 
 	# Remote build server.
 	nix = {
-		buildMachines = [{
-			hostName = "hanaharu";
-			systems = [ "x86_64-linux" "i686-linux" ];
-			maxJobs = 2; # max 8
-			speedFactor = 10;
-			supportedFeatures = [ "nixos-test" "benchmark" "big-parallel" "kvm" ];
-		}];
+		buildMachines = [
+			{
+				hostName = "otokonoko";
+				systems = [ "x86_64-linux" "i686-linux" ];
+				maxJobs = 2; # max 8
+				speedFactor = 20;
+				supportedFeatures = [ "nixos-test" "benchmark" "big-parallel" "kvm" ];
+			}
+			{
+				hostName = "hanaharu";
+				systems = [ "x86_64-linux" "i686-linux" ];
+				maxJobs = 2; # max 8
+				speedFactor = 10;
+				supportedFeatures = [ "nixos-test" "benchmark" "big-parallel" "kvm" ];
+			}
+		];
 		trustedUsers = [ "root" "diamond" ];
 		distributedBuilds = true;
 		extraOptions = "builders-use-substitutes = true";
-	};
-
-	programs.ssh.extraConfig = utils.sshFallback {
-		tryAddr  = "192.168.1.169";
-		elseAddr = "home.arikawa-hi.me";
-		host = "hanaharu";
-		user = "diamond";
-		port = "1337";
 	};
 
 	# Group to change SSH keys to.
