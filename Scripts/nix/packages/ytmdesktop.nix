@@ -16,11 +16,12 @@ in appimageTools.wrapType2 rec {
 
   extraInstallCommands = ''
     mv $out/bin/{${name},${pname}}
+	# ls ${appimageContents}
     install -m 444 \
-        -D ${appimageContents}/youtube-music-desktop-app.desktop \
+        -D ${appimageContents}/youtube-music.desktop \
         -t $out/share/applications
     substituteInPlace \
-        $out/share/applications/youtube-music-desktop-app.desktop \
+        $out/share/applications/youtube-music.desktop \
         --replace 'Exec=AppRun' 'Exec=${pname}'
     cp -r ${appimageContents}/usr/share/icons $out/share
   '';
