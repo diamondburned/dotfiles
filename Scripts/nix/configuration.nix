@@ -652,6 +652,7 @@ in
 			pavucontrol
 			pulseaudio
 			easyeffects
+			(pkgs.callPackage ./packages/ytmdesktop.nix {})
 
 			# Browsers
 			google-chrome

@@ -1,5 +1,5 @@
 [Default Applications]
-text/html=firefox.desktop
+text/html=youtube-music-desktop-app.desktop
 x-scheme-handler/http=firefox.desktop
 x-scheme-handler/https=firefox.desktop
 x-scheme-handler/about=firefox.desktop
@@ -44,6 +44,7 @@ application/x-extension-shtml=firefox.desktop
 application/xhtml+xml=firefox.desktop
 application/x-extension-xhtml=firefox.desktop
 application/x-extension-xht=firefox.desktop
+x-scheme-handler/ytmd=youtube-music-desktop-app.desktop
 
 [Added Associations]
 application/zip=org.gnome.FileRoller.desktop;
