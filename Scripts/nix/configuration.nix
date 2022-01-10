@@ -99,17 +99,17 @@ in
 	nix = {
 		buildMachines = [
 			{
-				hostName = "otokonoko";
-				systems = [ "x86_64-linux" "i686-linux" ];
-				maxJobs = 2; # max 8
-				speedFactor = 20;
-				supportedFeatures = [ "nixos-test" "benchmark" "big-parallel" "kvm" ];
-			}
-			{
 				hostName = "hanaharu";
 				systems = [ "x86_64-linux" "i686-linux" ];
 				maxJobs = 2; # max 8
 				speedFactor = 10;
+				supportedFeatures = [ "nixos-test" "benchmark" "big-parallel" "kvm" ];
+			}
+			{
+				hostName = "otokonoko";
+				systems = [ "x86_64-linux" "i686-linux" ];
+				maxJobs = 2; # max 8
+				speedFactor = 5;
 				supportedFeatures = [ "nixos-test" "benchmark" "big-parallel" "kvm" ];
 			}
 		];
