@@ -76,20 +76,20 @@ in {
 		v4l2loopback
 
 		# Driver for the TP-Link Archer T3U.
-		(rtl88x2bu.overrideAttrs (old: {
-			src = pkgs.fetchFromGitHub {
-				owner  = "RinCat";
-				repo   = "RTL88x2BU-Linux-Driver";
-				rev    = "657b7cfde9958e273febdeaeac579902e407f577";
-				sha256 = "15gkgwp2ghg1wdp8n04a047kd8kp73y566fdc254dgxbk3ggz4xa";
-			};
-			patches = [];
-		}))
+		# (rtl88x2bu.overrideAttrs (old: {
+		# 	src = pkgs.fetchFromGitHub {
+		# 		owner  = "RinCat";
+		# 		repo   = "RTL88x2BU-Linux-Driver";
+		# 		rev    = "657b7cfde9958e273febdeaeac579902e407f577";
+		# 		sha256 = "15gkgwp2ghg1wdp8n04a047kd8kp73y566fdc254dgxbk3ggz4xa";
+		# 	};
+		# 	patches = [];
+		# }))
 	];
 
 	# Refer to unstable.nix.
-	boot.kernelPackages = pkgs.linuxPackages_5_13;
-	# boot.kernelPackages = pkgs.linuxPackages_xanmod_5_13;
+	# boot.kernelPackages = pkgs.linuxPackages_5_13;
+	boot.kernelPackages = pkgs.linuxPackages_xanmod;
 
 	# Kernel tweaks and such for real-time audio.
 	musnix = {
