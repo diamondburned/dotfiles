@@ -88,8 +88,8 @@ in {
 	];
 
 	# Refer to unstable.nix.
-	# boot.kernelPackages = pkgs.linuxPackages_5_13;
-	boot.kernelPackages = pkgs.linuxPackages_xanmod;
+	boot.kernelPackages = pkgs.linuxPackages_5_13;
+	# boot.kernelPackages = pkgs.linuxPackages_xanmod_5_13;
 
 	# Kernel tweaks and such for real-time audio.
 	musnix = {
