@@ -3,27 +3,31 @@
 let profileName = "default";
 	profilePath = "q1f740f8.default";
 
-	nativeMessagingHosts = {
-		"org.gnome.shell.extensions.gsconnect" = pkgs.gnomeExtensions.gsconnect;
-		"org.gnome.chrome_gnome_shell"         = pkgs.chrome-gnome-shell;
-	};
+	# nativeMessagingHosts = {
+	# 	"org.gnome.shell.extensions.gsconnect" = pkgs.gnomeExtensions.gsconnect;
+	# 	"org.gnome.chrome_gnome_shell"         = pkgs.chrome-gnome-shell;
+	# };
 
 	firefox-attrs = {
 		applicationName = "firefox";
 		forceWayland = true;
-		extraNativeMessagingHosts = lib.attrValues nativeMessagingHosts;
+		# extraNativeMessagingHosts = lib.attrValues nativeMessagingHosts;
 	};
 
-	firefox-devedition = pkgs.wrapFirefox pkgs.firefox-devedition-bin-unwrapped firefox-attrs;
+	# firefox-devedition = pkgs.wrapFirefox pkgs.firefox-devedition-bin-unwrapped firefox-attrs;
+	# firefox-devedition = pkgs.firefox-devedition-bin;
 
-	firefox = pkgs.writeShellScriptBin "firefox" ''
-		${firefox-devedition}/bin/firefox -P default "$@"
-	'' // {
-		# satisfy home-manager
-		inherit (pkgs) gtk3;
-		inherit (firefox-attrs) applicationName extraNativeMessagingHosts;
-		inherit (firefox-devedition) meta;
-	};
+	# firefox = pkgs.writeShellScriptBin "firefox" ''
+	# 	${firefox-devedition}/bin/firefox -P default "$@"
+	# '' // {
+	# 	# satisfy home-manager
+	# 	inherit (pkgs) gtk3;
+	# 	# inherit (firefox-attrs) applicationName extraNativeMessagingHosts;
+	# 	inherit (firefox-attrs) applicationName;
+	# 	inherit (firefox-devedition) meta;
+	# };
+
+	# firefox = pkgs.firefox-devedition-bin;
 
 
 in {
@@ -38,15 +42,15 @@ in {
 
 	# Thanks, Firefox. Seriously.
 	# See https://github.com/NixOS/nixpkgs/issues/47340#issuecomment-440645870.
-	home.file = lib.flip lib.mapAttrs' nativeMessagingHosts (name: pkg: {
-		name  = ".mozilla/native-messaging-hosts/${name}.json";
-		value = {
-			source = "${pkg}/lib/mozilla/native-messaging-hosts/${name}.json";
-		};
-	});
+	# home.file = lib.flip lib.mapAttrs' nativeMessagingHosts (name: pkg: {
+	# 	name  = ".mozilla/native-messaging-hosts/${name}.json";
+	# 	value = {
+	# 		source = "${pkg}/lib/mozilla/native-messaging-hosts/${name}.json";
+	# 	};
+	# });
 
 	programs.firefox.enable = true;
-	programs.firefox.package = firefox;
+	# programs.firefox.package = firefox;
 
 	programs.firefox.profiles."Tunneled" = {
 		id = 1;
