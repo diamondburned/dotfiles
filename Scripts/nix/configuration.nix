@@ -101,7 +101,7 @@ in
 			{
 				hostName = "hanaharu";
 				systems = [ "x86_64-linux" "i686-linux" ];
-				maxJobs = 4;
+				maxJobs = 8;
 				speedFactor = 10;
 				supportedFeatures = [ "nixos-test" "benchmark" "big-parallel" "kvm" ];
 			}
