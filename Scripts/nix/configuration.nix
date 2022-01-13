@@ -101,14 +101,14 @@ in
 			{
 				hostName = "hanaharu";
 				systems = [ "x86_64-linux" "i686-linux" ];
-				maxJobs = 2; # max 8
+				maxJobs = 4;
 				speedFactor = 10;
 				supportedFeatures = [ "nixos-test" "benchmark" "big-parallel" "kvm" ];
 			}
 			{
 				hostName = "otokonoko";
 				systems = [ "x86_64-linux" "i686-linux" ];
-				maxJobs = 2; # max 8
+				maxJobs = 2;
 				speedFactor = 5;
 				supportedFeatures = [ "nixos-test" "benchmark" "big-parallel" "kvm" ];
 			}
