@@ -743,6 +743,9 @@ in
 				};
 				# Allow non-free for user
 				"nixpkgs/config.nix".text = "{ allowUnfree = true; }";
+				"nix/config.nix".text = ''
+					experimental-featuers = nix-command
+				'';
 			};
 		};
 	};
