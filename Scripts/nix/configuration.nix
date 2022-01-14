@@ -97,6 +97,8 @@ in
 
 	# Remote build server.
 	nix = {
+		# I don't understand the newer versions.
+		package = pkgs.nix_2_3;
 		buildMachines = [
 			{
 				hostName = "hanaharu";
@@ -115,7 +117,10 @@ in
 		];
 		trustedUsers = [ "root" "diamond" ];
 		distributedBuilds = true;
-		extraOptions = "builders-use-substitutes = true";
+		extraOptions = ''
+			builders-use-substitutes = true
+			# experimental-features = nix-command
+		'';
 	};
 
 	# Group to change SSH keys to.
@@ -743,9 +748,9 @@ in
 				};
 				# Allow non-free for user
 				"nixpkgs/config.nix".text = "{ allowUnfree = true; }";
-				"nix/config.nix".text = ''
-					experimental-featuers = nix-command
-				'';
+				# "nix/config.nix".text = ''
+				# 	experimental-featuers = nix-command
+				# '';
 			};
 		};
 	};
