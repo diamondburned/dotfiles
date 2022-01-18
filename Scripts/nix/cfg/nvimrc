@@ -46,8 +46,8 @@ map - dd
 
 set clipboard+=unnamedplus
 
-"Make comments italiced
-hi Comment cterm=italic
+"Make comments NOT italicized
+hi Comment cterm=none
 
 "Auto-commands for type-specific files"
 autocmd BufRead,BufNewFile *.nix    setlocal noautoindent
