@@ -102,7 +102,7 @@ in
 		buildMachines = [
 			{
 				hostName = "hanaharu";
-				systems = [ "x86_64-linux" "i686-linux" ];
+				systems = [ "x86_64-linux" "i686-linux" "aarch64-linux" ];
 				maxJobs = 8;
 				speedFactor = 10;
 				supportedFeatures = [ "nixos-test" "benchmark" "big-parallel" "kvm" ];
