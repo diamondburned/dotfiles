@@ -631,6 +631,7 @@ in
 			xorg.xhost # dependency for wsudo
 			powertop
 			blueberry
+			gatttool
 
 			# Development tools
 			neovim
