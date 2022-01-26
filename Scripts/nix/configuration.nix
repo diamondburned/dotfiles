@@ -667,6 +667,7 @@ in
 			zoom-us
 			tdesktop
 			discord
+			gotktrix
 			# fractal
 
 			# Office

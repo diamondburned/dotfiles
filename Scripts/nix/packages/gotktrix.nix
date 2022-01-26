@@ -6,5 +6,6 @@ let src = builtins.fetchGit {
 };
 
 in pkgs.callPackage "${src}/.nix/package.nix" {
-	inherit src;
+	gotktrixSrc = src;
+	buildPkgs   = pkgs;
 }
