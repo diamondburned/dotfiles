@@ -42,6 +42,8 @@ in {
 		inherit (self) spotify-unwrapped;
 	};
 
+	gotktrix = self.callPackage ./packages/gotktrix.nix {};
+
 	# Broken
 	# spotify = self.callPackage (import "${spicetify}/package.nix") {
 	# 	theme = "Fluent";

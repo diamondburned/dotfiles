@@ -631,7 +631,7 @@ in
 			xorg.xhost # dependency for wsudo
 			powertop
 			blueberry
-			gatttool
+			# gatttool
 
 			# Development tools
 			neovim
@@ -667,7 +667,7 @@ in
 			zoom-us
 			tdesktop
 			discord
-			# fractal # lol
+			# fractal
 
 			# Office
 			libreoffice
