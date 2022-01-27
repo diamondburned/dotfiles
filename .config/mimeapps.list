@@ -45,6 +45,7 @@ application/xhtml+xml=firefox.desktop
 application/x-extension-xhtml=firefox.desktop
 application/x-extension-xht=firefox.desktop
 x-scheme-handler/ytmd=youtube-music-desktop-app.desktop
+application/x-shellscript=nvim.desktop
 
 [Added Associations]
 application/zip=org.gnome.FileRoller.desktop;
@@ -107,3 +108,4 @@ x-scheme-handler/tg=userapp-Telegram Desktop-EPSI50.desktop;userapp-Telegram Des
 application/x-trash=nvim.desktop;
 application/x-x509-ca-cert=nvim.desktop;
 application/x-executable=nvim.desktop;
+application/x-shellscript=nvim.desktop;

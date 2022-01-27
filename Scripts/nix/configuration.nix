@@ -388,7 +388,7 @@ in
 		package = pkgs.gnomeExtensions.gsconnect;
 	};
 
-	services.flatpak.enable = false;
+	services.flatpak.enable = true;
 
 	environment.gnome.excludePackages = with pkgs.gnome3; [
 		orca
