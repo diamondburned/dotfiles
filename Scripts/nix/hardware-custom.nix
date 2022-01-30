@@ -140,12 +140,12 @@ in {
 	services.auto-cpufreq.enable = true;
 
 	services.power-profiles-daemon.enable = lib.mkForce false;
-	# services.tlp = {
-	# 	enable = true;
-	# 	settings = {
-	# 		USB_AUTOSUSPEND = "0";
-	# 	};
-	# };
+	services.tlp = {
+		enable = true;
+		settings = {
+			USB_AUTOSUSPEND = "0";
+		};
+	};
 
 	fileSystems."/run/media/diamond/Data" = {
 		device  = "/dev/disk/by-uuid/1cdd8e08-846d-42b1-8fef-500cf4398c4b";
