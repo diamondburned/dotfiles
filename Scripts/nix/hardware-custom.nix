@@ -36,6 +36,8 @@ in {
 		"w /sys/devices/platform/lg-laptop/battery_care_limit - - - - 80"
 		# fan_mode is very mysterious, but setting it to 1 brings the CPU down to 900MHz.
 		"w /sys/devices/platform/lg-laptop/fan_mode - - - - 0"
+		# Prevent powertop from suspending my USB devices.
+		"w /sys/bus/usb/devices/*/power/control - - - - on"
 	];
 
 	# Do not suspend on lid close.

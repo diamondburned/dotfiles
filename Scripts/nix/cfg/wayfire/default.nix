@@ -66,10 +66,17 @@ in {
 	];
 
 	xdg.portal = {
+		# GNOME has their own portal.
 		enable = true;
-		extraPortals = with pkgs; [ xdg-desktop-portal-wlr ];
-		# gtkUsePortal = false;
+		# extraPortals = with pkgs; [ xdg-desktop-portal-gtk ];
+		# gtkUsePortal = true;
 	};
+
+	# xdg.portal = {
+	# 	enable = true;
+	# 	extraPortals = with pkgs; [ xdg-desktop-portal-wlr ];
+	# 	# gtkUsePortal = false;
+	# };
 
 	nixpkgs.overlays = [ (import ./overlay.nix) ];
 

@@ -446,11 +446,11 @@ in
 		platformTheme = "gnome";
 	};
 
-	xdg.portal = {
-		enable = true;
-		# extraPortals = with pkgs; [ xdg-desktop-portal-gtk ];
-		gtkUsePortal = true;
-	};
+	# xdg.portal = {
+	# 	enable = true;
+	# 	# extraPortals = with pkgs; [ xdg-desktop-portal-gtk ];
+	# 	gtkUsePortal = true;
+	# };
 
 	# Enable PAM user environments for GDM.
 	security.pam.services.gdm-password.text = ''
