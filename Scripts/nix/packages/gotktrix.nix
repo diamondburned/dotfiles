@@ -3,8 +3,8 @@
 let src = pkgs.fetchFromGitHub {
 	owner = "diamondburned";
 	repo  = "gotktrix";
-	rev   = "c1098ba9a98852083109a21c3100369ad19008ba";
-	hash  = "sha256:1ly0jgrixxb5mdsgyag4a2lfqz1dbas57i7gi2zakc8m7i95nqhd";
+	rev   = "7fcac05a46f763c089d52cb313cedcb5516189fc";
+	hash  = "sha256:1dl9sssfqx0dkxymh79mbczlrmpa70yqzk03dc36kr8gcrfnf2mn";
 };
 
 in pkgs.callPackage "${src}/.nix/package.nix" {
