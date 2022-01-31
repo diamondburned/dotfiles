@@ -6,7 +6,7 @@
 
 let home-manager = builtins.fetchGit {
 		url = "https://github.com/nix-community/home-manager.git";
-		ref = "master";
+		ref = "release-21.11";
 	};
 
 	lsoc-overlay = pkgs.fetchFromGitHub {
@@ -631,6 +631,7 @@ in
 			xorg.xhost # dependency for wsudo
 			powertop
 			blueberry
+			libcanberra-gtk3
 			# gatttool
 
 			# Development tools
