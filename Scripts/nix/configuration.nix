@@ -665,7 +665,7 @@ in
 			google-chrome
 
 			# Chat/Social
-			zoom-us
+			# zoom-us
 			tdesktop
 			discord
 			gotktrix
