@@ -672,6 +672,7 @@ in
 			# fractal
 
 			# Office
+			qalculate-gtk
 			libreoffice
 			evince
 			aspell
