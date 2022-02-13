@@ -1,6 +1,6 @@
 { pkgs, lib, config, ... }:
 
-let ip = "192.168.1.7";
+let ip = "10.0.0.248";
 
 	schedule = {
 		name        = "wyze-bulb";

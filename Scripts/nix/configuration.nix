@@ -486,6 +486,13 @@ in
 					exit 0
 				'';
 			})
+
+			(import ./utils/schedule.nix {
+				name        = "birthdayer-juan";
+				description = "Delete once Juan gets annoyed";
+				calendar    = "daily";
+				command     = "/home/diamond/.go/bin/birthdayer";
+			})
 		];
 
 		nixpkgs.config = {
