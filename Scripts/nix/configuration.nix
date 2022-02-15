@@ -698,6 +698,7 @@ in
 
 			# GNOME things
 			xfce.thunar
+			kooha
 			gnome-mpv
 			gnome3.eog
 			gnome3.vinagre
