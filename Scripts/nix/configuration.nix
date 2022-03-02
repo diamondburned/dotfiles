@@ -245,6 +245,7 @@ in
 
 	# Install global fonts
 	fonts.fonts = with pkgs; [
+		bakoma_ttf # math
 		open-sans
 		roboto
 		roboto-slab # serif
