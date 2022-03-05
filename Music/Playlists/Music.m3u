@@ -3661,41 +3661,41 @@
 /run/user/1000/gvfs/sftp:host=home.arikawa-hi.me,port=1337/mnt/Music/Cage The Elephant - Melophobia/08 - Hypocrite.flac
 #EXTINF:327,Teeth
 /run/user/1000/gvfs/sftp:host=home.arikawa-hi.me,port=1337/mnt/Music/Cage The Elephant - Melophobia/09 - Teeth.flac
-#EXTINF:-1,01 Airbag
-run/user/1000/gvfs/sftp:host=home.arikawa-hi.me,port=1337/mnt/Music/Radiohead - 1997 - OK Computer/01 Airbag.flac
-#EXTINF:-1,02 Paranoid Android
-run/user/1000/gvfs/sftp:host=home.arikawa-hi.me,port=1337/mnt/Music/Radiohead - 1997 - OK Computer/02 Paranoid Android.flac
-#EXTINF:-1,03 Subterranean Homesick Alien
-run/user/1000/gvfs/sftp:host=home.arikawa-hi.me,port=1337/mnt/Music/Radiohead - 1997 - OK Computer/03 Subterranean Homesick Alien.flac
-#EXTINF:-1,04 Exit Music (For A Film)
-run/user/1000/gvfs/sftp:host=home.arikawa-hi.me,port=1337/mnt/Music/Radiohead - 1997 - OK Computer/04 Exit Music (For A Film).flac
-#EXTINF:-1,05 Let Down
-run/user/1000/gvfs/sftp:host=home.arikawa-hi.me,port=1337/mnt/Music/Radiohead - 1997 - OK Computer/05 Let Down.flac
-#EXTINF:-1,06 Karma Police
-run/user/1000/gvfs/sftp:host=home.arikawa-hi.me,port=1337/mnt/Music/Radiohead - 1997 - OK Computer/06 Karma Police.flac
-#EXTINF:-1,07 Fitter Happier
-run/user/1000/gvfs/sftp:host=home.arikawa-hi.me,port=1337/mnt/Music/Radiohead - 1997 - OK Computer/07 Fitter Happier.flac
-#EXTINF:-1,08 Electioneering
-run/user/1000/gvfs/sftp:host=home.arikawa-hi.me,port=1337/mnt/Music/Radiohead - 1997 - OK Computer/08 Electioneering.flac
-#EXTINF:-1,09 Climbing Up The Walls
-run/user/1000/gvfs/sftp:host=home.arikawa-hi.me,port=1337/mnt/Music/Radiohead - 1997 - OK Computer/09 Climbing Up The Walls.flac
-#EXTINF:-1,10 No Surprises
-run/user/1000/gvfs/sftp:host=home.arikawa-hi.me,port=1337/mnt/Music/Radiohead - 1997 - OK Computer/10 No Surprises.flac
-#EXTINF:-1,11 Lucky
-run/user/1000/gvfs/sftp:host=home.arikawa-hi.me,port=1337/mnt/Music/Radiohead - 1997 - OK Computer/11 Lucky.flac
-#EXTINF:-1,12 The Tourist
-run/user/1000/gvfs/sftp:host=home.arikawa-hi.me,port=1337/mnt/Music/Radiohead - 1997 - OK Computer/12 The Tourist.flac
-#EXTINF:-1,01 Fear Inoculum
-run/user/1000/gvfs/sftp:host=home.arikawa-hi.me,port=1337/mnt/Music/Tool - 2019 - Fear Inoculum [FLAC]/01 Fear Inoculum.flac
-#EXTINF:-1,02 Pneuma
-run/user/1000/gvfs/sftp:host=home.arikawa-hi.me,port=1337/mnt/Music/Tool - 2019 - Fear Inoculum [FLAC]/02 Pneuma.flac
-#EXTINF:-1,03 Invincible
-run/user/1000/gvfs/sftp:host=home.arikawa-hi.me,port=1337/mnt/Music/Tool - 2019 - Fear Inoculum [FLAC]/03 Invincible.flac
-#EXTINF:-1,04 Descending
-run/user/1000/gvfs/sftp:host=home.arikawa-hi.me,port=1337/mnt/Music/Tool - 2019 - Fear Inoculum [FLAC]/04 Descending.flac
-#EXTINF:-1,05 Culling Voices
-run/user/1000/gvfs/sftp:host=home.arikawa-hi.me,port=1337/mnt/Music/Tool - 2019 - Fear Inoculum [FLAC]/05 Culling Voices.flac
-#EXTINF:-1,06 Chocolate Chip Trip
-run/user/1000/gvfs/sftp:host=home.arikawa-hi.me,port=1337/mnt/Music/Tool - 2019 - Fear Inoculum [FLAC]/06 Chocolate Chip Trip.flac
-#EXTINF:-1,07 7empest
-run/user/1000/gvfs/sftp:host=home.arikawa-hi.me,port=1337/mnt/Music/Tool - 2019 - Fear Inoculum [FLAC]/07 7empest.flac
+#EXTINF:284,Airbag
+/run/user/1000/gvfs/sftp:host=home.arikawa-hi.me,port=1337/mnt/Music/Radiohead - 1997 - OK Computer/01 Airbag.flac
+#EXTINF:383,Paranoid Android
+/run/user/1000/gvfs/sftp:host=home.arikawa-hi.me,port=1337/mnt/Music/Radiohead - 1997 - OK Computer/02 Paranoid Android.flac
+#EXTINF:267,Subterranean Homesick Alien
+/run/user/1000/gvfs/sftp:host=home.arikawa-hi.me,port=1337/mnt/Music/Radiohead - 1997 - OK Computer/03 Subterranean Homesick Alien.flac
+#EXTINF:264,Exit Music (For A Film)
+/run/user/1000/gvfs/sftp:host=home.arikawa-hi.me,port=1337/mnt/Music/Radiohead - 1997 - OK Computer/04 Exit Music (For A Film).flac
+#EXTINF:299,Let Down
+/run/user/1000/gvfs/sftp:host=home.arikawa-hi.me,port=1337/mnt/Music/Radiohead - 1997 - OK Computer/05 Let Down.flac
+#EXTINF:261,Karma Police
+/run/user/1000/gvfs/sftp:host=home.arikawa-hi.me,port=1337/mnt/Music/Radiohead - 1997 - OK Computer/06 Karma Police.flac
+#EXTINF:117,Fitter Happier
+/run/user/1000/gvfs/sftp:host=home.arikawa-hi.me,port=1337/mnt/Music/Radiohead - 1997 - OK Computer/07 Fitter Happier.flac
+#EXTINF:230,Electioneering
+/run/user/1000/gvfs/sftp:host=home.arikawa-hi.me,port=1337/mnt/Music/Radiohead - 1997 - OK Computer/08 Electioneering.flac
+#EXTINF:285,Climbing Up The Walls
+/run/user/1000/gvfs/sftp:host=home.arikawa-hi.me,port=1337/mnt/Music/Radiohead - 1997 - OK Computer/09 Climbing Up The Walls.flac
+#EXTINF:228,No Surprises
+/run/user/1000/gvfs/sftp:host=home.arikawa-hi.me,port=1337/mnt/Music/Radiohead - 1997 - OK Computer/10 No Surprises.flac
+#EXTINF:259,Lucky
+/run/user/1000/gvfs/sftp:host=home.arikawa-hi.me,port=1337/mnt/Music/Radiohead - 1997 - OK Computer/11 Lucky.flac
+#EXTINF:326,The Tourist
+/run/user/1000/gvfs/sftp:host=home.arikawa-hi.me,port=1337/mnt/Music/Radiohead - 1997 - OK Computer/12 The Tourist.flac
+#EXTINF:621,Fear Inoculum
+/run/user/1000/gvfs/sftp:host=home.arikawa-hi.me,port=1337/mnt/Music/Tool - 2019 - Fear Inoculum [FLAC]/01 Fear Inoculum.flac
+#EXTINF:712,Pneuma
+/run/user/1000/gvfs/sftp:host=home.arikawa-hi.me,port=1337/mnt/Music/Tool - 2019 - Fear Inoculum [FLAC]/02 Pneuma.flac
+#EXTINF:764,Invincible
+/run/user/1000/gvfs/sftp:host=home.arikawa-hi.me,port=1337/mnt/Music/Tool - 2019 - Fear Inoculum [FLAC]/03 Invincible.flac
+#EXTINF:817,Descending
+/run/user/1000/gvfs/sftp:host=home.arikawa-hi.me,port=1337/mnt/Music/Tool - 2019 - Fear Inoculum [FLAC]/04 Descending.flac
+#EXTINF:605,Culling Voices
+/run/user/1000/gvfs/sftp:host=home.arikawa-hi.me,port=1337/mnt/Music/Tool - 2019 - Fear Inoculum [FLAC]/05 Culling Voices.flac
+#EXTINF:288,Chocolate Chip Trip
+/run/user/1000/gvfs/sftp:host=home.arikawa-hi.me,port=1337/mnt/Music/Tool - 2019 - Fear Inoculum [FLAC]/06 Chocolate Chip Trip.flac
+#EXTINF:944,7empest
+/run/user/1000/gvfs/sftp:host=home.arikawa-hi.me,port=1337/mnt/Music/Tool - 2019 - Fear Inoculum [FLAC]/07 7empest.flac
