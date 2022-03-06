@@ -62,6 +62,7 @@ autocmd BufRead,BufNewFile *.svelte setlocal filetype=html
 autocmd BufRead,BufNewFile *.svelte setlocal syntax=html
 autocmd BufRead,BufNewFile .env*    setlocal syntax=sh
 autocmd BufRead,BufNewFile *.html   setlocal textwidth=100
+autocmd BufRead,BufNewFile *.cpp    setlocal expandtab tabstop=2 shiftwidth=2
 
 "Go to last cursor on file open"
 autocmd BufReadPost *
