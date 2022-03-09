@@ -353,7 +353,7 @@ __lineprompt_redraw() {
 	(( ${#j[@]} > 0 )) && JOBS=" (${#j[@]} jobs)" || JOBS=
 
 	# Calculate direnv status.
-	[[ "$DIRENV_DIR" ]] && direnv_status="+ direnv"
+	[[ "$DIRENV_DIR" ]] && direnv_status="+ direnv" || direnv_status=
 
 	# rainbow prompt
 	__lineprompt_cmps COLUMNS PWD SHLVL JOBS git_branch direnv_status || {
