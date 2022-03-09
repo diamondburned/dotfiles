@@ -44,13 +44,6 @@ in {
 
 	gotktrix = self.callPackage ./packages/gotktrix.nix {};
 
-	discord = super.discord.overrideAttrs (old: let version = "0.0.17"; in {
-		inherit version;
-		src = super.fetchurl {
-			url = "https://dl.discordapp.net/apps/linux/${version}/discord-${version}.tar.gz";
-			sha256 = "058k0cmbm4y572jqw83bayb2zzl2fw2aaz0zj1gvg6sxblp76qil";
-	    };
-	});
 
 	# Broken
 	# spotify = self.callPackage (import "${spicetify}/package.nix") {
@@ -156,4 +149,20 @@ in {
 	# 		wrapProgram $out/bin/octave --set LIBGL_ALWAYS_SOFTWARE true
 	# 	'';
 	# });
+
+	discord = super.discord.overrideAttrs (old:
+		let asar = builtins.fetchurl "https://github.com/GooseMod/OpenAsar/releases/download/nightly/app.asar";
+		in {
+			version = "0.0.17";
+			src = super.fetchurl {
+				url = "https://dl.discordapp.net/apps/linux/0.0.17/discord-0.0.17.tar.gz";
+				sha256 = "sha256-NGJzLl1dm7dfkB98pQR3gv4vlldrII6lOMWTuioDExU=";
+			};
+			nativeBuildInputs = (old.nativeBuildInputs or []) ++ [ super.makeWrapper ]; 
+			postFixup = (old.postFixup or "") + ''
+				cp ${asar} $out/opt/Discord/resources/app.asar
+				wrapProgram $out/bin/discord \
+					--add-flags "--enable-gpu-rasterization --enable-zero-copy --enable-gpu-compositing --enable-native-gpu-memory-buffers --enable-oop-rasterization --enable-features=UseSkiaRenderer,CanvasOopRasterization"
+			'';
+		});
 }
