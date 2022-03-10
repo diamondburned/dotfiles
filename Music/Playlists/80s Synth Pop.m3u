@@ -969,7 +969,7 @@
 /run/user/1000/gvfs/sftp:host=home.arikawa-hi.me,port=1337/mnt/Music/[EAC] 桑江 知子 - ボーン・フリー(野性に生まれて)+5 [2015.03.18][CDSOL-1640][CDRip FLAC Lossless]/05 - 私のハートはストップモーション.flac
 #EXTINF:295,ヘイ・ミスター・ロンリー Hey, Mr. Lonely
 /run/user/1000/gvfs/sftp:host=home.arikawa-hi.me,port=1337/mnt/Music/[EAC] 桑江 知子 - ボーン・フリー(野性に生まれて)+5 [2015.03.18][CDSOL-1640][CDRip FLAC Lossless]/06 - ヘイ・ミスター・ロンリー Hey, Mr. Lonely.flac
-#EXTINF:259,鏡の向こう側
+#EXTINF:259,07 - 鏡の向こう側
 /run/user/1000/gvfs/sftp:host=home.arikawa-hi.me,port=1337/mnt/Music/[EAC] 桑江 知子 - ボーン・フリー(野性に生まれて)+5 [2015.03.18][CDSOL-1640][CDRip FLAC Lossless]/07 - 鏡の向こう側.flac
 #EXTINF:281,はっきりしてよ
 /run/user/1000/gvfs/sftp:host=home.arikawa-hi.me,port=1337/mnt/Music/[EAC] 桑江 知子 - ボーン・フリー(野性に生まれて)+5 [2015.03.18][CDSOL-1640][CDRip FLAC Lossless]/08 - はっきりしてよ.flac
@@ -979,7 +979,7 @@
 /run/user/1000/gvfs/sftp:host=home.arikawa-hi.me,port=1337/mnt/Music/[EAC] 桑江 知子 - ボーン・フリー(野性に生まれて)+5 [2015.03.18][CDSOL-1640][CDRip FLAC Lossless]/10 - ブルーブルーアイランド Blue Blue Island.flac
 #EXTINF:219,たずねびと
 /run/user/1000/gvfs/sftp:host=home.arikawa-hi.me,port=1337/mnt/Music/[EAC] 桑江 知子 - ボーン・フリー(野性に生まれて)+5 [2015.03.18][CDSOL-1640][CDRip FLAC Lossless]/11 - たずねびと.flac
-#EXTINF:221,私のハートはストップモーション カラオケ
+#EXTINF:221,12 - 私のハートはストップモーション カラオケ
 /run/user/1000/gvfs/sftp:host=home.arikawa-hi.me,port=1337/mnt/Music/[EAC] 桑江 知子 - ボーン・フリー(野性に生まれて)+5 [2015.03.18][CDSOL-1640][CDRip FLAC Lossless]/12 - 私のハートはストップモーション カラオケ.flac
 #EXTINF:220,たずねびと カラオケ
 /run/user/1000/gvfs/sftp:host=home.arikawa-hi.me,port=1337/mnt/Music/[EAC] 桑江 知子 - ボーン・フリー(野性に生まれて)+5 [2015.03.18][CDSOL-1640][CDRip FLAC Lossless]/13 - たずねびと カラオケ.flac
