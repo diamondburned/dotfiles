@@ -158,6 +158,7 @@ in {
 				url = "https://dl.discordapp.net/apps/linux/0.0.17/discord-0.0.17.tar.gz";
 				sha256 = "sha256-NGJzLl1dm7dfkB98pQR3gv4vlldrII6lOMWTuioDExU=";
 			};
+			buildInputs = (old.buildInputs or []) ++ [ super.unzip ];
 			nativeBuildInputs = (old.nativeBuildInputs or []) ++ [ super.makeWrapper ]; 
 			postFixup = (old.postFixup or "") + ''
 				cp ${asar} $out/opt/Discord/resources/app.asar
