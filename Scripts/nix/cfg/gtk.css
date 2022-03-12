@@ -2,6 +2,7 @@ vte-terminal {
 	padding: 4px 6px;
 }
 
+/*
 terminal-window,
 terminal-window stack,
 terminal-window vte-terminal {
@@ -11,6 +12,7 @@ terminal-window vte-terminal {
 terminal-window vte-terminal {
 	opacity: 0.975;
 }
+*/
 
 .sidebar-row {
 	margin: -1px 0;

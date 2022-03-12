@@ -36,8 +36,6 @@ in {
 		"w /sys/devices/platform/lg-laptop/battery_care_limit - - - - 100"
 		# fan_mode is very mysterious, but setting it to 1 brings the CPU down to 900MHz.
 		"w /sys/devices/platform/lg-laptop/fan_mode - - - - 0"
-		# Prevent powertop from suspending my USB devices.
-		"w /sys/bus/usb/devices/*/power/control - - - - on"
 	];
 
 	# Do not suspend on lid close.
@@ -244,6 +242,12 @@ in {
 
 	# Powertop is bad because of its aggressive power saving.
 	powerManagement.powertop.enable = true;
+
+	# Stop powertop from automatically suspending USBs because it's fucking
+	# annoying.
+	powerManagement.powerUpCommands = ''
+		echo on | tee /sys/bus/usb/devices/*/power/control
+	'';
 
 	nix.maxJobs = lib.mkForce 4;
 
