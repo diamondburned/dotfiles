@@ -4,8 +4,8 @@ let nixosPkgs = import <nixos> {};
 	waylandOverlays = import (nixosPkgs.fetchFromGitHub {
 		owner  = "nix-community";
 		repo   = "nixpkgs-wayland";
-		rev    = "5a8d934666de00b7e3ad78967350ad0a1f2ed4c7";
-		sha256 = "1007wzy1lgj86g2yw7kbgxrzrl288cj29b3bwmmxv7zs0r3qqb7z";
+		rev    = "a1c9b58";
+		sha256 = "1c9dxdw3r5g71wwnpqvnifzpb41005yg7mmzsjjk8kpkfrh5cb4q";
 	});
 
 	waylandPkgs = import <unstable> {
