@@ -68,7 +68,10 @@ in {
 	xdg.portal = {
 		# GNOME has their own portal.
 		enable = true;
-		# extraPortals = with pkgs; [ xdg-desktop-portal-gtk ];
+		extraPortals = with pkgs; [
+			xdg-desktop-portal-wlr
+			xdg-desktop-portal-gtk
+		];
 		# gtkUsePortal = true;
 	};
 
@@ -113,7 +116,7 @@ in {
 			mako
 			wlsunset
 			wlogout
-			# gappdash
+			gappdash
 		];
 
 		programs.bash.profileExtra = ''
