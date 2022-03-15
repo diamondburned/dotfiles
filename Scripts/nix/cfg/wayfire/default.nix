@@ -24,6 +24,23 @@ let utils = import ../../utils { inherit config lib pkgs; };
 			"''${region[@]}" "$@"
 	'' (with pkgs; [ wf-recorder slurp ]);
 
+	autostart = utils.writeBashScript "wayfire-autostart" ''
+		set +e
+		fork() { $@ & disown; }
+
+		echo Forking...
+
+		fork dex -a -s /home/diamond/.config/autostart/
+		fork ${pkgs.polkit_gnome}/libexec/polkit-gnome-authentication-agent-1
+		fork wlsunset -l 33.8 -L -117.9
+		fork wf-background
+		fork kanshi
+		fork fcitx
+		fork mako
+
+		echo Forked everything.
+	'' (config.environment.systemPackages ++ config.home-manager.users.diamond.home.packages);
+
 in {
 	services.xserver.displayManager = {
 		gdm = {
@@ -141,6 +158,7 @@ in {
 				source = pkgs.substituteAll {
 					src = ./wayfire.ini;
 					scrot = "${scrot}/bin/scrot.sh";
+					autostart = autostart;
 					polkit_gnome = "${pkgs.polkit_gnome}/libexec/polkit-gnome-authentication-agent-1";
 				};
 			};
@@ -158,14 +176,18 @@ in {
 			enable = true;
 			profiles = with import ./kanshi.nix; {
 				"docked".outputs = [
-					(disable "eDP-1")
+					(enable "eDP-1" {
+						position = "0,1268";
+						mode     = "1920x1080@60.020";
+						scale    = 1.85;
+					})
 					(enable "Acer Technologies V277U TDCAA002852A" {
-						position = "0,1270";
+						position = "1037,1268";
 						mode     = "2560x1440@69.928001";
 						scale    = 1.0;
 					})
 					(enable "Unknown Sceptre F24 0x00000001" {
-						position = "151,0";
+						position = "1168,0";
 						mode     = "1920x1080@74.973000";
 						scale    = 0.85;
 					})

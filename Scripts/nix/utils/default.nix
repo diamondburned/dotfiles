@@ -11,9 +11,12 @@ for deriv in ${lib.concatStringsSep " " pkgList}; {
 	export PATH="$deriv/bin:$PATH"
 }
 
+LOG_OUTFILE=/tmp/nix-${name}.out
+echo "Running at $(date)..." >> $LOG_OUTFILE
+
 {
 ${text}
-} &> /tmp/nix-${name}.out
+} &>> $LOG_OUTFILE
 	'';
 
 in {

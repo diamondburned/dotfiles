@@ -243,11 +243,16 @@ in {
 	# Powertop is bad because of its aggressive power saving.
 	powerManagement.powertop.enable = true;
 
-	# Stop powertop from automatically suspending USBs because it's fucking
-	# annoying.
-	powerManagement.powerUpCommands = ''
-		echo on | tee /sys/bus/usb/devices/*/power/control
-	'';
+	systemd.services."unfuck-powertop" = {
+		description = "Script to undo Powertop disabling USB ports";
+		after    = [ "powertop.service" ];
+		wantedBy = [ "powertop.service" ];
+		serviceConfig = {
+			ExecStart = pkgs.writeShellScript "unfuck-powertop.sh" ''
+				${pkgs.coreutils}/bin/tee /sys/bus/usb/devices/*/power/control <<< on
+			'';
+		};
+	};
 
 	nix.maxJobs = lib.mkForce 4;
 

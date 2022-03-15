@@ -9,6 +9,11 @@
 		status = "enable";
 	});
 
+	output = criteria: {
+		inherit criteria;
+		status = null;
+	};
+
 	position =  criteria: position: scale: {
 		inherit criteria position scale;
 		status = "enable";
