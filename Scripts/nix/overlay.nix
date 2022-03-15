@@ -1,6 +1,8 @@
 self: super:
 
-let vte = pkgs: pkgs.vte.overrideAttrs(old: {
+let src = import ./src.nix super;
+
+	vte = pkgs: pkgs.vte.overrideAttrs(old: {
 		version = "0.63.91"; # rev without SIXEL reversion commit.
 		src = builtins.fetchGit {
 			url = "https://gitlab.gnome.org/GNOME/vte.git";
@@ -25,6 +27,9 @@ let vte = pkgs: pkgs.vte.overrideAttrs(old: {
 	spicetify-themes = builtins.fetchTarball https://github.com/morpheusthewhite/spicetify-themes/archive/master.tar.gz;
 
 in {
+	# keyd
+	keyd = (import src.keyd {}).keyd;
+
 	# NUR
 	gamescope = nur.repos.dukzcry.gamescope;
 	spotify-adblock = nur.repos.instantos.spotify-adblock;

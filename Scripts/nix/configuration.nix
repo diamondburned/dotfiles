@@ -70,12 +70,13 @@ let home-manager = builtins.fetchGit {
 	   	STAGING_PA_LATENCY_USEC = "128";
 	};
 
-in
+	src = import ./src.nix pkgs;
 
-{
+in {
 	imports = [
 		"${diamond}"
 		"${home-manager}/nixos"
+		"${src.keyd}/nixos/modules/services/hardware/keyd.nix"
 		./hardware-configuration.nix
 		./hardware-custom.nix
 		./unstable.nix
@@ -222,6 +223,18 @@ in
 	};
 	console.font = "Lat2-Terminus16";
 	console.keyMap = "us";
+
+	services.keyd = {
+		enable = true;
+		configuration = {
+			"default.conf" = ''
+				[ids]
+				*
+				[main]
+				capslock = esc
+			'';
+		};
+	};
 
 	# Set your time zone.
 	time.timeZone = "America/Los_Angeles";
