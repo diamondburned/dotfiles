@@ -28,7 +28,7 @@ let src = import ./src.nix super;
 
 in {
 	# keyd
-	keyd = (import src.keyd {}).keyd;
+	# keyd = (import "${src.keyd}" {}).keyd;
 
 	# NUR
 	gamescope = nur.repos.dukzcry.gamescope;

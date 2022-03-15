@@ -76,7 +76,9 @@ in {
 	imports = [
 		"${diamond}"
 		"${home-manager}/nixos"
-		"${src.keyd}/nixos/modules/services/hardware/keyd.nix"
+		# Nix can't competently import this file. Giving it a false path still makes it freak out.
+		# It didn't even bother resolving the path.
+		# "${src.keyd}/nixos/modules/services/hardwsadjiasdare/keyd.nix"
 		./hardware-configuration.nix
 		./hardware-custom.nix
 		./unstable.nix
@@ -224,17 +226,17 @@ in {
 	console.font = "Lat2-Terminus16";
 	console.keyMap = "us";
 
-	services.keyd = {
-		enable = true;
-		configuration = {
-			"default.conf" = ''
-				[ids]
-				*
-				[main]
-				capslock = esc
-			'';
-		};
-	};
+	# services.keyd = {
+	# 	enable = true;
+	# 	configuration = {
+	# 		"default.conf" = ''
+	# 			[ids]
+	# 			*
+	# 			[main]
+	# 			capslock = esc
+	# 		'';
+	# 	};
+	# };
 
 	# Set your time zone.
 	time.timeZone = "America/Los_Angeles";
