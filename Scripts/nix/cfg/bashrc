@@ -22,6 +22,18 @@ export SSH_ASKPASS=""
 # Tab width 4.
 tabs 4
 
+f() {
+	[[ "$(jobs)" ]] && {
+		echo "There are background jobs."
+		return 1
+	}
+	"$@" &> /dev/null & disown
+}
+
+fork() {
+	f "$@"
+}
+
 # export GTKCORD_CUSTOM_CSS="
 # .membercontainer {
 # 	background-image: url(\"/home/diamond/Downloads/Snow is - 夏少女 (70546791) 1ページ.png\");
