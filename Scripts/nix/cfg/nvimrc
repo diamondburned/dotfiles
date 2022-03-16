@@ -406,7 +406,8 @@ let g:ale_fixers = {
 			\ 'css':        [ "prettier" ],
 			\ 'c':          [ "clang-format" ],
 			\ 'cpp':        [ "uncrustify", "clang-format" ],
-			\ 'json':       [ "jq" ],
+			\ 'json':       [ "prettier", "jq" ],
+			\ 'yaml':       [ "prettier" ],
 			\ 'svelte':     [ "prettier", "prettier_standard", "eslint" ],
 			\ 'javascript': [ "prettier", "prettier_standard", "eslint" ],
 			\ }
