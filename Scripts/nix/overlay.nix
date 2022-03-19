@@ -156,7 +156,10 @@ in {
 	# });
 
 	discord = super.discord.overrideAttrs (old:
-		let asar = builtins.fetchurl "https://github.com/GooseMod/OpenAsar/releases/download/nightly/app.asar";
+		let asar = builtins.fetchurl {
+			url = "https://github.com/GooseMod/OpenAsar/releases/download/nightly/app.asar";
+			sha256 = "0d4pffbp9g3zgc3i257hx7lgsxjdnwzq0m9vcx713af250w2qh8q";
+		};
 		in {
 			version = "0.0.17";
 			src = super.fetchurl {
