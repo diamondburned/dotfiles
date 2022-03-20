@@ -518,6 +518,7 @@ in {
 
 		programs.direnv = {
 			enable = true;
+			config = { skip_dotenv = true; };
 			nix-direnv.enable = true;
 		};
 
