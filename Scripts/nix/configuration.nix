@@ -211,9 +211,11 @@ in {
 
 	i18n = {
 		inputMethod = {
-			enabled	= "fcitx";
-			# TODO re-enable fcitx5
-			fcitx.engines = with pkgs.fcitx-engines; [ mozc unikey ];
+			enabled	= "fcitx5";
+			fcitx5.addons = with pkgs; [
+				fcitx5-m17n
+				fcitx5-mozc
+			];
 		};
 
 		defaultLocale = "en_US.UTF-8";
@@ -657,6 +659,8 @@ in {
 			powertop
 			blueberry
 			libcanberra-gtk3
+			fcitx5-configtool
+			fcitx5-gtk
 			# gatttool
 
 			# Development tools

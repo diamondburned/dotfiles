@@ -9,7 +9,7 @@ let nixosPkgs = import <nixos> {};
 	});
 
 	waylandPkgs = import <unstable> {
-		overlays = [ waylandOverlays ];
+		overlays = [ "${waylandOverlays}/overlay.nix" ];
 	};
 
 	wf-config = waylandPkgs.wayfire.overrideAttrs (old: {
