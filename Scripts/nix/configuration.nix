@@ -215,6 +215,7 @@ in {
 			fcitx5.addons = with pkgs; [
 				fcitx5-m17n
 				fcitx5-mozc
+				fcitx5-gtk
 			];
 		};
 
@@ -660,7 +661,6 @@ in {
 			blueberry
 			libcanberra-gtk3
 			fcitx5-configtool
-			fcitx5-gtk
 			# gatttool
 
 			# Development tools
