@@ -3839,6 +3839,26 @@
 /run/user/1000/gvfs/sftp:host=home.arikawa-hi.me,port=1337/mnt/Music/In Rainbows (2007)/09 - Jigsaw Falling Into Place.flac
 #EXTINF:281,Videotape
 /run/user/1000/gvfs/sftp:host=home.arikawa-hi.me,port=1337/mnt/Music/In Rainbows (2007)/10 - Videotape.flac
+#EXTINF:271,Dear Stranger
+/run/user/1000/gvfs/sftp:host=home.arikawa-hi.me,port=1337/mnt/Music/STRFKR - Future Past Life (2020) [WEB Flac]/01 Dear Stranger.flac
+#EXTINF:152,Never The Same
+/run/user/1000/gvfs/sftp:host=home.arikawa-hi.me,port=1337/mnt/Music/STRFKR - Future Past Life (2020) [WEB Flac]/02 Never The Same.flac
+#EXTINF:220,Deep Dream
+/run/user/1000/gvfs/sftp:host=home.arikawa-hi.me,port=1337/mnt/Music/STRFKR - Future Past Life (2020) [WEB Flac]/03 Deep Dream.flac
+#EXTINF:209,Second Hand
+/run/user/1000/gvfs/sftp:host=home.arikawa-hi.me,port=1337/mnt/Music/STRFKR - Future Past Life (2020) [WEB Flac]/04 Second Hand.flac
+#EXTINF:133,Better Together
+/run/user/1000/gvfs/sftp:host=home.arikawa-hi.me,port=1337/mnt/Music/STRFKR - Future Past Life (2020) [WEB Flac]/05 Better Together.flac
+#EXTINF:208,Budapest (feat Shy Boys)
+/run/user/1000/gvfs/sftp:host=home.arikawa-hi.me,port=1337/mnt/Music/STRFKR - Future Past Life (2020) [WEB Flac]/06 Budapest (feat Shy Boys).flac
+#EXTINF:115,Palm Reader
+/run/user/1000/gvfs/sftp:host=home.arikawa-hi.me,port=1337/mnt/Music/STRFKR - Future Past Life (2020) [WEB Flac]/07 Palm Reader.flac
+#EXTINF:218,Sea Foam
+/run/user/1000/gvfs/sftp:host=home.arikawa-hi.me,port=1337/mnt/Music/STRFKR - Future Past Life (2020) [WEB Flac]/08 Sea Foam.flac
+#EXTINF:293,Pink Noise
+/run/user/1000/gvfs/sftp:host=home.arikawa-hi.me,port=1337/mnt/Music/STRFKR - Future Past Life (2020) [WEB Flac]/09 Pink Noise.flac
+#EXTINF:347,Cold Comfort
+/run/user/1000/gvfs/sftp:host=home.arikawa-hi.me,port=1337/mnt/Music/STRFKR - Future Past Life (2020) [WEB Flac]/10 Cold Comfort.flac
 #EXTINF:308,Horsehead
 /run/user/1000/gvfs/sftp:host=home.arikawa-hi.me,port=1337/mnt/Music/DIIV - 2019 - Deceiver (Captured Tracks) [FLAC]/01 - Horsehead.flac
 #EXTINF:184,Like Before You Were Born
