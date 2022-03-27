@@ -3787,6 +3787,14 @@
 /run/user/1000/gvfs/sftp:host=home.arikawa-hi.me,port=1337/mnt/Music/Syd Arthur - Apricity/09 - Evolution.flac
 #EXTINF:246,Apricity
 /run/user/1000/gvfs/sftp:host=home.arikawa-hi.me,port=1337/mnt/Music/Syd Arthur - Apricity/10 - Apricity.flac
+#EXTINF:280,Morning's Calling
+/run/user/1000/gvfs/sftp:host=home.arikawa-hi.me,port=1337/mnt/Music/Syd Arthur - Moving World EP/Syd Arthur - Moving World EP - 01 Morning's Calling.flac
+#EXTINF:276,Pulse
+/run/user/1000/gvfs/sftp:host=home.arikawa-hi.me,port=1337/mnt/Music/Syd Arthur - Moving World EP/Syd Arthur - Moving World EP - 02 Pulse.flac
+#EXTINF:206,Exit Domino
+/run/user/1000/gvfs/sftp:host=home.arikawa-hi.me,port=1337/mnt/Music/Syd Arthur - Moving World EP/Syd Arthur - Moving World EP - 03 Exit Domino.flac
+#EXTINF:414,Planet Of Love / Hermethio
+/run/user/1000/gvfs/sftp:host=home.arikawa-hi.me,port=1337/mnt/Music/Syd Arthur - Moving World EP/Syd Arthur - Moving World EP - 04 Planet Of Love - Hermethio.flac
 #EXTINF:284,Airbag
 /run/user/1000/gvfs/sftp:host=home.arikawa-hi.me,port=1337/mnt/Music/Radiohead - 1997 - OK Computer/01 Airbag.flac
 #EXTINF:383,Paranoid Android

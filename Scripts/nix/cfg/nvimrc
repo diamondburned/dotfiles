@@ -32,6 +32,7 @@ Plug 'diamondburned/ale'
 "Languages"
 Plug 'cespare/vim-toml'
 Plug 'LnL7/vim-nix'
+Plug 'symphorien/vim-nixhash'
 Plug 'evanleck/vim-svelte'
 Plug 'mattn/vim-gotmpl'
 
