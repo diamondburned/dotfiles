@@ -3747,6 +3747,48 @@
 /run/user/1000/gvfs/sftp:host=home.arikawa-hi.me,port=1337/mnt/Music/Syd Arthur - Sound Mirror (2014) [CDrip]/09 - Singularity.flac
 #EXTINF:158,Sink Hole
 /run/user/1000/gvfs/sftp:host=home.arikawa-hi.me,port=1337/mnt/Music/Syd Arthur - Sound Mirror (2014) [CDrip]/10 - Sink Hole.flac
+#EXTINF:196,first difference
+/run/user/1000/gvfs/sftp:host=home.arikawa-hi.me,port=1337/mnt/Music/Syd Arthur - 2013 On And On Prog USA/01 first difference.mp3
+#EXTINF:218,edge of the earth
+/run/user/1000/gvfs/sftp:host=home.arikawa-hi.me,port=1337/mnt/Music/Syd Arthur - 2013 On And On Prog USA/02 edge of the earth.mp3
+#EXTINF:248,ode to the summer
+/run/user/1000/gvfs/sftp:host=home.arikawa-hi.me,port=1337/mnt/Music/Syd Arthur - 2013 On And On Prog USA/03 ode to the summer.mp3
+#EXTINF:263,dorothy
+/run/user/1000/gvfs/sftp:host=home.arikawa-hi.me,port=1337/mnt/Music/Syd Arthur - 2013 On And On Prog USA/04 dorothy.mp3
+#EXTINF:184,truth seeker
+/run/user/1000/gvfs/sftp:host=home.arikawa-hi.me,port=1337/mnt/Music/Syd Arthur - 2013 On And On Prog USA/05 truth seeker.mp3
+#EXTINF:216,night shaped light
+/run/user/1000/gvfs/sftp:host=home.arikawa-hi.me,port=1337/mnt/Music/Syd Arthur - 2013 On And On Prog USA/06 night shaped light.mp3
+#EXTINF:158,Promise Me
+/run/user/1000/gvfs/sftp:host=home.arikawa-hi.me,port=1337/mnt/Music/Syd Arthur - 2013 On And On Prog USA/07 promise me.mp3
+#EXTINF:158,Black Wave
+/run/user/1000/gvfs/sftp:host=home.arikawa-hi.me,port=1337/mnt/Music/Syd Arthur - 2013 On And On Prog USA/08 black wave.mp3
+#EXTINF:246,moving world
+/run/user/1000/gvfs/sftp:host=home.arikawa-hi.me,port=1337/mnt/Music/Syd Arthur - 2013 On And On Prog USA/09 moving world.mp3
+#EXTINF:502,paradise lost
+/run/user/1000/gvfs/sftp:host=home.arikawa-hi.me,port=1337/mnt/Music/Syd Arthur - 2013 On And On Prog USA/10 paradise lost.mp3
+#EXTINF:268,Coal Mine
+/run/user/1000/gvfs/sftp:host=home.arikawa-hi.me,port=1337/mnt/Music/Syd Arthur - Apricity/01 - Coal Mine.flac
+#EXTINF:172,Plane Crash in Kansas
+/run/user/1000/gvfs/sftp:host=home.arikawa-hi.me,port=1337/mnt/Music/Syd Arthur - Apricity/02 - Plane Crash In Kansas.flac
+#EXTINF:259,No Peace
+/run/user/1000/gvfs/sftp:host=home.arikawa-hi.me,port=1337/mnt/Music/Syd Arthur - Apricity/03 - No Peace.flac
+#EXTINF:257,Sun Rays
+/run/user/1000/gvfs/sftp:host=home.arikawa-hi.me,port=1337/mnt/Music/Syd Arthur - Apricity/04 - Sun Rays.flac
+#EXTINF:316,Into Eternity
+/run/user/1000/gvfs/sftp:host=home.arikawa-hi.me,port=1337/mnt/Music/Syd Arthur - Apricity/05 - Into Eternity.flac
+#EXTINF:296,Rebel Lands
+/run/user/1000/gvfs/sftp:host=home.arikawa-hi.me,port=1337/mnt/Music/Syd Arthur - Apricity/06 - Rebel Lands.flac
+#EXTINF:298,Seraphim
+/run/user/1000/gvfs/sftp:host=home.arikawa-hi.me,port=1337/mnt/Music/Syd Arthur - Apricity/07 - Seraphim.flac
+#EXTINF:216,Portal
+/run/user/1000/gvfs/sftp:host=home.arikawa-hi.me,port=1337/mnt/Music/Syd Arthur - Apricity/08 - Portal.flac
+#EXTINF:241,Evolution
+/run/user/1000/gvfs/sftp:host=home.arikawa-hi.me,port=1337/mnt/Music/Syd Arthur - Apricity/09 - Evolution.flac
+#EXTINF:246,Apricity
+/run/user/1000/gvfs/sftp:host=home.arikawa-hi.me,port=1337/mnt/Music/Syd Arthur - Apricity/10 - Apricity.flac
+#EXTINF:-1,folder
+/run/user/1000/gvfs/sftp:host=home.arikawa-hi.me,port=1337/mnt/Music/Syd Arthur - Apricity/folder.jpg
 #EXTINF:284,Airbag
 /run/user/1000/gvfs/sftp:host=home.arikawa-hi.me,port=1337/mnt/Music/Radiohead - 1997 - OK Computer/01 Airbag.flac
 #EXTINF:383,Paranoid Android
@@ -3791,8 +3833,44 @@
 /run/user/1000/gvfs/sftp:host=home.arikawa-hi.me,port=1337/mnt/Music/In Rainbows (2007)/09 - Jigsaw Falling Into Place.flac
 #EXTINF:281,Videotape
 /run/user/1000/gvfs/sftp:host=home.arikawa-hi.me,port=1337/mnt/Music/In Rainbows (2007)/10 - Videotape.flac
-#EXTINF:621,Fear Inoculum
-/run/user/1000/gvfs/sftp:host=home.arikawa-hi.me,port=1337/mnt/Music/Tool - 2019 - Fear Inoculum [FLAC]/01 Fear Inoculum.flac
+#EXTINF:308,Horsehead
+/run/user/1000/gvfs/sftp:host=home.arikawa-hi.me,port=1337/mnt/Music/DIIV - 2019 - Deceiver (Captured Tracks) [FLAC]/01 - Horsehead.flac
+#EXTINF:184,Like Before You Were Born
+/run/user/1000/gvfs/sftp:host=home.arikawa-hi.me,port=1337/mnt/Music/DIIV - 2019 - Deceiver (Captured Tracks) [FLAC]/02 - Like Before You Were Born.flac
+#EXTINF:265,Skin Game
+/run/user/1000/gvfs/sftp:host=home.arikawa-hi.me,port=1337/mnt/Music/DIIV - 2019 - Deceiver (Captured Tracks) [FLAC]/03 - Skin Game.flac
+#EXTINF:283,Between Tides
+/run/user/1000/gvfs/sftp:host=home.arikawa-hi.me,port=1337/mnt/Music/DIIV - 2019 - Deceiver (Captured Tracks) [FLAC]/04 - Between Tides.flac
+#EXTINF:268,Taker
+/run/user/1000/gvfs/sftp:host=home.arikawa-hi.me,port=1337/mnt/Music/DIIV - 2019 - Deceiver (Captured Tracks) [FLAC]/05 - Taker.flac
+#EXTINF:219,For the Guilty
+/run/user/1000/gvfs/sftp:host=home.arikawa-hi.me,port=1337/mnt/Music/DIIV - 2019 - Deceiver (Captured Tracks) [FLAC]/06 - For the Guilty.flac
+#EXTINF:239,The Spark
+/run/user/1000/gvfs/sftp:host=home.arikawa-hi.me,port=1337/mnt/Music/DIIV - 2019 - Deceiver (Captured Tracks) [FLAC]/07 - The Spark.flac
+#EXTINF:238,Lorelai
+/run/user/1000/gvfs/sftp:host=home.arikawa-hi.me,port=1337/mnt/Music/DIIV - 2019 - Deceiver (Captured Tracks) [FLAC]/08 - Lorelai.flac
+#EXTINF:236,Blankenship
+/run/user/1000/gvfs/sftp:host=home.arikawa-hi.me,port=1337/mnt/Music/DIIV - 2019 - Deceiver (Captured Tracks) [FLAC]/09 - Blankenship.flac
+#EXTINF:271,Dear Stranger
+/run/user/1000/gvfs/sftp:host=home.arikawa-hi.me,port=1337/mnt/Music/STRFKR - Future Past Life (2020) [WEB Flac]/01 Dear Stranger.flac
+#EXTINF:152,Never The Same
+/run/user/1000/gvfs/sftp:host=home.arikawa-hi.me,port=1337/mnt/Music/STRFKR - Future Past Life (2020) [WEB Flac]/02 Never The Same.flac
+#EXTINF:220,Deep Dream
+/run/user/1000/gvfs/sftp:host=home.arikawa-hi.me,port=1337/mnt/Music/STRFKR - Future Past Life (2020) [WEB Flac]/03 Deep Dream.flac
+#EXTINF:209,Second Hand
+/run/user/1000/gvfs/sftp:host=home.arikawa-hi.me,port=1337/mnt/Music/STRFKR - Future Past Life (2020) [WEB Flac]/04 Second Hand.flac
+#EXTINF:133,Better Together
+/run/user/1000/gvfs/sftp:host=home.arikawa-hi.me,port=1337/mnt/Music/STRFKR - Future Past Life (2020) [WEB Flac]/05 Better Together.flac
+#EXTINF:208,Budapest (feat Shy Boys)
+/run/user/1000/gvfs/sftp:host=home.arikawa-hi.me,port=1337/mnt/Music/STRFKR - Future Past Life (2020) [WEB Flac]/06 Budapest (feat Shy Boys).flac
+#EXTINF:115,Palm Reader
+/run/user/1000/gvfs/sftp:host=home.arikawa-hi.me,port=1337/mnt/Music/STRFKR - Future Past Life (2020) [WEB Flac]/07 Palm Reader.flac
+#EXTINF:218,Sea Foam
+/run/user/1000/gvfs/sftp:host=home.arikawa-hi.me,port=1337/mnt/Music/STRFKR - Future Past Life (2020) [WEB Flac]/08 Sea Foam.flac
+#EXTINF:293,Pink Noise
+/run/user/1000/gvfs/sftp:host=home.arikawa-hi.me,port=1337/mnt/Music/STRFKR - Future Past Life (2020) [WEB Flac]/09 Pink Noise.flac
+#EXTINF:347,Cold Comfort
+/run/user/1000/gvfs/sftp:host=home.arikawa-hi.me,port=1337/mnt/Music/STRFKR - Future Past Life (2020) [WEB Flac]/10 Cold Comfort.flac
 #EXTINF:712,Pneuma
 /run/user/1000/gvfs/sftp:host=home.arikawa-hi.me,port=1337/mnt/Music/Tool - 2019 - Fear Inoculum [FLAC]/02 Pneuma.flac
 #EXTINF:764,Invincible
@@ -3835,13 +3913,3 @@
 /run/user/1000/gvfs/sftp:host=home.arikawa-hi.me,port=1337/mnt/Music/1996 - Ænima - [Flac]/14. (-) ions.flac
 #EXTINF:827,Third Eye
 /run/user/1000/gvfs/sftp:host=home.arikawa-hi.me,port=1337/mnt/Music/1996 - Ænima - [Flac]/15. third eye.flac
-#EXTINF:-1,back
-/run/user/1000/gvfs/sftp:host=home.arikawa-hi.me,port=1337/mnt/Music/1996 - Ænima - [Flac]/back.jpg
-#EXTINF:-1,cd
-/run/user/1000/gvfs/sftp:host=home.arikawa-hi.me,port=1337/mnt/Music/1996 - Ænima - [Flac]/cd.bmp
-#EXTINF:-1,front
-/run/user/1000/gvfs/sftp:host=home.arikawa-hi.me,port=1337/mnt/Music/1996 - Ænima - [Flac]/front.jpg
-#EXTINF:-1,inside
-/run/user/1000/gvfs/sftp:host=home.arikawa-hi.me,port=1337/mnt/Music/1996 - Ænima - [Flac]/inside.bmp
-#EXTINF:-1,tool - Ænima
-/run/user/1000/gvfs/sftp:host=home.arikawa-hi.me,port=1337/mnt/Music/1996 - Ænima - [Flac]/tool - Ænima.m3u
