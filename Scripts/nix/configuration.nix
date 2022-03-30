@@ -92,6 +92,7 @@ in {
 	nixpkgs.overlays = [
 		# (tdeo)
 		(import ./overlay.nix)
+		(import (builtins.fetchTarball "https://github.com/PolyMC/PolyMC/archive/develop.tar.gz")).overlay
 	];
 
 	nixpkgs.config = {
@@ -715,6 +716,7 @@ in {
 			material-design-icons
 
 			# Games
+			polymc
 			osu-wine
 			osu-wine-realistik
 
