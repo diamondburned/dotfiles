@@ -553,9 +553,10 @@ refx() {
 
 # Direnv.
 export DIRENV_LOG_FORMAT= # quiet mode
-eval "$(direnv hook bash)"
 
 alias vim="nvim"
 alias gdbrun="gdb -ex run"
 
 echo Welcome
+
+. ~/.bash_aliases
