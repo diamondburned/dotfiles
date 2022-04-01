@@ -203,7 +203,7 @@ in {
 	boot.kernelParams = [ "mitigations=off" ];
 
 	# Requires the real-time kernel patches in Musnix.
-	# security.rtkit.enable = true;
+	security.rtkit.enable = true;
 
 	# # Trivial graphics options.
 	# boot.extraModprobeConfig = ''
