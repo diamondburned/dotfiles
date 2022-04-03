@@ -74,6 +74,7 @@ in {
 			${builtins.readFile ./userChrome.main.css}
 		'';
 		settings = {
+			"media.av1.enabled" = false;
 			"browser.sessionhistory.max_entries" = 15;
 			"browser.send_pings" = false;
 			"browser.cache.offline.enable" = true;
