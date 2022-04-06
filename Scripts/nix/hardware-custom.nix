@@ -30,6 +30,8 @@ in {
 
 	services.fstrim.enable = true;
 
+	services.sysprof.enable = true;
+
 	# LG Gram tweaks.
 	systemd.tmpfiles.rules = [
 		# https://01.org/linuxgraphics/gfx-docs/drm/admin-guide/laptops/lg-laptop.html

@@ -716,7 +716,7 @@ in {
 			material-design-icons
 
 			# Games
-			polymc
+			# polymc
 			osu-wine
 			osu-wine-realistik
 

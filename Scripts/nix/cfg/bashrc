@@ -1,3 +1,32 @@
+#!/nix/store/pbfraw351mksnkp2ni9c4rkc9cpp89iv-bash-5.1-p12/bin/bash
+
+
+# Commands that should be applied only for interactive shells.
+[[ $- == *i* ]] || return
+
+HISTFILESIZE=100000
+HISTSIZE=10000
+
+shopt -s histappend
+shopt -s checkwinsize
+shopt -s extglob
+shopt -s globstar
+shopt -s checkjobs
+
+
+
+__HM_PROMPT_COMMAND="${PROMPT_COMMAND:+${PROMPT_COMMAND%;};}__hm_vte_prompt_command"
+. /nix/store/bxkrg460lhmmqqhzsfpvvw2lr8kj31z1-vte-0.64.2/etc/profile.d/vte.sh
+if [[ $(type -t __vte_prompt_command) = function ]]; then
+  __hm_vte_prompt_command() {
+    local old_exit_status=$?
+    __vte_prompt_command
+    return $old_exit_status
+  }
+  PROMPT_COMMAND="$__HM_PROMPT_COMMAND"
+fi
+unset __HM_PROMPT_COMMAND
+
 #!/usr/bin/env bash
 
 # ~/.bashrc
@@ -552,7 +581,7 @@ refx() {
 }
 
 # Direnv.
-export DIRENV_LOG_FORMAT= # quiet mode
+# export DIRENV_LOG_FORMAT= # quiet mode
 
 alias vim="nvim"
 alias gdbrun="gdb -ex run"
@@ -560,3 +589,7 @@ alias gdbrun="gdb -ex run"
 echo Welcome
 
 . ~/.bash_aliases
+
+eval "$(/nix/store/m3jcg1x7jcyd1nnnr5c5pchd60krfw7y-direnv-2.30.3/bin/direnv hook bash)"
+
+
