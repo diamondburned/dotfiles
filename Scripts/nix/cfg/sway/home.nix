@@ -32,6 +32,7 @@ let utils = import ../../utils { inherit config lib pkgs; };
 
 		fork dex -a -s /home/diamond/.config/autostart/
 		fork ${pkgs.polkit_gnome}/libexec/polkit-gnome-authentication-agent-1
+		fork ${pkgs.xdg-desktop-portal-wlr}/libexec/xdg-desktop-portal-wlr
 		fork wlsunset -l 33.8 -L -117.9
 		fork wf-background
 		fork wf-panel
