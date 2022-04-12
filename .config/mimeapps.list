@@ -46,6 +46,7 @@ application/x-extension-xhtml=firefox.desktop
 application/x-extension-xht=firefox.desktop
 x-scheme-handler/ytmd=youtube-music-desktop-app.desktop
 application/x-shellscript=nvim.desktop
+text/x-c++hdr=nvim.desktop
 
 [Added Associations]
 application/zip=org.gnome.FileRoller.desktop;
@@ -109,3 +110,4 @@ application/x-trash=nvim.desktop;
 application/x-x509-ca-cert=nvim.desktop;
 application/x-executable=nvim.desktop;
 application/x-shellscript=nvim.desktop;
+text/x-c++hdr=nvim.desktop;
