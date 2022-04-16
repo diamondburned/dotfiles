@@ -26,8 +26,7 @@ Plug 'nvim-treesitter/nvim-treesitter-refactor'
 Plug 'jiangmiao/auto-pairs'
 
 "Autocompletion"
-"Plug 'dense-analysis/ale'
-Plug 'diamondburned/ale'
+Plug 'dense-analysis/ale'
 
 "Languages"
 Plug 'cespare/vim-toml'
@@ -106,19 +105,6 @@ hi Normal guibg=NONE ctermbg=NONE
 filetype plugin indent on
 syntax on
 
-"Tree-sitter config"
-lua <<EOF
-	require'nvim-treesitter.configs'.setup {
-		indent    = { enable = true },
-		highlight = { enable = true },
-		refactor  = {
-			highlight_definitions = { enable = true },
-		},
-	}
-EOF
-
-let g:nvim_tree_auto_open = 1
-
 if exists('g:started_by_firenvim')
 	colorscheme plain
 	hi Normal guibg=#242424 guifg=#EEEEEE
@@ -135,8 +121,100 @@ if exists('g:started_by_firenvim')
 	\	},
 	\ }
 
-	let g:nvim_tree_auto_open = 0
+	" let g:nvim_tree_auto_open = 0
 endif
+
+"Nvim Tree configs"
+let g:nvim_tree_add_trailing = 1
+let g:nvim_tree_git_hl = 1
+let g:nvim_tree_show_icons = {
+	\	'git': 1,
+	\	'folders': 1,
+	\	'files': 1,
+	\ }
+let g:nvim_tree_icons = {
+	\	'default': "  ",
+	\	'symlink': "  ",
+	\	'git': {
+	\		'unstaged': "M",
+	\		'staged': "M",
+	\		'unmerged': "U",
+	\		'renamed': "R",
+	\		'untracked': "U",
+	\		'deleted': "D",
+	\		'ignored': "I",
+	\	},
+	\	'folder': {
+	\		'default': ">",
+	\		'open': "v",
+	\		'empty': ">",
+	\		'empty_open': "v",
+	\		'symlink': ">",
+	\		'symlink_open': "v",
+	\	}
+	\ }
+
+hi NvimTreeCursorLine ctermbg=7
+hi NvimTreeFolderName ctermfg=NONE
+hi NvimTreeFolderIcon ctermfg=14
+hi NvimTreeExecFile   ctermfg=12
+hi NvimTreeGitDirty   ctermfg=9
+hi NvimTreeGitStaged  ctermfg=2
+hi NvimTreeGitRenamed ctermfg=6
+hi NvimTreeGitDeleted ctermfg=1
+hi NvimTreeGitIgnored ctermfg=8
+
+"Tree-sitter config"
+lua <<EOF
+	require'nvim-tree'.setup {
+		disable_netrw = true,
+		open_on_tab = true,
+		open_on_setup = true,
+		auto_reload_on_write = true,
+		lsp_diagnostics = true,
+		update_cwd = true,
+		git = {
+			enable = true,
+			ignore = false,
+		},
+		filters = {
+			custom = { '.git', 'node_modules' },
+			dotfiles = false,
+		},
+		actions = {
+			open_file = {
+				window_picker = { enable = true },
+			},
+		},
+		update_focused_file = { enable = true },
+		view = {
+			width = 28,
+			signcolumn = "no",
+			mappings = {
+				custom_only = true,
+				list = {
+					{ key = "<2-RightMouse>", action = "cd" },
+					{ key = "<C-t>",          action = "tabnew" },
+					{ key = "<",              action = "prev_sibling" },
+					{ key = ">",              action = "next_sibling" },
+					{ key = "<BS>",           action = "close_node" },
+					{ key = "d",              action = "remove" },
+					{ key = "r",              action = "rename" },
+					{ key = "q",              action = "close" },
+					{ key = "/",              action = "search_node" },
+				},
+			},
+		},
+	}
+
+	require'nvim-treesitter.configs'.setup {
+		indent    = { enable = true },
+		highlight = { enable = true },
+		refactor  = {
+			highlight_definitions = { enable = true },
+		},
+	}
+EOF
 
 "Custom colors"
 hi TabLine     cterm=NONE ctermfg=15 ctermbg=NONE
@@ -326,62 +404,6 @@ set sidescrolloff=5
 set autoread
 au CursorHold * checktime
 
-"Nvim Tree configs"
-let g:nvim_tree_hijack_netrw = 1
-let g:nvim_tree_ignore = [ '.git', 'node_modules' ]
-let g:nvim_tree_tab_open = 1
-let g:nvim_tree_auto_close = 1
-let g:nvim_tree_add_trailing = 1
-let g:nvim_tree_lsp_diagnostics = 0
-let g:nvim_tree_git_hl = 1
-let g:nvim_tree_follow = 1
-let g:nvim_tree_hide_dotfiles = 0
-let g:nvim_tree_disable_window_picker = 0
-let g:nvim_tree_gitignore = 0
-let g:nvim_tree_show_icons = {
-	\	'git': 1,
-	\	'folders': 1,
-	\	'files': 1,
-	\ }
-let g:nvim_tree_icons = {
-	\	'default': "  ",
-	\	'symlink': "  ",
-	\	'git': {
-	\		'unstaged': "M",
-	\		'staged': "M",
-	\		'unmerged': "U",
-	\		'renamed': "R",
-	\		'untracked': "U",
-	\		'deleted': "D",
-	\		'ignored': "I",
-	\	},
-	\	'folder': {
-	\		'default': ">",
-	\		'open': "v",
-	\		'empty': ">",
-	\		'empty_open': "v",
-	\		'symlink': ">",
-	\		'symlink_open': "v",
-	\	}
-	\ }
-
-"Return the Tab bind"
-lua << EOF
-	vim.g.nvim_tree_bindings = {
-		["<Tab>"] = nil,
-	}
-EOF
-
-hi NvimTreeCursorLine ctermbg=7
-hi NvimTreeFolderName ctermfg=NONE
-hi NvimTreeFolderIcon ctermfg=14
-hi NvimTreeExecFile   ctermfg=12
-hi NvimTreeGitDirty   ctermfg=9
-hi NvimTreeGitStaged  ctermfg=2
-hi NvimTreeGitRenamed ctermfg=6
-hi NvimTreeGitDeleted ctermfg=1
-hi NvimTreeGitIgnored ctermfg=8
-
 "Autocompletion"
 "Fix aggressive preemptive completion with noselect"
 set completeopt=menuone,noselect
@@ -421,7 +443,7 @@ let g:ale_linters = {
 			\ 'zig':        [ "zls" ],
 			\ 'c':          [ "clangd" ],
 			\ 'cpp':        [ "clangd" ],
-			\ 'svelte':     [ "tsserver", "eslint" ],
+			\ 'svelte':     [ "svelteserver", "tsserver", "eslint" ],
 			\ 'javascript': [ "tsserver", "deno" ],
 			\ }
 nnoremap gd :ALEGoToDefinition<CR>
