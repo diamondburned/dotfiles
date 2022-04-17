@@ -212,6 +212,10 @@ in {
 	# 	options i915 fastboot=1 enable_fbc=1 enable_psr=0
 	# '';
 
+	# Brightness stuff.
+	hardware.acpilight.enable = true;
+	services.illum.enable = true;
+
 	# Enable the Intel driver with a fallback to the current modesetting driver.
 	services.xserver.videoDrivers = [ "intel" "modesetting" ];
 	boot.initrd.kernelModules = [ "i915" ];
