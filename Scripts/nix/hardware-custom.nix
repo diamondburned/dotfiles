@@ -125,13 +125,13 @@ in {
 	hardware.steam-hardware.enable = true;
 
 	# Undervolting.
-	services.undervolt = {
-		enable   = true;
-		useTimer = true;
+	# services.undervolt = {
+	# 	enable   = true;
+	# 	useTimer = true;
 
-		temp = 95; # Celsius
-		coreOffset = -10; # mV
-	};
+	# 	temp = 95; # Celsius
+	# 	coreOffset = -10; # mV
+	# };
 
 	powerManagement.cpufreq = {
 		max = 2800000; # prevent overheating

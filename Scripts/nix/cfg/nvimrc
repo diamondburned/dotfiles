@@ -32,7 +32,7 @@ Plug 'dense-analysis/ale'
 Plug 'cespare/vim-toml'
 Plug 'LnL7/vim-nix'
 Plug 'symphorien/vim-nixhash'
-Plug 'evanleck/vim-svelte'
+" Plug 'evanleck/vim-svelte'
 Plug 'mattn/vim-gotmpl'
 
 call plug#end()
@@ -58,8 +58,7 @@ autocmd BufRead,BufNewFile *.md     setlocal spell
 autocmd BufRead,BufNewFile *.txt    setlocal spell
 autocmd BufRead,BufNewFile *.vue    syntax sync fromstart
 autocmd BufRead,BufNewFile *.vugu   setlocal filetype=html
-autocmd BufRead,BufNewFile *.svelte setlocal filetype=html
-autocmd BufRead,BufNewFile *.svelte setlocal syntax=html
+autocmd BufRead,BufNewFile *.svelte setfiletype svelte
 autocmd BufRead,BufNewFile .env*    setlocal syntax=sh
 autocmd BufRead,BufNewFile *.html   setlocal textwidth=100
 autocmd BufRead,BufNewFile *.cpp    setlocal expandtab tabstop=2 shiftwidth=2
@@ -193,15 +192,16 @@ lua <<EOF
 			mappings = {
 				custom_only = true,
 				list = {
-					{ key = "<2-RightMouse>", action = "cd" },
-					{ key = "<C-t>",          action = "tabnew" },
-					{ key = "<",              action = "prev_sibling" },
-					{ key = ">",              action = "next_sibling" },
-					{ key = "<BS>",           action = "close_node" },
-					{ key = "d",              action = "remove" },
-					{ key = "r",              action = "rename" },
-					{ key = "q",              action = "close" },
-					{ key = "/",              action = "search_node" },
+					{ key = {"<CR>", "<2-LeftMouse>"}, action = "edit" },
+					{ key = "<2-RightMouse>",          action = "cd" },
+					{ key = "<C-t>",                   action = "tabnew" },
+					{ key = "<",                       action = "prev_sibling" },
+					{ key = ">",                       action = "next_sibling" },
+					{ key = "<BS>",                    action = "close_node" },
+					{ key = "d",                       action = "remove" },
+					{ key = "r",                       action = "rename" },
+					{ key = "q",                       action = "close" },
+					{ key = "/",                       action = "search_node" },
 				},
 			},
 		},
@@ -421,9 +421,9 @@ let g:ale_sign_column_always = 1
 let g:ale_fix_on_save = 1
 let g:ale_linters_explicit = 0
 let g:ale_completion_autoimport = 1
-let g:ale_linter_aliases = {
-			\ 'svelte': ['css', 'javascript'],
-			\ }
+" let g:ale_linter_aliases = {
+" 			\ 'svelte': ['svelte', 'css', 'javascript'],
+" 			\ }
 let g:ale_fixers = {
 			\ 'go':         [ "goimports" ],
 			\ 'css':        [ "prettier" ],
@@ -444,7 +444,7 @@ let g:ale_linters = {
 			\ 'c':          [ "clangd" ],
 			\ 'cpp':        [ "clangd" ],
 			\ 'svelte':     [ "svelteserver", "tsserver", "eslint" ],
-			\ 'javascript': [ "tsserver", "deno" ],
+			\ 'javascript': [ "svelteserver", "tsserver", "deno" ],
 			\ }
 nnoremap gd :ALEGoToDefinition<CR>
 nnoremap K :ALEHover<CR>
