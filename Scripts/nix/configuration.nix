@@ -702,6 +702,7 @@ in {
 			# Office
 			qalculate-gtk
 			libreoffice
+			onlyoffice-bin
 			evince
 			aspell
 
