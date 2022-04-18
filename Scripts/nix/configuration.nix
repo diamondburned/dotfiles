@@ -521,7 +521,7 @@ in {
 
 		programs.direnv = {
 			enable = true;
-			config = { skip_dotenv = true; };
+			config = { load_dotenv = false; };
 			nix-direnv.enable = true;
 		};
 
