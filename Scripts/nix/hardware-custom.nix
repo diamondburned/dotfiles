@@ -46,7 +46,7 @@ in {
 	hardware.cpu.intel.updateMicrocode = true;
 
 	environment.systemPackages = with pkgs; [
-		vkmark
+		# vkmark
 	];
 
 	hardware.opengl = {

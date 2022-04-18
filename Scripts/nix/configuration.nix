@@ -6,7 +6,8 @@
 
 let home-manager = builtins.fetchGit {
 		url = "https://github.com/nix-community/home-manager.git";
-		ref = "release-21.11";
+		# ref = "release-21.11";
+		rev = "742c6cb3e9d866e095c629162fe5faf519adeb26";
 	};
 
 	lsoc-overlay = pkgs.fetchFromGitHub {
@@ -507,7 +508,7 @@ in {
 			})
 
 			(import ./utils/schedule.nix {
-				name        = "birthdayer-juan2";
+				name        = "birthdayer-juan";
 				description = "Delete once Juan gets annoyed";
 				calendar    = "daily";
 				command     = "/home/diamond/.go/bin/birthdayer";
