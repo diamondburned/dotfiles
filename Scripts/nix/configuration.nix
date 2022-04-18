@@ -410,12 +410,10 @@ in {
 
 	services.flatpak.enable = true;
 
-	environment.gnome.excludePackages = with pkgs.gnome3; [
-		orca
-		totem
-		gnome-maps
-		gnome-contacts
-		gnome-initial-setup
+	environment.gnome.excludePackages = with pkgs; [
+		# gnome-maps
+		# gnome-contacts
+		# gnome-initial-setup
 	];
 
 	programs.seahorse.enable = true;
@@ -644,11 +642,11 @@ in {
 		]) ++ (with pkgs; [
 			# Personal stuff
 			gnome.pomodoro
-			gnome3.gnome-usage
+			gnome-usage
 			gnome3.polari
 			gnome3.pomodoro
 			gnomeExtensions.gsconnect
-			keepassx-community
+			keepassxc
 			gimp-with-plugins
 			git-crypt
 			gnupg
@@ -669,7 +667,6 @@ in {
 			foot
 			jq
 			tree
-			gtk4.dev
 			fzf
 			graphviz
 			gnuplot
@@ -681,7 +678,7 @@ in {
 			octave-soft
 
 			# Multimedia
-			aqours
+			# aqours
 			spotify
 			catnip-gtk
 			ffmpeg
@@ -691,15 +688,15 @@ in {
 			easyeffects
 			(pkgs.callPackage ./packages/ytmdesktop.nix {})
 
-			# Browsers
-			google-chrome
+			# # Browsers
+			# google-chrome
 
-			# Chat/Social
-			# zoom-us
-			tdesktop
-			discord
-			gotktrix
-			# fractal
+			# # Chat/Social
+			# # zoom-us
+			# tdesktop
+			# discord
+			# gotktrix
+			# # fractal
 
 			# Office
 			qalculate-gtk
@@ -723,14 +720,13 @@ in {
 			# GNOME things
 			xfce.thunar
 			kooha
+			glib-networking
 			gnome-mpv
 			gnome3.eog
 			gnome3.vinagre
-			gnome3.glib-networking
 			gnome3.file-roller
 			gnome3.nautilus
 			gnome3.gnome-disk-utility
-			gnome3.gtk.dev
 			gnome3.gnome-tweaks
 		]);
 
