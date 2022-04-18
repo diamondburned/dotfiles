@@ -6,6 +6,7 @@
 	programs.gnome-terminal.enable  = true;
 	programs.gnome-terminal.profile = {
 		"f2afd3c7-cb35-4d08-b6c2-523b444be64d" = {
+			scrollOnOutput = false;
 			visibleName   = "pastel";
 			showScrollbar = false;
 			default = true;

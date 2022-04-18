@@ -55,7 +55,7 @@ in {
 		driSupport32Bit = true;
 		extraPackages = with pkgs; [
 			mesa
-			libva-full
+			libva
 			libva-utils
 			vaapiIntel
 			vaapi-intel-hybrid

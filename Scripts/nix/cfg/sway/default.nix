@@ -44,6 +44,6 @@ in {
 	];
 
 	environment.systemPackages = with pkgs; [
-		gappdash
+		# gappdash
 	];
 }

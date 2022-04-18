@@ -373,9 +373,9 @@ in {
 	programs.xwayland = {
 		enable = true;
 		package = pkgs.xwayland.overrideAttrs (old: {
-			preConfigure = (old.preConfigure or "") + ''
-				patch -p1 < ${./patches/xwayland-fps.patch}
-			'';
+			# preConfigure = (old.preConfigure or "") + ''
+			# 	patch -p1 < ${./patches/xwayland-fps.patch}
+			# '';
 		});
 	};
 
@@ -423,7 +423,7 @@ in {
 	programs.file-roller.enable = true;
 
 	# dbus things
-	services.dbus.packages = with pkgs; [ gnome3.dconf ];
+	services.dbus.packages = with pkgs; [ dconf ];
 
 	# Enable Polkit
 	security.polkit.enable = true;
@@ -507,7 +507,7 @@ in {
 			})
 
 			(import ./utils/schedule.nix {
-				name        = "birthdayer-juan";
+				name        = "birthdayer-juan2";
 				description = "Delete once Juan gets annoyed";
 				calendar    = "daily";
 				command     = "/home/diamond/.go/bin/birthdayer";
@@ -680,7 +680,7 @@ in {
 			# Multimedia
 			# aqours
 			spotify
-			catnip-gtk
+			# catnip-gtk
 			ffmpeg
 			v4l_utils
 			pavucontrol
