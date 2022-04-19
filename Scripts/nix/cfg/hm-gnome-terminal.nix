@@ -11,7 +11,7 @@
 			showScrollbar = false;
 			default = true;
 
-			font	= "Inconsolata Bold 10";
+			font	= "Inconsolata Bold 11";
 			colors  = {
 				backgroundColor = "#1D1D1D";
 				foregroundColor = "#FFFFFF";
@@ -29,7 +29,7 @@
 			visibleName  = "Google Light";
 			showScrollbar = false;
 
-			font   = "Inconsolata Bold 10";
+			font   = "Inconsolata Bold 11";
 			colors = {
 				backgroundColor = "#FEFEFE";
 				foregroundColor = "#373B41";
