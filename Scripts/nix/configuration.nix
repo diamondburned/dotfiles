@@ -266,7 +266,7 @@ in {
 	# Install global fonts
 	fonts.fonts = with pkgs; [
 		bakoma_ttf # math
-		open-sans
+		# opensans-ttf
 		roboto
 		roboto-slab # serif
 		noto-fonts
@@ -350,13 +350,13 @@ in {
 		enable = true;
 		allowBitmaps = true;
 		useEmbeddedBitmaps = true; # emojis
-		subpixel = {
-			# http://www.spasche.net/files/lcdfiltering/
-			lcdfilter = "legacy";
-			rgba = "none";
-		};
+		# See fontconfig.xml.
+		# subpixel = {
+		# 	# http://www.spasche.net/files/lcdfiltering/
+		# 	lcdfilter = "legacy";
+		# 	rgba = "none";
+		# };
 		includeUserConf = true;
-		hinting.enable = false;
 	};
 
 	security.sudo.extraConfig = ''

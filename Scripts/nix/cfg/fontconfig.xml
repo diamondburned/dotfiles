@@ -14,13 +14,15 @@
 			<const>none</const>
 		</edit>
 		<edit name="hintstyle" mode="assign">
-			<const>hintnone</const>
+			<!-- <const>hintnone</const> -->
+			<const>hintfull</const>
 		</edit>
 		<edit name="hinting" mode="assign">
 			<bool>false</bool>
 		</edit>
 		<edit name="lcdfilter" mode="assign">
-			<const>lcdnone</const>
+			<!-- <const>lcdnone</const> -->
+			<const>lcddefault</const>
 		</edit>
 	</match>
 
@@ -68,14 +70,20 @@
 		</prefer>
 	</alias>
 
-
+	<!-- https://work.lisk.in/2020/07/18/font-weight-300.html -->
+	<selectfont>
+		<rejectfont>
+			<glob>*/OpenSans-Light.ttf</glob>
+			<glob>*/OpenSans-CondLight.ttf</glob>
+		</rejectfont>
+	</selectfont>
 
 	<match target="pattern">
 		<test compare="eq" name="family">
 			<string>Open Sans</string>
 		</test>
-		<test name="weight" qual="any" compare="eq"><int>80</int></test>
-		<edit name="weight" mode="assign" binding="strong"><int>180</int></edit>
+		<test name="weight" qual="any" compare="less_eq"><int>120</int></test>
+		<edit name="weight" mode="assign" binding="strong"><int>120</int></edit>
 	</match>
 
 	<match target="pattern">
