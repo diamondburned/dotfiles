@@ -43,6 +43,7 @@ let home-manager = builtins.fetchGit {
 	}) {};
 
 	userEnv = {
+		LC_TIME = "en_GB";
 		NIX_AUTO_RUN = "1";
 		STEAM_RUNTIME = "0";
 		GTK_THEME = "Materia-dark-compact";
