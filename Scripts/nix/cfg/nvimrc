@@ -444,7 +444,7 @@ let g:ale_linters = {
 			\ 'c':          [ "clangd" ],
 			\ 'cpp':        [ "clangd" ],
 			\ 'svelte':     [ "svelteserver", "tsserver", "eslint" ],
-			\ 'javascript': [ "svelteserver", "tsserver", "deno" ],
+			\ 'javascript': [ "svelteserver", "tsserver", "deno", "standard" ],
 			\ }
 nnoremap gd :ALEGoToDefinition<CR>
 nnoremap K :ALEHover<CR>
