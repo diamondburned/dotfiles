@@ -213,7 +213,7 @@ in {
 	# '';
 
 	# Brightness stuff.
-	hardware.acpilight.enable = true;
+	hardware.acpilight.enable = false;
 	services.illum.enable = true;
 
 	# Enable the Intel driver with a fallback to the current modesetting driver.
