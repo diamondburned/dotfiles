@@ -46,6 +46,13 @@
 	</alias>
 
 	<alias binding="strong">
+		<family>ui-monospace</family>
+		<prefer>
+			<family>monospace</family>
+		</prefer>
+	</alias>
+
+	<alias binding="strong">
 		<family>monospace</family>
 		<prefer>
 			<family>Inconsolata</family>
@@ -111,7 +118,6 @@
 		<edit name="family" mode="assign" binding="strong">
 			<string>Inconsolata</string>
 		</edit>
-		<!-- dump copypaste because fontconfig is retarded -->
 		<!-- Force Inconsolata to be Bold -->
 		<edit name="weight" mode="assign" binding="strong">
 			<int>200</int>
@@ -142,9 +148,9 @@
 		<family>sans-serif</family>
 		<prefer>
 			<family>Open Sans</family>
-			<!-- <family>Source Sans 3</family> -->
-			<!-- <family>Source Sans Pro</family> -->
-			<!-- <family>Noto Sans</family> -->
+			<family>Source Sans 3</family>
+			<family>Source Sans Pro</family>
+			<family>Noto Sans</family>
 			<family>Noto Sans Armenian</family>
 			<family>Noto Sans Avestan</family>
 			<family>Noto Sans Balinese</family>
