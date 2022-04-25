@@ -692,8 +692,8 @@ in {
 			easyeffects
 			(pkgs.callPackage ./packages/ytmdesktop.nix {})
 
-			# # Browsers
-			# google-chrome
+			# Browsers
+			google-chrome
 
 			# # Chat/Social
 			# # zoom-us
