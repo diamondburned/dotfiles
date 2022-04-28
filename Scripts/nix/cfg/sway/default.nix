@@ -30,7 +30,7 @@ in {
 	xdg.portal = {
 		enable       = true;
 		extraPortals = with pkgs; [ xdg-desktop-portal-wlr ];
-		gtkUsePortal = true;
+		gtkUsePortal = false;
 	};
 
 	nixpkgs.overlays = [

@@ -47,6 +47,7 @@ application/x-extension-xht=firefox.desktop
 x-scheme-handler/ytmd=youtube-music-desktop-app.desktop
 application/x-shellscript=nvim.desktop
 text/x-c++hdr=nvim.desktop
+application/pdf=org.gnome.Evince.desktop
 
 [Added Associations]
 application/zip=org.gnome.FileRoller.desktop;
@@ -57,7 +58,7 @@ image/svg+xml=firefox.desktop;nvim.desktop;gimp.desktop;inkscape.desktop;org.gno
 image/jpeg=gimp.desktop;org.gnome.eog.desktop;
 image/png=gimp.desktop;org.gnome.eog.desktop;
 application/x-compressed-tar=org.gnome.FileRoller.desktop;
-application/pdf=org.gnome.Evince.desktop;
+application/pdf=org.gnome.Evince.desktop;draw.desktop;
 application/octet-stream=nvim.desktop;org.gnome.gedit.desktop;
 video/mp4=mpv.desktop;io.github.celluloid_player.Celluloid.desktop;
 x-scheme-handler/magnet=userapp-transmission-gtk-T35SO0.desktop;
