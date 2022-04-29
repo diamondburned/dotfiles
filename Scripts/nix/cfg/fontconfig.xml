@@ -14,8 +14,8 @@
 			<const>none</const>
 		</edit>
 		<edit name="hintstyle" mode="assign">
-			<!-- <const>hintnone</const> -->
-			<const>hintfull</const>
+			<const>hintnone</const>
+			<!-- <const>hintfull</const> -->
 		</edit>
 		<edit name="hinting" mode="assign">
 			<bool>false</bool>
@@ -46,13 +46,6 @@
 	</alias>
 
 	<alias binding="strong">
-		<family>ui-monospace</family>
-		<prefer>
-			<family>monospace</family>
-		</prefer>
-	</alias>
-
-	<alias binding="strong">
 		<family>monospace</family>
 		<prefer>
 			<family>Inconsolata</family>
@@ -77,60 +70,44 @@
 		</prefer>
 	</alias>
 
-	<!-- https://work.lisk.in/2020/07/18/font-weight-300.html -->
-	<selectfont>
-		<rejectfont>
-			<glob>*/OpenSans-Light.ttf</glob>
-			<glob>*/OpenSans-CondLight.ttf</glob>
-		</rejectfont>
-	</selectfont>
+	<!-- <match target="pattern"> -->
+	<!-- 	<test compare="eq" name="family"> -->
+	<!-- 		<string>Inconsolata</string> -->
+	<!-- 	</test> -->
+	<!-- 	<!-1- Force Inconsolata to be Bold -1-> -->
+	<!-- 	<edit name="weight" mode="assign" binding="strong"> -->
+	<!-- 		<int>200</int> -->
+	<!-- 	</edit> -->
+	<!-- 	<!-1- Inconsolata is kind of small, so we scale it up -1-> -->
+	<!-- 	<edit name="scale" mode="assign" binding="strong"> -->
+	<!-- 		<!-1- doesn't actually work, fuck -1-> -->
+	<!-- 		<!-1- <times> -1-> -->
+	<!-- 		<!-1- 	<name>pixelsize</name> -1-> -->
+	<!-- 		<!-1- 	<double>1.1</double> -1-> -->
+	<!-- 		<!-1- </times> -1-> -->
+	<!-- 	</edit> -->
+	<!-- </match> -->
 
-	<match target="pattern">
-		<test compare="eq" name="family">
-			<string>Open Sans</string>
-		</test>
-		<test name="weight" qual="any" compare="less_eq"><int>120</int></test>
-		<edit name="weight" mode="assign" binding="strong"><int>120</int></edit>
-	</match>
-
-	<match target="pattern">
-		<test compare="eq" name="family">
-			<string>Inconsolata</string>
-		</test>
-		<!-- Force Inconsolata to be Bold -->
-		<edit name="weight" mode="assign" binding="strong">
-			<int>200</int>
-		</edit>
-		<!-- Inconsolata is kind of small, so we scale it up -->
-		<edit name="scale" mode="assign" binding="strong">
-			<!-- doesn't actually work, fuck -->
-			<!-- <times> -->
-			<!-- 	<name>pixelsize</name> -->
-			<!-- 	<double>1.1</double> -->
-			<!-- </times> -->
-		</edit>
-	</match>
-
-	<match target="pattern">
-		<test compare="eq" name="family">
-			<string>monospace</string>
-		</test>
-		<edit name="family" mode="assign" binding="strong">
-			<string>Inconsolata</string>
-		</edit>
-		<!-- Force Inconsolata to be Bold -->
-		<edit name="weight" mode="assign" binding="strong">
-			<int>200</int>
-		</edit>
-		<!-- Inconsolata is kind of small, so we scale it up -->
-		<edit name="scale" mode="assign" binding="strong">
-			<!-- doesn't actually work, fuck -->
-			<!-- <times> -->
-			<!-- 	<name>pixelsize</name> -->
-			<!-- 	<double>1.1</double> -->
-			<!-- </times> -->
-		</edit>
-	</match>
+	<!-- <match target="pattern"> -->
+		<!-- <test compare="eq" name="family"> -->
+		<!-- 	<string>monospace</string> -->
+		<!-- </test> -->
+		<!-- <edit name="family" mode="assign" binding="strong"> -->
+		<!-- 	<string>Inconsolata</string> -->
+		<!-- </edit> -->
+		<!-- <!-1- Force Inconsolata to be Bold -1-> -->
+		<!-- <edit name="weight" mode="assign" binding="strong"> -->
+		<!-- 	<int>200</int> -->
+		<!-- </edit> -->
+		<!-- <!-1- Inconsolata is kind of small, so we scale it up -1-> -->
+		<!-- <edit name="scale" mode="assign" binding="strong"> -->
+		<!-- 	<!-1- doesn't actually work, fuck -1-> -->
+		<!-- 	<!-1- <times> -1-> -->
+		<!-- 	<!-1- 	<name>pixelsize</name> -1-> -->
+		<!-- 	<!-1- 	<double>1.1</double> -1-> -->
+		<!-- 	<!-1- </times> -1-> -->
+		<!-- </edit> -->
+	<!-- </match> -->
 
 	<match>
 		<test compare="contains" name="lang">
