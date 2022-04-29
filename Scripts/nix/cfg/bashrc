@@ -1,3 +1,31 @@
+
+
+# Commands that should be applied only for interactive shells.
+[[ $- == *i* ]] || return
+
+HISTFILESIZE=100000
+HISTSIZE=10000
+
+shopt -s histappend
+shopt -s checkwinsize
+shopt -s extglob
+shopt -s globstar
+shopt -s checkjobs
+
+
+
+__HM_PROMPT_COMMAND="${PROMPT_COMMAND:+${PROMPT_COMMAND%;};}__hm_vte_prompt_command"
+. /nix/store/md5p4ci3ds3p803yhr1ix0bks2ng0k22-vte-0.68.0/etc/profile.d/vte.sh
+if [[ $(type -t __vte_prompt_command) = function ]]; then
+  __hm_vte_prompt_command() {
+    local old_exit_status=$?
+    __vte_prompt_command
+    return $old_exit_status
+  }
+  PROMPT_COMMAND="$__HM_PROMPT_COMMAND"
+fi
+unset __HM_PROMPT_COMMAND
+
 #!/nix/store/pbfraw351mksnkp2ni9c4rkc9cpp89iv-bash-5.1-p12/bin/bash
 
 
@@ -62,6 +90,9 @@ f() {
 fork() {
 	f "$@"
 }
+
+complete -F _command f
+complete -F _command fork
 
 # export GTKCORD_CUSTOM_CSS="
 # .membercontainer {
@@ -592,4 +623,7 @@ echo Welcome
 
 eval "$(/nix/store/m3jcg1x7jcyd1nnnr5c5pchd60krfw7y-direnv-2.30.3/bin/direnv hook bash)"
 
+
+
+eval "$(/nix/store/cs0z1zgnw8jn62j8zky8sksn9smf9iz1-direnv-2.31.0/bin/direnv hook bash)"
 
