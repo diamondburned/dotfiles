@@ -70,23 +70,15 @@
 		</prefer>
 	</alias>
 
-	<!-- <match target="pattern"> -->
-	<!-- 	<test compare="eq" name="family"> -->
-	<!-- 		<string>Inconsolata</string> -->
-	<!-- 	</test> -->
-	<!-- 	<!-1- Force Inconsolata to be Bold -1-> -->
-	<!-- 	<edit name="weight" mode="assign" binding="strong"> -->
-	<!-- 		<int>200</int> -->
-	<!-- 	</edit> -->
-	<!-- 	<!-1- Inconsolata is kind of small, so we scale it up -1-> -->
-	<!-- 	<edit name="scale" mode="assign" binding="strong"> -->
-	<!-- 		<!-1- doesn't actually work, fuck -1-> -->
-	<!-- 		<!-1- <times> -1-> -->
-	<!-- 		<!-1- 	<name>pixelsize</name> -1-> -->
-	<!-- 		<!-1- 	<double>1.1</double> -1-> -->
-	<!-- 		<!-1- </times> -1-> -->
-	<!-- 	</edit> -->
-	<!-- </match> -->
+	<match target="pattern">
+		<test compare="eq" name="family">
+			<string>Inconsolata</string>
+		</test>
+		<!-- Force Inconsolata to be Bold -->
+		<edit name="weight" mode="assign" binding="strong">
+			<int>200</int>
+		</edit>
+	</match>
 
 	<!-- <match target="pattern"> -->
 		<!-- <test compare="eq" name="family"> -->
@@ -285,12 +277,12 @@
 		<prefer><family>sans-serif</family></prefer>
 	</alias>
 
-	<!-- Default font (no fc-match pattern) -->
-	<match>
-		<edit mode="prepend" name="family">
-			<string>sans-serif</string>
-		</edit>
-	</match>
+	<!-- <!-1- Default font (no fc-match pattern) -1-> -->
+	<!-- <match> -->
+	<!-- 	<edit mode="prepend" name="family"> -->
+	<!-- 		<string>sans-serif</string> -->
+	<!-- 	</edit> -->
+	<!-- </match> -->
 
 	<!-- Replacing VL Gothic for osu! -->
 	<alias binding="strong">
