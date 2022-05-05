@@ -17,12 +17,33 @@ let utils = import ../../utils { inherit config lib pkgs; };
 	'' (with pkgs; [ slurp grim wl-clipboard ]);
 
 	screenrec = utils.writeBashScriptBin "screenrec" ''
+		set -e
+
 		region=( -g "$(slurp)" ) || region=()
 		wf-recorder \
 			-c h264_vaapi -d /dev/dri/renderD128 --bframes 0 \
 			-f "screenrec_$(date +"%Y-%m-%d_%H:%M:%S").mp4"  \
 			"''${region[@]}" "$@"
 	'' (with pkgs; [ wf-recorder slurp ]);
+
+	screengif = utils.writeBashScriptBin "screengif" ''
+		set -e
+		src="$PWD"
+		dir="$(mktemp -d)"
+
+		cleanup() { command rm -rf "$dir" }
+		trap cleanup EXIT
+
+		cd "$dir"
+		${screenrec}/bin/screenrec
+
+		files=( screenrec_*.mp4 )
+		file="''${files[0]}"
+		name="''${file%%.*}"
+
+		ffmpeg -threads 8 -i "$file" -vf 'minterpolate=fps=50:mi_mode=blend' "frame%10d.png"
+		gifski --fps 50 -o "$name.gif" "frame"*.png
+	'';
 
 	autostart = utils.writeBashScript "wayfire-autostart" ''
 		set +e
