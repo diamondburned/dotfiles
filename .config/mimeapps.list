@@ -114,3 +114,4 @@ application/x-shellscript=nvim.desktop;
 text/x-c++hdr=nvim.desktop;
 application/vnd.oasis.opendocument.presentation=impress.desktop;nvim.desktop;
 application/x-cd-image=gnome-disk-image-writer.desktop;
+audio/x-opus+ogg=mpv.desktop;
