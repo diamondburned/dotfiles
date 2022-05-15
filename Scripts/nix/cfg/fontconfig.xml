@@ -44,6 +44,13 @@
 			<family>WenQuanYi WenQuanYi Bitmap Song</family>
 		</prefer>
 	</alias>
+	
+	<alias binding="strong">
+		<family>ui-monospace</family>
+		<prefer>
+			<family>Inconsolata</family>
+		</prefer>
+	</alias>
 
 	<alias binding="strong">
 		<family>monospace</family>
