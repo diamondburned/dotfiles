@@ -90,7 +90,7 @@ in {
 	];
 
 	# Refer to unstable.nix.
-	boot.kernelPackages = pkgs.linuxPackages_5_16;
+	boot.kernelPackages = pkgs.linuxPackages_latest;
 	# boot.kernelPackages = pkgs.linuxPackages_xanmod;
 
 	# Kernel tweaks and such for real-time audio.
