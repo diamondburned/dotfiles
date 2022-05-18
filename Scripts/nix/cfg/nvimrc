@@ -434,6 +434,7 @@ let g:ale_fixers = {
 			\ 'yaml':       [ "prettier" ],
 			\ 'sql':        [ "pgformatter" ],
 			\ 'svelte':     [ "prettier", "prettier_standard", "eslint" ],
+			\ 'markdown':   [ "prettier" ],
 			\ 'javascript': [ "prettier", "prettier_standard", "eslint" ],
 			\ }
 let g:ale_completion_enabled = 1
