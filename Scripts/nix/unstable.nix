@@ -1,34 +1,6 @@
 { config, lib, pkgs, ... }:
 
 let 
-	unstable = import <nixpkgs> {
-		config.allowUnfree = true;
-		overlays = [(self: super: {
-			go = super.go.overrideAttrs (old: {
-				version = "1.17.2";
-				src = builtins.fetchurl {
-					url    = "https://golang.org/dl/go1.17.2.src.tar.gz";
-					sha256 = "sha256:0cgla9vw2d3a12qnym1f663c2wa3af27ybnwzkaxfkc29qzfnm92";
-				};
-				doCheck = false;
-			});
-			obs-studio = super.obs-studio.overrideAttrs (old: {
-				src = super.fetchFromGitHub {
-					owner  = "obsproject";
-					repo   = "obs-studio";
-                    rev    = "cd5873e9bcfaf9cc2614939ddb3264bea919be4a";
-					sha256 = "04fzsr9yizmxy0r7z2706crvnsnybpnv5kgfn77znknxxjacfhkn";
-					fetchSubmodules = true;
-				};
-
-				version = "27.0.1";
-				patches = [];
-
-				cmakeFlags = old.cmakeFlags ++ [ "-Wno-error" "-DBUILD_BROWSER=false" ];
-			});
-		})];
-	};
-
 	# home-manager-master = builtins.fetchGit {
 	# 	url = "https://github.com/nix-community/home-manager.git";
 	# 	ref = "master";
@@ -182,8 +154,6 @@ in {
 			fcitx5-gtk
 
 			# Compilers
-			unstable.go
-
 			playerctl
 			wl-clipboard
 		];

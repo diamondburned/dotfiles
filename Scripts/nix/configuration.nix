@@ -2,7 +2,7 @@
 # your system.	Help is available in the configuration.nix(5) man page
 # and in the NixOS manual (accessible by running ‘nixos-help’).
 
-{ config, pkgs, lib, ... }:
+{ config, pkgs, lib, inputs, ... }:
 
 let home-manager = builtins.fetchGit {
 		url = "https://github.com/nix-community/home-manager.git";
@@ -22,8 +22,6 @@ let home-manager = builtins.fetchGit {
 	# 	url = "https://github.com/tadeokondrak/nix-overlay";
 	# 	rev = "0d05c53204da3b576f810ef2e1312b19bf2420b7";
 	# });
-
-	diamond = ../nix-overlays;
 
 	utils = import ./utils { inherit config pkgs lib; };
 
@@ -72,29 +70,17 @@ let home-manager = builtins.fetchGit {
 	   	STAGING_PA_LATENCY_USEC = "128";
 	};
 
-	src = import ./src.nix pkgs;
-
 in {
 	imports = [
-		"${diamond}"
-		"${home-manager}/nixos"
-		# Nix can't competently import this file. Giving it a false path still makes it freak out.
-		# It didn't even bother resolving the path.
-		# "${src.keyd}/nixos/modules/services/hardwsadjiasdare/keyd.nix"
+		inputs.home-manager.nixosModule
 		./hardware-configuration.nix
 		./hardware-custom.nix
 		./unstable.nix
 		./secrets
+		./overlays
 		./cfg/udev
 		./cfg/sway
 		./cfg/localhost
-	];
-
-	# Overlays
-	nixpkgs.overlays = [
-		# (tdeo)
-		(import ./overlay.nix)
-		(import (builtins.fetchTarball "https://github.com/PolyMC/PolyMC/archive/develop.tar.gz")).overlay
 	];
 
 	nixpkgs.config = {
@@ -491,8 +477,8 @@ in {
 	home-manager.users.diamond = {
 		imports = [
 			"${lsoc-overlay}"
-			"${diamond}/home-manager"
 
+			./overlays/home-manager
 			./cfg/wyze
 			./cfg/tilix
 			./cfg/firefox
@@ -670,6 +656,7 @@ in {
 			neovim
 			foot
 			jq
+			go
 			tree
 			fzf
 			graphviz

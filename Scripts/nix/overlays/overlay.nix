@@ -1,8 +1,8 @@
+{ inputs }:
+
 self: super:
 
-let src = import ./src.nix super;
-
-	vte = pkgs: pkgs.vte.overrideAttrs(old: {
+let vte = pkgs: pkgs.vte.overrideAttrs(old: {
 		version = "0.63.91"; # rev without SIXEL reversion commit.
 		src = builtins.fetchGit {
 			url = "https://gitlab.gnome.org/GNOME/vte.git";
@@ -26,20 +26,17 @@ let src = import ./src.nix super;
 	spicetify = builtins.fetchTarball https://github.com/pietdevries94/spicetify-nix/archive/master.tar.gz;
 	spicetify-themes = builtins.fetchTarball https://github.com/morpheusthewhite/spicetify-themes/archive/master.tar.gz;
 
-	nixos-21_11 = import src.nixos-21_11 {};
+	nixos-21_11 = import inputs.nixpkgs-21_11 {};
 
 in {
-	# keyd
-	# keyd = (import "${src.keyd}" {}).keyd;
-
 	# NUR
 	gamescope = nur.repos.dukzcry.gamescope;
 	spotify-adblock = nur.repos.instantos.spotify-adblock;
 	gatttool = nur.repos.mic92.gatttool;
 
 	# Downgrades.
-	easyeffects = nixos-21_11.easyeffects;
-	pipewire = nixos-21_11.pipewire;
+	# easyeffects = nixos-21_11.easyeffects;
+	# pipewire = nixos-21_11.pipewire;
 
 	# Spotify
 	spotify-unwrapped = self.callPackage ./packages/spotify-adblocked.nix {

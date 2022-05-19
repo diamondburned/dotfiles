@@ -160,7 +160,7 @@ nix_exec() {
 
 alias nixshbuild="nix-shell '<nixpkgs>' -A"
 alias nixbuild="nix-build '<nixpkgs>' -A package"
-alias nixrl="sudo nixos-rebuild switch --max-jobs 0"
+alias nixrl="sudo nixos-rebuild switch --max-jobs 0 --flake '.#'"
 alias nixgc="sudo nix-collect-garbage -d"
 
 # lol fuck node
