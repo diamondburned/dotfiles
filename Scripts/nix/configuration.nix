@@ -104,7 +104,8 @@ in {
 	# Remote build server.
 	nix = {
 		# I don't understand the newer versions.
-		package = pkgs.nix_2_3;
+		# package = pkgs.nix_2_3;
+		package = pkgs.nixFlakes;
 		buildMachines = [
 			{
 				hostName = "hanaharu";
@@ -125,7 +126,7 @@ in {
 		distributedBuilds = true;
 		extraOptions = ''
 			builders-use-substitutes = true
-			# experimental-features = nix-command
+			experimental-features = nix-command flakes
 		'';
 	};
 
