@@ -5,8 +5,6 @@
 
 let utils = import ./utils { inherit lib; };
 
-	unstable = import <nixos-unstable> {};
-
 	musnix = builtins.fetchGit {
 		url = "https://github.com/musnix/musnix.git";
 		rev = "fcad5573eba0a9d1ec3ed1e8e1413f601fec35fe";

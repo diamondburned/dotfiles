@@ -8,6 +8,7 @@
 
 		# Overlay inputs.
 		home-manager.url = "github:nix-community/home-manager";
+		nix-wayland.url = "github:nix-community/nixpkgs-wayland";
 		polymc.url = "github:PolyMC/PolyMC/develop";
 	};
 

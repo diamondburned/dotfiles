@@ -778,6 +778,8 @@ in {
 				# '';
 			};
 		};
+
+		home.stateVersion = "20.09";
 	};
 
 	system.stateVersion = "20.03"; # DO NOT TOUCH

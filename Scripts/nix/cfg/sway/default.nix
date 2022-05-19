@@ -1,4 +1,4 @@
-{ config, lib, pkgs, ... }:
+{ config, lib, pkgs, inputs, ... }:
 
 let utils = import ../../utils { inherit config lib pkgs; };
 
@@ -34,7 +34,7 @@ in {
 	};
 
 	nixpkgs.overlays = [
-		(import ../wayfire/overlay.nix)
+		(import ./overlay.nix { inherit inputs; })
 	];
 
 	# Extracted from Unstable's programs.xwayland.
