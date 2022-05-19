@@ -39,6 +39,7 @@ in {
 
 	# Downgrades.
 	easyeffects = nixos-21_11.easyeffects;
+	pipewire = nixos-21_11.pipewire;
 
 	# Spotify
 	spotify-unwrapped = self.callPackage ./packages/spotify-adblocked.nix {
