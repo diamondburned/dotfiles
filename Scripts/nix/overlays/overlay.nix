@@ -1,4 +1,4 @@
-{ inputs }:
+{ flakeInputs }:
 
 self: super:
 
@@ -26,7 +26,7 @@ let vte = pkgs: pkgs.vte.overrideAttrs(old: {
 	spicetify = builtins.fetchTarball https://github.com/pietdevries94/spicetify-nix/archive/master.tar.gz;
 	spicetify-themes = builtins.fetchTarball https://github.com/morpheusthewhite/spicetify-themes/archive/master.tar.gz;
 
-	nixos-21_11 = import inputs.nixpkgs-21_11 {};
+	nixos-21_11 = import flakeInputs.nixpkgs-21_11 {};
 
 in {
 	# NUR

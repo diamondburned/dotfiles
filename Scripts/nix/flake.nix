@@ -12,13 +12,12 @@
 		polymc.url = "github:PolyMC/PolyMC/develop";
 	};
 
-	outputs = { self, nixpkgs, ... }@all: {
+	outputs = inputs: {
 		nixosConfigurations = {
-			"hackadoll3" = nixpkgs.lib.nixosSystem {
+			"hackadoll3" = inputs.nixpkgs.lib.nixosSystem {
 				system = "x86_64-linux";
 				modules = [ ./configuration.nix ];
-				# Every input is passed individually in here, apparently?
-				specialArgs = { inputs = all; } // all;
+				specialArgs = { inherit inputs; };
 			};
 		};
 	};

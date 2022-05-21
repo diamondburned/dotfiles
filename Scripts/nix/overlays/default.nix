@@ -1,9 +1,9 @@
-{ lib, pkgs, config, inputs, ... }:
+{ lib, pkgs, config, flakeInputs, ... }:
 
 {
 	nixpkgs.overlays = [
-		(import ./overlay.nix { inherit inputs; })
-		(import inputs.polymc).overlay
+		(import ./overlay.nix { inherit flakeInputs; })
+		(import flakeInputs.polymc).overlay
 		(self: super: {
 			transmission-web = super.callPackage ./packages/transmission-web {};
 			audacious-3-5 = super.callPackage ./packages/audacious-3-5 {};

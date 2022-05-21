@@ -4,13 +4,7 @@
 
 { config, pkgs, lib, inputs, ... }:
 
-let home-manager = builtins.fetchGit {
-		url = "https://github.com/nix-community/home-manager.git";
-		# ref = "release-21.11";
-		rev = "742c6cb3e9d866e095c629162fe5faf519adeb26";
-	};
-
-	lsoc-overlay = pkgs.fetchFromGitHub {
+let lsoc-overlay = pkgs.fetchFromGitHub {
 		owner = "diamondburned";
 		repo  = "lsoc-overlay";
 		rev   = "09d41b0a6f574390d6edc0271be459bd1390ea8d";
@@ -782,5 +776,6 @@ in {
 		home.stateVersion = "20.09";
 	};
 
-	system.stateVersion = "20.03"; # DO NOT TOUCH
+	# system.stateVersion = "20.03"; # DO NOT TOUCH
+	system.stateVersion = "20.09"; # I TOUCHED.
 }
