@@ -66,7 +66,7 @@ let lsoc-overlay = pkgs.fetchFromGitHub {
 
 in {
 	imports = [
-		inputs.home-manager.nixosModule
+		<home-manager/nixos>
 		./hardware-configuration.nix
 		./hardware-custom.nix
 		./unstable.nix
