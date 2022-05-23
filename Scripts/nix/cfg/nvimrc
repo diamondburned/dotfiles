@@ -177,7 +177,7 @@ lua <<EOF
 			ignore = false,
 		},
 		filters = {
-			custom = { '.git', 'node_modules' },
+			custom = { '^\\.git$', '^node_modules$' },
 			dotfiles = false,
 		},
 		actions = {
