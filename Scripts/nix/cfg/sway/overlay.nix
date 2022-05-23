@@ -1,6 +1,4 @@
-{ flakeInputs }:
-
-let nixosPkgs = import flakeInputs.nixpkgs {};
+let nixosPkgs = import <nixpkgs> {};
 	lib = nixosPkgs.lib;
 
 	waylandOverlays = import (nixosPkgs.fetchFromGitHub {
@@ -10,8 +8,10 @@ let nixosPkgs = import flakeInputs.nixpkgs {};
 		sha256 = "1c9dxdw3r5g71wwnpqvnifzpb41005yg7mmzsjjk8kpkfrh5cb4q";
 	});
 
-	waylandPkgs = import flakeInputs.nix-wayland {
-		overlays = [ waylandOverlays ];
+	waylandPkgs = import <nixpkgs> {
+		overlays = [
+			(import <nix-wayland/overlay.nix>)
+		];
 	};
 
 	wf-config = waylandPkgs.wayfire.overrideAttrs (old: {
