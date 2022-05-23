@@ -7,6 +7,7 @@
 		(self: super: {
 			transmission-web = super.callPackage ./packages/transmission-web {};
 			audacious-3-5 = super.callPackage ./packages/audacious-3-5 {};
+			ytmdesktop = super.callPackage ./packages/ytmdesktop.nix {};
 			tagtool  = super.callPackage ./packages/tagtool.nix {};
 			ymuse    = super.callPackage ./packages/ymuse {};
 			srain    = super.callPackage ./packages/srain {};

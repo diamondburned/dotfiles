@@ -122,7 +122,7 @@ in {
 		papirus-icon-theme
 	];
 
-	programs.steam.enable = true;
+	# programs.steam.enable = true;
 
 	home-manager.users.diamond = {
 		# programs.mpv.package = unstable.mpv;
