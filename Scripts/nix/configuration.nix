@@ -84,8 +84,8 @@ in {
 	# Remote build server.
 	nix = {
 		# I don't understand the newer versions.
-		# package = pkgs.nix_2_3;
-		package = pkgs.nixFlakes;
+		# package = pkgs.nix_2_4;
+		# package = pkgs.nixFlakes;
 		buildMachines = [
 			{
 				hostName = "hanaharu";
