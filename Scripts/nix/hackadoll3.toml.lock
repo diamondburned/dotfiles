@@ -1,0 +1,28 @@
+{
+  "channels": {
+    "github:NixOS/nixpkgs 1ffba9f": {
+      "url": "https://github.com/NixOS/nixpkgs/archive/1ffba9f.tar.gz",
+      "store_hash": "6lxdn9xflh454s5svaggni8bviqcnnbg"
+    },
+    "github:NixOS/nixpkgs 8b3398bc7587ebb79f93dfeea1b8c574d3c6dba1": {
+      "url": "https://github.com/NixOS/nixpkgs/archive/8b3398bc7587ebb79f93dfeea1b8c574d3c6dba1.tar.gz",
+      "store_hash": "l0askjmxx3m526q7dl9iljjlnlwlx40l"
+    },
+    "github:PolyMC/PolyMC develop": {
+      "url": "https://github.com/PolyMC/PolyMC/archive/dca4ea5ceaa30f1285570d2bf32ea112118b9204.tar.gz",
+      "store_hash": "024pzp7za1ai17s8clvfgknxv3xrss9l"
+    },
+    "github:nix-community/home-manager 742c6cb": {
+      "url": "https://github.com/nix-community/home-manager/archive/742c6cb.tar.gz",
+      "store_hash": "zd4gj547yzgmdz2m5znw0bcmxfb8ajiz"
+    },
+    "github:nix-community/nixpkgs-wayland master": {
+      "url": "https://github.com/nix-community/nixpkgs-wayland/archive/8af0ac68e9df21c0c42b44c5e85d9fa4217da085.tar.gz",
+      "store_hash": "5z46vfh9q0807yg35z60p3ahm1xqaxn0"
+    },
+    "https://nixos.org/channels/nixos-unstable": {
+      "url": "https://nixos.org/channels/nixos-unstable",
+      "store_hash": "4hxhmqy9cbxhi603y9kpm0mhgzy5ag33"
+    }
+  }
+}
