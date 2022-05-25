@@ -83,8 +83,10 @@ in {
 
 	# Remote build server.
 	nix = {
-		# I don't understand the newer versions.
-		# package = pkgs.nix_2_4;
+		# I don't understand the newer versions. Why do they break literally everything? Let's make
+		# everything Flakes, but then since they're Flakes now that means they're experimental, so
+		# let's break everything! Bruh.
+		package = pkgs.nix_2_3;
 		# package = pkgs.nixFlakes;
 		buildMachines = [
 			{
@@ -106,7 +108,6 @@ in {
 		distributedBuilds = true;
 		extraOptions = ''
 			builders-use-substitutes = true
-			experimental-features = nix-command flakes
 		'';
 	};
 

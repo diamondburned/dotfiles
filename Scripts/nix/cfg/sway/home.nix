@@ -199,6 +199,18 @@ in {
 					scale    = 0.85;
 				})
 			];
+			"seattle-docked".outputs = [
+				(enable "eDP-1" {
+					mode     = "1920x1080@60.020000";
+					position = "0,17";
+					scale    = 1.2;
+				})
+				(enable "Unknown VP525" {
+					mode     = "1920x1080@60.000000";
+					position = "1600,0";
+					scale    = 1.0;
+				})
+			];
 			"normal".outputs = [
 				(enable "eDP-1" {
 					mode     = "1920x1080@60.020000";
