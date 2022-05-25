@@ -35,7 +35,7 @@ let lsoc-overlay = pkgs.fetchFromGitHub {
 	}) {};
 
 	userEnv = {
-		LC_TIME = "en_GB";
+		LC_TIME = "en_GB.UTF-8";
 		NIX_AUTO_RUN = "1";
 		STEAM_RUNTIME = "0";
 		GTK_THEME = "Materia-dark-compact";

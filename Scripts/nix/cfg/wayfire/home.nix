@@ -56,7 +56,6 @@ let utils = import ../../utils { inherit config lib pkgs; };
 		fork ${pkgs.xdg-desktop-portal-wlr}/libexec/xdg-desktop-portal-wlr
 		fork wlsunset -l 33.8 -L -117.9
 		fork wf-background
-		fork wf-panel
 		fork fcitx
 		fork mako
 
@@ -124,6 +123,7 @@ in {
 				})
 			];
 		};
+		systemdTarget = "wayfire-session.target";
 	};
 
 	programs.mako = {
@@ -157,6 +157,15 @@ in {
 				scrot = "${scrot}/bin/scrot.sh";
 				menu_icon = ./wf-panel/menu.png;
 			};
+		};
+	};
+
+	systemd.user.targets.wayfire-session = {
+		Unit = {
+			Description = "wayfire compositor session";
+			BindsTo = [ "graphical-session.target" ];
+			Wants = [ "graphical-session-pre.target" ];
+			After = [ "graphical-session-pre.target" ];
 		};
 	};
 }

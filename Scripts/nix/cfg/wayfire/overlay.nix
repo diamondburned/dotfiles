@@ -3,7 +3,7 @@ self: super:
 let nixosPkgs = import <nixos> {};
 	lib = nixosPkgs.lib;
 
-	waylandPkgs = import <nixpkgs_unstable> {
+	waylandPkgs = import <nixos> {
 		overlays = [ (import <nix-wayland/overlay.nix>) ];
 	};
 
@@ -20,13 +20,13 @@ let nixosPkgs = import <nixos> {};
 	});
 
 	makeGApp = old: old.overrideAttrs(old: {
-		buildInputs = old.buildInputs ++ (with super; [
+		buildInputs = (old.buildInputs or []) ++ (with super; [
 			gtk3
 			glib
 			gdk-pixbuf
 			librsvg
 		]);
-		nativeBuildInputs = old.nativeBuildInputs ++ (with super; [
+		nativeBuildInputs = (old.nativeBuildInputs or []) ++ (with super; [
 			wrapGAppsHook
 		]);
 	});
@@ -60,5 +60,6 @@ in {
 	'';
 
 	wf-shell = makeGApp super.wayfirePlugins.wf-shell;
-	wayfire  = makeGApp waylandPkgs.wayfire;
+	wayfire  = makeGApp super.wayfire;
+	# wayfire  = makeGApp waylandPkgs.wayfire;
 }
