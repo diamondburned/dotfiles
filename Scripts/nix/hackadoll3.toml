@@ -3,9 +3,17 @@
  override-channels = true
 
 [root.channels]
- nixos = "github:NixOS/nixpkgs 1ffba9f"
- nixpkgs21_11 = "github:NixOS/nixpkgs 8b3398bc7587ebb79f93dfeea1b8c574d3c6dba1"
+ # nixos = "github:NixOS/nixpkgs 1ffba9f"
+ nixos = "github:NixOS/nixpkgs nixos-21.11"
+ nixpkgs_21_11 = "github:NixOS/nixpkgs nixos-21.11"
+ nixpkgs_unstable = "github:NixOS/nixpkgs nixos-unstable"
  nix-wayland = "github:nix-community/nixpkgs-wayland master"
- home-manager = "github:nix-community/home-manager 742c6cb"
+ home-manager = "github:nix-community/home-manager release-21.11"
+ home-manager_21_11 = "github:nix-community/home-manager release-21.11"
+ home-manager_unstable = "github:nix-community/home-manager 742c6cb"
  polymc = "github:PolyMC/PolyMC develop"
  unstable = "https://nixos.org/channels/nixos-unstable"
+
+# TODO
+# [root.aliases]
+# nixos = "nixpkgs_21_11"

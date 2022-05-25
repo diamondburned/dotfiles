@@ -8,6 +8,18 @@
       "url": "https://github.com/NixOS/nixpkgs/archive/8b3398bc7587ebb79f93dfeea1b8c574d3c6dba1.tar.gz",
       "store_hash": "l0askjmxx3m526q7dl9iljjlnlwlx40l"
     },
+    "github:NixOS/nixpkgs cbd40c72b26": {
+      "url": "https://github.com/NixOS/nixpkgs/archive/cbd40c72b26.tar.gz",
+      "store_hash": "h7ssdi476xbh7ymwv1063lkkp3y3037v"
+    },
+    "github:NixOS/nixpkgs nixos-21.11": {
+      "url": "https://github.com/NixOS/nixpkgs/archive/cbd40c72b2603ab54e7208f99f9b35fc158bc009.tar.gz",
+      "store_hash": "4gdmaidfd9g1mmdkwp0gmbpwk8fwbp7f"
+    },
+    "github:NixOS/nixpkgs nixos-unstable": {
+      "url": "https://github.com/NixOS/nixpkgs/archive/dfd82985c273aac6eced03625f454b334daae2e8.tar.gz",
+      "store_hash": "i7svwwr5n9zwnvvjfpyv85hnrqm9bmcm"
+    },
     "github:PolyMC/PolyMC develop": {
       "url": "https://github.com/PolyMC/PolyMC/archive/dca4ea5ceaa30f1285570d2bf32ea112118b9204.tar.gz",
       "store_hash": "024pzp7za1ai17s8clvfgknxv3xrss9l"
@@ -15,6 +27,10 @@
     "github:nix-community/home-manager 742c6cb": {
       "url": "https://github.com/nix-community/home-manager/archive/742c6cb.tar.gz",
       "store_hash": "zd4gj547yzgmdz2m5znw0bcmxfb8ajiz"
+    },
+    "github:nix-community/home-manager release-21.11": {
+      "url": "https://github.com/nix-community/home-manager/archive/d93d56ab8c1c6aa575854a79b9d2f69d491db7d0.tar.gz",
+      "store_hash": "mwqylcnwdbzpzn8jjn8nqj7zy532a6ib"
     },
     "github:nix-community/nixpkgs-wayland master": {
       "url": "https://github.com/nix-community/nixpkgs-wayland/archive/8af0ac68e9df21c0c42b44c5e85d9fa4217da085.tar.gz",

@@ -703,7 +703,7 @@ in {
 			# Games
 			# polymc
 			osu-wine
-			osu-wine-realistik
+			# osu-wine-realistik
 
 			# GNOME things
 			xfce.thunar

@@ -24,7 +24,7 @@ let vte = pkgs: pkgs.vte.overrideAttrs(old: {
 	spicetify = builtins.fetchTarball https://github.com/pietdevries94/spicetify-nix/archive/master.tar.gz;
 	spicetify-themes = builtins.fetchTarball https://github.com/morpheusthewhite/spicetify-themes/archive/master.tar.gz;
 
-	nixpkgs21_11 = import <nixpkgs21_11> {};
+	nixpkgs_21_11 = import <nixpkgs_21_11> {};
 
 in {
 	# NUR
@@ -33,8 +33,8 @@ in {
 	gatttool = nur.repos.mic92.gatttool;
 
 	# Downgrades.
-	# easyeffects = nixpkgs21_11.easyeffects;
-	# pipewire = nixpkgs21_11.pipewire;
+	# easyeffects = nixpkgs_21_11.easyeffects;
+	# pipewire = nixpkgs_21_11.pipewire;
 
 	# Spotify
 	spotify-unwrapped = self.callPackage ./packages/spotify-adblocked.nix {
@@ -87,14 +87,14 @@ in {
 	# 		sha256 = "0cw9qh41lynfx25pxpd13r8kyqj1zh86n0sxyqz3f39fpljr9w4r";
 	# 	};
 	# });
-	morph = super.morph.overrideAttrs(_: {
-		version = "1.4.0";
-		src = builtins.fetchGit {
-			url = "https://github.com/diamondburned/morph.git";
-			ref = "merges";
-			rev = "a3ef469edf1613b8ab51de87e043c3c57d12a4a9";
-		};
-	});
+	# morph = super.morph.overrideAttrs(_: {
+	# 	version = "1.4.0";
+	# 	src = builtins.fetchGit {
+	# 		url = "https://github.com/diamondburned/morph.git";
+	# 		ref = "merges";
+	# 		rev = "a3ef469edf1613b8ab51de87e043c3c57d12a4a9";
+	# 	};
+	# });
 	osu-wine-realistik = super.writeShellScriptBin "osu-realistik" ''
 		${self.osu-wine}/bin/osu -devserver ussr.pl "$@"
 	'';
@@ -103,8 +103,8 @@ in {
 	# 	wine = aspellPkgs.wineStaging.overrideDerivation(old: {
 	# 		NIX_CFLAGS_COMPILE = (old.NIX_CFLAGS_COMPILE or "") + " -DNDEBUG -Ofast -mfpmath=sse -mtune=intel -march=skylake";
 	# 		postPatch = (old.postPatch or "") + ''
-	# 			patch -Np1 < ${./patches/wine-4.2-alsa-lower-latency.patch}
-	# 			patch -Np1 < ${./patches/wine-4.2-pulseaudio-lower-latency.patch}
+	# 			patch -Np1 < ${../patches/wine-4.2-alsa-lower-latency.patch}
+	# 			patch -Np1 < ${../patches/wine-4.2-pulseaudio-lower-latency.patch}
 	# 		'';
 	# 	});
 	# };
@@ -135,7 +135,7 @@ in {
 		gnome = super.gnome.overrideScope' (gself: gsuper: {
 			gnome-bluetooth = gsuper.gnome-bluetooth.overrideAttrs(old: {
 				postPatch = (old.postPatch or "") + ''
-		 			patch -Np1 < ${./patches/gnome-bluetooth-connectall.patch}
+		 			patch -Np1 < ${../patches/gnome-bluetooth-connectall.patch}
 				'';
 			});
 		});
