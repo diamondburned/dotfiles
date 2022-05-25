@@ -1,17 +1,10 @@
-let nixosPkgs = import <nixpkgs> {};
+self: super:
+
+let nixosPkgs = import <nixos> {};
 	lib = nixosPkgs.lib;
 
-	waylandOverlays = import (nixosPkgs.fetchFromGitHub {
-		owner  = "nix-community";
-		repo   = "nixpkgs-wayland";
-		rev    = "a1c9b58";
-		sha256 = "1c9dxdw3r5g71wwnpqvnifzpb41005yg7mmzsjjk8kpkfrh5cb4q";
-	});
-
-	waylandPkgs = import <nixpkgs> {
-		overlays = [
-			(import <nix-wayland/overlay.nix>)
-		];
+	waylandPkgs = import <nixpkgs_unstable> {
+		overlays = [ (import <nix-wayland/overlay.nix>) ];
 	};
 
 	wf-config = waylandPkgs.wayfire.overrideAttrs (old: {
@@ -26,12 +19,22 @@ let nixosPkgs = import <nixpkgs> {};
 		# mesonFlags = [ "-Dwlroots:x11-backend=disabled" ];
 	});
 
-	makeGApp = pkgs: pkg: pkg.overrideAttrs(old: {
-		nativeBuildInputs = old.nativeBuildInputs ++ (with pkgs; [ wrapGAppsHook ]);
+	makeGApp = old: old.overrideAttrs(old: {
+		buildInputs = old.buildInputs ++ (with super; [
+			gtk3
+			glib
+			gdk-pixbuf
+			librsvg
+		]);
+		nativeBuildInputs = old.nativeBuildInputs ++ (with super; [
+			wrapGAppsHook
+		]);
 	});
 
-in self: super: {
-	inherit (waylandPkgs) wlogout wlsunset;
+in {
+	inherit (waylandPkgs)
+		wlogout
+		wlsunset;
 
 	# Broken.
 	# wlroots = waylandPkgs.wlroots.overrideAttrs (old: {
@@ -56,6 +59,6 @@ in self: super: {
 			"$out/share/wayland-sessions/labwc.desktop"	
 	'';
 
-	wf-shell = makeGApp super super.wayfirePlugins.wf-shell;
-	wayfire  = makeGApp super super.wayfire;
+	wf-shell = makeGApp super.wayfirePlugins.wf-shell;
+	wayfire  = makeGApp waylandPkgs.wayfire;
 }

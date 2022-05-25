@@ -73,7 +73,7 @@ in {
 		./secrets
 		./overlays
 		./cfg/udev
-		./cfg/sway
+		./cfg/wayfire
 		./cfg/localhost
 	];
 
@@ -477,7 +477,7 @@ in {
 			./cfg/wyze
 			./cfg/tilix
 			./cfg/firefox
-			./cfg/sway/home.nix
+			./cfg/wayfire/home.nix
 			./cfg/hm-gnome-terminal.nix
 
 			# Automatically push dotfiles.

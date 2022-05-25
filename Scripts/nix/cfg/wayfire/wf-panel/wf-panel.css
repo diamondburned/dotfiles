@@ -1,0 +1,120 @@
+* {
+	color: @theme_fg_color;
+	font-family: Sans;
+	font-size:   10pt;
+}
+
+window > box * {
+	font-weight: bold;
+}
+
+window.background {
+	background-color: transparent;
+	background: linear-gradient(to top, alpha(black, 0.55), transparent);
+}
+
+popover.background {
+	background-color: alpha(@theme_base_color, 0.85);
+	box-shadow: 0 0 5px 0px alpha(@theme_bg_color, 0.85);
+	padding: 0;
+	outline: none;
+	border: 0;
+}
+
+popover > box {
+	min-width: 650px;
+}
+
+popover > box > scrolledwindow > viewport > box {
+	padding: 15px;
+}
+
+popover > box > scrolledwindow > viewport > box flowboxchild {
+	padding: 0;
+}
+
+popover > box > scrolledwindow > viewport > box flowboxchild button {
+	min-width: 100px;
+	margin:  0;
+	padding: 20px 0px;
+}
+
+popover > box > separator {
+	opacity: 0;
+}
+
+popover > box > entry {
+	margin: -8px 0px;
+	margin-top: -5px;
+}
+
+/* Power button */
+popover > box > box:last-child > button {
+	margin-top:   -25px;
+	margin-bottom: -5px;
+	margin-right: -25px;
+
+	-gtk-icon-style: symbolic;
+	transition: linear 55ms all;
+	background: none;
+	box-shadow: none;
+}
+popover > box > box:last-child > button:hover {
+	-gtk-icon-shadow: 0 0 5px alpha(white, 0.85);
+}
+
+window > box button {
+	box-shadow: none;
+
+	border: 1px solid transparent;
+	border-radius: 0;
+
+	transition: linear 75ms all;
+	transition-delay: 0;
+}
+
+window > box button:hover {
+	border: 1px solid alpha(white, 0.2);
+	transition: linear 50ms all;
+}
+
+window > box button:not(.flat) {
+	border: 1px solid alpha(pink, 0.75);
+	border-bottom-width: 2px;
+	border-bottom-color: white;
+	background: linear-gradient(to top, alpha(pink, 0.5) 25%, alpha(pink, 0.2));
+	background-color: transparent;
+}
+
+window > box button image {
+	margin-right: 4px;
+}
+
+/* Left-side menu button */
+window > box > box:first-child button {
+	padding: 4px 5px;
+	padding-right: 2px;
+}
+
+/* Right-side container */
+window > box > box:last-child button {
+	padding: 0 10px;
+}
+
+/* WiFi button */
+window > box > box:last-child > button:first-child {
+	padding-right: 6px;
+}
+
+/* Clock */
+window > box > box:last-child > button:last-child label {
+	font-size: 11pt;
+}
+window > box > box:last-child > button:last-child {
+	border-right: 0;
+}
+
+window > box > box:last-child {
+	margin-right: 5px;
+	border-right: 1px solid alpha(white, 0.25);
+}

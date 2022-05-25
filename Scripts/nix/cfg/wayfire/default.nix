@@ -1,23 +1,14 @@
-{ config, lib, pkgs, ... }:
+{ config, lib, pkgs, ... }: 
 
-let utils = import ../../utils { inherit config lib pkgs; };
-
-in {
-	services.xserver.displayManager.gdm = {
-		enable  = true;
-		wayland = true;
-	};
-
-	programs.sway = {
-		enable = true;
-		extraSessionCommands = ''
-			dbus-update-activation-environment --all --systemd
-			systemctl --user import-environment
-		'';
-		wrapperFeatures = {
-			gtk  = true;
-			base = true;
+{
+	services.xserver.displayManager = {
+		gdm = {
+			enable  = true;
+			wayland = true;
 		};
+		sessionPackages = with pkgs; [
+			wayfire-session
+		];
 	};
 
 	nix.binaryCachePublicKeys = [
@@ -28,14 +19,12 @@ in {
 	];
 
 	xdg.portal = {
-		enable       = true;
+		enable = true;
 		extraPortals = with pkgs; [ xdg-desktop-portal-wlr ];
 		gtkUsePortal = false;
 	};
 
-	nixpkgs.overlays = [
-		(import ./overlay.nix)
-	];
+	nixpkgs.overlays = [ (import ./overlay.nix) ];
 
 	# Extracted from Unstable's programs.xwayland.
 	environment.pathsToLink = [
@@ -44,6 +33,12 @@ in {
 	];
 
 	environment.systemPackages = with pkgs; [
-		# gappdash
+		# labwc
+		# labwc-session
+		wayfire
+		wayfire-session
+		polkit_gnome
 	];
+
+	# services.xserver.enable  = true;
 }
