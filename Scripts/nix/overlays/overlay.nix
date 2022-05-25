@@ -25,16 +25,21 @@ let vte = pkgs: pkgs.vte.overrideAttrs(old: {
 	spicetify-themes = builtins.fetchTarball https://github.com/morpheusthewhite/spicetify-themes/archive/master.tar.gz;
 
 	nixpkgs_21_11 = import <nixpkgs_21_11> {};
+	nixpkgs_unstable = import <nixpkgs_unstable> {};
 
 in {
+	# Upgrades.
+	inherit (nixpkgs_unstable)
+		neovim
+		go_1_18;
+
+	# Downgrades.
+	inherit (nixpkgs_21_11);
+
 	# NUR
 	gamescope = nur.repos.dukzcry.gamescope;
 	spotify-adblock = nur.repos.instantos.spotify-adblock;
 	gatttool = nur.repos.mic92.gatttool;
-
-	# Downgrades.
-	# easyeffects = nixpkgs_21_11.easyeffects;
-	# pipewire = nixpkgs_21_11.pipewire;
 
 	# Spotify
 	spotify-unwrapped = self.callPackage ./packages/spotify-adblocked.nix {
@@ -50,6 +55,19 @@ in {
 
 	gotktrix = self.callPackage ./packages/gotktrix.nix {};
 	grun     = self.callPackage ./packages/grun.nix {};
+
+	wlroots = super.wlroots.overrideAttrs(old: {
+		version = "cyanreg-f21245b";
+		src = super.fetchFromGitHub {
+			owner  = "cyanreg";
+			repo   = "wlroots";
+			rev    = "f21245b";
+			sha256 = "1395940dq75bl9ipvms5hkmz5km0jl3bh37k2a21ld4mprpqhvz3";
+		};
+		# patches = (old.patches or []) ++ (with builtins; [
+		# 	(fetchurl "https://github.com/cyanreg/wlroots/commit/f21245b03a459d74187cf05e8ad531c2bf07cc42.patch")
+		# ]);
+	});
 
 	# Broken
 	# spotify = self.callPackage (import "${spicetify}/package.nix") {
