@@ -651,7 +651,7 @@ in {
 			neovim
 			foot
 			jq
-			go
+			go_1_18
 			tree
 			fzf
 			graphviz
