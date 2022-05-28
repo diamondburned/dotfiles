@@ -2,6 +2,7 @@ package main
 
 import (
 	"bufio"
+	"fmt"
 	"os"
 	"strings"
 
@@ -30,10 +31,14 @@ func main() {
 	})
 }
 
-func parseColor(color string) colorful.Color {
+func parseColor(color string) (colorful.Color, error) {
 	switch {
 	case strings.HasPrefix(color, "#"):
+		return colorful.Hex(color)
 	case strings.HasPrefix(color, "rgba"):
+		return colorful.Hex
+	default:
+		return colorful.Color{}, fmt.Errorf("unknown error %q", color)
 	}
 }
 
