@@ -3,6 +3,7 @@ package main
 import (
 	"bufio"
 	"os"
+	"strings"
 
 	"github.com/lucasb-eyer/go-colorful"
 	"gitlab.com/diamondburned/lineprompt/lineprompt"
@@ -27,6 +28,13 @@ func main() {
 		rgba(234, 171, 217, 1),
 		rgba(247, 148, 168, 1),
 	})
+}
+
+func parseColor(color string) colorful.Color {
+	switch {
+	case strings.HasPrefix(color, "#"):
+	case strings.HasPrefix(color, "rgba"):
+	}
 }
 
 func rgba(r, g, b, a uint8) colorful.Color {
