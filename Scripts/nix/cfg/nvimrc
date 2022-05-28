@@ -203,6 +203,8 @@ lua <<EOF
 						empty_open = "v",
 						symlink = ">",
 						symlink_open = "v",
+						arrow_open = "",
+						arrow_closed = "",
 					},
 				},
 			},
