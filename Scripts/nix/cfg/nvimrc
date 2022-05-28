@@ -153,7 +153,7 @@ let g:nvim_tree_icons = {
 	\	}
 	\ }
 
-hi NvimTreeCursorLine ctermbg=7
+hi NvimTreeCursorLine ctermbg=8
 hi NvimTreeFolderName ctermfg=NONE
 hi NvimTreeFolderIcon ctermfg=14
 hi NvimTreeExecFile   ctermfg=12
