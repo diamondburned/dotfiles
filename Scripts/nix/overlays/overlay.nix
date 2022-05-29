@@ -27,6 +27,8 @@ let vte = pkgs: pkgs.vte.overrideAttrs(old: {
 	nixpkgs_21_11 = import <nixpkgs_21_11> {};
 	nixpkgs_unstable = import <nixpkgs_unstable> {};
 
+	GOPATH = "/home/diamond/.go";
+
 in {
 	# Upgrades.
 	inherit (nixpkgs_unstable)
@@ -35,6 +37,14 @@ in {
 
 	# Downgrades.
 	inherit (nixpkgs_21_11);
+
+	buildLocalGoModule = { GOPATH ? GOPATH, ... }@args: super.buildGoModule {
+		vendorSha256 = null;
+		postConfigure = ''
+			export GOPATH=${GOPATH}
+			${args.postConfigure or ""}
+		'';
+	};
 
 	# NUR
 	gamescope = nur.repos.dukzcry.gamescope;
