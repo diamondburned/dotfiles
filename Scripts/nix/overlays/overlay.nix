@@ -24,8 +24,8 @@ let vte = pkgs: pkgs.vte.overrideAttrs(old: {
 	spicetify = builtins.fetchTarball https://github.com/pietdevries94/spicetify-nix/archive/master.tar.gz;
 	spicetify-themes = builtins.fetchTarball https://github.com/morpheusthewhite/spicetify-themes/archive/master.tar.gz;
 
-	nixpkgs_21_11 = import <nixpkgs_21_11> {};
-	nixpkgs_unstable = import <nixpkgs_unstable> {};
+	nixpkgs_21_11 = import <nixpkgs_21_11> { config.allowUnfree = true; };
+	nixpkgs_unstable = import <nixpkgs_unstable> { config.allowUnfree = true; };
 
 	GOPATH = "/home/diamond/.go";
 
@@ -33,6 +33,7 @@ in {
 	# Upgrades.
 	inherit (nixpkgs_unstable)
 		neovim
+		discord
 		go_1_18;
 
 	# Downgrades.
@@ -184,23 +185,23 @@ in {
 	# 	'';
 	# });
 
-	discord = super.discord.overrideAttrs (old:
-		let asar = builtins.fetchurl {
-			url = "https://github.com/GooseMod/OpenAsar/releases/download/nightly/app.asar";
-			sha256 = "0d4pffbp9g3zgc3i257hx7lgsxjdnwzq0m9vcx713af250w2qh8q";
-		};
-		in {
-			version = "0.0.17";
-			src = super.fetchurl {
-				url = "https://dl.discordapp.net/apps/linux/0.0.17/discord-0.0.17.tar.gz";
-				sha256 = "sha256-NGJzLl1dm7dfkB98pQR3gv4vlldrII6lOMWTuioDExU=";
-			};
-			buildInputs = (old.buildInputs or []) ++ [ super.unzip ];
-			nativeBuildInputs = (old.nativeBuildInputs or []) ++ [ super.makeWrapper ]; 
-			postFixup = (old.postFixup or "") + ''
-				cp ${asar} $out/opt/Discord/resources/app.asar
-				wrapProgram $out/bin/discord \
-					--add-flags "--enable-gpu-rasterization --enable-zero-copy --enable-gpu-compositing --enable-native-gpu-memory-buffers --enable-oop-rasterization --enable-features=UseSkiaRenderer,CanvasOopRasterization"
-			'';
-		});
+	# discord = super.discord.overrideAttrs (old:
+	# 	let asar = builtins.fetchurl {
+	# 		url = "https://github.com/GooseMod/OpenAsar/releases/download/nightly/app.asar";
+	# 		sha256 = "0d4pffbp9g3zgc3i257hx7lgsxjdnwzq0m9vcx713af250w2qh8q";
+	# 	};
+	# 	in {
+	# 		version = "0.0.17";
+	# 		src = super.fetchurl {
+	# 			url = "https://dl.discordapp.net/apps/linux/0.0.17/discord-0.0.17.tar.gz";
+	# 			sha256 = "sha256-NGJzLl1dm7dfkB98pQR3gv4vlldrII6lOMWTuioDExU=";
+	# 		};
+	# 		buildInputs = (old.buildInputs or []) ++ [ super.unzip ];
+	# 		nativeBuildInputs = (old.nativeBuildInputs or []) ++ [ super.makeWrapper ]; 
+	# 		postFixup = (old.postFixup or "") + ''
+	# 			cp ${asar} $out/opt/Discord/resources/app.asar
+	# 			wrapProgram $out/bin/discord \
+	# 				--add-flags "--enable-gpu-rasterization --enable-zero-copy --enable-gpu-compositing --enable-native-gpu-memory-buffers --enable-oop-rasterization --enable-features=UseSkiaRenderer,CanvasOopRasterization"
+	# 		'';
+	# 	});
 }
