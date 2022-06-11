@@ -238,6 +238,7 @@ in {
 		# System packages
 		wget
 		nix-index
+		nix-index-update
 
 		# Utilities
 		# htop
