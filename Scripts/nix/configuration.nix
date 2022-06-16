@@ -171,9 +171,9 @@ in {
 		allowedUDPPortRanges = [
 			{ from = 1714; to = 1764; } # GSConnect;
 		];
-		#                      v  Steam  v
-		allowedTCPPorts = [ 22 27036 27037 ];
-		allowedUDPPorts = [ 22 27031 27036 ];
+		#                        v  Steam  v
+		allowedTCPPorts = [ 1337 27036 27037 ];
+		allowedUDPPorts = [ 1337 27031 27036 ];
 	};
 
 	services.avahi = {
@@ -277,7 +277,10 @@ in {
 	# List services that you want to enable:
 
 	# Enable the OpenSSH daemon.
-	services.openssh.enable = true;
+	services.openssh = {
+		enable = true;
+		ports  = [ 1337 ];
+	};
 
 	# Enable CUPS to print documents.
 	services.printing = {
