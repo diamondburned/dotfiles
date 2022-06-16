@@ -14,5 +14,5 @@
 
 # TODO
 [root.aliases]
- nixos = "nixpkgs_21_11"
- home-manager = "home-manager_21_11"
+ nixos = "nixpkgs_unstable"
+ home-manager = "home-manager_unstable"
