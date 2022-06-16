@@ -262,7 +262,8 @@ in {
 		source-sans-pro
 		source-serif-pro
 		fira-code
-		nerdfonts
+		# nerdfonts
+		inconsolata-nerdfont
 		material-design-icons
 		inconsolata
 		comic-neue
