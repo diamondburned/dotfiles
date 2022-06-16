@@ -30,6 +30,11 @@ let vte = pkgs: pkgs.vte.overrideAttrs(old: {
 	GOPATH = "/home/diamond/.go";
 
 in {
+	# Expose these for the system to use.
+	inherit
+		nixpkgs_21_11
+		nixpkgs_unstable;
+
 	# Upgrades.
 	inherit (nixpkgs_unstable)
 		neovim
