@@ -238,7 +238,7 @@ in {
 		# System packages
 		wget
 		nix-index
-		nix-index-update
+		# nix-index-update
 
 		# Utilities
 		# htop
@@ -313,19 +313,36 @@ in {
 		};
 
 		# https://nixos.wiki/wiki/PipeWire
-		media-session.config.bluez-monitor.rules = [
-			{
-				# Match all.
-				matches = [ { "device.name" = "~bluez_card.*"; } ];
-				actions = {
-					"update-props" = {
-						"bluez5.reconnect-profiles" = [ "a2dp_sink" "hfp_hf" "hsp_hs" ];
-						"bluez5.msbc-support" = true;
-						"bluez5.sbc-xq-support" = true;
+		media-session.config = {
+			alsa-monitor.rules = [
+				{
+					# https://wiki.archlinux.org/title/PipeWire#High_latency_with_USB_DACs_(e.g._Schiit_DACs)
+					matches = [ { "node.name" = "alsa_output.usb-Schiit_Audio_I_m_Fulla_Schiit-00.analog-stereo"; } ];
+					actions = {
+						"update-props" = {
+							"audio.format" = "S24_3LE";
+							"audio.rate" = 96000;
+							# https://github.com/audiojs/sample-rate
+							"audio.allowed-rates" = [ 44100 4800 88200 96000 176400 192000 ];
+							"api.alsa.period-size" = 128;
+						};
 					};
-				};
-			}
-		];
+				}
+			];
+			bluez-monitor.rules = [
+				{
+					# Match all.
+					matches = [ { "device.name" = "~bluez_card.*"; } ];
+					actions = {
+						"update-props" = {
+							"bluez5.reconnect-profiles" = [ "a2dp_sink" "hfp_hf" "hsp_hs" ];
+							"bluez5.msbc-support" = true;
+							"bluez5.sbc-xq-support" = true;
+						};
+					};
+				}
+			];
+		};
 	};
 
 	# Enable the X11 windowing system.
