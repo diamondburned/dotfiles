@@ -11,13 +11,18 @@
 	boot.kernelModules = [ "kvm-intel" ];
 	boot.extraModulePackages = [ ];
 
+	boot.initrd.luks.devices = {
+		home-luks.device = "/dev/disk/by-uuid/8c741ec0-0ed3-4114-a9ab-e4abe5fc6071";
+	};
+
 	fileSystems."/" = {
-		device = "/dev/disk/by-uuid/bc6d7c51-0f68-4270-bede-d824b5179482";
-		fsType = "ext4";
+		device  = "/dev/disk/by-uuid/92a054fe-aea4-41f9-90fa-59b6a4143133";
+		fsType  = "btrfs";
+		options = [ "compress=lzo" ];
 	};
 
 	fileSystems."/home" = {
-		device = "/dev/disk/by-uuid/20521e43-1c9d-4072-9042-163da42d9f0e";
+		device = "/dev/mapper/home-luks";
 		fsType = "ext4";
 	};
 

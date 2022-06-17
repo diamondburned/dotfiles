@@ -166,10 +166,10 @@ in {
 		options = [ "nosuid" "nodev" "nofail" "x-gvfs-show" "noauto" ];
 	};
 
-	swapDevices = [ {
-		device = "/swapfile";
-		options = [ "nofail" ];
-	} ];
+	# swapDevices = [ {
+	# 	device = "/swapfile";
+	# 	options = [ "nofail" ];
+	# } ];
 
 	# My NVMe SSD is just faster than decompressing this.
 	# zramSwap = {

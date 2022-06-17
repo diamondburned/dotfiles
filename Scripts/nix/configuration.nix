@@ -244,6 +244,7 @@ in {
 		# Utilities
 		# htop
 		git
+		compsize
 
 		qgnomeplatform
 		adwaita-qt
