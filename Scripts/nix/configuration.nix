@@ -551,6 +551,7 @@ in {
 		programs.obs-studio = {
 			enable  = true;
 			plugins = with pkgs; [
+				obs-virtualbg
 				# obs-wlrobs
 				# obs-v4l2sink
 			];
