@@ -26,6 +26,7 @@ let vte = pkgs: pkgs.vte.overrideAttrs(old: {
 
 	nixpkgs_21_11 = import <nixpkgs_21_11> { config.allowUnfree = true; };
 	nixpkgs_unstable = import <nixpkgs_unstable> { config.allowUnfree = true; };
+	nixpkgs_puffnfresh = import <nixpkgs_puffnfresh> { config.allowUnfree = true; };
 
 	GOPATH = "/home/diamond/.go";
 
@@ -42,6 +43,11 @@ in {
 
 	# Downgrades.
 	# inherit (nixpkgs_21_11);
+
+	# For OBS.
+	inherit (nixpkgs_puffnfresh)
+		obs-studio
+		obs-studio-plugins;
 
 	buildLocalGoModule = { GOPATH ? GOPATH, ... }@args: super.buildGoModule {
 		vendorSha256 = null;

@@ -36,6 +36,10 @@
       "url": "https://github.com/nix-community/nixpkgs-wayland/archive/8af0ac68e9df21c0c42b44c5e85d9fa4217da085.tar.gz",
       "store_hash": "5z46vfh9q0807yg35z60p3ahm1xqaxn0"
     },
+    "github:puffnfresh/nixpkgs pkgs/obs-backgroundremoval": {
+      "url": "https://github.com/puffnfresh/nixpkgs/archive/6630869e12cfeba50e1e370e26255ed8c3f46832.tar.gz",
+      "store_hash": "437p3lk4ccwxg7b4r4lbw14sga7l2f49"
+    },
     "https://nixos.org/channels/nixos-unstable": {
       "url": "https://nixos.org/channels/nixos-unstable",
       "store_hash": "4hxhmqy9cbxhi603y9kpm0mhgzy5ag33"

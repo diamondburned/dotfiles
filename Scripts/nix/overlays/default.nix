@@ -23,7 +23,6 @@
 			gappdash = super.callPackage ./packages/gappdash {};
 			osu-wine = super.callPackage ./packages/osu-wine {};
 			osu-wineprefix = super.callPackage ./packages/osu-wineprefix {};
-			obs-virtualbg = super.callPackage ./packages/obs-virtualbg {};
 			intiface-cli = super.callPackage ./packages/intiface-cli {};
 			catnip-gtk = super.callPackage ./packages/catnip-gtk {};
 			passwordsafe = super.callPackage ./packages/gnome-passwordsafe {};
