@@ -70,8 +70,8 @@ in {
 		./hardware-configuration.nix
 		./hardware-custom.nix
 		./unstable.nix
-		./secrets
 		./overlays
+		./secrets
 		./cfg/udev
 		./cfg/wayfire
 		./cfg/pipewire
@@ -474,6 +474,10 @@ in {
 		nixpkgs.config = {
 			allowUnfree = true;
 		};
+
+		nixpkgs.overlays = [
+			(import ./overlays/overlay.nix)
+		];
 
 		programs.direnv = {
 			enable = true;

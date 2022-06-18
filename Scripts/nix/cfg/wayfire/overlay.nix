@@ -3,7 +3,7 @@ self: super:
 let nixosPkgs = import <nixos> {};
 	lib = nixosPkgs.lib;
 
-	waylandPkgs = import <nixos> {
+	waylandPkgs = import <nixpkgs> {
 		overlays = [ (import <nix-wayland/overlay.nix>) ];
 	};
 
@@ -60,6 +60,6 @@ in {
 	'';
 
 	wf-shell = makeGApp super.wayfirePlugins.wf-shell;
-	wayfire  = makeGApp super.wayfire;
-	# wayfire  = makeGApp waylandPkgs.wayfire;
+	# wayfire  = makeGApp super.wayfire;
+	wayfire  = makeGApp waylandPkgs.wayfire;
 }

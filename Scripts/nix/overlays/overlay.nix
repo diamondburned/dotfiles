@@ -42,7 +42,7 @@ in {
 		go_1_18;
 
 	# Downgrades.
-	inherit (nixpkgs_21_11);
+	# inherit (nixpkgs_21_11);
 
 	buildLocalGoModule = { GOPATH ? GOPATH, ... }@args: super.buildGoModule {
 		vendorSha256 = null;
