@@ -45,9 +45,13 @@ in {
 	# inherit (nixpkgs_21_11);
 
 	# For OBS.
-	inherit (nixpkgs_puffnfresh)
-		obs-studio
-		obs-studio-plugins;
+	# inherit (nixpkgs_puffnfresh)
+	# 	obs-studio
+	# 	obs-studio-plugins;
+
+	# OBS junk.
+	onnxruntime = self.callPackage <nixpkgs_puffnfresh/pkgs/development/libraries/onnxruntime> { };
+	obs-backgroundremoval = self.callPackage <nixpkgs_puffnfresh/pkgs/applications/video/obs-studio/plugins/obs-backgroundremoval.nix> {};
 
 	buildLocalGoModule = { GOPATH ? GOPATH, ... }@args: super.buildGoModule {
 		vendorSha256 = null;
