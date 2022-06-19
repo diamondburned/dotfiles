@@ -81,19 +81,6 @@ in {
 	gotktrix = self.callPackage ./packages/gotktrix.nix {};
 	grun     = self.callPackage ./packages/grun.nix {};
 
-	wlroots = super.wlroots.overrideAttrs(old: {
-		version = "cyanreg-f21245b";
-		src = super.fetchFromGitHub {
-			owner  = "cyanreg";
-			repo   = "wlroots";
-			rev    = "f21245b";
-			sha256 = "1395940dq75bl9ipvms5hkmz5km0jl3bh37k2a21ld4mprpqhvz3";
-		};
-		# patches = (old.patches or []) ++ (with builtins; [
-		# 	(fetchurl "https://github.com/cyanreg/wlroots/commit/f21245b03a459d74187cf05e8ad531c2bf07cc42.patch")
-		# ]);
-	});
-
 	# Broken
 	# spotify = self.callPackage (import "${spicetify}/package.nix") {
 	# 	theme = "Fluent";

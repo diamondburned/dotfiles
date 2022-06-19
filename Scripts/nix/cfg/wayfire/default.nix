@@ -24,7 +24,9 @@
 		gtkUsePortal = false;
 	};
 
-	nixpkgs.overlays = [ (import ./overlay.nix) ];
+	nixpkgs.overlays = [
+		(import ./overlay.nix)
+	];
 
 	# Extracted from Unstable's programs.xwayland.
 	environment.pathsToLink = [
