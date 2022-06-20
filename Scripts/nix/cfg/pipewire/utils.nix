@@ -12,12 +12,12 @@ lib:
 			"audio.allowed-rates" = v.audio.allowedRates;
 			"capture.props" = {
 				"media.class"  = "Audio/Sink";
-				"node.name"    = name + " (sink)";
+				"node.name"    = v.short + "-sink";
 				"node.passive" = true;
 			};
 			"playback.props" = {
 				"stream.dont-remix" = true;
-				"node.name"         = name + " (output)";
+				"node.name"         = v.short + "-output";
 				"node.target"       = v.target;
 				"node.passive"      = true;
 			};
