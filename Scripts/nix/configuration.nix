@@ -441,6 +441,13 @@ in {
 	# 	package = pkgs.wireshark-qt;
 	# };
 
+	programs.command-not-found = {
+		enable = true;
+		# programs.sqlite is only available if we use the nixos.org channels.
+		# See hackadoll3.toml.
+		dbPath = "/nix/var/nix/profiles/per-user/root/channels/unstable/programs.sqlite";
+	};
+
 	home-manager.users.diamond = {
 		imports = [
 			"${lsoc-overlay}"
@@ -649,6 +656,7 @@ in {
 			v4l_utils
 			pavucontrol
 			pulseaudio
+			pamixer
 			easyeffects
 			ytmdesktop
 

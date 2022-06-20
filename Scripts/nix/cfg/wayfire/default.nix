@@ -40,7 +40,6 @@
 		wayfire
 		wayfire-session
 		polkit_gnome
+		wlr-randr
 	];
-
-	# services.xserver.enable  = true;
 }

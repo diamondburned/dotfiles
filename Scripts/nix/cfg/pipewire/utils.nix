@@ -4,8 +4,8 @@ lib:
 	filterChains = eqs: lib.mapAttrsToList (name: v: {
 		name = "libpipewire-module-filter-chain";
 		args = lib.recursiveUpdate {
-			"media.name"          = v.short;
-			"node.description"    = v.short;
+			"media.name"          = name;
+			"node.description"    = name;
 			"filter.graph"        = v.graph;
 			"audio.format"        = v.audio.format;
 			"audio.rate"          = v.audio.rate;
@@ -18,7 +18,7 @@ lib:
 			"playback.props" = {
 				"stream.dont-remix" = true;
 				"node.name"         = v.short + "-output.eq";
-				"node.target"       = v.target;
+				# "node.target"       = v.target;
 				"node.passive"      = true;
 			};
 		} v.args;

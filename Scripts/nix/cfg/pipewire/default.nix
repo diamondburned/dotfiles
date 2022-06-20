@@ -4,8 +4,8 @@ let utils = import ./utils.nix lib;
 
 	eq = name: import "${./EQ}/${name}.nix";
 	eqs = {
-		"I'm Fulla Schiit + HIFIMAN HE400i rtings EQ" = {
-			short  = "fulla-schiit-he400i-rtings";
+		"HIFIMAN HE400i EQ (rtings)" = {
+			short  = "he400i-rtings";
 			graph  = eq "HIFIMAN HE400i rtings";
 			target = "alsa_output.usb-Schiit_Audio_I_m_Fulla_Schiit-00.analog-stereo";
 			audio = {
