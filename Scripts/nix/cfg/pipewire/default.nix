@@ -16,6 +16,7 @@ let utils = import ./utils.nix lib;
 				periodSize   = 128;
 			};
 			args = {
+				"audio.channels" = 2;
 				"audio.position" = [ "FL" "FR" ];
 				"playback.props" = {
 					"audio.position" = [ "FL" "FR" ]; # check Carla
@@ -31,13 +32,13 @@ in {
 	services.pipewire = {
 		enable = true;
 		package = pkgs.nixpkgs_unstable.pipewire.overrideAttrs(old: {
-			version = "0.3.52-0c8cd4a";
+			version = "0.3.52";
 			src = pkgs.fetchFromGitLab {
 				domain = "gitlab.freedesktop.org";
 				owner  = "pipewire";
 				repo   = "pipewire";
-				rev    = "0c8cd4ab52557681df70e24df9072e2df7c7d6ff";
-				sha256 = "1gjhpbsswyywffvc84hq1vmzxfk80prh0c5v6v0ag77cnkz0q5yc";
+				rev    = "0.3.52";
+				sha256 = "0lfbjvzc1vkrf7vlp95ywcgx6vf2wx66fzmhn2yn65wfmzgqws95";
 			};
 			mesonFlags = old.mesonFlags ++ [ "-Dbluez5-codec-lc3plus=disabled" ];
 		});
