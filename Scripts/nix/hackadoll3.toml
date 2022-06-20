@@ -17,3 +17,7 @@
 [root.aliases]
  nixos = "nixpkgs_unstable"
  home-manager = "home-manager_unstable"
+
+[diamond.channels]
+ nixos = "github:NixOS/nixpkgs nixos-unstable"
+ unstable = "https://nixos.org/channels/nixos-unstable"

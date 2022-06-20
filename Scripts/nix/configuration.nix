@@ -701,6 +701,7 @@ in {
 			gnome3.nautilus
 			gnome3.gnome-disk-utility
 			gnome3.gnome-tweaks
+			gnome3.gnome-boxes
 		]);
 
 		programs.alacritty = {
