@@ -399,10 +399,10 @@ in {
 	*/
 
 	virtualisation.docker.enable = true;
+	virtualisation.spiceUSBRedirection.enable = true;
 
 	# virtualisation.libvirtd = {
 	# 	enable = true;
-	# 	qemuPackage = nixpkgs_19_09.qemu_kvm;
 	# 	qemuRunAsRoot = false;
 	# };
 
