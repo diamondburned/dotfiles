@@ -401,6 +401,8 @@ in {
 	virtualisation.docker.enable = true;
 	virtualisation.spiceUSBRedirection.enable = true;
 
+	services.sysprof.enable = true;
+
 	# virtualisation.libvirtd = {
 	# 	enable = true;
 	# 	qemuRunAsRoot = false;
