@@ -27,6 +27,7 @@ let vte = pkgs: pkgs.vte.overrideAttrs(old: {
 	nixpkgs_21_11 = import <nixpkgs_21_11> { config.allowUnfree = true; };
 	nixpkgs_unstable = import <nixpkgs_unstable> { config.allowUnfree = true; };
 	nixpkgs_puffnfresh = import <nixpkgs_puffnfresh> { config.allowUnfree = true; };
+	nixpkgs_unstable_real = import <unstable> { config.allowUnfree = true; };
 
 	GOPATH = "/home/diamond/.go";
 
@@ -34,7 +35,8 @@ in {
 	# Expose these for the system to use.
 	inherit
 		nixpkgs_21_11
-		nixpkgs_unstable;
+		nixpkgs_unstable
+		nixpkgs_unstable_real;
 
 	# Upgrades.
 	inherit (nixpkgs_unstable)

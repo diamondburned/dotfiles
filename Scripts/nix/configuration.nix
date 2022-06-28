@@ -610,6 +610,9 @@ in {
 			en-science
 			en-computers
 
+		]) ++ (with pkgs.nixpkgs_unstable_real; [
+			steam
+
 		]) ++ (with pkgs; [
 			# Personal stuff
 			gnome.pomodoro
