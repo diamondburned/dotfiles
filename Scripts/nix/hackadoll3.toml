@@ -21,3 +21,6 @@
 [diamond.channels]
  nixos = "github:NixOS/nixpkgs nixos-unstable"
  unstable = "https://nixos.org/channels/nixos-unstable"
+
+[diamond.aliases]
+ nixpkgs = "nixos"
