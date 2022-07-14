@@ -655,7 +655,7 @@ in {
 
 			# Multimedia
 			# aqours
-			spotify
+			spot
 			# catnip-gtk
 			ffmpeg
 			v4l_utils
