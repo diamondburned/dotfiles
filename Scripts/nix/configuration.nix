@@ -656,9 +656,9 @@ in {
 			# Multimedia
 			# aqours
 			# (succumb-to-libadwaita spot)
-			spotify-qt
+			spot
 			spotify
-			# catnip-gtk
+			catnip-gtk
 			ffmpeg
 			v4l_utils
 			pavucontrol

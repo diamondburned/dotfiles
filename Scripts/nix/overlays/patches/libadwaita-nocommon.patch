@@ -1,0 +1,58 @@
+diff --git a/src/stylesheet/_widgets.scss b/src/stylesheet/_widgets.scss
+index fbf00430..c0eed67c 100644
+--- a/src/stylesheet/_widgets.scss
++++ b/src/stylesheet/_widgets.scss
+@@ -1,9 +1,20 @@
++$ease-out-quad: cubic-bezier(0.25, 0.46, 0.45, 0.94);
++$backdrop_transition: 200ms ease-out;
++$button_transition: all 200ms $ease-out-quad;
++$focus_transition: outline-width 200ms $ease-out-quad, outline-offset 200ms $ease-out-quad;
++$button_radius: 6px;
++$card_radius: $button_radius + 6;
++$menu_radius: 6px;
++$menu_margin: 6px; //margin around menuitems & sidebar items
++$menu_padding: 12px; //inner menuitem padding
++$window_radius: $button_radius + 6;
++$popover_radius: $window_radius;
++
+ @import 'widgets/avatar';
+ @import 'widgets/buttons';
+ @import 'widgets/calendar';
+ @import 'widgets/checks';
+ @import 'widgets/color-chooser';
+-@import 'widgets/dialogs';
+ @import 'widgets/dropdowns';
+ @import 'widgets/emoji-chooser';
+ @import 'widgets/entries';
+@@ -16,7 +27,6 @@
+ @import 'widgets/links';
+ @import 'widgets/lists';
+ @import 'widgets/menus';
+-@import 'widgets/message-dialog';
+ @import 'widgets/misc';
+ @import 'widgets/notebook';
+ @import 'widgets/paned';
+@@ -25,7 +35,6 @@
+ @import 'widgets/progress-bar';
+ @import 'widgets/scale';
+ @import 'widgets/scrolling';
+-@import 'widgets/shortcuts-window';
+ @import 'widgets/sidebars';
+ @import 'widgets/spinner';
+ @import 'widgets/spin-button';
+@@ -38,4 +47,3 @@
+ @import 'widgets/trees';
+ @import 'widgets/views';
+ @import 'widgets/view-switcher';
+-@import 'widgets/window';
+diff --git a/src/stylesheet/base.scss b/src/stylesheet/base.scss
+index ffba5eac..e835a720 100644
+--- a/src/stylesheet/base.scss
++++ b/src/stylesheet/base.scss
+@@ -4,5 +4,5 @@ $contrast: 'normal';
+ @import 'functions';
+ @import 'colors';
+ @import 'drawing';
+-@import 'common';
++@import 'widgets';
+ @import 'compat-colors';

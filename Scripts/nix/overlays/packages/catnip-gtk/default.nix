@@ -1,11 +1,12 @@
 { pkgs, lib }:
 
-let src = pkgs.fetchFromGitHub {
-		owner  = "diamondburned";
-		repo   = "catnip-gtk";
-		rev    = "92350c410e39595703e0191314d15ea3f4975806";
-		sha256 = "0z09iqq1m4hdpj5ddzvd44ky8ixj320bzsy7fiwpcazb2v604shf";
-	};
+let src = /home/diamond/Scripts/catnip-gtk;
+	# pkgs.fetchFromGitHub {
+	# 	owner  = "diamondburned";
+	# 	repo   = "catnip-gtk";
+	# 	rev    = "92350c410e39595703e0191314d15ea3f4975806";
+	# 	sha256 = "0z09iqq1m4hdpj5ddzvd44ky8ixj320bzsy7fiwpcazb2v604shf";
+	# };
 
 	shell = import "${src}/shell.nix" {
 		unstable = pkgs;
