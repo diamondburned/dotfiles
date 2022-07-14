@@ -655,7 +655,7 @@ in {
 
 			# Multimedia
 			# aqours
-			spot
+			(succumb-to-libadwaita spot)
 			# catnip-gtk
 			ffmpeg
 			v4l_utils

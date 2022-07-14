@@ -63,6 +63,30 @@ in {
 		'';
 	};
 
+	# Fuck libadwaita's stylesheets. They can go fuck themselves.
+	fuck-libadwaita = pkg: self.fuck-libadwaita-bin pkg pkg.pname;
+
+	fuck-libadwaita-bin = pkg: bin:
+		let adw = super.libadwaita.overrideAttrs (old: {
+			name = "libadwaita-nocss";
+			doCheck = false;
+			postPatch = (old.postPatch or "") + ''
+				patch -N -p1 < ${./patches/libadwaita-nocommon.patch}
+				# sed -i 's/g_getenv ("GTK_THEME")/TRUE/g' $(find . -name '*.c')
+			'';
+		});
+		in super.writeScriptBin bin ''
+			export LD_PRELOAD=${adw}/lib/libadwaita-1.so
+			exec ${pkg}/bin/${bin} "$@"
+		'';
+	
+	succumb-to-libadwaita = pkg: self.succumb-to-libadwaita-bin pkg pkg.pname;
+	
+	succumb-to-libadwaita-bin = pkg: bin: super.writeScriptBin bin ''
+		unset GTK_THEME
+		exec ${pkg}/bin/${bin} "$@"
+	'';
+
 	# NUR
 	gamescope = nur.repos.dukzcry.gamescope;
 	spotify-adblock = nur.repos.instantos.spotify-adblock;
