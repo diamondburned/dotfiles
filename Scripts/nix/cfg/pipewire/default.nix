@@ -12,8 +12,8 @@ let utils = import ./utils.nix lib;
 				# cat /proc/asound/Schiit/stream0
 				rate   = 48000;
 				format = "S24_3LE";
-				allowedRates = [ 44100 48000 88200 96000 176400 192000 352800 384000 ];
-				periodSize   = 128;
+				allowedRates = [ 44100 48000 88200 96000 176400 192000 ];
+				# periodSize   = 128;
 			};
 			args = {
 				"audio.channels" = 2;

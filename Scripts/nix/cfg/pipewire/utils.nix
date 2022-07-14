@@ -16,10 +16,8 @@ lib:
 				"node.passive" = true;
 			};
 			"playback.props" = {
-				"stream.dont-remix" = true;
-				"node.name"         = v.short + "-output.eq";
-				# "node.target"       = v.target;
-				"node.passive"      = true;
+				"node.name"    = v.short + "-output.eq";
+				"node.passive" = true;
 			};
 		} v.args;
 	}) eqs;
@@ -31,7 +29,7 @@ lib:
 				"audio.format"         = v.audio.format;
 				"audio.rate"           = v.audio.rate;
 				"audio.allowed-rates"  = v.audio.allowedRates;
-				"api.alsa.period-size" = v.audio.periodSize;
+				# "api.alsa.period-size" = v.audio.periodSize;
 			};
 		};
 	}) eqs;

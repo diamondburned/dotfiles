@@ -658,7 +658,7 @@ in {
 			# (succumb-to-libadwaita spot)
 			spot
 			spotify
-			catnip-gtk
+			# catnip-gtk
 			ffmpeg
 			v4l_utils
 			pavucontrol
