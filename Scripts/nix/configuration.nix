@@ -611,7 +611,7 @@ in {
 			en-computers
 
 		]) ++ (with pkgs.nixpkgs_unstable_real; [
-			# steam
+			steam
 
 		]) ++ (with pkgs; [
 			# Personal stuff

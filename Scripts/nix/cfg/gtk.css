@@ -68,6 +68,12 @@ button.titlebutton:hover { opacity: 1.00; }
 	font-weight: 600;
 }
 
+.titlebar scrolledwindow {
+	background: none;
+	border: 1px solid alpha(black, 0.15);
+	border-radius: 4px;
+}
+
 decoration {
 	padding: 0;
 }
