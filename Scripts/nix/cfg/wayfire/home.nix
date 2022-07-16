@@ -105,7 +105,7 @@ in {
 			];
 			"seattle-docked".outputs = [
 				(enable "eDP-1" {
-					mode     = "1920x1080@60.020000";
+					mode     = "1920x1200@60.020000";
 					position = "0,17";
 					scale    = 1.2;
 				})
@@ -117,9 +117,9 @@ in {
 			];
 			"normal".outputs = [
 				(enable "eDP-1" {
-					mode     = "1920x1080@60.020000";
+					mode     = "1920x1200@60.020000";
 					position = "0,0";
-					scale    = 1.2;
+					scale    = 1.15;
 				})
 			];
 		};
