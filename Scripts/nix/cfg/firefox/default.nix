@@ -50,7 +50,7 @@ in {
 	# });
 
 	programs.firefox.enable = true;
-	# programs.firefox.package = firefox;
+	programs.firefox.package = pkgs.nixpkgs_unstable_real.firefox;
 
 	programs.firefox.profiles."Tunneled" = {
 		id = 1;
