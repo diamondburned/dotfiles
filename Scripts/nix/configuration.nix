@@ -37,7 +37,7 @@ let lsoc-overlay = pkgs.fetchFromGitHub {
 	userEnv = {
 		LC_TIME = "en_GB.UTF-8";
 		NIX_AUTO_RUN = "1";
-		STEAM_RUNTIME = "0";
+		# STEAM_RUNTIME = "0";
 		GTK_THEME = "Materia-dark-compact";
 		# XDG_CURRENT_DESKTOP = "Wayfire";
 
@@ -50,7 +50,7 @@ let lsoc-overlay = pkgs.fetchFromGitHub {
 
 		# Enforce Wayland.
 		MOZ_ENABLE_WAYLAND = "1";
-		SDL_VIDEODRIVER	= "wayland";
+		# SDL_VIDEODRIVER	= "wayland";
 		QT_QPA_PLATFORM	= "wayland";
 
 		# osu settings.
@@ -71,6 +71,7 @@ in {
 		./hardware-custom.nix
 		./unstable.nix
 		./overlays
+		./overlays/services.nix
 		./secrets
 		./cfg/udev
 		./cfg/wayfire
@@ -454,6 +455,7 @@ in {
 		imports = [
 			"${lsoc-overlay}"
 
+			./overlays
 			./overlays/home-manager
 			./cfg/wyze
 			./cfg/tilix
@@ -483,10 +485,6 @@ in {
 		nixpkgs.config = {
 			allowUnfree = true;
 		};
-
-		nixpkgs.overlays = [
-			(import ./overlays/overlay.nix)
-		];
 
 		programs.direnv = {
 			enable = true;
@@ -611,7 +609,12 @@ in {
 			en-computers
 
 		]) ++ (with pkgs.nixpkgs_unstable_real; [
-			steam
+			(gamescope)
+			(steam.override {
+				extraPkgs = pkgs: with pkgs; [
+					gamescope
+				];
+			})
 
 		]) ++ (with pkgs; [
 			# Personal stuff

@@ -1,9 +1,31 @@
 { lib, pkgs, config, ... }:
 
-{
+let nurOverlay = (self: super: (import ./nur.nix (import <nur> { pkgs = super; }) self super));
+
+	nixpkgsOpts = {
+		config.allowUnfree = true;
+		overlays = [
+			nurOverlay
+		];
+	};
+
+	nixpkgs_21_11 = import <nixpkgs_21_11> nixpkgsOpts;
+	nixpkgs_unstable = import <nixpkgs_unstable> nixpkgsOpts;
+	nixpkgs_puffnfresh = import <nixpkgs_puffnfresh> nixpkgsOpts;
+	nixpkgs_unstable_real = import <unstable> nixpkgsOpts;
+
+in {
 	nixpkgs.overlays = [
-		(import ./overlay.nix)
+		(self: super: {
+			# Expose these for the system to use.
+			inherit
+				nixpkgs_21_11
+				nixpkgs_unstable
+				nixpkgs_unstable_real;
+		})
+		(nurOverlay)
 		(import <polymc>).overlay
+		(import ./overlay.nix)
 		(self: super: {
 			transmission-web = super.callPackage ./packages/transmission-web {};
 			audacious-3-5 = super.callPackage ./packages/audacious-3-5 {};
@@ -33,16 +55,5 @@
 			# 	easyscreencast = super.callPackage ./packages/gnome-extensions/easyscreencast {};
 			# };
 		})
-	];
-
-	imports = [
-		./packages/transmission-web/service.nix
-		./packages/nixie/service.nix
-		./packages/butterfly/service.nix
-		./packages/caddy/caddy.nix
-		./packages/xcaddy/xcaddy.nix
-		./packages/caddyv1/caddy.nix
-		./packages/ghproxy/ghproxy.nix
-		./packages/drone-ci/drone-ci.nix
 	];
 }

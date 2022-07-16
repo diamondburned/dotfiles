@@ -12,6 +12,7 @@
  home-manager_unstable = "github:nix-community/home-manager 742c6cb"
  polymc = "github:PolyMC/PolyMC develop"
  unstable = "https://nixos.org/channels/nixos-unstable"
+ nur = "github:nix-community/NUR master"
 
 # TODO
 [root.aliases]

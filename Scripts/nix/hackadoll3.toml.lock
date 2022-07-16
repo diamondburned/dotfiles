@@ -24,6 +24,10 @@
       "url": "https://github.com/PolyMC/PolyMC/archive/dca4ea5ceaa30f1285570d2bf32ea112118b9204.tar.gz",
       "store_hash": "024pzp7za1ai17s8clvfgknxv3xrss9l"
     },
+    "github:nix-community/NUR master": {
+      "url": "https://github.com/nix-community/NUR/archive/0080fd66c6f9aa9e40ecf7b854f1af8db7a15bff.tar.gz",
+      "store_hash": "8q9zd9xzh6z0nby70if7bmwgg1pvz51c"
+    },
     "github:nix-community/home-manager 742c6cb": {
       "url": "https://github.com/nix-community/home-manager/archive/742c6cb.tar.gz",
       "store_hash": "zd4gj547yzgmdz2m5znw0bcmxfb8ajiz"

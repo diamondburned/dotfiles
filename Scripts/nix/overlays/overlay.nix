@@ -17,29 +17,15 @@ let vte = pkgs: pkgs.vte.overrideAttrs(old: {
 			./patches/vte-fast.patch
 		];
 	});
-	nur = import
-		(builtins.fetchTarball "https://github.com/nix-community/NUR/archive/master.tar.gz")
-		{pkgs = super;};
 
 	spicetify = builtins.fetchTarball https://github.com/pietdevries94/spicetify-nix/archive/master.tar.gz;
 	spicetify-themes = builtins.fetchTarball https://github.com/morpheusthewhite/spicetify-themes/archive/master.tar.gz;
 
-	nixpkgs_21_11 = import <nixpkgs_21_11> { config.allowUnfree = true; };
-	nixpkgs_unstable = import <nixpkgs_unstable> { config.allowUnfree = true; };
-	nixpkgs_puffnfresh = import <nixpkgs_puffnfresh> { config.allowUnfree = true; };
-	nixpkgs_unstable_real = import <unstable> { config.allowUnfree = true; };
-
 	GOPATH = "/home/diamond/.go";
 
 in {
-	# Expose these for the system to use.
-	inherit
-		nixpkgs_21_11
-		nixpkgs_unstable
-		nixpkgs_unstable_real;
-
 	# Upgrades.
-	inherit (nixpkgs_unstable)
+	inherit (self.nixpkgs_unstable)
 		neovim
 		go_1_18;
 
@@ -86,11 +72,6 @@ in {
 		unset GTK_THEME
 		exec ${pkg}/bin/${bin} "$@"
 	'';
-
-	# NUR
-	gamescope = nur.repos.dukzcry.gamescope;
-	spotify-adblock = nur.repos.instantos.spotify-adblock;
-	gatttool = nur.repos.mic92.gatttool;
 
 	# Spotify
 	spotify-unwrapped = self.callPackage ./packages/spotify-adblocked.nix {
