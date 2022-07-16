@@ -34,8 +34,6 @@ in {
 	systemd.tmpfiles.rules = [
 		# https://01.org/linuxgraphics/gfx-docs/drm/admin-guide/laptops/lg-laptop.html
 		"w /sys/devices/platform/lg-laptop/battery_care_limit - - - - 100"
-		# fan_mode is very mysterious, but setting it to 1 brings the CPU down to 900MHz.
-		"w /sys/devices/platform/lg-laptop/fan_mode - - - - 0"
 	];
 
 	# Do not suspend on lid close.
