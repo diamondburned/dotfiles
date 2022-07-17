@@ -119,6 +119,8 @@ in {
 		};
 	};
 
+	services.blueman.enable = true;
+
 	hardware.steam-hardware.enable = true;
 
 	# Undervolting.
