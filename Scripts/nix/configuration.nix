@@ -644,7 +644,7 @@ in {
 			foot
 			jq
 			go_1_18
-			perf
+			config.boot.kernelPackages.perf
 			perf_data_converter
 			tree
 			fzf
