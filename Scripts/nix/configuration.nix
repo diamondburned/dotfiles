@@ -644,6 +644,8 @@ in {
 			foot
 			jq
 			go_1_18
+			perf
+			perf_data_converter
 			tree
 			fzf
 			graphviz

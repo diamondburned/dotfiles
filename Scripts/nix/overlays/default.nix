@@ -51,6 +51,7 @@ in {
 			google-chrome-ozone = super.callPackage ./packages/google-chrome-ozone {};
 			lightdm-elephant-greeter = super.callPackage ./packages/lightdm-elephant-greeter;
 			rhythmbox-alternative-toolbar = pkgs.callPackage ./packages/rhythmbox-alternative-toolbar {};
+			perf_data_converter = pkgs.callPackage ./packages/perf_data_converter.nix {};
 			# gnomeExtensions = super.gnomeExtensions // {
 			# 	easyscreencast = super.callPackage ./packages/gnome-extensions/easyscreencast {};
 			# };
