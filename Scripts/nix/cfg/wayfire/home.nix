@@ -106,7 +106,7 @@ in {
 			"seattle-docked".outputs = [
 				(enable "eDP-1" {
 					mode     = "1920x1200@60.020000";
-					position = "0,17";
+					position = "0,329";
 					scale    = 1.2;
 				})
 				(enable "Unknown VP525" {
