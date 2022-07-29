@@ -49,6 +49,18 @@ in {
 		'';
 	};
 
+	# Allow 10 scale factors per integer instead of 4.
+	gnome = super.gnome // {
+		gnome-shell = super.gnome.gnome-shell.override {
+			mutter = super.gnome.mutter.overrideAttrs (old: {
+				patches = (old.patches or []) ++ [
+					./patches/mutter-scale-factors.patch
+				];
+				doCheck = false;
+			});
+		};
+	};
+
 	# Fuck libadwaita's stylesheets. They can go fuck themselves.
 	fuck-libadwaita = pkg: self.fuck-libadwaita-bin pkg pkg.pname;
 
