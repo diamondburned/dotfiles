@@ -677,7 +677,7 @@ in {
 
 			# # Chat/Social
 			# # zoom-us
-			# tdesktop
+			tdesktop
 			discord
 			# gotktrix
 			# # fractal
