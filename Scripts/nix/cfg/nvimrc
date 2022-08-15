@@ -426,6 +426,15 @@ call ale#linter#Define('sql', {
 	\ 'project_root': '.',
 	\ })
 
+function! FormatSQL(buffer) abort
+    return {
+    \   'command': 'sql-formatter'
+    \}
+endfunction
+
+"https://github.com/dense-analysis/ale/issues/3167"
+execute ale#fix#registry#Add('sql-formatter', 'FormatSQL', ['sql'], 'sql-formatter for sql')
+
 let g:ale_virtualtext_cursor = 1
 let g:ale_sign_error = '!'
 let g:ale_sign_warning = '>'
@@ -441,6 +450,7 @@ let g:ale_fixers = {
 			\ 'css':        [ "prettier" ],
 			\ 'c':          [ "clang-format" ],
 			\ 'cpp':        [ "uncrustify", "clang-format" ],
+			\ 'sql':        [ "sql-formatter" ],
 			\ 'json':       [ "prettier", "jq" ],
 			\ 'jsonc':      [ "prettier" ],
 			\ 'yaml':       [ "prettier" ],
@@ -461,7 +471,6 @@ let g:ale_linters = {
 			\ }
 nnoremap gd :ALEGoToDefinition<CR>
 nnoremap K :ALEHover<CR>
-
 
 ""Assistive LSP bindings"
 "function! ToggleQf()
