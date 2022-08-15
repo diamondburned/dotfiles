@@ -444,7 +444,6 @@ let g:ale_fixers = {
 			\ 'json':       [ "prettier", "jq" ],
 			\ 'jsonc':      [ "prettier" ],
 			\ 'yaml':       [ "prettier" ],
-			\ 'sql':        [ "sqls", "sqlformat" ],
 			\ 'svelte':     [ "prettier", "prettier_standard", "eslint" ],
 			\ 'markdown':   [ "prettier" ],
 			\ 'javascript': [ "prettier", "prettier_standard", "eslint" ],
