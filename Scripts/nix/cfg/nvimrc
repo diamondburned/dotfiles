@@ -418,6 +418,14 @@ set omnifunc=ale#completion#OmniFunc
 hi ALEError cterm=undercurl gui=undercurl guisp=#FF6961
 hi ALEWarningSign ctermbg=NONE
 
+call ale#linter#Define('sql', {
+	\ 'name': 'sqls',
+	\ 'lsp': 'stdio',
+	\ 'executable': 'sqls',
+	\ 'command': '%e',
+	\ 'project_root': '.',
+	\ })
+
 let g:ale_virtualtext_cursor = 1
 let g:ale_sign_error = '!'
 let g:ale_sign_warning = '>'
@@ -436,7 +444,7 @@ let g:ale_fixers = {
 			\ 'json':       [ "prettier", "jq" ],
 			\ 'jsonc':      [ "prettier" ],
 			\ 'yaml':       [ "prettier" ],
-			\ 'sql':        [ "pgformatter" ],
+			\ 'sql':        [ "sqls", "sqlformat" ],
 			\ 'svelte':     [ "prettier", "prettier_standard", "eslint" ],
 			\ 'markdown':   [ "prettier" ],
 			\ 'javascript': [ "prettier", "prettier_standard", "eslint" ],
@@ -448,6 +456,7 @@ let g:ale_linters = {
 			\ 'zig':        [ "zls" ],
 			\ 'c':          [ "clangd" ],
 			\ 'cpp':        [ "clangd" ],
+			\ 'sql':        [ "sqls" ],
 			\ 'svelte':     [ "svelteserver", "tsserver", "eslint" ],
 			\ 'javascript': [ "svelteserver", "tsserver", "deno", "standard" ],
 			\ }
