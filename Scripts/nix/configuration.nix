@@ -38,7 +38,7 @@ let lsoc-overlay = pkgs.fetchFromGitHub {
 		LC_TIME = "en_GB.UTF-8";
 		NIX_AUTO_RUN = "1";
 		# STEAM_RUNTIME = "0";
-		GTK_THEME = "Materia-dark-compact";
+		GTK_THEME = "Orchis-Pink-Dark-Compact";
 		# XDG_CURRENT_DESKTOP = "Wayfire";
 
 		GOPATH = "/home/diamond/.go";
@@ -569,7 +569,7 @@ in {
 			font.name = "Sans";
 
 			theme = {
-				name = "Materia-dark-compact";
+				name = userEnv.GTK_THEME;
 				package = pkgs.orchis-theme.override {
 					tweaks = [ "black" "compact" ];
 				};
