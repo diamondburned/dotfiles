@@ -570,7 +570,9 @@ in {
 
 			theme = {
 				name = "Materia-dark-compact";
-				package = pkgs.materia-theme;
+				package = pkgs.orchis-theme.override {
+					tweaks = [ "black" "compact" ];
+				};
 			};
 			iconTheme = {
 				name = "Papirus-Dark";
