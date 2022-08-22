@@ -46,6 +46,17 @@ map - dd
 
 set clipboard+=unnamedplus
 
+"80/100 column styling"
+set textwidth=80
+hi Column80  ctermfg=3
+hi Column100 ctermbg=1
+
+function! HighlightLong() abort
+	call matchadd("Column80",  '\%<101v.\%>81v')
+	call matchadd("Column100", '\%>100v.\+')
+endfunction
+au BufNew * call HighlightLong()
+
 "Make comments NOT italicized
 hi Comment cterm=none
 
@@ -62,7 +73,7 @@ autocmd BufRead,BufNewFile *.svelte setfiletype svelte
 autocmd BufRead,BufNewFile .env*    setlocal syntax=sh
 autocmd BufRead,BufNewFile *.html   setlocal textwidth=100
 autocmd BufRead,BufNewFile *.cpp    setlocal expandtab tabstop=2 shiftwidth=2
-autocmd BufRead,BufNewFile *.asm    set filetype=nasm
+autocmd BufRead,BufNewFile *.asm    set filetype=nasm textwidth=400
 
 "Go to last cursor on file open"
 autocmd BufReadPost *
@@ -77,17 +88,6 @@ filetype indent on
 "Thick gutter"
 set numberwidth=8
 set number
-
-"80/100 column styling"
-set textwidth=80
-hi Column80  ctermfg=3
-hi Column100 ctermbg=1
-
-function! HighlightLong() abort
-	call matchadd("Column80",  '\%<101v.\%>81v')
-	call matchadd("Column100", '\%>100v.\+')
-endfunction
-au BufNew * call HighlightLong()
 
 "Tab size 4"
 set tabstop=4
@@ -419,6 +419,14 @@ set omnifunc=ale#completion#OmniFunc
 hi ALEError cterm=undercurl gui=undercurl guisp=#FF6961
 hi ALEWarningSign ctermbg=NONE
 
+call ale#linter#Define('nasm', {
+	\ 'name': 'nasmfmt',
+	\ 'lsp': 'stdio',
+	\ 'executable': 'sqls',
+	\ 'command': '%e',
+	\ 'project_root': '.',
+	\ })
+
 call ale#linter#Define('sql', {
 	\ 'name': 'sqls',
 	\ 'lsp': 'stdio',
@@ -433,8 +441,15 @@ function! FormatSQL(buffer) abort
     \}
 endfunction
 
+function! FormatNasm(buffer) abort
+    return {
+    \   'command': 'nasmfmt -'
+    \}
+endfunction
+
 "https://github.com/dense-analysis/ale/issues/3167"
 execute ale#fix#registry#Add('sql-formatter', 'FormatSQL', ['sql'], 'sql-formatter for sql')
+execute ale#fix#registry#Add('nasmfmt', 'FormatNasm', ['nasm'], 'nasmfmt')
 
 let g:ale_virtualtext_cursor = 1
 let g:ale_sign_error = '!'
@@ -455,6 +470,7 @@ let g:ale_fixers = {
 			\ 'json':       [ "prettier", "jq" ],
 			\ 'jsonc':      [ "prettier" ],
 			\ 'yaml':       [ "prettier" ],
+			\ 'nasm':       [ "nasmfmt" ],
 			\ 'svelte':     [ "prettier", "prettier_standard", "eslint" ],
 			\ 'markdown':   [ "prettier" ],
 			\ 'javascript': [ "prettier", "prettier_standard", "eslint" ],
