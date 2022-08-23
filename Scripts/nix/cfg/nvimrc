@@ -29,6 +29,7 @@ Plug 'jiangmiao/auto-pairs'
 Plug 'dense-analysis/ale'
 
 "Languages"
+Plug 'makerj/vim-pdf'
 Plug 'cespare/vim-toml'
 Plug 'LnL7/vim-nix'
 Plug 'symphorien/vim-nixhash'
