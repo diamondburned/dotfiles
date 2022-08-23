@@ -709,6 +709,7 @@ in {
 			kooha
 			glib-networking
 			gnome-mpv
+			gnome3.gnome-power-manager
 			gnome3.eog
 			gnome3.vinagre
 			gnome3.file-roller
