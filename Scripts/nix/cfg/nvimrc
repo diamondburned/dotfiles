@@ -35,9 +35,9 @@ Plug 'LnL7/vim-nix'
 Plug 'symphorien/vim-nixhash'
 " Plug 'evanleck/vim-svelte'
 Plug 'mattn/vim-gotmpl'
-Plug 'vim-pandoc/vim-pandoc'
-Plug 'vim-pandoc/vim-pandoc-syntax'
-Plug 'vim-pandoc/vim-rmarkdown'
+" Plug 'vim-pandoc/vim-pandoc'
+" Plug 'vim-pandoc/vim-pandoc-syntax'
+" Plug 'vim-pandoc/vim-rmarkdown'
 
 call plug#end()
 
