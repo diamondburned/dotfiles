@@ -33,11 +33,7 @@ export SSH_ASKPASS=""
 tabs 4
 
 f() {
-	[[ "$(jobs)" ]] && {
-		echo "There are background jobs."
-		return 1
-	}
-	"$@" &> /dev/null & disown
+	nohup "$@" &> /dev/null
 }
 
 fork() {
