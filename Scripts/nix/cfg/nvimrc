@@ -475,6 +475,7 @@ let g:ale_fixers = {
 			\ 'jsonc':      [ "prettier" ],
 			\ 'yaml':       [ "prettier" ],
 			\ 'nasm':       [ "nasmfmt" ],
+			\ 'python':     [ "autopep8", "black" ],
 			\ 'svelte':     [ "prettier", "prettier_standard", "eslint" ],
 			\ 'markdown':   [ "prettier" ],
 			\ 'javascript': [ "prettier", "prettier_standard", "eslint" ],
@@ -488,6 +489,7 @@ let g:ale_linters = {
 			\ 'cpp':        [ "clangd" ],
 			\ 'sql':        [ "sqls" ],
 			\ 'nasm':       [ "nasm" ],
+			\ 'python':     [ "pyright" ],
 			\ 'svelte':     [ "svelteserver", "tsserver", "eslint" ],
 			\ 'javascript': [ "svelteserver", "tsserver", "deno", "standard" ],
 			\ }
