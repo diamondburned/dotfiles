@@ -625,6 +625,7 @@ in {
 			gnome3.polari
 			gnome3.pomodoro
 			gnomeExtensions.gsconnect
+			gnomeExtensions.easyScreenCast
 			keepassxc
 			gimp-with-plugins
 			git-crypt
