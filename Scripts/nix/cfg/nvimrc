@@ -478,7 +478,8 @@ let g:ale_fixers = {
 			\ 'python':     [ "autopep8", "black" ],
 			\ 'svelte':     [ "prettier", "prettier_standard", "eslint" ],
 			\ 'markdown':   [ "prettier" ],
-			\ 'javascript': [ "prettier", "prettier_standard", "eslint" ],
+			\ 'javascript': [ "deno", "prettier", "prettier_standard", "eslint" ],
+			\ 'typescript': [ "deno", "prettier", "prettier_standard", "eslint" ],
 			\ }
 let g:ale_completion_enabled = 1
 "Previously for Go: staticcheck and go vet"
@@ -491,7 +492,8 @@ let g:ale_linters = {
 			\ 'nasm':       [ "nasm" ],
 			\ 'python':     [ "pyright" ],
 			\ 'svelte':     [ "svelteserver", "tsserver", "eslint" ],
-			\ 'javascript': [ "svelteserver", "tsserver", "deno", "standard" ],
+			\ 'javascript': [ "deno", "svelteserver", "tsserver", "deno", "standard" ],
+			\ 'typescript': [ "deno", "svelteserver", "tsserver", "deno", "standard" ],
 			\ }
 nnoremap gd :ALEGoToDefinition<CR>
 nnoremap K :ALEHover<CR>
