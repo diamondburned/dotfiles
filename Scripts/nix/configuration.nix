@@ -73,6 +73,7 @@ in {
 		./overlays
 		./overlays/services.nix
 		./secrets
+		./configroot.nix
 		./cfg/udev
 		./cfg/wayfire
 		./cfg/pipewire
@@ -457,6 +458,8 @@ in {
 
 			./overlays
 			./overlays/home-manager
+			./configroot.nix
+			./secrets/diamond
 			./cfg/wyze
 			./cfg/tilix
 			./cfg/firefox
