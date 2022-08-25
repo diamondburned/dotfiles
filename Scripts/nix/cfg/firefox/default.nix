@@ -49,6 +49,16 @@ in {
 	# 	};
 	# });
 
+	home.packages = with pkgs; [
+		(makeFirefoxProfileDesktopFile {
+			profile = profileName;
+			name = "Firefox (default)";
+		})
+		(makeFirefoxProfileDesktopFile {
+			profile = "Tunneled";
+		})
+	];
+
 	programs.firefox.enable = true;
 	programs.firefox.package = pkgs.nixpkgs_unstable_real.firefox;
 

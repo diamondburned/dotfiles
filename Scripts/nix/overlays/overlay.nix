@@ -1,6 +1,8 @@
 self: super:
 
-let vte = pkgs: pkgs.vte.overrideAttrs(old: {
+let lib = super.lib;
+
+	vte = pkgs: pkgs.vte.overrideAttrs(old: {
 		version = "0.63.91"; # rev without SIXEL reversion commit.
 		src = builtins.fetchGit {
 			url = "https://gitlab.gnome.org/GNOME/vte.git";
@@ -226,4 +228,27 @@ in {
 					--add-flags "--enable-gpu-rasterization --enable-zero-copy --enable-gpu-compositing --enable-native-gpu-memory-buffers --enable-oop-rasterization --enable-features=UseSkiaRenderer,CanvasOopRasterization"
 			'';
 		});
+
+	makeFirefoxProfileDesktopFile = {
+		profile,
+		name ? "Firefox (${profile})",
+		icon ? "firefox",
+	}: super.makeDesktopItem {
+		name = "firefox-${profile}.desktop";
+		# bin/find-desktop Firefox
+		desktopName = name;
+		genericName = "Web Browser (${name})";
+		exec = "firefox -p ${profile} %U";
+		icon = icon;
+		mimeTypes = [
+			"text/html"
+			"text/xml"
+			"application/xhtml+xml"
+			"application/vnd.mozilla.xul+xml"
+			"x-scheme-handler/http"
+			"x-scheme-handler/https"
+			"x-scheme-handler/ftp"
+		];
+		categories = [ "Network" "WebBrowser" ];
+	};
 }
