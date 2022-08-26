@@ -90,6 +90,8 @@ in {
 			"browser.cache.offline.enable" = true;
 			"browser.cache.memory.capacity" = 14336;
 			"xpinstall.signatures.required" = false;
+			"dom.min_background_timeout_value" = 10000; # 10s
+			"dom.timeout.throttling_delay" = 10000;     # 10s
 			"dom.ipc.plugins.enabled" = false;
 			"security.dialog_enable_delay" = 0;
 			"dom.dialog_element.enabled" = true;

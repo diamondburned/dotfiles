@@ -33,7 +33,7 @@ export SSH_ASKPASS=""
 tabs 4
 
 f() {
-	nohup "$@" &> /dev/null
+	"$@" &> /dev/null & disown
 }
 
 fork() {
