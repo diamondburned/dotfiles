@@ -685,7 +685,8 @@ in {
 			# # zoom-us
 			tdesktop
 			discord
-			# gotktrix
+			gtkcord4
+			gotktrix
 			# # fractal
 
 			# Office

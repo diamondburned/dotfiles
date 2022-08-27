@@ -43,6 +43,8 @@ in {
 			blobmoji = super.callPackage ./packages/blobmoji {};
 			drone-ci = super.callPackage ./packages/drone-ci {};
 			gappdash = super.callPackage ./packages/gappdash {};
+			gotktrix = super.callPackage ./packages/gotktrix.nix {};
+			gtkcord4 = super.callPackage ./packages/gtkcord4.nix {};
 			osu-wine = super.callPackage ./packages/osu-wine {};
 			osu-wineprefix = super.callPackage ./packages/osu-wineprefix {};
 			intiface-cli = super.callPackage ./packages/intiface-cli {};
