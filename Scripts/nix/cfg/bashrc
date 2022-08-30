@@ -33,7 +33,7 @@ export SSH_ASKPASS=""
 tabs 4
 
 f() {
-	"$@" &> /dev/null & disown
+	"$@" &>> /tmp/forked-"$1".log & disown
 }
 
 fork() {
