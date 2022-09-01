@@ -439,21 +439,35 @@ call ale#linter#Define('sql', {
 	\ 'project_root': '.',
 	\ })
 
-function! FormatSQL(buffer) abort
+function! FixSQLFormatter(buffer) abort
     return {
     \   'command': 'sql-formatter'
     \}
 endfunction
 
-function! FormatNasm(buffer) abort
+function! FixNasmfmt(buffer) abort
     return {
     \   'command': 'nasmfmt -'
     \}
 endfunction
 
+function! FixDenoJSON(buffer) abort
+    return {
+    \   'command': 'deno fmt --ext json -'
+    \}
+endfunction
+
+function! FixDenoJSONC(buffer) abort
+    return {
+    \   'command': 'deno fmt --ext jsonc -'
+    \}
+endfunction
+
 "https://github.com/dense-analysis/ale/issues/3167"
-execute ale#fix#registry#Add('sql-formatter', 'FormatSQL', ['sql'], 'sql-formatter for sql')
-execute ale#fix#registry#Add('nasmfmt', 'FormatNasm', ['nasm'], 'nasmfmt')
+execute ale#fix#registry#Add('sql-formatter', 'FixSQLFormatter', ['sql'], 'sql-formatter for sql')
+execute ale#fix#registry#Add('nasmfmt', 'FixNasmfmt', ['nasm'], 'nasmfmt')
+execute ale#fix#registry#Add('denojson', 'FixDenoJSON', ['json'], 'deno fmt for json')
+execute ale#fix#registry#Add('denojsonc', 'FixDenoJSONC', ['jsonc'], 'deno fmt for jsonc')
 
 let g:ale_virtualtext_cursor = 1
 let g:ale_sign_error = '!'
@@ -471,8 +485,8 @@ let g:ale_fixers = {
 			\ 'c':          [ "clang-format" ],
 			\ 'cpp':        [ "uncrustify", "clang-format" ],
 			\ 'sql':        [ "sql-formatter" ],
-			\ 'json':       [ "prettier", "jq", "deno" ],
-			\ 'jsonc':      [ "prettier", "deno" ],
+			\ 'json':       [ "prettier", "jq", "denojson" ],
+			\ 'jsonc':      [ "prettier", "denojsonc" ],
 			\ 'yaml':       [ "prettier" ],
 			\ 'nasm':       [ "nasmfmt" ],
 			\ 'python':     [ "autopep8", "black" ],
