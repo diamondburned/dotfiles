@@ -92,6 +92,11 @@ in {
 	# boot.kernelPackages = pkgs.linuxPackages_latest;
 	# boot.kernelPackages = pkgs.linuxPackages_xanmod;
 
+	services.earlyoom = {
+		enable = true;
+		enableNotifications = true;
+	};
+
 	# Kernel tweaks and such for real-time audio.
 	musnix = {
 		enable = true;
