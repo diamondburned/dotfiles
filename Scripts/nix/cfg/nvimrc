@@ -409,6 +409,21 @@ set scrolloff=7
 set sidescroll=1
 set sidescrolloff=5
 
+"Tree Sitter configs"
+lua <<EOF
+	local parser_config = require "nvim-treesitter.parsers".get_parser_configs()
+	parser_config.x86asm = {
+		install_info = {
+			url = "https://github.com/bearcove/tree-sitter-x86asm.git",
+			files = {"src/parser.c"},
+			branch = "main",
+			generate_requires_npm = true,
+			requires_generate_from_grammar = false,
+		},
+		filetype = "nasm",
+	}
+EOF
+
 "Auto-reload changed files"
 set autoread
 au CursorHold * checktime

@@ -1,21 +1,28 @@
 { pkgs }:
 
-let deps = with pkgs; [
-	gtk3
-	gtk4
-	glib
-	librsvg
-	libadwaita
-	gdk-pixbuf
-	gobject-introspection
-	hicolor-icon-theme
-	gst_all_1.gstreamer
-	gst_all_1.gst-plugins-base
-	gst_all_1.gst-plugins-good
-	gst_all_1.gst-plugins-bad
-	gst_all_1.gst-plugins-ugly
-];
+let newpkgs = import (pkgs.fetchFromGitHub {
+		owner = "NixOS";
+		repo  = "nixpkgs";
+		rev   = "614a842";
+		hash  = "sha256:0gkpnjdcrh5s4jx0i8dc6679qfkffmz4m719aarzki4jss4l5n5p";
+	}) {};
 
+	deps = with newpkgs; [
+		gtk3
+		gtk4
+		glib
+		librsvg
+		libadwaita
+		gdk-pixbuf
+		gobject-introspection
+		hicolor-icon-theme
+		gst_all_1.gstreamer
+		gst_all_1.gst-plugins-base
+		gst_all_1.gst-plugins-good
+		gst_all_1.gst-plugins-bad
+		gst_all_1.gst-plugins-ugly
+	];
+	
 in pkgs.buildGoPackage {
 	name = "grun";
 	src  = pkgs.writeTextDir "main.go" ''
@@ -58,6 +65,6 @@ in pkgs.buildGoPackage {
 
 	nativeBuildInputs = with pkgs; [
 		wrapGAppsHook
-		# wrapGAppsHook4
+		wrapGAppsHook4
 	] ++ deps;
 }
