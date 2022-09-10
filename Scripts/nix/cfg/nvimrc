@@ -502,6 +502,7 @@ let g:ale_fixers = {
 			\ 'sql':        [ "sql-formatter" ],
 			\ 'json':       [ "prettier", "jq", "denojson" ],
 			\ 'jsonc':      [ "prettier", "denojsonc" ],
+			\ 'html':       [ "prettier" ],
 			\ 'yaml':       [ "prettier" ],
 			\ 'nasm':       [ "nasmfmt" ],
 			\ 'python':     [ "autopep8", "black" ],
