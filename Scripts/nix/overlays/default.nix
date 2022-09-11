@@ -54,6 +54,7 @@ in {
 			lightdm-elephant-greeter = super.callPackage ./packages/lightdm-elephant-greeter;
 			rhythmbox-alternative-toolbar = pkgs.callPackage ./packages/rhythmbox-alternative-toolbar {};
 			perf_data_converter = pkgs.callPackage ./packages/perf_data_converter.nix {};
+			typescript-transpile-only = pkgs.callPackage ./packages/typescript-transpile-only {};
 			# gnomeExtensions = super.gnomeExtensions // {
 			# 	easyscreencast = super.callPackage ./packages/gnome-extensions/easyscreencast {};
 			# };
