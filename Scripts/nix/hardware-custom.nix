@@ -15,6 +15,15 @@ let utils = import ./utils { inherit lib; };
 	# 	rev = "79a35253e6d81b840c3d9db8f3b0095e8a449b81";
 	# };
 
+	rtl8188gu = config.boot.kernelPackages.rtl88x2bu.overrideAttrs (old: {
+		src = pkgs.fetchFromGitHub {
+			owner  = "McMCCRU";
+			repo   = "rtl8188gu";
+			rev    = "bb3292d";
+			sha256 = "1d7giqxpvzks97r1hixl50mxd05sxy5fja8i6jjxlkd4g2zvq6wb";
+		};
+	});
+
 in {
 	imports = [
 		"${musnix }"
@@ -74,6 +83,8 @@ in {
 	boot.extraModulePackages = with config.boot.kernelPackages; [
 		# Add the camera loopback drivers.
 		v4l2loopback
+
+		rtl8188gu
 
 		# Driver for the TP-Link Archer T3U.
 		# (rtl88x2bu.overrideAttrs (old: {
