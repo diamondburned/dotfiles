@@ -16,6 +16,9 @@ let utils = import ./utils { inherit lib; };
 	# };
 
 	rtl8188gu = config.boot.kernelPackages.rtl88x2bu.overrideAttrs (old: {
+		pname = "rtl8188gu";
+		version = "bb3292d";
+
 		src = pkgs.fetchFromGitHub {
 			owner  = "McMCCRU";
 			repo   = "rtl8188gu";
@@ -99,7 +102,7 @@ in {
 	];
 
 	# Refer to unstable.nix.
-	boot.kernelPackages = pkgs.nixpkgs_unstable_real.linuxPackages_5_18;
+	boot.kernelPackages = pkgs.nixpkgs_unstable_real.linuxPackages_latest;
 	# boot.kernelPackages = pkgs.linuxPackages_latest;
 	# boot.kernelPackages = pkgs.linuxPackages_xanmod;
 
