@@ -106,6 +106,8 @@ in {
 	services.earlyoom = {
 		enable = true;
 		enableNotifications = true;
+		freeSwapThreshold = 15;
+		freeSwapKillThreshold = 5;
 	};
 
 	# Kernel tweaks and such for real-time audio.
