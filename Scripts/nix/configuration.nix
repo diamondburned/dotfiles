@@ -75,7 +75,7 @@ in {
 		./secrets
 		./configroot.nix
 		./cfg/udev
-		./cfg/wayfire
+		# ./cfg/wayfire
 		./cfg/pipewire
 		./cfg/localhost
 	];
@@ -460,10 +460,10 @@ in {
 			./overlays/home-manager
 			./configroot.nix
 			./secrets/diamond
-			./cfg/wyze
-			./cfg/tilix
+			# ./cfg/wyze
+			# ./cfg/tilix
 			./cfg/firefox
-			./cfg/wayfire/home.nix
+			# ./cfg/wayfire/home.nix
 			./cfg/hm-gnome-terminal.nix
 
 			# Automatically push dotfiles.
@@ -562,6 +562,7 @@ in {
 			enable  = true;
 			plugins = with pkgs; [
 				obs-backgroundremoval
+				obs-studio-plugins.obs-websocket
 				# obs-wlrobs
 				# obs-v4l2sink
 			];

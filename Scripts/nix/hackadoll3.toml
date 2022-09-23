@@ -5,7 +5,7 @@
 [root.channels]
  # nixos = "github:NixOS/nixpkgs 1ffba9f"
  nixpkgs_21_11 = "github:NixOS/nixpkgs nixos-21.11"
- nixpkgs_unstable = "github:NixOS/nixpkgs nixos-unstable"
+ nixpkgs_unstable = "github:NixOS/nixpkgs c97e777ff06"
  nixpkgs_puffnfresh = "github:puffnfresh/nixpkgs pkgs/obs-backgroundremoval"
  nix-wayland = "github:nix-community/nixpkgs-wayland master"
  home-manager_21_11 = "github:nix-community/home-manager release-21.11"
