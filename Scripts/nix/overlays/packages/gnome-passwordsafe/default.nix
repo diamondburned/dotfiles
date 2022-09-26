@@ -1,7 +1,7 @@
 {
 	stdenv, fetchgit, makeWrapper, wrapGAppsHook,
 	libhandy, libpwquality, python3, gtk3, glib,
-	meson, ninja, pkgconfig, cmake, gobject-introspection,
+	meson, ninja, pkg-config, cmake, gobject-introspection,
 }:
 
 python3.pkgs.buildPythonApplication rec {
@@ -40,7 +40,7 @@ python3.pkgs.buildPythonApplication rec {
 		wrapGAppsHook
 		meson
 		ninja
-		pkgconfig
+		pkg-config
 		cmake
 	];
 

@@ -20,9 +20,9 @@
       "url": "https://github.com/nix-community/NUR/archive/a643ef20f4722ae40f8949be4c453271172be25a.tar.gz",
       "store_hash": "hjsg662j6d4isymxdyna8fxlyns7cj6j"
     },
-    "github:nix-community/home-manager 742c6cb": {
-      "url": "https://github.com/nix-community/home-manager/archive/742c6cb.tar.gz",
-      "store_hash": "f2vbnd7mc2147sr1ym9rlyhn3fdpzw7p"
+    "github:nix-community/home-manager master": {
+      "url": "https://github.com/nix-community/home-manager/archive/9e7394523eb4f298528d457e316fc752bdf07151.tar.gz",
+      "store_hash": "fg986336rdfr24p1hxxvc7i56h8hnhi4"
     },
     "github:nix-community/home-manager release-21.11": {
       "url": "https://github.com/nix-community/home-manager/archive/d93d56ab8c1c6aa575854a79b9d2f69d491db7d0.tar.gz",

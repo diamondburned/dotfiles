@@ -1,4 +1,4 @@
-{ stdenv, fetchurl, pkgconfig, glib, gtk3, libmowgli
+{ stdenv, fetchurl, pkg-config, glib, gtk3, libmowgli
 , gettext, dbus_glib, libxml2, libmad, xorg, alsaLib, libogg
 , libvorbis, libcdio, libcddb, flac, ffmpeg, makeWrapper
 , mpg123, neon, faad2, gnome3, pkgs
@@ -20,7 +20,7 @@ stdenv.mkDerivation {
 	};
 
 	buildInputs =
-		[ gettext pkgconfig glib gtk3 libmowgli libxml2 dbus_glib
+		[ gettext pkg-config glib gtk3 libmowgli libxml2 dbus_glib
 			libmad xorg.libXcomposite libogg libvorbis flac alsaLib libcdio
 			libcddb ffmpeg makeWrapper mpg123 neon faad2 gnome3.defaultIconTheme
 		];

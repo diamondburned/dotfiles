@@ -28,7 +28,7 @@ stdenv.mkDerivation rec {
 	};
 
 	nativeBuildInputs = with pkgs; [
-		ninja meson pkgconfig wrapGAppsHook
+		ninja meson pkg-config wrapGAppsHook
 	];
 
 	buildInputs =  (with pkgs; [

@@ -341,6 +341,10 @@ in {
 	# Enable the GNOME desktop environment
 	services.xserver.desktopManager.gnome.enable = true;
 
+	# Enable GDM.
+	services.xserver.displayManager.gdm.enable = true;
+	services.xserver.displayManager.gdm.autoSuspend = true;
+
 	# More GNOME things
 	services.gnome = {
 		core-shell.enable = true;
@@ -555,6 +559,7 @@ in {
 				dither-depth = 8;
 				fbo-format = "rgba32f";
 				scale = "lanczos";
+				tone-mapping = "bt.2446a";
 			};
 		};
 
@@ -614,7 +619,7 @@ in {
 			en-science
 			en-computers
 
-		]) ++ (with pkgs.nixpkgs_unstable_real; [
+		]) ++ (with pkgs.nixpkgs_unstable; [
 			(gamescope)
 			(steam.override {
 				extraPkgs = pkgs: with pkgs; [
@@ -647,6 +652,7 @@ in {
 			# gatttool
 
 			# Development tools
+			dos2unix
 			neovim
 			foot
 			jq

@@ -1,5 +1,5 @@
 {
-	stdenv, fetchurl, makeWrapper, pkgconfig, wrapGAppsHook, intltool,
+	stdenv, fetchurl, makeWrapper, pkg-config, wrapGAppsHook, intltool,
 	gnome3, gnome2, libxml2, glib, id3lib, libogg,
 }:
 
@@ -25,7 +25,7 @@ stdenv.mkDerivation rec {
 		id3lib
 		libogg
 	];
-	nativeBuildInputs = [ intltool pkgconfig wrapGAppsHook ];
+	nativeBuildInputs = [ intltool pkg-config wrapGAppsHook ];
 
 	meta = with pkgs.lib; {
 		description = "Program to manage the tags in MP3 and Ogg Vorbis files";

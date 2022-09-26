@@ -21,7 +21,7 @@ in pkgs.buildGoModule {
 	buildInputs = shell.buildInputs;
 
 	nativeBuildInputs = with pkgs; [
-		pkgconfig
+		pkg-config
 	];
 
 	vendorSha256 = "18bpxzwpplz9xbgjwz1n704fcqgw3fplqsjzc587ibk25crv7w19";

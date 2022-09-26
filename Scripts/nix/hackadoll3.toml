@@ -9,7 +9,7 @@
  nixpkgs_puffnfresh = "github:puffnfresh/nixpkgs pkgs/obs-backgroundremoval"
  nix-wayland = "github:nix-community/nixpkgs-wayland master"
  home-manager_21_11 = "github:nix-community/home-manager release-21.11"
- home-manager_unstable = "github:nix-community/home-manager 742c6cb"
+ home-manager_unstable = "github:nix-community/home-manager master"
  polymc = "github:PolyMC/PolyMC develop"
  unstable = "https://nixos.org/channels/nixos-unstable"
  nur = "github:nix-community/NUR master"
@@ -19,9 +19,9 @@
  nixos = "nixpkgs_unstable"
  home-manager = "home-manager_unstable"
 
-[diamond.channels]
- nixos = "github:NixOS/nixpkgs nixos-unstable"
- unstable = "https://nixos.org/channels/nixos-unstable"
-
-[diamond.aliases]
- nixpkgs = "nixos"
+# [diamond.channels]
+#  nixos = "github:NixOS/nixpkgs nixos-unstable"
+#  unstable = "https://nixos.org/channels/nixos-unstable"
+# 
+# [diamond.aliases]
+#  nixpkgs = "nixos"

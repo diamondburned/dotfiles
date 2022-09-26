@@ -11,7 +11,7 @@ stdenv.mkDerivation {
 	};
 
 	nativeBuildInputs = with pkgs; [
-		pkgconfig
+		pkg-config
 		intltool perl perlPackages.XMLParser
 		itstool
 		autoreconfHook

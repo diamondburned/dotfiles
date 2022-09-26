@@ -20,7 +20,7 @@ in pkgs.buildGo117Module {
 	buildInputs = shell.buildInputs;
 
 	nativeBuildInputs = with pkgs; [
-		pkgconfig
+		pkg-config
 		glib
 		wrapGAppsHook
 	];
