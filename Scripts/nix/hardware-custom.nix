@@ -50,17 +50,14 @@ in {
 		"w /sys/devices/platform/lg-laptop/battery_care_limit - - - - 100"
 	];
 
-	services.udev.extraRules = builtins.concatStringsSep "\n" [
-		# Add this for Vial.
-		''KERNEL=="hidraw*", SUBSYSTEM=="hidraw", MODE="0666", TAG+="uaccess", TAG+="udev-acl"''
-	];
-
 	# Do not suspend on lid close.
 	services.logind.lidSwitch = "ignore";
 
 	hardware.cpu.intel.updateMicrocode = true;
 
 	environment.systemPackages = with pkgs; [
+		qmk
+		qmk-udev-rules
 		# vkmark
 	];
 
