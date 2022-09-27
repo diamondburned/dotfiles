@@ -573,6 +573,12 @@ in {
 			];
 		};
 
+		programs.neovim = {
+			enable = true;
+			vimAlias = true;
+			withNodeJs = true;
+		};
+
 		gtk = {
 			enable = true;
 			font.name = "Sans";
@@ -653,7 +659,6 @@ in {
 
 			# Development tools
 			dos2unix
-			neovim
 			foot
 			jq
 			go_1_18

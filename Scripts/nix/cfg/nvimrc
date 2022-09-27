@@ -27,6 +27,7 @@ Plug 'jiangmiao/auto-pairs'
 
 "Autocompletion"
 Plug 'dense-analysis/ale'
+Plug 'github/copilot.vim'
 
 "Languages"
 Plug 'makerj/vim-pdf'
