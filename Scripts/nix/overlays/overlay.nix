@@ -34,6 +34,15 @@ in {
 	# Downgrades.
 	# inherit (nixpkgs_21_11);
 
+	# For Copilot + Vim.
+	nixpkgs_copilot = import <nixpkgs> {
+		overlays = [
+			(self_copilot: super_copilot: {
+				nodejs = self.nixpkgs_21_11.nodejs;
+			})
+		];
+	};
+
 	# For OBS.
 	# inherit (nixpkgs_puffnfresh)
 	# 	obs-studio

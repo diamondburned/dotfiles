@@ -573,12 +573,6 @@ in {
 			];
 		};
 
-		programs.neovim = {
-			enable = true;
-			vimAlias = true;
-			withNodeJs = true;
-		};
-
 		gtk = {
 			enable = true;
 			font.name = "Sans";
@@ -675,6 +669,16 @@ in {
 			xorg.xauth
 			octave-soft
 			grun
+
+			(with nixpkgs_copilot; wrapNeovimUnstable neovim-unwrapped
+				# Use unstable Neovim with a slightly outdated Nixpkgs because
+				# Copilot is fucking trash.
+				(neovimUtils.makeNeovimConfig {
+					vimAlias = true;
+					withNodeJs = true;
+					customRC = builtins.readFile ./cfg/nvimrc;
+				})
+			)
 
 			# Multimedia
 			# aqours
