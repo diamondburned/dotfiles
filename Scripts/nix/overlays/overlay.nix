@@ -32,7 +32,8 @@ in {
 		go_1_18;
 
 	# Downgrades.
-	# inherit (nixpkgs_21_11);
+	# inherit (self.nixpkgs_21_11)
+	# 	gnome;
 
 	# For Copilot + Vim.
 	nixpkgs_copilot = import <nixpkgs> {
@@ -62,7 +63,7 @@ in {
 
 	# Allow 10 scale factors per integer instead of 4.
 	gnome = super.gnome // {
-		gnome-shell = super.gnome.gnome-shell.override {
+		gnome-shell = super.nixpkgs_21_11.gnome.gnome-shell.override {
 			mutter = super.gnome.mutter.overrideAttrs (old: {
 				patches = (old.patches or []) ++ [
 					./patches/mutter-scale-factors.patch
