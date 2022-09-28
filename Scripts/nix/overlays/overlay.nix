@@ -63,14 +63,27 @@ in {
 
 	# Allow 10 scale factors per integer instead of 4.
 	gnome = super.gnome // {
-		gnome-shell = super.nixpkgs_21_11.gnome.gnome-shell.override {
-			mutter = super.gnome.mutter.overrideAttrs (old: {
-				patches = (old.patches or []) ++ [
-					./patches/mutter-scale-factors.patch
-				];
-				doCheck = false;
+		gnome-shell =
+			let supergnome = super.nixpkgs_gnome43.gnome;
+				mutter = supergnome.mutter.overrideAttrs (old: {
+					patches = (old.patches or []) ++ [
+						./patches/mutter-scale-factors.patch
+					];
+					doCheck = false;
+				});
+				gnome-shell' = supergnome.gnome-shell.override {
+					inherit mutter;
+				};
+			in gnome-shell'.overrideAttrs (old: {
+				version = "43.0";
+				src = super.fetchFromGitLab {
+					domain = "gitlab.gnome.org";
+					owner  = "GNOME";
+					repo   = "gnome-shell";
+					rev    = "43.0";
+					sha256 = "0k9dcxk6mby2if2qwyvvzd62mnvc338if5i012098jbiggxyy1gg";
+				};
 			});
-		};
 	};
 
 	# Fuck libadwaita's stylesheets. They can go fuck themselves.

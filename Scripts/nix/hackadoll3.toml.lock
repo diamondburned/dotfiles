@@ -4,6 +4,10 @@
       "url": "https://github.com/NixOS/nixpkgs/archive/c97e777ff06.tar.gz",
       "store_hash": "3jnz0b35cvaa7b3qq6zcp3w6mfsqhdps"
     },
+    "github:NixOS/nixpkgs d8404059b21": {
+      "url": "https://github.com/NixOS/nixpkgs/archive/d8404059b21.tar.gz",
+      "store_hash": "msclcjz2y947jf1hxv9gpnkmc31mip2q"
+    },
     "github:NixOS/nixpkgs nixos-21.11": {
       "url": "https://github.com/NixOS/nixpkgs/archive/eabc38219184cc3e04a974fe31857d8e0eac098d.tar.gz",
       "store_hash": "88r745wdywwzvqzfk19xgim9rrsd5gm2"
