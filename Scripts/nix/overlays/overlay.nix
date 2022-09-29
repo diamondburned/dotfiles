@@ -62,31 +62,28 @@ in {
 	};
 
 	# Allow 10 scale factors per integer instead of 4.
-	gnome = super.gnome // {
-		gnome-shell =
-			let supergnome = super.nixpkgs_unstable_real.gnome;
-				mutter = supergnome.mutter.overrideAttrs (old: {
-					patches = (old.patches or []) ++ [
-						./patches/mutter-scale-factors.patch
-					];
-					doCheck = false;
-				});
-				gnome-shell' = supergnome.gnome-shell.override {
-					inherit mutter;
-				};
-			in gnome-shell'.overrideAttrs (old: {
-				version = "43.0";
-				src = super.fetchurl {
-					url = "mirror://gnome/sources/gnome-shell/43/gnome-shell-43.0.tar.xz";
-					sha256 = "0h8vfj1aw5vvz56iqdgq9p48xc91r1nizd76wrpwrwzr0dvwkvpn";
-					# sha256 = "05yr7qxjdjyf3m7nf5nbam2576gl11c8rwph72q928bni3kxc5ag";
-				};
-				buildInputs = old.buildInputs ++ (with super; [ gcr ]);
-				postPatch = ''
-					patchShebangs src/data-to-c.pl
-				'';
-			});
-	};
+	gnome = super.gnome.overrideScope' (self_gnome: super_gnome: {
+		mutter = super_gnome.mutter.overrideAttrs (old: {
+			patches = (old.patches or []) ++ [
+				./patches/mutter-scale-factors.patch
+			];
+			doCheck = false;
+		});
+		gnome-shell = super_gnome.gnome-shell.overrideAttrs (old: {
+			version = "42.5";
+			src = super.fetchurl {
+				url = "mirror://gnome/sources/gnome-shell/42/gnome-shell-42.5.tar.xz";
+				sha256 = "05yr7qxjdjyf3m7nf5nbam2576gl11c8rwph72q928bni3kxc5ag";
+			};
+			# src = super.fetchurl {
+			# 	url = "mirror://gnome/sources/gnome-shell/43/gnome-shell-43.0.tar.xz";
+			# 	sha256 = "0h8vfj1aw5vvz56iqdgq9p48xc91r1nizd76wrpwrwzr0dvwkvpn";
+			# };
+			postPatch = ''
+				patchShebangs src/data-to-c.pl
+			'';
+		});
+	});
 
 	# Fuck libadwaita's stylesheets. They can go fuck themselves.
 	fuck-libadwaita = pkg: self.fuck-libadwaita-bin pkg pkg.pname;

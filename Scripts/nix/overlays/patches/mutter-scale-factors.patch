@@ -1,0 +1,13 @@
+diff --git a/src/backends/meta-monitor.c b/src/backends/meta-monitor.c
+index 46cb05a66..82f56b5c5 100644
+--- a/src/backends/meta-monitor.c
++++ b/src/backends/meta-monitor.c
+@@ -31,7 +31,7 @@
+ #include "backends/meta-output.h"
+ #include "core/boxes-private.h"
+ 
+-#define SCALE_FACTORS_PER_INTEGER 4
++#define SCALE_FACTORS_PER_INTEGER 10
+ #define SCALE_FACTORS_STEPS (1.0 / (float) SCALE_FACTORS_PER_INTEGER)
+ #define MINIMUM_SCALE_FACTOR 1.0f
+ #define MAXIMUM_SCALE_FACTOR 4.0f
