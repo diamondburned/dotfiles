@@ -550,6 +550,7 @@ in {
 
 		programs.mpv = {
 			enable = true;
+			package = pkgs.mpv-next;
 			config = {
 				osd-font = "Sans";
 				# profile = "gpu-hq";

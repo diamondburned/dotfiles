@@ -49,6 +49,34 @@ in {
 	# 	obs-studio
 	# 	obs-studio-plugins;
 
+	mpv-next = let
+		super_unstable = super.nixpkgs_unstable_real;
+		libplacebo = super_unstable.libplacebo.overrideAttrs (old: {
+			version = "master-deccd2c";
+
+			src = super.fetchFromGitLab {
+				domain = "code.videolan.org";
+				owner  = "videolan";
+				repo   = "libplacebo";
+				rev    = "deccd2c7cc0a6d26f7649273d5c6878e255e1ac3";
+				sha256 = "1p0y4q68jgds81n3rv4lhsgip66ybsw21v1b770lag61z8lbyshl";
+			};
+		});
+		mpv-unwrapped' = super_unstable.mpv-unwrapped.override {
+			inherit libplacebo;
+		};
+		mpv-unwrapped = mpv-unwrapped'.overrideAttrs (old: {
+			version = "master-98e6fb2";
+
+			src = super.fetchFromGitHub {
+				owner  = "mpv-player";
+				repo   = "mpv";
+				rev    = "98e6fb26a3e03ae58d7026d4a28df3074a7459dc";
+				sha256 = "1p8h1jlz8xw3n1za9pvbv6k6mp5872fwwxp1cz4zp7ap8gfa44mp";
+			};
+		});
+		in super_unstable.wrapMpv mpv-unwrapped {};
+
 	# OBS junk.
 	onnxruntime = self.callPackage <nixpkgs_puffnfresh/pkgs/development/libraries/onnxruntime> { };
 	obs-backgroundremoval = self.callPackage <nixpkgs_puffnfresh/pkgs/applications/video/obs-studio/plugins/obs-backgroundremoval.nix> {};
