@@ -65,14 +65,14 @@ in {
 		mpv-unwrapped' = super_unstable.mpv-unwrapped.override {
 			inherit libplacebo;
 		};
-		mpv-unwrapped = mpv-unwrapped'.overrideAttrs (old: {
-			version = "master-98e6fb2";
+		mpv-unwrapped = super_unstable.mpv-unwrapped.overrideAttrs (old: {
+			version = "master-b9c7e5b";
 
 			src = super.fetchFromGitHub {
 				owner  = "mpv-player";
 				repo   = "mpv";
-				rev    = "98e6fb26a3e03ae58d7026d4a28df3074a7459dc";
-				sha256 = "1p8h1jlz8xw3n1za9pvbv6k6mp5872fwwxp1cz4zp7ap8gfa44mp";
+				rev    = "b9c7e5b5fff88c86ed19c9753b3b8a2499293bee";
+				sha256 = "1wf6xpbvcfchmc6442sqdzdglsv57ynpr63bg8vj7iz0y70k8kgq";
 			};
 		});
 		in super_unstable.wrapMpv mpv-unwrapped {};

@@ -560,7 +560,6 @@ in {
 				dither-depth = 8;
 				fbo-format = "rgba32f";
 				scale = "lanczos";
-				tone-mapping = "bt.2446a";
 			};
 		};
 
