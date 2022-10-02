@@ -51,6 +51,14 @@ in {
 
 	mpv-next = let
 		super_unstable = super.nixpkgs_unstable_real;
+		# ffmpeg = super_unstable.ffmpeg.overrideAttrs(old: {
+		# 	src = super.fetchFromGitHub {
+		# 		owner  = "FFmpeg";
+		# 		repo   = "FFmpeg";
+		# 		rev    = "n5.1.2";
+		# 		sha256 = "sha256-0Q4Z7Z7Z7Z7Z7Z7Z7Z7Z7Z7Z7Z7Z7Z7Z7Z7Z7Z7Z7Z7=";
+		# 	};
+		# });
 		libplacebo = super_unstable.libplacebo.overrideAttrs (old: {
 			version = "master-deccd2c";
 
@@ -64,6 +72,7 @@ in {
 		});
 		mpv-unwrapped' = super_unstable.mpv-unwrapped.override {
 			inherit libplacebo;
+			ffmpeg = super_unstable.ffmpeg_5;
 		};
 		mpv-unwrapped = super_unstable.mpv-unwrapped.overrideAttrs (old: {
 			version = "master-b9c7e5b";
