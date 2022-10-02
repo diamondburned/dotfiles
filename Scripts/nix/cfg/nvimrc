@@ -142,6 +142,17 @@ hi NvimTreeGitDeleted ctermfg=1
 hi NvimTreeGitIgnored ctermfg=8
 
 lua <<EOF
+	function git_add(node)
+		vim.cmd('Git add ' .. node.absolute_path)
+		vim.cmd('!echo hi!')
+		vim.cmd('NvimTreeRefresh')
+	end
+
+	function git_restore_staged(node)
+		vim.cmd('Git restore --staged ' .. node.absolute_path)
+		vim.cmd('NvimTreeRefresh')
+	end
+
 	require'nvim-tree'.setup {
 		disable_netrw = true,
 		open_on_tab = true,
@@ -178,6 +189,8 @@ lua <<EOF
 					{ key = "r",                       action = "rename" },
 					{ key = "q",                       action = "close" },
 					{ key = "/",                       action = "search_node" },
+					{ key = "A",                       action = "", action_cb = git_restore_staged },
+					{ key = "a",                       action = "", action_cb = git_add },
 				},
 			},
 		},
@@ -387,7 +400,8 @@ highlight LineNr guifg=#6c6c6c ctermfg=242
 command -nargs=1 New :e %:p:h/<args>
 
 ":GitAdd to add the current file to git."
-command -nargs=0 GitAdd :silent exec "!git add " . expand("%:p")
+command GitAdd           :Git add %:p
+command GitRestoreStaged :Git restore "--staged" %:p
 
 "Optimized drawing"
 set ttyfast
