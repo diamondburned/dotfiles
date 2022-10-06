@@ -4,6 +4,14 @@
       "url": "https://github.com/NixOS/nixpkgs/archive/48bf1dd780a.tar.gz",
       "store_hash": "mmxgwk9c2hcwxir1q99nqxnfi8nhh830"
     },
+    "github:NixOS/nixpkgs b7a6fde153d": {
+      "url": "https://github.com/NixOS/nixpkgs/archive/b7a6fde153d.tar.gz",
+      "store_hash": "z4kv2l8a1npkgqdc7q3y94cj7hvm5l4x"
+    },
+    "github:NixOS/nixpkgs c83b47ed03a": {
+      "url": "https://github.com/NixOS/nixpkgs/archive/c83b47ed03a.tar.gz",
+      "store_hash": "m87pgxhzd7xlld304fzznandb7hgaca2"
+    },
     "github:NixOS/nixpkgs c97e777ff06": {
       "url": "https://github.com/NixOS/nixpkgs/archive/c97e777ff06.tar.gz",
       "store_hash": "3jnz0b35cvaa7b3qq6zcp3w6mfsqhdps"

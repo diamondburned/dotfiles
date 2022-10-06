@@ -11,9 +11,11 @@ let nurOverlay = (self: super: (import ./nur.nix (import <nur> { pkgs = super; }
 
 	nixpkgs_21_11 = import <nixpkgs_21_11> nixpkgsOpts;
 	nixpkgs_gnome42 = import <nixpkgs_gnome42> nixpkgsOpts;
+	nixpkgs_linux_6 = import <nixpkgs_linux_6> nixpkgsOpts;
 	nixpkgs_unstable = import <nixpkgs_unstable> nixpkgsOpts;
 	nixpkgs_puffnfresh = import <nixpkgs_puffnfresh> nixpkgsOpts;
 	nixpkgs_unstable_real = import <unstable> nixpkgsOpts;
+	nixpkgs_pipewire_0_3_57 = import <nixpkgs_pipewire_0_3_57> nixpkgsOpts;
 
 in {
 	nixpkgs.overlays = [
@@ -22,8 +24,10 @@ in {
 			inherit
 				nixpkgs_21_11
 				nixpkgs_gnome42
+				nixpkgs_linux_6
 				nixpkgs_unstable
-				nixpkgs_unstable_real;
+				nixpkgs_unstable_real
+				nixpkgs_pipewire_0_3_57;
 		})
 		(nurOverlay)
 		(import <polymc>).overlay
