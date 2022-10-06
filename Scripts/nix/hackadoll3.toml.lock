@@ -20,6 +20,14 @@
       "url": "https://github.com/PolyMC/PolyMC/archive/c6bcb6228b421983006d16c93f7cda091dc9679b.tar.gz",
       "store_hash": "4l3sdzl3kl029p9n618in45jj1837yiz"
     },
+    "github:diamondburned/nixpkgs 3e9725a365e": {
+      "url": "https://github.com/diamondburned/nixpkgs/archive/3e9725a365e.tar.gz",
+      "store_hash": "dx7vq4ffcvxymnqysiydi6dhvwy7xld3"
+    },
+    "github:diamondburned/nixpkgs f8b9801ceb21a639203cc492fa9ebf83b7e72483": {
+      "url": "https://github.com/diamondburned/nixpkgs/archive/f8b9801ceb21a639203cc492fa9ebf83b7e72483.tar.gz",
+      "store_hash": "3j168mypxkz5svimmx58bmck0cxn371z"
+    },
     "github:nix-community/NUR master": {
       "url": "https://github.com/nix-community/NUR/archive/a643ef20f4722ae40f8949be4c453271172be25a.tar.gz",
       "store_hash": "hjsg662j6d4isymxdyna8fxlyns7cj6j"

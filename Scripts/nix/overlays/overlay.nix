@@ -25,11 +25,27 @@ let lib = super.lib;
 
 	GOPATH = "/home/diamond/.go";
 
+	nixpkgs_pipewire_0_3_57 = import (super.fetchFromGitHub {
+		owner  = "NixOS";
+		repo   = "nixpkgs";
+		rev    = "48bf1dd780a71096ef93ed2373e087ec6cba1351";
+		sha256 = "1jb62j2mqww93zl7qka6p5zxfyg42nzzzpi6sb6vazphszhshbgp";
+	}) {};
+
 in {
 	# Upgrades.
 	inherit (self.nixpkgs_unstable)
 		neovim
 		go_1_18;
+
+	# GNOME Shell's new regression workaround requires a specific minimum
+	# Pipewire version. This will cause a fuckton of things in our system
+	# to be rebuilt, but until this is fixed, we have no choice.
+	#
+	# For more information, see the commit
+	# https://gitlab.gnome.org/GNOME/gnome-shell/-/commit/d32c0348.
+	inherit (nixpkgs_pipewire_0_3_57)
+		pipewire;
 
 	# Downgrades.
 	# inherit (self.nixpkgs_21_11)
@@ -98,8 +114,13 @@ in {
 		'';
 	};
 
-	gnome = super.gnome.overrideScope' (self_gnome: super_gnome: {
+	gnome = super.nixpkgs_gnome42.gnome.overrideScope' (self_gnome: super_gnome: {
 		mutter = super_gnome.mutter.overrideAttrs (old: {
+			version = "42.5";
+			src = super.fetchurl {
+				url = "mirror://gnome/sources/mutter/42/mutter-42.5.tar.xz";
+				sha256 = "1xjr4f0bvg8zc2vyxs2bpdzs1wsmz5jcbnrqhfvp1m9zs5n5ddv4";
+			};
 			patches = (old.patches or []) ++ [
 				# Allow 10 scale factors per integer instead of 4.
 				./patches/mutter-scale-factors.patch
