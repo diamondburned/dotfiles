@@ -1,5 +1,9 @@
 {
   "channels": {
+    "github:NixOS/nixpkgs 48bf1dd780a": {
+      "url": "https://github.com/NixOS/nixpkgs/archive/48bf1dd780a.tar.gz",
+      "store_hash": "mmxgwk9c2hcwxir1q99nqxnfi8nhh830"
+    },
     "github:NixOS/nixpkgs c97e777ff06": {
       "url": "https://github.com/NixOS/nixpkgs/archive/c97e777ff06.tar.gz",
       "store_hash": "3jnz0b35cvaa7b3qq6zcp3w6mfsqhdps"

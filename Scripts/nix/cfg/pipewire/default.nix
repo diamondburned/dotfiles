@@ -25,23 +25,26 @@ let utils = import ./utils.nix lib;
 		};
 	};
 
+	nixpkgs_pipewire_0_3_57 = import (pkgs.fetchFromGitHub {
+		owner  = "NixOS";
+		repo   = "nixpkgs";
+		rev    = "48bf1dd780a71096ef93ed2373e087ec6cba1351";
+		sha256 = "1jb62j2mqww93zl7qka6p5zxfyg42nzzzpi6sb6vazphszhshbgp";
+	}) {};
+
 in {
 	sound.enable = true;
 	hardware.pulseaudio.enable = lib.mkForce false;
 
 	services.pipewire = {
 		enable = true;
-		package = pkgs.nixpkgs_unstable.pipewire.overrideAttrs(old: {
-			version = "0.3.52";
-			src = pkgs.fetchFromGitLab {
-				domain = "gitlab.freedesktop.org";
-				owner  = "pipewire";
-				repo   = "pipewire";
-				rev    = "0.3.52";
-				sha256 = "0lfbjvzc1vkrf7vlp95ywcgx6vf2wx66fzmhn2yn65wfmzgqws95";
-			};
-			mesonFlags = old.mesonFlags ++ [ "-Dbluez5-codec-lc3plus=disabled" ];
-		});
+		# GNOME Shell's new regression workaround requires a specific minimum
+		# Pipewire version. This will cause a fuckton of things in our system
+		# to be rebuilt, but until this is fixed, we have no choice.
+		#
+		# For more information, see the commit
+		# https://gitlab.gnome.org/GNOME/gnome-shell/-/commit/d32c0348.
+		package = nixpkgs_pipewire_0_3_57.pipewire;
 
 		alsa.enable = true;
 		alsa.support32Bit = true;
