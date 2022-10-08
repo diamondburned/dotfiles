@@ -17,6 +17,7 @@ let newpkgs = import (pkgs.fetchFromGitHub {
 		gobject-introspection
 		hicolor-icon-theme
 		gst_all_1.gstreamer
+		gst_all_1.gstreamer.dev
 		gst_all_1.gst-plugins-base
 		gst_all_1.gst-plugins-good
 		gst_all_1.gst-plugins-bad
