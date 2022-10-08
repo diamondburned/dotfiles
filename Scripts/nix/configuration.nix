@@ -409,10 +409,10 @@ in {
 
 	services.sysprof.enable = true;
 
-	# virtualisation.libvirtd = {
-	# 	enable = true;
-	# 	qemuRunAsRoot = false;
-	# };
+	virtualisation.libvirtd = {
+		enable = true;
+		qemuRunAsRoot = false;
+	};
 
 	# Enable the Android debug bridge.
 	programs.adb.enable = true;
