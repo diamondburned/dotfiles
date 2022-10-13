@@ -61,7 +61,7 @@ in {
 			rhythmbox-alternative-toolbar = pkgs.callPackage ./packages/rhythmbox-alternative-toolbar {};
 			perf_data_converter = pkgs.callPackage ./packages/perf_data_converter.nix {};
 			typescript-transpile-only = pkgs.callPackage ./packages/typescript-transpile-only {};
-			xelfviewer = pkgs.callPackage (builtins.fetchurl "https://github.com/xieby1/nix_config/blob/7e36d3d18f32028893775ad31b93235c68e496d5/usr/gui/xelfviewer.nix") {};
+			xelfviewer = pkgs.callPackage (builtins.fetchurl "https://raw.githubusercontent.com/xieby1/nix_config/7e36d3d18f32028893775ad31b93235c68e496d5/usr/gui/xelfviewer.nix") {};
 			# gnomeExtensions = super.gnomeExtensions // {
 			# 	easyscreencast = super.callPackage ./packages/gnome-extensions/easyscreencast {};
 			# };

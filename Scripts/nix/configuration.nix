@@ -656,6 +656,7 @@ in {
 			foot
 			jq
 			go_1_18
+			xelfviewer
 			config.boot.kernelPackages.perf
 			perf_data_converter
 			tree
