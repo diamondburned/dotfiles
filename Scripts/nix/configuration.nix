@@ -627,6 +627,9 @@ in {
 				];
 			})
 
+		]) ++ (with pkgs.nixpkgs_unstable_real; [
+			spotify
+
 		]) ++ (with pkgs; [
 			# Personal stuff
 			gnome.pomodoro
@@ -685,7 +688,6 @@ in {
 			# aqours
 			# (succumb-to-libadwaita spot)
 			spot
-			spotify
 			# catnip-gtk
 			ffmpeg
 			v4l_utils
