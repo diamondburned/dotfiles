@@ -44,10 +44,10 @@ in {
 		#
 		# For more information, see the commit
 		# https://gitlab.gnome.org/GNOME/gnome-shell/-/commit/d32c0348.
-		package = nixpkgs_pipewire_0_3_57.pipewire;
+		package = pkgs.pipewire;
 
-		alsa.enable = true;
-		alsa.support32Bit = true;
+		alsa.enable = false;
+		alsa.support32Bit = false;
 		jack.enable = true;
 		pulse.enable = true;
 
@@ -58,36 +58,10 @@ in {
 				"default.clock.min-quantum" = 64;
 				"default.clock.max-quantum" = 10240;
 			};
-			"context.modules" = [
-				{
-					name = "libpipewire-module-rtkit";
-					args = {};
-					flags = [ "ifexists" "nofail" ];
-				}
-				{ name = "libpipewire-module-protocol-native"; }
-				{ name = "libpipewire-module-profiler"; }
-				{ name = "libpipewire-module-metadata"; }
-				{ name = "libpipewire-module-spa-device-factory"; }
-				{ name = "libpipewire-module-spa-node-factory"; }
-				{ name = "libpipewire-module-client-node"; }
-				{ name = "libpipewire-module-client-device"; }
-				{
-					name = "libpipewire-module-portal";
-					flags = [ "ifexists" "nofail" ];
-				}
-				{
-					name = "libpipewire-module-access";
-					args = {};
-				}
-				{ name = "libpipewire-module-adapter"; }
-				{ name = "libpipewire-module-link-factory"; }
-				{ name = "libpipewire-module-session-manager"; }
-			] ++ (utils.filterChains eqs);
 		};
 
 		# https://nixos.wiki/wiki/PipeWire
 		media-session.config = {
-			alsa-monitor.rules = utils.alsaMonitorRules eqs;
 			bluez-monitor.rules = [
 				{
 					# Match all.
