@@ -104,7 +104,7 @@ in {
 			"font.minimum-size.x-western" = 9;
 			"font.name.monospace.ja" = "monospace";
 			"font.name.monospace.x-western" = "monospace";
-			# "dom.webgpu.enabled" = true;
+			"dom.webgpu.enabled" = true;
 			"gfx.webrender.all" = true;
 			"gfx.webrender.compositor" = true;
 			"gfx.webrender.compositor.force-enabled" = false;
