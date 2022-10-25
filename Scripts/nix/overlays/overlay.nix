@@ -52,42 +52,42 @@ in {
 	# 	obs-studio
 	# 	obs-studio-plugins;
 
-	mpv-next = let
-		super_unstable = super.nixpkgs_unstable_real;
-		# ffmpeg = super_unstable.ffmpeg.overrideAttrs(old: {
-		# 	src = super.fetchFromGitHub {
-		# 		owner  = "FFmpeg";
-		# 		repo   = "FFmpeg";
-		# 		rev    = "n5.1.2";
-		# 		sha256 = "sha256-0Q4Z7Z7Z7Z7Z7Z7Z7Z7Z7Z7Z7Z7Z7Z7Z7Z7Z7Z7Z7Z7=";
-		# 	};
-		# });
-		libplacebo = super_unstable.libplacebo.overrideAttrs (old: {
-			version = "master-deccd2c";
+	# mpv-next = let
+	# 	super_unstable = super.nixpkgs_unstable_real;
+	# 	# ffmpeg = super_unstable.ffmpeg.overrideAttrs(old: {
+	# 	# 	src = super.fetchFromGitHub {
+	# 	# 		owner  = "FFmpeg";
+	# 	# 		repo   = "FFmpeg";
+	# 	# 		rev    = "n5.1.2";
+	# 	# 		sha256 = "sha256-0Q4Z7Z7Z7Z7Z7Z7Z7Z7Z7Z7Z7Z7Z7Z7Z7Z7Z7Z7Z7Z7=";
+	# 	# 	};
+	# 	# });
+	# 	libplacebo = super_unstable.libplacebo.overrideAttrs (old: {
+	# 		version = "master-deccd2c";
 
-			src = super.fetchFromGitLab {
-				domain = "code.videolan.org";
-				owner  = "videolan";
-				repo   = "libplacebo";
-				rev    = "deccd2c7cc0a6d26f7649273d5c6878e255e1ac3";
-				sha256 = "1p0y4q68jgds81n3rv4lhsgip66ybsw21v1b770lag61z8lbyshl";
-			};
-		});
-		mpv-unwrapped' = super_unstable.mpv-unwrapped.override {
-			inherit libplacebo;
-			ffmpeg = super_unstable.ffmpeg_5;
-		};
-		mpv-unwrapped = super_unstable.mpv-unwrapped.overrideAttrs (old: {
-			version = "master-b9c7e5b";
+	# 		src = super.fetchFromGitLab {
+	# 			domain = "code.videolan.org";
+	# 			owner  = "videolan";
+	# 			repo   = "libplacebo";
+	# 			rev    = "deccd2c7cc0a6d26f7649273d5c6878e255e1ac3";
+	# 			sha256 = "1p0y4q68jgds81n3rv4lhsgip66ybsw21v1b770lag61z8lbyshl";
+	# 		};
+	# 	});
+	# 	mpv-unwrapped' = super_unstable.mpv-unwrapped.override {
+	# 		inherit libplacebo;
+	# 		# ffmpeg = super_unstable.ffmpeg_5;
+	# 	};
+	# 	mpv-unwrapped = super_unstable.mpv-unwrapped.overrideAttrs (old: {
+	# 		version = "master-b9c7e5b";
 
-			src = super.fetchFromGitHub {
-				owner  = "mpv-player";
-				repo   = "mpv";
-				rev    = "b9c7e5b5fff88c86ed19c9753b3b8a2499293bee";
-				sha256 = "1wf6xpbvcfchmc6442sqdzdglsv57ynpr63bg8vj7iz0y70k8kgq";
-			};
-		});
-		in super_unstable.wrapMpv mpv-unwrapped {};
+	# 		src = super.fetchFromGitHub {
+	# 			owner  = "mpv-player";
+	# 			repo   = "mpv";
+	# 			rev    = "b9c7e5b5fff88c86ed19c9753b3b8a2499293bee";
+	# 			sha256 = "1wf6xpbvcfchmc6442sqdzdglsv57ynpr63bg8vj7iz0y70k8kgq";
+	# 		};
+	# 	});
+	# 	in super_unstable.wrapMpv mpv-unwrapped {};
 
 	# OBS junk.
 	onnxruntime = self.callPackage <nixpkgs_puffnfresh/pkgs/development/libraries/onnxruntime> { };
