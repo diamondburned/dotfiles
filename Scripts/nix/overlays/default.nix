@@ -30,7 +30,7 @@ in {
 				nixpkgs_pipewire_0_3_57;
 		})
 		(nurOverlay)
-		(import <polymc>).overlay
+		(import <prismlauncher>).overlay
 		(import ./overlay.nix)
 		(self: super: {
 			transmission-web = super.callPackage ./packages/transmission-web {};

@@ -550,7 +550,7 @@ in {
 
 		programs.mpv = {
 			enable = true;
-			package = pkgs.mpv-next;
+			# package = pkgs.mpv-next;
 			config = {
 				osd-font = "Sans";
 				# profile = "gpu-hq";
@@ -558,7 +558,7 @@ in {
 				gpu-context = "auto";
 				vo = "gpu";
 				dither-depth = 8;
-				fbo-format = "rgba32f";
+				# fbo-format = "rgba32f";
 				scale = "lanczos";
 			};
 		};
@@ -623,7 +623,6 @@ in {
 			(gamescope)
 			(steam.override {
 				extraPkgs = pkgs: with pkgs; [
-					gamescope
 				];
 			})
 
@@ -725,6 +724,7 @@ in {
 
 			# Games
 			# polymc
+			prismlauncher
 			osu-wine
 			# osu-wine-realistik
 

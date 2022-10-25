@@ -14,7 +14,7 @@
  nix-wayland = "github:nix-community/nixpkgs-wayland master"
  home-manager_21_11 = "github:nix-community/home-manager release-21.11"
  home-manager_unstable = "github:nix-community/home-manager master"
- polymc = "github:PolyMC/PolyMC develop"
+ prismlauncher = "github:PrismLauncher/PrismLauncher master"
  unstable = "https://nixos.org/channels/nixos-unstable"
  nur = "github:nix-community/NUR master"
 

@@ -32,6 +32,10 @@
       "url": "https://github.com/PolyMC/PolyMC/archive/c6bcb6228b421983006d16c93f7cda091dc9679b.tar.gz",
       "store_hash": "4l3sdzl3kl029p9n618in45jj1837yiz"
     },
+    "github:PrismLauncher/PrismLauncher master": {
+      "url": "https://github.com/PrismLauncher/PrismLauncher/archive/master.tar.gz",
+      "store_hash": "z5qai4fcsjzjjqdi2srrk4i0nbiicqc5"
+    },
     "github:diamondburned/nixpkgs 3e9725a365e": {
       "url": "https://github.com/diamondburned/nixpkgs/archive/3e9725a365e.tar.gz",
       "store_hash": "dx7vq4ffcvxymnqysiydi6dhvwy7xld3"
