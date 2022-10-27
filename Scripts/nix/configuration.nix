@@ -253,14 +253,11 @@ in {
 	];
 
 	# Install global fonts
-	fonts.fonts = with pkgs; [
+	fonts.fonts = (with pkgs; [
 		bakoma_ttf # math
 		# opensans-ttf
 		roboto
 		roboto-slab # serif
-		noto-fonts
-		noto-fonts-cjk
-		noto-fonts-emoji
 		source-code-pro
 		source-sans-pro
 		source-serif-pro
@@ -270,9 +267,13 @@ in {
 		material-design-icons
 		inconsolata
 		comic-neue
-		blobmoji
+		# blobmoji
 		tewi-font
-	];
+	]) ++ (with pkgs.nixpkgs_unstable_real; [
+		noto-fonts
+		noto-fonts-cjk
+		noto-fonts-emoji
+	]);
 	# Some programs need SUID wrappers, can be configured further or are
 	# started in user sessions.
 	programs.mtr.enable = true;
