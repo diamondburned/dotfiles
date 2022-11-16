@@ -78,6 +78,7 @@ in {
 		# ./cfg/wayfire
 		./cfg/pipewire
 		./cfg/localhost
+		./cfg/keyd
 	];
 
 	nixpkgs.config = {
@@ -250,6 +251,7 @@ in {
 
 		qgnomeplatform
 		adwaita-qt
+		keyd
 	];
 
 	# Install global fonts

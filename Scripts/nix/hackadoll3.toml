@@ -23,9 +23,8 @@
  nixos = "nixpkgs_unstable"
  home-manager = "home-manager_unstable"
 
-# [diamond.channels]
-#  nixos = "github:NixOS/nixpkgs nixos-unstable"
-#  unstable = "https://nixos.org/channels/nixos-unstable"
-# 
-# [diamond.aliases]
-#  nixpkgs = "nixos"
+[diamond]
+ override-channels = false
+
+[diamond.channels]
+ nixos2 = "github:NixOS/nixpkgs c97e777ff06"
