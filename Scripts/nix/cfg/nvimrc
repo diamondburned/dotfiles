@@ -549,6 +549,11 @@ let g:ale_linters = {
 nnoremap gd :ALEGoToDefinition<CR>
 nnoremap K :ALEHover<CR>
 
+let g:copilot_filetypes = {
+	\ 'markdown': v:true,
+	\ 'yaml': v:true,
+	\ }
+
 ""Assistive LSP bindings"
 "function! ToggleQf()
 "	for buffer in tabpagebuflist()
