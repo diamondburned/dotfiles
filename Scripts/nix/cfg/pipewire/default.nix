@@ -44,7 +44,7 @@ in {
 		#
 		# For more information, see the commit
 		# https://gitlab.gnome.org/GNOME/gnome-shell/-/commit/d32c0348.
-		package = pkgs.pipewire;
+		package = pkgs.nixpkgs_unstable_real.pipewire;
 
 		alsa.enable = false;
 		alsa.support32Bit = false;
