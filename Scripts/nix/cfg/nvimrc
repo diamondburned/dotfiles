@@ -344,6 +344,7 @@ let g:mkdp_preview_options = {
 	\ 'katex': {},
 	\ }
 let g:mkdp_page_title = '${name}'
+let g:preview_markdown_auto_update = 1
 
 "Remove background"
 hi LineNr       guibg=NONE ctermbg=NONE
