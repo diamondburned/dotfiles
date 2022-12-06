@@ -717,6 +717,7 @@ in {
 			onlyoffice-bin
 			evince
 			aspell
+			marker
 
 			# Applications
 			gcolor3
