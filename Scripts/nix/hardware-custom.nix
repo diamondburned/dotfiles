@@ -137,9 +137,11 @@ in {
 	hardware.bluetooth = {
 		enable = true;
 		package = pkgs.bluezFull;
+		hsphfpd.enable = true;
 		settings = {
 			General = {
 				Enable = "Source,Sink,Media,Socket";
+				FastConnectable = true;
 			};
 		};
 	};
