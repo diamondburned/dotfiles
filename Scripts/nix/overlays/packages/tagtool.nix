@@ -1,6 +1,6 @@
 {
 	stdenv, fetchurl, makeWrapper, pkg-config, wrapGAppsHook, intltool,
-	gnome3, gnome2, libxml2, glib, id3lib, libogg,
+	gnome, gnome2, libxml2, glib, id3lib, libogg,
 }:
 
 stdenv.mkDerivation rec {
@@ -17,7 +17,7 @@ stdenv.mkDerivation rec {
 	buildInputs = [ 
 		# GUI libs
 		glib libxml2 
-		gnome3.adwaita-icon-theme 
+		gnome.adwaita-icon-theme 
 		gnome2.gtk
 		gnome2.libglade
 

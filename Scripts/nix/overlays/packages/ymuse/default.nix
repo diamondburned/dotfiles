@@ -1,4 +1,4 @@
-{ buildGoModule, lib, gnome3, go, pkg-config, git, cacert, gettext }:
+{ buildGoModule, lib, gnome, go, pkg-config, git, cacert, gettext }:
 
 let srcGenerated = go.stdenv.mkDerivation {
 	name = "ymuse-src";
@@ -51,6 +51,6 @@ in buildGoModule {
 
 	doCheck = false;
 
-	buildInputs = with gnome3; [ gtk glib ];
+	buildInputs = with gnome; [ gtk glib ];
 	nativeBuildInputs = [ go pkg-config ];
 }

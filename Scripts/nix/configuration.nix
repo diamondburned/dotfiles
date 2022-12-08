@@ -610,7 +610,7 @@ in {
 		'';
 
 		# Home is for no DM, PAM is for gdm.
-		home.sessionVariables = userEnv;         # for no DM.
+		# home.sessionVariables = userEnv;         # for no DM.
 		pam.sessionVariables = userEnv;          # for GDM + GNOME.
 		systemd.user.sessionVariables = userEnv; # for GDM + Wayfire.
 
@@ -623,7 +623,7 @@ in {
 			en-computers
 
 		]) ++ (with pkgs.nixpkgs_unstable; [
-			(gamescope)
+			# (gamescope)
 			(steam.override {
 				extraPkgs = pkgs: with pkgs; [
 				];
@@ -636,8 +636,8 @@ in {
 			# Personal stuff
 			gnome.pomodoro
 			gnome-usage
-			gnome3.polari
-			gnome3.pomodoro
+			gnome.polari
+			gnome.pomodoro
 			gnomeExtensions.gsconnect
 			gnomeExtensions.easyScreenCast
 			keepassxc
@@ -693,7 +693,7 @@ in {
 			spot
 			# catnip-gtk
 			ffmpeg
-			v4l_utils
+			v4l-utils
 			pavucontrol
 			pulseaudio
 			pamixer
@@ -737,15 +737,15 @@ in {
 			xfce.thunar
 			kooha
 			glib-networking
-			gnome-mpv
-			gnome3.gnome-power-manager
-			gnome3.eog
-			gnome3.vinagre
-			gnome3.file-roller
-			gnome3.nautilus
-			gnome3.gnome-disk-utility
-			gnome3.gnome-tweaks
-			gnome3.gnome-boxes
+			celluloid
+			gnome.gnome-power-manager
+			gnome.eog
+			gnome.vinagre
+			gnome.file-roller
+			gnome.nautilus
+			gnome.gnome-disk-utility
+			gnome.gnome-tweaks
+			gnome.gnome-boxes
 		]);
 
 		programs.alacritty = {

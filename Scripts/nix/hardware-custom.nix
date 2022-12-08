@@ -5,11 +5,6 @@
 
 let utils = import ./utils { inherit lib; };
 
-	musnix = builtins.fetchGit {
-		url = "https://github.com/musnix/musnix.git";
-		rev = "fcad5573eba0a9d1ec3ed1e8e1413f601fec35fe";
-	};
-
 	# blurcam = builtins.fetchGit {
 	# 	url = "https://github.com/diamondburned/blurcam.git";
 	# 	rev = "79a35253e6d81b840c3d9db8f3b0095e8a449b81";
@@ -29,7 +24,6 @@ let utils = import ./utils { inherit lib; };
 
 in {
 	imports = [
-		"${musnix }"
 		# "${blurcam}"
 	];
 
@@ -115,19 +109,6 @@ in {
 		freeSwapKillThreshold = 5;
 	};
 
-	# Kernel tweaks and such for real-time audio.
-	musnix = {
-		enable = true;
-		soundcardPciId = "00:1f.3";
-		# kernel = {
-		# 	optimize = true;
-		# 	realtime = true;
-		# 	packages = pkgs.linuxPackages_5_9_rt; # TODO: update.
-		# };
-		rtirq.enable = true;
-		das_watchdog.enable = true;
-	};
-
 	# We don't want to sacrifice battery for the above.
 	powerManagement.cpuFreqGovernor = lib.mkForce "powersave";
 
@@ -136,7 +117,6 @@ in {
 
 	hardware.bluetooth = {
 		enable = true;
-		package = pkgs.bluezFull;
 		hsphfpd.enable = true;
 		settings = {
 			General = {

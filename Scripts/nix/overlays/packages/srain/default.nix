@@ -32,8 +32,8 @@ stdenv.mkDerivation rec {
 		glib
 		glib-networking
 		gtk3
-		gnome3.libsoup
-		gnome3.libsecret
+		gnome.libsoup
+		gnome.libsecret
 
 		libconfig
 		openssl
@@ -41,9 +41,9 @@ stdenv.mkDerivation rec {
 
 	preFixup = ''
 		gappsWrapperArgs+=(
-			--prefix XDG_DATA_DIRS : "${pkgs.gnome3.glib-networking}/share"
-			--prefix XDG_DATA_DIRS : "${pkgs.gnome3.libsoup}/share"
-			--prefix XDG_DATA_DIRS : "${pkgs.gnome3.libsecret}/share"
+			--prefix XDG_DATA_DIRS : "${pkgs.gnome.glib-networking}/share"
+			--prefix XDG_DATA_DIRS : "${pkgs.gnome.libsoup}/share"
+			--prefix XDG_DATA_DIRS : "${pkgs.gnome.libsecret}/share"
 		)
 	'';
 }

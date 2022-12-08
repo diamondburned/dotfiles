@@ -32,7 +32,7 @@ stdenv.mkDerivation {
 		gtk3
 		libpeas
 		totem-pl-parser
-		gnome3.adwaita-icon-theme
+		gnome.adwaita-icon-theme
 
 		rhythmbox
 

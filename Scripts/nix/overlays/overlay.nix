@@ -47,6 +47,9 @@ in {
 		];
 	};
 
+	# I don't care!!!!!! Nixpkgs, stop doing this!!
+	pkgconfig = self.pkg-config;
+
 	# For OBS.
 	# inherit (nixpkgs_puffnfresh)
 	# 	obs-studio
@@ -101,7 +104,7 @@ in {
 		'';
 	};
 
-	gnome = super.nixpkgs_gnome42.gnome.overrideScope' (self_gnome: super_gnome: {
+	gnome = super.gnome.overrideScope' (self_gnome: super_gnome: {
 		mutter = super_gnome.mutter.overrideAttrs (old: {
 			version = "42.5";
 			src = super.fetchurl {

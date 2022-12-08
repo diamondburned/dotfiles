@@ -34,8 +34,8 @@ stdenv.mkDerivation rec {
 	buildInputs =  (with pkgs; [
 		gtkspell3
 		webkitgtk
-		gnome3.gtk
-		gnome3.glib
-		gnome3.gtksourceview
+		gnome.gtk
+		gnome.glib
+		gnome.gtksourceview
 	]);
 }
