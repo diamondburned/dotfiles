@@ -104,7 +104,7 @@ in {
 	];
 
 	# Refer to unstable.nix.
-	boot.kernelPackages = pkgs.nixpkgs_linux_6.linuxPackages_6_0;
+	boot.kernelPackages = pkgs.nixpkgs_unstable_real.linuxPackages_latest;
 	# boot.kernelPackages = pkgs.linuxPackages_latest;
 	# boot.kernelPackages = pkgs.linuxPackages_xanmod;
 
@@ -213,21 +213,6 @@ in {
 	# Tablet drivers.
 	hardware.opentabletdriver.enable = false;
 
-	# Mouse settings.
-	services.xserver.inputClassSections = [
-		''
-		Identifier      "libinput pointer catchall"
-		MatchIsPointer  ""
-		MatchProduct    "Logitech Gaming Mouse"
-		MatchDevicePath "/dev/input/event*"
-		Driver "libinput"
-		Option "AccelerationProfile" "-1"
-		Option "AccelerationScheme" "none"
-		Option "AccelSpeed" "0"
-		Option "AccelProfile" "flat"
-		''
-	];
-
 	boot.kernelParams = [ "mitigations=off" ];
 
 	# Requires the real-time kernel patches in Musnix.
@@ -239,8 +224,8 @@ in {
 	# '';
 
 	# Brightness stuff.
-	hardware.acpilight.enable = false;
-	services.illum.enable = true;
+	# hardware.acpilight.enable = false;
+	# services.illum.enable = true;
 
 	# Enable the Intel driver with a fallback to the current modesetting driver.
 	services.xserver.videoDrivers = [ "intel" "modesetting" ];
@@ -286,7 +271,7 @@ in {
 		};
 	};
 
-	nix.maxJobs = lib.mkForce 4;
+	nix.maxJobs = lib.mkForce 12;
 
 	# These patches taken from cidkid's config.
 	# le9db patchset to prevent I/O thrasing on high memory loads.
