@@ -93,7 +93,7 @@ in {
 	# 	in super_unstable.wrapMpv mpv-unwrapped {};
 
 	# OBS junk.
-	onnxruntime = self.callPackage <nixpkgs_puffnfresh/pkgs/development/libraries/onnxruntime> { };
+	# onnxruntime = self.callPackage <nixpkgs/pkgs/development/libraries/onnxruntime> { };
 	obs-backgroundremoval = self.callPackage <nixpkgs_puffnfresh/pkgs/applications/video/obs-studio/plugins/obs-backgroundremoval.nix> {};
 
 	buildLocalGoModule = { GOPATH ? GOPATH, ... }@args: super.buildGoModule {
@@ -106,26 +106,11 @@ in {
 
 	gnome = super.gnome.overrideScope' (self_gnome: super_gnome: {
 		mutter = super_gnome.mutter.overrideAttrs (old: {
-			version = "42.5";
-			src = super.fetchurl {
-				url = "mirror://gnome/sources/mutter/42/mutter-42.5.tar.xz";
-				sha256 = "1xjr4f0bvg8zc2vyxs2bpdzs1wsmz5jcbnrqhfvp1m9zs5n5ddv4";
-			};
 			patches = (old.patches or []) ++ [
 				# Allow 10 scale factors per integer instead of 4.
 				./patches/mutter-scale-factors.patch
 			];
 			doCheck = false;
-		});
-		gnome-shell = super_gnome.gnome-shell.overrideAttrs (old: {
-			version = "42.5";
-			src = super.fetchurl {
-				url = "mirror://gnome/sources/gnome-shell/42/gnome-shell-42.5.tar.xz";
-				sha256 = "05yr7qxjdjyf3m7nf5nbam2576gl11c8rwph72q928bni3kxc5ag";
-			};
-			postPatch = ''
-				patchShebangs src/data-to-c.pl
-			'';
 		});
 	});
 

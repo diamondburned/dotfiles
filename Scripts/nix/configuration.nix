@@ -295,12 +295,12 @@ in {
 		drivers = with pkgs; [
 			# gutenprint
 			# hplip
-			cups-filters
-			cups-bjnp
+			# cups-filters
+			# cups-bjnp
 
 			# Canon
-			cnijfilter2
-			canon-cups-ufr2
+			# cnijfilter2
+			# canon-cups-ufr2
 		];
 	};
 
@@ -569,8 +569,8 @@ in {
 		programs.obs-studio = {
 			enable  = true;
 			plugins = with pkgs; [
-				obs-backgroundremoval
-				obs-studio-plugins.obs-websocket
+				# obs-backgroundremoval
+				# obs-studio-plugins.obs-websocket
 				# obs-wlrobs
 				# obs-v4l2sink
 			];
