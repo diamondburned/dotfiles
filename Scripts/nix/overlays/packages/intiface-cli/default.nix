@@ -13,7 +13,7 @@ else stdenv.mkDerivation rec {
 
 	src = fetchzip {
 		url = "https://github.com/intiface/intiface-cli-rs/releases/download/${version}/intiface-cli-rs-linux-x64-Release.zip";
-		sha256 = "sha256:${pkgs.lib.fakeSha256}";
+		sha256 = "sha256:1gazypmpxgk8clmbb3cg33d4f12zdr33niz1zqdgd2rp2hpnw0q5}";
 		stripRoot = false;
 	};
 
