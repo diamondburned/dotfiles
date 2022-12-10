@@ -50,6 +50,7 @@ text/x-c++hdr=nvim.desktop
 application/pdf=org.gnome.Evince.desktop
 x-scheme-handler/eclipse+command=_nix_store_320d73592p9mwhcfr4zmga4bpp3fh17c-dbeaver-22.0.2_dbeaver_.desktop
 video/webm=mpv.desktop
+application/vnd.oasis.opendocument.text=writer.desktop
 
 [Added Associations]
 application/zip=org.gnome.FileRoller.desktop;
