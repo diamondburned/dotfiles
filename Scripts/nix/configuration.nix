@@ -119,7 +119,6 @@ in {
 				"https://cache.nixos.org/"
 			];
 			trusted-public-keys = [
-				"binarycache.example.com-1:dsafdafDFW123fdasfa123124FADSAD"
 				"nix-community.cachix.org-1:mB9FSh9qf2dCimDSUo8Zy7bkq5CX+/rkCWyvRCYg3Fs="
 			];
 		};
@@ -481,7 +480,9 @@ in {
 			# ./cfg/tilix
 			./cfg/firefox
 			# ./cfg/wayfire/home.nix
+			./cfg/hm-blackbox-terminal.nix
 			./cfg/hm-gnome-terminal.nix
+			./cfg/hm-alacritty.nix
 
 			# Automatically push dotfiles.
 			(import ./utils/schedule.nix {
@@ -637,6 +638,7 @@ in {
 
 		]) ++ (with pkgs.nixpkgs_unstable_real; [
 			spotify
+			blackbox-terminal
 			# gamescope
 			(steam.override {
 				extraPkgs = pkgs: with pkgs; [
@@ -758,18 +760,6 @@ in {
 			gnome.gnome-tweaks
 			gnome.gnome-boxes
 		]);
-
-		programs.alacritty = {
-			enable = true;
-			settings = {
-				font = let font = { family = "monospace"; }; in {
-					normal = font;
-					bold   = font;
-					italic = font;
-					size   = 11;
-				};
-			};
-		};
 
 		systemd.user.services = {
 			# terminal = utils.waylandService "gnome-terminal";
