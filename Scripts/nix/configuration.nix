@@ -634,13 +634,15 @@ in {
 
 		]) ++ (with pkgs.nixpkgs_unstable; [
 			# (gamescope)
-			(steam.override {
-				extraPkgs = pkgs: with pkgs; [
-				];
-			})
 
 		]) ++ (with pkgs.nixpkgs_unstable_real; [
 			spotify
+			# gamescope
+			(steam.override {
+				extraPkgs = pkgs: with pkgs; [
+					# gamescope
+				];
+			})
 
 		]) ++ (with pkgs; [
 			# Personal stuff
@@ -672,7 +674,7 @@ in {
 			jq
 			go_1_18
 			mdr
-			xelfviewer
+			# xelfviewer
 			config.boot.kernelPackages.perf
 			# perf_data_converter
 			tree
@@ -708,7 +710,6 @@ in {
 			pulseaudio
 			pamixer
 			easyeffects
-			ytmdesktop
 
 			# Browsers
 			google-chrome
