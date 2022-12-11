@@ -25,7 +25,7 @@ else stdenv.mkDerivation rec {
 		udev
 		libusb1
 		dbus
-		openssl
+		openssl_1_1
 	];
 	
 	sourceRoot = ".";

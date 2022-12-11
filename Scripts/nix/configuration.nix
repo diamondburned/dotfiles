@@ -100,19 +100,29 @@ in {
 				speedFactor = 10;
 				supportedFeatures = [ "nixos-test" "benchmark" "big-parallel" "kvm" ];
 			}
-			{
-				hostName = "otokonoko";
-				systems = [ "x86_64-linux" "i686-linux" ];
-				maxJobs = 2;
-				speedFactor = 5;
-				supportedFeatures = [ "nixos-test" "benchmark" "big-parallel" "kvm" ];
-			}
+			# {
+			# 	hostName = "otokonoko";
+			# 	systems = [ "x86_64-linux" "i686-linux" ];
+			# 	maxJobs = 2;
+			# 	speedFactor = 5;
+			# 	supportedFeatures = [ "nixos-test" "benchmark" "big-parallel" "kvm" ];
+			# }
 		];
 		trustedUsers = [ "root" "diamond" ];
 		distributedBuilds = true;
 		extraOptions = ''
 			builders-use-substitutes = true
 		'';
+		settings = {
+			substituters = [
+				"https://nix-community.cachix.org"
+				"https://cache.nixos.org/"
+			];
+			trusted-public-keys = [
+				"binarycache.example.com-1:dsafdafDFW123fdasfa123124FADSAD"
+				"nix-community.cachix.org-1:mB9FSh9qf2dCimDSUo8Zy7bkq5CX+/rkCWyvRCYg3Fs="
+			];
+		};
 	};
 
 	# Group to change SSH keys to.
@@ -664,7 +674,7 @@ in {
 			mdr
 			xelfviewer
 			config.boot.kernelPackages.perf
-			perf_data_converter
+			# perf_data_converter
 			tree
 			fzf
 			graphviz
@@ -729,7 +739,7 @@ in {
 
 			# Games
 			# polymc
-			prismlauncher
+			# prismlauncher
 			osu-wine
 			# osu-wine-realistik
 
