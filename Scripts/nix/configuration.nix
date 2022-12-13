@@ -731,6 +731,7 @@ in {
 			evince
 			aspell
 			marker
+			foliate
 
 			# Applications
 			gcolor3
