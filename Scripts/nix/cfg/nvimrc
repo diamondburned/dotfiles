@@ -519,6 +519,7 @@ let g:ale_completion_autoimport = 1
 " 			\ }
 let g:ale_fixers = {
 			\ 'go':         [ "goimports" ],
+			\ 'zig':        [ "zigfmt" ],
 			\ 'css':        [ "prettier" ],
 			\ 'c':          [ "clang-format" ],
 			\ 'cpp':        [ "uncrustify", "clang-format" ],
