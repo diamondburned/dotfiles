@@ -77,11 +77,13 @@ in {
 	};
 
 	# This needs to be manually stated, for some reason.
-	boot.kernelModules = [ "v4l2loopback" ];
+	boot.kernelModules = [ "v4l2loopback" "i2c-dev" ];
 
 	boot.extraModulePackages = with config.boot.kernelPackages; [
 		# Add the camera loopback drivers.
 		v4l2loopback
+		# Add DDC/CI backlight control.
+		ddcci-driver
 
 		rtl8188gu
 
@@ -111,6 +113,11 @@ in {
 
 	# We don't want to sacrifice battery for the above.
 	powerManagement.cpuFreqGovernor = lib.mkForce "powersave";
+
+	services.ddccontrol.enable = true;
+	services.udev.extraRules = ''
+		KERNEL=="i2c-[0-9]*", GROUP="i2c", MODE="0660"
+	'';
 
 	# Blueman sucks; use bluetoothctl.
 	# services.blueman.enable = true;

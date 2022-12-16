@@ -432,7 +432,7 @@ in {
 	# Define a user account. Don't forget to set a password with ‘passwd’.
 	users.users.diamond = {
 		isNormalUser = true;
-		extraGroups = [ "wheel" "networkmanager" "docker" "storage" "audio" "adbusers" "libvirtd" ];
+		extraGroups = [ "wheel" "networkmanager" "docker" "storage" "audio" "adbusers" "libvirtd" "i2c" ];
 	};
 
 	qt5 = {
