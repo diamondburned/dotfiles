@@ -639,6 +639,7 @@ in {
 		]) ++ (with pkgs.nixpkgs_unstable_real; [
 			spotify
 			blackbox-terminal
+			evolutionWithPlugins
 			# gamescope
 			(steam.override {
 				extraPkgs = pkgs: with pkgs; [
