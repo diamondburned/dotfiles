@@ -48,6 +48,7 @@ in {
 			gtkcord4 = super.callPackage ./packages/gtkcord4.nix {};
 			osu-wine = super.callPackage ./packages/osu-wine {};
 			osu-wineprefix = super.callPackage ./packages/osu-wineprefix {};
+			inconsolata = super.callPackage ./packages/inconsolata.nix {};
 			intiface-cli = super.callPackage ./packages/intiface-cli {};
 			catnip-gtk = super.callPackage ./packages/catnip-gtk {};
 			passwordsafe = super.callPackage ./packages/gnome-passwordsafe {};
