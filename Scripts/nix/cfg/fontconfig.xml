@@ -84,6 +84,13 @@
 		<edit name="weight" mode="assign" binding="strong"><int>100</int></edit>
 	</match>
 
+	<match target="pattern">
+		<test name="family" compare="eq"><string>monospace</string></test>
+		<!-- Force Inconsolata to be Medium -->
+		<test name="weight" qual="any" compare="eq"><int>80</int></test>
+		<edit name="weight" mode="assign" binding="strong"><int>100</int></edit>
+	</match>
+
 	<!-- <match target="pattern"> -->
 		<!-- <test compare="eq" name="family"> -->
 		<!-- 	<string>monospace</string> -->
