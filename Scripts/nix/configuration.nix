@@ -640,11 +640,9 @@ in {
 			spotify
 			blackbox-terminal
 			evolutionWithPlugins
-			# gamescope
+			gamescope
 			(steam.override {
-				extraPkgs = pkgs: with pkgs; [
-					# gamescope
-				];
+				extraPkgs = pkgs: with pkgs; [ gamescope ];
 			})
 
 		]) ++ (with pkgs; [
