@@ -125,10 +125,26 @@ in {
 				# Allow 10 scale factors per integer instead of 4.
 				./patches/mutter-scale-factors.patch
 				# Use Nearest for scaling.
-				./patches/mutter-scaling-nearest.patch
+				# ./patches/mutter-scaling-nearest.patch
 			];
 			doCheck = false;
 		});
+	});
+
+	xwayland = super.xwayland.overrideAttrs (old: {
+		# https://gitlab.freedesktop.org/xorg/xserver/-/merge_requests/733
+		src = super.fetchFromGitLab {
+			domain = "gitlab.freedesktop.org";
+			owner  = "refi_64";
+			repo   = "xserver";
+			rev    = "01513cd124576167ec802e43e952d33476ce0d32"; # scaling-mr
+			sha256 = "0n1c1wrg3mqqvhn265qjbmfmch6ii9n419yyalwdib2abxfba7cj";
+		};
+		buildInputs = old.buildInputs ++ [ super.udev ];
+		patches = (old.patches or []) ++ [
+			# Hack to use 2x scaling always. Fits my purpose.
+			./patches/xserver-scale-2x.diff
+		];
 	});
 
 	# Fuck libadwaita's stylesheets. They can go fuck themselves.
