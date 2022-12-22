@@ -670,6 +670,7 @@ in {
 			# gatttool
 
 			# Development tools
+			sommelier
 			dos2unix
 			foot
 			jq

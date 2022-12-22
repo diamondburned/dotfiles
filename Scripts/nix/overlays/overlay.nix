@@ -50,6 +50,16 @@ in {
 	# I don't care!!!!!! Nixpkgs, stop doing this!!
 	pkgconfig = self.pkg-config;
 
+	sommelier = super.sommelier.overrideAttrs (old: {
+		version = "110.0";
+		src = super.fetchzip rec {
+			url = "https://chromium.googlesource.com/chromiumos/platform2/+archive/${passthru.rev}/vm_tools/sommelier.tar.gz";
+			passthru.rev = "fc06d8652e47afb3cd94f8fb5f09f740d72456c2";
+			stripRoot = false;
+			sha256 = "0vmy4jjid68l5cjv8sdwn45vzisl64czxlj2j509glwa5alw8pvn";
+		};
+	});
+
 	# For OBS.
 	# inherit (nixpkgs_puffnfresh)
 	# 	obs-studio
