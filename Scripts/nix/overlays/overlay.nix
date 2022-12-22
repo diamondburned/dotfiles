@@ -124,6 +124,8 @@ in {
 			patches = (old.patches or []) ++ [
 				# Allow 10 scale factors per integer instead of 4.
 				./patches/mutter-scale-factors.patch
+				# Use Nearest for scaling.
+				./patches/mutter-scaling-nearest.patch
 			];
 			doCheck = false;
 		});
