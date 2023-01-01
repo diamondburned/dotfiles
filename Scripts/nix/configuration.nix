@@ -638,6 +638,7 @@ in {
 			blackbox-terminal
 			evolutionWithPlugins
 			gamescope
+			(steam-run)
 			(steam.override {
 				extraPkgs = pkgs: with pkgs; [ gamescope ];
 			})
