@@ -643,6 +643,9 @@ in {
 				extraPkgs = pkgs: with pkgs; [ gamescope ];
 			})
 
+			# Browsers
+			google-chrome
+
 		]) ++ (with pkgs; [
 			# Personal stuff
 			gnome.pomodoro
@@ -710,9 +713,6 @@ in {
 			pulseaudio
 			pamixer
 			easyeffects
-
-			# Browsers
-			google-chrome
 
 			# # Chat/Social
 			# # zoom-us
