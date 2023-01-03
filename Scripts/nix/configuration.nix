@@ -429,7 +429,10 @@ in {
 	# Define a user account. Don't forget to set a password with ‘passwd’.
 	users.users.diamond = {
 		isNormalUser = true;
-		extraGroups = [ "wheel" "networkmanager" "docker" "storage" "audio" "adbusers" "libvirtd" "i2c" ];
+		extraGroups = [
+			"wheel" "networkmanager" "docker" "storage" "audio" "adbusers" "libvirtd" "i2c"
+			"wireshark"
+		];
 	};
 
 	qt5 = {
@@ -453,10 +456,10 @@ in {
 		session   required      pam_env.so user_readenv=1
 	'';
 
-	# programs.wireshark = {
-	# 	enable  = true;
-	# 	package = pkgs.wireshark-qt;
-	# };
+	programs.wireshark = {
+		enable  = true;
+		package = pkgs.wireshark-qt;
+	};
 
 	programs.command-not-found = {
 		enable = true;
