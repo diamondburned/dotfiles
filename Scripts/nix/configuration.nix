@@ -537,9 +537,8 @@ in {
 					"ssh://git@github.com/" = { insteadOf = "https://github.com/"; };
 					"ssh://git@gitlab.com/" = { insteadOf = "https://gitlab.com/"; };
 				};
-				pull = {
-					rebase = true;
-				};
+				pull.rebase = true;
+				push.autoSetupRemote = true;
 			};
 		};
 
