@@ -153,12 +153,13 @@ nixsh() {
 }
 
 nix_exec() {
-	nix-build "${@:2}" --max-jobs 0 -E "with import <nixpkgs> {}; (callPackage ./$1 {}).all"
+	nix-build "${@:2}" -E "with import <nixpkgs> {}; (callPackage ./$1 {}).all"
 }
 
 alias nixshbuild="nix-shell '<nixpkgs>' -A"
 alias nixbuild="nix-build '<nixpkgs>' -A package"
-alias nixrl="sudo nixos-rebuild switch --max-jobs 0"
+# alias nixrl="sudo nixos-rebuild switch --max-jobs 0"
+alias nixrl="sudo nixos-rebuild switch"
 alias nixgc="sudo nix-collect-garbage -d"
 
 # lol fuck node
