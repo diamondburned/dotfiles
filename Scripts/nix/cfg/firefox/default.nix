@@ -122,6 +122,9 @@ in {
 			"browser.aboutConfig.showWarning" = false;
 			"browser.in-content.dark-mode" = true;
 			"browser.menu.showViewImageInfo" = true;
+			"privacy.resistFingerprinting" = true;
+			"privacy.antitracking.testing" = true;
+			"privacy.trackingprotection.enabled" = true;
 		};
 	};
 }
