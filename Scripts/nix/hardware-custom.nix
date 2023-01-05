@@ -117,6 +117,9 @@ in {
 	services.ddccontrol.enable = true;
 	services.udev.extraRules = ''
 		KERNEL=="i2c-[0-9]*", GROUP="i2c", MODE="0660"
+
+		# Disable internal laptop keyboard.
+		# KERNELS=="input1", SUBSYSTEMS=="input", ATTRS{name}=="AT Translated Set 2 keyboard", ENV{LIBINPUT_IGNORE_DEVICE}="1"
 	'';
 
 	# Blueman sucks; use bluetoothctl.
