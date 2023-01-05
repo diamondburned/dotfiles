@@ -120,6 +120,12 @@ in {
 
 		# Disable internal laptop keyboard.
 		# KERNELS=="input1", SUBSYSTEMS=="input", ATTRS{name}=="AT Translated Set 2 keyboard", ENV{LIBINPUT_IGNORE_DEVICE}="1"
+
+		# Rule for my NuPhy Air60.
+		# ACTION=="add", ENV{PRODUCT}=="5/5ac/24f/6701"
+
+		# We want to disable the internal laptop keyboard if the Air60 is connected.
+		# ACTION=="add", ENV
 	'';
 
 	# Blueman sucks; use bluetoothctl.
