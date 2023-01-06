@@ -129,17 +129,9 @@ in {
 
 	services.ddccontrol.enable = true;
 	# Allow i2c access to the DDC/CI driver.
-	services.udev.extraRules = (''
+	services.udev.extraRules = ''
 		KERNEL=="i2c-[0-9]*", GROUP="i2c", MODE="0660"
-	'') + (
-		# We want to disable the internal laptop keyboard if the Air60 is
-		# connected.
-		let grab-laptop-kb = wl-grab "/dev/input/by-path/platform-i8042-serio-0-event-kbd";
-			air60-product  = "5/5ac/24f/6701";
-		in ''
-			ACTION=="add", ENV{PRODUCT}=="${air60-product}", RUN+="${grab-laptop-kb "on"}"
-			ACTION=="remove", ENV{PRODUCT}=="${air60-product}", RUN+="${grab-laptop-kb "off"}"
-		'');
+	'';
 
 	# Blueman sucks; use bluetoothctl.
 	# services.blueman.enable = true;

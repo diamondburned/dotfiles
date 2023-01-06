@@ -75,6 +75,7 @@ in {
 		./secrets
 		./configroot.nix
 		./cfg/udev
+		./cfg/nokbd
 		# ./cfg/wayfire
 		./cfg/pipewire
 		./cfg/localhost
