@@ -22,6 +22,19 @@ let utils = import ./utils { inherit lib; };
 		};
 	});
 
+	wl-grab = device: mode:
+		let pkg = pkgs.writeShellApplication {
+			name = "wl-grab";
+			text = builtins.readFile ./bin/wl-grab;
+			runtimeInputs = with pkgs; [
+				coreutils
+				gnused
+				procps
+				evtest
+			];
+		};
+		in "${pkg}/bin/wl-grab ${device} ${mode}";
+
 in {
 	imports = [
 		# "${blurcam}"
@@ -115,18 +128,18 @@ in {
 	powerManagement.cpuFreqGovernor = lib.mkForce "powersave";
 
 	services.ddccontrol.enable = true;
-	services.udev.extraRules = ''
+	# Allow i2c access to the DDC/CI driver.
+	services.udev.extraRules = (''
 		KERNEL=="i2c-[0-9]*", GROUP="i2c", MODE="0660"
-
-		# Disable internal laptop keyboard.
-		# KERNELS=="input1", SUBSYSTEMS=="input", ATTRS{name}=="AT Translated Set 2 keyboard", ENV{LIBINPUT_IGNORE_DEVICE}="1"
-
-		# Rule for my NuPhy Air60.
-		# ACTION=="add", ENV{PRODUCT}=="5/5ac/24f/6701"
-
-		# We want to disable the internal laptop keyboard if the Air60 is connected.
-		# ACTION=="add", ENV
-	'';
+	'') + (
+		# We want to disable the internal laptop keyboard if the Air60 is
+		# connected.
+		let grab-laptop-kb = wl-grab "/dev/input/by-path/platform-i8042-serio-0-event-kbd";
+			air60-product  = "5/5ac/24f/6701";
+		in ''
+			ACTION=="add", ENV{PRODUCT}=="${air60-product}", RUN+="${grab-laptop-kb "on"}"
+			ACTION=="remove", ENV{PRODUCT}=="${air60-product}", RUN+="${grab-laptop-kb "off"}"
+		'');
 
 	# Blueman sucks; use bluetoothctl.
 	# services.blueman.enable = true;

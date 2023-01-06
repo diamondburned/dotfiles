@@ -664,7 +664,6 @@ in {
 			intiface-cli
 
 			# System
-			(writeScriptBin "wsudo" (builtins.readFile ./bin/wsudo))
 			xorg.xhost # dependency for wsudo
 			powertop
 			blueberry
@@ -760,6 +759,12 @@ in {
 			gnome.gnome-disk-utility
 			gnome.gnome-tweaks
 			gnome.gnome-boxes
+
+			# Everything in ./bin
+			(runCommand "diamond-bin" {} ''
+				mkdir -p $out/bin
+				cp -r ${./bin}/* $out/bin
+			'')
 		]);
 
 		systemd.user.services = {
