@@ -569,4 +569,6 @@ refx() {
 alias vim="nvim"
 alias gdbrun="gdb -ex run"
 
+alias dc=cd
+
 echo Welcome
