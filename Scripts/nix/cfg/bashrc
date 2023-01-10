@@ -83,14 +83,20 @@ HISTFILESIZE=2147483647 # fuck
 HISTSIZE=100000
 shopt -s histappend
 
-grepr() {
-	# -n show line number
-	# -R grep recursively
-	grep "$@" --color -nR '.'
+# always show line number
+function grep() {
+	if [[ -t 1 ]]; then
+		command grep --color -n "$@"
+	else
+		command grep "$@"
+	fi
 }
 
-# always show line number
-alias grep="grep -n"
+function grepr() {
+	# -n show line number
+	# -R grep recursively
+	grep "$@" -R '.'
+}
 
 #PID=`pgrep -n -u $USER gnome-session`
 #if [ -n "$PID" ]; then
