@@ -721,7 +721,7 @@ in {
 			tdesktop
 			discord
 			gtkcord4
-			gotktrix
+			# gotktrix
 			# # fractal
 
 			# Office
@@ -806,9 +806,9 @@ in {
 				};
 				# Allow non-free for user
 				"nixpkgs/config.nix".text = "{ allowUnfree = true; }";
-				# "nix/config.nix".text = ''
-				# 	experimental-featuers = nix-command
-				# '';
+				"nix/nix.conf".text = ''
+					experimental-features = nix-command flakes
+				'';
 			};
 		};
 

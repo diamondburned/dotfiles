@@ -22,5 +22,4 @@ in import "${gotk4-nix}/package.nix" {
 	base = (import "${gotktrix}/.nix/base.nix") // {
 		vendorSha256 = "0cmandfdkczpppmf1kdxliw2b164a48vh9iqb46vizab69ynv7j7";
 	};
-	doCheck = false;
 }
