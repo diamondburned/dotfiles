@@ -3,15 +3,13 @@
 with lib;
 
 let cfg = config.services.diamondburned.caddy;
-	configFile = pkgs.writeText "caddyconfig" cfg.config;
 
 in {
 	options.services.diamondburned.caddy = {
 		enable = mkEnableOption "Caddy web server";
 
-		config = mkOption {
-			default = "";
-			example = ''
+		configFile = mkOption {
+			example = pkgs.writeText "Caddyfile" ''
 				example.com {
 					gzip
 					minify
@@ -20,7 +18,7 @@ in {
 					root /srv/http
 				}
 			'';
-			type = types.lines;
+			type = types.path;
 			description = "Configuration file to use with adapter";
 		};
 
@@ -61,6 +59,18 @@ in {
 			description = "Only fill this if custom plugins are added";
 		};
 
+		environment = mkOption {
+			default = {};
+			type = types.attrsOf types.str;
+			description = "Environment variables to pass to the service";
+		};
+
+		environmentFile = mkOption {
+			default = null;
+			type = types.nullOr types.path;
+			description = "File containing environment variables to pass to the service";
+		};
+
 		openFirewall = mkEnableOption "Port-forward 80 and 443";
 
 		package = mkOption {
@@ -87,16 +97,17 @@ in {
 			after    = [ "network-online.target" ];
 			wantedBy = [ "multi-user.target"     ];
 			reloadIfChanged = true;
+			environment = cfg.environment;
 			serviceConfig = {
 				ExecStart = ''
 					${cfg.package}/bin/caddy run \
 						--environ                \
-						--config  ${configFile}  \
+						--config  ${cfg.configFile}  \
 						--adapter ${cfg.adapter} \
 				'';
 				ExecReload = ''
 					${cfg.package}/bin/caddy reload \
-						--config  ${configFile}  \
+						--config  ${cfg.configFile}  \
 						--adapter ${cfg.adapter} \
 				'';
 				TimeoutStopSec = "5s";
@@ -107,10 +118,12 @@ in {
 				AmbientCapabilities   = [ "cap_net_bind_service" "cap_net_raw" ];
 				CapabilityBoundingSet = [ "cap_net_bind_service" "cap_net_raw" ];
 				NoNewPrivileges = true;
+				StateDirectory = "caddy";
 				LimitNPROC  = 8192;
 				LimitNOFILE = 1048576;
 				PrivateTmp    = false;
 				ProtectSystem = "full";
+				EnvironmentFile = cfg.environmentFile;
 			};
 		};
 
