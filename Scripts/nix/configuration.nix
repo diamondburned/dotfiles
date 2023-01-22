@@ -80,6 +80,7 @@ in {
 		./cfg/pipewire
 		./cfg/localhost
 		./cfg/keyd
+		./cfg/avahi
 	];
 
 	nixpkgs.config = {
@@ -187,21 +188,6 @@ in {
 		#                        v  Steam  v
 		allowedTCPPorts = [ 1337 27036 27037 ];
 		allowedUDPPorts = [ 1337 27031 27036 ];
-	};
-
-	services.avahi = {
-		enable = true;
-		nssmdns = true;
-		publish = {
-			enable = true;
-			domain = true;
-			addresses = true;
-			workstation = true;
-		};
-		interfaces = [
-			# USB-C Ethernet dock.
-			"enp0s20f0u2u1"
-		];
 	};
 
 	security.pki.certificateFiles = [
