@@ -121,3 +121,4 @@ application/x-cd-image=gnome-disk-image-writer.desktop;
 audio/x-opus+ogg=mpv.desktop;
 application/x-wine-extension-ini=nvim.desktop;
 application/vnd.ms-excel=calc.desktop;
+image/vnd.microsoft.icon=gimp.desktop;
