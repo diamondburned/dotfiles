@@ -98,7 +98,8 @@ in {
 		# Add DDC/CI backlight control.
 		ddcci-driver
 
-		rtl8188gu
+		# Realtek driver builds itself on latest kernel challenge impossible.
+		# rtl8188gu
 
 		# Driver for the TP-Link Archer T3U.
 		# (rtl88x2bu.overrideAttrs (old: {
