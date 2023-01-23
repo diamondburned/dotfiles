@@ -16,6 +16,10 @@
       "url": "https://github.com/NixOS/nixpkgs/archive/eabc38219184cc3e04a974fe31857d8e0eac098d.tar.gz",
       "store_hash": "g3bgaa9s64l8s0llh0j92l6lrxp9vsnh"
     },
+    "github:NixOS/nixpkgs staging": {
+      "url": "https://github.com/NixOS/nixpkgs/archive/2f8e6f3d33d73190ac8bebb4b4c94bfdf59c904d.tar.gz",
+      "store_hash": "zqk59c9i6zxzwp91rsiy8xbjv020qrkz"
+    },
     "github:PrismLauncher/PrismLauncher master": {
       "url": "https://github.com/PrismLauncher/PrismLauncher/archive/master.tar.gz",
       "store_hash": "v9msd97qxb1w4kyqcxhxh7li2f2k8cm4"

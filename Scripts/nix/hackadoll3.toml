@@ -7,6 +7,7 @@
  nixpkgs_21_11 = "github:NixOS/nixpkgs nixos-21.11"
  nixpkgs_pipewire_0_3_57 = "github:NixOS/nixpkgs b7a6fde153d"
  nixpkgs_unstable = "github:NixOS/nixpkgs b7a6fde153d"
+ nixpkgs_staging = "github:NixOS/nixpkgs staging"
  nix-wayland = "github:nix-community/nixpkgs-wayland master"
  home-manager_21_11 = "github:nix-community/home-manager master"
  home-manager_unstable = "github:nix-community/home-manager master"
