@@ -3,16 +3,16 @@
 	
 rustPlatform.buildRustPackage rec {
 	name = "neovim-gtk-unstable-${version}";
-	version = "1.0.4";
+	version = "9b834b60";
 
 	src = fetchFromGitHub {
 		owner  = "Lyude";
 		repo   = "neovim-gtk";
-		rev	   = "v${version}";
-		sha256 = "1wp3rp416k736gqr3dws43k3l9193ag2jppibvdhsfrhjvpdlywa";
+		rev	   = "9b834b607935f532e77fb90dacdb044c7bc47922";
+		sha256 = "1byvrsmyjchb95jgsllrwqc4h32axdfv7vxjj6rypbgrlizmvr4s";
 	};
 
-	cargoSha256 = "1akx4ygzpccpsiv7xh43adddcnwgfzqg16aj4m01w379ln0qszr4";
+	cargoSha256 = "19zi9wzyw0mqnlfiv39gv2xxpm3q5kvdchmzrrw70gl56lsvsqd8";
 
 	nativeBuildInputs = [
 		pkg-config

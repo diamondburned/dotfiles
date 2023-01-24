@@ -13,6 +13,7 @@ let nurOverlay = (self: super: (import ./nur.nix (import <nur> { pkgs = super; }
 	nixpkgs_staging = import <nixpkgs_staging> nixpkgsOpts;
 	nixpkgs_unstable = import <nixpkgs_unstable> nixpkgsOpts;
 	nixpkgs_unstable_real = import <unstable> nixpkgsOpts;
+	nixpkgs_unstable_newer = import <nixpkgs_unstable_newer> nixpkgsOpts;
 	nixpkgs_pipewire_0_3_57 = import <nixpkgs_pipewire_0_3_57> nixpkgsOpts;
 
 in {
@@ -24,6 +25,7 @@ in {
 				nixpkgs_staging
 				nixpkgs_unstable
 				nixpkgs_unstable_real
+				nixpkgs_unstable_newer
 				nixpkgs_pipewire_0_3_57;
 		})
 		(nurOverlay)
@@ -50,7 +52,9 @@ in {
 			gtkcord4 = super.callPackage ./packages/gtkcord4.nix {};
 			osu-wine = super.callPackage ./packages/osu-wine {};
 			osu-wineprefix = super.callPackage ./packages/osu-wineprefix {};
-			neovim-gtk = super.callPackage ./packages/neovim-gtk {};
+			neovim-gtk = super.callPackage ./packages/neovim-gtk {
+				inherit (super.nixpkgs_unstable_newer) rustPlatform;
+			};
 			inconsolata = super.callPackage ./packages/inconsolata.nix {};
 			intiface-cli = super.callPackage ./packages/intiface-cli {};
 			catnip-gtk = super.callPackage ./packages/catnip-gtk {};
