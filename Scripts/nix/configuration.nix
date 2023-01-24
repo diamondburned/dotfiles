@@ -680,6 +680,7 @@ in {
 			xorg.xauth
 			octave-soft
 			grun
+			neovim-gtk
 
 			(with nixpkgs_copilot; wrapNeovimUnstable neovim-unwrapped
 				# Use unstable Neovim with a slightly outdated Nixpkgs because

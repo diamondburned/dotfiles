@@ -301,6 +301,14 @@ hi PmenuSel ctermfg=13 ctermbg=0
 "Resume past cursor location on open"
 au InsertLeave * call cursor([getpos('.')[1], getpos('.')[2]+1])
 
+"GUI shit"
+if exists('g:GtkGuiLoaded')
+	let g:GuiInternalClipboard = 1
+	call rpcnotify(1, 'Gui', 'Font', 'Monospace 11')
+	call rpcnotify(1, 'Gui', 'Command', 'SetCursorBlink', '0')
+	hi Normal guibg=#1D1D1D
+endif
+
 "Autoindentation"
 set autoindent
 
