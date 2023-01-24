@@ -649,6 +649,7 @@ in {
 			gnupg
 			gnuplot
 			intiface-cli
+			drawing
 
 			# System
 			xorg.xhost # dependency for wsudo
