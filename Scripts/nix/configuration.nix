@@ -745,6 +745,7 @@ in {
 			gnome.vinagre
 			gnome.file-roller
 			gnome.nautilus
+			nautilus-open-any-terminal
 			gnome.gnome-disk-utility
 			gnome.gnome-tweaks
 			gnome.gnome-boxes
