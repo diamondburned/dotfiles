@@ -539,7 +539,7 @@ in {
 		# };
 		programs.vscode = {
 			enable = true;
-			package = pkgs.vscode;
+			package = pkgs.nixpkgs_unstable_real.vscode;
 			# userSettings = {
 			# 	"telemetry.enableTelemetry" = false;
 			# 	"window.menuBarVisibility"  = "toggle";
@@ -719,6 +719,7 @@ in {
 			evince
 			aspell
 			marker
+			graphviz
 			foliate
 
 			# Applications
