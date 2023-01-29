@@ -128,11 +128,13 @@ in {
 	# We don't want to sacrifice battery for the above.
 	powerManagement.cpuFreqGovernor = lib.mkForce "powersave";
 
+	hardware.i2c.enable = true;
+
 	services.ddccontrol.enable = true;
 	# Allow i2c access to the DDC/CI driver.
-	services.udev.extraRules = ''
-		KERNEL=="i2c-[0-9]*", GROUP="i2c", MODE="0660"
-	'';
+	# services.udev.extraRules = ''
+	# 	KERNEL=="i2c-[0-9]*", GROUP="i2c", MODE="0660"
+	# '';
 
 	# Blueman sucks; use bluetoothctl.
 	# services.blueman.enable = true;

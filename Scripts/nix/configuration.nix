@@ -643,6 +643,7 @@ in {
 			gnome.pomodoro
 			gnomeExtensions.gsconnect
 			gnomeExtensions.easyScreenCast
+			gnomeExtensions.brightness-control-using-ddcutil
 			keepassxc
 			gimp-with-plugins
 			git-crypt
