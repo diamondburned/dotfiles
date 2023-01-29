@@ -23,6 +23,16 @@ let lib = super.lib;
 	spicetify = builtins.fetchTarball https://github.com/pietdevries94/spicetify-nix/archive/master.tar.gz;
 	spicetify-themes = builtins.fetchTarball https://github.com/morpheusthewhite/spicetify-themes/archive/master.tar.gz;
 
+	waylandify-chromium = pkg: pkg.overrideAttrs (old: {
+		nativeBuildInputs = (old.nativeBuildInputs or []) ++ (with super; [
+			buildPackages.makeWrapper
+		]);
+		postFixup = ''
+			wrapProgram $out/bin/${old.name} \
+				--add-flags '--enable-features=UseOzonePlatform --ozone-platform=wayland'
+		'';
+	});
+
 	GOPATH = "/home/diamond/.go";
 
 in {
