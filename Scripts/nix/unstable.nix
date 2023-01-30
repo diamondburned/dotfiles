@@ -147,7 +147,7 @@ in {
 		home.packages = with pkgs; [
 			# sage
 			abiword
-			darktable
+			# darktable
 
 			# Typing
 			fcitx5-configtool
