@@ -646,7 +646,8 @@ in {
 			gnomeExtensions.easyScreenCast
 			gnomeExtensions.brightness-control-using-ddcutil
 			keepassxc
-			gimp-with-plugins
+			# gimp-with-plugins
+			gimp
 			git-crypt
 			gnupg
 			gnuplot
