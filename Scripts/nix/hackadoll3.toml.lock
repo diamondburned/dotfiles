@@ -37,8 +37,8 @@
       "store_hash": "saq4d26jf30wg6lz992qpammk48nhwz4"
     },
     "github:nix-community/home-manager master": {
-      "url": "https://github.com/nix-community/home-manager/archive/2af0d07678fc15612345e0dd55337550dcf6465f.tar.gz",
-      "store_hash": "8ya38wfg4jvgk4jhzp0nlq6m0ljsalkv"
+      "url": "https://github.com/nix-community/home-manager/archive/08a778d80308353f4f65c9dcd3790b5da02d6306.tar.gz",
+      "store_hash": "47km3w2914qdimwms13szvc9vgmc3rn2"
     },
     "github:nix-community/nixpkgs-wayland master": {
       "url": "https://github.com/nix-community/nixpkgs-wayland/archive/5097457af8e9dcf45a68fa892716919ad28e545a.tar.gz",

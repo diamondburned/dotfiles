@@ -306,26 +306,26 @@ in {
 	# 	'';
 	# });
 
-	discord = super.discord.overrideAttrs (old:
-		let version = "0.0.21";
-			asar = builtins.fetchurl {
-				url    = "https://github.com/GooseMod/OpenAsar/releases/download/nightly/app.asar";
-				sha256 = "16191zzhqab0cq79vcvynw26gmq87z5ig0qzjmsygp2kkdb0yzdw";
-			};
-		in {
-			inherit version;
-			src = super.fetchurl {
-				url    = "https://dl.discordapp.net/apps/linux/${version}/discord-${version}.tar.gz";
-				sha256 = "18rmw979vg8lxxvagji6sim2s5yyfq91lfabsz1wzbniqfr98ci8";
-			};
-			# buildInputs = (old.buildInputs or []) ++ [ super.unzip ];
-			# nativeBuildInputs = (old.nativeBuildInputs or []) ++ [ super.makeWrapper ]; 
-			postFixup = (old.postFixup or "") + ''
-				# cp ${asar} $out/opt/Discord/resources/app.asar
-				wrapProgram $out/bin/discord \
-					--add-flags "--enable-gpu-rasterization --enable-zero-copy --enable-gpu-compositing --enable-native-gpu-memory-buffers --enable-oop-rasterization --enable-features=UseSkiaRenderer,CanvasOopRasterization"
-			'';
-		});
+	# discord = super.discord.overrideAttrs (old:
+	# 	let version = "0.0.21";
+	# 		asar = builtins.fetchurl {
+	# 			url    = "https://github.com/GooseMod/OpenAsar/releases/download/nightly/app.asar";
+	# 			sha256 = "16191zzhqab0cq79vcvynw26gmq87z5ig0qzjmsygp2kkdb0yzdw";
+	# 		};
+	# 	in {
+	# 		inherit version;
+	# 		src = super.fetchurl {
+	# 			url    = "https://dl.discordapp.net/apps/linux/${version}/discord-${version}.tar.gz";
+	# 			sha256 = "18rmw979vg8lxxvagji6sim2s5yyfq91lfabsz1wzbniqfr98ci8";
+	# 		};
+	# 		# buildInputs = (old.buildInputs or []) ++ [ super.unzip ];
+	# 		# nativeBuildInputs = (old.nativeBuildInputs or []) ++ [ super.makeWrapper ]; 
+	# 		postFixup = (old.postFixup or "") + ''
+	# 			# cp ${asar} $out/opt/Discord/resources/app.asar
+	# 			wrapProgram $out/bin/discord \
+	# 				--add-flags "--enable-gpu-rasterization --enable-zero-copy --enable-gpu-compositing --enable-native-gpu-memory-buffers --enable-oop-rasterization --enable-features=UseSkiaRenderer,CanvasOopRasterization"
+	# 		'';
+	# 	});
 
 	makeFirefoxProfileDesktopFile = {
 		profile,

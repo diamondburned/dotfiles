@@ -117,11 +117,12 @@ in {
 		'';
 		settings = {
 			substituters = [
-				"https://nix-community.cachix.org"
+				# Cachix uses zstd, which Nix 2.3 does not support. Disable it.
+				# "https://nix-community.cachix.org"
 				"https://cache.nixos.org/"
 			];
 			trusted-public-keys = [
-				"nix-community.cachix.org-1:mB9FSh9qf2dCimDSUo8Zy7bkq5CX+/rkCWyvRCYg3Fs="
+				# "nix-community.cachix.org-1:mB9FSh9qf2dCimDSUo8Zy7bkq5CX+/rkCWyvRCYg3Fs="
 			];
 		};
 	};
