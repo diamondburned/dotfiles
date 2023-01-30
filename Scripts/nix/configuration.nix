@@ -370,10 +370,15 @@ in {
 
 	services.flatpak.enable = true;
 
-	environment.gnome.excludePackages = with pkgs; [
-		# gnome-maps
-		# gnome-contacts
-		# gnome-initial-setup
+	environment.gnome.excludePackages = with pkgs; with pkgs.gnome; [
+		gnome-contacts
+		gnome-initial-setup
+		totem
+		cheese
+		tracker-miners
+		sushi
+		gnome-photos
+		gnome-music
 	];
 
 	programs.seahorse.enable = true;

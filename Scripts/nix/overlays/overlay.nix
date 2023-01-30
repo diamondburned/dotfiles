@@ -129,17 +129,17 @@ in {
 		'';
 	};
 
-	gnome = super.gnome.overrideScope' (self_gnome: super_gnome: {
-		mutter = super_gnome.mutter.overrideAttrs (old: {
-			patches = (old.patches or []) ++ [
-				# Allow 10 scale factors per integer instead of 4.
-				./patches/mutter-scale-factors.patch
-				# Support the Xwayland MR underneath by changing the X scale factor to 2x.
-				# ./patches/mutter-xserver-scale-2x.diff
-			];
-			doCheck = false;
-		});
-	});
+	# gnome = super.gnome.overrideScope' (self_gnome: super_gnome: {
+	# 	mutter = super_gnome.mutter.overrideAttrs (old: {
+	# 		patches = (old.patches or []) ++ [
+	# 			# Allow 10 scale factors per integer instead of 4.
+	# 			./patches/mutter-scale-factors.patch
+	# 			# Support the Xwayland MR underneath by changing the X scale factor to 2x.
+	# 			# ./patches/mutter-xserver-scale-2x.diff
+	# 		];
+	# 		doCheck = false;
+	# 	});
+	# });
 
 	# xwayland = super.xwayland.overrideAttrs (old: {
 	# 	# https://gitlab.freedesktop.org/xorg/xserver/-/merge_requests/733
@@ -330,17 +330,7 @@ in {
 	# Fix GTK3 regression.
 	gtk3 =
 		if super.gtk3.version == "3.24.35"
-		then super.gtk3.overrideAttrs (old: rec {
-			version = "3.24.36";
-			src = super.fetchurl {
-				url = "mirror://gnome/sources/gtk+/${lib.versions.majorMinor version}/gtk+-${version}.tar.xz";
-				sha256 = "sha256-J6bvFXdDNQyAf/6lm6odcCJtvt6CpelT/9WOpgWf5pE=";
-			};
-			patches = [
-				(lib.elemAt old.patches 0)
-				(lib.elemAt old.patches 1)
-			];
-		})
+		then builtins.abort "GTK3 v3.24.35 is broken. Use a different version."
 		else super.gtk3;
 
 	makeFirefoxProfileDesktopFile = {
