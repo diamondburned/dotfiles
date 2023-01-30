@@ -6,7 +6,7 @@
  # nixos = "github:NixOS/nixpkgs 1ffba9f"
  nixpkgs_21_11 = "github:NixOS/nixpkgs nixos-21.11"
  nixpkgs_pipewire_0_3_57 = "github:NixOS/nixpkgs b7a6fde153d"
- nixpkgs_unstable = "github:NixOS/nixpkgs nixos-unstable"
+ nixpkgs_unstable = "github:NixOS/nixpkgs 26c6895e1005b3e4f6dfe0d16afbd1f12d0a054c"
  nixpkgs_unstable_newer = "github:NixOS/nixpkgs nixos-unstable"
  nixpkgs_staging = "github:NixOS/nixpkgs staging"
  nix-wayland = "github:nix-community/nixpkgs-wayland master"

@@ -1,5 +1,9 @@
 {
   "channels": {
+    "github:NixOS/nixpkgs 26c6895e1005b3e4f6dfe0d16afbd1f12d0a054c": {
+      "url": "https://github.com/NixOS/nixpkgs/archive/26c6895e1005b3e4f6dfe0d16afbd1f12d0a054c.tar.gz",
+      "store_hash": "bzb6wgp4qnr8gaafzffi2za58d8bli86"
+    },
     "github:NixOS/nixpkgs b7a6fde153d": {
       "url": "https://github.com/NixOS/nixpkgs/archive/b7a6fde153d.tar.gz",
       "store_hash": "7rrljz5qwcj6z7x122zrf7y3gmjqaxb6"
@@ -11,6 +15,10 @@
     "github:NixOS/nixpkgs d8404059b21": {
       "url": "https://github.com/NixOS/nixpkgs/archive/d8404059b21.tar.gz",
       "store_hash": "kgbddn9xjsy81zjgimvkgr14q04mn8dr"
+    },
+    "github:NixOS/nixpkgs d99608265db4f3c3b769fd2f4d49fb358fbb3172": {
+      "url": "https://github.com/NixOS/nixpkgs/archive/d99608265db4f3c3b769fd2f4d49fb358fbb3172.tar.gz",
+      "store_hash": "05g6nmj7k3sh4bb38h7yva01hmm232y9"
     },
     "github:NixOS/nixpkgs nixos-21.11": {
       "url": "https://github.com/NixOS/nixpkgs/archive/eabc38219184cc3e04a974fe31857d8e0eac098d.tar.gz",
@@ -39,6 +47,10 @@
     "github:nix-community/home-manager master": {
       "url": "https://github.com/nix-community/home-manager/archive/08a778d80308353f4f65c9dcd3790b5da02d6306.tar.gz",
       "store_hash": "47km3w2914qdimwms13szvc9vgmc3rn2"
+    },
+    "github:nix-community/home-manager release-22.11": {
+      "url": "https://github.com/nix-community/home-manager/archive/65c47ced082e3353113614f77b1bc18822dc731f.tar.gz",
+      "store_hash": "h1598fqxh0z4865dnjwj7pc5bm473sa3"
     },
     "github:nix-community/nixpkgs-wayland master": {
       "url": "https://github.com/nix-community/nixpkgs-wayland/archive/5097457af8e9dcf45a68fa892716919ad28e545a.tar.gz",
