@@ -347,6 +347,7 @@ in {
 		core-shell.enable = true;
 		core-os-services.enable = true;
 		gnome-settings-daemon.enable = true;
+		core-utilities.enable = true;
 
 		# Enable the Keyring for password managing
 		gnome-keyring.enable = true;
@@ -373,6 +374,7 @@ in {
 	environment.gnome.excludePackages = with pkgs; with pkgs.gnome; [
 		gnome-contacts
 		gnome-initial-setup
+		epiphany
 		yelp
 		totem
 		cheese
