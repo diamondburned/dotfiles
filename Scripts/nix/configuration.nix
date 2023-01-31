@@ -376,6 +376,7 @@ in {
 		gnome-initial-setup
 		epiphany
 		yelp
+		geary
 		totem
 		cheese
 		tracker-miners
@@ -628,6 +629,9 @@ in {
 			en-science
 			en-computers
 
+		]) ++ (with pkgs.nixpkgs_21_11; [
+			tdesktop
+
 		]) ++ (with pkgs.nixpkgs_unstable; [
 			# (gamescope)
 
@@ -717,7 +721,6 @@ in {
 
 			# # Chat/Social
 			# # zoom-us
-			tdesktop
 			discord
 			gtkcord4
 			# gotktrix
@@ -731,7 +734,7 @@ in {
 			aspell
 			marker
 			graphviz
-			foliate
+			# foliate
 
 			# Applications
 			gcolor3

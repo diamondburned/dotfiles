@@ -65,6 +65,11 @@ in {
 		enableOAuth2 = false;
 	};
 
+	# Later WebkitGTKs weren't in Hydra until like late December 2022.
+	webkitgtk     = super.nixpkgs_unstable_newer.webkitgtk;
+	webkitgtk_4_1 = super.nixpkgs_unstable_newer.webkitgtk_4_1;
+	webkitgtk_5_0 = super.nixpkgs_unstable_newer.webkitgtk_5_0;
+
 	sommelier = super.sommelier.overrideAttrs (old: {
 		version = "110.0";
 		src = super.fetchzip rec {
