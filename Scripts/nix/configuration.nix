@@ -373,6 +373,7 @@ in {
 	environment.gnome.excludePackages = with pkgs; with pkgs.gnome; [
 		gnome-contacts
 		gnome-initial-setup
+		yelp
 		totem
 		cheese
 		tracker-miners
@@ -569,15 +570,15 @@ in {
 			};
 		};
 
-		programs.obs-studio = {
-			enable  = true;
-			plugins = with pkgs; [
-				# obs-backgroundremoval
-				# obs-studio-plugins.obs-websocket
-				# obs-wlrobs
-				# obs-v4l2sink
-			];
-		};
+		# programs.obs-studio = {
+		# 	enable  = true;
+		# 	plugins = with pkgs; [
+		# 		# obs-backgroundremoval
+		# 		# obs-studio-plugins.obs-websocket
+		# 		# obs-wlrobs
+		# 		# obs-v4l2sink
+		# 	];
+		# };
 
 		gtk = {
 			enable = true;
