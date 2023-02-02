@@ -127,6 +127,9 @@ in {
 		};
 	};
 
+	# Allow aarch64 emulation.
+	boot.binfmt.emulatedSystems = [ "aarch64-linux" ];
+
 	# Group to change SSH keys to.
 	users.groups.ssh-trusted.members = [ "diamond" "root" ] ++
 		(utils.formatInts 1 32 (i: "nixbld${toString i}"));
