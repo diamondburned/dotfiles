@@ -15,6 +15,7 @@ let nurOverlay = (self: super: (import ./nur.nix (import <nur> { pkgs = super; }
 	nixpkgs_unstable_real = import <unstable> nixpkgsOpts;
 	nixpkgs_unstable_newer = import <nixpkgs_unstable_newer> nixpkgsOpts;
 	nixpkgs_pipewire_0_3_57 = import <nixpkgs_pipewire_0_3_57> nixpkgsOpts;
+	nixpkgs_gradience = import <nixpkgs_gradience> nixpkgsOpts;
 
 in {
 	nixpkgs.overlays = [
@@ -26,7 +27,8 @@ in {
 				nixpkgs_unstable
 				nixpkgs_unstable_real
 				nixpkgs_unstable_newer
-				nixpkgs_pipewire_0_3_57;
+				nixpkgs_pipewire_0_3_57
+				nixpkgs_gradience;
 		})
 		(nurOverlay)
 		(import <prismlauncher>).overlay

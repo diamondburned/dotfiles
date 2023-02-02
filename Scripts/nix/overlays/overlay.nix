@@ -65,6 +65,12 @@ in {
 		enableOAuth2 = false;
 	};
 
+	gradience =
+		if super ? gradience then
+			super.gradience
+		else
+			super.nixpkgs_gradience.gradience;
+
 	# Later WebkitGTKs weren't in Hydra until like late December 2022.
 	webkitgtk     = super.nixpkgs_unstable_newer.webkitgtk;
 	webkitgtk_4_1 = super.nixpkgs_unstable_newer.webkitgtk_4_1;

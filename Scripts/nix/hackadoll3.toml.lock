@@ -44,6 +44,10 @@
       "url": "https://github.com/diamondburned/nixpkgs/archive/3e9725a365e.tar.gz",
       "store_hash": "nfhp4psnyiana84zicakg9iwa5zb17ig"
     },
+    "github:foo-dogsquared/nixpkgs add-gradience-app": {
+      "url": "https://github.com/foo-dogsquared/nixpkgs/archive/9e8daec62f855bff3ec58d5ebdca4aee8ef7ec6e.tar.gz",
+      "store_hash": "nb11mf53a37m68x73sg2qvi3gz8yl0wa"
+    },
     "github:nix-community/NUR master": {
       "url": "https://github.com/nix-community/NUR/archive/25c0b2f7f43cbe50bf17f5c190c0aa6231d3754f.tar.gz",
       "store_hash": "saq4d26jf30wg6lz992qpammk48nhwz4"
