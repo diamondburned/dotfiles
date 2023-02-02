@@ -589,9 +589,19 @@ in {
 
 			theme = {
 				name = userEnv.GTK_THEME;
-				package = pkgs.orchis-theme.override {
-					tweaks = [ "black" "compact" ];
-				};
+				package =
+					let orchis-theme = pkgs.orchis-theme.overrideAttrs (old: rec {
+						version = "2023-01-25";
+						src = pkgs.fetchFromGitHub {
+						    repo = "Orchis-theme";
+						    owner = "vinceliuice";
+						    rev = version;
+						    sha256 = "sha256:0rlvqzlfabvayp9p2ihw4jk445ahhrgv6zc5n47sr5w6hbb082ny";
+						};
+					});
+					in orchis-theme.override {
+						tweaks = [ "black" "compact" ];
+					};
 			};
 			iconTheme = {
 				name = "Papirus-Dark";
