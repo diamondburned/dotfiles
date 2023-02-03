@@ -277,6 +277,18 @@ gm() {
 	} || {
 		git commit
 	}
+
+}
+
+ghpr() {
+	local pr="$1"
+	if [[ ! "$pr" ]]; then
+		echo "Usage: ghpr <pr#>" >&2
+		return 1
+	fi
+
+	git fetch origin pull/"$pr"/head:pr/"$pr"
+	git checkout pr/"$pr"
 }
 
 alias gagm="git add -A && gm"
