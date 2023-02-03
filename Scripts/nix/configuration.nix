@@ -95,20 +95,20 @@ in {
 		package = pkgs.nix_2_3;
 		# package = pkgs.nixFlakes;
 		buildMachines = [
-			{
-				hostName = "hanaharu";
-				systems = [ "x86_64-linux" "i686-linux" ];
-				maxJobs = 2;
-				speedFactor = 1;
-				supportedFeatures = [ "nixos-test" "benchmark" "big-parallel" "kvm" ];
-			}
-			{
-				hostName = "bridget";
-				systems  = [ "aarch64-linux" ];
-				maxJobs  = 1;
-				speedFactor = 2;
-				supportedFeatures = [ "nixos-test" ];
-			}
+			# {
+			# 	hostName = "hanaharu";
+			# 	systems = [ "x86_64-linux" "i686-linux" ];
+			# 	maxJobs = 2;
+			# 	speedFactor = 1;
+			# 	supportedFeatures = [ "nixos-test" "benchmark" "big-parallel" "kvm" ];
+			# }
+			# {
+			# 	hostName = "bridget";
+			# 	systems  = [ "aarch64-linux" ];
+			# 	maxJobs  = 1;
+			# 	speedFactor = 2;
+			# 	supportedFeatures = [ "nixos-test" ];
+			# }
 			# {
 			# 	hostName = "otokonoko";
 			# 	systems = [ "x86_64-linux" "i686-linux" ];
