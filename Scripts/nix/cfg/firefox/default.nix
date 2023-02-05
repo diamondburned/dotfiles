@@ -79,10 +79,10 @@ in {
 		path = profilePath;
 		isDefault   = true;
 		userContent = builtins.readFile ./userContent.css;
-		# userChrome  = ''
-		# 	${builtins.readFile ./userChrome.megabarstyler.css}
-		# 	${builtins.readFile ./userChrome.main.css}
-		# '';
+		userChrome  = ''
+			${builtins.readFile ./userChrome.megabarstyler.css}
+			${builtins.readFile ./userChrome.main.css}
+		'';
 		settings = {
 			"media.av1.enabled" = false;
 			"browser.sessionhistory.max_entries" = 15;
