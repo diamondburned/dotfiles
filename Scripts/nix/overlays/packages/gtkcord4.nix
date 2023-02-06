@@ -1,17 +1,35 @@
 { pkgs }:
 
-let gtkcord4 = {
+let gtkcord4 = rec {
+		version = "0.0.8";
+		hashes = {
+			src = "sha256:1sqn08hapgbkb5vmw562a03a1b178a887r492k49c245sa9mb538";
+			bin = "sha256:0swp5pb7w6j622kbp7qkzyi321fch8wwbq6d9i83w8cg3gh9payp";
+		};
+
 		src = pkgs.fetchFromGitHub {
 			owner = "diamondburned";
 			repo  = "gtkcord4";
-			rev   = "0ac19003b75865378b8a36781cb9106741bc603f";
-			hash  = "sha256:13wvbqqskrrczk3q2az18wmj6a7k79alrsnz0v7cijvm1bi1lrvk";
+			rev   = "v${version}";
+			hash  = hashes.src;
 		};
-		bin = pkgs.fetchzip {
-			url = "https://github.com/diamondburned/gtkcord4/releases/download/v0.0.3-2/gtkcord4-nixos-x86_64.tar.gz";
-			sha256 = "1n5c4lyydiq1y1h658wc7zg0nsrjl175ms3rpin2il40618w73z2";
-		};
-		base = import "${gtkcord4.src}/.nix/base.nix";
+
+		bin = pkgs.runCommand "gtkcord4-bin" {
+			src = pkgs.fetchurl {
+				url = "https://github.com/diamondburned/gtkcord4/releases/download/v${version}/gtkcord4-linux-amd64-v0.0.8-libadwaita.tar.zst";
+				sha256 = hashes.bin;
+			};
+			nativeBuildInputs = with pkgs; [
+				zstd
+			];
+		} ''
+			tar --zstd -xf $src
+			mkdir -p $out/bin
+			cp bin/gtkcord4 $out/
+			chmod +x $out/*
+		'';
+
+		base = import "${gtkcord4.src}/nix/base.nix";
 	};
 
 	gotk4-nix = pkgs.fetchFromGitHub {
@@ -23,9 +41,9 @@ let gtkcord4 = {
 
 	depsPkgs = import "${gotk4-nix}/pkgs.nix" {};
 
-in pkgs.stdenv.mkDerivation rec {
+in pkgs.stdenv.mkDerivation {
 	pname = gtkcord4.base.pname;
-	version = "0.0.3";
+	inherit (gtkcord4) version;
 
 	src = gtkcord4.bin;
 
