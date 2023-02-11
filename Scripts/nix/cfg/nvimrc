@@ -47,9 +47,9 @@ call plug#end()
 
 "Better mouse support"
 set mouse=a
-vmap <C-c> "+y
-vmap <C-v> "+p
-imap <C-v> <Esc>"+pi<Right>
+vnoremap <C-c> "+y
+vnoremap <C-v> "+p
+inoremap <C-v> <Esc>"+pi<Right>
 map - dd
 
 set clipboard+=unnamedplus
@@ -337,15 +337,15 @@ autocmd BufEnter * :syntax sync fromstart
 syntax sync minlines=100
 
 "Custom keybinds"
-map <Tab> :NvimTreeToggle<CR> <bar> :NvimTreeRefresh<CR>
+nmap <Tab> :NvimTreeToggle<CR> <bar> :NvimTreeRefresh<CR>
 nmap <C-_> gcc
 vmap <C-_> gc<CR>gv
 nmap <C-j> =G
 nnoremap f :F<CR>
 
-vmap ' :s/\%V.*\%V./'&'/<CR>
-vmap " :s/\%V.*\%V./"&"/<CR>
-vmap ` :s/\%V.*\%V./`&`/<CR>
+vnoremap ' :s/\%V.*\%V./'&'/<CR>
+vnoremap " :s/\%V.*\%V./"&"/<CR>
+vnoremap ` :s/\%V.*\%V./`&`/<CR>
 
 "Better Vim regexes"
 set smartcase
