@@ -343,6 +343,10 @@ vmap <C-_> gc<CR>gv
 nmap <C-j> =G
 nnoremap f :F<CR>
 
+vmap ' :s/\%V.*\%V./'&'/<CR>
+vmap " :s/\%V.*\%V./"&"/<CR>
+vmap ` :s/\%V.*\%V./`&`/<CR>
+
 "Better Vim regexes"
 set smartcase
 
