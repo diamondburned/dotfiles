@@ -12,6 +12,7 @@ Plug 'plasticboy/vim-markdown'
 Plug 'godlygeek/tabular'
 Plug 'bogado/file-line'
 Plug 'rhysd/conflict-marker.vim'
+Plug 'gpanders/editorconfig.nvim'
 
 Plug 'hhhapz/firenvim', { 'do': { _ -> firenvim#install(0) } }
 Plug 'andreypopp/vim-colors-plain'
@@ -539,6 +540,7 @@ let g:ale_fixers = {
 			\ 'nasm':       [ "nasmfmt" ],
 			\ 'python':     [ "autopep8", "black" ],
 			\ 'svelte':     [ "prettier", "prettier_standard", "eslint" ],
+			\ 'jsonnet':    [ "jsonnetfmt" ],
 			\ 'markdown':   [ "prettier" ],
 			\ 'javascript': [ "deno", "prettier", "prettier_standard", "eslint" ],
 			\ 'typescript': [ "deno", "prettier", "prettier_standard", "eslint" ],
