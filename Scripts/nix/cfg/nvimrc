@@ -565,6 +565,7 @@ let g:ale_linters = {
 			\ 'c':          [ "clangd" ],
 			\ 'cpp':        [ "clangd" ],
 			\ 'sql':        [ "sqls" ],
+			\ 'rust':       [ "analyzer", "cargo" ],
 			\ 'nasm':       [ "nasm" ],
 			\ 'python':     [ "pyright" ],
 			\ 'svelte':     [ "svelteserver", "tsserver", "eslint" ],
