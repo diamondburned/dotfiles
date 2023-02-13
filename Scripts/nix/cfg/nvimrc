@@ -490,6 +490,14 @@ call ale#linter#Define('sql', {
 	\ 'project_root': '.',
 	\ })
 
+call ale#linter#Define('jsonnet', {
+	\ 'name': 'jsonnet-language-server',
+	\ 'lsp': 'stdio',
+	\ 'executable': 'jsonnet-language-server',
+	\ 'command': '%e',
+	\ 'project_root': '.',
+	\ })
+
 function! FixSQLFormatter(buffer) abort
     return {
     \   'command': 'sql-formatter'
@@ -560,6 +568,7 @@ let g:ale_linters = {
 			\ 'nasm':       [ "nasm" ],
 			\ 'python':     [ "pyright" ],
 			\ 'svelte':     [ "svelteserver", "tsserver", "eslint" ],
+			\ 'jsonnet':    [ "jsonnetfmt", "jsonnet_lint", "jsonnet-language-server" ],
 			\ 'javascript': [ "deno", "svelteserver", "tsserver", "deno", "standard" ],
 			\ 'typescript': [ "deno", "svelteserver", "tsserver", "deno", "standard" ],
 			\ }
