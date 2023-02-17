@@ -1,7 +1,8 @@
 { pkgs, config, lib, ... }:
 
 {
-	environment.etc."keyd/air60.conf".source = ./keyd.ini;
+	environment.etc."keyd/air60.conf".source = ./k_air60.ini;
+	environment.etc."keyd/kcrk7.conf".source = ./k_kcrk7.ini;
 
 	systemd.services.keyd = {
 		enable = true;
