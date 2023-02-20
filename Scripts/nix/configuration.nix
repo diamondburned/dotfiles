@@ -629,12 +629,12 @@ in {
 		# xsession.pointerCursor = {
 			# package = 
 		# };
-		home.file.".icons/default/index.theme".text = ''
-			[icon theme]
-			Name=Default
-			Comment=Default Cursor Theme
-			Inherits=Ardoise_shadow_87
-		'';
+		# home.file.".icons/default/index.theme".text = ''
+		# 	[icon theme]
+		# 	Name=Default
+		# 	Comment=Default Cursor Theme
+		# 	Inherits=Ardoise_shadow_87
+		# '';
 
 		# Home is for no DM, PAM is for gdm.
 		# home.sessionVariables = userEnv;         # for no DM.
@@ -766,6 +766,7 @@ in {
 			papirus-icon-theme
 			materia-theme
 			material-design-icons
+			catppuccin-cursors.mochaPink
 
 			# Games
 			# polymc
