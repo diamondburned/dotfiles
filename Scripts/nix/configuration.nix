@@ -626,9 +626,11 @@ in {
 			};
 		};
 
-		# xsession.pointerCursor = {
-			# package = 
-		# };
+		xsession.pointerCursor = {
+			package = pkgs.catppuccin-cursors.macchiatoPink;
+			size = 48;
+		};
+
 		# home.file.".icons/default/index.theme".text = ''
 		# 	[icon theme]
 		# 	Name=Default
@@ -767,6 +769,10 @@ in {
 			materia-theme
 			material-design-icons
 			catppuccin-cursors.mochaPink
+			catppuccin-cursors.macchiatoPink
+			catppuccin-cursors.mochaFlamingo
+			catppuccin-cursors.macchiatoFlamingo
+			catppuccin-gtk
 
 			# Games
 			# polymc
