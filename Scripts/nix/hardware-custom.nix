@@ -90,7 +90,7 @@ in {
 	};
 
 	# This needs to be manually stated, for some reason.
-	boot.kernelModules = [ "v4l2loopback" "i2c-dev" ];
+	boot.kernelModules = [ "v4l2loopback" "i2c-dev" "ddcci-driver" ];
 
 	boot.extraModulePackages = with config.boot.kernelPackages; [
 		# Add the camera loopback drivers.
