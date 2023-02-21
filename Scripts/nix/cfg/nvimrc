@@ -498,6 +498,14 @@ call ale#linter#Define('jsonnet', {
 	\ 'project_root': '.',
 	\ })
 
+call ale#linter#Define('astro', {
+	\ 'name': 'astro-ls',
+	\ 'lsp': 'stdio',
+	\ 'executable': 'astro-ls',
+	\ 'command': '--stdio %e',
+	\ 'project_root': '.',
+	\ })
+
 function! FixSQLFormatter(buffer) abort
     return {
     \   'command': 'sql-formatter'
