@@ -625,7 +625,7 @@ in {
 
 			cursorTheme = {
 				name = "Catppuccin-Mocha-Pink-Cursors";
-				size = 48;
+				size = 32;
 			};
 
 			gtk3 = {
