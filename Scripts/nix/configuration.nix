@@ -617,9 +617,15 @@ in {
 						tweaks = [ "black" "compact" ];
 					};
 			};
+
 			iconTheme = {
 				name = "Papirus-Dark";
 				package = pkgs.papirus-icon-theme;
+			};
+
+			cursorTheme = {
+				name = "Catppuccin-Mocha-Pink-Cursors";
+				size = 48;
 			};
 
 			gtk3 = {
@@ -628,11 +634,6 @@ in {
 				};
 				extraCss = builtins.readFile ./cfg/gtk.css;
 			};
-		};
-
-		xsession.pointerCursor = {
-			package = pkgs.catppuccin-cursors.macchiatoPink;
-			size = 48;
 		};
 
 		# home.file.".icons/default/index.theme".text = ''
