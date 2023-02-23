@@ -200,6 +200,10 @@ in {
 		allowedTCPPorts = [ 1337 27036 27037 ];
 		allowedUDPPorts = [ 1337 27031 27036 ];
 	};
+	networking.nat = {
+		enable = true;
+		internalInterfaces = [ "ve-+" ];                                                                                            
+	};
 
 	security.pki.certificateFiles = [
 		./secrets/ssl/otokonoko.local/otokonoko.local+1.pem
