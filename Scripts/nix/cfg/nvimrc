@@ -535,6 +535,7 @@ execute ale#fix#registry#Add('sql-formatter', 'FixSQLFormatter', ['sql'], 'sql-f
 execute ale#fix#registry#Add('nasmfmt', 'FixNasmfmt', ['nasm'], 'nasmfmt')
 execute ale#fix#registry#Add('denojson', 'FixDenoJSON', ['json'], 'deno fmt for json')
 execute ale#fix#registry#Add('denojsonc', 'FixDenoJSONC', ['jsonc'], 'deno fmt for jsonc')
+execute ale#fix#registry#Add('prettier', 'ale#fixers#prettier#Fix', ['astro'], 'prettier for astro')
 
 let g:ale_virtualtext_cursor = 1
 let g:ale_sign_error = '!'
@@ -559,6 +560,7 @@ let g:ale_fixers = {
 			\ 'yaml':       [ "prettier" ],
 			\ 'nasm':       [ "nasmfmt" ],
 			\ 'python':     [ "autopep8", "black" ],
+			\ 'astro':	    [ "prettier" ],
 			\ 'svelte':     [ "prettier", "prettier_standard", "eslint" ],
 			\ 'jsonnet':    [ "jsonnetfmt" ],
 			\ 'markdown':   [ "prettier" ],
