@@ -530,12 +530,26 @@ function! FixDenoJSONC(buffer) abort
     \}
 endfunction
 
+function! FixCMark(buffer) abort
+    return {
+    \   'command': 'cmark -t commonmark'
+    \}
+endfunction
+
+function! FixCMarkGFM(buffer) abort
+    return {
+    \   'command': 'cmark-gfm --extension table --extension autolink --extension tagfilter --extension tasklist --extension strikethrough --extension footnotes -t commonmark'
+	\ }
+endfunction
+
 "https://github.com/dense-analysis/ale/issues/3167"
 execute ale#fix#registry#Add('sql-formatter', 'FixSQLFormatter', ['sql'], 'sql-formatter for sql')
 execute ale#fix#registry#Add('nasmfmt', 'FixNasmfmt', ['nasm'], 'nasmfmt')
 execute ale#fix#registry#Add('denojson', 'FixDenoJSON', ['json'], 'deno fmt for json')
 execute ale#fix#registry#Add('denojsonc', 'FixDenoJSONC', ['jsonc'], 'deno fmt for jsonc')
 execute ale#fix#registry#Add('prettier', 'ale#fixers#prettier#Fix', ['astro'], 'prettier for astro')
+execute ale#fix#registry#Add('cmark', 'FixCMark', ['markdown'], 'cmark for markdown')
+execute ale#fix#registry#Add('cmark-gfm', 'FixCMarkGFM', ['markdown'], 'cmark-gfm for markdown')
 
 let g:ale_virtualtext_cursor = 1
 let g:ale_sign_error = '!'
@@ -563,7 +577,7 @@ let g:ale_fixers = {
 			\ 'astro':	    [ "prettier" ],
 			\ 'svelte':     [ "prettier", "prettier_standard", "eslint" ],
 			\ 'jsonnet':    [ "jsonnetfmt" ],
-			\ 'markdown':   [ "prettier" ],
+			\ 'markdown':   [ "cmark-gfm", "cmark", "prettier" ],
 			\ 'javascript': [ "deno", "prettier", "prettier_standard", "eslint" ],
 			\ 'typescript': [ "deno", "prettier", "prettier_standard", "eslint" ],
 			\ }
