@@ -13,6 +13,7 @@ Plug 'godlygeek/tabular'
 Plug 'bogado/file-line'
 Plug 'rhysd/conflict-marker.vim'
 Plug 'gpanders/editorconfig.nvim'
+Plug 'folke/todo-comments.nvim'
 
 Plug 'hhhapz/firenvim', { 'do': { _ -> firenvim#install(0) } }
 Plug 'andreypopp/vim-colors-plain'
