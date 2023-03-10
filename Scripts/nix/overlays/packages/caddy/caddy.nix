@@ -9,23 +9,35 @@ in {
 		enable = mkEnableOption "Caddy web server";
 
 		configFile = mkOption {
-			example = pkgs.writeText "Caddyfile" ''
-				example.com {
-					gzip
-					minify
-					log syslog
+			example = literalExample ''
+				pkgs.writeText "Caddyfile" \'\'
+					example.com {
+						gzip
+						minify
+						log syslog
 
-					root /srv/http
-				}
+						root /srv/http
+					}
+				\'\'
 			'';
 			type = types.path;
 			description = "Configuration file to use with adapter";
 		};
 
-		adapter = mkOption {
-			default = "caddyfile";
-			type = types.str;
-			description = "Type of config given";
+		sites = mkOption {
+			type = types.attrsOf types.str;
+			default = {};
+			example = {
+				"b.example.com" = ''
+					root * /home/b.example.com
+					file_server
+				'';
+			};
+			description = ''
+				Sites to serve. DO NOT use this for sites with secrets; prefer using the global
+				config file for secrets and use `import' to include it in the site config.
+				Sites will be appended to the global config file.
+			'';
 		};
 
 		dataDir = mkOption {
@@ -38,33 +50,6 @@ in {
 			'';
 		};
 
-		plugins = mkOption {
-			default = [];
-			type = types.listOf types.str;
-			example = [
-				"github.com/tarent/loginsrv/caddy"
-			];
-			description = "List of plugins to use";
-		};
-
-		version = mkOption {
-			default = "v2.4.3";
-			type = types.str;
-			description = "The Caddy version to use";
-		};
-
-		modSha256 = mkOption {
-			default = "";
-			type = types.str;
-			description = "Only fill this if custom plugins are added";
-		};
-
-		environment = mkOption {
-			default = {};
-			type = types.attrsOf types.str;
-			description = "Environment variables to pass to the service";
-		};
-
 		environmentFile = mkOption {
 			default = null;
 			type = types.nullOr types.path;
@@ -74,66 +59,76 @@ in {
 		openFirewall = mkEnableOption "Port-forward 80 and 443";
 
 		package = mkOption {
-			default = (pkgs.callPackage ./default.nix {
-				plugins   = cfg.plugins;
-				version   = cfg.version;
-				modSha256 = cfg.modSha256;
-			});
+			default = pkgs.caddy;
 			type = types.package;
 			description = "Caddy package to use.";
 		};
 	};
 
-	config = mkIf cfg.enable {
-		environment.systemPackages = [ cfg.package ];
+	config = mkIf cfg.enable (
+		let sitesConfigFile = pkgs.writeText "caddy-sites"
+			(concatStringsSep "\n"
+				(mapAttrsToList
+					(name: value: "${name} {\n${value}\n}")
+					(cfg.sites)));
 
-		networking.firewall = mkIf cfg.openFirewall {
-			allowedTCPPorts = [ 80 443 ];
-			allowedUDPPorts = [ 80 443 ]; # SPDY/QUIC soon.
-		};
+			configPrepare = pkgs.writeShellScript "caddy-wrap" ''
+				set -e
 
-		systemd.services.caddy = {
-			description = "Caddy web server";
-			after    = [ "network-online.target" ];
-			wantedBy = [ "multi-user.target"     ];
-			reloadIfChanged = true;
-			environment = cfg.environment;
-			serviceConfig = {
-				ExecStart = ''
-					${cfg.package}/bin/caddy run \
-						--environ                \
-						--config  ${cfg.configFile}  \
-						--adapter ${cfg.adapter} \
-				'';
-				ExecReload = ''
-					${cfg.package}/bin/caddy reload \
-						--config  ${cfg.configFile}  \
-						--adapter ${cfg.adapter} \
-				'';
-				TimeoutStopSec = "5s";
-				Type  = "notify";
-				User  = "caddy";
-				Group = "caddy";
-				Restart = "on-failure";
-				AmbientCapabilities   = [ "cap_net_bind_service" "cap_net_raw" ];
-				CapabilityBoundingSet = [ "cap_net_bind_service" "cap_net_raw" ];
-				NoNewPrivileges = true;
-				StateDirectory = "caddy";
-				LimitNPROC  = 8192;
-				LimitNOFILE = 1048576;
-				PrivateTmp    = false;
-				ProtectSystem = "full";
-				EnvironmentFile = cfg.environmentFile;
+				if [[ "$RUNTIME_DIRECTORY" == "" ]]; then
+					echo "RUNTIME_DIRECTORY is not set" >&2
+					exit 1
+				fi
+
+				cat ${escapeShellArg cfg.configFile} > $RUNTIME_DIRECTORY/Caddyfile
+				cat ${escapeShellArg sitesConfigFile} >> $RUNTIME_DIRECTORY/Caddyfile
+
+				exec ${cfg.package}/bin/caddy "$@" \
+					--config "$RUNTIME_DIRECTORY/Caddyfile" \
+					--adapter caddyfile
+			'';
+		in {
+			environment.systemPackages = [ cfg.package ];
+	
+			networking.firewall = mkIf cfg.openFirewall {
+				allowedTCPPorts = [ 80 443 ];
+				allowedUDPPorts = [ 80 443 ]; # SPDY/QUIC soon.
 			};
-		};
-
-		users.users.caddy = {
-			group = "caddy";
-			uid = config.ids.uids.caddy;
-			home = cfg.dataDir;
-			createHome = true;
-		};
-
-		users.groups.caddy.gid = config.ids.uids.caddy;
-	};
+	
+			systemd.services.caddy = {
+				description = "Caddy web server";
+				after    = [ "network-online.target" ];
+				wantedBy = [ "multi-user.target"     ];
+				reloadIfChanged = true;
+				serviceConfig = {
+					ExecStart = "${configPrepare} run --environ";
+					ExecReload = "${configPrepare} reload";
+					TimeoutStopSec = "5s";
+					Type  = "notify";
+					User  = "caddy";
+					Group = "caddy";
+					Restart = "on-failure";
+					AmbientCapabilities   = [ "CAP_NET_BIND_SERVICE" "CAP_NET_RAW" ];
+					CapabilityBoundingSet = [ "CAP_NET_BIND_SERVICE" "CAP_NET_RAW" ];
+					NoNewPrivileges = true;
+					StateDirectory = "caddy";
+					LimitNPROC  = 8192;
+					LimitNOFILE = 1048576;
+					PrivateTmp    = false;
+					ProtectSystem = "full";
+					EnvironmentFile = cfg.environmentFile;
+					RuntimeDirectory = "caddy";
+				};
+			};
+	
+			users.users.caddy = {
+				group = "caddy";
+				uid = config.ids.uids.caddy;
+				home = cfg.dataDir;
+				createHome = true;
+			};
+	
+			users.groups.caddy.gid = config.ids.uids.caddy;
+		}
+	);
 }
