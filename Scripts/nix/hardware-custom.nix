@@ -114,7 +114,8 @@ in {
 	];
 
 	# Refer to unstable.nix.
-	boot.kernelPackages = pkgs.nixpkgs_unstable_real.linuxPackages_latest;
+	boot.kernelPackages = pkgs.nixpkgs_unstable.linuxKernel.packages.linux_xanmod_latest;
+	# boot.kernelPackages = pkgs.nixpkgs_unstable_real.linuxPackages_latest;
 	# boot.kernelPackages = pkgs.linuxPackages_latest;
 	# boot.kernelPackages = pkgs.linuxPackages_xanmod;
 
@@ -124,6 +125,8 @@ in {
 		freeSwapThreshold = 15;
 		freeSwapKillThreshold = 5;
 	};
+
+	services.irqbalance.enable = true;
 
 	# We don't want to sacrifice battery for the above.
 	powerManagement.cpuFreqGovernor = lib.mkForce "powersave";
