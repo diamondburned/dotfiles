@@ -80,7 +80,11 @@ in {
 					exit 1
 				fi
 
-				cat ${escapeShellArg cfg.configFile} > $RUNTIME_DIRECTORY/Caddyfile
+				# Harden.
+				:> "$RUNTIME_DIRECTORY/Caddyfile"
+				chmod 600 "$RUNTIME_DIRECTORY/Caddyfile"
+
+				cat ${escapeShellArg cfg.configFile} >> $RUNTIME_DIRECTORY/Caddyfile
 				cat ${escapeShellArg sitesConfigFile} >> $RUNTIME_DIRECTORY/Caddyfile
 
 				exec ${cfg.package}/bin/caddy "$@" \
