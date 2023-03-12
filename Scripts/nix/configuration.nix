@@ -185,9 +185,9 @@ in {
 		enable = true;
 		dns = "default";
 	};
-	networking.nameservers = [
-		"1.1.1.1" "1.0.0.1"
-	];
+	# networking.nameservers = [
+	# 	"1.1.1.1" "1.0.0.1"
+	# ];
 	networking.firewall = {
 		enable = false;
 		allowedTCPPortRanges = [
@@ -657,9 +657,9 @@ in {
 			en-computers
 
 		]) ++ (with pkgs.nixpkgs_21_11; [
-			tdesktop
 
 		]) ++ (with pkgs.nixpkgs_unstable; [
+			# tdesktop
 			# (gamescope)
 
 		]) ++ (with pkgs.nixpkgs_unstable_real; [
