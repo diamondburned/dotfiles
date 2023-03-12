@@ -1,6 +1,10 @@
 { lib, pkgs, config, ... }:
 
-let nurOverlay = (self: super: (import ./nur.nix (import <nur> { pkgs = super; }) self super));
+let nurOverlay =
+	(self: super:
+		(import ./nur.nix
+			(import <nur> { pkgs = super; })
+			self super));
 
 	nixpkgsOpts = {
 		config.allowUnfree = true;

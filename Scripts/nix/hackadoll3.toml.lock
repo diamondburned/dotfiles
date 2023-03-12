@@ -49,8 +49,8 @@
       "store_hash": "nb11mf53a37m68x73sg2qvi3gz8yl0wa"
     },
     "github:nix-community/NUR master": {
-      "url": "https://github.com/nix-community/NUR/archive/25c0b2f7f43cbe50bf17f5c190c0aa6231d3754f.tar.gz",
-      "store_hash": "saq4d26jf30wg6lz992qpammk48nhwz4"
+      "url": "https://github.com/nix-community/NUR/archive/e1452cb657eafdcc699c30bd85383f2488de8eb9.tar.gz",
+      "store_hash": "pgah0b81jdh860aidavvz6rzcvnl3sh0"
     },
     "github:nix-community/home-manager master": {
       "url": "https://github.com/nix-community/home-manager/archive/08a778d80308353f4f65c9dcd3790b5da02d6306.tar.gz",

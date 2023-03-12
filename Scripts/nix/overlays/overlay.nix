@@ -48,6 +48,14 @@ in {
 	# inherit (self.nixpkgs_21_11)
 	# 	gnome;
 
+	# Linux xanmod with LTO.
+	linux_xanmod-lto = super.callPackage ./packages/linux/xanmod-lto.nix {
+		linux_xanmod = super.linuxKernel.kernels.linux_xanmod;
+	};
+	linux_xanmod_latest-lto = super.callPackage ./packages/linux/xanmod-lto.nix {
+		linux_xanmod = super.linuxKernel.kernels.linux_xanmod_latest;
+	};
+
 	# For Copilot + Vim.
 	nixpkgs_copilot = import <nixpkgs> {
 		overlays = [
