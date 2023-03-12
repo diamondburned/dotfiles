@@ -9,7 +9,10 @@ let nurOverlay =
 	nixpkgsOpts = {
 		config.allowUnfree = true;
 		overlays = [
-			nurOverlay
+			# TODO: move the massive overlays list to a separate file and import them to all of our
+			# Nixpkgs.
+			(import ./packages/linux/xanmod-lto-overlay.nix)
+			(nurOverlay)
 		];
 	};
 
@@ -37,6 +40,7 @@ in {
 		(nurOverlay)
 		(import <prismlauncher>).overlay
 		(import ./overlay.nix)
+		(import ./packages/linux/xanmod-lto-overlay.nix)
 		(self: super: {
 			transmission-web = super.callPackage ./packages/transmission-web {};
 			audacious-3-5 = super.callPackage ./packages/audacious-3-5 {};

@@ -709,7 +709,7 @@ in {
 			go_1_18
 			mdr
 			# xelfviewer
-			config.boot.kernelPackages.perf
+			# config.boot.kernelPackages.perf
 			# perf_data_converter
 			tree
 			fzf
