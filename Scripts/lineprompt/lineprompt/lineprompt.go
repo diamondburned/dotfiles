@@ -43,7 +43,7 @@ var DefaultOpts = Opts{
 // provided colors. LOD controls the level of detail of the blend, or the number
 // of steps between the two colors. The blend is linear, so the colors will be
 // evenly distributed between the two colors.
-func Blend(w Writer, text []byte, columns int, blends []colorful.Color, opts Opts) {
+func Blend(w Writer, text string, columns int, blends []colorful.Color, opts Opts) {
 	// Constrain LOD at columns.
 	if opts.LOD == 0 {
 		opts.LOD = 20
@@ -82,7 +82,7 @@ func Blend(w Writer, text []byte, columns int, blends []colorful.Color, opts Opt
 
 	// Input text. In byte slices because. May not work because runecolumns.
 	textbuf := bytes.Buffer{}
-	textbuf.Write(text)
+	textbuf.WriteString(text)
 
 	// Pad the rest of the text slice.
 	switch delta := columns - textbuf.Len(); {

@@ -2,18 +2,16 @@ package main
 
 import (
 	"bufio"
-	"fmt"
 	"os"
-	"strings"
 
 	"github.com/lucasb-eyer/go-colorful"
 	"gitlab.com/diamondburned/dotfiles/Scripts/lineprompt/lineprompt"
 )
 
 func main() {
-	var text []byte
+	var text string
 	if len(os.Args) > 1 {
-		text = []byte(os.Args[1])
+		text = os.Args[1]
 	}
 
 	var output = bufio.NewWriterSize(os.Stdout, 512)
@@ -34,6 +32,7 @@ func main() {
 	}, opts)
 }
 
+/*
 func parseColor(color string) (colorful.Color, error) {
 	switch {
 	case strings.HasPrefix(color, "#"):
@@ -53,6 +52,7 @@ func parseColor(color string) (colorful.Color, error) {
 		return colorful.Color{}, fmt.Errorf("unknown error %q", color)
 	}
 }
+*/
 
 func rgba(r, g, b, a uint8) colorful.Color {
 	return colorful.Color{
