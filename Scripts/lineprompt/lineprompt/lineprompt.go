@@ -20,25 +20,53 @@ var (
 
 type rgb struct{ r, g, b uint8 }
 
+// Writer is an interface that combines io.Writer and io.ByteWriter.
 type Writer interface {
 	io.Writer
 	io.ByteWriter
 }
 
-func Blend(w Writer, columns int, text []byte, lod int, blends []colorful.Color) {
+// Opts are options for the prompt.
+type Opts struct {
+	// LOD is the level of detail of the blend. The higher the LOD, the more
+	// steps within the gradient will be used to blend the text.
+	LOD int
+	// Underline is whether the prompt should be underlined.
+	Underline bool
+}
+
+// DefaultOpts are the default options for the prompt.
+var DefaultOpts = Opts{
+	LOD:       20,
+	Underline: true,
+}
+
+// Blend writes text to w with a text color that is blended between the
+// provided colors. LOD controls the level of detail of the blend, or the number
+// of steps between the two colors. The blend is linear, so the colors will be
+// evenly distributed between the two colors.
+func Blend(w Writer, text []byte, columns int, blends []colorful.Color, opts Opts) {
 	// Constrain LOD at columns.
-	if lod > columns {
-		lod = columns
+	if opts.LOD == 0 {
+		opts.LOD = 20
+	}
+	if opts.LOD > columns {
+		opts.LOD = columns
+	}
+	if opts.LOD < len(blends) {
+		opts.LOD = len(blends)
 	}
 
+	flod := float64(opts.LOD)
+
 	// Precalculate colors according to the level of details.
-	var colors = make([]rgb, 0, lod)
+	colors := make([]rgb, 0, opts.LOD)
 	var rgb rgb
 
 	// We need to calculate the gradient pointer for each gradient segment. So
 	// we can't use 1/perc*pos, as that only gets you the pointer for the entire
 	// gradient at once.
-	var segmentf64 = math.Ceil(float64(lod) / float64(len(blends)-1))
+	var segmentf64 = math.Ceil(flod / float64(len(blends)-1))
 	var segmentLen = int(segmentf64)
 
 	for blend := 0; blend < len(blends)-1; blend++ {
@@ -52,7 +80,7 @@ func Blend(w Writer, columns int, text []byte, lod int, blends []colorful.Color)
 	}
 
 	// Chunk length.
-	var chunkLen = int(math.Ceil(float64(columns) / float64(lod)))
+	chunkLen := int(math.Ceil(float64(columns) / flod))
 
 	// Input text. In byte slices because. May not work because runecolumns.
 	textbuf := bytes.Buffer{}
@@ -74,21 +102,23 @@ func Blend(w Writer, columns int, text []byte, lod int, blends []colorful.Color)
 	}
 
 	// Print a new line that's underlined
-	w.Write(underline)
+	if opts.Underline {
+		w.Write(underline)
+	}
 
 	// Reuse the same bytes buffer to avoid copying.
 	// var buf bytes.Buffer
 
 	// LOD index to keep track of which color we're in.
-	var lodIndex = 0
+	var lodIx int
 
 	// cap because formatBits appends
-	var intbuf = make([]byte, 0, 3)
+	intbuf := make([]byte, 0, 3)
 
 	// Lazy draw. Increment by chunk length.
 	for i := 0; i < columns; i += chunkLen {
 		// Print the color to use.
-		rgb := colors[lodIndex]
+		rgb := colors[lodIx]
 
 		w.Write(header)
 		w.Write(itoau8(intbuf, rgb.r))
@@ -103,15 +133,10 @@ func Blend(w Writer, columns int, text []byte, lod int, blends []colorful.Color)
 		w.Write(textbuf.Bytes()[i:end])
 
 		// increment
-		lodIndex++
+		lodIx++
 	}
 
 	w.Write(reset)
-}
-
-func getPair(blends []colorful.Color, current, total int) (start, end int) {
-	i := current * (len(blends) - 1) / total
-	return i, i + 1
 }
 
 func min(i, j int) int {
