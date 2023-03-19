@@ -3,13 +3,11 @@ package lineprompt
 import (
 	"bytes"
 	"io"
-	"log"
 	"math"
-	"os"
+
 	_ "unsafe"
 
 	"github.com/lucasb-eyer/go-colorful"
-	"golang.org/x/sys/unix"
 )
 
 var (
@@ -155,20 +153,4 @@ func formatBits(dst []byte, u uint64, base int, neg, append_ bool) (d []byte, s 
 func itoau8(dst []byte, n uint8) []byte {
 	d, _ := formatBits(dst, uint64(n), 10, false, true)
 	return d
-}
-
-// Columns polls the terminal column size using TIOCGWINSZ.
-func Columns() int {
-	f, err := os.Open("/dev/tty")
-	if err != nil {
-		log.Fatalln("Failed to open /dev/tty:", err)
-	}
-	defer f.Close()
-
-	sz, err := unix.IoctlGetWinsize(int(f.Fd()), unix.TIOCGWINSZ)
-	if err != nil {
-		log.Fatalln("Failed to get winsz:", err)
-	}
-
-	return int(sz.Col)
 }
