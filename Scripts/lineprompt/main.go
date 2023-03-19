@@ -7,7 +7,7 @@ import (
 	"strings"
 
 	"github.com/lucasb-eyer/go-colorful"
-	"gitlab.com/diamondburned/lineprompt/lineprompt"
+	"gitlab.com/diamondburned/dotfiles/Scripts/lineprompt/lineprompt"
 )
 
 func main() {
