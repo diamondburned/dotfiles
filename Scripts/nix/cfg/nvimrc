@@ -16,6 +16,7 @@ Plug 'rhysd/conflict-marker.vim'
 Plug 'gpanders/editorconfig.nvim'
 Plug 'folke/todo-comments.nvim'
 Plug 'chrisbra/Colorizer'
+Plug 'luochen1990/rainbow'
 
 Plug 'hhhapz/firenvim', { 'do': { _ -> firenvim#install(0) } }
 Plug 'andreypopp/vim-colors-plain'
@@ -648,3 +649,6 @@ let g:copilot_filetypes = {
 "nnoremap <M-p> :cprev<CR>zz
 
 nmap ; :
+
+"Lambda Calculus moment"
+let g:rainbow_active = 1
