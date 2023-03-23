@@ -38,6 +38,7 @@ let utils = import ./utils { inherit lib; };
 in {
 	imports = [
 		# "${blurcam}"
+		./cfg/bluetooth-hack
 	];
 
 	# services.blurcam = {
