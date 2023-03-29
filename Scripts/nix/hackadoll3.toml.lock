@@ -1,5 +1,9 @@
 {
   "channels": {
+    "github:MatthewCroughan/nixpkgs 6c3dbb326eeff83b11d7cb353c3cead30820e373": {
+      "url": "https://github.com/MatthewCroughan/nixpkgs/archive/6c3dbb326eeff83b11d7cb353c3cead30820e373.tar.gz",
+      "store_hash": "xjllv1kmbmww13lh3ycgwkaj0v6m5kks"
+    },
     "github:NixOS/nixpkgs 26c6895e1005b3e4f6dfe0d16afbd1f12d0a054c": {
       "url": "https://github.com/NixOS/nixpkgs/archive/26c6895e1005b3e4f6dfe0d16afbd1f12d0a054c.tar.gz",
       "store_hash": "bzb6wgp4qnr8gaafzffi2za58d8bli86"

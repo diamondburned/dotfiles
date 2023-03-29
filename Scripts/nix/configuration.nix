@@ -370,7 +370,7 @@ in {
 		gnome-user-share.enable = true;
 		gnome-online-accounts.enable = true;
 		gnome-online-miners.enable = true;
-		chrome-gnome-shell.enable = true;
+		gnome-browser-connector.enable = true;
 
 		# Disable garbage
 		tracker.enable = false;
@@ -674,6 +674,8 @@ in {
 				extraPkgs = pkgs: with pkgs; [ gamescope ];
 			})
 
+			# (import <nixpkgs_shotcut> {}).shotcut
+
 			# Browsers
 			google-chrome
 
@@ -743,6 +745,8 @@ in {
 			# aqours
 			# (succumb-to-libadwaita spot)
 			spot
+			openshot-qt
+			libva-utils
 			# catnip-gtk
 			ffmpeg
 			v4l-utils

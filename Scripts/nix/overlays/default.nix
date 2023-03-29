@@ -38,7 +38,6 @@ in {
 				nixpkgs_gradience;
 		})
 		(nurOverlay)
-		(import <prismlauncher>).overlay
 		(import ./overlay.nix)
 		(import ./packages/linux/overlay.nix)
 		(self: super: {
