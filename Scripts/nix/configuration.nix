@@ -556,6 +556,8 @@ in {
 		programs.bash = {
 			enable = true;
 			initExtra = builtins.readFile ./cfg/bashrc;
+			historySize = 500000;
+			historyFileSize = 1000000;
 		};
 
 		# programs.vscode-css = {

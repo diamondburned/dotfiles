@@ -158,6 +158,8 @@ nixsh() {
 	nix-shell --run bash -p
 }
 
+alias nixshu="nix-shell --run bash '<unstable>' -p"
+
 nix_exec() {
 	nix-build "${@:2}" -E "with import <nixpkgs> {}; (callPackage ./$1 {}).all"
 }
