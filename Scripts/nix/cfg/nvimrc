@@ -419,7 +419,6 @@ hi! GitGutterDelete       guibg=NONE ctermbg=NONE guifg=#6c6c6c ctermfg=245
 hi! GitGutterChangeDelete guibg=NONE ctermbg=NONE guifg=#6c6c6c ctermfg=245
 
 "Cooler git conflicts"
-let g:conflict_marker_highlight_group = ''
 let g:conflict_marker_begin = '^<<<<<<< .*$'
 let g:conflict_marker_end   = '^>>>>>>> .*$'
 
