@@ -675,6 +675,7 @@ in {
 			})
 
 			# (import <nixpkgs_shotcut> {}).shotcut
+			avidemux
 
 			# Browsers
 			google-chrome
