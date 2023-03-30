@@ -528,6 +528,22 @@ call ale#linter#Define('astro', {
 	\ 'project_root': '.',
 	\ })
 
+call ale#linter#Define('javascript', {
+	\ 'name': 'svelteserver',
+	\ 'lsp': 'stdio',
+	\ 'executable': 'svelteserver',
+	\ 'command': '%e --stdio',
+	\ 'project_root': '.',
+	\ })
+
+call ale#linter#Define('typescript', {
+	\ 'name': 'svelteserver',
+	\ 'lsp': 'stdio',
+	\ 'executable': 'svelteserver',
+	\ 'command': '%e --stdio',
+	\ 'project_root': '.',
+	\ })
+
 function! FixSQLFormatter(buffer) abort
     return {
     \   'command': 'sql-formatter'
@@ -619,8 +635,8 @@ let g:ale_linters = {
 			\ 'python':     [ "pyright" ],
 			\ 'svelte':     [ "svelteserver", "tsserver", "eslint" ],
 			\ 'jsonnet':    [ "jsonnetfmt", "jsonnet_lint", "jsonnet-language-server" ],
-			\ 'javascript': [ "deno", "svelteserver", "tsserver", "deno", "standard" ],
-			\ 'typescript': [ "deno", "svelteserver", "tsserver", "deno", "standard" ],
+			\ 'javascript': [ "deno", "tsserver", "deno", "standard" ],
+			\ 'typescript': [ "deno", "tsserver", "deno", "standard" ],
 			\ }
 nnoremap gd :ALEGoToDefinition<CR>
 nnoremap K :ALEHover<CR>
