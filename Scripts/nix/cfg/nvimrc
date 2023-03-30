@@ -78,6 +78,8 @@ autocmd BufRead,BufNewFile *.nix    setlocal noexpandtab
 autocmd BufRead,BufNewFile *.nix    setlocal shiftwidth=4
 autocmd BufRead,BufNewFile *.nix    setlocal textwidth=100
 autocmd BufRead,BufNewFile *.md     setlocal spell
+autocmd BufRead,BufNewFile *.md     setlocal wrap
+autocmd BufRead,BufNewFile *.md     setlocal textwidth=0
 autocmd BufRead,BufNewFile *.txt    setlocal spell
 autocmd BufRead,BufNewFile *.vue    syntax sync fromstart
 autocmd BufRead,BufNewFile *.vugu   setlocal filetype=html
