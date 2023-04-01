@@ -711,7 +711,8 @@ in {
 			dos2unix
 			foot
 			jq
-			go_1_18
+			go
+			gopls
 			mdr
 			# xelfviewer
 			# config.boot.kernelPackages.perf
