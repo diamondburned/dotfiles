@@ -674,6 +674,7 @@ in {
 				extraPkgs = pkgs: with pkgs; [ gamescope ];
 			})
 
+			xelfviewer
 			# (import <nixpkgs_shotcut> {}).shotcut
 			avidemux
 
@@ -714,7 +715,6 @@ in {
 			go
 			gopls
 			mdr
-			# xelfviewer
 			# config.boot.kernelPackages.perf
 			# perf_data_converter
 			tree
