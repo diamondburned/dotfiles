@@ -632,6 +632,7 @@ let g:ale_linters = {
 			\ 'sql':        [ "sqls" ],
 			\ 'rust':       [ "analyzer", "cargo" ],
 			\ 'nasm':       [ "nasm" ],
+			\ 'astro':      [ "astro-ls" ],
 			\ 'python':     [ "pyright" ],
 			\ 'svelte':     [ "svelteserver", "tsserver", "eslint" ],
 			\ 'jsonnet':    [ "jsonnetfmt", "jsonnet_lint", "jsonnet-language-server" ],
