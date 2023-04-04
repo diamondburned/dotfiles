@@ -736,7 +736,7 @@ in {
 				(neovimUtils.makeNeovimConfig {
 					vimAlias = true;
 					withNodeJs = true;
-					customRC = builtins.readFile ./cfg/nvimrc;
+					customRC = builtins.readFile ./cfg/nvim/init.vim;
 					plugins = with pkgs.vimPlugins; [
 						{ plugin = markdown-preview-nvim; }
 					];

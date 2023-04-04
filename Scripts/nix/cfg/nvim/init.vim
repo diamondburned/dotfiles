@@ -32,6 +32,12 @@ Plug 'nvim-treesitter/nvim-treesitter-refactor'
 Plug 'jiangmiao/auto-pairs'
 
 "Autocompletion"
+" Plug 'neovim/nvim-lspconfig'
+" Plug 'hrsh7th/nvim-cmp'
+Plug 'prabirshrestha/vim-lsp/'
+Plug 'prabirshrestha/asyncomplete.vim'
+Plug 'prabirshrestha/asyncomplete-lsp.vim'
+Plug 'mattn/vim-lsp-settings'
 Plug 'dense-analysis/ale'
 Plug 'github/copilot.vim'
 
