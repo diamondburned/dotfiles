@@ -607,17 +607,24 @@ in {
 			theme = {
 				name = userEnv.GTK_THEME;
 				package =
-					let orchis-theme = pkgs.orchis-theme.overrideAttrs (old: rec {
-						version = "2023-01-25";
-						src = pkgs.fetchFromGitHub {
-						    repo = "Orchis-theme";
-						    owner = "vinceliuice";
-						    rev = version;
-						    sha256 = "sha256:0rlvqzlfabvayp9p2ihw4jk445ahhrgv6zc5n47sr5w6hbb082ny";
-						};
+					# let orchis-theme = pkgs.orchis-theme.overrideAttrs (old: rec {
+					# 	version = "2023-01-25";
+					# 	src = pkgs.fetchFromGitHub {
+					# 	    repo = "Orchis-theme";
+					# 	    owner = "vinceliuice";
+					# 	    rev = version;
+					# 	    sha256 = "sha256:0rlvqzlfabvayp9p2ihw4jk445ahhrgv6zc5n47sr5w6hbb082ny";
+					# 	};
+					# });
+					let orchis-theme = pkgs.nixpkgs_unstable_real.orchis-theme.overrideAttrs (old: {
+						nativeBuildInputs = with pkgs.nixpkgs_unstable_real; [
+							gtk4
+							sassc
+							gnome.gnome-shell
+						];
 					});
 					in orchis-theme.override {
-						tweaks = [ "black" "compact" ];
+						tweaks = [ "compact" ];
 					};
 			};
 
