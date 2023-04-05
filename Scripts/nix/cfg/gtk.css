@@ -2,6 +2,29 @@ vte-terminal {
 	padding: 4px 6px;
 }
 
+.titlebar, headerbar {
+	/* opacity: 0.95; */
+	/* background: none; */
+}
+
+windowcontrols {
+	border-left: 2px solid alpha(white, 0.35);
+	border-bottom: 2px solid alpha(white, 0.35);
+	border-radius: 0 9px 0 9px;
+	padding: 0 4px;
+}
+
+windowhandle > box {
+	padding-right: 0;
+}
+
+windowcontrols > :nth-child(1) image {
+	color: #55CDFC;
+}
+windowcontrols > :nth-child(2) image {
+	color: #F7A8B8;
+}
+
 /*
 terminal-window,
 terminal-window stack,
@@ -18,6 +41,69 @@ terminal-window vte-terminal {
 	margin: -10px 0;
 	padding: 0;
 	min-height: 0;
+}
+
+.nautilus-window,
+.nautilus-grid-view gridview.view {
+	background-color: @theme_bg_color;
+}
+
+.nautilus-window .sidebar-row .sidebar-revealer {
+	padding-left: 6px;
+	margin-left: 6px;
+}
+
+.nautilus-window .sidebar-row:selected .sidebar-revealer {
+	background-color: @theme_bg_color;
+	border-radius: 100px 0 0 100px;
+	margin-top: 10px;
+	margin-bottom: 10px;
+	padding-top: 8px;
+	padding-bottom: 8px;
+}
+
+.nautilus-window .sidebar-row:selected .sidebar-revealer > box {
+	background: none;
+	border: none;
+}
+
+.nautilus-window .sidebar-row:selected .sidebar-icon {
+	margin-left: 8px;
+	padding-right: 8px;
+}
+
+.nautilus-window .sidebar-row:selected .sidebar-label {
+	min-height: 0;
+	padding-left: 0;
+}
+
+.nautilus-window .sidebar-row .sidebar-revealer {
+	padding-left: 6px;
+	margin-left: 6px;
+}
+
+.nautilus-window .sidebar-row:selected .sidebar-revealer {
+	background-color: @theme_bg_color;
+	border-radius: 100px 0 0 100px;
+	margin-top: 10px;
+	margin-bottom: 10px;
+	padding-top: 8px;
+	padding-bottom: 8px;
+}
+
+.nautilus-window .sidebar-row:selected .sidebar-revealer > box {
+	background: none;
+	border: none;
+}
+
+.nautilus-window .sidebar-row:selected .sidebar-icon {
+	margin-left: 8px;
+	padding-right: 8px;
+}
+
+.nautilus-window .sidebar-row:selected .sidebar-label {
+	min-height: 0;
+	padding-left: 0;
 }
 
 .background.csd,
@@ -47,35 +133,16 @@ button.titlebutton:hover { opacity: 1.00; }
 
 /* Hopefully Chrome can catch up to this. */
 /* .titlebar:only-child, headerbar:only-child { */
+/*  */
+/* .titlebar scrolledwindow { */
+/* 	background: none; */
+/* 	border: 1px solid alpha(black, 0.15); */
+/* 	border-radius: 4px; */
+/* } */
 
-/* Chrome could not. */
-.titlebar, headerbar {
-	/* opacity: 0.95; */
-	background: linear-gradient(
-		to right,
-		rgba(85,  205, 252, 1) 0%,
-		rgba(147, 194, 255, 1) 25%,
-		rgba(200, 181, 245, 1) 50%,
-		rgba(234, 171, 217, 1) 75%,
-		rgba(247, 168, 184, 1) 100%
-	);
-}
-
-.titlebar * {
-	color: black;
-	opacity: 1;
-	font-weight: 600;
-}
-
-.titlebar scrolledwindow {
-	background: none;
-	border: 1px solid alpha(black, 0.15);
-	border-radius: 4px;
-}
-
-decoration {
-	padding: 0;
-}
+/* decoration { */
+/* 	padding: 0; */
+/* } */
 
 .pavucontrol-window notebook scrolledwindow > viewport > box:first-child > box {
 	margin: 0 15px;

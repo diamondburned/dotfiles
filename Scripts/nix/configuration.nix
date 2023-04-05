@@ -617,14 +617,13 @@ in {
 					# 	};
 					# });
 					let orchis-theme = pkgs.nixpkgs_unstable_real.orchis-theme.overrideAttrs (old: {
-						nativeBuildInputs = with pkgs.nixpkgs_unstable_real; [
-							gtk4
-							sassc
-							gnome.gnome-shell
+						patches = (old.patches or []) ++ [
+							./overlays/patches/Orchis-theme-middark.patch
 						];
 					});
 					in orchis-theme.override {
 						tweaks = [ "compact" ];
+						border-radius = 6;
 					};
 			};
 
@@ -642,7 +641,7 @@ in {
 				extraConfig = {
 					gtk-application-prefer-dark-theme = 1;
 				};
-				extraCss = builtins.readFile ./cfg/gtk.css;
+				# extraCss = builtins.readFile ./cfg/gtk.css;
 			};
 		};
 
@@ -864,6 +863,8 @@ in {
 				"nix/nix.conf".text = ''
 					experimental-features = nix-command flakes
 				'';
+				"gtk-4.0/gtk.css".source = ./cfg/gtk.css;
+				"gtk-3.0/gtk.css".source = ./cfg/gtk.css;
 			};
 		};
 
