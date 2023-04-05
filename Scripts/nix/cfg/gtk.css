@@ -76,3 +76,16 @@ button.titlebutton:hover { opacity: 1.00; }
 decoration {
 	padding: 0;
 }
+
+.pavucontrol-window notebook scrolledwindow > viewport > box:first-child > box {
+	margin: 0 15px;
+}
+
+.pavucontrol-window notebook scrolledwindow > viewport > box:first-child > box > box > box:nth-child(2),
+.pavucontrol-window notebook scrolledwindow > viewport > box:first-child > box > box > box:nth-child(3) {
+	margin-right: 200px;
+}
+
+.pavucontrol-window notebook scrolledwindow > viewport > box:first-child progressbar {
+	margin-right: 120px;
+}
