@@ -490,6 +490,7 @@ in {
 			# ./cfg/wyze
 			# ./cfg/tilix
 			./cfg/firefox
+			./cfg/pantalaimon
 			# ./cfg/wayfire/home.nix
 			./cfg/hm-blackbox-terminal.nix
 			./cfg/hm-gnome-terminal.nix
@@ -840,7 +841,7 @@ in {
 					enable_semantic_tokens = true;
 				};
 				"fontconfig/fonts.conf".source = ./cfg/fontconfig.xml;
-				"nvim/init.vim".source = ./cfg/nvimrc;
+				# "nvim/init.vim".source = ./cfg/nvimrc;
 				"autostart/autostart.desktop".text = utils.mkDesktopFile {
 					name = "autostart-init";
 					exec = ./bin/autostart;
