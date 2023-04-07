@@ -152,10 +152,8 @@ func RGB(r, g, b uint8) []byte {
 	return s.Bytes()
 }
 
-// Reset returns the reset escape sequence.
-func Reset() string {
-	return string(reset)
-}
+// Reset is the escape sequence to reset the terminal.
+var Reset = reset
 
 func rgbString(w Writer, intbuf []byte, r, g, b uint8) {
 	w.Write(header)
