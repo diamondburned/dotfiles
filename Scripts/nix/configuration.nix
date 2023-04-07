@@ -490,7 +490,7 @@ in {
 			# ./cfg/wyze
 			# ./cfg/tilix
 			./cfg/firefox
-			./cfg/pantalaimon
+			# ./cfg/pantalaimon
 			# ./cfg/wayfire/home.nix
 			./cfg/hm-blackbox-terminal.nix
 			./cfg/hm-gnome-terminal.nix
