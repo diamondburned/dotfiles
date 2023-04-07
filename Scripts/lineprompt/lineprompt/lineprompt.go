@@ -124,14 +124,7 @@ func Blend(w Writer, text string, columns int, blends []colorful.Color, opts Opt
 	for i := 0; i < columns; i += chunkLen {
 		// Print the color to use.
 		rgb := colors[lodIx]
-
-		w.Write(header)
-		w.Write(itoau8(intbuf, rgb.r))
-		w.WriteByte(';')
-		w.Write(itoau8(intbuf, rgb.g))
-		w.WriteByte(';')
-		w.Write(itoau8(intbuf, rgb.b))
-		w.WriteByte('m')
+		rgbString(w, intbuf, rgb.r, rgb.g, rgb.b)
 
 		// Write the text.
 		var end = min(i+chunkLen, textbuf.Len())
@@ -149,6 +142,29 @@ func min(i, j int) int {
 		return i
 	}
 	return j
+}
+
+// RGB returns the escape sequence for the given RGB color.
+func RGB(r, g, b uint8) []byte {
+	var s bytes.Buffer
+	var intbuf []byte
+	rgbString(&s, intbuf, r, g, b)
+	return s.Bytes()
+}
+
+// Reset returns the reset escape sequence.
+func Reset() string {
+	return string(reset)
+}
+
+func rgbString(w Writer, intbuf []byte, r, g, b uint8) {
+	w.Write(header)
+	w.Write(itoau8(intbuf, r))
+	w.WriteByte(';')
+	w.Write(itoau8(intbuf, g))
+	w.WriteByte(';')
+	w.Write(itoau8(intbuf, b))
+	w.WriteByte('m')
 }
 
 // WHAT THE FUCK AAAAAAAAAAAAAAAAAAAAa
