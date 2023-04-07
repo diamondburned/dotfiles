@@ -55,30 +55,37 @@ func Blend(w Writer, text string, columns int, blends []colorful.Color, opts Opt
 		opts.LOD = len(blends)
 	}
 
-	flod := float64(opts.LOD)
-
 	// Precalculate colors according to the level of details.
-	colors := make([]rgb, 0, opts.LOD)
-	var rgb rgb
+	var colors []rgb
 
-	// We need to calculate the gradient pointer for each gradient segment. So
-	// we can't use 1/perc*pos, as that only gets you the pointer for the entire
-	// gradient at once.
-	var segmentf64 = math.Ceil(flod / float64(len(blends)-1))
-	var segmentLen = int(segmentf64)
+	if opts.LOD > len(blends) {
+		colors = make([]rgb, 0, opts.LOD)
+		var rgb rgb
+		// We need to calculate the gradient pointer for each gradient segment. So
+		// we can't use 1/perc*pos, as that only gets you the pointer for the entire
+		// gradient at once.
+		var segmentf64 = math.Ceil(float64(opts.LOD) / float64(len(blends)-1))
+		var segmentLen = int(segmentf64)
 
-	for blend := 0; blend < len(blends)-1; blend++ {
-		for i := 0; i < segmentLen; i++ {
-			start, end := blends[blend], blends[blend+1]
-			rgb.r, rgb.g, rgb.b = start.BlendRgb(end, 1/segmentf64*float64(i)).RGB255()
+		for blend := 0; blend < len(blends)-1; blend++ {
+			for i := 0; i < segmentLen; i++ {
+				start, end := blends[blend], blends[blend+1]
+				rgb.r, rgb.g, rgb.b = start.BlendRgb(end, 1/segmentf64*float64(i)).RGB255()
 
+				colors = append(colors, rgb)
+				// log.Println(rgb, i, start, end, pos)
+			}
+		}
+	} else {
+		var rgb rgb
+		for _, blend := range blends {
+			rgb.r, rgb.g, rgb.b = blend.RGB255()
 			colors = append(colors, rgb)
-			// log.Println(rgb, i, start, end, pos)
 		}
 	}
 
 	// Chunk length.
-	chunkLen := int(math.Ceil(float64(columns) / flod))
+	chunkLen := int(math.Ceil(float64(columns) / float64(len(colors))))
 
 	// Input text. In byte slices because. May not work because runecolumns.
 	textbuf := bytes.Buffer{}
