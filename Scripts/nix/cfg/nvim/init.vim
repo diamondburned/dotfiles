@@ -534,22 +534,6 @@ call ale#linter#Define('astro', {
 	\ 'project_root': '.',
 	\ })
 
-call ale#linter#Define('javascript', {
-	\ 'name': 'svelteserver',
-	\ 'lsp': 'stdio',
-	\ 'executable': 'svelteserver',
-	\ 'command': '%e --stdio',
-	\ 'project_root': '.',
-	\ })
-
-call ale#linter#Define('typescript', {
-	\ 'name': 'svelteserver',
-	\ 'lsp': 'stdio',
-	\ 'executable': 'svelteserver',
-	\ 'command': '%e --stdio',
-	\ 'project_root': '.',
-	\ })
-
 function! FixSQLFormatter(buffer) abort
     return {
     \   'command': 'sql-formatter'
@@ -640,7 +624,7 @@ let g:ale_linters = {
 			\ 'nasm':       [ "nasm" ],
 			\ 'astro':      [ "astro-ls" ],
 			\ 'python':     [ "pyright" ],
-			\ 'svelte':     [ "svelteserver", "tsserver", "eslint" ],
+			\ 'svelte':     [ "svelteserver" ],
 			\ 'jsonnet':    [ "jsonnetfmt", "jsonnet_lint", "jsonnet-language-server" ],
 			\ 'javascript': [ "deno", "tsserver", "deno", "standard" ],
 			\ 'typescript': [ "deno", "tsserver", "deno", "standard" ],
