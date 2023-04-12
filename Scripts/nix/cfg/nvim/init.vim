@@ -575,6 +575,7 @@ execute ale#fix#registry#Add('sql-formatter', 'FixSQLFormatter', ['sql'], 'sql-f
 execute ale#fix#registry#Add('nasmfmt', 'FixNasmfmt', ['nasm'], 'nasmfmt')
 execute ale#fix#registry#Add('denojson', 'FixDenoJSON', ['json'], 'deno fmt for json')
 execute ale#fix#registry#Add('denojsonc', 'FixDenoJSONC', ['jsonc'], 'deno fmt for jsonc')
+execute ale#fix#registry#Add('prettier', 'ale#fixers#prettier#Fix', ['markdown'], 'prettier for astro')
 execute ale#fix#registry#Add('prettier', 'ale#fixers#prettier#Fix', ['astro'], 'prettier for astro')
 execute ale#fix#registry#Add('prettier', 'ale#fixers#prettier#Fix', ['scss'], 'prettier for astro')
 execute ale#fix#registry#Add('cmark', 'FixCMark', ['markdown'], 'cmark for markdown')
