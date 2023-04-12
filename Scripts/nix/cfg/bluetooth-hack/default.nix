@@ -23,7 +23,8 @@
 
 {
 	systemd.services."bluetooth-sleep" = {
-		enable = true;
+		# This breaks Bluetooth. Fuck Intel.
+		enable = false;
 		description = "disable bluetooth for systemd sleep/suspend targets";
 		before = [ "sleep.target" "suspend.target" "hybrid-sleep.target" "suspend-then-hibernate.target" ];
 		unitConfig.Type = "oneshot";
