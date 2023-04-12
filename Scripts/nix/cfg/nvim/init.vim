@@ -608,6 +608,7 @@ let g:ale_fixers = {
 			\ 'python':     [ "autopep8", "black" ],
 			\ 'astro':	    [ "prettier" ],
 			\ 'svelte':     [ "prettier", "prettier_standard", "eslint" ],
+			\ 'haskell':    [ "ormolu" ],
 			\ 'jsonnet':    [ "jsonnetfmt" ],
 			\ 'markdown':   [ "cmark-gfm", "cmark", "prettier" ],
 			\ 'javascript': [ "deno", "prettier", "prettier_standard", "eslint" ],
