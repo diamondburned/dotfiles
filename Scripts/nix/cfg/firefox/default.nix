@@ -60,7 +60,7 @@ in {
 	];
 
 	programs.firefox.enable = true;
-	programs.firefox.package = pkgs.nixpkgs_unstable.firefox;
+	programs.firefox.package = pkgs.nixpkgs_unstable_real.firefox;
 
 	programs.firefox.profiles."Tunneled" = {
 		id = 1;
@@ -125,6 +125,7 @@ in {
 			"privacy.resistFingerprinting" = false; # breaks dark theme
 			"privacy.antitracking.testing" = true;
 			"privacy.trackingprotection.enabled" = true;
+			"network.trr.mode" = 5;
 		};
 	};
 }
