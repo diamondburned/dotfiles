@@ -158,7 +158,7 @@ nixsh() {
 	nix-shell --run bash -p
 }
 
-alias nixshu="nix-shell --run bash '<unstable>' -p"
+alias nixshu='nix-shell --run bash -I nixpkgs=$(nix-instantiate --eval -E "<unstable>") -p'
 
 nix_exec() {
 	nix-build "${@:2}" -E "with import <nixpkgs> {}; (callPackage ./$1 {}).all"
@@ -194,6 +194,10 @@ ytplay() {
 
 ytaudio() {
 	ytdl --filter=itag:250 -s -o - "$1" | mpv -
+}
+
+ytmpv() {
+	mpv --ytdl-format="ytdl-format=bestvideo[height<=?1440]+bestaudio/best" "${@}"
 }
 
 toclipboard() {

@@ -588,6 +588,7 @@ in {
 				dither-depth = 8;
 				# fbo-format = "rgba32f";
 				scale = "lanczos";
+				script-opts = "ytdl_hook-ytdl_path=yt-dlp";
 			};
 		};
 
