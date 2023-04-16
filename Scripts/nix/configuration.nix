@@ -49,6 +49,7 @@ let lsoc-overlay = pkgs.fetchFromGitHub {
 		vblank_mode = "0";
 
 		# Enforce Wayland.
+		NIXOS_OZONE_WL = "1";
 		MOZ_ENABLE_WAYLAND = "1";
 		# SDL_VIDEODRIVER	= "wayland";
 		QT_QPA_PLATFORM	= "wayland";
@@ -566,7 +567,7 @@ in {
 		# };
 		programs.vscode = {
 			enable = true;
-			package = pkgs.nixpkgs_unstable_real.vscode;
+			package = pkgs.nixpkgs_unstable.vscode;
 			# userSettings = {
 			# 	"telemetry.enableTelemetry" = false;
 			# 	"window.menuBarVisibility"  = "toggle";
