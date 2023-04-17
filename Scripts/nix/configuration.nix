@@ -191,6 +191,7 @@ in {
 	# ];
 	networking.firewall = {
 		enable = false;
+		checkReversePath = false;
 		allowedTCPPortRanges = [
 			{ from = 1714; to = 1764; } # GSConnect
 		];
