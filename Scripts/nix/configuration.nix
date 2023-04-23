@@ -568,7 +568,7 @@ in {
 		# };
 		programs.vscode = {
 			enable = true;
-			package = pkgs.nixpkgs_unstable.vscode;
+			package = pkgs.nixpkgs_unstable_newer.vscode;
 			# userSettings = {
 			# 	"telemetry.enableTelemetry" = false;
 			# 	"window.menuBarVisibility"  = "toggle";
