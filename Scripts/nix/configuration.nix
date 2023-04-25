@@ -687,6 +687,7 @@ in {
 			xelfviewer
 			# (import <nixpkgs_shotcut> {}).shotcut
 			avidemux
+			kdenlive
 
 			# Browsers
 			google-chrome
