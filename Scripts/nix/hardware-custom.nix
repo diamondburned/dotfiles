@@ -91,13 +91,17 @@ in {
 	};
 
 	# This needs to be manually stated, for some reason.
-	boot.kernelModules = [ "v4l2loopback" "i2c-dev" "ddcci-driver" ];
+	boot.kernelModules = [
+		"v4l2loopback"
+		"i2c-dev"
+		# "ddcci-driver"
+	];
 
 	boot.extraModulePackages = with config.boot.kernelPackages; [
 		# Add the camera loopback drivers.
 		v4l2loopback
 		# Add DDC/CI backlight control.
-		ddcci-driver
+		# ddcci-driver
 
 		# Realtek driver builds itself on latest kernel challenge impossible.
 		# rtl8188gu
