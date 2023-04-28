@@ -535,6 +535,7 @@ in {
 				key = "D78C4471CE776659";
 				signByDefault = true;
 			};
+			lfs.enable = true;
 			extraConfig = {
 				http = {
 					cookieFile = "/home/diamond/.gitcookies";
@@ -800,7 +801,7 @@ in {
 			# Games
 			# polymc
 			# prismlauncher
-			osu-wine
+			# osu-wine
 			# osu-wine-realistik
 
 			# GNOME things
