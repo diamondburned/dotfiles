@@ -179,6 +179,7 @@ in {
 
 	# Use the systemd-boot EFI boot loader.
 	boot.loader.systemd-boot.enable = true;
+	boot.loader.systemd-boot.configurationLimit = 25;
 	boot.loader.efi.canTouchEfiVariables = true;
 
 	networking.hostName = "hackadoll3"; # Define your hostname.
@@ -758,7 +759,6 @@ in {
 			# aqours
 			# (succumb-to-libadwaita spot)
 			spot
-			openshot-qt
 			libva-utils
 			# catnip-gtk
 			ffmpeg
