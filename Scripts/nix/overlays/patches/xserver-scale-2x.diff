@@ -1,0 +1,26 @@
+diff --git a/hw/xwayland/xwayland-output.c b/hw/xwayland/xwayland-output.c
+index 692532d7e..6e440b314 100644
+--- a/hw/xwayland/xwayland-output.c
++++ b/hw/xwayland/xwayland-output.c
+@@ -819,7 +819,7 @@ xwl_output_create(struct xwl_screen *xwl_screen, uint32_t id, Bool with_xrandr)
+         RROutputSetConnection(xwl_output->randr_output, RR_Connected);
+         RRTellChanged(xwl_screen->screen);
+ 
+-        xwl_output->scale = 1;
++        xwl_output->scale = 2;
+     }
+     /* We want the output to be in the list as soon as created so we can
+      * use it when binding to the xdg-output protocol...
+diff --git a/hw/xwayland/xwayland-screen.c b/hw/xwayland/xwayland-screen.c
+index ffaeaae1a..e94c6784f 100644
+--- a/hw/xwayland/xwayland-screen.c
++++ b/hw/xwayland/xwayland-screen.c
+@@ -832,7 +832,7 @@ xwl_screen_init(ScreenPtr pScreen, int argc, char **argv)
+ #ifdef XWL_HAS_GLAMOR
+     xwl_screen->glamor = 1;
+ #endif
+-    xwl_screen->global_output_scale = 1;
++    xwl_screen->global_output_scale = 2;
+ 
+     for (i = 1; i < argc; i++) {
+         if (strcmp(argv[i], "-rootless") == 0) {

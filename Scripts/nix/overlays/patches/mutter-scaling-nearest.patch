@@ -1,0 +1,13 @@
+diff --git a/src/compositor/meta-shaped-texture.c b/src/compositor/meta-shaped-texture.c
+index 34fec6852..d072f0036 100644
+--- a/src/compositor/meta-shaped-texture.c
++++ b/src/compositor/meta-shaped-texture.c
+@@ -715,7 +715,7 @@ do_paint_content (MetaShapedTexture   *stex,
+                                          NULL, NULL))
+     filter = COGL_PIPELINE_FILTER_NEAREST;
+   else
+-    filter = COGL_PIPELINE_FILTER_LINEAR;
++    filter = COGL_PIPELINE_FILTER_NEAREST;
+ 
+   ctx = clutter_backend_get_cogl_context (clutter_get_default_backend ());
+ 

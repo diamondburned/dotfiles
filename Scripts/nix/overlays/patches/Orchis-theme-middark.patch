@@ -1,0 +1,19 @@
+diff --git a/src/_sass/_colors.scss b/src/_sass/_colors.scss
+index 9af93e0..32c9788 100644
+--- a/src/_sass/_colors.scss
++++ b/src/_sass/_colors.scss
+@@ -80,10 +80,10 @@
+     @if ($type == 'g') { @return $grey-900; }
+     @if ($type == 'h') { @return $grey-850; }
+   } @else {
+-    @if ($type == 'e') { @return $grey-800; }
+-    @if ($type == 'f') { @return $grey-750; }
+-    @if ($type == 'g') { @return $grey-700; }
+-    @if ($type == 'h') { @return $grey-650; }
++    @if ($type == 'e') { @return $grey-850; }
++    @if ($type == 'f') { @return $grey-800; }
++    @if ($type == 'g') { @return $grey-750; }
++    @if ($type == 'h') { @return $grey-700; }
+   }
+ }
+ 

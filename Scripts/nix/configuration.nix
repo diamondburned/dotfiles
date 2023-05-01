@@ -742,7 +742,7 @@ in {
 			grun
 			# neovim-gtk
 
-			(with nixpkgs_copilot; wrapNeovimUnstable neovim-unwrapped
+			(wrapNeovimUnstable neovim-unwrapped
 				# Use unstable Neovim with a slightly outdated Nixpkgs because
 				# Copilot is fucking trash.
 				(neovimUtils.makeNeovimConfig {
