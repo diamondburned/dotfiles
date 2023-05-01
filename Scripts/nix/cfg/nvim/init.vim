@@ -34,7 +34,7 @@ Plug 'jiangmiao/auto-pairs'
 "Autocompletion"
 " Plug 'neovim/nvim-lspconfig'
 " Plug 'hrsh7th/nvim-cmp'
-Plug 'prabirshrestha/vim-lsp/'
+Plug 'prabirshrestha/vim-lsp'
 Plug 'prabirshrestha/asyncomplete.vim'
 Plug 'prabirshrestha/asyncomplete-lsp.vim'
 Plug 'mattn/vim-lsp-settings'
@@ -169,13 +169,16 @@ lua <<EOF
 
 	require'nvim-tree'.setup {
 		disable_netrw = true,
-		open_on_tab = true,
-		open_on_setup = true,
 		auto_reload_on_write = true,
 		update_cwd = true,
 		git = {
 			enable = true,
 			ignore = false,
+		},
+		tab = {
+			sync = {
+				open = true,
+			},
 		},
 		filters = {
 			custom = { '^\\.git$', '^node_modules$' },
@@ -192,20 +195,6 @@ lua <<EOF
 			signcolumn = "no",
 			mappings = {
 				custom_only = true,
-				list = {
-					{ key = {"<CR>", "<2-LeftMouse>"}, action = "edit" },
-					{ key = "<2-RightMouse>",          action = "cd" },
-					{ key = "<C-t>",                   action = "tabnew" },
-					{ key = "<",                       action = "prev_sibling" },
-					{ key = ">",                       action = "next_sibling" },
-					{ key = "<BS>",                    action = "close_node" },
-					{ key = "d",                       action = "remove" },
-					{ key = "r",                       action = "rename" },
-					{ key = "q",                       action = "close" },
-					{ key = "/",                       action = "search_node" },
-					{ key = "a",                       action = "", action_cb = git_add },
-					{ key = "s",                       action = "", action_cb = git_restore_staged },
-				},
 			},
 		},
 		renderer = {
@@ -243,6 +232,26 @@ lua <<EOF
 				},
 			},
 		},
+		-- Why the fuck did they decide to break a perfectly working declarative
+		-- API in favor of a shitty imperative one that is twice as verbose???
+		on_attach = function(bufnr)
+			local api = require("nvim-tree.api")
+			local function opts(desc)
+				return { desc = 'nvim-tree: ' .. desc, buffer = bufnr, noremap = true, silent = true, nowait = true }
+			end
+
+			vim.keymap.set("n", "<CR>", api.node.open.edit, opts('open file'))
+			vim.keymap.set("n", "<2-LeftMouse>", api.node.open.edit, opts('open file'))
+			vim.keymap.set("n", "<C-t>", api.node.open.tab, opts('tabnew'))
+			vim.keymap.set("n", "<", api.node.navigate.sibling.prev, opts('prev_sibling'))
+			vim.keymap.set("n", ">", api.node.navigate.sibling.next, opts('next_sibling'))
+			vim.keymap.set("n", "d", api.fs.remove, opts('remove'))
+			vim.keymap.set("n", "r", api.fs.rename, opts('rename'))
+			vim.keymap.set("n", "q", api.tree.close, opts('close'))
+			vim.keymap.set("n", "/", api.tree.search_node, opts('search_node'))
+			vim.keymap.set("n", "a", git_add, opts('git add'))
+			vim.keymap.set("n", "s", git_restore_staged, opts('git restore --staged'))
+		end
 	}
 
 	require'nvim-treesitter.configs'.setup {
@@ -614,7 +623,8 @@ let g:ale_fixers = {
 			\ 'javascript': [ "deno", "prettier", "prettier_standard", "eslint" ],
 			\ 'typescript': [ "deno", "prettier", "prettier_standard", "eslint" ],
 			\ }
-let g:ale_completion_enabled = 1
+let g:ale_completion_enabled = 0 
+let g:ale_disable_lsp = 1 "Use nvim's built-in LSP"
 "Previously for Go: staticcheck and go vet"
 let g:ale_linters = {
 			\ 'go':         [ "gopls", "staticcheck", "go vet" ],
@@ -662,3 +672,13 @@ nmap ; :
 
 "Lambda Calculus moment"
 let g:rainbow_active = 1
+
+"Nvim LSP workaround for gopls being annoying and breaking Copilot"
+"See https://github.com/neovim/nvim-lspconfig/issues/127"
+lua << EOF
+  vim.lsp.handlers["textDocument/publishDiagnostics"] = vim.lsp.with(
+    vim.lsp.diagnostic.on_publish_diagnostics, {
+      update_in_insert = false,
+    }
+  )
+EOF
