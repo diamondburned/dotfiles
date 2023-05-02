@@ -501,12 +501,8 @@ EOF
 set autoread
 au CursorHold * checktime
 
-"Autocompletion"
-"Fix aggressive preemptive completion with noselect"
-set completeopt=menuone,noselect
-
 "ALE configs"
-set omnifunc=ale#completion#OmniFunc
+" set omnifunc=ale#completion#OmniFunc
 
 hi ALEError cterm=undercurl gui=undercurl guisp=#FF6961
 hi ALEWarningSign ctermbg=NONE
@@ -641,8 +637,6 @@ let g:ale_linters = {
 			\ 'javascript': [ "deno", "tsserver", "deno", "standard" ],
 			\ 'typescript': [ "deno", "tsserver", "deno", "standard" ],
 			\ }
-nnoremap gd :ALEGoToDefinition<CR>
-nnoremap K :ALEHover<CR>
 
 let g:copilot_filetypes = {
 	\ 'markdown': v:true,
@@ -674,7 +668,16 @@ nmap ; :
 let g:rainbow_active = 1
 
 "vim-lsp stuff"
-let g:lsp_inlay_hints_enabled=1
+let g:lsp_inlay_hints_enabled = 1
 let g:lsp_fold_enabled = 0
+let g:lsp_float_max_width = 0 "full width"
+let g:lsp_semantic_enabled = 1
+" let g:lsp_preview_float = 0
 "This prevents Copilot from working properly"
-set completeopt-=preview
+let lsp_signature_help_enabled = 0
+"Fix aggressive preemptive completion with noselect"
+" let g:asyncomplete_auto_completeopt = 0 "idk if i gotta put this first"
+" set completeopt=menuone,noinsert,noselect
+
+nnoremap gd :LspDefinition<CR>
+nnoremap K :LspHover<CR>
