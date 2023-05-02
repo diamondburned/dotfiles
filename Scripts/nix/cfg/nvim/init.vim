@@ -673,12 +673,8 @@ nmap ; :
 "Lambda Calculus moment"
 let g:rainbow_active = 1
 
-"Nvim LSP workaround for gopls being annoying and breaking Copilot"
-"See https://github.com/neovim/nvim-lspconfig/issues/127"
-lua << EOF
-  vim.lsp.handlers["textDocument/publishDiagnostics"] = vim.lsp.with(
-    vim.lsp.diagnostic.on_publish_diagnostics, {
-      update_in_insert = false,
-    }
-  )
-EOF
+"vim-lsp stuff"
+let g:lsp_inlay_hints_enabled=1
+let g:lsp_fold_enabled = 0
+"This prevents Copilot from working properly"
+set completeopt-=preview
