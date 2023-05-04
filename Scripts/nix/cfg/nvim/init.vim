@@ -681,3 +681,6 @@ let lsp_signature_help_enabled = 0
 
 nnoremap gd :LspDefinition<CR>
 nnoremap K :LspHover<CR>
+
+command! -nargs=0 Rename LspRename
+command! -nargs=0 ALERename LspRename
