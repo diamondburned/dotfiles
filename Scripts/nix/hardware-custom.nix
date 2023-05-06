@@ -274,18 +274,18 @@ in {
 	};
 
 	# Powertop is bad because of its aggressive power saving.
-	powerManagement.powertop.enable = true;
+	powerManagement.powertop.enable = false;
 
-	systemd.services."unfuck-powertop" = {
-		description = "Script to undo Powertop disabling USB ports";
-		after    = [ "powertop.service" ];
-		wantedBy = [ "powertop.service" ];
-		serviceConfig = {
-			ExecStart = pkgs.writeShellScript "unfuck-powertop.sh" ''
-				${pkgs.coreutils}/bin/tee /sys/bus/usb/devices/*/power/control <<< on
-			'';
-		};
-	};
+	# systemd.services."unfuck-powertop" = {
+	# 	description = "Script to undo Powertop disabling USB ports";
+	# 	after    = [ "powertop.service" ];
+	# 	wantedBy = [ "powertop.service" ];
+	# 	serviceConfig = {
+	# 		ExecStart = pkgs.writeShellScript "unfuck-powertop.sh" ''
+	# 			${pkgs.coreutils}/bin/tee /sys/bus/usb/devices/*/power/control <<< on
+	# 		'';
+	# 	};
+	# };
 
 	nix.settings.max-jobs = lib.mkForce 4;
 	nix.settings.cores = lib.mkForce 6;
