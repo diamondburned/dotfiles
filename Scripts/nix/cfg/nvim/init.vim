@@ -575,6 +575,12 @@ function! FixCMarkGFM(buffer) abort
 	\ }
 endfunction
 
+function! FixTempl(buffer) abort
+	return {
+	\	'command': 'templ fmt'
+	\}
+endfunction
+
 "https://github.com/dense-analysis/ale/issues/3167"
 execute ale#fix#registry#Add('sql-formatter', 'FixSQLFormatter', ['sql'], 'sql-formatter for sql')
 execute ale#fix#registry#Add('nasmfmt', 'FixNasmfmt', ['nasm'], 'nasmfmt')
@@ -585,6 +591,7 @@ execute ale#fix#registry#Add('prettier', 'ale#fixers#prettier#Fix', ['astro'], '
 execute ale#fix#registry#Add('prettier', 'ale#fixers#prettier#Fix', ['scss'], 'prettier for astro')
 execute ale#fix#registry#Add('cmark', 'FixCMark', ['markdown'], 'cmark for markdown')
 execute ale#fix#registry#Add('cmark-gfm', 'FixCMarkGFM', ['markdown'], 'cmark-gfm for markdown')
+execute ale#fix#registry#Add('templ', 'FixTempl', ['templ'], 'templ fmt for templ')
 
 let g:ale_virtualtext_cursor = 1
 let g:ale_sign_error = '!'
@@ -610,6 +617,7 @@ let g:ale_fixers = {
 			\ 'html':       [ "prettier" ],
 			\ 'yaml':       [ "prettier" ],
 			\ 'nasm':       [ "nasmfmt" ],
+			\ 'templ':      [ "templ" ],
 			\ 'python':     [ "autopep8", "black" ],
 			\ 'astro':	    [ "prettier" ],
 			\ 'svelte':     [ "prettier", "prettier_standard", "eslint" ],
@@ -683,4 +691,14 @@ nnoremap gd :LspDefinition<CR>
 nnoremap K :LspHover<CR>
 
 command! -nargs=0 Rename LspRename
-command! -nargs=0 ALERename LspRename
+command! -nargs=0 ALERename LspRenam
+
+"Support templ"
+au BufRead,BufNewFile *.templ set filetype=templ
+if executable("templ")
+	au User lsp_setup call lsp#register_server({
+		\ 'name': 'templ',
+		\ 'cmd': {server_info->['templ', 'lsp']},
+		\ 'allowlist': ['templ'],
+		\ })
+endif
