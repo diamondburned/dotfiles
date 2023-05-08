@@ -618,7 +618,7 @@ let g:ale_fixers = {
 			\ 'html':       [ "prettier" ],
 			\ 'yaml':       [ "prettier" ],
 			\ 'nasm':       [ "nasmfmt" ],
-			\ 'templ':      [ "templ" ],
+			\ 'templ':      [  ],
 			\ 'python':     [ "autopep8", "black" ],
 			\ 'astro':	    [ "prettier" ],
 			\ 'svelte':     [ "prettier", "prettier_standard", "eslint" ],
