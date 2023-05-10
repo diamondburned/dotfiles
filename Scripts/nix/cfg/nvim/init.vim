@@ -691,8 +691,11 @@ let lsp_signature_help_enabled = 0
 nnoremap gd :LspDefinition<CR>
 nnoremap K :LspHover<CR>
 
+let g:lsp_log_verbose = 1
+let g:lsp_log_file = expand('/tmp/vim-lsp.log')
+
 command! -nargs=0 Rename LspRename
-command! -nargs=0 ALERename LspRenam
+command! -nargs=0 ALERename LspRename
 
 "Support templ"
 au BufRead,BufNewFile *.templ set filetype=templ
