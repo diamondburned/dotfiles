@@ -28,4 +28,8 @@
  override-channels = false
 
 [diamond.channels]
+ nixos = "github:NixOS/nixpkgs nixos-unstable"
  nixos2 = "github:NixOS/nixpkgs c97e777ff06"
+
+[diamond.aliases]
+ nixpkgs = "nixos"

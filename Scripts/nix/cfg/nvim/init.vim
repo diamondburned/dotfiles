@@ -707,3 +707,12 @@ if executable("templ")
 		\ 'allowlist': ['templ'],
 		\ })
 endif
+
+"Support Blueprint"
+if executable("blueprint-compiler")
+	au User lsp_setup call lsp#register_server({
+		\ 'name': 'blueprint',
+		\ 'cmd': {server_info->['blueprint-compiler', 'lsp']},
+		\ 'allowlist': ['blueprint'],
+		\ })
+endif
