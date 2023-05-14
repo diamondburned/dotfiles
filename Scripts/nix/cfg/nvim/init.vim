@@ -710,6 +710,7 @@ if executable("templ")
 endif
 
 "Support Blueprint"
+au BufRead,BufNewFile *.blueprint set filetype=blueprint
 if executable("blueprint-compiler")
 	au User lsp_setup call lsp#register_server({
 		\ 'name': 'blueprint',
