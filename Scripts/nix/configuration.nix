@@ -722,7 +722,9 @@ in {
 			# Development tools
 			sommelier
 			dos2unix
+			rnix-lsp
 			foot
+			silver-searcher
 			jq
 			go
 			gopls

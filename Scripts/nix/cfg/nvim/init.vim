@@ -82,7 +82,8 @@ hi Comment cterm=none
 "Auto-commands for type-specific files"
 autocmd BufRead,BufNewFile *.nix    setlocal noautoindent
 autocmd BufRead,BufNewFile *.nix    setlocal noexpandtab
-autocmd BufRead,BufNewFile *.nix    setlocal shiftwidth=4
+autocmd BufRead,BufNewFile *.nix    setlocal shiftwidth=2
+autocmd BufRead,BufNewFile *.nix    setlocal tabstop=2
 autocmd BufRead,BufNewFile *.nix    setlocal textwidth=100
 autocmd BufRead,BufNewFile *.md     setlocal spell
 autocmd BufRead,BufNewFile *.md     setlocal wrap
