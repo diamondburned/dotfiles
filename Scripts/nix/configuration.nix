@@ -93,7 +93,7 @@ in {
 		# I don't understand the newer versions. Why do they break literally everything? Let's make
 		# everything Flakes, but then since they're Flakes now that means they're experimental, so
 		# let's break everything! Bruh.
-		package = pkgs.nix_2_3;
+		# package = pkgs.nix_2_3;
 		# package = pkgs.nixFlakes;
 		buildMachines = [
 			# {
@@ -118,7 +118,6 @@ in {
 			# 	supportedFeatures = [ "nixos-test" "benchmark" "big-parallel" "kvm" ];
 			# }
 		];
-		trustedUsers = [ "root" "diamond" ];
 		distributedBuilds = true;
 		extraOptions = ''
 			builders-use-substitutes = true
@@ -129,6 +128,7 @@ in {
 				# "https://nix-community.cachix.org"
 				"https://cache.nixos.org/"
 			];
+			trusted-users = [ "root" "diamond" ];
 			trusted-public-keys = [
 				# "nix-community.cachix.org-1:mB9FSh9qf2dCimDSUo8Zy7bkq5CX+/rkCWyvRCYg3Fs="
 			];
@@ -434,7 +434,7 @@ in {
 
 	virtualisation.libvirtd = {
 		enable = true;
-		qemuRunAsRoot = false;
+		qemu.runAsRoot = false;
 	};
 
 	# Enable the Android debug bridge.
@@ -449,7 +449,7 @@ in {
 		];
 	};
 
-	qt5 = {
+	qt = {
 		enable = true;
 		style = "adwaita-dark";
 		platformTheme = "gnome";
