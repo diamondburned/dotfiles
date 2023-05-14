@@ -1,37 +1,10 @@
 self: super:
 
-let lib = super.lib;
+let
+	lib = super.lib;
 
-	vte = pkgs: pkgs.vte.overrideAttrs(old: {
-		version = "0.63.91"; # rev without SIXEL reversion commit.
-		src = builtins.fetchGit {
-			url = "https://gitlab.gnome.org/GNOME/vte.git";
-			rev = "35b0a8dc9776300bd33c8106e500436b6c11fccc";
-		};
-		postPatch = (old.postPatch or "") + ''
-			patchShebangs src/*.py
-		'';
-		nativeBuildInputs = old.nativeBuildInputs ++ (with pkgs; [
-			python3
-			python3Full
-		]);
-		patches = (old.patches or []) ++ [
-			./patches/vte-fast.patch
-		];
-	});
-
-	spicetify = builtins.fetchTarball https://github.com/pietdevries94/spicetify-nix/archive/master.tar.gz;
-	spicetify-themes = builtins.fetchTarball https://github.com/morpheusthewhite/spicetify-themes/archive/master.tar.gz;
-
-	waylandify-chromium = pkg: pkg.overrideAttrs (old: {
-		nativeBuildInputs = (old.nativeBuildInputs or []) ++ (with super; [
-			buildPackages.makeWrapper
-		]);
-		postFixup = ''
-			wrapProgram $out/bin/${old.name} \
-				--add-flags '--enable-features=UseOzonePlatform --ozone-platform=wayland'
-		'';
-	});
+	# spicetify = builtins.fetchTarball https://github.com/pietdevries94/spicetify-nix/archive/master.tar.gz;
+	# spicetify-themes = builtins.fetchTarball https://github.com/morpheusthewhite/spicetify-themes/archive/master.tar.gz;
 
 	GOPATH = "/home/diamond/.go";
 
@@ -40,9 +13,6 @@ in {
 	inherit (self.nixpkgs_unstable)
 		neovim
 		go_1_18;
-
-	# inherit (nixpkgs_pipewire_0_3_57)
-	# 	pipewire;
 
 	# Downgrades.
 	# inherit (self.nixpkgs_21_11)
@@ -147,17 +117,17 @@ in {
 		'';
 	};
 
-	gnome = super.gnome.overrideScope' (self_gnome: super_gnome: {
-		mutter = super_gnome.mutter.overrideAttrs (old: {
-			patches = (old.patches or []) ++ [
-				# Allow 10 scale factors per integer instead of 4.
-				./patches/mutter-scale-factors.patch
-				# Support the Xwayland MR underneath by changing the X scale factor to 2x.
-				# ./patches/mutter-xserver-scale-2x.diff
-			];
-			doCheck = false;
-		});
-	});
+	# gnome = super.gnome.overrideScope' (self_gnome: super_gnome: {
+	# 	mutter = super_gnome.mutter.overrideAttrs (old: {
+	# 		patches = (old.patches or []) ++ [
+	# 			# Allow 10 scale factors per integer instead of 4.
+	# 			./patches/mutter-scale-factors.patch
+	# 			# Support the Xwayland MR underneath by changing the X scale factor to 2x.
+	# 			# ./patches/mutter-xserver-scale-2x.diff
+	# 		];
+	# 		doCheck = false;
+	# 	});
+	# });
 
 	# xwayland = super.xwayland.overrideAttrs (old: {
 	# 	# https://gitlab.freedesktop.org/xorg/xserver/-/merge_requests/733
@@ -299,15 +269,15 @@ in {
 		export LIBGL_ALWAYS_SOFTWARE=true
 		${super.octaveFull}/bin/octave "$@"
 	'';
-	blueberry = super.blueberry.override {
-		gnome = super.gnome.overrideScope' (gself: gsuper: {
-			gnome-bluetooth = gsuper.gnome-bluetooth.overrideAttrs(old: {
-				postPatch = (old.postPatch or "") + ''
-		 			patch -Np1 < ${../patches/gnome-bluetooth-connectall.patch}
-				'';
-			});
-		});
-	};
+	# blueberry = super.blueberry.override {
+	# 	gnome = super.gnome.overrideScope' (gself: gsuper: {
+	# 		gnome-bluetooth = gsuper.gnome-bluetooth.overrideAttrs(old: {
+	# 			postPatch = (old.postPatch or "") + ''
+	# 	 			patch -Np1 < ${../patches/gnome-bluetooth-connectall.patch}
+	# 			'';
+	# 		});
+	# 	});
+	# };
 	# octave-soft = super.buildEnv {
 	# 	name = "octave-soft";
 	# 	paths = with super; [ octave ];
