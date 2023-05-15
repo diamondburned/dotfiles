@@ -33,3 +33,16 @@
 
 [diamond.aliases]
  nixpkgs = "nixos"
+
+[flakes]
+ # This setting controls whether bonito should override /etc/nix/registry.json.
+ #
+ # If true, bonito will override the file with the contents of the registry
+ # specified in the [root] section. This forces the unstable flake-based Nix CLI
+ # to also use the registry below.
+ override = true
+
+[flakes.channels]
+ nixpkgs = "github:NixOS/nixpkgs nixos-unstable"
+ home-manager = "github:nix-community/home-manager master"
+ nur = "github:nix-community/NUR master"

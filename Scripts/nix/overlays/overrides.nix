@@ -117,17 +117,17 @@ in {
 		'';
 	};
 
-	# gnome = super.gnome.overrideScope' (self_gnome: super_gnome: {
-	# 	mutter = super_gnome.mutter.overrideAttrs (old: {
-	# 		patches = (old.patches or []) ++ [
-	# 			# Allow 10 scale factors per integer instead of 4.
-	# 			./patches/mutter-scale-factors.patch
-	# 			# Support the Xwayland MR underneath by changing the X scale factor to 2x.
-	# 			# ./patches/mutter-xserver-scale-2x.diff
-	# 		];
-	# 		doCheck = false;
-	# 	});
-	# });
+	gnome = super.gnome.overrideScope' (self_gnome: super_gnome: {
+		mutter = super_gnome.mutter.overrideAttrs (old: {
+			patches = (old.patches or []) ++ [
+				# Allow 10 scale factors per integer instead of 4.
+				./patches/mutter-scale-factors.patch
+				# Support the Xwayland MR underneath by changing the X scale factor to 2x.
+				# ./patches/mutter-xserver-scale-2x.diff
+			];
+			doCheck = false;
+		});
+	});
 
 	# xwayland = super.xwayland.overrideAttrs (old: {
 	# 	# https://gitlab.freedesktop.org/xorg/xserver/-/merge_requests/733
