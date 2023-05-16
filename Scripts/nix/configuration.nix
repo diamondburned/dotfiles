@@ -122,6 +122,7 @@ in {
 		extraOptions = ''
 			builders-use-substitutes = true
 		'';
+		registry = builtins.fromJSON (builtins.readFile ./hackadoll3.registry.json);
 		settings = {
 			substituters = [
 				# Cachix uses zstd, which Nix 2.3 does not support. Disable it.
