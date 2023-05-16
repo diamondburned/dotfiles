@@ -89,6 +89,7 @@ in {
 			"browser.send_pings" = false;
 			"browser.cache.offline.enable" = true;
 			"browser.cache.memory.capacity" = 14336;
+			"browser.download.alwaysOpenPanel" = true;
 			"xpinstall.signatures.required" = false;
 			"dom.min_background_timeout_value" = 10000; # 10s
 			"dom.timeout.throttling_delay" = 10000;     # 10s
