@@ -1,8 +1,10 @@
-[root]
+[channels]
+
+[users.root]
  use-sudo = true
  override-channels = true
 
-[root.channels]
+[users.root.channels]
  # nixos = "github:NixOS/nixpkgs 1ffba9f"
  nixpkgs_21_11 = "github:NixOS/nixpkgs nixos-21.11"
  nixpkgs_pipewire_0_3_57 = "github:NixOS/nixpkgs b7a6fde153d"
@@ -19,28 +21,19 @@
  unstable = "https://nixos.org/channels/nixos-unstable"
  nur = "github:nix-community/NUR master"
 
-# TODO
-[root.aliases]
+[users.root.aliases]
  nixos = "nixpkgs_unstable"
  home-manager = "home-manager_unstable"
 
-[diamond]
+[users.diamond]
  override-channels = false
 
-[diamond.channels]
+[users.diamond.channels]
  nixos = "github:NixOS/nixpkgs nixos-unstable"
  nixos2 = "github:NixOS/nixpkgs c97e777ff06"
 
-[diamond.aliases]
+[users.diamond.aliases]
  nixpkgs = "nixos"
-
-[flakes]
- # This setting controls whether bonito should override /etc/nix/registry.json.
- #
- # If true, bonito will override the file with the contents of the registry
- # specified in the [root] section. This forces the unstable flake-based Nix CLI
- # to also use the registry below.
- override = true
 
 [flakes.channels]
  nixpkgs = "github:NixOS/nixpkgs nixos-unstable"
