@@ -609,6 +609,7 @@ in {
 		gtk = {
 			enable = true;
 			font.name = "Sans";
+			font.size = 11;
 
 			theme = {
 				name = userEnv.GTK_THEME;
