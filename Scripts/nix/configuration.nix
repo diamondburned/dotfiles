@@ -694,7 +694,7 @@ in {
 			kdenlive
 
 			# Browsers
-			google-chrome
+			# google-chrome
 
 		]) ++ (with pkgs; [
 			# Personal stuff
@@ -791,6 +791,7 @@ in {
 
 			# Applications
 			gcolor3
+			google-chrome
 
 			# Themes
 			papirus-icon-theme
