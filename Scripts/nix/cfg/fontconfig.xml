@@ -256,10 +256,10 @@
 	<!-- Add emoji generic family -->
 	<alias binding="strong">
 		<family>emoji</family>
-		<default><family>Blobmoji</family></default>
+		<default>
+			<family>Noto Color Emoji</family>
+		</default>
 		<prefer>
-			<family>Blobmoji</family>
-			<family>OpenMoji Color</family>
 			<family>Noto Color Emoji</family>
 		</prefer>
 	</alias>
@@ -312,10 +312,6 @@
 	</alias>
 
 	<!-- Alias requests for the other emoji fonts -->
-	<alias binding="strong">
-		<family>Noto Color Emoji</family>
-		<prefer><family>emoji</family></prefer>
-	</alias>
 	<alias binding="strong">
 		<family>Apple Color Emoji</family>
 		<prefer><family>emoji</family></prefer>

@@ -105,6 +105,7 @@ in {
 			"font.minimum-size.x-western" = 9;
 			"font.name.monospace.ja" = "monospace";
 			"font.name.monospace.x-western" = "monospace";
+			"font.name-list.emoji" = "emoji"; # why the fuck does Firefox have this
 			"dom.webgpu.enabled" = true;
 			"gfx.webrender.all" = true;
 			"gfx.webrender.compositor" = true;

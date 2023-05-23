@@ -281,13 +281,39 @@ in {
 		material-design-icons
 		inconsolata
 		comic-neue
-		# blobmoji
 		tewi-font
+		unifont
 	]) ++ (with pkgs.nixpkgs_unstable_real; [
 		noto-fonts
 		noto-fonts-cjk
 		noto-fonts-emoji
 	]);
+	fonts.fontconfig.defaultFonts = {
+		serif = [
+			"serif"
+			"Noto Serif"
+		];
+		sansSerif = [
+			"sans-serif"
+			"Open Sans"
+			"Source Sans 3"
+			"Source Sans Pro"
+			"Noto Sans"
+		];
+		monospace = [
+			"Inconsolata"
+			"Symbols Nerd Font"
+			"Source Code Pro"
+			"Noto	Sans Mono"
+			"emoji"
+			"symbol"
+			"Unifont"
+			"Unifont Upper"
+		];
+		emoji = [
+			"Noto Color Emoji"
+		];
+	};
 	# Some programs need SUID wrappers, can be configured further or are
 	# started in user sessions.
 	programs.mtr.enable = true;
