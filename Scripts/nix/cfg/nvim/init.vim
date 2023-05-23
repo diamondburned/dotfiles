@@ -148,6 +148,17 @@ if exists('g:started_by_firenvim')
 	" let g:nvim_tree_auto_open = 0
 endif
 
+"I fucking hate it when Nvim makes things harder than they need to be.
+"See https://github.com/vhakulinen/gnvim/issues/97#issuecomment-536731701.
+function! s:gnvimInit()
+	if get(v:event, "chan") == 1
+		colorscheme lunaperche
+		set guifont=Monospace\ 13
+		set linespace=2
+	endif
+endfunction
+autocmd UIEnter * call s:gnvimInit()
+
 "Nvim Tree configs"
 hi NvimTreeCursorLine ctermbg=8
 hi NvimTreeFolderName ctermfg=NONE

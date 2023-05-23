@@ -688,10 +688,14 @@ in {
 				extraPkgs = pkgs: with pkgs; [ gamescope ];
 			})
 
-			xelfviewer
+			# xelfviewer
 			# (import <nixpkgs_shotcut> {}).shotcut
-			avidemux
-			kdenlive
+			(gnvim.overrideAttrs (old: {
+				buildCommand = old.buildCommand + ''
+					ln -s ${nodePackages.neovim}/bin/neovim-node-host $out/bin/nvim-node
+					makeWrapper ${python3.interpreter} $out/bin/nvim-python3 --unset PYTHONPATH
+				'';
+			}))
 
 			# Browsers
 			# google-chrome
@@ -856,7 +860,7 @@ in {
 					enable_semantic_tokens = true;
 				};
 				"fontconfig/fonts.conf".source = ./cfg/fontconfig.xml;
-				# "nvim/init.vim".source = ./cfg/nvimrc;
+			 	"nvim/init.vim".source = ./cfg/nvim/init.vim;
 				"autostart/autostart.desktop".text = utils.mkDesktopFile {
 					name = "autostart-init";
 					exec = ./bin/autostart;
