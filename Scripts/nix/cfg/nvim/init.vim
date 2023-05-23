@@ -122,8 +122,8 @@ let g:material_terminal_italics = 1
 let g:material_theme_style='lighter'
 set background=dark
 
-"Transparent background"
-hi Normal guibg=NONE ctermbg=NONE
+"Transparent background in TUI"
+hi Normal ctermbg=NONE
 
 "Tweaks"
 filetype plugin indent on
@@ -152,7 +152,6 @@ endif
 "See https://github.com/vhakulinen/gnvim/issues/97#issuecomment-536731701.
 function! s:gnvimInit()
 	if get(v:event, "chan") == 1
-		colorscheme lunaperche
 		set guifont=Monospace\ 13
 		set linespace=2
 	endif
@@ -293,42 +292,51 @@ lua << EOF
 	}
 EOF
 
+" backgroundColor = "#1D1D1D";
+" foregroundColor = "#FFFFFF";
+" palette = [
+" 	0  "#272224" "#FF473D" "#3DCCB2" "#FF9600"
+" 	4  "#3B7ECB" "#F74C6D" "#00B5FC" "#3E3E3E"
+"
+" 	8  "#52494C" "#FF6961" "#85E6D4" "#FFB347"
+" 	12 "#779ECB" "#F7A8B8" "#55CDFC" "#EEEEEC"
+" ];
 "Custom colors"
-hi TabLine     cterm=NONE ctermfg=15 ctermbg=NONE
-hi TabLineSel  ctermbg=15 ctermfg=0
-hi TabLineFill cterm=NONE
+hi Normal guibg=#1D1D1D
 
-hi Todo     ctermbg=14
-hi Search   ctermbg=14   ctermfg=0
-hi SpellBad ctermbg=NONE cterm=undercurl guisp=#FF6961
+hi TabLine     cterm=NONE ctermfg=15 ctermbg=NONE  gui=NONE guifg=#EEEEEC guibg=NONE
+hi TabLineSel  ctermbg=15 ctermfg=0                guibg=#EEEEEC guifg=#272224
+hi TabLineFill cterm=NONE                          gui=NONE
+
+hi Todo     ctermbg=14                   guibg=#55CDFC
+hi Search   ctermbg=14   ctermfg=0       guibg=#55CDFC guifg=#272224
+hi SpellBad ctermbg=NONE cterm=undercurl guisp=#FF6961 
 
 hi StatusLine   ctermfg=5
 hi StatusLineNC ctermfg=13
 
-hi Special     ctermfg=15
-hi SpecialChar ctermfg=5
-hi Comment     ctermfg=4
-hi Constant    ctermfg=15
-hi String      ctermfg=13
-hi Number      ctermfg=13
-hi Boolean     ctermfg=13
-hi Identifier  ctermfg=15
-hi Function    ctermfg=14
-hi Statement   ctermfg=6
-hi Operator    ctermfg=12
+hi Special     ctermfg=15 guifg=#EEEEEC
+hi SpecialChar ctermfg=5  guifg=#F74C6D
+hi Comment     ctermfg=4  guifg=#3B7ECB
+hi Constant    ctermfg=15 guifg=#EEEEEC
+hi String      ctermfg=13 guifg=#F7A8B8
+hi Number      ctermfg=13 guifg=#F7A8B8
+hi Boolean     ctermfg=13 guifg=#F7A8B8
+hi Identifier  ctermfg=15 guifg=#EEEEEC
+hi Function    ctermfg=14 guifg=#55CDFC
+hi Statement   ctermfg=6  guifg=#00B5FC
+hi Operator    ctermfg=12 guifg=#779ECB
 
-hi Type ctermfg=2
+hi Type ctermfg=2 guifg=#3DCCB2
 
-hi SignColumn   ctermbg=NONE
-hi EndOfBuffer  ctermfg=7
-hi QuickFixLine cterm=reverse
+hi SignColumn   ctermbg=NONE  guibg=NONE
+hi EndOfBuffer  ctermfg=7     guifg=#3E3E3E
+hi QuickFixLine cterm=reverse gui=reverse
 
-"Change NERDTree's colors"
-hi Directory     ctermfg=14
-hi NERDTreeFlags ctermfg=6
+hi Directory ctermfg=14 guifg=#55CDFC
 
 "NERDTree executable highlight but also something else"
-hi Title ctermfg=10
+hi Title ctermfg=10 guifg=#85E6D4
 
 "Custom negative number highlighting"
 syntax match negativeNumber '[-+]\d\+\(\.\d*\)\?'
@@ -340,8 +348,8 @@ set guicursor+=i-c-ci-ve:ver25
 set guicursor+=r-cr-o:hor20
 
 "Change completion colors"
-hi Pmenu    ctermfg=15 ctermbg=8
-hi PmenuSel ctermfg=13 ctermbg=0
+hi Pmenu    ctermfg=15 ctermbg=8 guifg=#EEEEEC guibg=#52494C
+hi PmenuSel ctermfg=13 ctermbg=0 guifg=#F7A8B8 guibg=#272224
 
 "Extra Go colors"
 "hi goParamName       ctermfg=15

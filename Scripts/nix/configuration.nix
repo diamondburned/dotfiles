@@ -693,7 +693,9 @@ in {
 			(gnvim.overrideAttrs (old: {
 				buildCommand = old.buildCommand + ''
 					ln -s ${nodePackages.neovim}/bin/neovim-node-host $out/bin/nvim-node
-					makeWrapper ${python3.interpreter} $out/bin/nvim-python3 --unset PYTHONPATH
+					wrapProgram $out/bin/gnvim \
+						--prefix PATH : $out/bin \
+						--prefix PATH : ${nodejs_18}/bin
 				'';
 			}))
 
