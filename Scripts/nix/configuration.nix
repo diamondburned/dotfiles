@@ -716,14 +716,7 @@ in {
 
 			# xelfviewer
 			# (import <nixpkgs_shotcut> {}).shotcut
-			(gnvim.overrideAttrs (old: {
-				buildCommand = old.buildCommand + ''
-					ln -s ${nodePackages.neovim}/bin/neovim-node-host $out/bin/nvim-node
-					wrapProgram $out/bin/gnvim \
-						--prefix PATH : $out/bin \
-						--prefix PATH : ${nodejs_18}/bin
-				'';
-			}))
+			gnvim
 
 			# Browsers
 			# google-chrome
