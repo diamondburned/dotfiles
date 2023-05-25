@@ -11,6 +11,7 @@ let nurOverlay =
 		overlays = [
 			# TODO: move the massive overlays list to a separate file and import them to all of our
 			# Nixpkgs.
+			(import ./overrides-all.nix)
 			(import ./packages/linux/overlay.nix)
 			(import ./packages.nix)
 			(nurOverlay)
@@ -42,6 +43,7 @@ in {
 		})
 		(nurOverlay)
 		(import ./overrides.nix)
+		(import ./overrides-all.nix)
 		(import ./packages/linux/overlay.nix)
 		(import ./packages.nix)
 	];
