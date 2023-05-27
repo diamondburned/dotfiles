@@ -716,7 +716,7 @@ in {
 
 			# xelfviewer
 			# (import <nixpkgs_shotcut> {}).shotcut
-			gnvim
+			# gnvim
 
 			# Browsers
 			# google-chrome
