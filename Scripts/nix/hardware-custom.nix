@@ -266,14 +266,6 @@ in {
 	# 	tertiary = {
 	# 		device = "/dev/disk/by-uuid/ecd642fd-9c6e-40b0-a43a-ff05bb2b671c";
 	# 	};
-	# };
-
-	environment.etc."crypttab" = {
-		enable = true;
-		text = ''
-			tertiary UUID=ecd642fd-9c6e-40b0-a43a-ff05bb2b671c none nofail,noauto
-		'';
-	};
 
 	# Powertop is bad because of its aggressive power saving.
 	powerManagement.powertop.enable = false;
