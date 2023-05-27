@@ -166,6 +166,8 @@ in {
 
 	hardware.steam-hardware.enable = true;
 
+	services.fwupd.enable = true;
+
 	# Undervolting.
 	# services.undervolt = {
 	# 	enable   = true;
