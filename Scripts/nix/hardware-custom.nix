@@ -40,6 +40,7 @@ in {
 		# "${blurcam}"
 		./cfg/bluetooth-hack
 		./cfg/secureboot
+		./cfg/u2f
 	];
 
 	# services.blurcam = {
