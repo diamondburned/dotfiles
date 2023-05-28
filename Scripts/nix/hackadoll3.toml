@@ -2,7 +2,6 @@
  nixpkgs_unstable = "github:NixOS/nixpkgs nixos-unstable"
  nixpkgs_unstable_older = "github:NixOS/nixpkgs 1b1f50645af2a70dc93ea"
  nixpkgs_unstable_newer = "github:NixOS/nixpkgs nixos-unstable"
- home-manager_21_11 = "github:nix-community/home-manager release-22.11"
  home-manager_unstable = "github:nix-community/home-manager master"
 
 [global.aliases]
@@ -25,6 +24,7 @@
  nixpkgs_gradience = "github:foo-dogsquared/nixpkgs add-gradience-app"
  nixpkgs_shotcut = "github:MatthewCroughan/nixpkgs 6c3dbb326eeff83b11d7cb353c3cead30820e373"
  nix-wayland = "github:nix-community/nixpkgs-wayland master"
+ lanzaboote = "github:nix-community/lanzaboote master"
  prismlauncher = "github:PrismLauncher/PrismLauncher master"
  unstable = "https://nixos.org/channels/nixos-unstable"
  nur = "github:nix-community/NUR master"

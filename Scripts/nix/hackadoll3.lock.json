@@ -68,6 +68,10 @@
       "url": "https://github.com/nix-community/home-manager/archive/f9edbedaf015013eb35f8caacbe0c9666bbc16af.tar.gz",
       "store_hash": "93px0kqyxnxmjpbv4f19myaryzny9b1y"
     },
+    "github:nix-community/lanzaboote master": {
+      "url": "https://github.com/nix-community/lanzaboote/archive/e9003f12e63588736dde12acf95a4d0361b215e5.tar.gz",
+      "store_hash": "46q97n8ir3w7pmbzdkjgdb0hfajiyq1z"
+    },
     "github:nix-community/nixpkgs-wayland master": {
       "url": "https://github.com/nix-community/nixpkgs-wayland/archive/5097457af8e9dcf45a68fa892716919ad28e545a.tar.gz",
       "store_hash": "mlr1hdzy6b38nj6khsy0a7lnf1bl76vq"

@@ -178,8 +178,8 @@ in {
 		MaxRetentionSec=3month
 	'';
 
-	# Use the systemd-boot EFI boot loader.
-	boot.loader.systemd-boot.enable = true;
+	# systemd-boot not used. See cfg/secureboot.
+	# boot.loader.systemd-boot.enable = true;
 	boot.loader.systemd-boot.configurationLimit = 25;
 	boot.loader.efi.canTouchEfiVariables = true;
 

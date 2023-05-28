@@ -9,16 +9,6 @@
       "path": "/nix/store/f8k2riglpzgd1g1i2505s37h5cw1f8qn-bonito-tmp-home-manager_unstable/bonito-tmp-home-manager_unstable"
     }
   },
-  "bonito:home-manager_21_11": {
-    "from": {
-      "type": "indirect",
-      "id": "home-manager_21_11"
-    },
-    "to": {
-      "type": "path",
-      "path": "/nix/store/93px0kqyxnxmjpbv4f19myaryzny9b1y-bonito-tmp-home-manager_unstable/bonito-tmp-home-manager_unstable"
-    }
-  },
   "bonito:home-manager_unstable": {
     "from": {
       "type": "indirect",

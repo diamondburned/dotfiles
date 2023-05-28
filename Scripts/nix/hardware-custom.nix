@@ -39,6 +39,7 @@ in {
 	imports = [
 		# "${blurcam}"
 		./cfg/bluetooth-hack
+		./cfg/secureboot
 	];
 
 	# services.blurcam = {
@@ -165,8 +166,6 @@ in {
 	services.blueman.enable = true;
 
 	hardware.steam-hardware.enable = true;
-
-	services.fwupd.enable = true;
 
 	# Undervolting.
 	# services.undervolt = {
