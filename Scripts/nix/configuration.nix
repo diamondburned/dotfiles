@@ -709,10 +709,6 @@ in {
 			blackbox-terminal
 			evolutionWithPlugins
 			gamescope
-			(steam-run)
-			(steam.override {
-				extraPkgs = pkgs: with pkgs; [ gamescope ];
-			})
 
 			# xelfviewer
 			# (import <nixpkgs_shotcut> {}).shotcut
@@ -833,6 +829,10 @@ in {
 			# prismlauncher
 			# osu-wine
 			# osu-wine-realistik
+			(steam-run)
+			(steam.override {
+				extraPkgs = pkgs: with pkgs; [ gamescope ];
+			})
 
 			# GNOME things
 			xfce.thunar
