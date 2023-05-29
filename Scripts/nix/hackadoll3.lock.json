@@ -2,87 +2,87 @@
   "channels": {
     "github:MatthewCroughan/nixpkgs 6c3dbb326eeff83b11d7cb353c3cead30820e373": {
       "url": "https://github.com/MatthewCroughan/nixpkgs/archive/6c3dbb326eeff83b11d7cb353c3cead30820e373.tar.gz",
-      "store_hash": "xjllv1kmbmww13lh3ycgwkaj0v6m5kks"
+      "store_hash": "4144dqvwpxz7bz3ryahg8k0b1cknx7w8"
     },
     "github:NixOS/nixpkgs 1b1f50645af2a70dc93ea": {
       "url": "https://github.com/NixOS/nixpkgs/archive/1b1f50645af2a70dc93ea.tar.gz",
-      "store_hash": "9mzkgbpysbyi6hpccw6xpkc59cziyb4w"
+      "store_hash": "h03v54ixmrci80izv77sdh4ia8i8x9k7"
     },
     "github:NixOS/nixpkgs 26c6895e1005b3e4f6dfe0d16afbd1f12d0a054c": {
       "url": "https://github.com/NixOS/nixpkgs/archive/26c6895e1005b3e4f6dfe0d16afbd1f12d0a054c.tar.gz",
-      "store_hash": "bzb6wgp4qnr8gaafzffi2za58d8bli86"
+      "store_hash": "0qfn05smfxljrpkg7c1v03g92fcgjrif"
     },
     "github:NixOS/nixpkgs 757b822": {
       "url": "https://github.com/NixOS/nixpkgs/archive/757b822.tar.gz",
-      "store_hash": "6a39m30pxbl8b5kab4cfp0q3dxprymah"
+      "store_hash": "vqp6jn96k441jykpiz5nb8q8zpgb8kic"
     },
     "github:NixOS/nixpkgs b7a6fde153d": {
       "url": "https://github.com/NixOS/nixpkgs/archive/b7a6fde153d.tar.gz",
-      "store_hash": "7rrljz5qwcj6z7x122zrf7y3gmjqaxb6"
+      "store_hash": "vdx9phsmqg92gk6id5npjbdcgb07f0f5"
     },
     "github:NixOS/nixpkgs c97e777ff06": {
       "url": "https://github.com/NixOS/nixpkgs/archive/c97e777ff06.tar.gz",
-      "store_hash": "y7a2fv7b6lxn227cbnpld5k89jzdncra"
+      "store_hash": "rs7h08wp5gb889lnv9l5vn1sfw9lgyjw"
     },
     "github:NixOS/nixpkgs d8404059b21": {
       "url": "https://github.com/NixOS/nixpkgs/archive/d8404059b21.tar.gz",
-      "store_hash": "kgbddn9xjsy81zjgimvkgr14q04mn8dr"
+      "store_hash": "8vb292q9qd9wgmfpnk5y6anamnl4xd0c"
     },
     "github:NixOS/nixpkgs d99608265db4f3c3b769fd2f4d49fb358fbb3172": {
       "url": "https://github.com/NixOS/nixpkgs/archive/d99608265db4f3c3b769fd2f4d49fb358fbb3172.tar.gz",
-      "store_hash": "05g6nmj7k3sh4bb38h7yva01hmm232y9"
+      "store_hash": "2z0fjwqkjijlbxx3sivzb86590qrw7bv"
     },
     "github:NixOS/nixpkgs nixos-21.11": {
       "url": "https://github.com/NixOS/nixpkgs/archive/eabc38219184cc3e04a974fe31857d8e0eac098d.tar.gz",
-      "store_hash": "scyqwfh1jlhxq88ni8jxxlicx312pp4f"
+      "store_hash": "ccb69s0aqifdg0z3a67fbwyayb0g7ikj"
     },
     "github:NixOS/nixpkgs nixos-unstable": {
       "url": "https://github.com/NixOS/nixpkgs/archive/c8018361fa1d1650ee8d4b96294783cf564e8a7f.tar.gz",
-      "store_hash": "lp5b28hbyn1g51162bx13742y0x4ghza"
+      "store_hash": "zv125fa1jq0pr07j822pgwpjw7nbydx4"
     },
     "github:NixOS/nixpkgs staging": {
       "url": "https://github.com/NixOS/nixpkgs/archive/2f8e6f3d33d73190ac8bebb4b4c94bfdf59c904d.tar.gz",
-      "store_hash": "zqk59c9i6zxzwp91rsiy8xbjv020qrkz"
+      "store_hash": "20mi2zd18w7w3qhj0hppyjzi0mnhm0w2"
     },
     "github:PrismLauncher/PrismLauncher master": {
       "url": "https://github.com/PrismLauncher/PrismLauncher/archive/master.tar.gz",
-      "store_hash": "v9msd97qxb1w4kyqcxhxh7li2f2k8cm4"
+      "store_hash": "3k35vbyhhw7n2yb2h6q0fjm3jvc7n03n"
     },
     "github:diamondburned/nixpkgs 3e9725a365e": {
       "url": "https://github.com/diamondburned/nixpkgs/archive/3e9725a365e.tar.gz",
-      "store_hash": "nfhp4psnyiana84zicakg9iwa5zb17ig"
+      "store_hash": "1pmc1ipjzxc98r81k10wvbgar0xpqdzc"
     },
     "github:foo-dogsquared/nixpkgs add-gradience-app": {
       "url": "https://github.com/foo-dogsquared/nixpkgs/archive/9e8daec62f855bff3ec58d5ebdca4aee8ef7ec6e.tar.gz",
-      "store_hash": "nb11mf53a37m68x73sg2qvi3gz8yl0wa"
+      "store_hash": "ipf95sg2rzn12lv1b79fsbqy90jyr7as"
     },
     "github:nix-community/NUR master": {
       "url": "https://github.com/nix-community/NUR/archive/e1452cb657eafdcc699c30bd85383f2488de8eb9.tar.gz",
-      "store_hash": "pgah0b81jdh860aidavvz6rzcvnl3sh0"
+      "store_hash": "m5zs2v8shjzjpmzdwwyahvls8y5y4hl5"
     },
     "github:nix-community/home-manager master": {
       "url": "https://github.com/nix-community/home-manager/archive/d82c9af8175878a461a0fdf914e67cc446664570.tar.gz",
-      "store_hash": "f8k2riglpzgd1g1i2505s37h5cw1f8qn"
+      "store_hash": "0vfj0sks7flf9ym874j32b0d7n8w8sc4"
     },
     "github:nix-community/home-manager release-22.11": {
       "url": "https://github.com/nix-community/home-manager/archive/f9edbedaf015013eb35f8caacbe0c9666bbc16af.tar.gz",
-      "store_hash": "93px0kqyxnxmjpbv4f19myaryzny9b1y"
+      "store_hash": "0ah5iyb24mvcjmz4gwc6s50siysc81lm"
     },
     "github:nix-community/lanzaboote master": {
       "url": "https://github.com/nix-community/lanzaboote/archive/e9003f12e63588736dde12acf95a4d0361b215e5.tar.gz",
-      "store_hash": "46q97n8ir3w7pmbzdkjgdb0hfajiyq1z"
+      "store_hash": "x1j42hrfs6x5xhfzhd801x37dk47j3zr"
     },
     "github:nix-community/nixpkgs-wayland master": {
       "url": "https://github.com/nix-community/nixpkgs-wayland/archive/5097457af8e9dcf45a68fa892716919ad28e545a.tar.gz",
-      "store_hash": "mlr1hdzy6b38nj6khsy0a7lnf1bl76vq"
+      "store_hash": "7ajj5c7fzdg3hja1w6zfb3r7j03gnmci"
     },
     "github:puffnfresh/nixpkgs pkgs/obs-backgroundremoval": {
       "url": "https://github.com/puffnfresh/nixpkgs/archive/08fc3fa6c22bd8ebbb4adadc75fb2dd44c535b92.tar.gz",
-      "store_hash": "b6l7a59asyjqyylrxq6i00md31fdj0id"
+      "store_hash": "wm1c1n4p83nzvlsghyfqz9f41bhfh4wm"
     },
     "https://nixos.org/channels/nixos-unstable": {
       "url": "https://nixos.org/channels/nixos-unstable",
-      "store_hash": "zkjnbwic1lhkb488da6mbrqv5rxpxa3q"
+      "store_hash": "bqw9hr5aqycqfdzhvkrdby7kx65nqid9"
     }
   }
 }
