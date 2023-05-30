@@ -701,7 +701,6 @@ in {
 		]) ++ (with pkgs.nixpkgs_21_11; [
 
 		]) ++ (with pkgs.nixpkgs_unstable; [
-			# tdesktop
 			# (gamescope)
 
 		]) ++ (with pkgs.nixpkgs_unstable_real; [
@@ -803,6 +802,7 @@ in {
 			# # zoom-us
 			discord
 			gtkcord4
+			tdesktop
 			# gotktrix
 			# # fractal
 
