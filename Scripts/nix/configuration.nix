@@ -742,6 +742,12 @@ in {
 			fcitx5-configtool
 			# gatttool
 
+			# Force rm to use rmtrash.
+			rmtrash
+			(pkgs.writeShellScriptBin "rm" ''
+				exec ${rmtrash}/bin/rmtrash --forbid-root=ask-forbid "$@"
+			'')
+
 			# Development tools
 			sommelier
 			dos2unix

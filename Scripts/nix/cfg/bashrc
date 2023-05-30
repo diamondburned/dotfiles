@@ -566,19 +566,13 @@ _shell_calc() {
 }
 
 # Because I'm careless.
-rm() {
-	[[ $1 == "-"* ]] && {
-		echo "Stop using flags!"
-		return
-	}
-
-	gio trash "$@" 2> /dev/null && return
-
-	read -p "gio failed, remove without trash? (y/N) " answ
-	[[ $answ != "y" ]] && return
-
-	command rm -rf "$@"
-}
+# rm() {
+# 	command -v rmtrash &> /dev/null || {
+# 		echo 'rmtrash not found. Try using `command rm`.'
+# 		return
+# 	}
+# 	command rmtrash --forbid-root=ask-forbid "$@"
+# }
 
 # refx restarts PulseEffects.
 refx() {
