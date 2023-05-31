@@ -724,6 +724,7 @@ in {
 			gnome.pomodoro
 			gnomeExtensions.gsconnect
 			gnomeExtensions.brightness-control-using-ddcutil
+			gnomeExtensions.search-light
 			keepassxc
 			# gimp-with-plugins
 			gimp
