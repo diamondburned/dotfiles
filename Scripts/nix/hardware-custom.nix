@@ -122,7 +122,7 @@ in {
 
 	# Refer to unstable.nix.
 	# boot.kernelPackages = pkgs.nixpkgs_unstable.linuxKernel.packages.linux_xanmod_latest;
-	boot.kernelPackages = pkgs.nixpkgs_unstable_real.linuxPackages_latest;
+	boot.kernelPackages = pkgs.linuxPackages_latest;
 	# boot.kernelPackages = pkgs.linuxPackages_latest;
 	# boot.kernelPackages = pkgs.linuxPackages-xanmod;
 
@@ -130,6 +130,11 @@ in {
 	# fucking Alder Lake CPU.
 	# boot.kernelPackages = with pkgs.nixpkgs_unstable;
 	# 	linuxPackagesFor linux_xanmod_latest-lto.x86_64-v3;
+
+	hardware.firmware = with pkgs; [
+		alsa-firmware
+		sof-firmware
+	];
 
 	services.earlyoom = {
 		enable = true;

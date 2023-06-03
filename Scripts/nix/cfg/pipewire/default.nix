@@ -46,10 +46,15 @@ in {
 		# https://gitlab.gnome.org/GNOME/gnome-shell/-/commit/d32c0348.
 		package = pkgs.nixpkgs_unstable_real.pipewire;
 
-		alsa.enable = false;
-		alsa.support32Bit = false;
+		alsa.enable = true;
+		alsa.support32Bit = true;
 		jack.enable = true;
 		pulse.enable = true;
+
+		wireplumber = {
+			enable = true;
+			package = pkgs.nixpkgs_unstable_real.wireplumber;
+		};
 
 		# config.pipewire = {
 		# 	"context.properties" = {
