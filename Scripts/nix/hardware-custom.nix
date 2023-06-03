@@ -229,7 +229,7 @@ in {
 	# };
 
 	boot.kernel.sysctl = {
-		"vm.swappiness" = lib.mkForce 60;
+		"vm.swappiness" = lib.mkForce 80;
 	};
 
 	# Tablet drivers.

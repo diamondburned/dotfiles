@@ -713,6 +713,9 @@ in {
 			# xelfviewer
 			# (import <nixpkgs_shotcut> {}).shotcut
 			# gnvim
+			(steam.override {
+				extraPkgs = pkgs: with pkgs; [ mangohud ];
+			})
 
 			# Browsers
 			# google-chrome
@@ -726,6 +729,7 @@ in {
 			gnomeExtensions.gsconnect
 			gnomeExtensions.brightness-control-using-ddcutil
 			gnomeExtensions.search-light
+			gnomeExtensions.rounded-window-corners
 			keepassxc
 			# gimp-with-plugins
 			gimp
@@ -839,10 +843,6 @@ in {
 			# prismlauncher
 			# osu-wine
 			# osu-wine-realistik
-			(steam-run)
-			(steam.override {
-				extraPkgs = pkgs: with pkgs; [ gamescope ];
-			})
 
 			# GNOME things
 			xfce.thunar

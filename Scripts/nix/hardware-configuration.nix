@@ -31,7 +31,7 @@
 	};
 
 	swapDevices = [
-		{ device = "/.swapfile"; size = 32 * 1024; }
+		{ device = "/dev/nvme1n1p3"; randomEncryption = true; }
 	];
 
 	powerManagement.cpuFreqGovernor = lib.mkDefault "powersave";
