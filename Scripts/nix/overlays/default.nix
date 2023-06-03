@@ -24,7 +24,6 @@ let nurOverlay =
 	nixpkgs_unstable_real = import <unstable> nixpkgsOpts;
 	nixpkgs_unstable_newer = import <nixpkgs_unstable_newer> nixpkgsOpts;
 	nixpkgs_unstable_older = import <nixpkgs_unstable_older> nixpkgsOpts;
-	nixpkgs_pipewire_0_3_57 = import <nixpkgs_pipewire_0_3_57> nixpkgsOpts;
 	nixpkgs_gradience = import <nixpkgs_gradience> nixpkgsOpts;
 
 in {
@@ -38,7 +37,6 @@ in {
 				nixpkgs_unstable_real
 				nixpkgs_unstable_newer
 				nixpkgs_unstable_older
-				nixpkgs_pipewire_0_3_57
 				nixpkgs_gradience;
 		})
 		(nurOverlay)

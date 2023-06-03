@@ -70,7 +70,6 @@ in {
 		<home-manager/nixos>
 		./hardware-configuration.nix
 		./hardware-custom.nix
-		./unstable.nix
 		./overlays
 		./overlays/services.nix
 		./secrets
@@ -78,7 +77,6 @@ in {
 		./cfg/udev
 		./cfg/nokbd
 		# ./cfg/wayfire
-		./cfg/pipewire
 		./cfg/localhost
 		./cfg/keyd
 		./cfg/avahi
@@ -257,7 +255,7 @@ in {
 		# nix-index-update
 
 		# Utilities
-		# htop
+		htop
 		git
 		compsize
 
@@ -418,6 +416,7 @@ in {
 	environment.gnome.excludePackages = with pkgs; with pkgs.gnome; [
 		gnome-contacts
 		gnome-initial-setup
+		gnome-calendar
 		epiphany
 		yelp
 		geary
@@ -482,11 +481,13 @@ in {
 		platformTheme = "gnome";
 	};
 
-	# xdg.portal = {
-	# 	enable = true;
-	# 	# extraPortals = with pkgs; [ xdg-desktop-portal-gtk ];
-	# 	gtkUsePortal = true;
-	# };
+	xdg.portal = {
+		enable = true;
+		extraPortals = with pkgs; [
+			# xdg-desktop-portal-gtk
+			xdg-desktop-portal-gnome
+		];
+	};
 
 	# Enable PAM user environments for GDM.
 	security.pam.services.gdm-password.text = ''
@@ -731,7 +732,6 @@ in {
 			git-crypt
 			gnupg
 			gnuplot
-			intiface-cli
 			drawing
 
 			# System
@@ -740,6 +740,9 @@ in {
 			blueberry
 			libcanberra-gtk3
 			fcitx5-configtool
+			fcitx5-gtk
+			wl-clipboard
+			playerctl
 			# gatttool
 
 			# Force rm to use rmtrash.

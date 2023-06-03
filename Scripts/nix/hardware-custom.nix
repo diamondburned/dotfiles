@@ -88,7 +88,6 @@ in {
 			libva
 			libva-utils
 			vaapiIntel
-			pipewire.lib
 		];
 	};
 
@@ -370,4 +369,6 @@ in {
 	# 		value = "-10";
 	# 	}
 	# ];
+
+	sound.enable = true;
 }
