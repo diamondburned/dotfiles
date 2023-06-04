@@ -31,7 +31,14 @@
 	};
 
 	swapDevices = [
-		{ device = "/dev/nvme1n1p3"; randomEncryption = true; }
+		{
+			device = "/dev/disk/by-partuuid/44208e84-322c-4cac-ac72-30a747783df6";
+			randomEncryption = {
+				enable = true;
+				cipher = "aes-xts-plain64";
+				keySize = 256;
+			};
+		}
 	];
 
 	powerManagement.cpuFreqGovernor = lib.mkDefault "powersave";

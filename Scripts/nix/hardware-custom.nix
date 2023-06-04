@@ -59,6 +59,11 @@ in {
 		# https://01.org/linuxgraphics/gfx-docs/drm/admin-guide/laptops/lg-laptop.html
 		"w /sys/devices/platform/lg-laptop/battery_care_limit - - - - 100"
 	];
+	# Supposedly allow the fan to ramp up to 100%.
+	# We can't change this after boot for some reason.
+	boot.initrd.postMountCommands = ''
+		echo 1 > /sys/devices/platform/lg-laptop/fan_mode
+	'';
 
 	# Do not suspend on lid close.
 	# services.logind.lidSwitch = "ignore";
@@ -229,7 +234,7 @@ in {
 	# };
 
 	boot.kernel.sysctl = {
-		"vm.swappiness" = lib.mkForce 80;
+		"vm.swappiness" = lib.mkForce 90;
 	};
 
 	# Tablet drivers.
