@@ -32,21 +32,25 @@
       "url": "https://github.com/NixOS/nixpkgs/archive/d99608265db4f3c3b769fd2f4d49fb358fbb3172.tar.gz",
       "store_hash": "2z0fjwqkjijlbxx3sivzb86590qrw7bv"
     },
+    "github:NixOS/nixpkgs fd9d979ab67581f": {
+      "url": "https://github.com/NixOS/nixpkgs/archive/fd9d979ab67581f.tar.gz",
+      "store_hash": "clyb1cwbnkcl9kiac0b8ag8caic0q2y3"
+    },
     "github:NixOS/nixpkgs nixos-21.11": {
       "url": "https://github.com/NixOS/nixpkgs/archive/eabc38219184cc3e04a974fe31857d8e0eac098d.tar.gz",
       "store_hash": "ccb69s0aqifdg0z3a67fbwyayb0g7ikj"
     },
     "github:NixOS/nixpkgs nixos-unstable": {
-      "url": "https://github.com/NixOS/nixpkgs/archive/e635192892f5abbc2289eaac3a73cdb249abaefd.tar.gz",
-      "store_hash": "1lkawlj17p0q11hci0r9wjr32nhzg6p2"
+      "url": "https://github.com/NixOS/nixpkgs/archive/7409480d5c8584a1a83c422530419efe4afb0d19.tar.gz",
+      "store_hash": "3jh8fj9mrkil1alspy2rh52lgbf6c4rv"
     },
     "github:NixOS/nixpkgs staging": {
-      "url": "https://github.com/NixOS/nixpkgs/archive/466131b4da804e37b7b58fae1dfbd63510ed9d4f.tar.gz",
-      "store_hash": "6qhq6jk6b1k17831qxvqrh11q9fflwry"
+      "url": "https://github.com/NixOS/nixpkgs/archive/03925ecb5febe87eff4e00b32a66b5cd9a9820ac.tar.gz",
+      "store_hash": "gq4z18vf7nl3fl9svj4qizjv9ivvaivi"
     },
     "github:PrismLauncher/PrismLauncher master": {
       "url": "https://github.com/PrismLauncher/PrismLauncher/archive/master.tar.gz",
-      "store_hash": "zw6mr3hb08177171dphl6lzqsmvw4bfc"
+      "store_hash": "rlvnk3bq72kyn8vi7zbal9w124clvnj7"
     },
     "github:diamondburned/nixpkgs 3e9725a365e": {
       "url": "https://github.com/diamondburned/nixpkgs/archive/3e9725a365e.tar.gz",
@@ -57,24 +61,24 @@
       "store_hash": "lg1cb797x79jx9bd6dmdwwg9x4fnw0sd"
     },
     "github:nix-community/NUR master": {
-      "url": "https://github.com/nix-community/NUR/archive/626b603b70802f0bb780a8bdaf0eda31c3d8f616.tar.gz",
-      "store_hash": "xal8zk8hm9blzgbxp8n105vhq3r9mjv6"
+      "url": "https://github.com/nix-community/NUR/archive/b53d8f8e684ecfad2a730b8c86b1449ef415dd91.tar.gz",
+      "store_hash": "ih8qc87pvh7zjxwgjlzr2fpjqlk8y29g"
     },
     "github:nix-community/home-manager master": {
-      "url": "https://github.com/nix-community/home-manager/archive/29519461834c08395b35f840811faf8c23e3b61c.tar.gz",
-      "store_hash": "cvavh9gx1mxwa94jy3zzg3vv3km1xl98"
+      "url": "https://github.com/nix-community/home-manager/archive/28614ed7a1e3ace824c122237bdc0e5e0b62c5c3.tar.gz",
+      "store_hash": "1297r69xh722g6iw1lrk13zj2rmln12i"
     },
     "github:nix-community/home-manager release-22.11": {
       "url": "https://github.com/nix-community/home-manager/archive/f9edbedaf015013eb35f8caacbe0c9666bbc16af.tar.gz",
       "store_hash": "0ah5iyb24mvcjmz4gwc6s50siysc81lm"
     },
     "github:nix-community/lanzaboote master": {
-      "url": "https://github.com/nix-community/lanzaboote/archive/e422970c1bc3351bb7a20cf6e30e78d975280ed3.tar.gz",
-      "store_hash": "wfa8r28pb454wkllg2rhccpf3acj7jca"
+      "url": "https://github.com/nix-community/lanzaboote/archive/45d04a45d3dfcdee5246f7c0dfed056313de2a61.tar.gz",
+      "store_hash": "9ng69xm929jmx1vn0b0xrrc0lm7c60kq"
     },
     "github:nix-community/nixpkgs-wayland master": {
-      "url": "https://github.com/nix-community/nixpkgs-wayland/archive/217783e46fd199a033af8d488551c77b7019c752.tar.gz",
-      "store_hash": "236cxxzljgpn341zya4rdl9g92y2z2f9"
+      "url": "https://github.com/nix-community/nixpkgs-wayland/archive/c819c52c58b54797bba7d4b6c3224a75a4588473.tar.gz",
+      "store_hash": "6dj11v5jrdrvr67ncyr1cgi0fkdc187k"
     },
     "github:puffnfresh/nixpkgs pkgs/obs-backgroundremoval": {
       "url": "https://github.com/puffnfresh/nixpkgs/archive/08fc3fa6c22bd8ebbb4adadc75fb2dd44c535b92.tar.gz",
@@ -82,7 +86,7 @@
     },
     "https://nixos.org/channels/nixos-unstable": {
       "url": "https://nixos.org/channels/nixos-unstable",
-      "store_hash": "857z405ali4y34ixyqbnmjxzc9wny7n9"
+      "store_hash": "038d6hyg8r7pvc23rm7hyrv6cnng5dl9"
     }
   }
 }

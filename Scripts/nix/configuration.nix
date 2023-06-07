@@ -713,9 +713,6 @@ in {
 			# xelfviewer
 			# (import <nixpkgs_shotcut> {}).shotcut
 			# gnvim
-			(steam.override {
-				extraPkgs = pkgs: with pkgs; [ mangohud ];
-			})
 
 			# Browsers
 			# google-chrome
@@ -779,6 +776,13 @@ in {
 			octave-soft
 			grun
 			# neovim-gtk
+
+			(steam.override {
+				extraPkgs = pkgs: with pkgs; [
+					(mangohud)
+					(pkgs.nixpkgs_unstable_real.callPackage <nixpkgs_pr_230931/pkgs/applications/window-managers/gamescope> {})
+			 	];
+			})
 
 			(wrapNeovimUnstable neovim-unwrapped
 				# Use unstable Neovim with a slightly outdated Nixpkgs because

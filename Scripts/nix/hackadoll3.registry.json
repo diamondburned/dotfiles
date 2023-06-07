@@ -6,7 +6,7 @@
     },
     "to": {
       "type": "path",
-      "path": "/nix/store/cvavh9gx1mxwa94jy3zzg3vv3km1xl98-bonito-J55ciUEAJtRR7sdV-home-manager/bonito-J55ciUEAJtRR7sdV-home-manager"
+      "path": "/nix/store/1297r69xh722g6iw1lrk13zj2rmln12i-bonito-nbiOZ0OUK5vxTNVm-home-manager/bonito-nbiOZ0OUK5vxTNVm-home-manager"
     }
   },
   "bonito:home-manager_unstable": {
@@ -16,7 +16,7 @@
     },
     "to": {
       "type": "path",
-      "path": "/nix/store/cvavh9gx1mxwa94jy3zzg3vv3km1xl98-bonito-J55ciUEAJtRR7sdV-home-manager/bonito-J55ciUEAJtRR7sdV-home-manager"
+      "path": "/nix/store/1297r69xh722g6iw1lrk13zj2rmln12i-bonito-nbiOZ0OUK5vxTNVm-home-manager/bonito-nbiOZ0OUK5vxTNVm-home-manager"
     }
   },
   "bonito:nixos": {
@@ -26,7 +26,7 @@
     },
     "to": {
       "type": "path",
-      "path": "/nix/store/1lkawlj17p0q11hci0r9wjr32nhzg6p2-bonito-Eia97pIsPiQR7iVc-nixpkgs/bonito-Eia97pIsPiQR7iVc-nixpkgs"
+      "path": "/nix/store/3jh8fj9mrkil1alspy2rh52lgbf6c4rv-bonito-HKWDcuMe78IkxPPE-nixpkgs/bonito-HKWDcuMe78IkxPPE-nixpkgs"
     }
   },
   "bonito:nixpkgs": {
@@ -36,7 +36,7 @@
     },
     "to": {
       "type": "path",
-      "path": "/nix/store/1lkawlj17p0q11hci0r9wjr32nhzg6p2-bonito-Eia97pIsPiQR7iVc-nixpkgs/bonito-Eia97pIsPiQR7iVc-nixpkgs"
+      "path": "/nix/store/3jh8fj9mrkil1alspy2rh52lgbf6c4rv-bonito-HKWDcuMe78IkxPPE-nixpkgs/bonito-HKWDcuMe78IkxPPE-nixpkgs"
     }
   },
   "bonito:nixpkgs_unstable": {
@@ -46,7 +46,7 @@
     },
     "to": {
       "type": "path",
-      "path": "/nix/store/1lkawlj17p0q11hci0r9wjr32nhzg6p2-bonito-Eia97pIsPiQR7iVc-nixpkgs/bonito-Eia97pIsPiQR7iVc-nixpkgs"
+      "path": "/nix/store/3jh8fj9mrkil1alspy2rh52lgbf6c4rv-bonito-HKWDcuMe78IkxPPE-nixpkgs/bonito-HKWDcuMe78IkxPPE-nixpkgs"
     }
   },
   "bonito:nixpkgs_unstable_newer": {
@@ -56,7 +56,7 @@
     },
     "to": {
       "type": "path",
-      "path": "/nix/store/1lkawlj17p0q11hci0r9wjr32nhzg6p2-bonito-Eia97pIsPiQR7iVc-nixpkgs/bonito-Eia97pIsPiQR7iVc-nixpkgs"
+      "path": "/nix/store/3jh8fj9mrkil1alspy2rh52lgbf6c4rv-bonito-HKWDcuMe78IkxPPE-nixpkgs/bonito-HKWDcuMe78IkxPPE-nixpkgs"
     }
   },
   "bonito:nixpkgs_unstable_older": {

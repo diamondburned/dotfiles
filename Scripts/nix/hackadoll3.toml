@@ -22,6 +22,7 @@
  nixpkgs_staging = "github:NixOS/nixpkgs staging"
  nixpkgs_gradience = "github:foo-dogsquared/nixpkgs add-gradience-app"
  nixpkgs_shotcut = "github:MatthewCroughan/nixpkgs 6c3dbb326eeff83b11d7cb353c3cead30820e373"
+ nixpkgs_pr_230931 = "github:NixOS/nixpkgs fd9d979ab67581f" # refs/pull/230931
  nix-wayland = "github:nix-community/nixpkgs-wayland master"
  lanzaboote = "github:nix-community/lanzaboote master"
  prismlauncher = "github:PrismLauncher/PrismLauncher master"
