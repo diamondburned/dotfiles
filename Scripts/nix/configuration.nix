@@ -708,7 +708,6 @@ in {
 			spotify
 			blackbox-terminal
 			evolutionWithPlugins
-			gamescope
 
 			# xelfviewer
 			# (import <nixpkgs_shotcut> {}).shotcut
@@ -780,9 +779,10 @@ in {
 			(steam.override {
 				extraPkgs = pkgs: with pkgs; [
 					(mangohud)
-					(pkgs.nixpkgs_unstable_real.callPackage <nixpkgs_pr_230931/pkgs/applications/window-managers/gamescope> {})
+					(import <nixpkgs_pr_230931> {}).gamescope
 			 	];
 			})
+			(import <nixpkgs_pr_230931> {}).gamescope
 
 			(wrapNeovimUnstable neovim-unwrapped
 				# Use unstable Neovim with a slightly outdated Nixpkgs because
