@@ -726,6 +726,8 @@ in {
 			gnomeExtensions.brightness-control-using-ddcutil
 			gnomeExtensions.search-light
 			gnomeExtensions.rounded-window-corners
+			gnomeExtensions.expandable-notifications
+			gnomeExtensions.notification-banner-reloaded
 			keepassxc
 			# gimp-with-plugins
 			gimp
