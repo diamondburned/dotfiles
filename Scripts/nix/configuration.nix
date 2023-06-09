@@ -778,6 +778,7 @@ in {
 			grun
 			# neovim-gtk
 
+			protonup
 			(steam.override {
 				extraPkgs = pkgs: with pkgs; [
 					(mangohud)
