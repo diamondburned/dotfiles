@@ -5,8 +5,7 @@ call plug#begin('~/.vim/bundle')
 Plug 'gioele/vim-autoswap'
 Plug 'kyazdani42/nvim-tree.lua'
 Plug 'antoinemadec/FixCursorHold.nvim'
-Plug 'tomtom/tcomment_vim'
-" Plug 'tpope/vim-commentary'
+Plug 'numToStr/Comment.nvim'
 Plug 'tpope/vim-fugitive'
 Plug 'airblade/vim-gitgutter'
 Plug 'plasticboy/vim-markdown'
@@ -738,3 +737,5 @@ if executable("blueprint-compiler")
 		\ 'allowlist': ['blueprint'],
 		\ })
 endif
+
+lua require('Comment').setup()
