@@ -152,7 +152,7 @@ endif
 "See https://github.com/vhakulinen/gnvim/issues/97#issuecomment-536731701.
 function! s:gnvimInit()
 	if get(v:event, "chan") == 1
-		set guifont=Monospace\ 13
+		set guifont=Monospace\ 11
 		set linespace=2
 	endif
 endfunction
