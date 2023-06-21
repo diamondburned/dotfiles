@@ -399,7 +399,9 @@ syntax sync minlines=100
 "Custom keybinds"
 nmap <Tab> :NvimTreeToggle<CR> <bar> :NvimTreeRefresh<CR>
 nmap <C-_> gcc
+nmap <C-/> gcc
 vmap <C-_> gc<CR>gv
+vmap <C-/> gc<CR>gv
 nmap <C-j> =G
 nnoremap f :F<CR>
 
@@ -738,4 +740,10 @@ if executable("blueprint-compiler")
 		\ })
 endif
 
-lua require('Comment').setup()
+lua << EOF
+	require('Comment').setup({
+		opleader = {
+			line = '<C-/>',
+		},
+	})
+EOF
