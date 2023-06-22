@@ -4,10 +4,10 @@ call plug#begin('~/.vim/bundle')
 
 Plug 'gioele/vim-autoswap'
 Plug 'kyazdani42/nvim-tree.lua'
-Plug 'antoinemadec/FixCursorHold.nvim'
 Plug 'numToStr/Comment.nvim'
 Plug 'tpope/vim-fugitive'
-Plug 'airblade/vim-gitgutter'
+Plug 'lewis6991/gitsigns.nvim'
+" Plug 'airblade/vim-gitgutter'
 Plug 'plasticboy/vim-markdown'
 Plug 'godlygeek/tabular'
 Plug 'bogado/file-line'
@@ -446,12 +446,24 @@ set fillchars=vert:\▏
 " let g:gitgutter_sign_modified='░'
 " let g:gitgutter_sign_removed_first_line='_'
 " let g:gitgutter_sign_modified_removed='_'
-let g:gitgutter_sign_added='+'
-let g:gitgutter_sign_modified='¦'
-let g:gitgutter_sign_removed='-'
-let g:gitgutter_sign_removed_first_line='-'
-let g:gitgutter_sign_modified_removed='-'
-let g:gitgutter_override_sign_column_highlight = 0
+" let g:gitgutter_sign_added='+'
+" let g:gitgutter_sign_modified='¦'
+" let g:gitgutter_sign_removed='-'
+" let g:gitgutter_sign_removed_first_line='-'
+" let g:gitgutter_sign_modified_removed='-'
+" let g:gitgutter_override_sign_column_highlight = 0
+lua << EOF
+require('gitsigns').setup({
+	signs = {
+		add          = { text = '+' },
+		change       = { text = '¦' },
+		delete       = { text = '-' },
+		topdelete    = { text = '-' },
+		changedelete = { text = '-' },
+		untracked    = { text = ' ' },
+	}
+})
+EOF
 
 "245 is a grey-ish shade."
 hi! GitGutterAdd          guibg=NONE ctermbg=NONE guifg=#6c6c6c ctermfg=245
