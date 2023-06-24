@@ -734,6 +734,9 @@ nnoremap K :LspHover<CR>
 command! -nargs=0 Rename LspRename
 command! -nargs=0 ALERename LspRename
 
+"Support the garbage that is PostCSS"
+au BufRead,BufNewFile *.postcss set filetype=postcss
+
 "Support templ"
 au BufRead,BufNewFile *.templ set filetype=templ
 if executable("templ")
