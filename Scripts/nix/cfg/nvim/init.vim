@@ -759,8 +759,5 @@ endif
 
 lua << EOF
 	require('Comment').setup({
-		opleader = {
-			line = '<C-/>',
-		},
 	})
 EOF
