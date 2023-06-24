@@ -622,9 +622,10 @@ execute ale#fix#registry#Add('sql-formatter', 'FixSQLFormatter', ['sql'], 'sql-f
 execute ale#fix#registry#Add('nasmfmt', 'FixNasmfmt', ['nasm'], 'nasmfmt')
 execute ale#fix#registry#Add('denojson', 'FixDenoJSON', ['json'], 'deno fmt for json')
 execute ale#fix#registry#Add('denojsonc', 'FixDenoJSONC', ['jsonc'], 'deno fmt for jsonc')
-execute ale#fix#registry#Add('prettier', 'ale#fixers#prettier#Fix', ['markdown'], 'prettier for astro')
+execute ale#fix#registry#Add('prettier', 'ale#fixers#prettier#Fix', ['markdown'], 'prettier for markdown')
+execute ale#fix#registry#Add('prettier', 'ale#fixers#prettier#Fix', ['postcss'], 'prettier for postcss')
 execute ale#fix#registry#Add('prettier', 'ale#fixers#prettier#Fix', ['astro'], 'prettier for astro')
-execute ale#fix#registry#Add('prettier', 'ale#fixers#prettier#Fix', ['scss'], 'prettier for astro')
+execute ale#fix#registry#Add('prettier', 'ale#fixers#prettier#Fix', ['scss'], 'prettier for scss')
 execute ale#fix#registry#Add('cmark', 'FixCMark', ['markdown'], 'cmark for markdown')
 execute ale#fix#registry#Add('cmark-gfm', 'FixCMarkGFM', ['markdown'], 'cmark-gfm for markdown')
 execute ale#fix#registry#Add('templ', 'FixTempl', ['templ'], 'templ fmt for templ')
@@ -644,6 +645,7 @@ let g:ale_fixers = {
 			\ 'zig':        [ "zigfmt" ],
 			\ 'css':        [ "prettier" ],
 			\ 'scss':       [ "prettier" ],
+			\ 'postcss':    [ "prettier" ],
 			\ 'c':          [ "clang-format" ],
 			\ 'cpp':        [ "uncrustify", "clang-format" ],
 			\ 'sql':        [ "sql-formatter" ],
