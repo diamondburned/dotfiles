@@ -4,14 +4,23 @@
 {
 	imports = [ (modulesPath + "/installer/scan/not-detected.nix") ];
 
+	boot.initrd.systemd.enable = true;
 	boot.initrd.availableKernelModules = [ "xhci_pci" "thunderbolt" "ahci" "nvme" "usb_storage" "sd_mod" "rtsx_pci_sdmmc" ];
 	boot.initrd.kernelModules = [ "dm-snapshot" ];
 	boot.kernelModules = [ "kvm-intel" ];
 	boot.extraModulePackages = [ ];
 
 	boot.initrd.luks.devices = {
-		main-luks.device = "/dev/disk/by-uuid/8cdac4ef-f4ab-466c-a934-0129580f985f";
-		home-luks.device = "/dev/disk/by-uuid/8c741ec0-0ed3-4114-a9ab-e4abe5fc6071";
+		main-luks = {
+			device = "/dev/disk/by-uuid/8cdac4ef-f4ab-466c-a934-0129580f985f";
+			bypassWorkqueues = true;
+			crypttabExtraOpts = ["fido2-device=auto"];
+		};
+		home-luks = {
+			device = "/dev/disk/by-uuid/8c741ec0-0ed3-4114-a9ab-e4abe5fc6071";
+			bypassWorkqueues = true;
+			crypttabExtraOpts = ["fido2-device=auto"];
+		};
 	};
 
 	fileSystems."/" = {

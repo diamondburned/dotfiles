@@ -6,8 +6,6 @@ let
 	};
 in
 {
-	boot.initrd.luks.fido2Support = true;
-
 	services.udev.packages = [ pkgs.yubikey-personalization ];
 	
 	programs.gnupg.agent = {
