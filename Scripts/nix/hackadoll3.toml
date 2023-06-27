@@ -1,6 +1,7 @@
 [global.channels]
  nixpkgs_unstable = "github:NixOS/nixpkgs nixos-unstable"
- nixpkgs_unstable_older = "github:NixOS/nixpkgs 1b1f50645af2a70dc93ea"
+ nixpkgs_unstable_older = "github:NixOS/nixpkgs 7409480d5c"
+ # nixpkgs_unstable_older = "github:NixOS/nixpkgs 1b1f50645af2a70dc93ea"
  nixpkgs_unstable_newer = "github:NixOS/nixpkgs nixos-unstable"
  home-manager_unstable = "github:nix-community/home-manager master"
 
@@ -25,7 +26,7 @@
  nixpkgs_pr_230931 = "github:NixOS/nixpkgs fd9d979ab67581f" # refs/pull/230931
  nix-wayland = "github:nix-community/nixpkgs-wayland master"
  lanzaboote = "github:nix-community/lanzaboote master"
- prismlauncher = "github:PrismLauncher/PrismLauncher master"
+ prismlauncher = "github:PrismLauncher/PrismLauncher develop"
  unstable = "https://nixos.org/channels/nixos-unstable"
  nur = "github:nix-community/NUR master"
 

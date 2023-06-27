@@ -48,7 +48,7 @@ in {
 	# 	output = "";
 	# };
 
-	services.fstrim.enable = true;
+	# services.fstrim.enable = true;
 
 	services.sysprof.enable = true;
 

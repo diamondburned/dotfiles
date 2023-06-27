@@ -17,7 +17,7 @@
 	fileSystems."/" = {
 		device	= "/dev/main/root";
 		fsType	= "btrfs";
-		options = [ "compress=lzo" ];
+		options = [ "discard=async" "compress=lzo" "thread_pool=12" "ssd" ];
 	};
 
 	fileSystems."/home" = {
