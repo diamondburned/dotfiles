@@ -657,6 +657,7 @@ let g:ale_fixers = {
 			\ 'nasm':       [ "nasmfmt" ],
 			\ 'templ':      [  ],
 			\ 'python':     [ "autopep8", "black" ],
+			\ 'proto':      [ "protolint" ],
 			\ 'astro':	    [ "prettier" ],
 			\ 'svelte':     [ "prettier", "prettier_standard", "eslint" ],
 			\ 'haskell':    [ "ormolu" ],
