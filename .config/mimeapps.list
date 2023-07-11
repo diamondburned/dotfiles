@@ -52,6 +52,7 @@ x-scheme-handler/eclipse+command=_nix_store_320d73592p9mwhcfr4zmga4bpp3fh17c-dbe
 video/webm=mpv.desktop
 application/vnd.oasis.opendocument.text=writer.desktop
 video/mp4=mpv.desktop
+text/csv=nvim.desktop
 
 [Added Associations]
 application/zip=org.gnome.FileRoller.desktop;
@@ -122,3 +123,4 @@ audio/x-opus+ogg=mpv.desktop;
 application/x-wine-extension-ini=nvim.desktop;
 application/vnd.ms-excel=calc.desktop;
 image/vnd.microsoft.icon=gimp.desktop;
+text/csv=nvim.desktop;
