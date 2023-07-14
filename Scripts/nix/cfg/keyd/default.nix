@@ -1,8 +1,20 @@
 { pkgs, config, lib, ... }:
 
+let
+	etcFiles =
+		with builtins;
+		with lib;
+		listToAttrs
+			(map
+				(n: {
+					name = "keyd/${replaceStrings [".ini"] [".conf"] n}";
+					value.source = builtins.toPath (./. + "/${n}");
+				})
+				(filter (n: hasSuffix ".ini" n) (attrNames (readDir ./.))));
+in
+
 {
-	environment.etc."keyd/air60.conf".source = ./k_air60.ini;
-	environment.etc."keyd/kcrk7.conf".source = ./k_kcrk7.ini;
+	environment.etc = builtins.trace (builtins.toJSON etcFiles) etcFiles;
 
 	systemd.services.keyd = {
 		enable = true;
