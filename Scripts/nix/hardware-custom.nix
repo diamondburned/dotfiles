@@ -126,7 +126,7 @@ in {
 
 	# Refer to unstable.nix.
 	# boot.kernelPackages = pkgs.nixpkgs_unstable.linuxKernel.packages.linux_xanmod_latest;
-	boot.kernelPackages = pkgs.linuxPackages_latest;
+	boot.kernelPackages = pkgs.linuxPackages;
 	# boot.kernelPackages = pkgs.linuxPackages_latest;
 	# boot.kernelPackages = pkgs.linuxPackages-xanmod;
 
