@@ -126,9 +126,16 @@ in {
 
 	# Refer to unstable.nix.
 	# boot.kernelPackages = pkgs.nixpkgs_unstable.linuxKernel.packages.linux_xanmod_latest;
-	boot.kernelPackages = pkgs.linuxPackages;
+	# boot.kernelPackages = pkgs.linuxPackages;
 	# boot.kernelPackages = pkgs.linuxPackages_latest;
 	# boot.kernelPackages = pkgs.linuxPackages-xanmod;
+	boot.kernelPackages = pkgs.linuxPackages_latest;
+	boot.kernelPatches = [
+		{
+			name = "enable-logitech-hires-scroll";
+			patch = ./overlays/patches/linux-enable-logitech-hires-scroll.patch;
+		}
+	];
 
 	# Use the Linux xanmod kernel with x86-64-v3 and LTO because we're on a
 	# fucking Alder Lake CPU.
