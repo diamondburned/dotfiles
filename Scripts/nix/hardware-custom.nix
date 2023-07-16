@@ -100,7 +100,6 @@ in {
 	boot.kernelModules = [
 		"v4l2loopback"
 		"i2c-dev"
-		"hid_logitech_hidpp"
 		# "ddcci-driver"
 	];
 
@@ -125,17 +124,18 @@ in {
 		# }))
 	];
 
-	# Force the Logitech mouse to use the hidpp driver.
-	boot.extraModprobeConfig = lib.concatStringsSep "\n" [
-		"alias hid:b0003g0001v0000046Dp0000C069 hid_logitech_hidpp"
-	];
-
 	# Refer to unstable.nix.
 	# boot.kernelPackages = pkgs.nixpkgs_unstable.linuxKernel.packages.linux_xanmod_latest;
 	# boot.kernelPackages = pkgs.linuxPackages;
 	# boot.kernelPackages = pkgs.linuxPackages_latest;
 	# boot.kernelPackages = pkgs.linuxPackages-xanmod;
-	boot.kernelPackages = pkgs.nixpkgs_linux_6_1_9.linuxPackages_latest;
+	boot.kernelPackages = pkgs.linuxPackagesFor pkgs.linux_6_3;
+	boot.kernelPatches = [
+		{
+			name = "enable-logitech-hires-scroll";
+			patch = ./overlays/patches/linux-enable-logitech-hires-scroll.patch;
+		}
+	];
 
 	# Use the Linux xanmod kernel with x86-64-v3 and LTO because we're on a
 	# fucking Alder Lake CPU.
