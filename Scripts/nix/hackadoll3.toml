@@ -18,7 +18,9 @@
  override-channels = true
 
 [users.root.channels]
- # nixos = "github:NixOS/nixpkgs 1ffba9f"
+ # This specific commit contains kernel 6.1.9, which doesn't have the patch that
+ # disables hi-res scrolling. We want this.
+ nixpkgs_linux_6_1_9 = "github:NixOS/nixpkgs bafc851daff10fdda5eb6ed068234c46baeb4d0f"
  nixpkgs_21_11 = "github:NixOS/nixpkgs nixos-21.11"
  nixpkgs_staging = "github:NixOS/nixpkgs staging"
  nixpkgs_gradience = "github:foo-dogsquared/nixpkgs add-gradience-app"
