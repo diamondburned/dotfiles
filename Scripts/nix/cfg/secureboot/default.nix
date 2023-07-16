@@ -13,6 +13,7 @@
 		lanzaboote = {
 			enable = true;
 			pkiBundle = "/etc/secureboot";
+			configurationLimit = 15;
 		};
 	};
 

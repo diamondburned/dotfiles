@@ -24,6 +24,10 @@
       "url": "https://github.com/NixOS/nixpkgs/archive/b7a6fde153d.tar.gz",
       "store_hash": "vdx9phsmqg92gk6id5npjbdcgb07f0f5"
     },
+    "github:NixOS/nixpkgs bafc851daff10fdda5eb6ed068234c46baeb4d0f": {
+      "url": "https://github.com/NixOS/nixpkgs/archive/bafc851daff10fdda5eb6ed068234c46baeb4d0f.tar.gz",
+      "store_hash": "87185q58ys2q0dwa6iw7vbrfrr1x5n03"
+    },
     "github:NixOS/nixpkgs c97e777ff06": {
       "url": "https://github.com/NixOS/nixpkgs/archive/c97e777ff06.tar.gz",
       "store_hash": "rs7h08wp5gb889lnv9l5vn1sfw9lgyjw"
@@ -98,7 +102,7 @@
     },
     "https://nixos.org/channels/nixos-unstable": {
       "url": "https://nixos.org/channels/nixos-unstable",
-      "store_hash": "038d6hyg8r7pvc23rm7hyrv6cnng5dl9"
+      "store_hash": "75dsfidy5pgi59c25gajagyylyzlxqyv"
     }
   }
 }

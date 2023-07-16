@@ -25,6 +25,7 @@ let nurOverlay =
 	nixpkgs_unstable_newer = import <nixpkgs_unstable_newer> nixpkgsOpts;
 	nixpkgs_unstable_older = import <nixpkgs_unstable_older> nixpkgsOpts;
 	nixpkgs_gradience = import <nixpkgs_gradience> nixpkgsOpts;
+	nixpkgs_linux_6_1_9 = import <nixpkgs_linux_6_1_9> nixpkgsOpts;
 
 in {
 	nixpkgs.overlays = [
@@ -37,7 +38,8 @@ in {
 				nixpkgs_unstable_real
 				nixpkgs_unstable_newer
 				nixpkgs_unstable_older
-				nixpkgs_gradience;
+				nixpkgs_gradience
+				nixpkgs_linux_6_1_9;
 		})
 		(nurOverlay)
 		(import ./overrides.nix)
