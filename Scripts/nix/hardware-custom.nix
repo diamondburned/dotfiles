@@ -135,6 +135,10 @@ in {
 			name = "enable-logitech-hires-scroll";
 			patch = ./overlays/patches/linux-enable-logitech-hires-scroll.patch;
 		}
+		{
+			name = "";
+			# CONFIG_DYNAMIC_DEBUG
+		}
 	];
 
 	# Use the Linux xanmod kernel with x86-64-v3 and LTO because we're on a
