@@ -134,10 +134,9 @@ in {
 		{
 			name = "enable-logitech-hires-scroll";
 			patch = ./overlays/patches/linux-enable-logitech-hires-scroll.patch;
-		}
-		{
-			name = "";
-			# CONFIG_DYNAMIC_DEBUG
+			extraStructuredConfig = with lib.kernel; {
+				DYNAMIC_DEBUG = yes;
+			};
 		}
 	];
 
