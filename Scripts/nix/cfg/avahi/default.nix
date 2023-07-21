@@ -2,7 +2,7 @@
 
 {
 	services.avahi = {
-		enable = false;
+		enable = true;
 		nssmdns = true;
 		publish = {
 			enable = true;
