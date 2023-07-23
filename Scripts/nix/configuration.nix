@@ -612,6 +612,7 @@ in {
 			# package = pkgs.mpv-next;
 			config = {
 				osd-font = "Sans";
+				osd-status-msg = "\${playback-time/full} / \${duration} (\${percent-pos}%)\\nframe: \${estimated-frame-number} / \${estimated-frame-count}";
 				# profile = "gpu-hq";
 				gpu-api = "auto";
 				gpu-context = "auto";
