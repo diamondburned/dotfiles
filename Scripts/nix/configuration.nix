@@ -724,6 +724,7 @@ in {
 			gnome.polari
 			gnome.pomodoro
 			gnomeExtensions.gsconnect
+			gnomeExtensions.tiling-assistant
 			gnomeExtensions.brightness-control-using-ddcutil
 			gnomeExtensions.search-light
 			gnomeExtensions.rounded-window-corners
@@ -739,6 +740,7 @@ in {
 
 			# System
 			xorg.xhost # dependency for wsudo
+			ddcutil
 			powertop
 			blueberry
 			libcanberra-gtk3
