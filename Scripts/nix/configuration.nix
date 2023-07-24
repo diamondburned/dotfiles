@@ -80,6 +80,7 @@ in {
 		./cfg/localhost
 		./cfg/keyd
 		./cfg/avahi
+		./cfg/gps
 	];
 
 	nixpkgs.config = {
