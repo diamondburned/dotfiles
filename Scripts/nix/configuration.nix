@@ -681,6 +681,9 @@ in {
 			};
 		};
 
+		services.easyeffects.enable = true;
+		programs.dconf.enable = true;
+
 		# home.file.".icons/default/index.theme".text = ''
 		# 	[icon theme]
 		# 	Name=Default
