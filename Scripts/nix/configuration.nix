@@ -437,6 +437,7 @@ in {
 
 	# dbus things
 	services.dbus.packages = with pkgs; [ dconf ];
+	programs.dconf.enable = true;
 
 	# Enable Polkit
 	security.polkit.enable = true;
@@ -682,7 +683,6 @@ in {
 		};
 
 		services.easyeffects.enable = true;
-		programs.dconf.enable = true;
 
 		# home.file.".icons/default/index.theme".text = ''
 		# 	[icon theme]
