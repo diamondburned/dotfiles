@@ -250,7 +250,11 @@ in {
 	# Tablet drivers.
 	hardware.opentabletdriver.enable = false;
 
-	boot.kernelParams = [ "mitigations=off" "i915.verbose_state_checks=1" ];
+	boot.kernelParams = [
+		"mitigations=off"
+		"mem_sleep_default=deep"
+		"i915.verbose_state_checks=1"
+	];
 
 	# Requires the real-time kernel patches in Musnix.
 	security.rtkit.enable = true;
