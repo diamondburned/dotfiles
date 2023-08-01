@@ -823,7 +823,7 @@ in {
 			# # zoom-us
 			discord
 			gtkcord4
-			tdesktop
+			nixpkgs_unstable_older.tdesktop
 			# gotktrix
 			# # fractal
 
