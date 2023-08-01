@@ -266,7 +266,7 @@ in {
 	];
 
 	# Install global fonts
-	fonts.fonts = (with pkgs; [
+	fonts.packages = (with pkgs; [
 		bakoma_ttf # math
 		# opensans-ttf
 		roboto
@@ -409,7 +409,7 @@ in {
 
 	programs.kdeconnect = {
 		enable  = true;
-		package = pkgs.gnomeExtensions.gsconnect;
+		package = pkgs.nixpkgs_unstable_newer.gnomeExtensions.gsconnect;
 	};
 
 	services.flatpak.enable = true;
@@ -781,7 +781,6 @@ in {
 			xclip
 			virt-manager
 			xorg.xauth
-			octave-soft
 			grun
 			# neovim-gtk
 
@@ -829,12 +828,12 @@ in {
 			# # fractal
 
 			# Office
-			qalculate-gtk
+			nixpkgs_unstable_older.qalculate-gtk
 			libreoffice
 			onlyoffice-bin
 			evince
 			aspell
-			marker
+			nixpkgs_unstable_newer.marker
 			graphviz
 			# foliate
 

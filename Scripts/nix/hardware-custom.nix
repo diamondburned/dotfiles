@@ -304,8 +304,8 @@ in {
 	# 	};
 	# };
 
-	nix.settings.max-jobs = lib.mkForce 4;
-	nix.settings.cores = lib.mkForce 6;
+	nix.settings.max-jobs = lib.mkForce 1;
+	nix.settings.cores = lib.mkForce 12;
 
 	# These patches taken from cidkid's config.
 	# le9db patchset to prevent I/O thrasing on high memory loads.

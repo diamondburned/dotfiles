@@ -56,7 +56,7 @@
     },
     "to": {
       "type": "path",
-      "path": "/nix/store/x7r2zpk53cbxgiawhpfkd746cqniwfjb-bonito-Q8ZROSrRLF_J4ypL-nixpkgs/bonito-Q8ZROSrRLF_J4ypL-nixpkgs"
+      "path": "/nix/store/7ld12v38v0qihzcahpmvfq1qdpa7njwh-bonito-8F-KMk1cQGHIwLKS-nixpkgs/bonito-8F-KMk1cQGHIwLKS-nixpkgs"
     }
   },
   "bonito:nixpkgs_unstable_older": {
