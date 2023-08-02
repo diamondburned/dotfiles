@@ -252,7 +252,6 @@ in {
 
 	boot.kernelParams = [
 		"mitigations=off"
-		"mem_sleep_default=deep"
 		"i915.verbose_state_checks=1"
 	];
 
