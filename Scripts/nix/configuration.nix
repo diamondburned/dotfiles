@@ -728,6 +728,7 @@ in {
 			gnome.polari
 			gnome.pomodoro
 			gnomeExtensions.gsconnect
+			gnomeExtensions.dash-to-panel
 			gnomeExtensions.tiling-assistant
 			gnomeExtensions.brightness-control-using-ddcutil
 			gnomeExtensions.search-light
