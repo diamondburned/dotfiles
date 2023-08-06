@@ -854,7 +854,7 @@ in {
 
 			# Games
 			# polymc
-			# prismlauncher
+			prismlauncher
 			# osu-wine
 			# osu-wine-realistik
 
