@@ -129,7 +129,7 @@ in {
 	# boot.kernelPackages = pkgs.linuxPackages_latest;
 	# boot.kernelPackages = pkgs.linuxPackages-xanmod;
 	# boot.kernelPackages = pkgs.linuxPackagesFor pkgs.linux_6_3;
-	boot.kernelPackages = pkgs.linuxPackages_zen;
+	boot.kernelPackages = pkgs.linuxPackages_xanmod;
 	# boot.kernelPatches = [
 	# 	{
 	# 		name = "enable-logitech-hires-scroll";
@@ -253,6 +253,7 @@ in {
 	boot.kernelParams = [
 		"mitigations=off"
 		"i915.enable_guc=2"
+		"i915.enable_psr=0"
 		"i915.verbose_state_checks=1"
 	];
 
