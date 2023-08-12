@@ -38,7 +38,7 @@ let lsoc-overlay = pkgs.fetchFromGitHub {
 		LC_TIME = "en_GB.UTF-8";
 		NIX_AUTO_RUN = "1";
 		# STEAM_RUNTIME = "0";
-		GTK_THEME = "Orchis-Pink-Dark-Compact";
+		GTK_THEME = config.home-manager.users.diamond.gtk.theme.name;
 		# XDG_CURRENT_DESKTOP = "Wayfire";
 
 		GOPATH = "/home/diamond/.go";
@@ -642,7 +642,7 @@ in {
 			font.size = 11;
 
 			theme = {
-				name = userEnv.GTK_THEME;
+				name = "Colloid-Pink-Dark-Compact";
 				package =
 					# let orchis-theme = pkgs.orchis-theme.overrideAttrs (old: rec {
 					# 	version = "2023-01-25";
@@ -666,7 +666,7 @@ in {
 						themeVariants = [ "all" ];
 						colorVariants = [ "standard" "light" "dark" ];
 						sizeVariants = [ "compact" ];
-						tweaks = [ "normal" "black" "float" ];
+						tweaks = [ "normal" "black" ];
 					};
 			};
 

@@ -37,6 +37,7 @@ terminal-window vte-terminal {
 }
 */
 
+/*
 .nautilus-window .sidebar-row {
 	margin: -10px 0;
 	padding: 0;
@@ -105,6 +106,7 @@ terminal-window vte-terminal {
 	min-height: 0;
 	padding-left: 0;
 }
+*/
 
 .background.csd,
 .background.csd > * {
