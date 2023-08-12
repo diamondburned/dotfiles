@@ -252,6 +252,7 @@ in {
 
 	boot.kernelParams = [
 		"mitigations=off"
+		"i915.enable_guc=2"
 		"i915.verbose_state_checks=1"
 	];
 
