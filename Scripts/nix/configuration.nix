@@ -653,14 +653,20 @@ in {
 					# 	    sha256 = "sha256:0rlvqzlfabvayp9p2ihw4jk445ahhrgv6zc5n47sr5w6hbb082ny";
 					# 	};
 					# });
-					let orchis-theme = pkgs.nixpkgs_unstable_real.orchis-theme.overrideAttrs (old: {
-						patches = (old.patches or []) ++ [
-							./overlays/patches/Orchis-theme-middark.patch
-						];
-					});
-					in orchis-theme.override {
-						tweaks = [ "compact" ];
-						border-radius = 6;
+					# let orchis-theme = pkgs.nixpkgs_unstable_real.orchis-theme.overrideAttrs (old: {
+					# 	patches = (old.patches or []) ++ [
+					# 		./overlays/patches/Orchis-theme-middark.patch
+					# 	];
+					# });
+					# in orchis-theme.override {
+					# 	tweaks = [ "compact" ];
+					# 	border-radius = 6;
+					# };
+					pkgs.colloid-gtk-theme.override {
+						themeVariants = [ "all" ];
+						colorVariants = [ "standard" "light" "dark" ];
+						sizeVariants = [ "compact" ];
+						tweaks = [ "normal" "black" "float" ];
 					};
 			};
 
