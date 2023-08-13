@@ -76,7 +76,7 @@ in {
 		wofi
 		playerctl
 		wl-clipboard
-		wf-shell
+		wayfirePlugins.wf-shell
 		wf-recorder
 		screenrec
 		kanshi

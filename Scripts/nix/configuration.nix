@@ -76,7 +76,7 @@ in {
 		./configroot.nix
 		./cfg/udev
 		./cfg/nokbd
-		# ./cfg/wayfire
+		./cfg/wayfire
 		./cfg/localhost
 		./cfg/keyd
 		./cfg/avahi
@@ -524,7 +524,7 @@ in {
 			# ./cfg/tilix
 			./cfg/firefox
 			# ./cfg/pantalaimon
-			# ./cfg/wayfire/home.nix
+			./cfg/wayfire/home.nix
 			./cfg/hm-blackbox-terminal.nix
 			./cfg/hm-gnome-terminal.nix
 			./cfg/hm-alacritty.nix
@@ -795,7 +795,8 @@ in {
 			(steam.override {
 				extraPkgs = pkgs: with pkgs; [
 					(mangohud)
-					(import <nixpkgs_pr_230931> {}).gamescope
+					gamescope
+					# (import <nixpkgs_pr_230931> {}).gamescope
 			 	];
 			})
 			(import <nixpkgs_pr_230931> {}).gamescope

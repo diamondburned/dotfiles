@@ -14,10 +14,10 @@ let lib = super.lib;
 	waylandPkgs = import <nixpkgs> {
 		overlays = [
 			(import <nix-wayland/overlay.nix>)
-			(self: super: {
-				wlroots      = wlrootsPatch super.wlroots;
-				wlroots_0_14 = wlrootsPatch super.wlroots_0_14;
-			})
+			# (self: super: {
+			# 	wlroots      = wlrootsPatch super.wlroots;
+			# 	wlroots_0_14 = wlrootsPatch super.wlroots_0_14;
+			# })
 		];
 	};
 
@@ -54,6 +54,6 @@ in {
 			"$out/share/wayland-sessions/labwc.desktop"	
 	'';
 
-	wf-shell = makeGApp waylandPkgs.wayfirePlugins.wf-shell;
-	wayfire  = makeGApp waylandPkgs.wayfire;
+	# wf-shell = waylandPkgs.wayfirePlugins.wf-shell;
+	# wayfire  = waylandPkgs.wayfire;
 }
