@@ -129,7 +129,7 @@ in {
 	# boot.kernelPackages = pkgs.linuxPackages_latest;
 	# boot.kernelPackages = pkgs.linuxPackages-xanmod;
 	# boot.kernelPackages = pkgs.linuxPackagesFor pkgs.linux_6_3;
-	boot.kernelPackages = pkgs.linuxPackages_xanmod;
+	boot.kernelPackages = pkgs.linuxPackages_zen;
 	# boot.kernelPatches = [
 	# 	{
 	# 		name = "enable-logitech-hires-scroll";
