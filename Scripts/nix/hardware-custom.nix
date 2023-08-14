@@ -130,7 +130,10 @@ in {
 	# boot.kernelPackages = pkgs.linuxPackages-xanmod;
 	# boot.kernelPackages = pkgs.linuxPackagesFor pkgs.linux_6_3;
 	# boot.kernelPackages = pkgs.linuxPackages_zen;
-	boot.kernelPackages = pkgs.nixpkgs_unstable_real.linuxPackages_latest;
+
+	# Liquorix has slightly more configurations than Zen.
+	# See https://github.com/NixOS/nixpkgs/blob/master/pkgs/os-specific/linux/kernel/zen-kernels.nix#L76
+	boot.kernelPackages = pkgs.nixpkgs_unstable_real.linuxPackages_lqx;
 	# boot.kernelPatches = [
 	# 	{
 	# 		name = "enable-logitech-hires-scroll";

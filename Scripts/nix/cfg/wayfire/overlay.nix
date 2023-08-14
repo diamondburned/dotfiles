@@ -21,6 +21,20 @@ let lib = super.lib;
 		];
 	};
 
+	# makeGApp = old: old.overrideAttrs(old: {
+	# 	buildInputs = (old.buildInputs or []) ++ (with super; [
+	# 		gtk3
+	# 		glib
+	# 		gdk-pixbuf
+	# 		librsvg
+	# 	]);
+	# 	nativeBuildInputs = (old.nativeBuildInputs or []) ++ (with super; [
+	# 		wrapGAppsHook
+	# 	]);
+	# });
+	# makeGApp = old: pkgs.mkDerivation {
+	# 	phases = [ "installPhase" ];
+	# };
 	makeGApp = old: old.overrideAttrs(old: {
 		buildInputs = (old.buildInputs or []) ++ (with super; [
 			gtk3

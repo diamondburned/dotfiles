@@ -126,7 +126,7 @@ in {
 		systemdTarget = "wayfire-session.target";
 	};
 
-	programs.mako = {
+	services.mako = {
 		enable   = true;
 		font     = "Sans 11";
 		anchor   = "top-center";
