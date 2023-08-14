@@ -105,9 +105,9 @@ in {
 	obs-backgroundremoval = self.callPackage <nixpkgs_puffnfresh/pkgs/applications/video/obs-studio/plugins/obs-backgroundremoval.nix> {};
 
 	# SPEEEEEEN.
-	libqalculate = super.libqalculate.override {
-		stdenv = super.impureUseNativeOptimizations super.stdenv;
-	};
+	# libqalculate = super.libqalculate.override {
+	# 	stdenv = super.impureUseNativeOptimizations super.stdenv;
+	# };
 
 	buildLocalGoModule = { GOPATH ? GOPATH, ... }@args: super.buildGoModule {
 		vendorSha256 = null;
