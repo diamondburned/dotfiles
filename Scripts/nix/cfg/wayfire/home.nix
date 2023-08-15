@@ -115,6 +115,18 @@ in {
 					scale    = 1.0;
 				})
 			];
+			"4k-docked".outputs = [
+				(enable "eDP-1" {
+					mode 	   = "1920x1200@60.020000";
+					position = "460,1234";
+					scale    = 1.5;
+				})
+				(enable "Dell Inc. DELL P2415Q G3D7F9740Y4B" {
+					mode     = "3840x2160@59.997002";
+					position = "0,0";
+					scale    = 1.75;
+				})
+			];
 			"normal".outputs = [
 				(enable "eDP-1" {
 					mode     = "1920x1200@60.020000";
