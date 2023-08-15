@@ -206,7 +206,7 @@ in {
 	# };
 
 	# Use auto-cpufreq instead of TLP.
-	# services.auto-cpufreq.enable = true;
+	services.auto-cpufreq.enable = true;
 
 	services.power-profiles-daemon.enable = true;
 	# services.power-profiles-daemon.enable = lib.mkForce false;
