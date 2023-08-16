@@ -81,7 +81,7 @@ in {
 		./cfg/keyd
 		./cfg/avahi
 		./cfg/gps
-		./cfg/kde
+		# ./cfg/kde
 	];
 
 	nixpkgs.config = {

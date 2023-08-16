@@ -11,7 +11,12 @@ let lib = super.lib;
 		];
 	});
 
-	waylandPkgs = super.extend (import <nix-wayland/overlay.nix>);
+	waylandPkgs = import <nixpkgs> {
+		overlays = [
+			(import <nix-wayland/overlay.nix>)
+		];
+	};
+	# waylandPkgs = super.extend (import <nix-wayland/overlay.nix>);
 
 	# makeGApp = old: old.overrideAttrs(old: {
 	# 	buildInputs = (old.buildInputs or []) ++ (with super; [
