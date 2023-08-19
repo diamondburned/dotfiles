@@ -830,7 +830,11 @@ in {
 
 			# # Chat/Social
 			# # zoom-us
-			discord
+			# discord
+			(discord.override {
+				withVencord = true;
+				withOpenASAR = true;
+			})
 			gtkcord4
 			nixpkgs_unstable_older.tdesktop
 			# gotktrix
