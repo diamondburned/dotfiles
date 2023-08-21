@@ -116,15 +116,18 @@ in {
 				})
 			];
 			"4k-docked".outputs = [
-				(enable "eDP-1" {
-					mode 	   = "1920x1200@60.020000";
-					position = "2194,434";
-					scale    = 1.5;
-				})
+				(disable "eDP-1")
+
 				(enable "Dell Inc. DELL P2415Q G3D7F9740Y4B" {
+					position = "1440,567";
 					mode     = "3840x2160@59.997002";
-					position = "0,0";
 					scale    = 1.75;
+				})
+				(enable "Acer Technologies V277U TDCAA002852A" {
+				  position  = "0,0";
+					mode      = "2560x1440@69.928001";
+				  scale     = 1.00;
+					transform = "90";
 				})
 			];
 			"normal".outputs = [
