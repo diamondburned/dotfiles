@@ -325,6 +325,7 @@ in {
 	services.openssh = {
 		enable = true;
 		ports  = [ 1337 ];
+		settings.PasswordAuthentication = true;
 	};
 
 	# Enable CUPS to print documents.
