@@ -750,6 +750,7 @@ in {
 			gnupg
 			gnuplot
 			drawing
+			sticky
 
 			# System
 			xorg.xhost # dependency for wsudo
