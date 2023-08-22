@@ -29,11 +29,18 @@ in
 		yubico-pam
 		yubikey-manager
 		yubikey-personalization
-	];
-
-	systemd.packages = with pkgs; [
 		yubikey-touch-detector
 	];
+
+	systemd.user.services.yubikey-touch-detector = {
+		enable = true;
+		wantedBy = [ "default.target" ];
+		description = "Detects when your YubiKey is waiting for a touch";
+		serviceConfig = {
+			ExecStart = "${pkgs.yubikey-touch-detector}/bin/yubikey-touch-detector --libnotify";
+			Restart = "always";
+		};
+	};
 
 	# systemd.user.services.yubikey-touch-detector.enable = true;
 	# home-manager.users.diamond.systemd.user.services.yubikey-touch-detector.enable = true;

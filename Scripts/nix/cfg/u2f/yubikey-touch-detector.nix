@@ -39,9 +39,11 @@ buildGoModule rec {
 
     install -Dm444 -t $out/lib/systemd/user *.{service,socket}
 
-    substituteInPlace $out/lib/systemd/user/*.service \
-			--replace /usr/bin/yubikey-touch-detector "$out/bin/yubikey-touch-detector --libnotify" \
-			--replace EnvironmentFile= $'Restart=always\nEnvironmentFile='
+		rm $out/lib/systemd/user/*
+
+   #  substituteInPlace $out/lib/systemd/user/*.service \
+			# --replace /usr/bin/yubikey-touch-detector "$out/bin/yubikey-touch-detector --libnotify" \
+			# --replace EnvironmentFile= $'Restart=always\nEnvironmentFile='
 
 		wrapProgram $out/bin/yubikey-touch-detector \
 			--prefix PATH : "${lib.makeBinPath [ gnupg ]}"
