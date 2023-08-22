@@ -21,6 +21,14 @@
 # WantedBy=hybrid-sleep.target
 # WantedBy=suspend-then-hibernate.target
 
+let
+	disconnectAll = pkgs.writeShellScript "disconnect-all-bluetooth" ''
+		${pkgs.bluez}/bin/bluetoothctl devices Connected \
+			| grep -o "[[:xdigit:]:]\{8,17\}" \
+			| while read -r device; do bluetoothctl disconnect "$device"; done
+	'';
+in
+
 {
 	systemd.services."bluetooth-disable-before-sleep" = {
 		enable = true;
@@ -36,9 +44,7 @@
 		};
 		serviceConfig = {
 			Type = "oneshot";
-			RemainAfterExit = true;
-			ExecStart = "${pkgs.bluez}/bin/bluetoothctl power off";
-			ExecStop = "${pkgs.bluez}/bin/bluetoothctl power on";
+			ExecStart = disconnectAll;
 		};
 		wantedBy = [
 			"sleep.target"

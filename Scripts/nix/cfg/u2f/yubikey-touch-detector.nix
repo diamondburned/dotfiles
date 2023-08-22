@@ -1,4 +1,4 @@
-{ lib, libnotify, buildGoModule, fetchFromGitHub, fetchurl, pkg-config, iconColor ? "#84bd00" }:
+{ lib, libnotify, gnupg, makeWrapper, buildGoModule, fetchFromGitHub, fetchurl, pkg-config, iconColor ? "#84bd00" }:
 
 buildGoModule rec {
   pname = "yubikey-touch-detector";
@@ -17,7 +17,7 @@ buildGoModule rec {
     hash = "sha256-+jC9RKjl1uMBaNqLX5WXN+E4CuOcIEx5IGXWxgxzA/k=";
   };
 
-  nativeBuildInputs = [ pkg-config ];
+  nativeBuildInputs = [ pkg-config makeWrapper ];
 
   buildInputs = [ libnotify ];
 
@@ -42,6 +42,9 @@ buildGoModule rec {
     substituteInPlace $out/lib/systemd/user/*.service \
 			--replace /usr/bin/yubikey-touch-detector "$out/bin/yubikey-touch-detector --libnotify" \
 			--replace EnvironmentFile= $'Restart=always\nEnvironmentFile='
+
+		wrapProgram $out/bin/yubikey-touch-detector \
+			--prefix PATH : "${lib.makeBinPath [ gnupg ]}"
   '';
 
   meta = with lib; {
