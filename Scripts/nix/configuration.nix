@@ -751,6 +751,7 @@ in {
 			gnuplot
 			drawing
 			sticky
+			fragments
 
 			# System
 			xorg.xhost # dependency for wsudo
