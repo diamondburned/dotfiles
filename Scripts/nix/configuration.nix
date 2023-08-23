@@ -778,6 +778,7 @@ in {
 			foot
 			silver-searcher
 			jq
+			gh
 			go
 			gopls
 			mdr
