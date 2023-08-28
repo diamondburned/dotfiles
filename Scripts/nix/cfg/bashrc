@@ -354,7 +354,11 @@ xterm() {
 
 
 set-title() {
-	__lineprompt_custom_title="$1"
+	local title="$1"
+	if [[ ! $title ]]; then
+		title="$(basename "$PWD")"
+	fi
+	__lineprompt_custom_title="$title"
 	__lineprompt_set_title
 }
 
