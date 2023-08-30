@@ -50,9 +50,9 @@ let lsoc-overlay = pkgs.fetchFromGitHub {
 
 		# Enforce Wayland.
 		NIXOS_OZONE_WL = "1";
+		QT_QPA_PLATFORM = "wayland";
 		MOZ_ENABLE_WAYLAND = "1";
 		# SDL_VIDEODRIVER	= "wayland";
-		QT_QPA_PLATFORM	= "wayland";
 
 		# osu settings.
 		WINE_RT = "89";
@@ -62,7 +62,7 @@ let lsoc-overlay = pkgs.fetchFromGitHub {
 		STAGING_RT_PRIORITY_SERVER = "99";
 		STAGING_PA_DURATION = "250000";
 		STAGING_PA_PERIOD = "8192";
-	   	STAGING_PA_LATENCY_USEC = "128";
+   	STAGING_PA_LATENCY_USEC = "128";
 	};
 
 in {
@@ -262,7 +262,6 @@ in {
 		compsize
 
 		qgnomeplatform
-		adwaita-qt
 		keyd
 	];
 
@@ -479,12 +478,6 @@ in {
 		];
 	};
 
-	qt = {
-		enable = true;
-		style = "adwaita-dark";
-		platformTheme = "gnome";
-	};
-
 	xdg.portal = {
 		enable = true;
 		extraPortals = with pkgs; [
@@ -687,6 +680,15 @@ in {
 					gtk-application-prefer-dark-theme = 1;
 				};
 				# extraCss = builtins.readFile ./cfg/gtk.css;
+			};
+		};
+
+		qt = {
+			enable = true;
+			platformTheme = "qtct";
+			style = {
+				name = "adwaita-dark";
+				package = pkgs.adwaita-qt;
 			};
 		};
 
