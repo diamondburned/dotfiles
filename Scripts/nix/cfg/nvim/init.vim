@@ -98,6 +98,7 @@ autocmd BufRead,BufNewFile *.html   setlocal textwidth=100
 autocmd BufRead,BufNewFile *.templ  setlocal textwidth=100
 autocmd BufRead,BufNewFile *.cpp    setlocal expandtab tabstop=2 shiftwidth=2
 autocmd BufRead,BufNewFile *.asm    set filetype=nasm textwidth=400
+autocmd BufRead,BufNewFile *s       set filetype=mips textwidth=400
 autocmd BufRead,BufNewFile *.hpp    set filetype=cpp
 
 "Go to last cursor on file open"
@@ -588,6 +589,12 @@ function! FixNasmfmt(buffer) abort
     \}
 endfunction
 
+function! FixMipsfmt(buffer) abort
+    return {
+    \   'command': 'mipsfmt -'
+    \}
+endfunction
+
 function! FixDenoJSON(buffer) abort
     return {
     \   'command': 'deno fmt --ext json -'
@@ -621,6 +628,7 @@ endfunction
 "https://github.com/dense-analysis/ale/issues/3167"
 execute ale#fix#registry#Add('sql-formatter', 'FixSQLFormatter', ['sql'], 'sql-formatter for sql')
 execute ale#fix#registry#Add('nasmfmt', 'FixNasmfmt', ['nasm'], 'nasmfmt')
+execute ale#fix#registry#Add('mipsfmt', 'FixMipsfmt', ['mips'], 'mipsfmt')
 execute ale#fix#registry#Add('denojson', 'FixDenoJSON', ['json'], 'deno fmt for json')
 execute ale#fix#registry#Add('denojsonc', 'FixDenoJSONC', ['jsonc'], 'deno fmt for jsonc')
 execute ale#fix#registry#Add('prettier', 'ale#fixers#prettier#Fix', ['markdown'], 'prettier for markdown')
@@ -656,6 +664,7 @@ let g:ale_fixers = {
 			\ 'html':       [ "prettier" ],
 			\ 'yaml':       [ "prettier" ],
 			\ 'nasm':       [ "nasmfmt" ],
+			\ 'mips':       [ "mipsfmt" ],
 			\ 'templ':      [  ],
 			\ 'python':     [ "autopep8", "black" ],
 			\ 'proto':      [ "protolint" ],
