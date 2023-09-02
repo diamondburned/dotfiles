@@ -721,8 +721,8 @@ in {
 
 		]) ++ (with pkgs.nixpkgs_unstable_real; [
 			spotify
-			blackbox-terminal
-			evolutionWithPlugins
+			# blackbox-terminal
+			# evolutionWithPlugins
 
 			# xelfviewer
 			# (import <nixpkgs_shotcut> {}).shotcut
@@ -754,6 +754,15 @@ in {
 			drawing
 			sticky
 			fragments
+
+			(mixxx.overrideAttrs (old:
+				if lib.versionAtLeast "2.4" old.version
+				then old
+				else old.override {
+					src = <mixxx2_4-beta>;
+					version = "2.4-beta";
+				}
+			))
 
 			# System
 			xorg.xhost # dependency for wsudo

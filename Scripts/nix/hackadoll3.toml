@@ -29,6 +29,7 @@
  nix-wayland = "github:nix-community/nixpkgs-wayland master"
  lanzaboote = "github:nix-community/lanzaboote 45d04a45d3dfcdee5246f7c0dfed056313de2a61"
  prismlauncher = "github:PrismLauncher/PrismLauncher develop"
+ mixxx2_4-beta = "github:mixxxdj/mixxx 2.4-beta"
  unstable = "https://nixos.org/channels/nixos-unstable"
  nur = "github:nix-community/NUR master"
 
