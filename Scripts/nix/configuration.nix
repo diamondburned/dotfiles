@@ -756,6 +756,7 @@ in {
 			drawing
 			sticky
 			fragments
+			mixxx
 			# (callPackage ./overlays/packages/mixxx/beta.nix {})
 
 			# System
