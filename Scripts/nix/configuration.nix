@@ -209,6 +209,8 @@ in {
 		internalInterfaces = [ "ve-+" ];                                                                                            
 	};
 
+	services.tailscale.enable = true;
+
 	security.pki.certificateFiles = [
 		./secrets/ssl/otokonoko.local/otokonoko.local+1.pem
 	];
@@ -754,7 +756,7 @@ in {
 			drawing
 			sticky
 			fragments
-			(callPackage ./overlays/packages/mixxx/beta.nix {})
+			# (callPackage ./overlays/packages/mixxx/beta.nix {})
 
 			# System
 			xorg.xhost # dependency for wsudo
