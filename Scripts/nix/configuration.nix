@@ -757,6 +757,8 @@ in {
 			sticky
 			fragments
 			mixxx
+			yt-dlp
+			spotdl
 			# (callPackage ./overlays/packages/mixxx/beta.nix {})
 
 			# System
