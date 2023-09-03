@@ -758,7 +758,7 @@ in {
 			drawing
 			sticky
 			fragments
-			mixxx
+			# mixxx
 			yt-dlp
 			spotdl
 			# (callPackage ./overlays/packages/mixxx/beta.nix {})
