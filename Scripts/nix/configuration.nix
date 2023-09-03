@@ -209,7 +209,9 @@ in {
 		internalInterfaces = [ "ve-+" ];                                                                                            
 	};
 
-	services.tailscale.enable = true;
+	services.tailscale = {
+		enable = true;
+	};
 
 	security.pki.certificateFiles = [
 		./secrets/ssl/otokonoko.local/otokonoko.local+1.pem
