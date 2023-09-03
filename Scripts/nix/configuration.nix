@@ -761,7 +761,7 @@ in {
 			# mixxx
 			yt-dlp
 			spotdl
-			# (callPackage ./overlays/packages/mixxx/beta.nix {})
+			(nixpkgs_unstable_newer.callPackage ./overlays/packages/mixxx/beta.nix {})
 
 			# System
 			xorg.xhost # dependency for wsudo
