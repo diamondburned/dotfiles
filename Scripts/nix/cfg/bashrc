@@ -363,6 +363,7 @@ set-title() {
 }
 
 __lineprompt_set_title() {
+	local p
 	p="${__lineprompt_custom_title:-$1}"
 	# Sanitize the title by stripping control characters.
 	p="${p//[^[:print:]]/}"
@@ -398,6 +399,7 @@ __lineprompt_init() {
 
 __lineprompt_redraw() {
 	# git branch
+	local git_branch
 	git_branch=" : ($(__git_ps1))" || git_branch=
 
 	# Count number of jobs.
