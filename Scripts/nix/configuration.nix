@@ -841,6 +841,7 @@ in {
 			pulseaudio
 			pamixer
 			easyeffects
+			lollypop
 
 			# # Chat/Social
 			# # zoom-us
