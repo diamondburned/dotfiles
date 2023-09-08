@@ -1,0 +1,2 @@
+#!/bin/sh
+sudo mount /dev/disk/by-partuuid/`cat /proc/device-tree/chosen/asahi,efi-system-partition` /boot

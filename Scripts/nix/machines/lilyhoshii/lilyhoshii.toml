@@ -1,0 +1,23 @@
+[global.channels]
+ nixpkgs_unstable = "github:NixOS/nixpkgs 1c9db9710c"
+ home-manager_unstable = "github:nix-community/home-manager master"
+
+[global.aliases]
+ nixos = "nixpkgs_unstable"
+ nixpkgs = "nixpkgs_unstable"
+ home-manager = "home-manager_unstable"
+
+[flakes]
+ enable = true
+
+[users.root]
+ use-sudo = true
+ override-channels = true
+
+[users.root.channels]
+ nixpkgs_unstable_newer = "github:NixOS/nixpkgs 1c9db9710c"
+ nur = "github:nix-community/NUR master"
+ # unstable = "https://nixos.org/channels/nixos-unstable"
+
+[users.diamond]
+ override-channels = false

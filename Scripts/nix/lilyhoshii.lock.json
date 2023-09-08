@@ -1,0 +1,20 @@
+{
+  "channels": {
+    "github:NixOS/nixpkgs 1c9db9710c": {
+      "url": "https://github.com/NixOS/nixpkgs/archive/1c9db9710c.tar.gz",
+      "store_hash": "7ld12v38v0qihzcahpmvfq1qdpa7njwh"
+    },
+    "github:NixOS/nixpkgs nixos-unstable": {
+      "url": "https://github.com/NixOS/nixpkgs/archive/0bffda19b8af722f8069d09d8b6a24594c80b352.tar.gz",
+      "store_hash": "f6v0k1b36yf5h709gg356b1yhkdjbrfc"
+    },
+    "github:nix-community/NUR master": {
+      "url": "https://github.com/nix-community/NUR/archive/f98e29d5f2406c4bfeca4d1003d4a95bca0b8ed8.tar.gz",
+      "store_hash": "cqilxii49ckw3mfhg0zp09w62ibl43xs"
+    },
+    "github:nix-community/home-manager master": {
+      "url": "https://github.com/nix-community/home-manager/archive/19c6a4081b14443420358262f8416149bd79561a.tar.gz",
+      "store_hash": "c3fpm2p7d8yyrv7w2za0qqwvr19q3rxy"
+    }
+  }
+}
