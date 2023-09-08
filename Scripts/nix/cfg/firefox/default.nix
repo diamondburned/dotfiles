@@ -1,7 +1,31 @@
 { config, lib, pkgs, ... }:
 
-let profileName = "default";
+let
+	profileName = "default";
 	profilePath = "q1f740f8.default";
+
+	makeFirefoxProfileDesktopFile = {
+		profile,
+		name ? "Firefox (${profile})",
+		icon ? "firefox",
+	}: pkgs.makeDesktopItem {
+		name = "firefox-${profile}.desktop";
+		# bin/find-desktop Firefox
+		desktopName = name;
+		genericName = "Web Browser (${name})";
+		exec = "firefox -p ${profile} %U";
+		icon = icon;
+		mimeTypes = [
+			"text/html"
+			"text/xml"
+			"application/xhtml+xml"
+			"application/vnd.mozilla.xul+xml"
+			"x-scheme-handler/http"
+			"x-scheme-handler/https"
+			"x-scheme-handler/ftp"
+		];
+		categories = [ "Network" "WebBrowser" ];
+	};
 
 	# nativeMessagingHosts = {
 	# 	"org.gnome.shell.extensions.gsconnect" = pkgs.gnomeExtensions.gsconnect;
@@ -60,7 +84,11 @@ in {
 	];
 
 	programs.firefox.enable = true;
-	programs.firefox.package = pkgs.firefox-bin;
+	programs.firefox.package = pkgs.firefox.override {
+		cfg = {
+			enableGnomeExtensions = true;
+		};
+	};
 
 	programs.firefox.profiles."Tunneled" = {
 		id = 1;

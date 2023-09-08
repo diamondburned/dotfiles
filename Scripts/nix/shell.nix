@@ -11,13 +11,17 @@ let
 in
 
 pkgs.mkShell {
+	buildInputs = with pkgs; [
+		# bonito
+		git
+		git-crypt
+	];
 	shellHook = ''
 		export HOSTNAME
 	'';
 	NIX_PATH = builtins.concatStringsSep ":" [
 		"dotfiles=${builtins.toString ./.}"
-		"nixpkgs=/nix/var/nix/profiles/per-user/root/channels/nixos"
-		"nixos-config=${builtins.toString ./.}/configuration.nix"
+		"nixos-config=/etc/nixos/configuration.nix"
 		"/nix/var/nix/profiles/per-user/root/channels"
 	];
 	MACHINES = builtins.concatStringsSep " " machines;

@@ -33,9 +33,9 @@ in {
 	pkgconfig = self.pkg-config;
 
 	# Takes too long to build.
-	evolution-data-server = super.evolution-data-server.override {
-		enableOAuth2 = false;
-	};
+	# evolution-data-server = super.evolution-data-server.override {
+	# 	enableOAuth2 = false;
+	# };
 
 	gradience =
 		if super ? gradience then
@@ -44,9 +44,9 @@ in {
 			super.nixpkgs_gradience.gradience;
 
 	# Later WebkitGTKs weren't in Hydra until like late December 2022.
-	webkitgtk     = super.nixpkgs_unstable_newer.webkitgtk;
-	webkitgtk_4_1 = super.nixpkgs_unstable_newer.webkitgtk_4_1;
-	webkitgtk_5_0 = super.nixpkgs_unstable_newer.webkitgtk_5_0;
+	webkitgtk     = super.webkitgtk     or super.nixpkgs_unstable_newer.webkitgtk;
+	webkitgtk_4_1 = super.webkitgtk_4_1 or super.nixpkgs_unstable_newer.webkitgtk_4_1;
+	webkitgtk_5_0 = super.webkitgtk_5_0 or super.nixpkgs_unstable_newer.webkitgtk_5_0;
 
 	sommelier = super.sommelier.overrideAttrs (old: {
 		version = "110.0";

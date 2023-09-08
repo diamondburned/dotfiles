@@ -1,10 +1,10 @@
 { pkgs }:
 
 let gtkcord4 = rec {
-		version = "0.0.8";
+		version = "0.0.12";
 		hashes = {
-			src = "sha256:1sqn08hapgbkb5vmw562a03a1b178a887r492k49c245sa9mb538";
-			bin = "sha256:0swp5pb7w6j622kbp7qkzyi321fch8wwbq6d9i83w8cg3gh9payp";
+			src = "sha256-x//PST2f501QuxRdPe3cYbpL66/zLJWmscED9SbxsTk=";
+			bin = "sha256-/TfoMYz5u5m/EGc4DBf5vD1TpV8NWp4Mopbrdn2LtIc=";
 		};
 
 		src = pkgs.fetchFromGitHub {
@@ -14,9 +14,14 @@ let gtkcord4 = rec {
 			hash  = hashes.src;
 		};
 
+		arch =
+			if pkgs.stdenv.isx86_64 then "amd64"
+			else if pkgs.stdenv.isAarch64 then "arm64"
+			else throw "Unsupported architecture";
+
 		bin = pkgs.runCommand "gtkcord4-bin" {
 			src = pkgs.fetchurl {
-				url = "https://github.com/diamondburned/gtkcord4/releases/download/v${version}/gtkcord4-linux-amd64-v0.0.8-libadwaita.tar.zst";
+				url = "https://github.com/diamondburned/gtkcord4/releases/download/v${version}/gtkcord4-linux-${arch}-v${version}-.tar.zst";
 				sha256 = hashes.bin;
 			};
 			nativeBuildInputs = with pkgs; [

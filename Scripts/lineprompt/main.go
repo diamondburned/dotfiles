@@ -21,6 +21,7 @@ func main() {
 	opts := lineprompt.Opts{
 		// Lower means more details, must be higher than len(blends)
 		LOD: 35,
+		Underline: true,
 	}
 
 	lineprompt.Blend(output, text, columns, []colorful.Color{

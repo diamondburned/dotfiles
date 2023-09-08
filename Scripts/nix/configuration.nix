@@ -15,7 +15,7 @@ in
 	home-manager.users.diamond = {
 		imports = [
 			# Automatically push dotfiles.
-			(import <dotfiles/utils/schedule.nix {
+			(import <dotfiles/utils/schedule.nix> {
 				name        = "dotfiles-pusher";
 				description = "Automatically push dotfiles";
 				calendar    = "hourly";
