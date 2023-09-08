@@ -80,6 +80,7 @@ in {
 		<dotfiles/cfg/keyd>
 		<dotfiles/cfg/avahi>
 		<dotfiles/cfg/gps>
+		<dotfiles/cfg/nvim>
 	];
 
 	nixpkgs.config = {
@@ -798,19 +799,6 @@ in {
 			 	];
 			})
 			(import <nixpkgs_pr_230931> {}).gamescope
-
-			(wrapNeovimUnstable neovim-unwrapped
-				# Use unstable Neovim with a slightly outdated Nixpkgs because
-				# Copilot is fucking trash.
-				(neovimUtils.makeNeovimConfig {
-					vimAlias = true;
-					withNodeJs = true;
-					customRC = builtins.readFile <dotfiles/cfg/nvim/init.vim>;
-					plugins = with pkgs.vimPlugins; [
-						{ plugin = markdown-preview-nvim; }
-					];
-				})
-			)
 
 			# Multimedia
 			# aqours
