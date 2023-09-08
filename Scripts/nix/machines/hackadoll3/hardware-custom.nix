@@ -3,7 +3,7 @@
 # to /etc/nixos/configuration.nix instead.
 { config, lib, pkgs, ... }:
 
-let utils = import <+/utils> { inherit lib; };
+let utils = import <dotfiles/utils> { inherit lib; };
 
 	# blurcam = builtins.fetchGit {
 	# 	url = "https://github.com/diamondburned/blurcam.git";
@@ -25,7 +25,7 @@ let utils = import <+/utils> { inherit lib; };
 	wl-grab = device: mode:
 		let pkg = pkgs.writeShellApplication {
 			name = "wl-grab";
-			text = builtins.readFile <+/bin/wl-grab>;
+			text = builtins.readFile <dotfiles/bin/wl-grab>;
 			runtimeInputs = with pkgs; [
 				coreutils
 				gnused
@@ -39,8 +39,8 @@ in {
 	imports = [
 		# "${blurcam}"
 		# ./cfg/bluetooth-hack
-		<+/cfg/secureboot>
-		<+/cfg/u2f>
+		<dotfiles/cfg/secureboot>
+		<dotfiles/cfg/u2f>
 	];
 
 	# services.blurcam = {

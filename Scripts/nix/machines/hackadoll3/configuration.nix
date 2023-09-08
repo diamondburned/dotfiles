@@ -17,7 +17,7 @@ let lsoc-overlay = pkgs.fetchFromGitHub {
 	# 	rev = "0d05c53204da3b576f810ef2e1312b19bf2420b7";
 	# });
 
-	utils = import <+/utils> { inherit config pkgs lib; };
+	utils = import <dotfiles/utils> { inherit config pkgs lib; };
 
 	# GIMP v2.99 Nixpkgs
 	gimpMesonPkgs = import (pkgs.fetchFromGitHub {
@@ -70,16 +70,16 @@ in {
 		<home-manager/nixos>
 		./hardware-configuration.nix
 		./hardware-custom.nix
-		<+/overlays>
-		<+/overlays/services.nix>
-		<+/secrets>
-		<+/cfg/udev>
-		<+/cfg/nokbd>
-		<+/cfg/wayfire>
-		<+/cfg/localhost>
-		<+/cfg/keyd>
-		<+/cfg/avahi>
-		<+/cfg/gps>
+		<dotfiles/overlays>
+		<dotfiles/overlays/services.nix>
+		<dotfiles/secrets>
+		<dotfiles/cfg/udev>
+		<dotfiles/cfg/nokbd>
+		<dotfiles/cfg/wayfire>
+		<dotfiles/cfg/localhost>
+		<dotfiles/cfg/keyd>
+		<dotfiles/cfg/avahi>
+		<dotfiles/cfg/gps>
 	];
 
 	nixpkgs.config = {
@@ -212,7 +212,7 @@ in {
 	};
 
 	security.pki.certificateFiles = [
-		<+/secrets/ssl/otokonoko.local/otokonoko.local+1.pem>
+		<dotfiles/secrets/ssl/otokonoko.local/otokonoko.local+1.pem>
 	];
 
 	i18n = {
@@ -513,16 +513,16 @@ in {
 		imports = [
 			"${lsoc-overlay}"
 
-			<+/overlays>
-			<+/overlays/home-manager>
-			<+/secrets/diamond>
-			<+/cfg/firefox>
-			<+/cfg/wayfire/home.nix>
-			<+/cfg/hm-blackbox-terminal.nix>
-			<+/cfg/hm-gnome-terminal.nix>
-			<+/cfg/hm-alacritty.nix>
+			<dotfiles/overlays>
+			<dotfiles/overlays/home-manager>
+			<dotfiles/secrets/diamond>
+			<dotfiles/cfg/firefox>
+			<dotfiles/cfg/wayfire/home.nix>
+			<dotfiles/cfg/hm-blackbox-terminal.nix>
+			<dotfiles/cfg/hm-gnome-terminal.nix>
+			<dotfiles/cfg/hm-alacritty.nix>
 
-			# (import <+/utils/schedule.nix {
+			# (import <dotfiles/utils/schedule.nix {
 			# 	name        = "birthdayer-juan";
 			# 	description = "Delete once Juan gets annoyed";
 			# 	calendar    = "daily";
@@ -572,7 +572,7 @@ in {
 
 		programs.bash = {
 			enable = true;
-			initExtra = builtins.readFile <+/cfg/bashrc>;
+			initExtra = builtins.readFile <dotfiles/cfg/bashrc>;
 			historySize = 500000;
 			historyFileSize = 1000000;
 		};
@@ -744,7 +744,7 @@ in {
 			# mixxx
 			yt-dlp
 			spotdl
-			(nixpkgs_unstable_newer.callPackage <+/overlays/packages/mixxx/beta.nix> {})
+			(nixpkgs_unstable_newer.callPackage <dotfiles/overlays/packages/mixxx/beta.nix> {})
 
 			# System
 			xorg.xhost # dependency for wsudo
@@ -805,7 +805,7 @@ in {
 				(neovimUtils.makeNeovimConfig {
 					vimAlias = true;
 					withNodeJs = true;
-					customRC = builtins.readFile <+/cfg/nvim/init.vim>;
+					customRC = builtins.readFile <dotfiles/cfg/nvim/init.vim>;
 					plugins = with pkgs.vimPlugins; [
 						{ plugin = markdown-preview-nvim; }
 					];
@@ -886,7 +886,7 @@ in {
 			# Everything in ./bin
 			(runCommand "diamond-bin" {} ''
 				mkdir -p $out/bin
-				cp -r ${<+/bin>}/* $out/bin
+				cp -r ${<dotfiles/bin>}/* $out/bin
 			'')
 		]);
 
@@ -914,11 +914,11 @@ in {
 					warn_style = true;
 					enable_semantic_tokens = true;
 				};
-				"fontconfig/fonts.conf".source = <+/cfg/fontconfig.xml>;
-			 	"nvim/init.vim".source = <+/cfg/nvim/init.vim>;
+				"fontconfig/fonts.conf".source = <dotfiles/cfg/fontconfig.xml>;
+			 	"nvim/init.vim".source = <dotfiles/cfg/nvim/init.vim>;
 				"autostart/autostart.desktop".text = utils.mkDesktopFile {
 					name = "autostart-init";
-					exec = <+/bin/autostart>;
+					exec = <dotfiles/bin/autostart>;
 					type = "Application";
 					comment = "An autostart script in ~/Scripts/nix/bin/autostart";
 					extraEntries = ''
@@ -931,8 +931,8 @@ in {
 				"nix/nix.conf".text = ''
 					experimental-features = nix-command flakes
 				'';
-				"gtk-4.0/gtk.css".source = <+/cfg/gtk.css>;
-				"gtk-3.0/gtk.css".source = <+/cfg/gtk.css>;
+				"gtk-4.0/gtk.css".source = <dotfiles/cfg/gtk.css>;
+				"gtk-3.0/gtk.css".source = <dotfiles/cfg/gtk.css>;
 			};
 		};
 
