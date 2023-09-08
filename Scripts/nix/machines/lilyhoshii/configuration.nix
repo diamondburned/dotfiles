@@ -5,6 +5,7 @@
 		<home-manager/nixos>
 		<dotfiles/secrets>
 		<dotfiles/cfg/fonts>
+		<dotfiles/cfg/gnome>
 		./home.nix
 	];
 

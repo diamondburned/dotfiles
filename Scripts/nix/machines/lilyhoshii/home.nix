@@ -5,8 +5,11 @@
 		imports = [
 			<dotfiles/cfg/firefox>
 			<dotfiles/cfg/fonts/home.nix>
+			<dotfiles/cfg/gnome/home.nix>
 			<dotfiles/cfg/nvim/home.nix>
+			<dotfiles/cfg/foot/home.nix>
 			<dotfiles/cfg/git/home.nix>
+			<dotfiles/cfg/gtk/home.nix>
 			<dotfiles/cfg/hm-gnome-terminal.nix>
 		];
 
