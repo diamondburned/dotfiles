@@ -11,6 +11,7 @@
 			<dotfiles/cfg/git/home.nix>
 			<dotfiles/cfg/gtk/home.nix>
 			<dotfiles/cfg/hm-gnome-terminal.nix>
+			./cfg/firefox/home.nix
 		];
 
 		nixpkgs.config.allowUnfree = true;
