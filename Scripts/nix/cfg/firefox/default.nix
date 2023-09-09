@@ -84,11 +84,18 @@ in {
 	];
 
 	programs.firefox.enable = true;
-	programs.firefox.package = pkgs.firefox.override {
-		cfg = {
-			enableGnomeExtensions = true;
-		};
-	};
+	programs.firefox.package =
+		let
+			firefox = pkgs.firefox-unwrapped;
+		in
+			pkgs.wrapFirefox firefox {
+				cfg = {
+					enableGnomeExtensions = true;
+				};
+				pkcs11Modules = with pkgs; [
+					(pkgs.callPackage <overlays/packages/widevine.nix> {})
+				];
+			};
 
 	programs.firefox.profiles."Tunneled" = {
 		id = 1;
