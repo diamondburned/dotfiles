@@ -20,4 +20,8 @@
 
 	programs.dconf.enable = true;
 	services.dbus.packages = with pkgs; [ dconf ];
+
+	boot.extraModprobeConfig = ''
+		options hid-apple swap_fn_leftctrl=1
+	'';
 }
