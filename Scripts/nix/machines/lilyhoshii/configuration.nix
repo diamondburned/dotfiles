@@ -6,6 +6,7 @@
 		<dotfiles/secrets>
 		<dotfiles/cfg/fonts>
 		<dotfiles/cfg/gnome>
+		<dotfiles/cfg/tailscale>
 		./home.nix
 	];
 
