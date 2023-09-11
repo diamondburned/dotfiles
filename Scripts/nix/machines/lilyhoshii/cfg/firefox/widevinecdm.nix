@@ -7,6 +7,7 @@
 	nspr,
 	nss,
 	python3,
+	writeText,
 }:
 
 let
@@ -47,16 +48,9 @@ stdenv.mkDerivation {
 
   patchPhase =
     ''
-			rm _platform_specific/linux_arm64/libwidevinecdm.so
-
-			patchelf \
-				--set-rpath "$PATCH_RPATH" \
-				_platform_specific/linux_arm64/libwidevinecdm_real.so
-
 			${python3}/bin/python3 ${./widevinecdm-fixup.py} \
 				_platform_specific/linux_arm64/libwidevinecdm_real.so \
 				_platform_specific/linux_arm64/libwidevinecdm.so
-
 			rm _platform_specific/linux_arm64/libwidevinecdm_real.so
 
 			chmod +x _platform_specific/linux_arm64/libwidevinecdm.so
@@ -69,6 +63,18 @@ stdenv.mkDerivation {
 
 	passthru = {
 		inherit widevinecdmVersion;
+
+		widevinecdmManifest = writeText "widevinecdm-manifest.json"
+			(builtins.toJSON {
+				name = "WidevineCdm";
+				description = "Widevine Content Decryption Module";
+				version = widevinecdmVersion;
+				"x-cdm-codecs" = "vp8,vp9.0,avc1";
+				"x-cdm-host-versions" = "10";
+				"x-cdm-interface-versions" = "10";
+				"x-cdm-module-versions" = "4";
+				"x-cdm-persistent-license-support" = true;
+			});
 	};
 
   meta = {

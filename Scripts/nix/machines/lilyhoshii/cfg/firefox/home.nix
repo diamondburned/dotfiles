@@ -5,18 +5,6 @@ let
 	profilePath = "q1f740f8.default";
 
 	widevinecdm-aarch64 = pkgs.callPackage ./widevinecdm.nix {};
-
-	widevinecdm-manifest = pkgs.writeText "widevinecdm-manifest.json"
-		(builtins.toJSON {
-			name = "WidevineCdm";
-			description = "Widevine Content Decryption Module";
-			version = widevinecdm-aarch64.widevinecdmVersion;
-			"x-cdm-codecs" = "vp8,vp9.0,avc1,av01";
-			"x-cdm-host-versions" = "4.10";
-			"x-cdm-interface-versions" = "4.10";
-			"x-cdm-module-versions" = "4.10";
-			"x-cdm-persistent-license-support" = true;
-		});
 in
 
 {
@@ -50,7 +38,7 @@ in
 		source = pkgs.runCommandLocal "firefox-widevinecdm" {} ''
 			d=$out/${widevinecdm-aarch64.widevinecdmVersion}
 			mkdir -p $d
-			ln -s ${widevinecdm-manifest} $d/manifest.json
+			ln -s ${widevinecdm-aarch64.widevinecdmManifest} $d/manifest.json
 			ln -s ${widevinecdm-aarch64}/WidevineCdm/_platform_specific/linux_arm64/libwidevinecdm.so $d/libwidevinecdm.so
 		'';
 		recursive = true;

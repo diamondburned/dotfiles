@@ -1,31 +1,17 @@
-{ pkgs }:
+{ pkgs, lib }:
 
 let
-	glibc = pkgs.glibc.overrideAttrs (self: super: {
-		name = "glibc-widevine-${super.version}";
-		patches = super.patches ++ [ ./disable-GLIBC_ABI_DT_RELR-check.patch ];
-		doCheck = false;
-	});
+	glibc = pkgs.callPackage ./glibc-patched.nix {};
+  mkrpath = p: "${lib.makeSearchPathOutput "lib" "lib64" p}:${lib.makeLibraryPath p}";
 
 	widevinecdm-aarch64 = pkgs.callPackage ./widevinecdm.nix {};
-
-	widevinecdm-manifest = pkgs.writeText "widevinecdm-manifest.json"
-		(builtins.toJSON {
-			name = "WidevineCdm";
-			description = "Widevine Content Decryption Module";
-			version = widevinecdm-aarch64.widevinecdmVersion;
-			"x-cdm-codecs" = "vp8,vp9.0,avc1,av01";
-			"x-cdm-host-versions" = "4.10";
-			"x-cdm-interface-versions" = "4.10";
-			"x-cdm-module-versions" = "4.10";
-			"x-cdm-persistent-license-support" = true;
-		});
 
 	firefox-unwrapped = pkgs.firefox-unwrapped;
 
 	firefox-unwrapped-widevine = pkgs.runCommandLocal "firefox-unwrapped-widevine" {
 		inherit (pkgs.firefox-unwrapped) meta version passthru buildInputs;
 		nativeBuildInputs = with pkgs; [ patchelf ];
+	  PATCH_RPATH = mkrpath (with pkgs; [ gcc.cc glib nspr nss ]);
 	} ''
 		cp -r ${firefox-unwrapped}/. $out
 		chmod -R u+w $out
@@ -36,7 +22,10 @@ let
 				exit 1
 			fi
 
-			patchelf --set-interpreter "$(cat ${glibc}/lib/ld-linux-aarch64.so.1)" "$1"
+			patchelf \
+				--set-interpreter "$(cat ${glibc}/lib/ld-linux-aarch64.so.1)" \
+				--add-rpath "$PATCH_RPATH" \
+				"$1"
 		}
 
 		glibcPatch $out/lib/firefox/firefox-bin
@@ -49,7 +38,7 @@ let
 
 		mkdir -p $out/lib/firefox/gmp-widevinecdm/${widevinecdm-aarch64.widevinecdmVersion}
 		ln -s \
-			${widevinecdm-manifest} \
+			${widevinecdm-aarch64.widevinecdmManifest} \
 			$out/lib/firefox/gmp-widevinecdm/${widevinecdm-aarch64.widevinecdmVersion}/manifest.json
 		ln -s \
 			${widevinecdm-aarch64}/WidevineCdm/_platform_specific/linux_arm64/libwidevinecdm.so \
