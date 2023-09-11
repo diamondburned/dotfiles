@@ -47,12 +47,18 @@ stdenv.mkDerivation {
 
   patchPhase =
     ''
-      patchelf --set-rpath "$PATCH_RPATH:\$ORIGIN" _platform_specific/linux_arm64/libwidevinecdm.so
-      patchelf --set-rpath "$PATCH_RPATH" _platform_specific/linux_arm64/libwidevinecdm_real.so
+			rm _platform_specific/linux_arm64/libwidevinecdm.so
+
+			patchelf \
+				--set-rpath "$PATCH_RPATH" \
+				_platform_specific/linux_arm64/libwidevinecdm_real.so
+
 			${python3}/bin/python3 ${./widevinecdm-fixup.py} \
 				_platform_specific/linux_arm64/libwidevinecdm_real.so \
 				_platform_specific/linux_arm64/libwidevinecdm.so
+
 			rm _platform_specific/linux_arm64/libwidevinecdm_real.so
+
 			chmod +x _platform_specific/linux_arm64/libwidevinecdm.so
 		'';
 

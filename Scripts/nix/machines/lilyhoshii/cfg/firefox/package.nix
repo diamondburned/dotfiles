@@ -6,11 +6,13 @@ let
 		doCheck = false;
 	});
 
-	firefox-unwrapped = pkgs.runCommandLocal "firefox-unwrapped-widevine" {
+	firefox = pkgs.wrapFirefox pkgs.firefox-unwrapped {};
+
+	firefoxWidevine = pkgs.runCommandLocal "firefox-widevine" {
 		inherit (pkgs.firefox-unwrapped) meta version passthru buildInputs;
 		nativeBuildInputs = with pkgs; [ patchelf ];
 	} ''
-		cp -r ${pkgs.firefox-unwrapped}/. $out
+		cp -r ${firefox}/. $out
 		chmod -R u+w $out
 
 		glibcPatch() {
@@ -19,9 +21,9 @@ let
 				--add-rpath ${glibc}/lib \
 				"$1"
 		}
-		glibcPatch $out/lib/firefox/firefox-bin
-		glibcPatch $out/lib/firefox/firefox
-		glibcPatch $out/bin/firefox
+		# glibcPatch $out/lib/firefox/firefox-bin
+		# glibcPatch $out/lib/firefox/firefox
+		glibcPatch $out/bin/.firefox-wrapped
 	'';
 in
-	pkgs.wrapFirefox firefox-unwrapped {}
+	firefox

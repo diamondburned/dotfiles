@@ -42,32 +42,7 @@ in
 #   };
 # in
 # (overrideCC stdenv cc).cc.cc;
-	programs.firefox.package =
-		let
-			glibc = pkgs.glibc.overrideAttrs (old: {
-				patches = old.patches ++ [ ./disable-GLIBC_ABI_DT_RELR-check.patch ];
-				doCheck = false;
-			});
-			firefox-unwrapped = pkgs.runCommandLocal "firefox-unwrapped-widevine" {
-				inherit (pkgs.firefox-unwrapped) meta version passthru buildInputs;
-				nativeBuildInputs = with pkgs; [ patchelf ];
-			} ''
-				cp -r ${pkgs.firefox-unwrapped}/. $out
-				chmod -R u+w $out
-
-				glibcPatch() {
-					patchelf \
-						--set-interpreter "$(cat ${glibc}/lib/ld-linux-aarch64.so.1)" \
-						--set-rpath ${glibc}/lib \
-						"$1"
-					echo -n "FUCK YOU FUCK YOU FUCK YOU IOBHRUOH" >> "$1"
-				}
-				glibcPatch $out/lib/firefox/firefox-bin
-				glibcPatch $out/lib/firefox/firefox
-				glibcPatch $out/bin/firefox
-			'';
-		in
-			lib.mkForce (pkgs.wrapFirefox firefox-unwrapped {});
+	programs.firefox.package = lib.mkForce (import ./package.nix { inherit pkgs; });
 
 	home.file."firefox-widevinecdm" = {
 		enable = true;
@@ -78,8 +53,8 @@ in
 		} ''
 			d=$out/${widevinecdm-aarch64.widevinecdmVersion}
 			mkdir -p $d
-			install -Dm644 ${widevinecdm-manifest} $d/manifest.json
-			install -Dm755 ${widevinecdm-aarch64}/WidevineCdm/_platform_specific/linux_arm64/libwidevinecdm.so $d/libwidevinecdm.so
+			ln -s ${widevinecdm-manifest} $d/manifest.json
+			ln -s ${widevinecdm-aarch64}/WidevineCdm/_platform_specific/linux_arm64/libwidevinecdm.so $d/libwidevinecdm.so
 		'';
 		recursive = true;
 	};

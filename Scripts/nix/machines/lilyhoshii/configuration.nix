@@ -29,4 +29,20 @@
 	environment.systemPackages = with pkgs; [
 		nix-search
 	];
+
+	services.openssh.enable = true;
+	users.users.diamond.openssh.authorizedKeys.keyFiles = [
+		<dotfiles/public_keys>
+	];
+
+	networking.firewall = {
+		enable = true;
+		allowedTCPPorts = [ ];
+		allowedUDPPorts = [ ];
+		# Allow ports for Tailscale.
+		interfaces."tailscale0" = {
+			allowedTCPPorts = [ 22 80 443 ];
+			allowedUDPPorts = [ 22 80 443 ];
+		};
+	};
 }
