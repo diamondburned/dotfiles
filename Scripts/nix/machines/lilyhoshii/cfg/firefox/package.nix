@@ -1,6 +1,8 @@
-{ pkgs, lib }:
+{ pkgs }:
 
 let
+	lib = pkgs.lib;
+
 	glibc = pkgs.callPackage ./glibc-patched.nix {};
   mkrpath = p: "${lib.makeSearchPathOutput "lib" "lib64" p}:${lib.makeLibraryPath p}";
 
