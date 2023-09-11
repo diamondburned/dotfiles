@@ -47,10 +47,7 @@ in
 	home.file."firefox-widevinecdm" = {
 		enable = true;
 		target = ".mozilla/firefox/${profilePath}/gmp-widevinecdm";
-		source = pkgs.runCommandLocal "firefox-widevinecdm" {
-			widevinecdm = widevinecdm-aarch64;
-			nativeBuildInputs = with pkgs; [ jq ];
-		} ''
+		source = pkgs.runCommandLocal "firefox-widevinecdm" {} ''
 			d=$out/${widevinecdm-aarch64.widevinecdmVersion}
 			mkdir -p $d
 			ln -s ${widevinecdm-manifest} $d/manifest.json
