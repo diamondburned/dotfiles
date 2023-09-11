@@ -4,6 +4,7 @@
 	home.packages = with pkgs; [
 			gnome-usage
 			gnome.polari
+			gnomeExtensions.vitals
 			gnomeExtensions.gsconnect
 			gnomeExtensions.dash-to-panel
 			gnomeExtensions.tiling-assistant
