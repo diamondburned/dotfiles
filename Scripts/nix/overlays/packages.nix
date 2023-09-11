@@ -22,6 +22,7 @@ self: super: {
 	neovim-gtk = super.callPackage ./packages/neovim-gtk {
 		inherit (super.nixpkgs_unstable_newer) rustPlatform;
 	};
+	nix-search = super.callPackage ./packages/nix-search.nix {};
 	inconsolata = super.callPackage ./packages/inconsolata.nix {};
 	intiface-cli = super.callPackage ./packages/intiface-cli {};
 	catnip-gtk = super.callPackage ./packages/catnip-gtk {};

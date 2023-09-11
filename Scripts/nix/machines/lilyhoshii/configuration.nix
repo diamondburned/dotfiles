@@ -25,4 +25,8 @@
 	boot.extraModprobeConfig = ''
 		options hid-apple swap_fn_leftctrl=1
 	'';
+
+	environment.systemPackages = with pkgs; [
+		nix-search
+	];
 }
