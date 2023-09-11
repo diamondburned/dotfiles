@@ -45,4 +45,19 @@
 			allowedUDPPorts = [ 22 80 443 ];
 		};
 	};
+
+	# Workaround to fix audio on boot.
+	# See tpwrules/nixos-apple-silicon#54.
+	systemd.services.fix-jack-dac-volume = {
+		script = ''
+			${pkgs.alsa-utils}/bin/amixer -c 0 set 'Jack Mixer' 100%
+		'';
+		after = [ "sound.target" ];
+		requires = [ "sound.target" ];
+		wantedBy = [ "multi-user.target" ];
+		serviceConfig = {
+			Type = "oneshot";
+			RemainAfterExit = true;
+		};
+	};
 }
