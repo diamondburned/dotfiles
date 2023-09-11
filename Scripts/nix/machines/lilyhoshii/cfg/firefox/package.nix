@@ -1,8 +1,9 @@
 { pkgs }:
 
 let
-	glibc = pkgs.glibc.overrideAttrs (old: {
-		patches = old.patches ++ [ ./disable-GLIBC_ABI_DT_RELR-check.patch ];
+	glibc = pkgs.glibc.overrideAttrs (self: super: {
+		name = "glibc-widevine-${super.version}";
+		patches = super.patches ++ [ ./disable-GLIBC_ABI_DT_RELR-check.patch ];
 		doCheck = false;
 	});
 
@@ -35,10 +36,7 @@ let
 				exit 1
 			fi
 
-			patchelf \
-				--set-interpreter "$(cat ${glibc}/lib/ld-linux-aarch64.so.1)" \
-				--add-rpath ${glibc}/lib \
-				"$1"
+			patchelf --set-interpreter "$(cat ${glibc}/lib/ld-linux-aarch64.so.1)" "$1"
 		}
 
 		glibcPatch $out/lib/firefox/firefox-bin
