@@ -53,6 +53,7 @@
 			gcolor3
 			gimp
 			qalculate-gtk
+			libreoffice-fresh
 		];
 		home.stateVersion = "23.11";
 
