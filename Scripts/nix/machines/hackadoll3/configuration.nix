@@ -80,7 +80,6 @@ in {
 		<dotfiles/cfg/keyd>
 		<dotfiles/cfg/avahi>
 		<dotfiles/cfg/gps>
-		<dotfiles/cfg/nvim>
 	];
 
 	nixpkgs.config = {
@@ -522,6 +521,7 @@ in {
 			<dotfiles/cfg/hm-blackbox-terminal.nix>
 			<dotfiles/cfg/hm-gnome-terminal.nix>
 			<dotfiles/cfg/hm-alacritty.nix>
+			<dotfiles/cfg/nvim/home.nix>
 
 			# (import <dotfiles/utils/schedule.nix {
 			# 	name        = "birthdayer-juan";

@@ -4,7 +4,10 @@ let gtkcord4 = rec {
 		version = "0.0.12";
 		hashes = {
 			src = "sha256-x//PST2f501QuxRdPe3cYbpL66/zLJWmscED9SbxsTk=";
-			bin = "sha256-/TfoMYz5u5m/EGc4DBf5vD1TpV8NWp4Mopbrdn2LtIc=";
+			bin = {
+				arm64 = "sha256-/TfoMYz5u5m/EGc4DBf5vD1TpV8NWp4Mopbrdn2LtIc=";
+				amd64 = "sha256-u++ZDq1uWreTjyalce+8xlapWrJ3iX/3xBXaLVpyZi8=";
+			};
 		};
 
 		src = pkgs.fetchFromGitHub {
@@ -22,7 +25,7 @@ let gtkcord4 = rec {
 		bin = pkgs.runCommand "gtkcord4-bin" {
 			src = pkgs.fetchurl {
 				url = "https://github.com/diamondburned/gtkcord4/releases/download/v${version}/gtkcord4-linux-${arch}-v${version}-.tar.zst";
-				sha256 = hashes.bin;
+				sha256 = hashes.bin.${arch};
 			};
 			nativeBuildInputs = with pkgs; [
 				zstd
