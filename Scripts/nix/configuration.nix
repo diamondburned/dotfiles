@@ -20,7 +20,7 @@ in
 				description = "Automatically push dotfiles";
 				calendar    = "hourly";
 				command     = ''
-					cd ~/ && git add -A && git commit -m Update && git pull --ff-only && git push origin
+					cd ~/ && git add -A && git commit -m Update && git pull --rebase && git push origin
 					exit 0
 				'';
 			})
