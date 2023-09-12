@@ -51,6 +51,7 @@
 			gnome.gnome-disk-utility
 			gnome.gnome-power-manager
 			gcolor3
+			gimp
 			qalculate-gtk
 		];
 		home.stateVersion = "23.11";
