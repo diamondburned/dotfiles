@@ -43,7 +43,6 @@
 			playerctl
 			foot # TODO mgirate to HM
 			zellij
-			gpt4all
 			gtkcord4
 			silver-searcher
 			pavucontrol

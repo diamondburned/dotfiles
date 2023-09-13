@@ -5,6 +5,7 @@
 			gnome-usage
 			gnome.polari
 			gnomeExtensions.vitals
+			gnomeExtensions.caffeine
 			gnomeExtensions.gsconnect
 			gnomeExtensions.dash-to-panel
 			gnomeExtensions.tiling-assistant
