@@ -42,6 +42,7 @@
 			wl-clipboard
 			playerctl
 			foot # TODO mgirate to HM
+			zellij
 			gtkcord4
 			silver-searcher
 			pavucontrol
