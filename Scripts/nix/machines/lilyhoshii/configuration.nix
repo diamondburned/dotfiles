@@ -28,6 +28,7 @@
 
 	environment.systemPackages = with pkgs; [
 		nix-search
+		nix-index
 	];
 
 	services.openssh.enable = true;
