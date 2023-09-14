@@ -23,6 +23,8 @@
 	programs.dconf.enable = true;
 	services.dbus.packages = with pkgs; [ dconf ];
 
+	programs.fuse.userAllowOther = true;
+
 	boot.extraModprobeConfig = ''
 		options hid-apple swap_fn_leftctrl=1
 	'';
@@ -30,6 +32,7 @@
 	environment.systemPackages = with pkgs; [
 		nix-search
 		nix-index
+		tmux
 	];
 
 	services.openssh.enable = true;
