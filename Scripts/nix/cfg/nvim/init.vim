@@ -16,6 +16,7 @@ Plug 'gpanders/editorconfig.nvim'
 Plug 'folke/todo-comments.nvim'
 Plug 'chrisbra/Colorizer'
 Plug 'luochen1990/rainbow'
+Plug 'ojroques/nvim-osc52'
 
 Plug 'hhhapz/firenvim', { 'do': { _ -> firenvim#install(0) } }
 Plug 'andreypopp/vim-colors-plain'
@@ -65,6 +66,28 @@ inoremap <C-v> <Esc>"+pi<Right>
 map - dd
 
 set clipboard+=unnamedplus
+
+lua <<EOF
+	require('osc52').setup {
+	  max_length = 0,
+	  silent     = true,
+	  trim       = false,
+	}
+	
+	local function copy(lines, _)
+	  require('osc52').copy(table.concat(lines, '\n'))
+	end
+	
+	local function paste()
+	  return {vim.fn.split(vim.fn.getreg(''), '\n'), vim.fn.getregtype('')}
+	end
+	
+	vim.g.clipboard = {
+	  name = 'osc52',
+	  copy = {['+'] = copy, ['*'] = copy},
+	  paste = {['+'] = paste, ['*'] = paste},
+	}
+EOF
 
 "80/100 column styling"
 set textwidth=80
