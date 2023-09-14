@@ -41,6 +41,7 @@
 			fcitx5-gtk
 			wl-clipboard
 			playerctl
+			oxfs
 			foot # TODO mgirate to HM
 			zellij
 			gtkcord4
