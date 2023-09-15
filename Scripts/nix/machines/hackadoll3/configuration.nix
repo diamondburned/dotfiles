@@ -190,7 +190,7 @@ in {
 	# 	"1.1.1.1" "1.0.0.1"
 	# ];
 	networking.firewall = {
-		enable = false;
+		enable = true;
 		checkReversePath = false;
 		allowedTCPPortRanges = [
 			{ from = 1714; to = 1764; } # GSConnect
@@ -198,10 +198,16 @@ in {
 		allowedUDPPortRanges = [
 			{ from = 1714; to = 1764; } # GSConnect;
 		];
-		#                        v  Steam  v
-		allowedTCPPorts = [ 1337 27036 27037 ];
-		allowedUDPPorts = [ 1337 27031 27036 ];
+		#                   v  Steam  v
+		allowedTCPPorts = [ 27036 27037 ];
+		allowedUDPPorts = [ 27031 27036 ];
+		# Allow any ports for Tailscale.
+		interfaces.tailscale0 = {
+			allowedTCPPortRanges = [ { from = 0; to = 65535; } ];
+			allowedUDPPortRanges = [ { from = 0; to = 65535; } ];
+		};
 	};
+
 	networking.nat = {
 		enable = true;
 		internalInterfaces = [ "ve-+" ];                                                                                            
@@ -325,7 +331,7 @@ in {
 	# Enable the OpenSSH daemon.
 	services.openssh = {
 		enable = true;
-		ports  = [ 1337 ];
+		ports  = [ 22 ];
 		settings.PasswordAuthentication = false;
 	};
 
