@@ -121,7 +121,7 @@ autocmd BufRead,BufNewFile *.html   setlocal textwidth=100
 autocmd BufRead,BufNewFile *.templ  setlocal textwidth=100
 autocmd BufRead,BufNewFile *.cpp    setlocal expandtab tabstop=2 shiftwidth=2
 autocmd BufRead,BufNewFile *.asm    set filetype=nasm textwidth=400
-autocmd BufRead,BufNewFile *s       set filetype=mips textwidth=400
+autocmd BufRead,BufNewFile *.s      set filetype=mips textwidth=400
 autocmd BufRead,BufNewFile *.hpp    set filetype=cpp
 
 "Go to last cursor on file open"
