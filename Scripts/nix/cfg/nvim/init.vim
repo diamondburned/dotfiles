@@ -231,9 +231,6 @@ lua <<EOF
 		view = {
 			width = 28,
 			signcolumn = "no",
-			mappings = {
-				custom_only = true,
-			},
 		},
 		renderer = {
 			add_trailing = true,
