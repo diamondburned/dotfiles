@@ -56,6 +56,8 @@
 			gimp
 			qalculate-gtk
 			libreoffice-fresh
+
+			(callPackage ./packages/spot-git.nix {})
 		];
 		home.stateVersion = "23.11";
 
