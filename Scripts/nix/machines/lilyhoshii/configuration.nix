@@ -8,7 +8,7 @@
 		<dotfiles/cfg/fonts>
 		<dotfiles/cfg/gnome>
 		<dotfiles/cfg/tailscale>
-		./cfg/speakers # !!!: DANGEROUS
+		# ./cfg/speakers # !!!: DANGEROUS
 		./home.nix
 	];
 
