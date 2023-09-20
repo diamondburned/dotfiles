@@ -786,6 +786,7 @@ in {
 			# perf_data_converter
 			tree
 			fzf
+			zellij
 			graphviz
 			gnuplot
 			vimHugeX
