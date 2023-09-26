@@ -1,6 +1,14 @@
 { config, lib, pkgs, ... }:
 
 {
+	imports = [
+		<dotfiles/overlays/packages/speakersafetyd/module.nix>
+	];
+
+	services.speakersafetyd = {
+		enable = true;
+	};
+
 	# Enable unsafe speaker configuration.
 	# See sound/soc/apple/macaudio.c:71.
 	boot.kernelParams = [ "snd-soc-macaudio.please_blow_up_my_speakers=1" ];
