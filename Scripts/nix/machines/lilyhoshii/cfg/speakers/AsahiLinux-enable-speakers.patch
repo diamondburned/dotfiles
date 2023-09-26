@@ -7,7 +7,7 @@ index 03e3f6744..33f24c1c9 100644
  			 * blowing your speakers.
  			 */
 -			status = "disabled";
-+			status = "enabled";
++			status = "okay";
  
  			cpu {
  				sound-dai = <&mca 0>, <&mca 1>;
@@ -20,7 +20,7 @@ index 4abd3edc0..3666ee648 100644
  			* blowing your speakers.
  			*/
 -			status = "disabled";
-+			status = "enabled";
++			status = "okay";
  			cpu {
  				sound-dai = <&mca 0>;
  			};
@@ -33,7 +33,7 @@ index c4e861f9f..7137640ec 100644
  			 * blowing your speakers.
  			 */
 -			status = "disabled";
-+			status = "enabled";
++			status = "okay";
  
  			cpu {
  				sound-dai = <&mca 0>, <&mca 1>;
@@ -46,7 +46,7 @@ index 7836d1607..c9053702f 100644
  			 * blowing your speakers.
  			 */
 -			status = "disabled";
-+			status = "enabled";
++			status = "okay";
  
  			cpu {
  				sound-dai = <&mca 0>, <&mca 1>;
@@ -59,7 +59,7 @@ index d4724ffd6..7c6a305d3 100644
  			 * blowing your speakers.
  			 */
 -			status = "disabled";
-+			status = "enabled";
++			status = "okay";
  
  			cpu {
  				sound-dai = <&mca 0>, <&mca 1>;
@@ -72,7 +72,7 @@ index ac29b7bc5..406d31053 100644
  			 * blowing your speakers.
  			 */
 -			status = "disabled";
-+			status = "enabled";
++			status = "okay";
  
  			cpu {
  				sound-dai = <&mca 0>, <&mca 1>;
