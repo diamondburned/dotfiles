@@ -23,7 +23,15 @@ in
 		};
 	};
 
-	programs.firefox.package = lib.mkForce (import ./package.nix { inherit pkgs; });
+	# TODO: fix crash:
+	#  [GFX1-]: glxtest: ManageChildProcess failed
+	#  [GFX1-]: No GPUs detected via PCI
+	programs.firefox.package = lib.mkForce
+		(pkgs.wrapFirefox
+			(import ./firefox-unwrapped.nix { pkgs = unstable; })
+			{});
+	# programs.firefox.package = lib.mkForce
+	# 	(pkgs.wrapFirefox unstable.firefox-unwrapped {});
 
 	# home.file."firefox-widevinecdm" = {
 	# 	enable = true;

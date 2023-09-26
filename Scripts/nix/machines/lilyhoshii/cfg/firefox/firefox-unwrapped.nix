@@ -44,4 +44,4 @@ let
 			$out/lib/firefox/gmp-widevinecdm/${widevinecdm-aarch64.widevinecdmVersion}/libwidevinecdm.so
 	'';
 in
-	pkgs.wrapFirefox firefox-unwrapped-widevine {}
+	firefox-unwrapped-widevine
