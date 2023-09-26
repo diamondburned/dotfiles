@@ -2,18 +2,21 @@
 
 let
 	lib = pkgs.lib;
+	unstable = import <nixpkgs> {
+		config = { allowUnfree = true; };
+	};
 
-	glibc = pkgs.callPackage ./glibc-patched.nix {};
+	glibc = unstable.callPackage ./glibc-patched.nix {};
   mkrpath = p: "${lib.makeSearchPathOutput "lib" "lib64" p}:${lib.makeLibraryPath p}";
 
-	widevinecdm-aarch64 = pkgs.callPackage ./widevinecdm.nix {};
+	widevinecdm-aarch64 = unstable.callPackage ./widevinecdm.nix {};
 
-	firefox-unwrapped = pkgs.firefox-unwrapped;
+	firefox-unwrapped = unstable.firefox-unwrapped;
 
 	firefox-unwrapped-widevine = pkgs.runCommandLocal "firefox-unwrapped-widevine" {
-		inherit (pkgs.firefox-unwrapped) meta version passthru buildInputs;
+		inherit (firefox-unwrapped) meta version passthru buildInputs;
 		nativeBuildInputs = with pkgs; [ patchelf ];
-	  PATCH_RPATH = mkrpath (with pkgs; [ gcc.cc glib nspr nss ]);
+	  PATCH_RPATH = mkrpath (with unstable; [ gcc.cc glib nspr nss ]);
 	} ''
 		cp -r ${firefox-unwrapped}/. $out
 		chmod -R u+w $out
@@ -35,9 +38,6 @@ let
 		glibcPatch $out/bin/firefox
 		glibcPatch $out/bin/.firefox-wrapped
 
-		# This is also done in home-manager.
-		# I'm doing this here just in case, but Firefox reports it as installed.
-
 		mkdir -p $out/lib/firefox/gmp-widevinecdm/${widevinecdm-aarch64.widevinecdmVersion}
 		ln -s \
 			${widevinecdm-aarch64.widevinecdmManifest} \
@@ -47,4 +47,4 @@ let
 			$out/lib/firefox/gmp-widevinecdm/${widevinecdm-aarch64.widevinecdmVersion}/libwidevinecdm.so
 	'';
 in
-	pkgs.wrapFirefox firefox-unwrapped-widevine {}
+	unstable.wrapFirefox firefox-unwrapped-widevine {}

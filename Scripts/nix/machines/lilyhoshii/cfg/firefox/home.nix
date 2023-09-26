@@ -19,28 +19,17 @@ in
 		};
 	};
 
-# buildCC = pkgs: glibc: with pkgs;
-# let
-#   cc = wrapCCWith {
-#     cc = gcc-unwrapped;
-#     libc = glibc;
-#     bintools = binutils.override {
-#       libc = glibc;
-#     };
-#   };
-# in
-# (overrideCC stdenv cc).cc.cc;
-	programs.firefox.package = lib.mkForce (import ./package.nix { inherit pkgs; });
-
-	home.file."firefox-widevinecdm" = {
-		enable = true;
-		target = ".mozilla/firefox/${profilePath}/gmp-widevinecdm";
-		source = pkgs.runCommandLocal "firefox-widevinecdm" {} ''
-			d=$out/${widevinecdm-aarch64.widevinecdmVersion}
-			mkdir -p $d
-			ln -s ${widevinecdm-aarch64.widevinecdmManifest} $d/manifest.json
-			ln -s ${widevinecdm-aarch64}/WidevineCdm/_platform_specific/linux_arm64/libwidevinecdm.so $d/libwidevinecdm.so
-		'';
-		recursive = true;
-	};
+	# programs.firefox.package = lib.mkForce (import ./package.nix { inherit pkgs; });
+	#
+	# home.file."firefox-widevinecdm" = {
+	# 	enable = true;
+	# 	target = ".mozilla/firefox/${profilePath}/gmp-widevinecdm";
+	# 	source = pkgs.runCommandLocal "firefox-widevinecdm" {} ''
+	# 		d=$out/${widevinecdm-aarch64.widevinecdmVersion}
+	# 		mkdir -p $d
+	# 		ln -s ${widevinecdm-aarch64.widevinecdmManifest} $d/manifest.json
+	# 		ln -s ${widevinecdm-aarch64}/WidevineCdm/_platform_specific/linux_arm64/libwidevinecdm.so $d/libwidevinecdm.so
+	# 	'';
+	# 	recursive = true;
+	# };
 }
