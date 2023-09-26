@@ -1,9 +1,7 @@
 { config, lib, pkgs, ... }:
 
 let
-	alsa-ucm-conf-asahi = pkgs.callPackage ./alsa-ucm-conf-asahi.nix {
-		inherit (pkgs) alsa-ucm-conf;
-	};
+	alsa-ucm-conf-asahi = pkgs.callPackage ./alsa-ucm-conf-asahi.nix { };
 in
 
 {
