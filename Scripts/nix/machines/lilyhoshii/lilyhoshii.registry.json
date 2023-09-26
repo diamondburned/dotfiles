@@ -6,7 +6,7 @@
     },
     "to": {
       "type": "path",
-      "path": "/nix/store/radcp7jlhihig92irnyj83hz46pc938b-bonito-vfHOP6vDs6qBy-6e-home-manager/bonito-vfHOP6vDs6qBy-6e-home-manager"
+      "path": "/nix/store/c3fpm2p7d8yyrv7w2za0qqwvr19q3rxy-bonito-_AEH_w0VH0ewzTRk-home-manager/bonito-_AEH_w0VH0ewzTRk-home-manager"
     }
   },
   "bonito:home-manager_unstable": {
@@ -16,7 +16,7 @@
     },
     "to": {
       "type": "path",
-      "path": "/nix/store/radcp7jlhihig92irnyj83hz46pc938b-bonito-vfHOP6vDs6qBy-6e-home-manager/bonito-vfHOP6vDs6qBy-6e-home-manager"
+      "path": "/nix/store/c3fpm2p7d8yyrv7w2za0qqwvr19q3rxy-bonito-_AEH_w0VH0ewzTRk-home-manager/bonito-_AEH_w0VH0ewzTRk-home-manager"
     }
   },
   "bonito:nixos": {
@@ -26,7 +26,7 @@
     },
     "to": {
       "type": "path",
-      "path": "/nix/store/x7r2zpk53cbxgiawhpfkd746cqniwfjb-bonito-Q8ZROSrRLF_J4ypL-nixpkgs/bonito-Q8ZROSrRLF_J4ypL-nixpkgs"
+      "path": "/nix/store/7ld12v38v0qihzcahpmvfq1qdpa7njwh-bonito-8F-KMk1cQGHIwLKS-nixpkgs/bonito-8F-KMk1cQGHIwLKS-nixpkgs"
     }
   },
   "bonito:nixpkgs": {
@@ -36,7 +36,7 @@
     },
     "to": {
       "type": "path",
-      "path": "/nix/store/x7r2zpk53cbxgiawhpfkd746cqniwfjb-bonito-Q8ZROSrRLF_J4ypL-nixpkgs/bonito-Q8ZROSrRLF_J4ypL-nixpkgs"
+      "path": "/nix/store/7ld12v38v0qihzcahpmvfq1qdpa7njwh-bonito-8F-KMk1cQGHIwLKS-nixpkgs/bonito-8F-KMk1cQGHIwLKS-nixpkgs"
     }
   },
   "bonito:nixpkgs_unstable": {
@@ -46,27 +46,7 @@
     },
     "to": {
       "type": "path",
-      "path": "/nix/store/x7r2zpk53cbxgiawhpfkd746cqniwfjb-bonito-Q8ZROSrRLF_J4ypL-nixpkgs/bonito-Q8ZROSrRLF_J4ypL-nixpkgs"
-    }
-  },
-  "bonito:nixpkgs_unstable_newer": {
-    "from": {
-      "type": "indirect",
-      "id": "nixpkgs_unstable_newer"
-    },
-    "to": {
-      "type": "path",
       "path": "/nix/store/7ld12v38v0qihzcahpmvfq1qdpa7njwh-bonito-8F-KMk1cQGHIwLKS-nixpkgs/bonito-8F-KMk1cQGHIwLKS-nixpkgs"
-    }
-  },
-  "bonito:nixpkgs_unstable_older": {
-    "from": {
-      "type": "indirect",
-      "id": "nixpkgs_unstable_older"
-    },
-    "to": {
-      "type": "path",
-      "path": "/nix/store/rycl94f14m0i35m35iw1fq1ippxx7f44-bonito-ux71T8c7dlt7heny-nixpkgs/bonito-ux71T8c7dlt7heny-nixpkgs"
     }
   }
 }

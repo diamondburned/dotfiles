@@ -2,21 +2,18 @@
 
 let
 	lib = pkgs.lib;
-	unstable = import <nixpkgs> {
-		config = { allowUnfree = true; };
-	};
 
-	glibc = unstable.callPackage ./glibc-patched.nix {};
+	glibc = pkgs.callPackage ./glibc-patched.nix {};
   mkrpath = p: "${lib.makeSearchPathOutput "lib" "lib64" p}:${lib.makeLibraryPath p}";
 
-	widevinecdm-aarch64 = unstable.callPackage ./widevinecdm.nix {};
+	widevinecdm-aarch64 = pkgs.callPackage ./widevinecdm.nix {};
 
-	firefox-unwrapped = unstable.firefox-unwrapped;
+	firefox-unwrapped = pkgs.firefox-unwrapped;
 
 	firefox-unwrapped-widevine = pkgs.runCommandLocal "firefox-unwrapped-widevine" {
 		inherit (firefox-unwrapped) meta version passthru buildInputs;
 		nativeBuildInputs = with pkgs; [ patchelf ];
-	  PATCH_RPATH = mkrpath (with unstable; [ gcc.cc glib nspr nss ]);
+	  PATCH_RPATH = mkrpath (with pkgs; [ gcc.cc glib nspr nss ]);
 	} ''
 		cp -r ${firefox-unwrapped}/. $out
 		chmod -R u+w $out
@@ -47,4 +44,4 @@ let
 			$out/lib/firefox/gmp-widevinecdm/${widevinecdm-aarch64.widevinecdmVersion}/libwidevinecdm.so
 	'';
 in
-	unstable.wrapFirefox firefox-unwrapped-widevine {}
+	pkgs.wrapFirefox firefox-unwrapped-widevine {}

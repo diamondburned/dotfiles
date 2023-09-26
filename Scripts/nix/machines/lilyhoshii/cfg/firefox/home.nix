@@ -4,7 +4,11 @@ let
 	profileName = "default";
 	profilePath = "q1f740f8.default";
 
-	widevinecdm-aarch64 = pkgs.callPackage ./widevinecdm.nix {};
+	unstable = import <unstable> {
+		config = { allowUnfree = true; };
+	};
+
+	widevinecdm-aarch64 = unstable.callPackage ./widevinecdm.nix {};
 in
 
 {
@@ -19,8 +23,8 @@ in
 		};
 	};
 
-	# programs.firefox.package = lib.mkForce (import ./package.nix { inherit pkgs; });
-	#
+	programs.firefox.package = lib.mkForce (import ./package.nix { inherit pkgs; });
+
 	# home.file."firefox-widevinecdm" = {
 	# 	enable = true;
 	# 	target = ".mozilla/firefox/${profilePath}/gmp-widevinecdm";

@@ -12,12 +12,11 @@
 
 [users.root]
  use-sudo = true
- override-channels = true
+ override-channels = false
 
 [users.root.channels]
  nixpkgs_unstable_newer = "github:NixOS/nixpkgs 1c9db9710c"
  nur = "github:nix-community/NUR master"
- # unstable = "https://nixos.org/channels/nixos-unstable"
 
 [users.diamond]
  override-channels = false
