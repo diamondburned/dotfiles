@@ -66,4 +66,11 @@
 			RemainAfterExit = true;
 		};
 	};
+
+	services.earlyoom = {
+		enable = true;
+		enableNotifications = true;
+		freeSwapThreshold = 15;
+		freeSwapKillThreshold = 5;
+	};
 }
