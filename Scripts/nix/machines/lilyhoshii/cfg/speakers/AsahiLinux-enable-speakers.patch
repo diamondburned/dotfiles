@@ -1,0 +1,78 @@
+diff --git a/arch/arm64/boot/dts/apple/t600x-j314-j316.dtsi b/arch/arm64/boot/dts/apple/t600x-j314-j316.dtsi
+index 03e3f6744..33f24c1c9 100644
+--- a/arch/arm64/boot/dts/apple/t600x-j314-j316.dtsi
++++ b/arch/arm64/boot/dts/apple/t600x-j314-j316.dtsi
+@@ -439,7 +439,7 @@ dai-link@0 {
+ 			 * to attenuate the audio stream, you run the risk of
+ 			 * blowing your speakers.
+ 			 */
+-			status = "disabled";
++			status = "enabled";
+ 
+ 			cpu {
+ 				sound-dai = <&mca 0>, <&mca 1>;
+diff --git a/arch/arm64/boot/dts/apple/t600x-j375.dtsi b/arch/arm64/boot/dts/apple/t600x-j375.dtsi
+index 4abd3edc0..3666ee648 100644
+--- a/arch/arm64/boot/dts/apple/t600x-j375.dtsi
++++ b/arch/arm64/boot/dts/apple/t600x-j375.dtsi
+@@ -300,7 +300,7 @@ dai-link@0 {
+ 			* to attenuate the audio stream, you run the risk of
+ 			* blowing your speakers.
+ 			*/
+-			status = "disabled";
++			status = "enabled";
+ 			cpu {
+ 				sound-dai = <&mca 0>;
+ 			};
+diff --git a/arch/arm64/boot/dts/apple/t8103-j293.dts b/arch/arm64/boot/dts/apple/t8103-j293.dts
+index c4e861f9f..7137640ec 100644
+--- a/arch/arm64/boot/dts/apple/t8103-j293.dts
++++ b/arch/arm64/boot/dts/apple/t8103-j293.dts
+@@ -160,7 +160,7 @@ dai-link@0 {
+ 			 * to attenuate the audio stream, you run the risk of
+ 			 * blowing your speakers.
+ 			 */
+-			status = "disabled";
++			status = "enabled";
+ 
+ 			cpu {
+ 				sound-dai = <&mca 0>, <&mca 1>;
+diff --git a/arch/arm64/boot/dts/apple/t8103-j313.dts b/arch/arm64/boot/dts/apple/t8103-j313.dts
+index 7836d1607..c9053702f 100644
+--- a/arch/arm64/boot/dts/apple/t8103-j313.dts
++++ b/arch/arm64/boot/dts/apple/t8103-j313.dts
+@@ -135,7 +135,7 @@ dai-link@0 {
+ 			 * to attenuate the audio stream, you run the risk of
+ 			 * blowing your speakers.
+ 			 */
+-			status = "disabled";
++			status = "enabled";
+ 
+ 			cpu {
+ 				sound-dai = <&mca 0>, <&mca 1>;
+diff --git a/arch/arm64/boot/dts/apple/t8112-j413.dts b/arch/arm64/boot/dts/apple/t8112-j413.dts
+index d4724ffd6..7c6a305d3 100644
+--- a/arch/arm64/boot/dts/apple/t8112-j413.dts
++++ b/arch/arm64/boot/dts/apple/t8112-j413.dts
+@@ -169,7 +169,7 @@ dai-link@0 {
+ 			 * to attenuate the audio stream, you run the risk of
+ 			 * blowing your speakers.
+ 			 */
+-			status = "disabled";
++			status = "enabled";
+ 
+ 			cpu {
+ 				sound-dai = <&mca 0>, <&mca 1>;
+diff --git a/arch/arm64/boot/dts/apple/t8112-j493.dts b/arch/arm64/boot/dts/apple/t8112-j493.dts
+index ac29b7bc5..406d31053 100644
+--- a/arch/arm64/boot/dts/apple/t8112-j493.dts
++++ b/arch/arm64/boot/dts/apple/t8112-j493.dts
+@@ -157,7 +157,7 @@ dai-link@0 {
+ 			 * to attenuate the audio stream, you run the risk of
+ 			 * blowing your speakers.
+ 			 */
+-			status = "disabled";
++			status = "enabled";
+ 
+ 			cpu {
+ 				sound-dai = <&mca 0>, <&mca 1>;
