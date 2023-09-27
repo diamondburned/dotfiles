@@ -5,12 +5,17 @@
 		<dotfiles/overlays/packages/speakersafetyd/module.nix>
 	];
 
-	# services.speakersafetyd = {
-	# 	enable = true;
-	# 	extraConfig = {
-	# 		j313 = ./j313.conf;
-	# 	};
-	# };
+	services.speakersafetyd = {
+		enable = true;
+		package = pkgs.speakersafetyd.overrideAttrs (old: {
+			postPatch = (old.postPatch or "") + ''
+				sed -i 's|" Speaker Volume"|" Speaker Playback Volume"|g' src/types.rs
+			'';
+		});
+		extraConfig = {
+			j313 = ./j313.conf;
+		};
+	};
 
 	# Enable unsafe speaker configuration.
 	# See sound/soc/apple/macaudio.c:71.

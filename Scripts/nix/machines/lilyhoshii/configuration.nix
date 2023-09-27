@@ -2,6 +2,7 @@
 
 {
 	imports = [
+		<nixos-apple-silicon/apple-silicon-support>
 		<home-manager/nixos>
 		<dotfiles/secrets>
 		<dotfiles/cfg/keyd>
@@ -11,6 +12,19 @@
 		./cfg/speakers # !!!: DANGEROUS
 		./home.nix
 	];
+
+  hardware.asahi.addEdgeKernelConfig = lib.mkForce true;
+  hardware.asahi.useExperimentalGPUDriver = lib.mkForce true;
+
+	systemd.services.mount-asahi = {
+		enable = true;
+		script = builtins.readFile ./mount-asahi;
+		wantedBy = [ "multi-user.target" ];
+		serviceConfig = {
+			Type = "oneshot";
+			RemainAfterExit = true;
+		};
+	};
 
 	nixpkgs = {
 		config.allowUnfree = true;
