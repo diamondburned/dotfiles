@@ -5,12 +5,12 @@
 		<dotfiles/overlays/packages/speakersafetyd/module.nix>
 	];
 
-	services.speakersafetyd = {
-		enable = true;
-		extraConfig = {
-			j313 = ./j313.conf;
-		};
-	};
+	# services.speakersafetyd = {
+	# 	enable = true;
+	# 	extraConfig = {
+	# 		j313 = ./j313.conf;
+	# 	};
+	# };
 
 	# Enable unsafe speaker configuration.
 	# See sound/soc/apple/macaudio.c:71.
@@ -33,16 +33,16 @@
 		})
 	];
 
-	# system.replaceRuntimeDependencies = [
-	# 	{
-	# 		original = pkgs.alsa-ucm-conf;
-	# 		replacement = pkgs.alsa-ucm-conf-asahi;
-	# 	}
-	# 	{
-	# 		original = pkgs.alsa-lib;
-	# 		replacement = pkgs.alsa-lib-asahi;
-	# 	}
-	# ];
+	system.replaceRuntimeDependencies = [
+		{
+			original = pkgs.alsa-ucm-conf;
+			replacement = pkgs.alsa-ucm-conf-asahi;
+		}
+		{
+			original = pkgs.alsa-lib;
+			replacement = pkgs.alsa-lib-asahi;
+		}
+	];
 
 	# environment.systemPackages = with pkgs; [
 	# 	alsa-ucm-conf-asahi
