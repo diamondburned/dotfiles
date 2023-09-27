@@ -7,6 +7,9 @@
 
 	services.speakersafetyd = {
 		enable = true;
+		extraConfig = {
+			j313 = ./j313.conf;
+		};
 	};
 
 	# Enable unsafe speaker configuration.
