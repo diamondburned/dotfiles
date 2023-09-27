@@ -5,17 +5,17 @@
 		<dotfiles/overlays/packages/speakersafetyd/module.nix>
 	];
 
-	services.speakersafetyd = {
-		enable = true;
-		package = pkgs.speakersafetyd.overrideAttrs (old: {
-			postPatch = (old.postPatch or "") + ''
-				sed -i 's|" Speaker Volume"|" Speaker Playback Volume"|g' src/types.rs
-			'';
-		});
-		extraConfig = {
-			j313 = ./j313.conf;
-		};
-	};
+	# services.speakersafetyd = {
+	# 	enable = true;
+	# 	package = pkgs.speakersafetyd.overrideAttrs (old: {
+	# 		postPatch = (old.postPatch or "") + ''
+	# 			sed -i 's|" Speaker Volume"|" Speaker Playback Volume"|g' src/types.rs
+	# 		'';
+	# 	});
+	# 	extraConfig = {
+	# 		j313 = ./j313.conf;
+	# 	};
+	# };
 
 	# Enable unsafe speaker configuration.
 	# See sound/soc/apple/macaudio.c:71.
@@ -38,16 +38,19 @@
 		})
 	];
 
-	system.replaceRuntimeDependencies = [
-		{
-			original = pkgs.alsa-ucm-conf;
-			replacement = pkgs.alsa-ucm-conf-asahi;
-		}
-		{
-			original = pkgs.alsa-lib;
-			replacement = pkgs.alsa-lib-asahi;
-		}
-	];
+	# The ALSA config doesn't seem to work at all, but it at least detects the speakers. The speakers
+	# are still detected even without this.
+
+	# system.replaceRuntimeDependencies = [
+	# 	{
+	# 		original = pkgs.alsa-ucm-conf;
+	# 		replacement = pkgs.alsa-ucm-conf-asahi;
+	# 	}
+	# 	{
+	# 		original = pkgs.alsa-lib;
+	# 		replacement = pkgs.alsa-lib-asahi;
+	# 	}
+	# ];
 
 	# environment.systemPackages = with pkgs; [
 	# 	alsa-ucm-conf-asahi

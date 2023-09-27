@@ -18,7 +18,9 @@
 
 	systemd.services.mount-asahi = {
 		enable = true;
-		script = builtins.readFile ./mount-asahi;
+		script = ''
+			/run/wrappers/bin/mount /dev/disk/by-partuuid/$(< /proc/device-tree/chosen/asahi,efi-system-partition) /boot
+		'';
 		wantedBy = [ "multi-user.target" ];
 		serviceConfig = {
 			Type = "oneshot";
@@ -70,8 +72,10 @@
 	# See tpwrules/nixos-apple-silicon#54.
 	systemd.services.fix-jack-dac-volume = {
 		script = ''
-			${pkgs.alsa-utils}/bin/amixer -c 0 set 'Jack Mixer' 100%
+			amixer -c 0 set 'Jack Mixer' 100%
+			amixer -c 0 set 'Speaker Playback Mux' Primary
 		'';
+		path = with pkgs; [ alsa-utils ];
 		after = [ "sound.target" ];
 		requires = [ "sound.target" ];
 		wantedBy = [ "multi-user.target" ];
