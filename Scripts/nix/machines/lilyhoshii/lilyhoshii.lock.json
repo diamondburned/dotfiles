@@ -5,16 +5,20 @@
       "store_hash": "7ld12v38v0qihzcahpmvfq1qdpa7njwh"
     },
     "github:NixOS/nixpkgs nixos-unstable": {
-      "url": "https://github.com/NixOS/nixpkgs/archive/0bffda19b8af722f8069d09d8b6a24594c80b352.tar.gz",
-      "store_hash": "f6v0k1b36yf5h709gg356b1yhkdjbrfc"
+      "url": "https://github.com/NixOS/nixpkgs/archive/8a86b98f0ba1c405358f1b71ff8b5e1d317f5db2.tar.gz",
+      "store_hash": "kg6wz5xv8nzxnqimgz1hxznavhmpjkrl"
     },
     "github:nix-community/NUR master": {
-      "url": "https://github.com/nix-community/NUR/archive/f98e29d5f2406c4bfeca4d1003d4a95bca0b8ed8.tar.gz",
-      "store_hash": "cqilxii49ckw3mfhg0zp09w62ibl43xs"
+      "url": "https://github.com/nix-community/NUR/archive/de1f391fb5953123d0244282540eee79bfe4ed0d.tar.gz",
+      "store_hash": "4f80yanjklbh4zkqvgj5z3v654m8bygq"
     },
     "github:nix-community/home-manager master": {
-      "url": "https://github.com/nix-community/home-manager/archive/19c6a4081b14443420358262f8416149bd79561a.tar.gz",
-      "store_hash": "c3fpm2p7d8yyrv7w2za0qqwvr19q3rxy"
+      "url": "https://github.com/nix-community/home-manager/archive/ae896c810f501bf0c3a2fd7fc2de094dd0addf01.tar.gz",
+      "store_hash": "3m7irgp3q80ipf9igf9jpdcxmcrr2q57"
+    },
+    "github:tpwrules/nixos-apple-silicon main": {
+      "url": "https://github.com/tpwrules/nixos-apple-silicon/archive/096dc63e5426e17f70b4a8bf7716c3dd3430ba8c.tar.gz",
+      "store_hash": "mh9sbc5hp4vnp02h4aa1x59fcf8q5ij4"
     }
   }
 }

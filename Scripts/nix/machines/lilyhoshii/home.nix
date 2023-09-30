@@ -49,6 +49,7 @@
 			pavucontrol
 			go
 			gopls
+			gotab
 			gnome.gnome-tweaks
 			gnome.gnome-disk-utility
 			gnome.gnome-power-manager

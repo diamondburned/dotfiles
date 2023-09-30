@@ -17,6 +17,8 @@ Plug 'folke/todo-comments.nvim'
 Plug 'chrisbra/Colorizer'
 Plug 'luochen1990/rainbow'
 Plug 'ojroques/nvim-osc52'
+Plug 'aymericbeaumet/vim-symlink'
+Plug 'moll/vim-bbye' " optional dependency
 
 Plug 'hhhapz/firenvim', { 'do': { _ -> firenvim#install(0) } }
 Plug 'andreypopp/vim-colors-plain'

@@ -1,5 +1,5 @@
 [global.channels]
- nixpkgs_unstable = "github:NixOS/nixpkgs 1c9db9710c"
+ nixpkgs_unstable = "github:NixOS/nixpkgs nixos-unstable"
  home-manager_unstable = "github:nix-community/home-manager master"
 
 [global.aliases]
@@ -15,7 +15,8 @@
  override-channels = false
 
 [users.root.channels]
- nixpkgs_unstable_newer = "github:NixOS/nixpkgs 1c9db9710c"
+ nixpkgs_unstable_newer = "github:NixOS/nixpkgs nixos-unstable"
+ nixos-apple-silicon = "github:tpwrules/nixos-apple-silicon main"
  nur = "github:nix-community/NUR master"
 
 [users.diamond]
