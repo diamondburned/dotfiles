@@ -648,7 +648,6 @@ function! FixTempl(buffer) abort
 endfunction
 
 "https://github.com/dense-analysis/ale/issues/3167"
-execute ale#fix#registry#Add('sql-formatter', 'FixSQLFormatter', ['sql'], 'sql-formatter for sql')
 execute ale#fix#registry#Add('nasmfmt', 'FixNasmfmt', ['nasm'], 'nasmfmt')
 execute ale#fix#registry#Add('mipsfmt', 'FixMipsfmt', ['mips'], 'mipsfmt')
 execute ale#fix#registry#Add('denojson', 'FixDenoJSON', ['json'], 'deno fmt for json')
@@ -679,7 +678,7 @@ let g:ale_fixers = {
 			\ 'postcss':    [ "prettier" ],
 			\ 'c':          [ "clang-format" ],
 			\ 'cpp':        [ "uncrustify", "clang-format" ],
-			\ 'sql':        [ "sql-formatter" ],
+			\ 'sql':        [ "sqlfluff" ],
 			\ 'rust':       [ "rustfmt" ],
 			\ 'json':       [ "prettier", "jq", "denojson" ],
 			\ 'jsonc':      [ "prettier", "denojsonc" ],
