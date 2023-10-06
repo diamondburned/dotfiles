@@ -47,6 +47,7 @@
 			gtkcord4
 			silver-searcher
 			pavucontrol
+			jq
 			go
 			gopls
 			gotab
