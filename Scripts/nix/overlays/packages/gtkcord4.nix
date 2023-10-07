@@ -1,20 +1,20 @@
-{ pkgs }:
+{ pkgs, lib }:
 
 let gtkcord4 = rec {
-		version = "0.0.12";
+		version = "0.0.14";
 		hashes = {
-			src = "sha256-x//PST2f501QuxRdPe3cYbpL66/zLJWmscED9SbxsTk=";
+			src = "${lib.fakeSha256}";
 			bin = {
-				arm64 = "sha256-/TfoMYz5u5m/EGc4DBf5vD1TpV8NWp4Mopbrdn2LtIc=";
-				amd64 = "sha256-u++ZDq1uWreTjyalce+8xlapWrJ3iX/3xBXaLVpyZi8=";
+				arm64 = "${lib.fakeSha256}";
+				amd64 = "${lib.fakeSha256}";
 			};
 		};
 
 		src = pkgs.fetchFromGitHub {
-			owner = "diamondburned";
-			repo  = "gtkcord4";
-			rev   = "v${version}";
-			hash  = hashes.src;
+			owner  = "diamondburned";
+			repo   = "gtkcord4";
+			rev    = "v${version}";
+			sha256 = "sha256-LG2fWJ5ycKz2r0CjJIpies69pFxVxG42+FKayrT9Dhs=";
 		};
 
 		arch =
