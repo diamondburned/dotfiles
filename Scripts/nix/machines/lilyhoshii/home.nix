@@ -43,6 +43,7 @@
 			playerctl
 			oxfs
 			foot # TODO mgirate to HM
+			virt-manager
 			zellij
 			gtkcord4
 			silver-searcher
