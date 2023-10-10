@@ -5,7 +5,7 @@ let gtkcord4 = rec {
 		hashes = {
 			src = "${lib.fakeSha256}";
 			bin = {
-				arm64 = "${lib.fakeSha256}";
+				arm64 = "sha256-qv3IKm/6ziF04JJ5DcPAl5vvD+QPzztTyUCxtthbGSE=";
 				amd64 = "sha256-Tfss14NPhJ12qQ86yhWgHd57y+UGdPxkTefY0HbJRUY=";
 			};
 		};
