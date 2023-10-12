@@ -434,7 +434,7 @@ in {
 		isNormalUser = true;
 		extraGroups = [
 			"wheel" "networkmanager" "docker" "storage" "audio" "adbusers" "libvirtd" "i2c"
-			"wireshark" "dialout"
+			"wireshark" "dialout" "input"
 		];
 	};
 
