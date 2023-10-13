@@ -333,7 +333,10 @@ in {
 	services.openssh = {
 		enable = true;
 		ports  = [ 22 ];
-		settings.PasswordAuthentication = false;
+		settings = {
+			PasswordAuthentication = false;
+			X11Forwarding = true;
+		};
 	};
 
 	# Enable CUPS to print documents.
