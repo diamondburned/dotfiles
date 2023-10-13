@@ -41,6 +41,7 @@
 			fcitx5-gtk
 			wl-clipboard
 			playerctl
+			waypipe
 			oxfs
 			foot # TODO mgirate to HM
 			virt-manager

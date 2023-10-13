@@ -716,6 +716,7 @@ in {
 			fcitx5-gtk
 			wl-clipboard
 			playerctl
+			waypipe
 			# gatttool
 
 			# Force rm to use rmtrash.
