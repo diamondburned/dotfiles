@@ -27,16 +27,16 @@
 	 	}
 	];
 
-	# nixpkgs.overlays = [
-	# 	(self: super: {
-	# 		alsa-ucm-conf-asahi = super.callPackage ./alsa-ucm-conf-asahi.nix {
-	# 			inherit (super) alsa-ucm-conf;
-	# 		};
-	# 		alsa-lib-asahi = super.alsa-lib.override {
-	# 			alsa-ucm-conf = self.alsa-ucm-conf-asahi;
-	# 		};
-	# 	})
-	# ];
+	nixpkgs.overlays = [
+		(self: super: {
+			alsa-ucm-conf-asahi = super.callPackage ./alsa-ucm-conf-asahi.nix {
+				inherit (super) alsa-ucm-conf;
+			};
+			alsa-lib-asahi = super.alsa-lib.override {
+				alsa-ucm-conf = self.alsa-ucm-conf-asahi;
+			};
+		})
+	];
 
 	# The ALSA config doesn't seem to work at all, but it at least detects the speakers. The speakers
 	# are still detected even without this.
