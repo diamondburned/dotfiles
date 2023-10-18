@@ -1,17 +1,18 @@
-{ stdenv, lib, buildGoApplication, go_1_19 }:
+{ stdenv, lib, buildGoApplication }:
 
 with lib;
 
 buildGoApplication {
 	pname = "caddy";
-	version = "v2.6.2";
+	version = "v2";
 	src = ./.;
 
-	go = go_1_19;
 	modules = ./gomod2nix.toml;
 	subPackages = [ "." ];
 
 	doCheck = false;
+
+	GOSUMDB = "off";
 
 	meta = with lib; {
 		homepage = https://caddyserver.com;

@@ -6,11 +6,16 @@
 let
 	hostname = config.networking.hostName;
 
+	trailingDot =
+		if hostname == "" then "" else ".";
+
 	subdomain = name:
 		with lib;
 		concatStringsSep ", " [
-			"${optionalString (name != "") (name + ".")}${hostname}.ts.libdb.so"
-			"${optionalString (name != "") (name + ".")}${hostname}.ts.arikawa-hi.me"
+			"http://${trailingDot name}${hostname}.ts.libdb.so"
+			"http://${trailingDot name}${hostname}.ts.arikawa-hi.me"
+			# "https://${optionalString (name != "") (name + ".")}${hostname}.ts.libdb.so"
+			# "https://${optionalString (name != "") (name + ".")}${hostname}.ts.arikawa-hi.me"
 		];
 
 	subdomains = subdomains:
@@ -21,19 +26,23 @@ let
 		with lib;
 		with builtins;
 		concatStringsSep " " [
-			"${toString <dotfiles/secrets/ssl/skate-gopher.ts.net>}/${hostname}.skate-gopher.ts.net.crt"
-			"${toString <dotfiles/secrets/ssl/skate-gopher.ts.net>}/${hostname}.skate-gopher.ts.net.key"
+			"${<dotfiles/secrets/ssl/skate-gopher.ts.net>}/${hostname}.skate-gopher.ts.net.crt"
+			"${<dotfiles/secrets/ssl/skate-gopher.ts.net>}/${hostname}.skate-gopher.ts.net.key"
 		];
+
+	dynamicSubdomains = subdomains:
+		with lib;
+		concatStringsSep " " (map (name: "${trailingDot name}${hostname}.ts") subdomains);
 in
 
 {
 	services.diamondburned.caddy = {
 		enable = true;
-		# Use builtins.toString so that the file does not get included in the
-		# closure. Caddy will directly read the file from the filesystem.
-		environmentFile = builtins.toString <dotfiles/secrets/dns.nix>;
+		environmentFile = <dotfiles/secrets/caddy.env>;
 		configFile = pkgs.writeText "Caddyfile" ''
 			{
+				auto_https off
+
 				dynamic_dns {
 					provider cloudflare {env.CLOUDFLARE_API_KEY}
 
@@ -44,8 +53,8 @@ in
 					domains {
 						# Specifically put the machine in .ts.libdb.so for Tailscale, as opposed to .s.libdb.so,
 						# which is a direct IP alias
-						libdb.so      ${hostname}.ts
-						arikawa-hi.me ${hostname}.ts
+						libdb.so      ${dynamicSubdomains ["" "test"]}
+						arikawa-hi.me ${dynamicSubdomains ["" "test"]}
 					}
 					dynamic_domains
 				}
@@ -53,7 +62,7 @@ in
 		'';
 		sites = {
 			${subdomains ["" "test"]} = ''
-				tls ${tailscaleTLS}
+				# tls ${tailscaleTLS}
 				respond "Hello from ${hostname}!"
 			'';
 		};
