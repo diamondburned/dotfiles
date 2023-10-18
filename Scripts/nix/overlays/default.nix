@@ -42,6 +42,7 @@ in {
 				nixpkgs_linux_6_1_9;
 		})
 		(nurOverlay)
+    (import <gomod2nix/overlay.nix>)
 		(import ./overrides.nix)
 		(import ./overrides-all.nix)
 		(import ./packages/linux/overlay.nix)

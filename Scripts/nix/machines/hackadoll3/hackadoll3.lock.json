@@ -84,6 +84,10 @@
       "url": "https://github.com/nix-community/NUR/archive/e48d227ff2d5afd0ec4ae3ccfb07294a35357857.tar.gz",
       "store_hash": "idy57whrvf9s358ms932qsk82lfljjzy"
     },
+    "github:nix-community/gomod2nix master": {
+      "url": "https://github.com/nix-community/gomod2nix/archive/f95720e89af6165c8c0aa77f180461fe786f3c21.tar.gz",
+      "store_hash": "ainbqc9bxfq7biskfc2b0hiy0z6vwxgs"
+    },
     "github:nix-community/home-manager master": {
       "url": "https://github.com/nix-community/home-manager/archive/3bc1bc40121eb0975dc3d96741300bb4fd16be29.tar.gz",
       "store_hash": "radcp7jlhihig92irnyj83hz46pc938b"
@@ -110,7 +114,7 @@
     },
     "https://nixos.org/channels/nixos-unstable": {
       "url": "https://nixos.org/channels/nixos-unstable",
-      "store_hash": "21ww433q9wrpz78xb564mg98w0jj2jjh"
+      "store_hash": "fbsbkw01074fmnd0z1zi7azyzhf3zbj5"
     }
   }
 }

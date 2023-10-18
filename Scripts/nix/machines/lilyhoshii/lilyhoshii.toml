@@ -18,6 +18,7 @@
  nixpkgs_unstable_newer = "github:NixOS/nixpkgs nixos-unstable"
  nixos-apple-silicon = "github:tpwrules/nixos-apple-silicon main"
  nur = "github:nix-community/NUR master"
+ gomod2nix = "github:nix-community/gomod2nix master"
 
 [users.diamond]
  override-channels = false
