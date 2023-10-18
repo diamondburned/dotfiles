@@ -6,8 +6,7 @@
 let
 	hostname = config.networking.hostName;
 
-	trailingDot =
-		if hostname == "" then "" else ".";
+	trailingDot = name: if name == "" then "" else "${name}.";
 
 	subdomain = name:
 		with lib;
@@ -56,7 +55,6 @@ in
 						libdb.so      ${dynamicSubdomains ["" "test"]}
 						arikawa-hi.me ${dynamicSubdomains ["" "test"]}
 					}
-					dynamic_domains
 				}
 			}
 		'';
