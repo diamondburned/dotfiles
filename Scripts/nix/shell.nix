@@ -1,4 +1,10 @@
-{ pkgs ? import <nixpkgs> {} }:
+{
+	pkgs ? import <nixpkgs> {
+		overlays = [
+			(import ./overlays/gomod2nix.nix)
+		];
+	}
+}:
 
 let
 	machines =
@@ -15,9 +21,14 @@ pkgs.mkShell {
 		# bonito
 		git
 		git-crypt
+		gomod2nix
 	];
 	shellHook = ''
-		export HOSTNAME
+		if [[ $HOSTNAME == "nixos" ]]; then
+			echo "You probably want to manually set your \$HOSTNAME."
+		else
+			export HOSTNAME
+		fi
 	'';
 	NIX_PATH = builtins.concatStringsSep ":" [
 		"dotfiles=${builtins.toString ./.}"
