@@ -50,11 +50,13 @@ in
 					versions ipv4
 
 					domains {
-						# Specifically put the machine in .ts.libdb.so for Tailscale, as opposed to .s.libdb.so,
-						# which is a direct IP alias
-						libdb.so      ${dynamicSubdomains ["" "test"]}
-						arikawa-hi.me ${dynamicSubdomains ["" "test"]}
+						# Specifically put the machine in .ts.libdb.so for Tailscale, as
+						# opposed to .s.libdb.so, which is a direct IP alias.
+						libdb.so      ${dynamicSubdomains ["" "test" "dol"]}
+						arikawa-hi.me ${dynamicSubdomains ["" "test" "dol"]}
 					}
+
+					dynamic_domains
 				}
 			}
 		'';
@@ -62,6 +64,11 @@ in
 			${subdomains ["" "test"]} = ''
 				# tls ${tailscaleTLS}
 				respond "Hello from ${hostname}!"
+			'';
+			${subdomains ["dol"]} = ''
+				# TODO: move this to a systemd service and use a reverse proxy to the
+				# Unix socket.
+				reverse_proxy * localhost:19384
 			'';
 		};
 	};
