@@ -104,6 +104,10 @@
       "url": "https://github.com/nix-community/lanzaboote/archive/c758cdad465e0c8174db57dc493f51a89f0e3372.tar.gz",
       "store_hash": "88k4nb3pksnpmfx6rf4qihglm7chfq4w"
     },
+    "github:nix-community/nixGL main": {
+      "url": "https://github.com/nix-community/nixGL/archive/489d6b095ab9d289fe11af0219a9ff00fe87c7c5.tar.gz",
+      "store_hash": "c4h9rpv2g10pn0s435qsbqs5s0i24r4d"
+    },
     "github:nix-community/nixpkgs-wayland master": {
       "url": "https://github.com/nix-community/nixpkgs-wayland/archive/1e16d6758a2692fe86b509e1fd08bd5aca223e4f.tar.gz",
       "store_hash": "shbhqdsj9z8vsyg7z0cq5z15azkymp83"
@@ -114,7 +118,7 @@
     },
     "https://nixos.org/channels/nixos-unstable": {
       "url": "https://nixos.org/channels/nixos-unstable",
-      "store_hash": "fbsbkw01074fmnd0z1zi7azyzhf3zbj5"
+      "store_hash": "33j5wdzwl4p84rci1dsbdqbvbhzrk6v6"
     }
   }
 }

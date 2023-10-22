@@ -19,6 +19,16 @@
       "path": "/nix/store/radcp7jlhihig92irnyj83hz46pc938b-bonito-vfHOP6vDs6qBy-6e-home-manager/bonito-vfHOP6vDs6qBy-6e-home-manager"
     }
   },
+  "bonito:nixGL": {
+    "from": {
+      "type": "indirect",
+      "id": "nixGL"
+    },
+    "to": {
+      "type": "path",
+      "path": "/nix/store/c4h9rpv2g10pn0s435qsbqs5s0i24r4d-bonito-ucNqpwvDz3I8-AlT-nixGL/bonito-ucNqpwvDz3I8-AlT-nixGL"
+    }
+  },
   "bonito:nixos": {
     "from": {
       "type": "indirect",

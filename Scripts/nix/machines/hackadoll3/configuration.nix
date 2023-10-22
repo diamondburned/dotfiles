@@ -672,6 +672,12 @@ in {
 
 		]) ++ (with pkgs.nixpkgs_unstable_real; [
 			spotify
+			vesktop
+			# vencord
+			# (discord.override {
+			# 	withVencord = true;
+			# 	withOpenASAR = false;
+			# })
 			# blackbox-terminal
 			# evolutionWithPlugins
 
@@ -782,10 +788,6 @@ in {
 			# # Chat/Social
 			# # zoom-us
 			# discord
-			(discord.override {
-				withVencord = true;
-				withOpenASAR = true;
-			})
 			gtkcord4
 			nixpkgs_unstable_older.tdesktop
 			# gotktrix
