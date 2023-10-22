@@ -53,6 +53,7 @@ video/webm=mpv.desktop
 application/vnd.oasis.opendocument.text=writer.desktop
 video/mp4=mpv.desktop
 text/csv=nvim.desktop
+image/webp=org.gnome.eog.desktop
 
 [Added Associations]
 application/zip=org.gnome.FileRoller.desktop;
