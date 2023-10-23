@@ -86,6 +86,7 @@ in {
 
 	nixpkgs.config = {
 		allowUnfree = true;
+		overlays = import ./overlays;
 	};
 
 	# Remote build server.
