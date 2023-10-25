@@ -795,7 +795,7 @@ in {
 			gtkcord4
 			nixpkgs_unstable_older.tdesktop
 			# vesktop
-			(pkgs.callPackage <unstable/pkgs/by-name/ve/vesktop/package.nix> {})
+			# (pkgs.callPackage <unstable/pkgs/by-name/ve/vesktop/package.nix> {})
 			# gotktrix
 			# # fractal
 
