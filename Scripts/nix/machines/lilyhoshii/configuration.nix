@@ -10,6 +10,7 @@
 		<dotfiles/cfg/gnome>
 		<dotfiles/cfg/tailscale>
 		./cfg/speakers # !!!: DANGEROUS
+		./cfg/virtualization.nix
 		./home.nix
 	];
 
@@ -29,7 +30,9 @@
 	};
 
 	nixpkgs = {
-		config.allowUnfree = true;
+		config = {
+			allowUnfree = true;
+		};
 		overlays = [
 			(import <dotfiles/overlays/overrides.nix>)
 			(import <dotfiles/overlays/overrides-all.nix>)

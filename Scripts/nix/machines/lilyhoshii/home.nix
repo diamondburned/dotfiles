@@ -67,6 +67,13 @@
 		home.stateVersion = "23.11";
 
 		fonts.fontconfig.enable = true;
-	};
 
+		xdg = {
+			enable = true;
+			mime.enable = true;
+			configFile = {
+				"nixpkgs/config.nix".text = "{ allowUnfree = true; }";
+			};
+		};
+	};
 }
