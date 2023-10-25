@@ -431,8 +431,6 @@ in {
 		qemu.runAsRoot = false;
 	};
 
-	virtualisation.virtualbox.host.enable = true;
-
 	# Enable the Android debug bridge.
 	programs.adb.enable = true;
 
@@ -675,7 +673,7 @@ in {
 
 		]) ++ (with pkgs.nixpkgs_unstable_real; [
 			spotify
-			vesktop
+			# vesktop
 			# vencord
 			# (discord.override {
 			# 	withVencord = true;
