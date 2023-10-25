@@ -84,9 +84,9 @@ in {
 		<dotfiles/cfg/gnome>
 	];
 
+	nixpkgs.overlays = import ./overlays;
 	nixpkgs.config = {
 		allowUnfree = true;
-		overlays = import ./overlays;
 	};
 
 	# Remote build server.
@@ -265,6 +265,7 @@ in {
 		# System packages
 		wget
 		nix-index
+		nixGL
 		# nix-index-update
 
 		# Utilities
@@ -497,6 +498,7 @@ in {
 
 		nixpkgs.config = {
 			allowUnfree = true;
+			overlays = import ./overlays;
 		};
 
 		programs.direnv = {
@@ -673,6 +675,7 @@ in {
 
 		]) ++ (with pkgs.nixpkgs_unstable_real; [
 			spotify
+			# armcord
 			# vesktop
 			# vencord
 			# (discord.override {
@@ -791,6 +794,8 @@ in {
 			# discord
 			gtkcord4
 			nixpkgs_unstable_older.tdesktop
+			# vesktop
+			(pkgs.callPackage <unstable/pkgs/by-name/ve/vesktop/package.nix> {})
 			# gotktrix
 			# # fractal
 
