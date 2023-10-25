@@ -431,6 +431,8 @@ in {
 		qemu.runAsRoot = false;
 	};
 
+	virtualisation.virtualbox.host.enable = true;
+
 	# Enable the Android debug bridge.
 	programs.adb.enable = true;
 
