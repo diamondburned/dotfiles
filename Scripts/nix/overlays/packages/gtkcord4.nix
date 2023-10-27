@@ -1,20 +1,20 @@
 { pkgs, lib }:
 
 let gtkcord4 = rec {
-		version = "0.0.14";
+		version = "0.0.15";
 		hashes = {
 			src = "${lib.fakeSha256}";
 			bin = {
-				arm64 = "sha256-qv3IKm/6ziF04JJ5DcPAl5vvD+QPzztTyUCxtthbGSE=";
-				amd64 = "sha256-Tfss14NPhJ12qQ86yhWgHd57y+UGdPxkTefY0HbJRUY=";
+				arm64 = "${lib.fakeSha256}";
+				amd64 = "${lib.fakeSha256}";
 			};
 		};
 
 		src = pkgs.fetchFromGitHub {
 			owner  = "diamondburned";
 			repo   = "gtkcord4";
-			rev    = "v${version}";
-			sha256 = "sha256-LG2fWJ5ycKz2r0CjJIpies69pFxVxG42+FKayrT9Dhs=";
+			rev    = "2d86201c37ba7d4706ef33296cadb34049ec6a0d";
+			sha256 = "sha256-vlZlHHHSPf2aejT0i4HP+KpHKyDn+pUZQVYIxRH0YNk=";
 		};
 
 		arch =
@@ -73,10 +73,9 @@ in pkgs.stdenv.mkDerivation {
 	sourceRoot = ".";
 
 	installPhase = with gtkcord4.base; ''
-		install -m755 -D "$src/${pname}" "$out/bin/${pname}"
-
-		mkdir -p $out/share/icons/hicolor/256x256/apps/ $out/share/applications/
-		cp ${files.desktop.path} $out/share/applications/${files.desktop.name}
-		cp ${files.logo.path} $out/share/icons/hicolor/256x256/apps/${files.logo.name}
+		install -Dm755 "$src/${pname}" "$out/bin/${pname}"
+		install -Dm644 ${src}/nix/so.libdb.gtkcord4.service $out/share/dbus-1/services/
+		install -Dm644 ${files.desktop.path} $out/share/applications/${files.desktop.name}
+		install -Dm644 ${files.logo.path} $out/share/icons/hicolor/256x256/apps/${files.logo.name}
 	'';
 }

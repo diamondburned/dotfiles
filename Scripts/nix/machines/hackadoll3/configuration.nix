@@ -229,7 +229,8 @@ in {
 			enabled	= "fcitx5";
 			fcitx5.addons = with pkgs; [
 				fcitx5-m17n
-				fcitx5-mozc
+				fcitx5-unikey
+				# fcitx5-mozc
 				fcitx5-gtk
 			];
 		};
@@ -792,9 +793,9 @@ in {
 			# # Chat/Social
 			# # zoom-us
 			# discord
-			gtkcord4
+			# gtkcord4
 			nixpkgs_unstable_older.tdesktop
-			# vesktop
+			vesktop
 			# (pkgs.callPackage <unstable/pkgs/by-name/ve/vesktop/package.nix> {})
 			# gotktrix
 			# # fractal
