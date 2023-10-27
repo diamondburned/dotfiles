@@ -6,7 +6,7 @@ let gtkcord4 = rec {
 			src = "${lib.fakeSha256}";
 			bin = {
 				arm64 = "${lib.fakeSha256}";
-				amd64 = "${lib.fakeSha256}";
+				amd64 = "sha256-0QV8ebVMtv4EKsbzbRLXKy1E7CYNGW3mHFguyQN33vo=";
 			};
 		};
 
@@ -74,7 +74,11 @@ in pkgs.stdenv.mkDerivation {
 
 	installPhase = with gtkcord4.base; ''
 		install -Dm755 "$src/${pname}" "$out/bin/${pname}"
-		install -Dm644 ${src}/nix/so.libdb.gtkcord4.service $out/share/dbus-1/services/
+		mkdir -p \
+			$out/share/dbus-1/services \
+			$out/share/applications \
+			$out/share/icons/hicolor/256x256/apps
+		install -Dm644 ${src}/nix/so.libdb.gtkcord4.service $out/share/dbus-1/services/so.libdb.gtkcord4.service
 		install -Dm644 ${files.desktop.path} $out/share/applications/${files.desktop.name}
 		install -Dm644 ${files.logo.path} $out/share/icons/hicolor/256x256/apps/${files.logo.name}
 	'';

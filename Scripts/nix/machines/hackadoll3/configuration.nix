@@ -718,7 +718,6 @@ in {
 			fragments
 			# mixxx
 			yt-dlp
-			spotdl
 			(nixpkgs_unstable_newer.callPackage <dotfiles/overlays/packages/mixxx/beta.nix> {})
 
 			# System
@@ -793,7 +792,7 @@ in {
 			# # Chat/Social
 			# # zoom-us
 			# discord
-			# gtkcord4
+			gtkcord4
 			nixpkgs_unstable_older.tdesktop
 			vesktop
 			# (pkgs.callPackage <unstable/pkgs/by-name/ve/vesktop/package.nix> {})

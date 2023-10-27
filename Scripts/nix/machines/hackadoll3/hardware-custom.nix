@@ -133,7 +133,7 @@ in {
 
 	# Liquorix has slightly more configurations than Zen.
 	# See https://github.com/NixOS/nixpkgs/blob/master/pkgs/os-specific/linux/kernel/zen-kernels.nix#L76
-	boot.kernelPackages = pkgs.linuxPackages_lqx;
+	boot.kernelPackages = pkgs.nixpkgs_unstable_newer.linuxPackages_lqx;
 	# boot.kernelPatches = [
 	# 	{
 	# 		name = "enable-logitech-hires-scroll";
