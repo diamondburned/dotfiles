@@ -749,6 +749,7 @@ in {
 			gh
 			go
 			gopls
+			gotools
 			mdr
 			# config.boot.kernelPackages.perf
 			# perf_data_converter
