@@ -29,9 +29,19 @@ let
 			"${<dotfiles/secrets/ssl/skate-gopher.ts.net>}/${hostname}.skate-gopher.ts.net.key"
 		];
 
-	dynamicSubdomains = subdomains:
+	bulbremote = pkgs.fetchzip {
+		url = "https://github.com/diamondburned/bulbremote/releases/download/v0.0.2/dist.tar.gz";
+		sha256 = "1jyd7hv2ivba4bjx106dmcmgbdy74lcn664l9hb2vy5gpnf0x1y3";
+	};
+
+	dynamicSubdomains = domains: subdomains:
 		with lib;
-		concatStringsSep " " (map (name: "${trailingDot name}${hostname}.ts") subdomains);
+		let
+			generate = domain:
+				(domain + " ") +
+				(concatStringsSep " " (map (name: "${trailingDot name}${hostname}.ts") subdomains));
+		in
+			concatStringsSep "\n" (map generate domains);
 in
 
 {
@@ -52,8 +62,10 @@ in
 					domains {
 						# Specifically put the machine in .ts.libdb.so for Tailscale, as
 						# opposed to .s.libdb.so, which is a direct IP alias.
-						libdb.so      ${dynamicSubdomains ["" "test" "dol"]}
-						arikawa-hi.me ${dynamicSubdomains ["" "test" "dol"]}
+						${dynamicSubdomains
+							["libdb.so" "arikawa-hi.me" "diamondx.pet"]
+							["" "test" "dol" "bulb"]
+						}
 					}
 
 					dynamic_domains
@@ -70,6 +82,27 @@ in
 				# Unix socket.
 				reverse_proxy * localhost:19384
 			'';
+			${subdomains ["bulb"]} =
+				let
+					secrets = import ./secrets/bulbremote.nix;
+					configJSON = builtins.toJSON {
+						JSONBIN_ID = secrets.jsonbinID;
+						JSONBIN_TOKEN = secrets.jsonbinToken;
+					};
+				in
+				''
+					handle * {
+						root * ${bulbremote}
+						file_server
+					}
+					handle /api/config {
+						respond `${configJSON}`
+					}
+					handle /api/apply {
+						rewrite * /?{query}
+						reverse_proxy * ${secrets.tasmotaAddress}
+					}
+				'';
 		};
 	};
 }
