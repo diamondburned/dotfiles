@@ -3,7 +3,7 @@
 
 # gnome-terminal &> /dev/null & disown
 
-catnip-gtk &> /dev/null & disown
-
-v4l2-ctl -d /dev/video2 --set-fmt-video "width=640,height=480"
-v4l2-ctl -d /dev/video2 -c "sharpness=25,saturation=45,contrast=60,brightness=60"
+# catnip-gtk &> /dev/null & disown
+#
+# v4l2-ctl -d /dev/video2 --set-fmt-video "width=640,height=480"
+# v4l2-ctl -d /dev/video2 -c "sharpness=25,saturation=45,contrast=60,brightness=60"
