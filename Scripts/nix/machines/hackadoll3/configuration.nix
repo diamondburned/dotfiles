@@ -70,6 +70,7 @@ in {
 		<home-manager/nixos>
 		./hardware-configuration.nix
 		./hardware-custom.nix
+		./services
 		./www
 		<dotfiles/overlays>
 		<dotfiles/overlays/services.nix>
