@@ -3,7 +3,7 @@
 {
 	programs.zellij = {
 		enable = true;
-		enableBashIntegration = true;
+		# enableBashIntegration = true;
 	};
 
 	xdg.configFile = {
