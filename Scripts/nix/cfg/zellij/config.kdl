@@ -1,6 +1,6 @@
-copy_on_select false
+copy_on_select true
 simplified_ui true
-// mouse_mode true
+mouse_mode true
 
 ui {
 	pane_frames {
@@ -12,6 +12,7 @@ ui {
 keybinds {
 	shared_except "scroll" "locked" {
 		unbind "Ctrl s"
+		bind "Ctrl f" { SwitchToMode "Search"; }
 	}
 	shared_except "session" "locked" {
 		unbind "Ctrl o"
