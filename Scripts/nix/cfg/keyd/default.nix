@@ -14,7 +14,7 @@ let
 in
 
 {
-	environment.etc = builtins.trace (builtins.toJSON etcFiles) etcFiles;
+	environment.etc = etcFiles; # builtins.trace (builtins.toJSON etcFiles) etcFiles;
 
 	systemd.services.keyd = {
 		enable = true;
