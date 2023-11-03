@@ -489,6 +489,7 @@ in {
 			<dotfiles/cfg/hm-alacritty.nix>
 			<dotfiles/cfg/nvim/home.nix>
 			<dotfiles/cfg/gnome/home.nix>
+			<dotfiles/cfg/zellij/home.nix>
 
 			# (import <dotfiles/utils/schedule.nix {
 			# 	name        = "birthdayer-juan";
@@ -756,7 +757,6 @@ in {
 			# perf_data_converter
 			tree
 			fzf
-			zellij
 			graphviz
 			gnuplot
 			vimHugeX
