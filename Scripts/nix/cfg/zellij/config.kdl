@@ -1,6 +1,6 @@
 copy_on_select false
 simplified_ui true
-mouse_mode true
+// mouse_mode true
 
 ui {
 	pane_frames {
