@@ -34,6 +34,7 @@
 		gnome-contacts
 		gnome-initial-setup
 		gnome-calendar
+		gnome-console
 		epiphany
 		yelp
 		geary

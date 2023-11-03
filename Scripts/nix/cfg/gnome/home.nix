@@ -22,4 +22,13 @@
 		QT_QPA_PLATFORM = "wayland";
 		MOZ_ENABLE_WAYLAND = "1";
 	};
+
+	dconf.settings = lib.attrsets.optionalAttrs
+		(config.programs.foot.enable)
+		{
+			"org/gnome/desktop/default-applications/terminal" = {
+				exec = "${pkgs.foot}/bin/foot";
+				exec-arg = "-e";
+			};
+		};
 }

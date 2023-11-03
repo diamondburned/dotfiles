@@ -1,43 +1,3 @@
-//		settings = {
-//			simplified_ui = true;
-//			mouse_mode = true;
-//			copy_on_select = false;
-//			ui.pane_frames = {
-//				rounded_corners = true;
-//				hide_session_name = true;
-//			};
-//			keybinds = {
-//				shared = [
-//					"unbind 'Ctrl o'"
-//					"unbind 'Ctrl s'"
-//				];
-//				normal = {
-//					bind = [
-//						{
-//							_
-//						}
-//					];
-//					# Remove scroll mode entirely, only keep Session mode.
-//					"bind 's'" = { SwitchToMode = "Session"; };
-//				};
-//			};
-//			theme = "terminal";
-//			themes.terminal = {
-//				fg = "#FFFFFF";
-//				bg = "#1D1D1D";
-//				black = "#272224";
-//				red = "#FF473D";
-//				green = "#3DCCB2";
-//				yellow = "#FF9600";
-//				blue = "#3B7ECB";
-//				magenta = "#F74C6D";
-//				cyan = "#00B5FC";
-//				white = "#3E3E3E";
-//				orange = "#52494C";
-//			};
-//		};
-//	};
-
 copy_on_select false
 simplified_ui true
 mouse_mode true
@@ -72,7 +32,7 @@ themes {
 		blue "#3B7ECB"
 		magenta "#F74C6D"
 		cyan "#00B5FC"
-		white "#3E3E3E"
-		orange "#52494C"
+		white "#EEEEEC"
+		orange "#FC5A00"
 	}
 }
