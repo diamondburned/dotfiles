@@ -19,20 +19,33 @@ keybinds {
 	}
 }
 
-theme "terminal"
+theme "terminal_pastel"
 
 themes {
 	terminal {
 		fg "#FFFFFF"
 		bg "#1D1D1D"
-		black "#272224"
-		red "#FF473D"
-		green "#3DCCB2"
+		black "#1D1D1D"
+		red "#FF473D"   // swapped with green
+		green "#3DCCB2" // swapped with red
 		yellow "#FF9600"
 		blue "#3B7ECB"
 		magenta "#F74C6D"
 		cyan "#00B5FC"
 		white "#EEEEEC"
 		orange "#FC5A00"
+	}
+	terminal_pastel {
+		fg "#FFFFFF"
+		bg "#1D1D1D"
+		black "#1D1D1D"
+		red "#FF6961"
+		green "#F7A8B8"   // swapped with magenta
+		yellow "#FFB347"
+		blue "#779ECB"
+		magenta "#85E6D4" // swapped with green
+		cyan "#55CDFC"
+		white "#EEEEEC"
+		orange "#FC7F55"
 	}
 }
