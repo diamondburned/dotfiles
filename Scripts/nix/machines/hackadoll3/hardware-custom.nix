@@ -57,12 +57,13 @@ in {
 	# LG Gram tweaks.
 	systemd.tmpfiles.rules = [
 		# https://01.org/linuxgraphics/gfx-docs/drm/admin-guide/laptops/lg-laptop.html
-		"w /sys/devices/platform/lg-laptop/battery_care_limit - - - - 100"
+		"w /sys/devices/platform/lg-laptop/battery_care_limit - - - - 80"
 	];
 	# Supposedly allow the fan to ramp up to 100%.
 	# We can't change this after boot for some reason.
 	boot.initrd.postMountCommands = ''
 		echo 1 > /sys/devices/platform/lg-laptop/fan_mode
+		echo 80 > /sys/devices/platform/lg-laptop/battery_care_limit
 	'';
 
 	# Do not suspend on lid close.
@@ -105,7 +106,7 @@ in {
 
 	boot.extraModulePackages = with config.boot.kernelPackages; [
 		# Add the camera loopback drivers.
-		v4l2loopback
+		# v4l2loopback
 		# Add DDC/CI backlight control.
 		# ddcci-driver
 
@@ -126,14 +127,14 @@ in {
 
 	# Refer to unstable.nix.
 	# boot.kernelPackages = pkgs.nixpkgs_unstable.linuxKernel.packages.linux_xanmod_latest;
-	# boot.kernelPackages = pkgs.linuxPackages_latest;
+	boot.kernelPackages = pkgs.linuxPackages_latest;
 	# boot.kernelPackages = pkgs.linuxPackages-xanmod;
 	# boot.kernelPackages = pkgs.linuxPackagesFor pkgs.linux_6_3;
 	# boot.kernelPackages = pkgs.linuxPackages_zen;
 
 	# Liquorix has slightly more configurations than Zen.
 	# See https://github.com/NixOS/nixpkgs/blob/master/pkgs/os-specific/linux/kernel/zen-kernels.nix#L76
-	boot.kernelPackages = pkgs.nixpkgs_unstable_newer.linuxPackages_lqx;
+	# boot.kernelPackages = pkgs.nixpkgs_unstable_newer.linuxPackages_lqx;
 	# boot.kernelPatches = [
 	# 	{
 	# 		name = "enable-logitech-hires-scroll";
@@ -150,8 +151,8 @@ in {
 	# 	linuxPackagesFor linux_xanmod_latest-lto.x86_64-v3;
 
 	hardware.firmware = with pkgs; [
-		alsa-firmware
-		sof-firmware
+		# alsa-firmware
+		# sof-firmware
 	];
 
 	services.earlyoom = {
@@ -273,9 +274,8 @@ in {
 	# hardware.acpilight.enable = false;
 	# services.illum.enable = true;
 
-	# Enable the Intel driver with a fallback to the current modesetting driver.
-	services.xserver.videoDrivers = [ "intel" "modesetting" ];
-	boot.initrd.kernelModules = [ "i915" ];
+	services.xserver.videoDrivers = [ "intel" ];
+	# boot.initrd.kernelModules = [ "i915" ];
 	# Crypto modules.
 	boot.initrd.availableKernelModules = [
 		"aesni_intel" "cryptd"
