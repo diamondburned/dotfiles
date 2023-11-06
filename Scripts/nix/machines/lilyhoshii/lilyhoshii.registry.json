@@ -39,6 +39,16 @@
       "path": "/nix/store/kg6wz5xv8nzxnqimgz1hxznavhmpjkrl-bonito-DhI227xRdXqbxeI0-nixpkgs/bonito-DhI227xRdXqbxeI0-nixpkgs"
     }
   },
+  "bonito:nixpkgs_gnome": {
+    "from": {
+      "type": "indirect",
+      "id": "nixpkgs_gnome"
+    },
+    "to": {
+      "type": "path",
+      "path": "/nix/store/17h14g2hhfxhfn4wqcfp2p1hz7c5vi64-bonito-V-I6qZIOu8-H3Y_r-nixpkgs/bonito-V-I6qZIOu8-H3Y_r-nixpkgs"
+    }
+  },
   "bonito:nixpkgs_unstable": {
     "from": {
       "type": "indirect",
