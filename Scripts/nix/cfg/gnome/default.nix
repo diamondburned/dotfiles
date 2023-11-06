@@ -35,6 +35,14 @@
 		gnome-initial-setup
 		gnome-calendar
 		gnome-console
+		gnome-tour
+		gnome-user-docs
+		gnome-software
+		gnome-calculator
+		gnome-maps
+		gnome-music
+		simple-scan
+		orca
 		epiphany
 		yelp
 		geary

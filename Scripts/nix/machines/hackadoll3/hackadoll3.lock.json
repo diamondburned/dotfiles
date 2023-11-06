@@ -48,6 +48,10 @@
       "url": "https://github.com/NixOS/nixpkgs/archive/fd9d979ab67581f.tar.gz",
       "store_hash": "clyb1cwbnkcl9kiac0b8ag8caic0q2y3"
     },
+    "github:NixOS/nixpkgs gnome": {
+      "url": "https://github.com/NixOS/nixpkgs/archive/7803282b09089f5ac0e75e7ce72ac5870a57bdca.tar.gz",
+      "store_hash": "8k1q4w3qwxcmqp53g7dphkv7d7nibkxq"
+    },
     "github:NixOS/nixpkgs nixos-21.11": {
       "url": "https://github.com/NixOS/nixpkgs/archive/eabc38219184cc3e04a974fe31857d8e0eac098d.tar.gz",
       "store_hash": "ccb69s0aqifdg0z3a67fbwyayb0g7ikj"
@@ -118,7 +122,7 @@
     },
     "https://nixos.org/channels/nixos-unstable": {
       "url": "https://nixos.org/channels/nixos-unstable",
-      "store_hash": "fh8b8shrdiyb3d6azz0wh6y4sjwbyqz5"
+      "store_hash": "y2s55xxfj8v6l5dxz07k40qxrl3a012b"
     }
   }
 }
