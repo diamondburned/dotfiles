@@ -802,8 +802,8 @@ in {
 			# # fractal
 
 			# Office
+			# libreoffice
 			nixpkgs_unstable_older.qalculate-gtk
-			libreoffice
 			onlyoffice-bin
 			evince
 			aspell
