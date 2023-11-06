@@ -102,4 +102,7 @@
 		freeSwapThreshold = 15;
 		freeSwapKillThreshold = 5;
 	};
+
+	nix.settings.cores = lib.mkForce 8;
+	nix.settings.max-jobs = lib.mkForce 1;
 }

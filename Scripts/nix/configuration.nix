@@ -6,7 +6,7 @@ let
 		builtins.getEnv "HOSTNAME";
 
 	configuration =
-		"${builtins.toPath ./.}/machines/${hostname}/configuration.nix";
+		"${builtins.toString <dotfiles>}/machines/${hostname}/configuration.nix";
 in
 
 {
@@ -34,7 +34,7 @@ in
 	nix.nixPath = [
 		"dotfiles=${builtins.toString ./.}"
 		"nixpkgs=/nix/var/nix/profiles/per-user/root/channels/nixos"
-		"nixos-config=${builtins.toString ./.}/configuration.nix"
+		"nixos-config=${builtins.toString <dotfiles>}/configuration.nix"
 		"/nix/var/nix/profiles/per-user/root/channels"
 	];
 
