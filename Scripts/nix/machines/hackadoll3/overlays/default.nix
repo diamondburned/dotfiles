@@ -1,4 +1,4 @@
 [
 	(import ./nixgl.nix)
-	(import ./gnome.nix)
+	# (import <dotfiles/cfg/gnome/gnome-45-overlay.nix>)
 ]
