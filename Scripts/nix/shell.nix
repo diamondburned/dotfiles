@@ -22,6 +22,7 @@ pkgs.mkShell {
 		git
 		git-crypt
 		gomod2nix
+		nix-output-monitor
 	];
 	shellHook = ''
 		if [[ $HOSTNAME == "nixos" ]]; then
