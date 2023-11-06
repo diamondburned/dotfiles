@@ -2,13 +2,14 @@
 
 {
 	imports = [
-		<nixos-apple-silicon/apple-silicon-support>
-		<home-manager/nixos>
+		<dotfiles/../../../../etc/nixos/configuration.nix>
 		<dotfiles/secrets>
 		<dotfiles/cfg/keyd>
 		<dotfiles/cfg/fonts>
 		<dotfiles/cfg/gnome>
 		<dotfiles/cfg/tailscale>
+		<home-manager/nixos>
+		<nixos-apple-silicon/apple-silicon-support>
 		./cfg/speakers # !!!: DANGEROUS
 		./cfg/virtualization.nix
 		./home.nix

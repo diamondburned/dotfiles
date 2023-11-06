@@ -30,11 +30,7 @@ pkgs.mkShell {
 		else
 			export HOSTNAME
 		fi
+		export NIX_PATH="$NIX_PATH:dotfiles=${builtins.toString ./.}"
+		export MACHINES="${builtins.concatStringsSep " " machines}"
 	'';
-	NIX_PATH = builtins.concatStringsSep ":" [
-		"dotfiles=${builtins.toString ./.}"
-		"nixos-config=/etc/nixos/configuration.nix"
-		"/nix/var/nix/profiles/per-user/root/channels"
-	];
-	MACHINES = builtins.concatStringsSep " " machines;
 }

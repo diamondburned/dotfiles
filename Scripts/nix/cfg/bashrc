@@ -170,12 +170,10 @@ alias nixbuild="nix-build '<nixpkgs>' -A package"
 # alias nixrl="(cd $HOME/Scripts/nix && sudo nix-shell --run 'nixos-rebuild switch')"
 alias nixgc="sudo nix-collect-garbage -d"
 
-nixrl() {
-	(
-		cd "$HOME/Scripts/nix"
-		nix-shell --run 'sudo nixos-rebuild --log-format internal-json -v switch |& nom --json'
-	)
-}
+nixrl() (
+	cd "$HOME/Scripts/nix"
+	sudo nix-shell --run 'nixos-rebuild --log-format internal-json -v switch |& nom --json'
+)
 
 # lol fuck node
 # NPM_PACKAGES="${HOME}/.npm-packages"
