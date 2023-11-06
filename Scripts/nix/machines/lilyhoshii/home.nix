@@ -49,7 +49,6 @@
 			gtkcord4
 			silver-searcher
 			pavucontrol
-			vesktop
 			nix-output-monitor
 			jq
 			go
