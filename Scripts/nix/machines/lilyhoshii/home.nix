@@ -59,6 +59,7 @@
 			gnome.gnome-power-manager
 			gcolor3
 			gimp
+			git-crypt
 			qalculate-gtk
 			libreoffice-fresh
 
