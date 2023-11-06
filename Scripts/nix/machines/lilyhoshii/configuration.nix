@@ -37,6 +37,7 @@
 			(import <dotfiles/overlays/overrides.nix>)
 			(import <dotfiles/overlays/overrides-all.nix>)
 			(import <dotfiles/overlays/packages.nix>)
+			# (import <dotfiles/cfg/gnome/gnome-45-overlay.nix>)
 		];
 	};
 
