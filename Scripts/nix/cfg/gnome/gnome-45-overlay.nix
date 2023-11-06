@@ -39,7 +39,6 @@ in
 			gnome-themes-extra
 			gnome-user-share
 			gucharmap
-			gvfs
 			eog
 			mutter
 			nautilus;
