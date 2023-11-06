@@ -61,7 +61,7 @@
 			gimp
 			git-crypt
 			qalculate-gtk
-			libreoffice-fresh
+			# libreoffice-fresh
 
 			(callPackage ./packages/spot-git.nix {})
 		];
