@@ -1,0 +1,25 @@
+diff --git a/drivers/hid/hid-logitech-hidpp.c b/drivers/hid/hid-logitech-hidpp.c
+index 3e1c30c653a5..41b9e05ce488 100644
+--- a/drivers/hid/hid-logitech-hidpp.c
++++ b/drivers/hid/hid-logitech-hidpp.c
+@@ -4041,8 +4041,7 @@ static void hidpp_connect_event(struct hidpp_device *hidpp)
+ 	}
+ 
+ 	hidpp_initialize_battery(hidpp);
+-	if (!hid_is_usb(hidpp->hid_dev))
+-		hidpp_initialize_hires_scroll(hidpp);
++	hidpp_initialize_hires_scroll(hidpp);
+ 
+ 	/* forward current battery state */
+ 	if (hidpp->capabilities & HIDPP_CAPABILITY_HIDPP10_BATTERY) {
+@@ -4427,6 +4426,10 @@ static const struct hid_device_id hidpp_devices[] = {
+ 		.driver_data = HIDPP_QUIRK_CLASS_G920 | HIDPP_QUIRK_FORCE_OUTPUT_REPORTS },
+ 	{ /* Logitech G Pro Gaming Mouse over USB */
+ 	  HID_USB_DEVICE(USB_VENDOR_ID_LOGITECH, 0xC088) },
++	{
++	  /* Logitech M500 Corded Mouse over USB */
++	  HID_USB_DEVICE(USB_VENDOR_ID_LOGITECH, 0xC069),
++	    .driver_data = HIDPP_QUIRK_HI_RES_SCROLL_1P0 },
+ 
+ 	{ /* MX5000 keyboard over Bluetooth */
+ 	  HID_BLUETOOTH_DEVICE(USB_VENDOR_ID_LOGITECH, 0xb305),
