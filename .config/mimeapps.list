@@ -54,6 +54,7 @@ application/vnd.oasis.opendocument.text=writer.desktop
 video/mp4=io.github.celluloid_player.Celluloid.desktop
 text/csv=nvim.desktop
 image/webp=org.gnome.eog.desktop
+video/mpeg=nvim.desktop
 
 [Added Associations]
 application/zip=org.gnome.FileRoller.desktop;
@@ -125,3 +126,4 @@ application/x-wine-extension-ini=nvim.desktop;
 application/vnd.ms-excel=calc.desktop;
 image/vnd.microsoft.icon=gimp.desktop;
 text/csv=nvim.desktop;
+video/mpeg=nvim.desktop;
