@@ -42,6 +42,7 @@
 			wl-clipboard
 			playerctl
 			waypipe
+			celluloid
 			oxfs
 			foot # TODO mgirate to HM
 			virt-manager
