@@ -4,6 +4,7 @@
 	home-manager.users.diamond = {
 		imports = [
 			<dotfiles/cfg/firefox>
+			<dotfiles/cfg/zellij/home.nix>
 			<dotfiles/cfg/fonts/home.nix>
 			<dotfiles/cfg/gnome/home.nix>
 			<dotfiles/cfg/nvim/home.nix>
@@ -46,7 +47,6 @@
 			oxfs
 			foot # TODO mgirate to HM
 			virt-manager
-			zellij
 			gtkcord4
 			silver-searcher
 			pavucontrol
