@@ -526,8 +526,12 @@ set lazyredraw
 set redrawtime=500
 
 "Configuring the update delay after buffer updates"
-set updatetime=150
-let g:cursorhold_updatetime = 150
+" set updatetime=150
+" let g:cursorhold_updatetime = 150
+
+"150 might be too low, so I'm setting it to 750."
+set updatetime=750
+let g:cursorhold_updatetime = 750
 
 "Undo history"
 set undofile
