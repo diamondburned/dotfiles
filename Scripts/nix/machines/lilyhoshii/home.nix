@@ -34,7 +34,9 @@
 			font.size = 11;
 		};
 
-		services.easyeffects.enable = true;
+		# EasyEffects breaks asahi-audio.
+		# See https://github.com/AsahiLinux/asahi-audio/issues/14.
+		# services.easyeffects.enable = true;
 
 		home.packages = with pkgs; [
 			keepassxc
