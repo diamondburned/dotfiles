@@ -16,6 +16,10 @@
 # - [x] Wireplumber w/ policy-dsp patch
 #
 
+let
+	unstable = import <unstable> { };
+in
+
 {
 	imports = [
 		./speakersafetyd/module.nix
@@ -31,42 +35,49 @@
 	 	}
 	];
 
-	services.speakersafetyd.enable = true;
+	services.speakersafetyd = {
+		enable = true;
+		package = unstable.callPackage ./speakersafetyd/package.nix { };
+	};
 
 	nixpkgs.overlays = [
 		(self: super: {
-			alsa-ucm-conf-asahi = super.callPackage ./alsa-ucm-conf-asahi.nix {
-				inherit (super) alsa-ucm-conf;
+			alsa-ucm-conf-asahi = unstable.callPackage ./alsa-ucm-conf-asahi.nix {
+				inherit (unstable) alsa-ucm-conf;
 			};
-			alsa-lib-asahi = super.alsa-lib.override {
+			alsa-lib-asahi = unstable.alsa-lib.override {
 				alsa-ucm-conf = self.alsa-ucm-conf-asahi;
 			};
 		})
 	];
 
-	services.pipewire =
-		let
-			unstable = import <unstable> { };
-		in
-			{
-				package =
-					# assert lib.assertMsg
-					# 	(lib.versionAtLeast unstable.pipewire.version "0.3.84")
-					# 	("Pipewire version is too old, need at least 0.3.84, got ${unstable.pipewire.version}");
-					unstable.pipewire;
-
-				wireplumber.package =
-					# assert lib.assertMsg
-					# 	(lib.versionAtLeast unstable.wireplumber.version "0.4.15")
-					# 	("Wireplumber version is too old, need at least 0.4.15, got ${unstable.wireplumber.version}");
-					unstable.wireplumber.overrideAttrs (old: {
-						patches = [
-							# policy-dsp: add ability to hide parent nodes 
-							# https://gitlab.freedesktop.org/pipewire/wireplumber/-/merge_requests/558
-							(builtins.fetchurl "https://gitlab.freedesktop.org/pipewire/wireplumber/-/merge_requests/558.patch")
-						];
-					});
+	services.pipewire = {
+		package =
+			# assert lib.assertMsg
+			# 	(lib.versionAtLeast unstable.pipewire.version "0.3.84")
+			# 	("Pipewire version is too old, need at least 0.3.84, got ${unstable.pipewire.version}");
+			unstable.pipewire.override {
+				lilv = unstable.lilv.overrideAttrs (old: {
+					propagatedBuildInputs =
+						(old.propagatedBuildInputs or []) ++
+						(with unstable; [ (callPackage ./lsp-plugins { }) ]);
+				});
 			};
+
+		wireplumber.package =
+			# assert lib.assertMsg
+			# 	(lib.versionAtLeast unstable.wireplumber.version "0.4.15")
+			# 	("Wireplumber version is too old, need at least 0.4.15, got ${unstable.wireplumber.version}");
+			(unstable.wireplumber.override {
+				pipewire = config.services.pipewire.package;
+			}).overrideAttrs (old: {
+				patches = [
+					# policy-dsp: add ability to hide parent nodes 
+					# https://gitlab.freedesktop.org/pipewire/wireplumber/-/merge_requests/558
+					(builtins.fetchurl "https://gitlab.freedesktop.org/pipewire/wireplumber/-/merge_requests/558.patch")
+				];
+			});
+	};
 
 	# aaaaa
 	# https://github.com/NixOS/nixpkgs/issues/200744
@@ -102,7 +113,8 @@
 					(path: {
 						name = "${path}";
 						value = {
-							source = "${asahi-audio}/share/asahi-audio/${path}";
+							source = "${asahi-audio}/share/${path}";
+							target = "${path}";
 							mode = "0444";
 						};
 					})
