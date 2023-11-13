@@ -1,6 +1,6 @@
 {
 	lib,
-	pkgconfig,
+	pkg-config,
 	alsa-lib,
 	rustPlatform,
 	fetchFromGitHub,
@@ -14,13 +14,17 @@ rustPlatform.buildRustPackage rec {
 		owner = "chadmed";
 		repo = "speakersafetyd";
 		rev = "d1c1f0b5b903f98ad553a04e3dc33a8731a58b28";
-		sha256 = lib.fakeSha256;
+		sha256 = "sha256-Ggs1+jDeUIY7F9FLW2krRp7Qyu04D6tuw5wrJ8jsAQA=";
 	};
 
-	cargoSha256 = lib.fakeSha256;
+	cargoSha256 = "sha256-hWMQGhcIM+SES2XWKvQvPYzoM1AEe2zvN3z2GXWihNs=";
+
+	preBuild = ''
+		cargo update --offline
+	'';
 
 	nativeBuildInputs = [
-		pkgconfig
+		pkg-config
 	];
 
 	buildInputs = [

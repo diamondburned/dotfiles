@@ -8,7 +8,7 @@
     owner = "AsahiLinux";
     repo = "alsa-ucm-conf-asahi";
     rev = "v4";
-    sha256 = "${lib.fakeSha256}";
+    sha256 = "sha256-ZLPpFwWL47Vwc8tRvLo2m/3ocSVNSBHBIRLS+TENr78=";
   };
 
   postInstall = oldAttrs.postInstall or "" + ''
