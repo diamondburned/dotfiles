@@ -7,8 +7,8 @@
     # tracking: https://github.com/AsahiLinux/PKGBUILDs/blob/main/alsa-ucm-conf-asahi/PKGBUILD
     owner = "AsahiLinux";
     repo = "alsa-ucm-conf-asahi";
-    rev = "v2";
-    sha256 = "sha256-iw+T5mZgqNYodAxOGu3r5cwkZZlVFyrxIV5EohImg8A=";
+    rev = "v4";
+    sha256 = "${lib.fakeSha256}";
   };
 
   postInstall = oldAttrs.postInstall or "" + ''

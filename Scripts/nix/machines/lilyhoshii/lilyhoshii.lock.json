@@ -4,6 +4,10 @@
       "url": "https://github.com/NixOS/nixpkgs/archive/1c9db9710c.tar.gz",
       "store_hash": "7ld12v38v0qihzcahpmvfq1qdpa7njwh"
     },
+    "github:NixOS/nixpkgs gnome": {
+      "url": "https://github.com/NixOS/nixpkgs/archive/8bb5f1d812b1844bbf24fa8abecea432d937f42e.tar.gz",
+      "store_hash": "fy4abddr91sf163n65f4m88wd35f7jw1"
+    },
     "github:NixOS/nixpkgs nixos-unstable": {
       "url": "https://github.com/NixOS/nixpkgs/archive/8a86b98f0ba1c405358f1b71ff8b5e1d317f5db2.tar.gz",
       "store_hash": "kg6wz5xv8nzxnqimgz1hxznavhmpjkrl"
@@ -12,13 +16,17 @@
       "url": "https://github.com/nix-community/NUR/archive/de1f391fb5953123d0244282540eee79bfe4ed0d.tar.gz",
       "store_hash": "4f80yanjklbh4zkqvgj5z3v654m8bygq"
     },
+    "github:nix-community/gomod2nix master": {
+      "url": "https://github.com/nix-community/gomod2nix/archive/f95720e89af6165c8c0aa77f180461fe786f3c21.tar.gz",
+      "store_hash": "ainbqc9bxfq7biskfc2b0hiy0z6vwxgs"
+    },
     "github:nix-community/home-manager master": {
       "url": "https://github.com/nix-community/home-manager/archive/ae896c810f501bf0c3a2fd7fc2de094dd0addf01.tar.gz",
       "store_hash": "3m7irgp3q80ipf9igf9jpdcxmcrr2q57"
     },
     "github:tpwrules/nixos-apple-silicon main": {
-      "url": "https://github.com/tpwrules/nixos-apple-silicon/archive/096dc63e5426e17f70b4a8bf7716c3dd3430ba8c.tar.gz",
-      "store_hash": "mh9sbc5hp4vnp02h4aa1x59fcf8q5ij4"
+      "url": "https://github.com/tpwrules/nixos-apple-silicon/archive/08cea2d8b6b32b5dd3976d369863d4b22a22f2b4.tar.gz",
+      "store_hash": "k37dch395840vnsqrgjpzryw5bd79x2k"
     }
   }
 }
