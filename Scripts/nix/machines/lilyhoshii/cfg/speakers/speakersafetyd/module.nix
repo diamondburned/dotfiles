@@ -5,28 +5,11 @@ with builtins;
 
 let
 	self = config.services.speakersafetyd;
-
-	prefix = pkgs.runCommandLocal "speakersafetyd-conf" {} ''
-		mkdir -p $out/share/speakersafetyd
-		cp -r ${self.package.src}/conf/apple $out/share/speakersafetyd/
-	'';
 in
 
 {
 	options.services.speakersafetyd = {
 		enable = mkEnableOption "Enable speakersafetyd";
-
-		# extraConfig = mkOption {
-		# 	type = types.attrsOf types.path;
-		# 	default = {};
-		# 	example = literalExpression ''
-		# 		{
-		# 			j313 = ./speakersafetyd/j313.conf;
-		# 			j314 = ./speakersafetyd/j314.conf;
-		# 		}
-		# 	'';
-		# 	description = "Extra configuration files to be installed";
-		# };
 
 		package = mkOption {
 			type = types.package;
@@ -46,11 +29,10 @@ in
 			enable = true;
 			script = ''
 				${self.package}/bin/speakersafetyd \
-					-c ${prefix}/share/speakersafetyd \
+					-c ${self.package}/share/speakersafetyd/ \
 					-b /var/lib/speakersafetyd/blackbox \
 					-m 7
 			'';
-			after = [ "sound.target" ];
 			wantedBy = [ "multi-user.target" ];
 			description = "Speaker Protection Daemon";
 			serviceConfig = {
@@ -61,5 +43,11 @@ in
 				StartLimitBurst = 10;
 			};
 		};
+
+		systemd.tmpfiles.rules = [
+			"z /var/lib/speakersafetyd 0700 root root -"
+		];
+
+		services.udev.packages = [ self.package ];
 	};
 }

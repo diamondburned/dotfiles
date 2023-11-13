@@ -23,6 +23,17 @@ rustPlatform.buildRustPackage rec {
 		cargo update --offline
 	'';
 
+	installPhase = ''
+		export VARDIR=$TMPDIR/var # don't care
+		export BINDIR=$out/bin
+		export UDEVDIR=$out/lib/udev/rules.d
+		export UNITDIR=$out/share/systemd/system
+		export SHAREDIR=$out/share
+
+		make
+		make install
+	'';
+
 	nativeBuildInputs = [
 		pkg-config
 	];
