@@ -26,10 +26,10 @@ in
 	# TODO: fix crash:
 	#  [GFX1-]: glxtest: ManageChildProcess failed
 	#  [GFX1-]: No GPUs detected via PCI
-	programs.firefox.package = lib.mkForce
-		(pkgs.wrapFirefox
-			(import ./firefox-unwrapped.nix { inherit pkgs; })
-			{});
+	# programs.firefox.package = lib.mkForce
+	# 	(pkgs.wrapFirefox
+	# 		(import ./firefox-unwrapped.nix { inherit pkgs; })
+	# 		{});
 	# programs.firefox.package = lib.mkForce
 	# 	(pkgs.wrapFirefox unstable.firefox-unwrapped {});
 

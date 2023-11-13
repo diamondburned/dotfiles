@@ -5,7 +5,7 @@ let
 		(fetchurl "https://aur.archlinux.org/cgit/aur.git/plain/disable-clone3.diff?h=glibc-widevine")
 		(fetchurl "https://aur.archlinux.org/cgit/aur.git/plain/0001-sys-libs-glibc-add-support-for-SHT_RELR-sections.patch?h=glibc-widevine")
 		(fetchurl "https://aur.archlinux.org/cgit/aur.git/plain/0002-tls-libwidevinecdm.so-since-4.10.2252.0-has-TLS-with.patch?h=glibc-widevine")
-		(fetchurl "https://aur.archlinux.org/cgit/aur.git/plain/0003-glibc-2.35-make-4.4-MAKEFLAGS.patch?h=glibc-widevine")
+		(fetchurl "https://aur.archlinux.org/cgit/aur.git/tree/0003-nscd-Do-not-rebuild-getaddrinfo-bug-30709.patch?h=glibc-widevine")
 	];
 
 	nixpkgs_glibc_2_35 = import (fetchFromGitHub {

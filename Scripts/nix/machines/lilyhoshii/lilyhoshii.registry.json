@@ -26,7 +26,7 @@
     },
     "to": {
       "type": "path",
-      "path": "/nix/store/kg6wz5xv8nzxnqimgz1hxznavhmpjkrl-bonito-DhI227xRdXqbxeI0-nixpkgs/bonito-DhI227xRdXqbxeI0-nixpkgs"
+      "path": "/nix/store/wp2ml3rcq283avifpmdbh2b6x2cz8d70-bonito-u34x9yT1dRMHaB0M-nixpkgs/bonito-u34x9yT1dRMHaB0M-nixpkgs"
     }
   },
   "bonito:nixpkgs": {
@@ -36,7 +36,7 @@
     },
     "to": {
       "type": "path",
-      "path": "/nix/store/kg6wz5xv8nzxnqimgz1hxznavhmpjkrl-bonito-DhI227xRdXqbxeI0-nixpkgs/bonito-DhI227xRdXqbxeI0-nixpkgs"
+      "path": "/nix/store/wp2ml3rcq283avifpmdbh2b6x2cz8d70-bonito-u34x9yT1dRMHaB0M-nixpkgs/bonito-u34x9yT1dRMHaB0M-nixpkgs"
     }
   },
   "bonito:nixpkgs_gnome": {
@@ -56,7 +56,7 @@
     },
     "to": {
       "type": "path",
-      "path": "/nix/store/kg6wz5xv8nzxnqimgz1hxznavhmpjkrl-bonito-DhI227xRdXqbxeI0-nixpkgs/bonito-DhI227xRdXqbxeI0-nixpkgs"
+      "path": "/nix/store/wp2ml3rcq283avifpmdbh2b6x2cz8d70-bonito-u34x9yT1dRMHaB0M-nixpkgs/bonito-u34x9yT1dRMHaB0M-nixpkgs"
     }
   }
 }

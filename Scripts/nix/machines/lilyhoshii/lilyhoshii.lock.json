@@ -9,8 +9,8 @@
       "store_hash": "fy4abddr91sf163n65f4m88wd35f7jw1"
     },
     "github:NixOS/nixpkgs nixos-unstable": {
-      "url": "https://github.com/NixOS/nixpkgs/archive/8a86b98f0ba1c405358f1b71ff8b5e1d317f5db2.tar.gz",
-      "store_hash": "kg6wz5xv8nzxnqimgz1hxznavhmpjkrl"
+      "url": "https://github.com/NixOS/nixpkgs/archive/85f1ba3e51676fa8cc604a3d863d729026a6b8eb.tar.gz",
+      "store_hash": "wp2ml3rcq283avifpmdbh2b6x2cz8d70"
     },
     "github:nix-community/NUR master": {
       "url": "https://github.com/nix-community/NUR/archive/de1f391fb5953123d0244282540eee79bfe4ed0d.tar.gz",

@@ -5,20 +5,17 @@
 #
 # This file covers these items:
 #
+# - [ ] Asahi Linux 6.5-25 (waiting on AsahiLinux/PKGBUILDs)
 # - [x] alsa-ucm-conf-asahi
-# - [ ] asahi-audio
-# - [x] speakersafetyd
-# - [ ] bankstown
-# - [ ] LSP plugins LV2 (how?)
-# - [.] Pipewire v0.3.84 (nixpkgs-dependent)
-# - [.] Pipewire module-filter-chain-lv2
-# - [.] Wireplumber v0.4.15
+# - [x] asahi-audio
+# - [ ] speakersafetyd (packaged but not working, ALSA error)
+# - [x] bankstown
+# - [x] LSP plugins LV2 (how?)
+# - [ ] Pipewire v0.3.84 (waiting for upstream Nixpkgs)
+# - [x] Pipewire module-filter-chain-lv2
+# - [x] Wireplumber v0.4.15
 # - [x] Wireplumber w/ policy-dsp patch
 #
-
-let
-	unstable = import <unstable> { };
-in
 
 {
 	imports = [
@@ -37,47 +34,58 @@ in
 
 	services.speakersafetyd = {
 		enable = true;
-		package = unstable.callPackage ./speakersafetyd/package.nix { };
+		package = pkgs.callPackage ./speakersafetyd/package.nix { };
 	};
 
 	nixpkgs.overlays = [
 		(self: super: {
-			alsa-ucm-conf-asahi = unstable.callPackage ./alsa-ucm-conf-asahi.nix {
-				inherit (unstable) alsa-ucm-conf;
+			alsa-ucm-conf-asahi = super.callPackage ./alsa-ucm-conf-asahi.nix {
+				inherit (super) alsa-ucm-conf;
 			};
-			alsa-lib-asahi = unstable.alsa-lib.override {
+			alsa-lib-asahi = super.alsa-lib.override {
 				alsa-ucm-conf = self.alsa-ucm-conf-asahi;
 			};
 		})
 	];
 
-	services.pipewire = {
-		package =
-			# assert lib.assertMsg
-			# 	(lib.versionAtLeast unstable.pipewire.version "0.3.84")
-			# 	("Pipewire version is too old, need at least 0.3.84, got ${unstable.pipewire.version}");
-			unstable.pipewire.override {
-				lilv = unstable.lilv.overrideAttrs (old: {
-					propagatedBuildInputs =
-						(old.propagatedBuildInputs or []) ++
-						(with unstable; [ (callPackage ./lsp-plugins { }) ]);
-				});
-			};
+	services.pipewire =
+		let
+			bankstown = pkgs.callPackage ./lsp-plugins/bankstown.nix { };
 
-		wireplumber.package =
-			# assert lib.assertMsg
-			# 	(lib.versionAtLeast unstable.wireplumber.version "0.4.15")
-			# 	("Wireplumber version is too old, need at least 0.4.15, got ${unstable.wireplumber.version}");
-			(unstable.wireplumber.override {
-				pipewire = config.services.pipewire.package;
-			}).overrideAttrs (old: {
-				patches = [
-					# policy-dsp: add ability to hide parent nodes 
-					# https://gitlab.freedesktop.org/pipewire/wireplumber/-/merge_requests/558
-					(builtins.fetchurl "https://gitlab.freedesktop.org/pipewire/wireplumber/-/merge_requests/558.patch")
-				];
-			});
-	};
+			lv2Plugins = with pkgs; [
+				lsp-plugins
+				bankstown				
+			];
+
+			withPlugins = bin: pkg:
+				pkg.overrideAttrs (old: {
+					nativeBuildInputs = old.nativeBuildInputs ++ [ pkgs.makeWrapper ];
+					postInstall = ''
+						# Taken from pkgs/applications/audio/pulseeffects/default.nix.
+						wrapProgram $out/bin/${bin} \
+							--prefix LV2_PATH : ${lib.makeSearchPath "lib/lv2" lv2Plugins}
+					'';
+				});
+		in
+		{
+			package =
+				# assert lib.assertMsg
+				# 	(lib.versionAtLeast pkgs.pipewire.version "0.3.84")
+				# 	("Pipewire version is too old, need at least 0.3.84, got ${pkgs.pipewire.version}");
+				pkgs.pipewire;
+
+			wireplumber.package =
+				assert lib.assertMsg
+					(lib.versionAtLeast pkgs.wireplumber.version "0.4.15")
+					("Wireplumber version is too old, need at least 0.4.15, got ${pkgs.wireplumber.version}");
+				withPlugins "wireplumber" (pkgs.wireplumber.overrideAttrs (old: {
+					patches = [
+						# policy-dsp: add ability to hide parent nodes 
+						# https://gitlab.freedesktop.org/pipewire/wireplumber/-/merge_requests/558
+						(builtins.fetchurl "https://gitlab.freedesktop.org/pipewire/wireplumber/-/merge_requests/558.patch")
+					];
+				}));
+		};
 
 	# aaaaa
 	# https://github.com/NixOS/nixpkgs/issues/200744
