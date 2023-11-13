@@ -1,21 +1,12 @@
 { config, lib, pkgs, ... }:
 
+# This file is adapted from the official wiki page for Asahi Linux speakers:
+# https://github.com/AsahiLinux/docs/wiki/SW:Speakers
+
 {
 	imports = [
 		<dotfiles/overlays/packages/speakersafetyd/module.nix>
 	];
-
-	# services.speakersafetyd = {
-	# 	enable = true;
-	# 	package = pkgs.speakersafetyd.overrideAttrs (old: {
-	# 		postPatch = (old.postPatch or "") + ''
-	# 			sed -i 's|" Speaker Volume"|" Speaker Playback Volume"|g' src/types.rs
-	# 		'';
-	# 	});
-	# 	extraConfig = {
-	# 		j313 = ./j313.conf;
-	# 	};
-	# };
 
 	# Enable unsafe speaker configuration.
 	# See sound/soc/apple/macaudio.c:71.
@@ -27,6 +18,8 @@
 	 	}
 	];
 
+	services.speakersafetyd.enable = true;
+
 	nixpkgs.overlays = [
 		(self: super: {
 			alsa-ucm-conf-asahi = super.callPackage ./alsa-ucm-conf-asahi.nix {
@@ -35,6 +28,13 @@
 			alsa-lib-asahi = super.alsa-lib.override {
 				alsa-ucm-conf = self.alsa-ucm-conf-asahi;
 			};
+			wireplumber = super.wireplumber.overrideAttrs (old: {
+				patches = [
+					# policy-dsp: add ability to hide parent nodes 
+					# https://gitlab.freedesktop.org/pipewire/wireplumber/-/merge_requests/558
+					(builtins.fetchurl "https://gitlab.freedesktop.org/pipewire/wireplumber/-/merge_requests/558.patch")
+				];
+			});
 		})
 	];
 
