@@ -11,7 +11,7 @@
 # - [ ] speakersafetyd (packaged but not working, ALSA error)
 # - [x] bankstown
 # - [x] LSP plugins LV2 (how?)
-# - [ ] Pipewire v0.3.84 (waiting for upstream Nixpkgs)
+# - [x] Pipewire v0.3.84
 # - [x] Pipewire module-filter-chain-lv2
 # - [x] Wireplumber v0.4.15
 # - [x] Wireplumber w/ policy-dsp patch
@@ -20,6 +20,7 @@
 {
 	imports = [
 		./speakersafetyd/module.nix
+		./pipewire-0.3.84/module.nix # see disabledModules below
 	];
 
 	# Enable unsafe speaker configuration.
@@ -54,7 +55,7 @@
 
 			lv2Plugins = with pkgs; [
 				lsp-plugins
-				bankstown				
+				bankstown
 			];
 
 			withPlugins = bin: pkg:
@@ -69,10 +70,13 @@
 		in
 		{
 			package =
-				# assert lib.assertMsg
-				# 	(lib.versionAtLeast pkgs.pipewire.version "0.3.84")
-				# 	("Pipewire version is too old, need at least 0.3.84, got ${pkgs.pipewire.version}");
-				pkgs.pipewire;
+				let
+					pipewire = pkgs.callPackage ./pipewire-0.3.84/package.nix { };
+				in
+					assert lib.assertMsg
+						(lib.versionAtLeast pipewire.version "0.3.84")
+						("Pipewire version is too old, need at least 0.3.84, got ${pipewire.version}");
+					pipewire;
 
 			wireplumber.package =
 				assert lib.assertMsg
@@ -127,9 +131,6 @@
 						};
 					})
 					paths);
-
-	# The ALSA config doesn't seem to work at all, but it at least detects the speakers. The speakers
-	# are still detected even without this.
 
 	system.replaceRuntimeDependencies = [
 		{

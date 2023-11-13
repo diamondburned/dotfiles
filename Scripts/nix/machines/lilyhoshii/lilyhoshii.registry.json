@@ -49,6 +49,16 @@
       "path": "/nix/store/fy4abddr91sf163n65f4m88wd35f7jw1-bonito-OI1rzSgkolTeR-LS-nixpkgs/bonito-OI1rzSgkolTeR-LS-nixpkgs"
     }
   },
+  "bonito:nixpkgs_staging": {
+    "from": {
+      "type": "indirect",
+      "id": "nixpkgs_staging"
+    },
+    "to": {
+      "type": "path",
+      "path": "/nix/store/ar24g34g5ix5rxpmqkw1qh9ali33rlmv-bonito-XTLXmMHEHcImHIC6-nixpkgs/bonito-XTLXmMHEHcImHIC6-nixpkgs"
+    }
+  },
   "bonito:nixpkgs_unstable": {
     "from": {
       "type": "indirect",

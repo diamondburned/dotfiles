@@ -12,6 +12,10 @@
       "url": "https://github.com/NixOS/nixpkgs/archive/85f1ba3e51676fa8cc604a3d863d729026a6b8eb.tar.gz",
       "store_hash": "wp2ml3rcq283avifpmdbh2b6x2cz8d70"
     },
+    "github:NixOS/nixpkgs staging": {
+      "url": "https://github.com/NixOS/nixpkgs/archive/b3460d2cb765845b73019ccde3a598dfab889b2d.tar.gz",
+      "store_hash": "ar24g34g5ix5rxpmqkw1qh9ali33rlmv"
+    },
     "github:nix-community/NUR master": {
       "url": "https://github.com/nix-community/NUR/archive/de1f391fb5953123d0244282540eee79bfe4ed0d.tar.gz",
       "store_hash": "4f80yanjklbh4zkqvgj5z3v654m8bygq"

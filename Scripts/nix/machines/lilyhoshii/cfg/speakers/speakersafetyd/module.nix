@@ -45,10 +45,21 @@ in
 		systemd.services.speakersafetyd = {
 			enable = true;
 			script = ''
-				${self.package}/bin/speakersafetyd -c ${prefix}/share/speakersafetyd
+				${self.package}/bin/speakersafetyd \
+					-c ${prefix}/share/speakersafetyd \
+					-b /var/lib/speakersafetyd/blackbox \
+					-m 7
 			'';
 			after = [ "sound.target" ];
 			wantedBy = [ "multi-user.target" ];
+			description = "Speaker Protection Daemon";
+			serviceConfig = {
+				UMask = "0066";
+				Restart = "on-failure";
+				RestartSec = 1;
+				StartLimitInterval = 60;
+				StartLimitBurst = 10;
+			};
 		};
 	};
 }

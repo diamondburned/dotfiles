@@ -57,12 +57,7 @@
 	];
 
 	services.openssh.enable = true;
-	services.openssh.listenAddresses = [
-		{
-			addr = "100.106.8.72"; # all Tailscale IPs
-			port = 22;
-		}
-	];
+
 	users.users.diamond.openssh.authorizedKeys.keyFiles = [
 		<dotfiles/public_keys>
 	];
