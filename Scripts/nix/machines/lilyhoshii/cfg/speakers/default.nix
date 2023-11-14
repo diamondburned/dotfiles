@@ -34,7 +34,7 @@
 	];
 
 	services.speakersafetyd = {
-		enable = true;
+		enable = false;
 		package = pkgs.callPackage ./speakersafetyd/package.nix { };
 	};
 

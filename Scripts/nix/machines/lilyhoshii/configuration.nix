@@ -99,4 +99,9 @@
 
 	nix.settings.cores = lib.mkForce 8;
 	nix.settings.max-jobs = lib.mkForce 1;
+
+	hardware.bluetooth = {
+		enable = true;
+		package = pkgs.bluez5-experimental;
+	};
 }
