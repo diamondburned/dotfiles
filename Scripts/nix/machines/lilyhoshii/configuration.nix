@@ -64,12 +64,12 @@
 
 	networking.firewall = {
 		enable = true;
-		allowedTCPPorts = [ ];
-		allowedUDPPorts = [ ];
 		# Allow ports for Tailscale.
+		allowedTCPPorts = [ 41641 ];
+		allowedUDPPorts = [ 41641 ];
 		interfaces."tailscale0" = {
-			allowedTCPPorts = [ 22 80 443 ];
-			allowedUDPPorts = [ 22 80 443 ];
+			allowedTCPPortRanges = [ { from = 0; to = 65535; } ];
+			allowedUDPPortRanges = [ { from = 0; to = 65535; } ];
 		};
 	};
 
