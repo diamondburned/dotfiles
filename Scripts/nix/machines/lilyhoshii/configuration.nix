@@ -18,6 +18,17 @@
   hardware.asahi.addEdgeKernelConfig = lib.mkForce true;
   hardware.asahi.useExperimentalGPUDriver = lib.mkForce true;
 
+	boot.kernelPackages =
+		let
+			kernel1 = pkgs.linux-asahi;
+			kernel2 = kernel1.override {
+				_kernelPatches = config.boot.kernelPatches;
+				_4KBuild = config.hardware.asahi.use4KPages;
+				withRust = config.hardware.asahi.withRust;
+			};
+			kernel3 = kernel2.overrideAttrs (old: {});
+		in
+
 	systemd.services.mount-asahi = {
 		enable = true;
 		script = ''

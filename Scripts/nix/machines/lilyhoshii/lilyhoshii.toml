@@ -19,6 +19,7 @@
 [users.root.channels]
  nixpkgs_unstable_newer = "github:NixOS/nixpkgs nixos-unstable"
  nixos-apple-silicon = "github:tpwrules/nixos-apple-silicon main"
+ asahilinux = "github:asahilinux/linux asahi"
  nur = "github:nix-community/NUR master"
  gomod2nix = "github:nix-community/gomod2nix master"
 
