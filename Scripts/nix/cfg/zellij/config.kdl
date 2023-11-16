@@ -1,6 +1,7 @@
 copy_on_select true
 simplified_ui true
 mouse_mode true // true
+scrollback_lines_to_serialize 100
 
 ui {
 	pane_frames {
@@ -25,7 +26,7 @@ theme "terminal_pastel"
 themes {
 	terminal {
 		fg "#FFFFFF"
-		bg "#1D1D1D"
+		bg "#52494C"
 		black "#52494C"
 		red "#FF473D"   // swapped with green
 		green "#3DCCB2" // swapped with red
@@ -38,7 +39,7 @@ themes {
 	}
 	terminal_pastel {
 		fg "#FFFFFF"
-		bg "#1D1D1D"
+		bg "#52494C"
 		black "#52494C"
 		red "#FF6961"
 		green "#F7A8B8"   // swapped with magenta
