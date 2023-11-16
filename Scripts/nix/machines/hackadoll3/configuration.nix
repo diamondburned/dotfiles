@@ -677,7 +677,6 @@ in {
 			# (gamescope)
 
 		]) ++ (with pkgs.nixpkgs_unstable_real; [
-			spotify
 			# armcord
 			# vesktop
 			# vencord
@@ -793,6 +792,7 @@ in {
 			# ytmdesktop # not until v2 is ready
 			youtube-music
 			monophony
+			spotify
 
 			# # Chat/Social
 			# # zoom-us
