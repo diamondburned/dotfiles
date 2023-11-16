@@ -30,8 +30,8 @@ let
 		];
 
 	bulbremote = pkgs.fetchzip {
-		url = "https://github.com/diamondburned/bulbremote/releases/download/v0.0.2/dist.tar.gz";
-		sha256 = "1jyd7hv2ivba4bjx106dmcmgbdy74lcn664l9hb2vy5gpnf0x1y3";
+		url = "https://github.com/diamondburned/bulbremote/releases/download/v0.0.3/dist.tar.gz";
+		sha256 = "sha256-V4DbvuiKDi6fUhVp74AQJll/AWY+SRCkMALDNjG/7ZE=";
 	};
 
 	dynamicSubdomains = domains: subdomains:
@@ -98,8 +98,9 @@ in
 					handle /api/config {
 						respond `${configJSON}`
 					}
-					handle /api/apply {
-						rewrite * /?{query}
+					handle /api/command {
+						method * GET
+						rewrite * /cm?cmnd={query.cmnd}
 						reverse_proxy * ${secrets.tasmotaAddress}
 					}
 				'';
