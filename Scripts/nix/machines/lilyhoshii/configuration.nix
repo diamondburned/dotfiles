@@ -20,14 +20,20 @@
 
 	boot.kernelPackages =
 		let
-			kernel1 = pkgs.linux-asahi;
+			kernel1 = pkgs.linux-asahi.kernel;
 			kernel2 = kernel1.override {
 				_kernelPatches = config.boot.kernelPatches;
 				_4KBuild = config.hardware.asahi.use4KPages;
 				withRust = config.hardware.asahi.withRust;
 			};
-			kernel3 = kernel2.overrideAttrs (old: {});
+			kernel3 = kernel2.overrideAttrs (old: {
+				src = <asahilinux/asahilinux>;
+				unpackPhase = ''
+					cp -r $src/. . && ls
+				'';
+			});
 		in
+			lib.mkForce (pkgs.linuxPackagesFor kernel3);
 
 	systemd.services.mount-asahi = {
 		enable = true;
