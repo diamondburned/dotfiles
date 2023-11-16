@@ -790,6 +790,9 @@ in {
 			pamixer
 			easyeffects
 			lollypop
+			# ytmdesktop # not until v2 is ready
+			youtube-music
+			monophony
 
 			# # Chat/Social
 			# # zoom-us
