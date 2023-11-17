@@ -273,6 +273,8 @@ in {
 	hardware.opentabletdriver.enable = false;
 
 	boot.kernelParams = [
+		"usbcore.autosuspend=-1"
+		"btusb.enable_autosuspend=0"
 		"mitigations=off"
 		"i915.enable_guc=2"
 		"i915.enable_psr=0"
