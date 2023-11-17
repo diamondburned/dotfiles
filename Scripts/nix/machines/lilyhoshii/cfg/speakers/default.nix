@@ -5,10 +5,10 @@
 #
 # This file covers these items:
 #
-# - [ ] Asahi Linux 6.5-25 (waiting on AsahiLinux/PKGBUILDs)
+# - [x] Asahi Linux 6.5-25 (waiting on AsahiLinux/PKGBUILDs)
 # - [x] alsa-ucm-conf-asahi
 # - [x] asahi-audio
-# - [ ] speakersafetyd (packaged but not working, ALSA error)
+# - [x] speakersafetyd
 # - [x] bankstown
 # - [x] LSP plugins LV2 (how?)
 # - [x] Pipewire v0.3.84
@@ -22,16 +22,6 @@
 		./speakersafetyd/module.nix
 		./pipewire-0.3.84/module.nix # see disabledModules below
 	];
-
-	# Enable unsafe speaker configuration.
-	# See sound/soc/apple/macaudio.c:71.
-	# boot.kernelParams = [ "snd-soc-macaudio.please_blow_up_my_speakers=1" ];
-	# boot.kernelPatches = [
-	# 	{
-	# 		name  = "enable-speakers";
-	# 		patch = ./AsahiLinux-enable-speakers.patch;
-	#  	}
-	# ];
 
 	services.speakersafetyd = {
 		enable = true;
@@ -131,10 +121,6 @@
 						};
 					})
 					paths);
-
-	environment.variables = {
-		ALSA_CONFIG_UCM2 = "${pkgs.alsa-ucm-conf-asahi}/share/alsa/ucm2";
-	};
 
 	system.replaceRuntimeDependencies = [
 		{
