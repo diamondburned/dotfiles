@@ -34,7 +34,7 @@
 	# ];
 
 	services.speakersafetyd = {
-		enable = false;
+		enable = true;
 		package = pkgs.callPackage ./speakersafetyd/package.nix { };
 	};
 
@@ -131,6 +131,10 @@
 						};
 					})
 					paths);
+
+	environment.variables = {
+		ALSA_CONFIG_UCM2 = "${pkgs.alsa-ucm-conf-asahi}/share/alsa/ucm2";
+	};
 
 	system.replaceRuntimeDependencies = [
 		{
