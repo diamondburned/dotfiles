@@ -20,20 +20,21 @@
 
 	boot.kernelPackages =
 		let
-			kernel1 = pkgs.linux-asahi.kernel;
-			kernel2 = kernel1.override {
+			kernelPackages = pkgs.linux-asahi.override {
 				_kernelPatches = config.boot.kernelPatches;
 				_4KBuild = config.hardware.asahi.use4KPages;
 				withRust = config.hardware.asahi.withRust;
 			};
-			kernel3 = kernel2.overrideAttrs (old: {
-				src = <asahilinux/asahilinux>;
+			kernel = kernelPackages.kernel.overrideAttrs (old: {
+				src = builtins.storePath <asahilinux>;
+				version = "asahi-6-latest";
 				unpackPhase = ''
-					cp -r $src/. . && ls
+					cp -r $(realpath $src)/. .
+					chmod -R u+w .
 				'';
 			});
 		in
-			lib.mkForce (pkgs.linuxPackagesFor kernel3);
+			lib.mkForce (pkgs.linuxPackagesFor kernel);
 
 	systemd.services.mount-asahi = {
 		enable = true;
