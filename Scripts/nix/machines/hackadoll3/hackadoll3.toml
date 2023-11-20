@@ -3,7 +3,7 @@
  nixpkgs_unstable_older = "github:NixOS/nixpkgs 7409480d5c"
  # nixpkgs_unstable_older = "github:NixOS/nixpkgs 1b1f50645af2a70dc93ea"
  nixpkgs_unstable_newer = "github:NixOS/nixpkgs 1c9db9710c"
- nixpkgs_gnome = "github:NixOS/nixpkgs gnome"
+ nixpkgs_gnome = "github:NixOS/nixpkgs 360bbbce42a" # gnome last Hydra
  home-manager_unstable = "github:nix-community/home-manager master"
  nixGL = "github:nix-community/nixGL main"
 
