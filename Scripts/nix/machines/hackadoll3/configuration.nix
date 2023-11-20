@@ -805,7 +805,7 @@ in {
 			# # fractal
 
 			# Office
-			# libreoffice
+			libreoffice
 			nixpkgs_unstable_older.qalculate-gtk
 			onlyoffice-bin
 			evince
