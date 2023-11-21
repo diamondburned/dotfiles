@@ -732,6 +732,7 @@ in {
 			wl-clipboard
 			playerctl
 			waypipe
+			bottles
 			# gatttool
 
 			# Force rm to use rmtrash.
