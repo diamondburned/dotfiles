@@ -126,7 +126,7 @@
     },
     "https://nixos.org/channels/nixos-unstable": {
       "url": "https://nixos.org/channels/nixos-unstable",
-      "store_hash": "py526inz50bw731spc6snf22fxk2mpdx"
+      "store_hash": "w6swwyb00i7r6x27d1961gqg5c3bicy8"
     }
   }
 }
