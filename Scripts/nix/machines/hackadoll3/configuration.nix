@@ -790,6 +790,7 @@ in {
 			pamixer
 			easyeffects
 			lollypop
+			komikku
 			# ytmdesktop # not until v2 is ready
 			youtube-music
 			monophony
