@@ -18,6 +18,9 @@
 
 [users.root.channels]
  nixpkgs_unstable_newer = "github:NixOS/nixpkgs nixos-unstable"
+ # I'm so fucking tired of Rust shit not building with a newer rustc version.
+ # This is here to appease Asahi Linux's Rust crap.
+ nixpkgs_older_rust = "github:NixOS/nixpkgs 85f1ba3e51676"
  nixos-apple-silicon = "github:tpwrules/nixos-apple-silicon main"
  asahilinux = "github:asahilinux/linux refs/tags/asahi-6.*"
  nur = "github:nix-community/NUR master"

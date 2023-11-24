@@ -4,13 +4,17 @@
       "url": "https://github.com/NixOS/nixpkgs/archive/1c9db9710c.tar.gz",
       "store_hash": "7ld12v38v0qihzcahpmvfq1qdpa7njwh"
     },
+    "github:NixOS/nixpkgs 85f1ba3e51676": {
+      "url": "https://github.com/NixOS/nixpkgs/archive/85f1ba3e51676.tar.gz",
+      "store_hash": "jni203jz4lwaj273bl2dm9kz34lqzng1"
+    },
     "github:NixOS/nixpkgs gnome": {
       "url": "https://github.com/NixOS/nixpkgs/archive/8bb5f1d812b1844bbf24fa8abecea432d937f42e.tar.gz",
       "store_hash": "fy4abddr91sf163n65f4m88wd35f7jw1"
     },
     "github:NixOS/nixpkgs nixos-unstable": {
-      "url": "https://github.com/NixOS/nixpkgs/archive/85f1ba3e51676fa8cc604a3d863d729026a6b8eb.tar.gz",
-      "store_hash": "wp2ml3rcq283avifpmdbh2b6x2cz8d70"
+      "url": "https://github.com/NixOS/nixpkgs/archive/19cbff58383a4ae384dea4d1d0c823d72b49d614.tar.gz",
+      "store_hash": "djxgqmfigw3020d1x5icv56427ynisbx"
     },
     "github:NixOS/nixpkgs staging": {
       "url": "https://github.com/NixOS/nixpkgs/archive/b3460d2cb765845b73019ccde3a598dfab889b2d.tar.gz",

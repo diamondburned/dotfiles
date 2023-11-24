@@ -80,7 +80,6 @@ in
 	home.packages = with pkgs; [
 		# Themes
 		papirus-icon-theme
-		materia-theme
 		material-design-icons
 		catppuccin-cursors.mochaPink
 		catppuccin-cursors.macchiatoPink
