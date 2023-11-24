@@ -171,6 +171,7 @@ video/x-mpeg=io.github.celluloid_player.Celluloid.desktop
 video/x-mpeg-system=io.github.celluloid_player.Celluloid.desktop
 video/x-ms-wm=io.github.celluloid_player.Celluloid.desktop
 video/x-nsv=io.github.celluloid_player.Celluloid.desktop
+x-scheme-handler/mailspring=Mailspring.desktop
 
 [Added Associations]
 application/zip=org.gnome.FileRoller.desktop;
