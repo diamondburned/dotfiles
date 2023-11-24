@@ -61,8 +61,8 @@
       "store_hash": "ccb69s0aqifdg0z3a67fbwyayb0g7ikj"
     },
     "github:NixOS/nixpkgs nixos-unstable": {
-      "url": "https://github.com/NixOS/nixpkgs/archive/e44462d6021bfe23dfb24b775cc7c390844f773d.tar.gz",
-      "store_hash": "4v535m2svfzps6cdnbdr9n1wvahvwm7i"
+      "url": "https://github.com/NixOS/nixpkgs/archive/19cbff58383a4ae384dea4d1d0c823d72b49d614.tar.gz",
+      "store_hash": "djxgqmfigw3020d1x5icv56427ynisbx"
     },
     "github:NixOS/nixpkgs staging": {
       "url": "https://github.com/NixOS/nixpkgs/archive/d74654eebef8315a570aee31063af4c8458518d5.tar.gz",
@@ -126,7 +126,7 @@
     },
     "https://nixos.org/channels/nixos-unstable": {
       "url": "https://nixos.org/channels/nixos-unstable",
-      "store_hash": "w6swwyb00i7r6x27d1961gqg5c3bicy8"
+      "store_hash": "ddr6vxk2d2p584cf5ylcqlbamj1llq81"
     }
   }
 }
