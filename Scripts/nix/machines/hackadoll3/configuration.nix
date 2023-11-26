@@ -792,7 +792,7 @@ in {
 			lollypop
 			komikku
 			# ytmdesktop # not until v2 is ready
-			youtube-music
+			(nixGLWrapBin youtube-music)
 			monophony
 			spotify
 
