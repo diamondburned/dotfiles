@@ -7,6 +7,7 @@
 	fonts.fonts = with pkgs; [
 		bakoma_ttf # math
 		# opensans-ttf
+		lexend
 		roboto
 		roboto-slab # serif
 		source-code-pro
