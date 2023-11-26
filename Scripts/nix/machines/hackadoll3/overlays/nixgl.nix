@@ -17,7 +17,8 @@ self: super: {
 			for bin in ${pkg}/bin/*; do
 				dst=$out/bin/$(basename "$bin")
 				echo "#!${super.runtimeShell}" >> $dst
-				echo "exec ${self.nixGL}/bin/nixGLIntel $bin "'$@' >> $dst
+				echo "exec ${self.nixGL}/bin/nixGLIntel $bin" '"$@"' >> $dst
+				chmod +x $dst
 			done
 		'';
 	nixGLWrapBin = pkg: self.nixGLWrap { inherit pkg; };
