@@ -23,6 +23,12 @@
 		MOZ_ENABLE_WAYLAND = "1";
 	};
 
+	systemd.user.sessionVariables = {
+		NIXOS_OZONE_WL = "1";
+		QT_QPA_PLATFORM = "wayland";
+		MOZ_ENABLE_WAYLAND = "1";
+	};
+
 	dconf.settings = lib.attrsets.optionalAttrs
 		(config.programs.foot.enable)
 		{

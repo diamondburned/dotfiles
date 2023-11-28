@@ -38,6 +38,7 @@
 
 		home.packages = with pkgs; [
 			keepassxc
+			chromium
 			fcitx5-configtool
 			fcitx5-gtk
 			wl-clipboard
