@@ -129,6 +129,7 @@ image/svg+xml-compressed=org.gnome.Loupe.desktop
 image/avif=org.gnome.Loupe.desktop
 image/heic=org.gnome.Loupe.desktop
 image/jxl=org.gnome.Loupe.desktop
+application/pdf=org.gnome.Evince.desktop
 
 [Added Associations]
 x-scheme-handler/http=chromium-browser.desktop;
@@ -138,3 +139,4 @@ x-scheme-handler/https=chromium-browser.desktop;
 image/gif=chromium-browser.desktop;
 image/png=chromium-browser.desktop;
 image/webp=chromium-browser.desktop;
+application/pdf=org.gnome.Evince.desktop;
