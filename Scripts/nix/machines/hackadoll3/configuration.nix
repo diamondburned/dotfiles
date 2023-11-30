@@ -836,8 +836,8 @@ in {
 			# osu-wine-realistik
 
 			# GNOME things
-			xfce.thunar
 			kooha
+			snapshot
 			glib-networking
 			celluloid
 			gnome.gnome-power-manager
