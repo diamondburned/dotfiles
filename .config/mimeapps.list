@@ -130,6 +130,7 @@ image/avif=org.gnome.Loupe.desktop
 image/heic=org.gnome.Loupe.desktop
 image/jxl=org.gnome.Loupe.desktop
 application/pdf=org.gnome.Evince.desktop
+audio/x-opus+ogg=io.github.celluloid_player.Celluloid.desktop
 
 [Added Associations]
 x-scheme-handler/http=chromium-browser.desktop;
@@ -140,3 +141,4 @@ image/gif=chromium-browser.desktop;
 image/png=chromium-browser.desktop;
 image/webp=chromium-browser.desktop;
 application/pdf=org.gnome.Evince.desktop;
+audio/x-opus+ogg=io.github.celluloid_player.Celluloid.desktop;

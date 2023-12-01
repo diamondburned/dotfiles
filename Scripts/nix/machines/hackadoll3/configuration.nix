@@ -717,6 +717,7 @@ in {
 			drawing
 			sticky
 			fragments
+			alarm-clock-applet
 			# mixxx
 			yt-dlp
 			(nixpkgs_unstable_newer.callPackage <dotfiles/overlays/packages/mixxx/beta.nix> {})
