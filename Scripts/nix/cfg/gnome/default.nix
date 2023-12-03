@@ -2,7 +2,13 @@
 
 {
 	# Enable the GNOME desktop environment
-	services.xserver.desktopManager.gnome.enable = true;
+	services.xserver.desktopManager.gnome = {
+		enable = true;
+		extraGSettingsOverrides = ''
+			[org.gnome.desktop.wm.preferences]
+			auto-raise = false
+		'';
+	};
 
 	# Enable GDM.
 	services.xserver.displayManager.gdm.enable = true;
