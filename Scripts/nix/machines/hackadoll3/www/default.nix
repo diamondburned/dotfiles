@@ -80,7 +80,8 @@ in
 			${subdomains ["dol"]} = ''
 				# TODO: move this to a systemd service and use a reverse proxy to the
 				# Unix socket.
-				reverse_proxy * localhost:19384
+				# reverse_proxy * localhost:19384
+				reverse_proxy * unix//tmp/dol-server.sock
 			'';
 			${subdomains ["bulb"]} =
 				let

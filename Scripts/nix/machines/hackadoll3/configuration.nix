@@ -490,6 +490,7 @@ in {
 			<dotfiles/cfg/nvim/home.nix>
 			<dotfiles/cfg/gnome/home.nix>
 			<dotfiles/cfg/zellij/home.nix>
+			<dotfiles/cfg/dol-server/home.nix>
 
 			# (import <dotfiles/utils/schedule.nix {
 			# 	name        = "birthdayer-juan";
