@@ -128,4 +128,6 @@
 		enable = true;
 		package = pkgs.bluez5-experimental;
 	};
+
+	services.xserver.videoDrivers = [ "displaylink" "modesetting" ];
 }
