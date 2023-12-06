@@ -21,8 +21,8 @@
       "store_hash": "ar24g34g5ix5rxpmqkw1qh9ali33rlmv"
     },
     "github:asahilinux/linux refs/tags/asahi-6.*": {
-      "url": "https://github.com/asahilinux/linux/archive/d9cf9c52cb1a56c97c7c7de874459b08fd376956.tar.gz",
-      "store_hash": "5940mqj4qvgcpy4xqw2nfisppkgqq91w"
+      "url": "https://github.com/asahilinux/linux/archive/ff2d348a4a3b06fab9a425f26537fedfdf162341.tar.gz",
+      "store_hash": "4cvflrnygw4iv399gbjbmkcxa6i2z358"
     },
     "github:nix-community/NUR master": {
       "url": "https://github.com/nix-community/NUR/archive/de1f391fb5953123d0244282540eee79bfe4ed0d.tar.gz",
@@ -37,8 +37,8 @@
       "store_hash": "3m7irgp3q80ipf9igf9jpdcxmcrr2q57"
     },
     "github:tpwrules/nixos-apple-silicon main": {
-      "url": "https://github.com/tpwrules/nixos-apple-silicon/archive/08cea2d8b6b32b5dd3976d369863d4b22a22f2b4.tar.gz",
-      "store_hash": "k37dch395840vnsqrgjpzryw5bd79x2k"
+      "url": "https://github.com/tpwrules/nixos-apple-silicon/archive/14b327ca47703c376ebb82ba16dc42ca2baa57d8.tar.gz",
+      "store_hash": "s27wbld2jq55388d4v2qbaa99x9qsfb1"
     }
   }
 }
