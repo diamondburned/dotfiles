@@ -25,12 +25,13 @@
 				_4KBuild = config.hardware.asahi.use4KPages;
 				withRust = config.hardware.asahi.withRust;
 			};
-			kernel' = kernelPackages.kernel.override {
-				inherit (import <nixpkgs_older_rust> {})
-					rustc
-					rustPlatform
-					rust-bindgen;
-			};
+			kernel' = kernelPackages.kernel;
+			# kernel' = kernelPackages.kernel.override {
+			# 	inherit (import <nixpkgs_older_rust> {})
+			# 		rustc
+			# 		rustPlatform
+			# 		rust-bindgen;
+			# };
 			kernel = kernel'.overrideAttrs (old: {
 				src = builtins.storePath <asahilinux>;
 				version = "asahi-6-latest";

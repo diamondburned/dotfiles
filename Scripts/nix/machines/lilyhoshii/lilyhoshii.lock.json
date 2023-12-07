@@ -24,6 +24,10 @@
       "url": "https://github.com/asahilinux/linux/archive/ff2d348a4a3b06fab9a425f26537fedfdf162341.tar.gz",
       "store_hash": "4cvflrnygw4iv399gbjbmkcxa6i2z358"
     },
+    "github:asahilinux/linux refs/tags/asahi-6.5-*": {
+      "url": "https://github.com/asahilinux/linux/archive/1e02bd56f11c6ef6b8feaf103539686a4bbaff4f.tar.gz",
+      "store_hash": "3ldnzr2qbimnd585dg6cp3bpws4lmqps"
+    },
     "github:nix-community/NUR master": {
       "url": "https://github.com/nix-community/NUR/archive/de1f391fb5953123d0244282540eee79bfe4ed0d.tar.gz",
       "store_hash": "4f80yanjklbh4zkqvgj5z3v654m8bygq"
