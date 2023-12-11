@@ -131,6 +131,7 @@ image/heic=org.gnome.Loupe.desktop
 image/jxl=org.gnome.Loupe.desktop
 application/pdf=org.gnome.Evince.desktop
 audio/x-opus+ogg=io.github.celluloid_player.Celluloid.desktop
+text/vnd.trolltech.linguist=nvim.desktop
 
 [Added Associations]
 x-scheme-handler/http=chromium-browser.desktop;
@@ -143,3 +144,4 @@ image/webp=chromium-browser.desktop;
 application/pdf=org.gnome.Evince.desktop;
 audio/x-opus+ogg=io.github.celluloid_player.Celluloid.desktop;
 image/jpeg=org.gnome.eog.desktop;
+text/vnd.trolltech.linguist=nvim.desktop;
