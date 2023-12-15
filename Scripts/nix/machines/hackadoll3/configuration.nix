@@ -4,13 +4,7 @@
 
 { config, pkgs, lib, ... }:
 
-let lsoc-overlay = pkgs.fetchFromGitHub {
-		owner = "diamondburned";
-		repo  = "lsoc-overlay";
-		rev   = "09d41b0a6f574390d6edc0271be459bd1390ea8d";
-		hash  = "sha256:0a27vwknk442k6wz29xk0gs4m8nhjwalq642xrcac45v97z5glc3";
-	};
-
+let
 	# # TODO: fix this.
 	# tdeo = import (builtins.fetchGit {
 	# 	url = "https://github.com/tadeokondrak/nix-overlay";
@@ -477,8 +471,6 @@ in {
 
 	home-manager.users.diamond = {
 		imports = [
-			"${lsoc-overlay}"
-
 			<dotfiles/overlays>
 			<dotfiles/overlays/home-manager>
 			<dotfiles/secrets/diamond>
@@ -675,7 +667,6 @@ in {
 		]) ++ (with pkgs.nixpkgs_21_11; [
 
 		]) ++ (with pkgs.nixpkgs_unstable; [
-			# (gamescope)
 
 		]) ++ (with pkgs.nixpkgs_unstable_real; [
 			# armcord
@@ -737,10 +728,14 @@ in {
 			bottles
 			# gatttool
 
-			# Force rm to use rmtrash.
 			rmtrash
+			# Force rm to use rmtrash.
 			(pkgs.writeShellScriptBin "rm" ''
-				exec ${rmtrash}/bin/rmtrash --forbid-root=ask-forbid "$@"
+				if [[ "$USER" == diamond ]]; then
+					exec ${rmtrash}/bin/rmtrash --forbid-root=ask-forbid "$@"
+				else
+					exec ${pkgs.coreutils}/bin/rm "$@"
+				fi
 			'')
 
 			# Development tools
@@ -770,14 +765,13 @@ in {
 			# neovim-gtk
 
 			protonup
+			gamescope
 			(steam.override {
 				extraPkgs = pkgs: with pkgs; [
-					(mangohud)
+					mangohud
 					gamescope
-					# (import <nixpkgs_pr_230931> {}).gamescope
 			 	];
 			})
-			(import <nixpkgs_pr_230931> {}).gamescope
 
 			# Multimedia
 			# aqours
@@ -794,7 +788,7 @@ in {
 			lollypop
 			komikku
 			# ytmdesktop # not until v2 is ready
-			(nixGLWrapBin youtube-music)
+			youtube-music
 			monophony
 			spotify
 

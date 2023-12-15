@@ -27,11 +27,10 @@
  nixpkgs_staging = "github:NixOS/nixpkgs staging"
  nixpkgs_gradience = "github:foo-dogsquared/nixpkgs add-gradience-app"
  nixpkgs_shotcut = "github:MatthewCroughan/nixpkgs 6c3dbb326eeff83b11d7cb353c3cead30820e373"
- nixpkgs_pr_230931 = "github:NixOS/nixpkgs fd9d979ab67581f" # refs/pull/230931
  nix-wayland = "github:nix-community/nixpkgs-wayland master"
  lanzaboote = "github:nix-community/lanzaboote 45d04a45d3dfcdee5246f7c0dfed056313de2a61"
  prismlauncher = "github:PrismLauncher/PrismLauncher develop"
- mixxx2_4-beta = "github:mixxxdj/mixxx 2.4-beta"
+ mixxx2_4-beta = "github:mixxxdj/mixxx refs/tags/2.4-beta"
  gomod2nix = "github:nix-community/gomod2nix master"
  unstable = "https://nixos.org/channels/nixos-unstable"
  nur = "github:nix-community/NUR master"
