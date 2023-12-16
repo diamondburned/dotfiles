@@ -788,7 +788,7 @@ in {
 			lollypop
 			komikku
 			# ytmdesktop # not until v2 is ready
-			youtube-music
+			(youtube-music.override { electron_25 = electron; })
 			monophony
 			spotify
 
