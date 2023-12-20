@@ -32,7 +32,7 @@ Plug 'nvim-treesitter/nvim-treesitter', {'do': ':TSUpdate'}
 Plug 'nvim-treesitter/nvim-treesitter-refactor'
 
 "Autocomplete brackets/parens/etc like vscode"
-Plug 'jiangmiao/auto-pairs'
+Plug 'windwp/nvim-autopairs'
 
 "Autocompletion"
 " Plug 'neovim/nvim-lspconfig'
@@ -795,6 +795,6 @@ if executable("blueprint-compiler")
 endif
 
 lua << EOF
-	require('Comment').setup({
-	})
+	require('Comment').setup({})
+	require("nvim-autopairs").setup({})
 EOF
