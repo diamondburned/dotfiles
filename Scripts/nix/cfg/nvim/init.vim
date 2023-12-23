@@ -7,7 +7,6 @@ Plug 'kyazdani42/nvim-tree.lua'
 Plug 'numToStr/Comment.nvim'
 Plug 'tpope/vim-fugitive'
 Plug 'lewis6991/gitsigns.nvim'
-Plug 'willothy/nvim-cokeline'
 " Plug 'airblade/vim-gitgutter'
 Plug 'plasticboy/vim-markdown'
 Plug 'godlygeek/tabular'
@@ -20,6 +19,10 @@ Plug 'luochen1990/rainbow'
 Plug 'ojroques/nvim-osc52'
 Plug 'aymericbeaumet/vim-symlink'
 Plug 'moll/vim-bbye' " optional dependency
+
+"Cokeline and its dependencies"
+Plug 'nvim-lua/plenary.nvim'
+Plug 'willothy/nvim-cokeline'
 
 Plug 'hhhapz/firenvim', { 'do': { _ -> firenvim#install(0) } }
 Plug 'andreypopp/vim-colors-plain'
@@ -797,4 +800,38 @@ endif
 lua << EOF
 	require('Comment').setup({})
 	require("nvim-autopairs").setup({})
+EOF
+
+lua << EOF
+local get_hex = require('cokeline.hlgroups').get_hl_attr
+
+require('cokeline').setup({
+	default_hl = {
+		fg = function(buffer)
+			return
+				buffer.is_focused
+				and get_hex('StatusLine', 'fg')
+				 or get_hex('StatusLineNC', 'fg')
+		end,
+		bg = function(buffer)
+			return get_hex('Pmenu', 'bg')
+		end,
+	},
+	components = {
+		{ text = ' ' },
+		{
+			text = function(buffer) return buffer.filename .. ' ' end,
+			underline = function(buffer)
+				return buffer.is_hovered and not buffer.is_focused
+			end
+		},
+		{
+			text = '🗙',
+			on_click = function(_, _, _, _, buffer)
+				buffer:delete()
+			end
+		},
+		{ text = ' ' }
+	},
+})
 EOF
