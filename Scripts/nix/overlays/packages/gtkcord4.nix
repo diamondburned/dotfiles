@@ -1,6 +1,7 @@
 { pkgs, lib }:
 
-let gtkcord4 = rec {
+let
+	gtkcord4 = rec {
 		version = "0.0.15";
 		hashes = {
 			src = "${lib.fakeSha256}";
@@ -10,12 +11,15 @@ let gtkcord4 = rec {
 			};
 		};
 
-		src = pkgs.fetchFromGitHub {
-			owner  = "diamondburned";
-			repo   = "gtkcord4";
-			rev    = "2d86201c37ba7d4706ef33296cadb34049ec6a0d";
-			sha256 = "sha256-vlZlHHHSPf2aejT0i4HP+KpHKyDn+pUZQVYIxRH0YNk=";
-		};
+		src =
+			if (builtins.pathExists /home/diamond/Scripts/gotk4/gtkcord4) then
+				/home/diamond/Scripts/gotk4/gtkcord4
+			else pkgs.fetchFromGitHub {
+				owner  = "diamondburned";
+				repo   = "gtkcord4";
+				rev    = "2d86201c37ba7d4706ef33296cadb34049ec6a0d";
+				sha256 = "sha256-vlZlHHHSPf2aejT0i4HP+KpHKyDn+pUZQVYIxRH0YNk=";
+			};
 
 		arch =
 			if pkgs.stdenv.isx86_64 then "amd64"
@@ -47,17 +51,13 @@ let gtkcord4 = rec {
 		hash  = "sha256:0009jbdj2y2vqi522a3r64xf4drp44ghbidf32j6bslswqf3wy4m";
 	};
 
-	depsPkgs = import "${gotk4-nix}/pkgs.nix" {};
-
 in pkgs.stdenv.mkDerivation {
 	pname = gtkcord4.base.pname;
-	inherit (gtkcord4) version;
-
-	src = gtkcord4.bin;
+	inherit (gtkcord4) version src;
 
 	buildInputs = 
-		(gtkcord4.base.buildInputs or (_: [])) depsPkgs ++
-		(with depsPkgs; [
+		(gtkcord4.base.buildInputs or (_: [])) pkgs ++
+		(with pkgs; [
 			gtk4
 			glib
 			librsvg
