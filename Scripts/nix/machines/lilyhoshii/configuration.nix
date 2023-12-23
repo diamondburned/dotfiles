@@ -10,38 +10,14 @@
 		<home-manager/nixos>
 		<nixos-apple-silicon/apple-silicon-support>
 		./base/configuration.nix
-		./cfg/speakers # !!!: DANGEROUS
+		./cfg/speakers
 		./cfg/virtualization.nix
+		./cfg/displaylink.nix
 		./home.nix
 	];
 
   hardware.asahi.addEdgeKernelConfig = lib.mkForce true;
   hardware.asahi.useExperimentalGPUDriver = lib.mkForce true;
-
-	boot.kernelPackages =
-		let
-			kernelPackages = pkgs.linux-asahi.override {
-				_kernelPatches = config.boot.kernelPatches;
-				_4KBuild = config.hardware.asahi.use4KPages;
-				withRust = config.hardware.asahi.withRust;
-			};
-			kernel' = kernelPackages.kernel;
-			# kernel' = kernelPackages.kernel.override {
-			# 	inherit (import <nixpkgs_older_rust> {})
-			# 		rustc
-			# 		rustPlatform
-			# 		rust-bindgen;
-			# };
-			kernel = kernel'.overrideAttrs (old: {
-				src = builtins.storePath <asahilinux>;
-				version = "asahi-6-latest";
-				unpackPhase = ''
-					cp -r $(realpath $src)/. .
-					chmod -R u+w .
-				'';
-			});
-		in
-			lib.mkForce (pkgs.linuxPackagesFor kernel);
 
 	systemd.services.mount-asahi = {
 		enable = true;
@@ -130,5 +106,7 @@
 		package = pkgs.bluez5-experimental;
 	};
 
-	services.xserver.videoDrivers = [ "displaylink" "modesetting" ];
+	# Do not suspend on lid close.
+	# https://github.com/AsahiLinux/linux/issues/246
+	# services.logind.lidSwitch = "ignore";
 }

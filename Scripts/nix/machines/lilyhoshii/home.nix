@@ -34,6 +34,20 @@
 			font.size = 11;
 		};
 
+		programs.mpv = {
+			enable = true;
+			config = {
+				osd-font = "Sans";
+				osd-status-msg = "\${playback-time/full} / \${duration} (\${percent-pos}%)\\nframe: \${estimated-frame-number} / \${estimated-frame-count}";
+				gpu-api = "auto";
+				gpu-context = "auto";
+				vo = "gpu";
+				dither-depth = 8;
+				scale = "lanczos";
+				script-opts = "ytdl_hook-ytdl_path=yt-dlp";
+			};
+		};
+
 		services.easyeffects.enable = true;
 
 		home.packages = with pkgs; [

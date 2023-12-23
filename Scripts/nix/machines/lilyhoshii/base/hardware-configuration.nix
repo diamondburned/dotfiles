@@ -32,15 +32,47 @@
   swapDevices =
     [ { device = "/dev/main/swap"; 
         randomEncryption = {
-  enable = true;
-  cipher = "aes-xts-plain64";
-  keySize = 256;
-};
-}
+          enable = true;
+          cipher = "aes-xts-plain64";
+          keySize = 256;
+        };
+       }
     ];
 
   hardware.asahi.addEdgeKernelConfig = true;
   hardware.asahi.useExperimentalGPUDriver = true;
+
+  boot.kernelPackages =
+    let
+      kernelPackages' = pkgs.linux-asahi.override {
+        _kernelPatches = config.boot.kernelPatches;
+        _4KBuild = config.hardware.asahi.use4KPages;
+        withRust = config.hardware.asahi.withRust;
+      };
+      kernel' = kernelPackages'.kernel;
+      # kernel' = kernelPackages.kernel.override {
+      #   inherit (import <nixpkgs_older_rust> {})
+      #     rustc
+      #     rustPlatform
+      #     rust-bindgen;
+      # };
+      kernel = kernel'.overrideAttrs (old: {
+        src = builtins.storePath <asahilinux>;
+        version = "asahi-6.6-latest";
+        unpackPhase = ''
+          cp -r $(realpath $src)/. .
+          chmod -R u+w .
+        '';
+      });
+    in
+      lib.mkForce (pkgs.linuxPackagesFor kernel);
+
+  # boot.kernelPackages = lib.mkForce
+  #   (pkgs.callPackage ./asahi-kernel.nix {
+  #     _kernelPatches = config.boot.kernelPatches;
+  #     _4KBuild = config.hardware.asahi.use4KPages;
+  #     withRust = config.hardware.asahi.withRust;
+  #   });
 
   # Enables DHCP on each ethernet and wireless interface. In case of scripted networking
   # (the default) this is the recommended approach. When using systemd-networkd it's
