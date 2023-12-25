@@ -7,12 +7,6 @@ let
 in
 
 {
-	xdg.enable = true;
-	xdg.configFile = {
-		"gtk-3.0/gtk.css".source = <dotfiles/cfg/gtk.css>;
-		"gtk-4.0/gtk.css".source = <dotfiles/cfg/gtk.css>;
-	};
-
 	pam.sessionVariables = env;
 	systemd.user.sessionVariables = env;
 
@@ -53,7 +47,11 @@ in
 				# gtk-application-prefer-dark-theme = 1;
 				gtk-application-prefer-dark-theme = 0;
 			};
-			# extraCss = builtins.readFile ./cfg/gtk.css;
+			extraCss = builtins.readFile <dotfiles/cfg/gtk.css>;
+		};
+
+		gtk4 = {
+			extraCss = builtins.readFile <dotfiles/cfg/gtk.css>;
 		};
 	};
 
@@ -75,5 +73,7 @@ in
 		catppuccin-cursors.mochaFlamingo
 		catppuccin-cursors.macchiatoFlamingo
 		catppuccin-gtk
+	] ++ [
+		config.gtk.theme.package
 	];
 }

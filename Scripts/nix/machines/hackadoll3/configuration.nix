@@ -664,6 +664,7 @@ in {
 			libcanberra-gtk3
 			fcitx5-configtool
 			fcitx5-gtk
+			libsForQt5.fcitx5-qt
 			wl-clipboard
 			playerctl
 			waypipe
@@ -788,7 +789,7 @@ in {
 			gnome.gnome-tweaks
 			gnome.gnome-boxes
 
-			# Everything in ./bin
+			# Everything in ./bn
 			(runCommand "diamond-bin" {} ''
 				mkdir -p $out/bin
 				cp -r ${<dotfiles/bin>}/* $out/bin
@@ -836,8 +837,6 @@ in {
 				"nix/nix.conf".text = ''
 					experimental-features = nix-command flakes
 				'';
-				"gtk-4.0/gtk.css".source = <dotfiles/cfg/gtk.css>;
-				"gtk-3.0/gtk.css".source = <dotfiles/cfg/gtk.css>;
 			};
 		};
 
