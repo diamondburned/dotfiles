@@ -31,6 +31,7 @@ let
 	userEnv = {
 		LC_TIME = "en_GB.UTF-8";
 		NIX_AUTO_RUN = "1";
+		GTK_THEME = config.home-manager.users.diamond.gtk.theme.name;
 		# STEAM_RUNTIME = "0";
 		# XDG_CURRENT_DESKTOP = "Wayfire";
 
