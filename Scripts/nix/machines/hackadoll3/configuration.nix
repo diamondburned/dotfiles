@@ -710,11 +710,11 @@ in {
 
 			protonup
 			gamescope
-			(steam.override ({ extraLibraries ? pkgs: [], ... }: {
+			(steam.override ({ extraLibraries ? pkgs': [], ... }: {
 				# Workaround for TF2.
 				# See https://github.com/ValveSoftware/Source-1-Games/issues/5043#issuecomment-1822019817.
         extraLibraries = pkgs': (extraLibraries pkgs') ++ ( [
-          pkgs.gperftools
+          pkgs'.gperftools
         ]);
       }))
 
