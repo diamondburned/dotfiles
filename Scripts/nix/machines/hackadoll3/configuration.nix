@@ -206,6 +206,9 @@ in {
 		};
 	};
 
+	# This doesn't really work.
+	systemd.services.NetworkManager-wait-online.enable = false;
+
 	networking.nat = {
 		enable = true;
 		internalInterfaces = [ "ve-+" ];                                                                                            

@@ -814,24 +814,36 @@ require('cokeline').setup({
 				 or get_hex('StatusLineNC', 'fg')
 		end,
 		bg = function(buffer)
-			return get_hex('Pmenu', 'bg')
+			return
+				buffer.is_focused
+				and get_hex('Pmenu', 'bg')
+				 or get_hex('StatusLineNC', 'bg')
 		end,
 	},
 	components = {
-		{ text = ' ' },
 		{
-			text = function(buffer) return buffer.filename .. ' ' end,
+			text = ' ',
+		},
+		{
+			text = function(buffer)
+				return buffer.filename .. ' ' end,
+			bold = function(buffer)
+				return buffer.is_focused end,
 			underline = function(buffer)
-				return buffer.is_hovered and not buffer.is_focused
-			end
+				return buffer.is_hovered and not buffer.is_focused end,
+		},
+		{
+			text = function(buffer)
+				return buffer.is_modified and '● ' or '' end,
 		},
 		{
 			text = '🗙',
-			on_click = function(_, _, _, _, buffer)
-				buffer:delete()
-			end
+			fg = get_hex("NvimTreeGitDirty", "fg"),
+			on_click = function(_, _, _, _, buffer) buffer:delete() end,
 		},
-		{ text = ' ' }
+		{
+			text = ' ',
+		}
 	},
 })
 EOF
