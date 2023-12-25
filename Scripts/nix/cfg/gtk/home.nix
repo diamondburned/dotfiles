@@ -18,28 +18,28 @@ in
 
 	gtk = {
 		enable = true;
-		font.name = "Sans";
+		font.name = "Nunito";
 		font.size = 11;
 
 		theme = {
 			# name = "Colloid-Pink-Dark-Compact";
-			name = "Colloid-Red-Light-Compact";
+			name = "Colloid-Light";
 			package =
 				pkgs.colloid-gtk-theme.override {
 					themeVariants = [ "all" ];
 					colorVariants = [ "standard" "light" "dark" ];
-					# sizeVariants = [ "compact" ];
+					sizeVariants  = [ "standard" "compact" ];
 					tweaks = [
 						"rimless"
 						"normal"
 						# "black"
-						"float"
 					];
 				};
 		};
 
 		iconTheme = {
-			name = "Papirus-Dark";
+			# name = "Papirus-Dark";
+			name = "Papirus-Light";
 			package = pkgs.papirus-icon-theme;
 		};
 
@@ -50,7 +50,7 @@ in
 
 		gtk3 = {
 			extraConfig = {
-				gtk-application-prefer-dark-theme = 1;
+				# gtk-application-prefer-dark-theme = 1;
 			};
 			# extraCss = builtins.readFile ./cfg/gtk.css;
 		};

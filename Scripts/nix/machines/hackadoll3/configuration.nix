@@ -32,7 +32,6 @@ let
 		LC_TIME = "en_GB.UTF-8";
 		NIX_AUTO_RUN = "1";
 		# STEAM_RUNTIME = "0";
-		GTK_THEME = config.home-manager.users.diamond.gtk.theme.name;
 		# XDG_CURRENT_DESKTOP = "Wayfire";
 
 		GOPATH = "/home/diamond/.go";
@@ -457,7 +456,7 @@ in {
         account   include       login
         password  substack      login
         session   include       login
-		session   required      pam_env.so user_readenv=1
+				session   required      pam_env.so user_readenv=1
 	'';
 
 	programs.wireshark = {
@@ -482,6 +481,7 @@ in {
 			<dotfiles/cfg/hm-blackbox-terminal.nix>
 			<dotfiles/cfg/hm-gnome-terminal.nix>
 			<dotfiles/cfg/hm-alacritty.nix>
+			<dotfiles/cfg/gtk/home.nix>
 			<dotfiles/cfg/nvim/home.nix>
 			<dotfiles/cfg/gnome/home.nix>
 			<dotfiles/cfg/zellij/home.nix>
@@ -583,67 +583,6 @@ in {
 		# 		# obs-v4l2sink
 		# 	];
 		# };
-
-		gtk = {
-			enable = true;
-			font.name = "Sans";
-			font.size = 11;
-
-			theme = {
-				name = "Colloid-Pink-Dark-Compact";
-				package =
-					# let orchis-theme = pkgs.orchis-theme.overrideAttrs (old: rec {
-					# 	version = "2023-01-25";
-					# 	src = pkgs.fetchFromGitHub {
-					# 	    repo = "Orchis-theme";
-					# 	    owner = "vinceliuice";
-					# 	    rev = version;
-					# 	    sha256 = "sha256:0rlvqzlfabvayp9p2ihw4jk445ahhrgv6zc5n47sr5w6hbb082ny";
-					# 	};
-					# });
-					# let orchis-theme = pkgs.nixpkgs_unstable_real.orchis-theme.overrideAttrs (old: {
-					# 	patches = (old.patches or []) ++ [
-					# 		./overlays/patches/Orchis-theme-middark.patch
-					# 	];
-					# });
-					# in orchis-theme.override {
-					# 	tweaks = [ "compact" ];
-					# 	border-radius = 6;
-					# };
-					pkgs.colloid-gtk-theme.override {
-						themeVariants = [ "all" ];
-						colorVariants = [ "standard" "light" "dark" ];
-						sizeVariants = [ "compact" ];
-						tweaks = [ "normal" "black" ];
-					};
-			};
-
-			iconTheme = {
-				name = "Papirus-Dark";
-				package = pkgs.papirus-icon-theme;
-			};
-
-			cursorTheme = {
-				name = "Catppuccin-Mocha-Pink-Cursors";
-				size = 32;
-			};
-
-			gtk3 = {
-				extraConfig = {
-					gtk-application-prefer-dark-theme = 1;
-				};
-				# extraCss = builtins.readFile ./cfg/gtk.css;
-			};
-		};
-
-		qt = {
-			enable = true;
-			platformTheme = "qtct";
-			style = {
-				name = "adwaita-dark";
-				package = pkgs.adwaita-qt;
-			};
-		};
 
 		services.easyeffects.enable = true;
 

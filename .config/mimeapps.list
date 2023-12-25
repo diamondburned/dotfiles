@@ -147,3 +147,5 @@ audio/x-opus+ogg=io.github.celluloid_player.Celluloid.desktop;
 image/jpeg=org.gnome.eog.desktop;
 text/vnd.trolltech.linguist=nvim.desktop;
 application/json=nvim.desktop;
+x-scheme-handler/sms=org.gnome.Shell.Extensions.GSConnect.desktop;
+x-scheme-handler/tel=org.gnome.Shell.Extensions.GSConnect.desktop;
