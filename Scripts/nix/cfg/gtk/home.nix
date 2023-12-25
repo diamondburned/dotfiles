@@ -51,6 +51,7 @@ in
 		gtk3 = {
 			extraConfig = {
 				# gtk-application-prefer-dark-theme = 1;
+				gtk-application-prefer-dark-theme = 0;
 			};
 			# extraCss = builtins.readFile ./cfg/gtk.css;
 		};
