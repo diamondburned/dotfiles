@@ -81,13 +81,5 @@ in pkgs.stdenv.mkDerivation {
 		install -Dm644 ${src}/nix/so.libdb.gtkcord4.service $out/share/dbus-1/services/so.libdb.gtkcord4.service
 		install -Dm644 ${files.desktop.path} $out/share/applications/${files.desktop.name}
 		install -Dm644 ${files.logo.path} $out/share/icons/hicolor/256x256/apps/${files.logo.name}
-
-		ls $out/share/applications
-		sed -i \
-			's|Exec=[a-zA-Z0-9\-_/]*gtkcord4|Exec=/home/diamond/Scripts/gotk4/gtkcord4/gtkcord4|' \
-			"$out/share/applications/${files.desktop.name}"
-		sed -i \
-			's|Exec=[a-zA-Z0-9\-_/]*gtkcord4|Exec=/home/diamond/Scripts/gotk4/gtkcord4/gtkcord4|' \
-			"$out/share/dbus-1/services/so.libdb.gtkcord4.service"
 	'';
 }
