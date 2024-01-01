@@ -30,7 +30,7 @@
 
 		gtk = {
 			enable = true;
-			font.name = "Sans";
+			# font.name = "Sans";
 			font.size = 11;
 		};
 
