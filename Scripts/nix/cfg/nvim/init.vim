@@ -80,19 +80,21 @@ lua <<EOF
 	  trim       = false,
 	}
 	
-	local function copy(lines, _)
-	  require('osc52').copy(table.concat(lines, '\n'))
+	if not vim.g.neovide then
+	  local function copy(lines, _)
+	    require('osc52').copy(table.concat(lines, '\n'))
+	  end
+	  
+	  local function paste()
+	    return {vim.fn.split(vim.fn.getreg(''), '\n'), vim.fn.getregtype('')}
+	  end
+
+	  vim.g.clipboard = {
+	    name = 'osc52',
+	    copy = {['+'] = copy, ['*'] = copy},
+	    paste = {['+'] = paste, ['*'] = paste},
+	  }
 	end
-	
-	local function paste()
-	  return {vim.fn.split(vim.fn.getreg(''), '\n'), vim.fn.getregtype('')}
-	end
-	
-	vim.g.clipboard = {
-	  name = 'osc52',
-	  copy = {['+'] = copy, ['*'] = copy},
-	  paste = {['+'] = paste, ['*'] = paste},
-	}
 EOF
 
 "80/100 column styling"
@@ -190,15 +192,15 @@ endfunction
 autocmd UIEnter * call s:gnvimInit()
 
 "Nvim Tree configs"
-hi NvimTreeCursorLine ctermbg=8
-hi NvimTreeFolderName ctermfg=NONE
-hi NvimTreeFolderIcon ctermfg=14
-hi NvimTreeExecFile   ctermfg=12
-hi NvimTreeGitDirty   ctermfg=9
-hi NvimTreeGitStaged  ctermfg=2
-hi NvimTreeGitRenamed ctermfg=6
-hi NvimTreeGitDeleted ctermfg=1
-hi NvimTreeGitIgnored ctermfg=8
+hi NvimTreeCursorLine ctermbg=8    guibg=#52494C
+hi NvimTreeFolderName ctermfg=NONE guifg=NONE
+hi NvimTreeFolderIcon ctermfg=14   guifg=#55CDFC
+hi NvimTreeExecFile   ctermfg=12   guifg=#779ECB
+hi NvimTreeGitDirty   ctermfg=9    guifg=#FF6961
+hi NvimTreeGitStaged  ctermfg=2    guifg=#3DCCB2
+hi NvimTreeGitRenamed ctermfg=6    guifg=#00B5FC
+hi NvimTreeGitDeleted ctermfg=1    guifg=#FF473D
+hi NvimTreeGitIgnored ctermfg=8    guifg=#52494C
 
 lua <<EOF
 	local function git_add(node)
@@ -395,6 +397,21 @@ if exists('g:GtkGuiLoaded')
 	call rpcnotify(1, 'Gui', 'Font', 'Monospace 11')
 	call rpcnotify(1, 'Gui', 'Command', 'SetCursorBlink', '0')
 	hi Normal guibg=#1D1D1D
+endif
+
+if exists("g:neovide")
+	set guifont=Monospace:h11.5
+	set linespace=1
+
+	let g:neovide_padding_top = 10
+	let g:neovide_padding_bottom = 10
+	let g:neovide_padding_left = 10
+	let g:neovide_padding_right = 10
+	let g:neovide_remember_window_size = v:true
+	let g:neovide_cursor_animation_length = 0.1
+	let g:neovide_cursor_trail_size = 0.001
+	let g:neovide_cursor_animate_in_insert_mode = v:false
+	let g:neovide_cursor_animate_command_line = v:false
 endif
 
 "Autoindentation"

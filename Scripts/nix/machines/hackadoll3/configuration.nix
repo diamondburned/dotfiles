@@ -706,6 +706,7 @@ in {
 			virt-manager
 			xorg.xauth
 			grun
+			neovide
 			# neovim-gtk
 
 			protonup
