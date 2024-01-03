@@ -1,10 +1,8 @@
 local lspconfig = require("lspconfig")
 local cmp = require("cmp")
 local cmp_nvim_lsp = require("cmp_nvim_lsp")
+local cmp_copilot = require("copilot_cmp")
 local snippy = require("snippy")
-
--- Super unreliable, I'm not using this anymore.
--- local cmp_copilot = require("copilot_cmp")
 
 -- I might be the only person in this planet who has a sane LSP configuration
 -- for Neovim, bruh. ALE has this behavior, vim-lsp has this behavior, so why
@@ -36,14 +34,30 @@ local lsp_local_mappings = {
 
 -- This table contains all autocompletion sources.
 local cmp_sources = {
+	"copilot",
 	"nvim_lsp",
 	"snippy",
 	"path",
 }
 
 local cmp_opts = {
-	view = {
-		entries = "native",
+	-- view = {
+	-- 	entries = "native",
+	-- },
+	window = {
+		completion = {
+			-- I had to steal this off someone else.
+			-- cmp's developer has the BALLS to have this in the demo yet never
+			-- included a single example configuration showing it. What even is
+			-- the fucking point.
+			border = { "╭", "─", "╮", "│", "╯", "─", "╰", "│" },
+			scrollbar = "║",
+		},
+		documentation = {
+			border = { "╭", "─", "╮", "│", "╯", "─", "╰", "│" },
+			winhighlight = "NormalFloat:NormalFloat,FloatBorder:FloatBorder",
+			scrollbar = "║",
+		},
 	},
 	snippet = {
 		expand = function(args)
@@ -51,22 +65,18 @@ local cmp_opts = {
 		end,
 	},
 	mapping = cmp.mapping.preset.insert({
-		-- ["<Tab>"] = cmp.mapping(
-		-- 	function(fallback)
-		-- 		if not cmp.visible() then
-		-- 			fallback()
-		-- 			return
-		-- 		end
-		--
-		-- 		local entry = cmp.get_selected_entry()
-		-- 		if entry then
-		-- 			cmp.confirm()
-		-- 		else
-		-- 			cmp.select_next_item({ behavior = cmp.SelectBehavior.Select })
-		-- 		end
-		-- 	end,
-		-- 	{"i", "s"}
-		-- ),
+		["<Tab>"] = vim.schedule_wrap(function(fallback)
+			local function has_words_before()
+				if vim.api.nvim_buf_get_option(0, "buftype") == "prompt" then return false end
+				local line, col = unpack(vim.api.nvim_win_get_cursor(0))
+				return col ~= 0 and vim.api.nvim_buf_get_text(0, line-1, 0, line-1, col, {})[1]:match("^%s*$") == nil
+			end
+			if cmp.visible() and has_words_before() then
+				cmp.select_next_item({ behavior = cmp.SelectBehavior.Select })
+			else
+				fallback()
+			end
+		end),
 		["<CR>"] = cmp.mapping({
 			i = function(fallback)
 				if cmp.visible() and cmp.get_selected_entry() then
@@ -91,7 +101,7 @@ local cmp_opts = {
 
 -- This function returns a table that contains all the supported LSPs that the
 -- nvim-lspconfig plugin provides.
-function find_all_lsp_modules()
+local function find_all_lsp_modules()
 	-- We use this hack to find the source directory of nvim-lspconfig.
 	-- This is the only way to find the directory that contains the LSP modules.
 	local lspconfig_path = nil
@@ -117,7 +127,7 @@ function find_all_lsp_modules()
 	return lsp_modules
 end
 
-function load_lsp(name)
+local function load_lsp(name)
 	local binary = lspconfig[name].document_config.default_config.cmd[1]
 	local config = {
 		unpack(lsp_configuration_base),
@@ -154,4 +164,6 @@ for _, source in ipairs(cmp_sources) do
 	table.insert(cmp_sources_2, { name = source })
 end
 cmp_opts.sources = cmp.config.sources(cmp_sources_2)
+
+cmp_copilot.setup()
 cmp.setup(cmp_opts)

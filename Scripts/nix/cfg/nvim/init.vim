@@ -19,6 +19,7 @@ Plug 'luochen1990/rainbow'
 Plug 'ojroques/nvim-osc52'
 Plug 'aymericbeaumet/vim-symlink'
 Plug 'moll/vim-bbye' " optional dependency
+Plug 'sunjon/shade.nvim'
 
 "Cokeline and its dependencies"
 Plug 'nvim-lua/plenary.nvim'
@@ -51,8 +52,8 @@ Plug 'dcampos/cmp-snippy'
 
 "Autocompletion with Copilot"
 Plug 'zbirenbaum/copilot.lua'
+Plug 'zbirenbaum/copilot-cmp'
 " Plug 'github/copilot.vim'
-" Plug 'zbirenbaum/copilot-cmp'
 
 "Autocompletion using vim-lsp"
 " Plug 'prabirshrestha/vim-lsp'
@@ -273,8 +274,9 @@ set guicursor+=i-c-ci-ve:ver25
 set guicursor+=r-cr-o:hor20
 
 "Change completion colors"
-hi Pmenu    ctermfg=15 ctermbg=8 guifg=#EEEEEC guibg=#52494C
-hi PmenuSel ctermfg=13 ctermbg=0 guifg=#F7A8B8 guibg=#272224
+" hi Pmenu    ctermfg=15 ctermbg=8 guifg=#EEEEEC guibg=#52494C
+hi Pmenu    ctermfg=15 ctermbg=NONE guifg=#EEEEEC guibg=NONE
+hi PmenuSel ctermfg=13 ctermbg=0    guifg=#F7A8B8 guibg=#272224
 
 "Extra Go colors"
 "hi goParamName       ctermfg=15

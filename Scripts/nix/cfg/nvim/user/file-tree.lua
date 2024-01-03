@@ -32,9 +32,19 @@ nvim_tree.setup({
 			window_picker = { enable = true },
 		},
 	},
+	diagnostics = {
+		enable = true,
+		show_on_dirs = true,
+		icons = {
+			hint = "",
+			info = "",
+			warning = "",
+			error = "",
+		},
+	},
 	update_focused_file = { enable = true },
 	view = {
-		width = 28,
+		width = 30,
 		signcolumn = "no",
 	},
 	renderer = {
@@ -93,3 +103,14 @@ nvim_tree.setup({
 		vim.keymap.set("n", "s", git_restore_staged, opts('git restore --staged'))
 	end
 })
+
+vim.cmd([[hi NvimTreeCursorLine ctermbg=8    guibg=#52494C]])
+vim.cmd([[hi NvimTreeFolderName ctermfg=NONE guifg=NONE   ]])
+vim.cmd([[hi NvimTreeFolderIcon ctermfg=14   guifg=#55CDFC]])
+vim.cmd([[hi NvimTreeExecFile   ctermfg=12   guifg=#779ECB]])
+vim.cmd([[hi NvimTreeGitDirty   ctermfg=9    guifg=#FF6961]])
+vim.cmd([[hi NvimTreeGitStaged  ctermfg=2    guifg=#3DCCB2]])
+vim.cmd([[hi NvimTreeGitRenamed ctermfg=6    guifg=#00B5FC]])
+vim.cmd([[hi NvimTreeGitDeleted ctermfg=1    guifg=#FF473D]])
+vim.cmd([[hi NvimTreeGitIgnored ctermfg=8    guifg=#52494C]])
+
