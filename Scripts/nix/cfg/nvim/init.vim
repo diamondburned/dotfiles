@@ -37,8 +37,6 @@ Plug 'nvim-treesitter/nvim-treesitter-refactor'
 "Autocomplete brackets/parens/etc like vscode"
 Plug 'windwp/nvim-autopairs'
 
-"Autocompletion with Copilot"
-Plug 'github/copilot.vim'
 
 "ALE for linting and formatting"
 Plug 'dense-analysis/ale'
@@ -46,6 +44,13 @@ Plug 'dense-analysis/ale'
 "Autocompletion using built-in Neovim LSP"
 Plug 'neovim/nvim-lspconfig'
 Plug 'hrsh7th/nvim-cmp'
+Plug 'hrsh7th/cmp-nvim-lsp'
+Plug 'hrsh7th/cmp-path'
+
+"Autocompletion with Copilot"
+" Plug 'github/copilot.vim'
+Plug 'zbirenbaum/copilot.lua'
+Plug 'zbirenbaum/copilot-cmp'
 
 "Autocompletion using vim-lsp"
 " Plug 'prabirshrestha/vim-lsp'
@@ -77,30 +82,6 @@ inoremap <C-v> <Esc>"+pi<Right>
 map - dd
 
 set clipboard+=unnamedplus
-
-lua <<EOF
-	require('osc52').setup {
-	  max_length = 0,
-	  silent     = true,
-	  trim       = false,
-	}
-	
-	if not vim.g.neovide then
-	  local function copy(lines, _)
-	    require('osc52').copy(table.concat(lines, '\n'))
-	  end
-	  
-	  local function paste()
-	    return {vim.fn.split(vim.fn.getreg(''), '\n'), vim.fn.getregtype('')}
-	  end
-
-	  vim.g.clipboard = {
-	    name = 'osc52',
-	    copy = {['+'] = copy, ['*'] = copy},
-	    paste = {['+'] = paste, ['*'] = paste},
-	  }
-	end
-EOF
 
 "80/100 column styling"
 set textwidth=80
@@ -197,6 +178,7 @@ endfunction
 autocmd UIEnter * call s:gnvimInit()
 
 "Nvim Tree configs"
+"TODO: move this into user/file-tree.lua"
 hi NvimTreeCursorLine ctermbg=8    guibg=#52494C
 hi NvimTreeFolderName ctermfg=NONE guifg=NONE
 hi NvimTreeFolderIcon ctermfg=14   guifg=#55CDFC
@@ -208,100 +190,6 @@ hi NvimTreeGitDeleted ctermfg=1    guifg=#FF473D
 hi NvimTreeGitIgnored ctermfg=8    guifg=#52494C
 
 lua <<EOF
-	local function git_add(node)
-		vim.cmd('Git add ' .. node.absolute_path)
-		vim.cmd('NvimTreeRefresh')
-	end
-
-	local function git_restore_staged(node)
-		vim.cmd('Git restore --staged ' .. node.absolute_path)
-		vim.cmd('NvimTreeRefresh')
-	end
-
-	require'nvim-tree'.setup {
-		disable_netrw = true,
-		auto_reload_on_write = true,
-		update_cwd = true,
-		git = {
-			enable = true,
-			ignore = false,
-		},
-		tab = {
-			sync = {
-				open = true,
-			},
-		},
-		filters = {
-			custom = { '^\\.git$', '^node_modules$' },
-			dotfiles = false,
-		},
-		actions = {
-			open_file = {
-				window_picker = { enable = true },
-			},
-		},
-		update_focused_file = { enable = true },
-		view = {
-			width = 28,
-			signcolumn = "no",
-		},
-		renderer = {
-			add_trailing = true,
-			highlight_git = true,
-			icons = {
-				show = {
-					git = true,
-					file = true,
-					folder = true,
-					folder_arrow = true,
-				},
-				glyphs = {
-					default = " ",
-					symlink = " ",
-					git = {
-						unstaged = "M",
-						staged = "M",
-						unmerged = "U",
-						renamed = "R",
-						untracked = "U",
-						deleted = "D",
-						ignored = "I",
-					},
-					folder = {
-						default = ">",
-						open = "v",
-						empty = ">",
-						empty_open = "v",
-						symlink = ">",
-						symlink_open = "v",
-						arrow_open = "",
-						arrow_closed = "",
-					},
-				},
-			},
-		},
-		-- Why the fuck did they decide to break a perfectly working declarative
-		-- API in favor of a shitty imperative one that is twice as verbose???
-		on_attach = function(bufnr)
-			local api = require("nvim-tree.api")
-			local function opts(desc)
-				return { desc = 'nvim-tree: ' .. desc, buffer = bufnr, noremap = true, silent = true, nowait = true }
-			end
-
-			vim.keymap.set("n", "<CR>", api.node.open.edit, opts('open file'))
-			vim.keymap.set("n", "<2-LeftMouse>", api.node.open.edit, opts('open file'))
-			vim.keymap.set("n", "<C-t>", api.node.open.tab, opts('tabnew'))
-			vim.keymap.set("n", "<", api.node.navigate.sibling.prev, opts('prev_sibling'))
-			vim.keymap.set("n", ">", api.node.navigate.sibling.next, opts('next_sibling'))
-			vim.keymap.set("n", "d", api.fs.remove, opts('remove'))
-			vim.keymap.set("n", "r", api.fs.rename, opts('rename'))
-			vim.keymap.set("n", "q", api.tree.close, opts('close'))
-			vim.keymap.set("n", "/", api.tree.search_node, opts('search_node'))
-			vim.keymap.set("n", "a", git_add, opts('git add'))
-			vim.keymap.set("n", "s", git_restore_staged, opts('git restore --staged'))
-		end
-	}
-
 	require'nvim-treesitter.configs'.setup {
 		indent    = { enable = false },
 		highlight = { enable = true },
@@ -818,49 +706,3 @@ au BufRead,BufNewFile *.postcss set filetype=postcss
 " 		\ 'allowlist': ['blueprint'],
 " 		\ })
 " endif
-
-lua << EOF
-local get_hex = require('cokeline.hlgroups').get_hl_attr
-
-require('cokeline').setup({
-	default_hl = {
-		fg = function(buffer)
-			return
-				buffer.is_focused
-				and get_hex('StatusLine', 'fg')
-				 or get_hex('StatusLineNC', 'fg')
-		end,
-		bg = function(buffer)
-			return
-				buffer.is_focused
-				and get_hex('Pmenu', 'bg')
-				 or get_hex('StatusLineNC', 'bg')
-		end,
-	},
-	components = {
-		{
-			text = ' ',
-		},
-		{
-			text = function(buffer)
-				return buffer.filename .. ' ' end,
-			bold = function(buffer)
-				return buffer.is_focused end,
-			underline = function(buffer)
-				return buffer.is_hovered and not buffer.is_focused end,
-		},
-		{
-			text = function(buffer)
-				return buffer.is_modified and '● ' or '' end,
-		},
-		{
-			text = '🗙',
-			fg = get_hex("NvimTreeGitDirty", "fg"),
-			on_click = function(_, _, _, _, buffer) buffer:delete() end,
-		},
-		{
-			text = ' ',
-		}
-	},
-})
-EOF

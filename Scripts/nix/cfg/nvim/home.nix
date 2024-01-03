@@ -1,20 +1,20 @@
 { config, lib, pkgs, ... }:
 
 {
-	home.packages = with pkgs; [
-		(wrapNeovimUnstable neovim-unwrapped
-			# Use unstable Neovim with a slightly outdated Nixpkgs because
-			# Copilot is fucking trash.
-			(neovimUtils.makeNeovimConfig {
-				vimAlias = true;
-				withNodeJs = true;
-				customRC = builtins.readFile ./init.vim;
-				plugins = with pkgs.vimPlugins; [
-					{ plugin = markdown-preview-nvim; }
-				];
-			})
-		)
-	];
+	programs.neovim = {
+		enable = true;
+		vimAlias = true;
+		withNodeJs = true;
+		withPython3 = true;
+		defaultEditor = true;
+		extraConfig = builtins.readFile ./init.vim;
+		extraLuaConfig = builtins.readFile ./init.lua;
+		plugins = with pkgs.vimPlugins; [
+			# This thing is actually impossible to install via vim-plug,
+			# so we get it from Nix instead.
+			{ plugin = markdown-preview-nvim; }
+		];
+	};
 
 	xdg.enable = true;
 	xdg.configFile."nvim/lua/user" = {
