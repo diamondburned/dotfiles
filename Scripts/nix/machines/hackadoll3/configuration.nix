@@ -824,7 +824,6 @@ in {
 					enable_semantic_tokens = true;
 				};
 				"fontconfig/fonts.conf".source = <dotfiles/cfg/fontconfig.xml>;
-			 	"nvim/init.vim".source = <dotfiles/cfg/nvim/init.vim>;
 				"autostart/autostart.desktop".text = utils.mkDesktopFile {
 					name = "autostart-init";
 					exec = <dotfiles/bin/autostart>;

@@ -2,4 +2,8 @@
 /*
 /*/
 
+# Except the Nix configuration
+!/Scripts/nix
+!/Scripts/nix/*
+
 .Rproj.user

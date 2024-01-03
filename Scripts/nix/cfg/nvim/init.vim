@@ -775,6 +775,9 @@ nmap ; :
 "Lambda Calculus moment"
 let g:rainbow_active = 1
 
+"Support the garbage that is PostCSS"
+au BufRead,BufNewFile *.postcss set filetype=postcss
+
 "vim-lsp stuff"
 " let g:lsp_inlay_hints_enabled = 1
 " let g:lsp_fold_enabled = 0
@@ -796,33 +799,25 @@ let g:rainbow_active = 1
 " command! -nargs=0 Rename LspRename
 " command! -nargs=0 ALERename LspRename
 
-"Support the garbage that is PostCSS"
-au BufRead,BufNewFile *.postcss set filetype=postcss
-
 "Support templ"
-au BufRead,BufNewFile *.templ set filetype=templ
-if executable("templ")
-	au User lsp_setup call lsp#register_server({
-		\ 'name': 'templ',
-		\ 'cmd': {server_info->['templ', 'lsp']},
-		\ 'allowlist': ['templ'],
-		\ })
-endif
+" au BufRead,BufNewFile *.templ set filetype=templ
+" if executable("templ")
+" 	au User lsp_setup call lsp#register_server({
+" 		\ 'name': 'templ',
+" 		\ 'cmd': {server_info->['templ', 'lsp']},
+" 		\ 'allowlist': ['templ'],
+" 		\ })
+" endif
 
 "Support Blueprint"
-au BufRead,BufNewFile *.blueprint set filetype=blueprint
-if executable("blueprint-compiler")
-	au User lsp_setup call lsp#register_server({
-		\ 'name': 'blueprint',
-		\ 'cmd': {server_info->['blueprint-compiler', 'lsp']},
-		\ 'allowlist': ['blueprint'],
-		\ })
-endif
-
-lua << EOF
-	require('Comment').setup({})
-	require("nvim-autopairs").setup({})
-EOF
+" au BufRead,BufNewFile *.blueprint set filetype=blueprint
+" if executable("blueprint-compiler")
+" 	au User lsp_setup call lsp#register_server({
+" 		\ 'name': 'blueprint',
+" 		\ 'cmd': {server_info->['blueprint-compiler', 'lsp']},
+" 		\ 'allowlist': ['blueprint'],
+" 		\ })
+" endif
 
 lua << EOF
 local get_hex = require('cokeline.hlgroups').get_hl_attr

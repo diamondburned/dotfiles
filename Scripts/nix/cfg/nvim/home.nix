@@ -15,4 +15,10 @@
 			})
 		)
 	];
+
+	xdg.enable = true;
+	xdg.configFile."nvim/lua/user" = {
+		source = ./user;
+		recursive = true;
+	};
 }
