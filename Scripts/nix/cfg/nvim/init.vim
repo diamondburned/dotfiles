@@ -38,7 +38,6 @@ Plug 'nvim-treesitter/nvim-treesitter-refactor'
 "Autocomplete brackets/parens/etc like vscode"
 Plug 'windwp/nvim-autopairs'
 
-
 "ALE for linting and formatting"
 Plug 'dense-analysis/ale'
 
@@ -49,10 +48,11 @@ Plug 'hrsh7th/cmp-nvim-lsp'
 Plug 'hrsh7th/cmp-path'
 Plug 'dcampos/nvim-snippy'
 Plug 'dcampos/cmp-snippy'
+Plug 'lvimuser/lsp-inlayhints.nvim'
 
 "Autocompletion with Copilot"
 Plug 'zbirenbaum/copilot.lua'
-Plug 'zbirenbaum/copilot-cmp'
+" Plug 'zbirenbaum/copilot-cmp'
 " Plug 'github/copilot.vim'
 
 "Autocompletion using vim-lsp"
@@ -357,7 +357,7 @@ let g:preview_markdown_auto_update = 1
 "Remove background"
 hi LineNr       guibg=NONE ctermbg=NONE
 hi SignColumn   guibg=NONE ctermbg=NONE
-hi VertSplit    guibg=NONE ctermbg=NONE gui=NONE cterm=NONE ctermfg=240
+hi VertSplit    guibg=NONE ctermbg=NONE gui=NONE cterm=NONE ctermfg=240 guifg=#585858
 hi StatusLine   guibg=NONE ctermbg=NONE gui=NONE cterm=NONE
 hi StatusLineNC guibg=NONE ctermbg=NONE gui=NONE cterm=NONE
 

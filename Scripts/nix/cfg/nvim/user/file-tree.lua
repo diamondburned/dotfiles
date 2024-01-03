@@ -35,6 +35,10 @@ nvim_tree.setup({
 	diagnostics = {
 		enable = true,
 		show_on_dirs = true,
+		severity = {
+			min = vim.diagnostic.severity.WARN,
+			max = vim.diagnostic.severity.ERROR,
+		},
 		icons = {
 			hint = "",
 			info = "",
@@ -55,30 +59,32 @@ nvim_tree.setup({
 				git = true,
 				file = true,
 				folder = true,
+				diagnostics = true,
 				folder_arrow = true,
 			},
 			glyphs = {
 				-- Using a single space actually adds 2 spaces but using an
 				-- empty string adds 0 spaces, so we'll use a zero-width space
-				-- :)
-				default = "​",
-				symlink = "​",
+				-- instead! :)
+				-- NOTE: FUCK YOU!!!
+				default = " ",
+				symlink = " ",
 				git = {
-					unstaged = "M",
-					staged = "M",
-					unmerged = "U",
-					renamed = "R",
-					untracked = "U",
-					deleted = "D",
-					ignored = "I",
+					unstaged = "●",
+					staged = "+",
+					unmerged = "●",
+					renamed = "●",
+					untracked = "?",
+					deleted = "-",
+					ignored = " ",
 				},
 				folder = {
-					default = ">",
-					open = "v",
-					empty = ">",
-					empty_open = "v",
-					symlink = ">",
-					symlink_open = "v",
+					default = "▸",
+					open = "▾",
+					empty = "▾",
+					empty_open = "▾",
+					symlink = "▸",
+					symlink_open = "▾",
 					arrow_open = "",
 					arrow_closed = "",
 				},

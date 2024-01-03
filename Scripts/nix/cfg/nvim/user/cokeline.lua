@@ -41,15 +41,15 @@ cokeline.setup({
 				return buffer.is_focused
 			end,
 			underline = function(buffer)
-				return buffer.is_hovered and not buffer.is_focused
+				return buffer.is_hovered
 			end,
 			fg = function(buffer)
-				if buffer.diagnostics.errors > 0 then
-					return get_hex("DiagnosticError", "fg")
-				elseif buffer.is_focused then
-					return get_hex("StatusLine", "fg")
-				else
+				if not buffer.is_focused then
 					return get_hex("StatusLineNC", "fg")
+				elseif buffer.diagnostics.errors > 0 then
+					return get_hex("DiagnosticError", "fg")
+				else
+					return get_hex("StatusLine", "fg")
 				end
 			end
 		},

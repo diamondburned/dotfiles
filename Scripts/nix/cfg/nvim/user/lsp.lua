@@ -1,4 +1,5 @@
 local lspconfig = require("lspconfig")
+local lsp_inlayhints = require("lsp-inlayhints")
 local cmp = require("cmp")
 local cmp_nvim_lsp = require("cmp_nvim_lsp")
 local cmp_copilot = require("copilot_cmp")
@@ -19,7 +20,16 @@ local lsp_configuration_base = {
 -- This table defines overrides for specific LSPs.
 -- gopls is included as an example.
 local lsp_configurations = {
-	gopls = {},
+	gopls = {
+	"hints": {
+		"assignVariableTypes": true,
+		"compositeLiteralFields": true,
+		"constantValues": true,
+		"functionTypeParameters": true,
+		"parameterNames": true,
+		"rangeVariableTypes": true
+	}
+	},
 }
 
 -- This table defines LSP keybindings that are local to the buffer.
@@ -67,9 +77,9 @@ local cmp_opts = {
 	mapping = cmp.mapping.preset.insert({
 		-- Ignore Tab.
 		-- TODO: find the right way to do this
-		["<Tab>"] = function(fallback)
-			fallback()
-		end,
+		-- ["<Tab>"] = function(fallback)
+		-- 	fallback()
+		-- end,
 		["<CR>"] = cmp.mapping({
 			i = function(fallback)
 				if cmp.visible() and cmp.get_selected_entry() then
@@ -91,6 +101,11 @@ local cmp_opts = {
 		}),
 	}),
 }
+
+-- Set up inlay hints.
+lsp_inlayhints.setup({
+
+})
 
 -- This function returns a table that contains all the supported LSPs that the
 -- nvim-lspconfig plugin provides.
