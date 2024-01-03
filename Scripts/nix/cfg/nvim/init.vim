@@ -49,6 +49,7 @@ Plug 'hrsh7th/cmp-path'
 Plug 'dcampos/nvim-snippy'
 Plug 'dcampos/cmp-snippy'
 Plug 'lvimuser/lsp-inlayhints.nvim'
+Plug 'ray-x/lsp_signature.nvim'
 
 "Autocompletion with Copilot"
 Plug 'zbirenbaum/copilot.lua'

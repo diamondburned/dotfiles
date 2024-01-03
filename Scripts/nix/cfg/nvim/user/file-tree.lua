@@ -59,7 +59,6 @@ nvim_tree.setup({
 				git = true,
 				file = true,
 				folder = true,
-				diagnostics = true,
 				folder_arrow = true,
 			},
 			glyphs = {

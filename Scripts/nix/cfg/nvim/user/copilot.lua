@@ -5,7 +5,7 @@ copilot.setup({
 		enabled = true,
 		auto_trigger = true,
 		keymap = {
-			accept = "<Tab>",
+			accept = false, -- handled in lsp.lua
 			accept_word = false,
 			accept_line = false,
 		},

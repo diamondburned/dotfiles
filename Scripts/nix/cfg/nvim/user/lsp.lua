@@ -1,9 +1,10 @@
 local lspconfig = require("lspconfig")
+local lsp_signature = require("lsp_signature")
 local lsp_inlayhints = require("lsp-inlayhints")
 local cmp = require("cmp")
 local cmp_nvim_lsp = require("cmp_nvim_lsp")
-local cmp_copilot = require("copilot_cmp")
 local snippy = require("snippy")
+local copilot_suggestion = require("copilot.suggestion")
 
 -- I might be the only person in this planet who has a sane LSP configuration
 -- for Neovim, bruh. ALE has this behavior, vim-lsp has this behavior, so why
@@ -21,14 +22,24 @@ local lsp_configuration_base = {
 -- gopls is included as an example.
 local lsp_configurations = {
 	gopls = {
-	"hints": {
-		"assignVariableTypes": true,
-		"compositeLiteralFields": true,
-		"constantValues": true,
-		"functionTypeParameters": true,
-		"parameterNames": true,
-		"rangeVariableTypes": true
-	}
+		settings = {
+			gopls = {
+				analyses = {
+					unusedwrite = true,
+					unusedparams = true,
+					unusedvariable = true,
+				},
+				staticcheck = true,
+				-- Enable inlay hints.
+				allExperiments = true,
+				hints = {
+					assignVariableTypes = true,
+					compositeLiteralFields = true,
+					parameterNames = true,
+					rangeVariableTypes = true,
+				},
+			},
+		},
 	},
 }
 
@@ -44,7 +55,6 @@ local lsp_local_mappings = {
 
 -- This table contains all autocompletion sources.
 local cmp_sources = {
-	"copilot",
 	"nvim_lsp",
 	"snippy",
 	"path",
@@ -77,9 +87,15 @@ local cmp_opts = {
 	mapping = cmp.mapping.preset.insert({
 		-- Ignore Tab.
 		-- TODO: find the right way to do this
-		-- ["<Tab>"] = function(fallback)
-		-- 	fallback()
-		-- end,
+		["<Tab>"] = cmp.mapping(function(fallback)
+			if copilot_suggestion.is_visible() then
+				copilot_suggestion.accept()
+			elseif snippy.can_expand_or_advance() then
+				snippy.expand_or_advance()
+			else
+				fallback()
+			end
+		end, {"i", "s"}),
 		["<CR>"] = cmp.mapping({
 			i = function(fallback)
 				if cmp.visible() and cmp.get_selected_entry() then
@@ -101,11 +117,6 @@ local cmp_opts = {
 		}),
 	}),
 }
-
--- Set up inlay hints.
-lsp_inlayhints.setup({
-
-})
 
 -- This function returns a table that contains all the supported LSPs that the
 -- nvim-lspconfig plugin provides.
@@ -179,11 +190,20 @@ vim.api.nvim_create_user_command(
 -- Bordered hover.
 vim.lsp.handlers['textDocument/hover'] = vim.lsp.with(vim.lsp.handlers.hover, {border = 'rounded', focusable = false})
 
+-- LSP function signature helper plugin.
+lsp_signature.setup({
+	bind = true,
+	handler_opts = {
+		border = "rounded",
+	},
+})
+
+-- Set up inlay hints.
+lsp_inlayhints.setup({})
+
 local cmp_sources_2 = {}
 for _, source in ipairs(cmp_sources) do
 	table.insert(cmp_sources_2, { name = source })
 end
 cmp_opts.sources = cmp.config.sources(cmp_sources_2)
-
-cmp_copilot.setup()
 cmp.setup(cmp_opts)
