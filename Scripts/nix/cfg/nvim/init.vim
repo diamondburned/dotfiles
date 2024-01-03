@@ -182,15 +182,6 @@ autocmd UIEnter * call s:gnvimInit()
 
 "Nvim Tree configs"
 "TODO: move this into user/file-tree.lua"
-hi NvimTreeCursorLine ctermbg=8    guibg=#52494C
-hi NvimTreeFolderName ctermfg=NONE guifg=NONE
-hi NvimTreeFolderIcon ctermfg=14   guifg=#55CDFC
-hi NvimTreeExecFile   ctermfg=12   guifg=#779ECB
-hi NvimTreeGitDirty   ctermfg=9    guifg=#FF6961
-hi NvimTreeGitStaged  ctermfg=2    guifg=#3DCCB2
-hi NvimTreeGitRenamed ctermfg=6    guifg=#00B5FC
-hi NvimTreeGitDeleted ctermfg=1    guifg=#FF473D
-hi NvimTreeGitIgnored ctermfg=8    guifg=#52494C
 
 lua <<EOF
 	require'nvim-treesitter.configs'.setup {
@@ -238,8 +229,8 @@ hi Todo     ctermbg=14                   guibg=#55CDFC
 hi Search   ctermbg=14   ctermfg=0       guibg=#55CDFC guifg=#272224
 hi SpellBad ctermbg=NONE cterm=undercurl guisp=#FF6961 
 
-hi StatusLine   ctermfg=5
-hi StatusLineNC ctermfg=13
+hi StatusLine   ctermfg=5  guifg=#F74C6D
+hi StatusLineNC ctermfg=13 guifg=#F7A8B8
 
 hi Special     ctermfg=15 guifg=#EEEEEC
 hi SpecialChar ctermfg=5  guifg=#F74C6D

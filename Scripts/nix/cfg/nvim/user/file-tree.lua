@@ -58,8 +58,11 @@ nvim_tree.setup({
 				folder_arrow = true,
 			},
 			glyphs = {
-				default = " ",
-				symlink = " ",
+				-- Using a single space actually adds 2 spaces but using an
+				-- empty string adds 0 spaces, so we'll use a zero-width space
+				-- :)
+				default = "​",
+				symlink = "​",
 				git = {
 					unstaged = "M",
 					staged = "M",

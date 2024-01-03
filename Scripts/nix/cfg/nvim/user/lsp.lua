@@ -65,18 +65,11 @@ local cmp_opts = {
 		end,
 	},
 	mapping = cmp.mapping.preset.insert({
-		["<Tab>"] = vim.schedule_wrap(function(fallback)
-			local function has_words_before()
-				if vim.api.nvim_buf_get_option(0, "buftype") == "prompt" then return false end
-				local line, col = unpack(vim.api.nvim_win_get_cursor(0))
-				return col ~= 0 and vim.api.nvim_buf_get_text(0, line-1, 0, line-1, col, {})[1]:match("^%s*$") == nil
-			end
-			if cmp.visible() and has_words_before() then
-				cmp.select_next_item({ behavior = cmp.SelectBehavior.Select })
-			else
-				fallback()
-			end
-		end),
+		-- Ignore Tab.
+		-- TODO: find the right way to do this
+		["<Tab>"] = function(fallback)
+			fallback()
+		end,
 		["<CR>"] = cmp.mapping({
 			i = function(fallback)
 				if cmp.visible() and cmp.get_selected_entry() then
@@ -158,6 +151,18 @@ vim.api.nvim_create_autocmd("LspAttach", {
 		end
 	end
 })
+
+-- Set up :Rename command.
+vim.api.nvim_create_user_command(
+	"Rename",
+	function(args)
+		vim.lsp.buf.rename()
+	end,
+	{}
+)
+
+-- Bordered hover.
+vim.lsp.handlers['textDocument/hover'] = vim.lsp.with(vim.lsp.handlers.hover, {border = 'rounded', focusable = false})
 
 local cmp_sources_2 = {}
 for _, source in ipairs(cmp_sources) do
