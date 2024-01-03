@@ -37,16 +37,21 @@ Plug 'nvim-treesitter/nvim-treesitter-refactor'
 "Autocomplete brackets/parens/etc like vscode"
 Plug 'windwp/nvim-autopairs'
 
-"Autocompletion"
-" Plug 'neovim/nvim-lspconfig'
-" Plug 'hrsh7th/nvim-cmp'
-Plug 'prabirshrestha/vim-lsp'
-Plug 'prabirshrestha/asyncomplete.vim'
-Plug 'prabirshrestha/asyncomplete-lsp.vim'
-Plug 'diamondburned/vim-lsp-settings', { 'commit': 'c99ed5a' }
-" Plug 'mattn/vim-lsp-settings'
-Plug 'dense-analysis/ale'
+"Autocompletion with Copilot"
 Plug 'github/copilot.vim'
+
+"ALE for linting and formatting"
+Plug 'dense-analysis/ale'
+
+"Autocompletion using built-in Neovim LSP"
+Plug 'neovim/nvim-lspconfig'
+Plug 'hrsh7th/nvim-cmp'
+
+"Autocompletion using vim-lsp"
+" Plug 'prabirshrestha/vim-lsp'
+" Plug 'prabirshrestha/asyncomplete.vim'
+" Plug 'prabirshrestha/asyncomplete-lsp.vim'
+" Plug 'diamondburned/vim-lsp-settings', { 'commit': 'c99ed5a' }
 
 "Languages"
 Plug 'makerj/vim-pdf'
@@ -771,25 +776,25 @@ nmap ; :
 let g:rainbow_active = 1
 
 "vim-lsp stuff"
-let g:lsp_inlay_hints_enabled = 1
-let g:lsp_fold_enabled = 0
-let g:lsp_float_max_width = 0 "full width"
-let g:lsp_semantic_enabled = 1
+" let g:lsp_inlay_hints_enabled = 1
+" let g:lsp_fold_enabled = 0
+" let g:lsp_float_max_width = 0 "full width"
+" let g:lsp_semantic_enabled = 1
 " let g:lsp_preview_float = 0
 "This prevents Copilot from working properly"
-let lsp_signature_help_enabled = 0
+" let lsp_signature_help_enabled = 0
 "Fix aggressive preemptive completion with noselect"
 " let g:asyncomplete_auto_completeopt = 0 "idk if i gotta put this first"
 " set completeopt=menuone,noinsert,noselect
 
-nnoremap gd :LspDefinition<CR>
-nnoremap K :LspHover<CR>
+" nnoremap gd :LspDefinition<CR>
+" nnoremap K :LspHover<CR>
 
 " let g:lsp_log_verbose = 1
 " let g:lsp_log_file = expand('/tmp/vim-lsp.log')
 
-command! -nargs=0 Rename LspRename
-command! -nargs=0 ALERename LspRename
+" command! -nargs=0 Rename LspRename
+" command! -nargs=0 ALERename LspRename
 
 "Support the garbage that is PostCSS"
 au BufRead,BufNewFile *.postcss set filetype=postcss

@@ -4,6 +4,11 @@ let
 	env = {
 		GTK_THEME = config.gtk.theme.name;
 	};
+
+	css = pkgs.concatText "gtk.css" [
+		./default.css
+		# ./christmas.css
+	];
 in
 
 {
@@ -16,8 +21,8 @@ in
 		font.size = 11;
 
 		theme = {
-			# name = "Colloid-Pink-Dark-Compact";
-			name = "Colloid-Light";
+			# name = "Colloid-Light";
+			name = "Colloid-Pink-Dark";
 			package =
 				pkgs.colloid-gtk-theme.override {
 					themeVariants = [ "all" ];
@@ -32,8 +37,8 @@ in
 		};
 
 		iconTheme = {
-			# name = "Papirus-Dark";
-			name = "Papirus-Light";
+			# name = "Papirus-Light";
+			name = "Papirus-Dark";
 			package = pkgs.papirus-icon-theme;
 		};
 
@@ -44,14 +49,14 @@ in
 
 		gtk3 = {
 			extraConfig = {
-				# gtk-application-prefer-dark-theme = 1;
-				gtk-application-prefer-dark-theme = 0;
+				gtk-application-prefer-dark-theme = 1;
+				# gtk-application-prefer-dark-theme = 0;
 			};
-			extraCss = builtins.readFile <dotfiles/cfg/gtk.css>;
+			extraCss = builtins.readFile css;
 		};
 
 		gtk4 = {
-			extraCss = builtins.readFile <dotfiles/cfg/gtk.css>;
+			extraCss = builtins.readFile css;
 		};
 	};
 
