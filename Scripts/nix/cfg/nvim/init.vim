@@ -46,11 +46,13 @@ Plug 'neovim/nvim-lspconfig'
 Plug 'hrsh7th/nvim-cmp'
 Plug 'hrsh7th/cmp-nvim-lsp'
 Plug 'hrsh7th/cmp-path'
+Plug 'dcampos/nvim-snippy'
+Plug 'dcampos/cmp-snippy'
 
 "Autocompletion with Copilot"
-" Plug 'github/copilot.vim'
 Plug 'zbirenbaum/copilot.lua'
-Plug 'zbirenbaum/copilot-cmp'
+" Plug 'github/copilot.vim'
+" Plug 'zbirenbaum/copilot-cmp'
 
 "Autocompletion using vim-lsp"
 " Plug 'prabirshrestha/vim-lsp'

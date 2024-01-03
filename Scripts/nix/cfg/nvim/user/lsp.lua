@@ -1,6 +1,15 @@
 local lspconfig = require("lspconfig")
 local cmp = require("cmp")
 local cmp_nvim_lsp = require("cmp_nvim_lsp")
+local snippy = require("snippy")
+
+-- Super unreliable, I'm not using this anymore.
+-- local cmp_copilot = require("copilot_cmp")
+
+-- I might be the only person in this planet who has a sane LSP configuration
+-- for Neovim, bruh. ALE has this behavior, vim-lsp has this behavior, so why
+-- can't nvim-lsp have this behavior? Why is every stock config a dance of
+-- 3-keypresses to do anything and "just install all LSPs in the world"?
 
 -- This table is the base configuration for all LSPs.
 local lsp_configuration_base = {
@@ -25,12 +34,59 @@ local lsp_local_mappings = {
 	{ "n", "K", vim.lsp.buf.hover },
 }
 
-
 -- This table contains all autocompletion sources.
 local cmp_sources = {
-	"copilot",
 	"nvim_lsp",
+	"snippy",
 	"path",
+}
+
+local cmp_opts = {
+	view = {
+		entries = "native",
+	},
+	snippet = {
+		expand = function(args)
+			snippy.expand_snippet(args.body)
+		end,
+	},
+	mapping = cmp.mapping.preset.insert({
+		-- ["<Tab>"] = cmp.mapping(
+		-- 	function(fallback)
+		-- 		if not cmp.visible() then
+		-- 			fallback()
+		-- 			return
+		-- 		end
+		--
+		-- 		local entry = cmp.get_selected_entry()
+		-- 		if entry then
+		-- 			cmp.confirm()
+		-- 		else
+		-- 			cmp.select_next_item({ behavior = cmp.SelectBehavior.Select })
+		-- 		end
+		-- 	end,
+		-- 	{"i", "s"}
+		-- ),
+		["<CR>"] = cmp.mapping({
+			i = function(fallback)
+				if cmp.visible() and cmp.get_selected_entry() then
+					cmp.confirm({
+						select = false,
+						behavior = cmp.ConfirmBehavior.Replace,
+					})
+				else
+					fallback()
+				end
+			end,
+			s = cmp.mapping.confirm({
+				select = true,
+			}),
+			c = cmp.mapping.confirm({
+				select = true,
+				behavior = cmp.ConfirmBehavior.Replace,
+			}),
+		}),
+	}),
 }
 
 -- This function returns a table that contains all the supported LSPs that the
@@ -93,8 +149,9 @@ vim.api.nvim_create_autocmd("LspAttach", {
 	end
 })
 
-local cmp_opts = { sources = {} }
+local cmp_sources_2 = {}
 for _, source in ipairs(cmp_sources) do
-	table.insert(cmp_opts.sources, { name = source })
+	table.insert(cmp_sources_2, { name = source })
 end
+cmp_opts.sources = cmp.config.sources(cmp_sources_2)
 cmp.setup(cmp_opts)

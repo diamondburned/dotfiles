@@ -23,6 +23,7 @@ pkgs.mkShell {
 		git-crypt
 		gomod2nix
 		nix-output-monitor
+		sumneko-lua-language-server
 	];
 	shellHook = ''
 		if [[ $HOSTNAME == "nixos" ]]; then
