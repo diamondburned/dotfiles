@@ -299,8 +299,6 @@ if exists("g:neovide")
 	let g:neovide_remember_window_size = v:false
 	let g:neovide_cursor_animation_length = 0
 	let g:neovide_cursor_trail_size = 0
-	let g:neovide_cursor_animate_in_insert_mode = v:false
-	let g:neovide_cursor_animate_command_line = v:false
 endif
 
 "Autoindentation"
@@ -640,6 +638,9 @@ let g:ale_linters = {
 			\ 'javascript': [ "deno", "tsserver", "deno", "standard" ],
 			\ 'typescript': [ "deno", "tsserver", "deno", "standard" ],
 			\ }
+
+"Add :TidyGoMod command"
+command! TidyGoMod execute '!go mod tidy' | LspRestart
 
 let g:copilot_filetypes = {
 	\ 'markdown': v:true,
