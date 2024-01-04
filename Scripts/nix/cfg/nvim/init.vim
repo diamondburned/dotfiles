@@ -561,6 +561,12 @@ function! FixTempl(buffer) abort
 	\}
 endfunction
 
+function! FixGoFormattag(buffer) abort
+	return {
+	\	'command': 'formattag'
+	\}
+endfunction
+
 "https://github.com/dense-analysis/ale/issues/3167"
 execute ale#fix#registry#Add('nasmfmt', 'FixNasmfmt', ['nasm'], 'nasmfmt')
 execute ale#fix#registry#Add('mipsfmt', 'FixMipsfmt', ['mips'], 'mipsfmt')
@@ -573,6 +579,11 @@ execute ale#fix#registry#Add('prettier', 'ale#fixers#prettier#Fix', ['scss'], 'p
 execute ale#fix#registry#Add('cmark', 'FixCMark', ['markdown'], 'cmark for markdown')
 execute ale#fix#registry#Add('cmark-gfm', 'FixCMarkGFM', ['markdown'], 'cmark-gfm for markdown')
 execute ale#fix#registry#Add('templ', 'FixTempl', ['templ'], 'templ fmt for templ')
+
+"Only enable if $VIM_GO_FORMATTAG is set"
+if $VIM_GO_FORMATTAG != ''
+	execute ale#fix#registry#Add('goformattag', 'FixGoFormattag', ['go'], 'formattag for go')
+end
 
 let g:ale_virtualtext_cursor = 1
 let g:ale_sign_error = '!'
