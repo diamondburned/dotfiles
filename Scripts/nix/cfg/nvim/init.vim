@@ -52,9 +52,11 @@ Plug 'lvimuser/lsp-inlayhints.nvim'
 Plug 'ray-x/lsp_signature.nvim'
 
 "Autocompletion with Copilot"
-Plug 'zbirenbaum/copilot.lua'
+Plug 'github/copilot.vim'
+
+"Copilot.lua is unironically very bad, so we're just not going to use it."
+" Plug 'zbirenbaum/copilot.lua'
 " Plug 'zbirenbaum/copilot-cmp'
-" Plug 'github/copilot.vim'
 
 "Autocompletion using vim-lsp"
 " Plug 'prabirshrestha/vim-lsp'

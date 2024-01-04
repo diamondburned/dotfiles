@@ -4,7 +4,7 @@ local lsp_inlayhints = require("lsp-inlayhints")
 local cmp = require("cmp")
 local cmp_nvim_lsp = require("cmp_nvim_lsp")
 local snippy = require("snippy")
-local copilot_suggestion = require("copilot.suggestion")
+-- local copilot_suggestion = require("copilot.suggestion")
 
 -- I might be the only person in this planet who has a sane LSP configuration
 -- for Neovim, bruh. ALE has this behavior, vim-lsp has this behavior, so why
@@ -87,15 +87,16 @@ local cmp_opts = {
 	mapping = cmp.mapping.preset.insert({
 		-- Ignore Tab.
 		-- TODO: find the right way to do this
-		["<Tab>"] = cmp.mapping(function(fallback)
-			if copilot_suggestion.is_visible() then
-				copilot_suggestion.accept()
-			elseif snippy.can_expand_or_advance() then
-				snippy.expand_or_advance()
-			else
-				fallback()
-			end
-		end, {"i", "s"}),
+
+		-- ["<Tab>"] = cmp.mapping(function(fallback)
+		-- 	if copilot_suggestion.is_visible() then
+		-- 		copilot_suggestion.accept()
+		-- 	elseif snippy.can_expand_or_advance() then
+		-- 		snippy.expand_or_advance()
+		-- 	else
+		-- 		fallback()
+		-- 	end
+		-- end, {"i", "s"}),
 		["<CR>"] = cmp.mapping({
 			i = function(fallback)
 				if cmp.visible() and cmp.get_selected_entry() then

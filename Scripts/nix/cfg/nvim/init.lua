@@ -6,7 +6,7 @@ require("nvim-autopairs").setup({})
 -- 	require("shade").setup({ overlay_opacity = 60 })
 -- end
 
-require("user.copilot")
+-- require("user.copilot")
 require("user.lsp")
 require("user.cokeline")
 require("user.clipboard")
