@@ -296,9 +296,9 @@ if exists("g:neovide")
 	let g:neovide_padding_bottom = 10
 	let g:neovide_padding_left = 10
 	let g:neovide_padding_right = 10
-	let g:neovide_remember_window_size = v:true
-	let g:neovide_cursor_animation_length = 0.1
-	let g:neovide_cursor_trail_size = 0.001
+	let g:neovide_remember_window_size = v:false
+	let g:neovide_cursor_animation_length = 0
+	let g:neovide_cursor_trail_size = 0
 	let g:neovide_cursor_animate_in_insert_mode = v:false
 	let g:neovide_cursor_animate_command_line = v:false
 endif
