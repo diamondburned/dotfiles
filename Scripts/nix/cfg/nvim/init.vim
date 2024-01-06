@@ -612,6 +612,7 @@ let g:ale_fixers = {
 			\ 'nasm':       [ "nasmfmt" ],
 			\ 'mips':       [ "mipsfmt" ],
 			\ 'templ':      [  ],
+			\ 'kotlin':     [ "ktlint" ],
 			\ 'python':     [ "autopep8", "black" ],
 			\ 'proto':      [ "protolint" ],
 			\ 'astro':	    [ "prettier" ],
