@@ -568,9 +568,9 @@ function! FixGoFormattag(buffer) abort
 endfunction
 
 "Fix broken ALE ktlint configuration"
-function! ale#fixers#ktlint#Fix(buffer) abort
+function! FixKtlint(buffer) abort
     return {
-    \   'command': ale#handlers#ktlint#GetCommand(a:buffer) . ' --format'
+    \   'command': 'ktlint -l none -F --stdin'
     \}
 endfunction
 
@@ -586,6 +586,7 @@ execute ale#fix#registry#Add('prettier', 'ale#fixers#prettier#Fix', ['scss'], 'p
 execute ale#fix#registry#Add('cmark', 'FixCMark', ['markdown'], 'cmark for markdown')
 execute ale#fix#registry#Add('cmark-gfm', 'FixCMarkGFM', ['markdown'], 'cmark-gfm for markdown')
 execute ale#fix#registry#Add('templ', 'FixTempl', ['templ'], 'templ fmt for templ')
+execute ale#fix#registry#Add('ktlint-2', 'FixKtlint', ['kotlin'], 'ktlint for kotlin')
 
 "Only enable if $VIM_GO_FORMATTAG is set"
 if $VIM_GO_FORMATTAG != ''
@@ -619,7 +620,7 @@ let g:ale_fixers = {
 			\ 'nasm':       [ "nasmfmt" ],
 			\ 'mips':       [ "mipsfmt" ],
 			\ 'templ':      [  ],
-			\ 'kotlin':     [ "ktlint" ],
+			\ 'kotlin':     [ "ktlint-2" ],
 			\ 'python':     [ "autopep8", "black" ],
 			\ 'proto':      [ "protolint" ],
 			\ 'astro':	    [ "prettier" ],
