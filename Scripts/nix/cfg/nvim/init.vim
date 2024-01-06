@@ -567,6 +567,13 @@ function! FixGoFormattag(buffer) abort
 	\}
 endfunction
 
+"Fix broken ALE ktlint configuration"
+" function! ale#fixers#ktlint#Fix(buffer) abort
+"     return {
+"     \   'command': ale#handlers#ktlint#GetCommand(a:buffer) . ' --format'
+"     \}
+" endfunction
+
 "https://github.com/dense-analysis/ale/issues/3167"
 execute ale#fix#registry#Add('nasmfmt', 'FixNasmfmt', ['nasm'], 'nasmfmt')
 execute ale#fix#registry#Add('mipsfmt', 'FixMipsfmt', ['mips'], 'mipsfmt')
