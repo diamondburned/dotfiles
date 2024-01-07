@@ -106,7 +106,24 @@
 		package = pkgs.bluez5-experimental;
 	};
 
-	# Do not suspend on lid close.
-	# https://github.com/AsahiLinux/linux/issues/246
-	# services.logind.lidSwitch = "ignore";
+	services.auto-cpufreq = {
+		enable = true;
+		settings = {
+			charger = {
+				# Use Asahi's own CPU governor algorithm.
+				governor = "schedutil";
+				turbo = "auto";
+			};
+			battery = {
+				# Use the conservative governor to save power.
+				governor = "conservative";
+				# M1 is plenty fast enough without turbo.
+				turbo = "never";
+			};
+		};
+	};
+
+	# Note: the displaylink module breaks suspend.
+	# We don't have it enabled right now.
+	services.logind.lidSwitch = "suspend";
 }

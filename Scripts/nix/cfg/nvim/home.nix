@@ -21,4 +21,8 @@
 		source = ./user;
 		recursive = true;
 	};
+
+	home.packages = with pkgs; [
+		neovide
+	];
 }
