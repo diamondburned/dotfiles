@@ -1,0 +1,39 @@
+window {
+	background: linear-gradient(
+		135deg, rgba(255, 245, 247, 0.98), rgba(245, 255, 246, 0.98));
+	box-shadow:
+		0 0 20px -4px rgba(0, 0, 0, 0.5),
+		 4px -4px  0px 0px #e54c44,
+		-4px 4px 0px 0px #7daf25,
+		0 0 4px 0px rgba(0, 0, 0, 0.35);
+}
+
+windowcontrols {
+	border: none;
+	margin: 0;
+}
+
+windowcontrols > *:not(:hover) {
+	opacity: 0;
+}
+
+windowcontrols > *:hover {
+	opacity: 1;
+}
+
+windowcontrols > * image {
+	background: #444;
+}
+
+windowcontrols {
+	background-image:
+		url("file:///home/diamond/Downloads/Animated Christmas Lights@2x.png");
+	background-size: 190px;
+	background-position: 142px -2px;
+	background-origin: border-box;
+	background-repeat: repeat-x;
+}
+
+.titlebar {
+	background: none;
+}
