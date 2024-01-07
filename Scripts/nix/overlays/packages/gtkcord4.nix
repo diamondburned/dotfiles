@@ -21,26 +21,6 @@ let
 				sha256 = "sha256-vlZlHHHSPf2aejT0i4HP+KpHKyDn+pUZQVYIxRH0YNk=";
 			};
 
-		arch =
-			if pkgs.stdenv.isx86_64 then "amd64"
-			else if pkgs.stdenv.isAarch64 then "arm64"
-			else throw "Unsupported architecture";
-
-		bin = pkgs.runCommand "gtkcord4-bin" {
-			src = pkgs.fetchurl {
-				url = "https://github.com/diamondburned/gtkcord4/releases/download/v${version}/gtkcord4-linux-${arch}-v${version}-.tar.zst";
-				sha256 = hashes.bin.${arch};
-			};
-			nativeBuildInputs = with pkgs; [
-				zstd
-			];
-		} ''
-			tar --zstd -xf $src
-			mkdir -p $out/bin
-			cp bin/gtkcord4 $out/
-			chmod +x $out/*
-		'';
-
 		base = import "${gtkcord4.src}/nix/base.nix";
 	};
 
@@ -72,7 +52,7 @@ in pkgs.stdenv.mkDerivation {
 
 	sourceRoot = ".";
 
-	installPhase = with gtkcord4.base; ''
+	buildPhase = with gtkcord4.base; ''
 		install -Dm755 "$src/${pname}" "$out/bin/${pname}"
 		mkdir -p \
 			$out/share/dbus-1/services \
