@@ -156,6 +156,7 @@ in {
 			"privacy.antitracking.testing" = true;
 			"privacy.trackingprotection.enabled" = true;
 			"network.trr.mode" = 5;
+			"widget.gtk.rounded-bottom-corners.enabled" = true;
 		};
 	};
 }
