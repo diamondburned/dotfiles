@@ -71,7 +71,7 @@ in {
 		<dotfiles/secrets>
 		<dotfiles/cfg/udev>
 		<dotfiles/cfg/nokbd>
-		<dotfiles/cfg/wayfire>
+		# <dotfiles/cfg/wayfire>
 		<dotfiles/cfg/localhost>
 		<dotfiles/cfg/keyd>
 		<dotfiles/cfg/avahi>
