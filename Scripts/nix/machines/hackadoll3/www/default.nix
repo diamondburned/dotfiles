@@ -19,6 +19,7 @@ let
 
 	subdomains = subdomains:
 		with lib;
+		with builtins;
 		concatStringsSep ", " (map subdomain subdomains);
 
 	tailscaleTLS =
@@ -105,20 +106,26 @@ in
 						reverse_proxy * ${secrets.tasmotaAddress}
 					}
 				'';
-			${subdomains "esp"} = ''
-				redir /bulb http://192.168.2.124:80 302
-				redir /plug http://192.168.2.238:80 302
+			${subdomain "esp"} =
+				let
+					index = pkgs.writeTextDir "index.html" ''
+						<!DOCTYPE html>
+						<title>Tasmota Index</title>
 
-				respond / "
-					<!DOCTYPE html>
-					<title>ESP Index</title>
-					<h1>ESP Index</h1>
-					<ul>
-						<li><a href="/bulb">Tasmota Bulb</a></li>
-						<li><a href="/plug">Tasmota Plug</a></li>
-					</ul>
-				"
-			'';
+						<h1>Tasmota Index</h1>
+						<ul>
+							<li><a href="/bulb">Tasmota Bulb</a></li>
+							<li><a href="/plug">Tasmota Plug</a></li>
+						</ul>
+					'';
+				in ''
+					redir /bulb http://192.168.2.124:80 302
+					redir /plug http://192.168.2.238:80 302
+					handle / {
+						file_server
+						root * ${index}
+					}
+				'';
 		};
 	};
 }
