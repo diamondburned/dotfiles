@@ -64,7 +64,7 @@ in
 						# opposed to .s.libdb.so, which is a direct IP alias.
 						${dynamicSubdomains
 							["libdb.so" "arikawa-hi.me" "diamondx.pet"]
-							["" "test" "dol" "bulb"]
+							["" "test" "dol" "bulb" "esp"]
 						}
 					}
 
@@ -105,6 +105,20 @@ in
 						reverse_proxy * ${secrets.tasmotaAddress}
 					}
 				'';
+			${subdomains "esp"} = ''
+				redir /bulb http://192.168.2.124:80 302
+				redir /plug http://192.168.2.238:80 302
+
+				respond / "
+					<!DOCTYPE html>
+					<title>ESP Index</title>
+					<h1>ESP Index</h1>
+					<ul>
+						<li><a href="/bulb">Tasmota Bulb</a></li>
+						<li><a href="/plug">Tasmota Plug</a></li>
+					</ul>
+				"
+			'';
 		};
 	};
 }
