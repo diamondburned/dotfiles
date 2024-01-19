@@ -601,4 +601,12 @@ alias gdbrun="gdb -ex run"
 
 alias dc=cd
 
+cd() {
+	if [[ "$1" == "-" ]]; then
+		popd &> /dev/null
+		return
+	fi
+	pushd "$@" &> /dev/null
+}
+
 echo Welcome
