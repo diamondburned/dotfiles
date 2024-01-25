@@ -51,32 +51,33 @@
 		services.easyeffects.enable = true;
 
 		home.packages = with pkgs; [
-			keepassxc
+			celluloid
 			chromium
 			fcitx5-configtool
 			fcitx5-gtk
-			wl-clipboard
-			playerctl
-			waypipe
-			celluloid
-			oxfs
 			foot # TODO mgirate to HM
-			virt-manager
-			gtkcord4
-			silver-searcher
-			pavucontrol
-			nix-output-monitor
-			jq
-			go
-			gopls
-			gotab
-			gnome.gnome-tweaks
-			gnome.gnome-disk-utility
-			gnome.gnome-power-manager
 			gcolor3
 			gimp
 			git-crypt
+			gnome.gnome-disk-utility
+			gnome.gnome-power-manager
+			gnome.gnome-tweaks
+			go
+			gopls
+			gotab
+			gtkcord4
+			jq
+			keepassxc
+			komikku
+			nix-output-monitor
+			oxfs
+			pavucontrol
+			playerctl
 			qalculate-gtk
+			silver-searcher
+			virt-manager
+			waypipe
+			wl-clipboard
 			# libreoffice-fresh
 
 			(callPackage ./packages/spot-git.nix {})
