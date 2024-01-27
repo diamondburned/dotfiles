@@ -133,6 +133,7 @@ application/pdf=org.gnome.Evince.desktop
 audio/x-opus+ogg=io.github.celluloid_player.Celluloid.desktop
 text/vnd.trolltech.linguist=nvim.desktop
 application/json=nvim.desktop
+text/x-csrc=neovide.desktop
 
 [Added Associations]
 x-scheme-handler/http=chromium-browser.desktop;
@@ -149,3 +150,4 @@ text/vnd.trolltech.linguist=nvim.desktop;
 application/json=nvim.desktop;
 x-scheme-handler/sms=org.gnome.Shell.Extensions.GSConnect.desktop;
 x-scheme-handler/tel=org.gnome.Shell.Extensions.GSConnect.desktop;
+text/x-csrc=neovide.desktop;
