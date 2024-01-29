@@ -179,7 +179,8 @@ in {
 		freeSwapKillThreshold = 5;
 	};
 
-	services.irqbalance.enable = true;
+	# This is already a thing in Linux.
+	# services.irqbalance.enable = true;
 
 	# We don't want to sacrifice battery for the above.
 	powerManagement.cpuFreqGovernor = lib.mkForce "powersave";
