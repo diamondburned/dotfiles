@@ -67,6 +67,8 @@
 			gotab
 			gtkcord4
 			jq
+			htop
+			dnsutils
 			keepassxc
 			komikku
 			nix-output-monitor
