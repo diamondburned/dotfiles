@@ -31,6 +31,8 @@ in
 		HOSTNAME = config.networking.hostName;
 	};
 
+	nix.settings.experimental-features = [ "nix-command" "flakes" ];
+
 	nix.nixPath = [
 		"dotfiles=${builtins.toString ./.}"
 		"nixpkgs=/nix/var/nix/profiles/per-user/root/channels/nixos"
