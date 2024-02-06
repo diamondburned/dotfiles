@@ -47,4 +47,8 @@ in
 	# 		readOnly = true;
 	# 	};
 	# };
+
+	# Disable split lock detection since it penalizes the performance of certain
+	# apps for arbitrary reasons.
+	boot.kernelParams = [ "split_lock_detect=off" ];
 }
