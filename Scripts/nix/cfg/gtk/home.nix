@@ -2,13 +2,27 @@
 
 let
 	env = {
-		GTK_THEME = config.gtk.theme.name;
+		GTK_THEME = theme.name;
 	};
 
 	css = pkgs.concatText "gtk.css" [
 		./default.css
 		# ./christmas.css
 	];
+
+	theme = {
+		name = "Colloid-Pink-Dark";
+		package = pkgs.colloid-gtk-theme.override {
+			themeVariants = [ "all" ];
+			colorVariants = [ "standard" "light" "dark" ];
+			sizeVariants  = [ "standard" "compact" ];
+			tweaks = [
+				"rimless"
+				"normal"
+				# "black"
+			];
+		};
+	};
 in
 
 {
@@ -21,19 +35,9 @@ in
 		font.size = 11;
 
 		theme = {
+			inherit (theme) name;
 			# name = "Colloid-Light";
-			name = "Colloid-Pink-Dark";
-			package =
-				pkgs.colloid-gtk-theme.override {
-					themeVariants = [ "all" ];
-					colorVariants = [ "standard" "light" "dark" ];
-					sizeVariants  = [ "standard" "compact" ];
-					tweaks = [
-						"rimless"
-						"normal"
-						# "black"
-					];
-				};
+			# package = theme;
 		};
 
 		iconTheme = {
@@ -87,6 +91,6 @@ in
 		catppuccin-cursors.macchiatoFlamingo
 		catppuccin-gtk
 	] ++ [
-		config.gtk.theme.package
+		theme.package
 	];
 }
