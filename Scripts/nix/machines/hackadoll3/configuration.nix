@@ -862,6 +862,8 @@ in {
 				arch = "x86_64";
 			};
 
+			cmdArgs = [];
+
 			# See https://nixos.org/manual/nixpkgs/stable/#ssec-pkgs-dockerTools-buildLayeredImage.
 			imageFile = pkgs.dockerTools.buildLayeredImage {
 				name = "experimental-discord-bot-image";
@@ -886,7 +888,7 @@ in {
 					echo "Running the bot..."
 					exec ./commands-hybrid
 				'';
-				config.Cmd = "/bin/experimental-discord-bot";
+				config.Cmd = [ "/bin/experimental-discord-bot" ] ++ cmdArgs;
 			};
 		in
 		{
