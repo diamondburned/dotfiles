@@ -51,4 +51,8 @@ in
 	# Disable split lock detection since it penalizes the performance of certain
 	# apps for arbitrary reasons.
 	boot.kernelParams = [ "split_lock_detect=off" ];
+
+	# Suppress Tailscale log printing to prevent disk spamming.
+	# See https://github.com/tailscale/tailscale/issues/1548.
+	systemd.services.tailscaled.serviceConfig.StandardOutput = "null";
 }
