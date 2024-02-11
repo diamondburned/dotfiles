@@ -14,12 +14,12 @@ Plug 'bogado/file-line'
 Plug 'rhysd/conflict-marker.vim'
 Plug 'gpanders/editorconfig.nvim'
 Plug 'folke/todo-comments.nvim'
-Plug 'chrisbra/Colorizer'
 Plug 'luochen1990/rainbow'
 Plug 'ojroques/nvim-osc52'
 Plug 'aymericbeaumet/vim-symlink'
 Plug 'moll/vim-bbye' " optional dependency
 Plug 'sunjon/shade.nvim'
+Plug 'NvChad/nvim-colorizer.lua'
 
 "Cokeline and its dependencies"
 Plug 'nvim-lua/plenary.nvim'
@@ -221,7 +221,10 @@ EOF
 " 	8  "#52494C" "#FF6961" "#85E6D4" "#FFB347"
 " 	12 "#779ECB" "#F7A8B8" "#55CDFC" "#EEEEEC"
 " ];
+
 "Custom colors"
+set termguicolors
+
 hi Normal guibg=#1D1D1D
 
 hi TabLine     cterm=NONE ctermfg=15 ctermbg=NONE  gui=NONE guifg=#EEEEEC guibg=NONE
