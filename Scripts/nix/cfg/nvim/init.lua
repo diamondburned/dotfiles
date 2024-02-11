@@ -1,10 +1,19 @@
 require("Comment").setup({})
 require("nvim-autopairs").setup({})
 
-require("colorizer").setup({}, {
-	mode = "virtualtext",
-	virtualtext = "●",
-	always_update = true,
+require("colorizer").setup({
+	user_default_options = {
+		RGB = true,
+		RRGGBB = true,
+		names = false,
+		RRGGBBAA = true,
+		AARRGGBB = false,
+		rgb_fn = true,
+		hsl_fn = true,
+		mode = "virtualtext",
+		virtualtext = "●",
+		always_update = true,
+	},
 })
 
 -- if vim.g.neovide then
