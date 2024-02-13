@@ -153,3 +153,5 @@ application/json=nvim.desktop;
 text/x-csrc=neovide.desktop;
 application/vnd.oasis.opendocument.text=writer.desktop;
 text/plain=neovide.desktop;
+x-scheme-handler/sms=org.gnome.Shell.Extensions.GSConnect.desktop;
+x-scheme-handler/tel=org.gnome.Shell.Extensions.GSConnect.desktop;
