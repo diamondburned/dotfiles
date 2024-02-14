@@ -55,4 +55,9 @@ in
 	# Suppress Tailscale log printing to prevent disk spamming.
 	# See https://github.com/tailscale/tailscale/issues/1548.
 	systemd.services.tailscaled.serviceConfig.StandardOutput = "null";
+
+	services.xserver.gdk-pixbuf.modulePackages = with pkgs; [
+		librsvg
+		webp-pixbuf-loader
+	];
 }
