@@ -36,7 +36,7 @@
 		gnome-initial-setup.enable = false;
 	};
 
-	xdg.portal.gtkUsePortal = true; # make GTK use GNOME's portal
+	# xdg.portal.gtkUsePortal = true; # make GTK use GNOME's portal
 
 	environment.gnome.excludePackages = with pkgs; with pkgs.gnome; [
 		gnome-contacts
