@@ -693,6 +693,7 @@ in {
 			go
 			gopls
 			gotools
+			licensor
 			mdr
 			# config.boot.kernelPackages.perf
 			# perf_data_converter
