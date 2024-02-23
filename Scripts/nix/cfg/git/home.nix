@@ -28,6 +28,12 @@
 			};
 			pull.rebase = true;
 			push.autoSetupRemote = true;
+			diff.tool = "difftastic";
+			difftool = {
+				prompt = false;
+				difftastic.cmd = ''${pkgs.difftastic}/bin/difft "$LOCAL" "$REMOTE"'';
+			};
+			pager.difftool = true;
 		};
 	};
 }
