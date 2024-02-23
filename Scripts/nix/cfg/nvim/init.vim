@@ -616,7 +616,7 @@ let g:ale_fixers = {
 			\ 'cpp':        [ "uncrustify", "clang-format" ],
 			\ 'sql':        [ "sqlfluff" ],
 			\ 'rust':       [ "rustfmt" ],
-			\ 'json':       [ "prettier", "jq", "denojson" ],
+			\ 'json':       [ "jq", "prettier", "denojson" ],
 			\ 'jsonc':      [ "prettier", "denojsonc" ],
 			\ 'html':       [ "prettier" ],
 			\ 'yaml':       [ "prettier" ],

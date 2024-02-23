@@ -4,7 +4,7 @@
 	programs.git = {
 		enable = true;
 		userName  = "diamondburned";
-		userEmail = "diamond@arikawa-hi.me";
+		userEmail = "diamond@libdb.so";
 		signing = {
 			key = "D78C4471CE776659";
 			signByDefault = true;
