@@ -45,8 +45,8 @@
       "store_hash": "3m7irgp3q80ipf9igf9jpdcxmcrr2q57"
     },
     "github:tpwrules/nixos-apple-silicon main": {
-      "url": "https://github.com/tpwrules/nixos-apple-silicon/archive/14b327ca47703c376ebb82ba16dc42ca2baa57d8.tar.gz",
-      "store_hash": "s27wbld2jq55388d4v2qbaa99x9qsfb1"
+      "url": "https://github.com/tpwrules/nixos-apple-silicon/archive/6e324ab06cb27a19409ebc1dc2664bf1e585490a.tar.gz",
+      "store_hash": "mnlflb1nkkvq3gpvbnn035wrf87pdb9p"
     }
   }
 }
