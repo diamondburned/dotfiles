@@ -12,7 +12,7 @@ let
 		};
 
 		src =
-			if (builtins.pathExists /home/diamond/Scripts/gotk4/gtkcord4) then
+			if (false && builtins.pathExists /home/diamond/Scripts/gotk4/gtkcord4) then
 				/home/diamond/Scripts/gotk4/gtkcord4
 			else pkgs.fetchFromGitHub {
 				owner  = "diamondburned";
