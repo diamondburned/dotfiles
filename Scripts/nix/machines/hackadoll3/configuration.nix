@@ -482,6 +482,7 @@ in {
 			<dotfiles/cfg/hm-blackbox-terminal.nix>
 			<dotfiles/cfg/hm-gnome-terminal.nix>
 			<dotfiles/cfg/hm-alacritty.nix>
+			<dotfiles/cfg/git/home.nix>
 			<dotfiles/cfg/gtk/home.nix>
 			<dotfiles/cfg/nvim/home.nix>
 			<dotfiles/cfg/gnome/home.nix>
@@ -505,36 +506,6 @@ in {
 			enable = true;
 			config = { load_dotenv = false; };
 			nix-direnv.enable = true;
-		};
-
-		programs.git = {
-			enable = true;
-			userName  = "diamondburned";
-			userEmail = "diamond@arikawa-hi.me";
-			signing = {
-				key = "D78C4471CE776659";
-				signByDefault = true;
-			};
-			lfs.enable = true;
-			extraConfig = {
-				http = {
-					cookieFile = "/home/diamond/.gitcookies";
-				};
-				core = {
-					excludesfile = "${pkgs.writeText "gitignore" (
-						builtins.concatStringsSep "\n" [
-							".envrc"
-							".direnv"
-						]
-					)}";
-				};
-				url = {
-					"ssh://git@github.com/" = { insteadOf = "https://github.com/"; };
-					"ssh://git@gitlab.com/" = { insteadOf = "https://gitlab.com/"; };
-				};
-				pull.rebase = true;
-				push.autoSetupRemote = true;
-			};
 		};
 
 		programs.bash = {
