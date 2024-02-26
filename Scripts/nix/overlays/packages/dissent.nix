@@ -3,13 +3,6 @@
 let
 	dissent = rec {
 		version = "0.0.15";
-		hashes = {
-			src = "${lib.fakeSha256}";
-			bin = {
-				arm64 = "sha256-KBHCQWNh48OVi2UqW3L5Icqb2ctC+dzezH0w8a2T6jY=";
-				amd64 = "sha256-0QV8ebVMtv4EKsbzbRLXKy1E7CYNGW3mHFguyQN33vo=";
-			};
-		};
 
 		src =
 			if (false && builtins.pathExists /home/diamond/Scripts/gotk4/dissent) then
@@ -53,7 +46,7 @@ in pkgs.stdenv.mkDerivation {
 	sourceRoot = ".";
 
 	buildPhase = with dissent.base; ''
-		install -Dm755 "$src/${pname}" "$out/bin/${pname}"
+		# install -Dm755 "$src/${pname}" "$out/bin/${pname}"
 		mkdir -p \
 			$out/share/dbus-1/services \
 			$out/share/applications \
