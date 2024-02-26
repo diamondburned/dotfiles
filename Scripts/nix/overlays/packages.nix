@@ -11,12 +11,12 @@ self: super: {
 	vkmark   = super.callPackage ./packages/vkmark {};
 	aqours   = super.callPackage ./packages/aqours {};
 	ghproxy  = super.callPackage ./packages/ghproxy {};
+	dissent = super.callPackage ./packages/dissent.nix {};
 	openmoji = super.callPackage ./packages/openmoji {};
 	blobmoji = super.callPackage ./packages/blobmoji {};
 	drone-ci = super.callPackage ./packages/drone-ci {};
 	gappdash = super.callPackage ./packages/gappdash {};
 	gotktrix = super.callPackage ./packages/gotktrix.nix {};
-	gtkcord4 = super.callPackage ./packages/gtkcord4.nix {};
 	osu-wine = super.callPackage ./packages/osu-wine {};
 	osu-wineprefix = super.callPackage ./packages/osu-wineprefix {};
 	neovim-gtk = super.callPackage ./packages/neovim-gtk {

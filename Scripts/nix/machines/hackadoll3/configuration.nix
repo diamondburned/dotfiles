@@ -713,7 +713,7 @@ in {
 			# # Chat/Social
 			# # zoom-us
 			# discord
-			# gtkcord4
+			dissent
 			vesktop
 			# (pkgs.callPackage <unstable/pkgs/by-name/ve/vesktop/package.nix> {})
 			# gotktrix
