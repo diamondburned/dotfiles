@@ -12,7 +12,6 @@ Plug 'plasticboy/vim-markdown'
 Plug 'godlygeek/tabular'
 Plug 'bogado/file-line'
 Plug 'rhysd/conflict-marker.vim'
-Plug 'gpanders/editorconfig.nvim'
 Plug 'folke/todo-comments.nvim'
 Plug 'luochen1990/rainbow'
 Plug 'ojroques/nvim-osc52'
@@ -728,3 +727,6 @@ au BufRead,BufNewFile *.postcss set filetype=postcss
 " 		\ 'allowlist': ['blueprint'],
 " 		\ })
 " endif
+
+"Use editorconfig"
+let g:editorconfig = v:true
