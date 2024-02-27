@@ -24,4 +24,31 @@
 		noto-fonts-cjk
 		noto-fonts-emoji
 	];
+
+	fonts.fontconfig.defaultFonts = {
+		serif = [
+			"serif"
+			"Noto Serif"
+		];
+		sansSerif = [
+			"sans-serif"
+			"Open Sans"
+			"Source Sans 3"
+			"Source Sans Pro"
+			"Noto Sans"
+		];
+		monospace = [
+			"Inconsolata"
+			"Symbols Nerd Font"
+			"Source Code Pro"
+			"Noto	Sans Mono"
+			"emoji"
+			"symbol"
+			"Unifont"
+			"Unifont Upper"
+		];
+		emoji = [
+			"Noto Color Emoji"
+		];
+	};
 }

@@ -71,6 +71,7 @@ in {
 		<dotfiles/secrets>
 		<dotfiles/cfg/udev>
 		<dotfiles/cfg/nokbd>
+		<dotfiles/cfg/fonts>
 		# <dotfiles/cfg/wayfire>
 		<dotfiles/cfg/localhost>
 		<dotfiles/cfg/keyd>
@@ -276,54 +277,6 @@ in {
 		keyd
 	];
 
-	# Install global fonts
-	fonts.packages = (with pkgs; [
-		bakoma_ttf # math
-		# opensans-ttf
-		roboto
-		roboto-slab # serif
-		source-code-pro
-		source-sans-pro
-		source-serif-pro
-		fira-code
-		# nerdfonts
-		inconsolata-nerdfont
-		material-design-icons
-		inconsolata
-		comic-neue
-		tewi-font
-		unifont
-	]) ++ (with pkgs.nixpkgs_unstable_real; [
-		noto-fonts
-		noto-fonts-cjk
-		noto-fonts-emoji
-	]);
-	fonts.fontconfig.defaultFonts = {
-		serif = [
-			"serif"
-			"Noto Serif"
-		];
-		sansSerif = [
-			"sans-serif"
-			"Open Sans"
-			"Source Sans 3"
-			"Source Sans Pro"
-			"Noto Sans"
-		];
-		monospace = [
-			"Inconsolata"
-			"Symbols Nerd Font"
-			"Source Code Pro"
-			"Noto	Sans Mono"
-			"emoji"
-			"symbol"
-			"Unifont"
-			"Unifont Upper"
-		];
-		emoji = [
-			"Noto Color Emoji"
-		];
-	};
 	# Some programs need SUID wrappers, can be configured further or are
 	# started in user sessions.
 	programs.mtr.enable = true;
@@ -486,6 +439,7 @@ in {
 			<dotfiles/cfg/gtk/home.nix>
 			<dotfiles/cfg/nvim/home.nix>
 			<dotfiles/cfg/gnome/home.nix>
+			<dotfiles/cfg/fonts/home.nix>
 			<dotfiles/cfg/zellij/home.nix>
 			<dotfiles/cfg/dol-server/home.nix>
 
