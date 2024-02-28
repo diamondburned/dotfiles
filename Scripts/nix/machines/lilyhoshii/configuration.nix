@@ -10,13 +10,12 @@
 		<home-manager/nixos>
 		<nixos-apple-silicon/apple-silicon-support>
 		./base/configuration.nix
-		./cfg/speakers
+		# ./cfg/speakers
 		./cfg/virtualization.nix
 		./cfg/displaylink.nix
 		./home.nix
 	];
 
-  hardware.asahi.addEdgeKernelConfig = lib.mkForce true;
   hardware.asahi.useExperimentalGPUDriver = lib.mkForce true;
 
 	systemd.services.mount-asahi = {

@@ -37,7 +37,7 @@
     desktopManager.gnome.enable = true;
   };
 
-  environment.gnome.excludePackages = with pkgs; with pkgs.gnome; [
+  environment.gnome.excludePackages = with pkgs.gnome; with pkgs; [
     cheese
     gnome-music
     gnome-tour
