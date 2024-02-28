@@ -48,7 +48,8 @@
 			};
 		};
 
-		services.easyeffects.enable = true;
+		# Breaks speakers.
+		# services.easyeffects.enable = true;
 
 		home.packages = with pkgs; [
 			celluloid

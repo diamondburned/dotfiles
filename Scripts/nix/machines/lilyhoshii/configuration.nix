@@ -122,6 +122,9 @@
 		};
 	};
 
+	# Disable power-profiles-daemon in favor of auto-cpufreq.
+	services.power-profiles-daemon.enable = false;
+
 	# Note: the displaylink module breaks suspend.
 	# We don't have it enabled right now.
 	services.logind.lidSwitch = "suspend";

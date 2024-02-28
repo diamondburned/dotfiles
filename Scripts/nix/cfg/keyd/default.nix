@@ -14,7 +14,17 @@ let
 in
 
 {
-	environment.etc = etcFiles; # builtins.trace (builtins.toJSON etcFiles) etcFiles;
+	# builtins.trace (builtins.toJSON etcFiles) etcFiles;
+	environment.etc = etcFiles // {
+		# Fix disable while typing when using keyd.
+		# See https://github.com/rvaiya/keyd/issues/66.
+		"libinput/local-overrides.quirks".text = ''
+			[keyd]
+			MatchUdevType=keyboard
+			MatchVendor=0xFAC
+			AttrKeyboardIntegration=internal
+		'';
+	};
 
 	systemd.services.keyd = {
 		enable = true;
