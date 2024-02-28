@@ -65,7 +65,7 @@
 			go
 			gopls
 			gotab
-			gtkcord4
+			dissent
 			jq
 			htop
 			dnsutils

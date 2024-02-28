@@ -5,7 +5,7 @@ let
 		version = "0.0.15";
 
 		src =
-			if (false && builtins.pathExists /home/diamond/Scripts/gotk4/dissent) then
+			if (builtins.pathExists /home/diamond/Scripts/gotk4/dissent) then
 				/home/diamond/Scripts/gotk4/dissent
 			else pkgs.fetchFromGitHub {
 				owner  = "diamondburned";
@@ -46,7 +46,7 @@ in pkgs.stdenv.mkDerivation {
 	sourceRoot = ".";
 
 	buildPhase = with dissent.base; ''
-		# install -Dm755 "$src/${pname}" "$out/bin/${pname}"
+		install -Dm755 "$src/${pname}" "$out/bin/${pname}"
 		mkdir -p \
 			$out/share/dbus-1/services \
 			$out/share/applications \
