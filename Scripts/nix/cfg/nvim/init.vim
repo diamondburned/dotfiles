@@ -53,6 +53,7 @@ Plug 'ray-x/lsp_signature.nvim'
 "Autocompletion with Copilot"
 " Plug 'github/copilot.vim'
 Plug 'zbirenbaum/copilot.lua'
+Plug 'zbirenbaum/copilot-cmp'
 
 "Autocompletion with Sourcegraph's Cody
 " Plug 'sourcegraph/sg.nvim', { 'do': 'nvim -l build/init.lua' }
@@ -253,7 +254,7 @@ hi Function    ctermfg=14 guifg=#55CDFC
 hi Statement   ctermfg=6  guifg=#00B5FC
 hi Operator    ctermfg=12 guifg=#779ECB
 
-hi LspGhostText ctermfg=8 guifg=#3E3E3E
+hi LspGhostText ctermfg=8 guifg=#646464
 
 hi Type ctermfg=2 guifg=#3DCCB2
 
@@ -659,7 +660,7 @@ let g:ale_linters = {
 			\ }
 
 "Make goimports not search for imports, since it's so slowwwww"
-call ale#Set('go_goimports_options', '--format-only')
+" call ale#Set('go_goimports_options', '--format-only')
 
 "Add :TidyGoMod command"
 command! TidyGoMod execute '!go mod tidy' | LspRestart

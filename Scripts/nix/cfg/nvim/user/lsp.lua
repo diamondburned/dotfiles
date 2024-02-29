@@ -6,8 +6,28 @@ local cmptypes = require("cmp.types")
 local cmp_nvim_lsp = require("cmp_nvim_lsp")
 local snippy = require("snippy")
 local copilot = require("copilot")
+local copilot_cmp = require("copilot_cmp")
 
--- local copilot_suggestion = require("copilot.suggestion")
+-- Set up Copilot.
+copilot.setup({
+	panel = {
+		enabled = false,
+	},
+	suggestion = {
+		enabled = false,
+	},
+	filetypes = {
+		sh = function ()
+			-- disable for .env files
+			if string.match(vim.fs.basename(vim.api.nvim_buf_get_name(0)), '^%.env.*') then
+				return false
+			end
+			return true
+		end,
+		["*"] = true,
+	},
+})
+copilot_cmp.setup()
 
 -- I might be the only person in this planet who has a sane LSP configuration
 -- for Neovim, bruh. ALE has this behavior, vim-lsp has this behavior, so why
@@ -58,11 +78,23 @@ local lsp_local_mappings = {
 
 -- This table contains all autocompletion sources.
 local cmp_sources = {
-	{name = "cody", keyword_length = 0},
+	-- {name = "cody", keyword_length = 0},
+	{name = "copilot", keyword_length = 0},
 	"nvim_lsp",
 	"snippy",
 	"path",
 }
+
+-- This function returns true if the cursor is before a word.
+-- Using this function, Tab will fallback to indenting unless a non-whitespace
+-- character has actually been typed.
+local has_words_before = function()
+	if vim.api.nvim_buf_get_option(0, "buftype") == "prompt" then
+		return false
+	end
+	local line, col = unpack(vim.api.nvim_win_get_cursor(0))
+	return col ~= 0 and vim.api.nvim_buf_get_text(0, line-1, 0, line-1, col, {})[1]:match("^%s*$") == nil
+end
 
 local cmp_opts = {
 	enabled = function()
@@ -104,15 +136,16 @@ local cmp_opts = {
 		-- Ignore Tab.
 		-- TODO: find the right way to do this
 
-		-- ["<Tab>"] = cmp.mapping(function(fallback)
-		-- 	if copilot_suggestion.is_visible() then
-		-- 		copilot_suggestion.accept()
-		-- 	elseif snippy.can_expand_or_advance() then
-		-- 		snippy.expand_or_advance()
-		-- 	else
-		-- 		fallback()
-		-- 	end
-		-- end, {"i", "s"}),
+		["<Tab>"] = cmp.mapping(function(fallback)
+			if cmp.visible() and has_words_before() then
+				cmp.confirm({
+					select = true,
+					behavior = cmp.ConfirmBehavior.Replace,
+				})
+			else
+				fallback()
+			end
+		end, {"i", "s"}),
 		["<CR>"] = cmp.mapping({
 			i = function(fallback)
 				if cmp.visible() and cmp.get_selected_entry() then
@@ -135,7 +168,7 @@ local cmp_opts = {
 		["<C-a>"] = cmp.mapping.complete {
 			config = {
 				sources = {
-					{ name = "cody" },
+					{ name = "copilot" },
 				}
 			}
 		},
@@ -228,9 +261,6 @@ lsp_inlayhints.setup({})
 -- Set up Cody.
 -- 
 -- sg.setup()
-
--- Set up Copilot.
-copilot.setup()
 
 local cmp_sources_2 = {}
 for _, source in ipairs(cmp_sources) do

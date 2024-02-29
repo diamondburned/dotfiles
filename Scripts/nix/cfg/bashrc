@@ -307,6 +307,17 @@ alias gagm="git add -A && gm"
 
 alias gamend="git commit --amend"
 
+last-commit() (
+	cd "$1" || return 1
+	git log --pretty=oneline | cut -f1 -d' ' | head -n1
+)
+
+copy-last-commit() {
+	last_commit=$(last-commit "$1") || return 1
+	echo -n "$last_commit" | wl-copy
+	echo "Copied $last_commit to clipboard."
+}
+
 # Get go completion if missing.
 command -v gotab &> /dev/null || {
 	(
