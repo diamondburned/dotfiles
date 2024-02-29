@@ -16,6 +16,8 @@ require("colorizer").setup({
 	},
 })
 
+require("sg").setup()
+
 -- if vim.g.neovide then
 -- 	-- Only a GUI client like Neovide can do this.
 -- 	require("shade").setup({ overlay_opacity = 60 })

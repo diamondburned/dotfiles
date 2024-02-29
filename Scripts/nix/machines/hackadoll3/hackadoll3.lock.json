@@ -80,6 +80,10 @@
       "url": "https://github.com/diamondburned/nixpkgs/archive/3e9725a365e.tar.gz",
       "store_hash": "1pmc1ipjzxc98r81k10wvbgar0xpqdzc"
     },
+    "github:edolstra/flake-compat 0f9255e01c2": {
+      "url": "https://github.com/edolstra/flake-compat/archive/0f9255e01c2.tar.gz",
+      "store_hash": "726glnx4r8d5kf0gqagn4c936p8b2k7f"
+    },
     "github:foo-dogsquared/nixpkgs add-gradience-app": {
       "url": "https://github.com/foo-dogsquared/nixpkgs/archive/97ebba6f1a7151a7a5b7b020e2d5f83f6fce0d93.tar.gz",
       "store_hash": "82zymdgmkg8mdq9msj118y4ppndmzvag"
@@ -130,7 +134,7 @@
     },
     "https://nixos.org/channels/nixos-unstable": {
       "url": "https://nixos.org/channels/nixos-unstable",
-      "store_hash": "6k6jman6a39x9kgpxc7r4bvqaik2zzqj"
+      "store_hash": "mwbix4ma8ybay70nbqzsf9zzadak0j9c"
     }
   }
 }
