@@ -652,6 +652,9 @@ let g:ale_linters = {
 			\ 'typescript': [ "deno", "tsserver", "deno", "standard" ],
 			\ }
 
+"Make goimports not search for imports, since it's so slowwwww"
+call ale#Set('go_goimports_options', '--format-only')
+
 "Add :TidyGoMod command"
 command! TidyGoMod execute '!go mod tidy' | LspRestart
 
