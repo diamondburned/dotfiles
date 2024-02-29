@@ -52,9 +52,10 @@ Plug 'ray-x/lsp_signature.nvim'
 
 "Autocompletion with Copilot"
 " Plug 'github/copilot.vim'
+Plug 'zbirenbaum/copilot.lua'
 
 "Autocompletion with Sourcegraph's Cody
-Plug 'sourcegraph/sg.nvim', { 'do': 'nvim -l build/init.lua' }
+" Plug 'sourcegraph/sg.nvim', { 'do': 'nvim -l build/init.lua' }
 
 "Copilot.lua is unironically very bad, so we're just not going to use it."
 " Plug 'zbirenbaum/copilot.lua'
@@ -251,6 +252,8 @@ hi Identifier  ctermfg=15 guifg=#EEEEEC
 hi Function    ctermfg=14 guifg=#55CDFC
 hi Statement   ctermfg=6  guifg=#00B5FC
 hi Operator    ctermfg=12 guifg=#779ECB
+
+hi LspGhostText ctermfg=8 guifg=#3E3E3E
 
 hi Type ctermfg=2 guifg=#3DCCB2
 

@@ -5,7 +5,7 @@ local cmp = require("cmp")
 local cmptypes = require("cmp.types")
 local cmp_nvim_lsp = require("cmp_nvim_lsp")
 local snippy = require("snippy")
-local sg = require("sg")
+local copilot = require("copilot")
 
 -- local copilot_suggestion = require("copilot.suggestion")
 
@@ -68,10 +68,12 @@ local cmp_opts = {
 	enabled = function()
 		return true
 	end,
-	autocomplete = {
-		cmptypes.cmp.TriggerEvent.TextChanged,
-		cmptypes.cmp.TriggerEvent.InsertEnter,
-	}
+	completion = {
+		autocomplete = {
+			cmptypes.cmp.TriggerEvent.TextChanged,
+			cmptypes.cmp.TriggerEvent.InsertEnter,
+		},
+	},
 	-- view = {
 	-- 	entries = "native",
 	-- },
@@ -96,7 +98,7 @@ local cmp_opts = {
 		end,
 	},
 	experimental = {
-		ghost_text = true,
+		ghost_text = { hl_group = "LspGhostText" },
 	},
 	mapping = cmp.mapping.preset.insert({
 		-- Ignore Tab.
@@ -224,6 +226,11 @@ lsp_signature.setup({
 lsp_inlayhints.setup({})
 
 -- Set up Cody.
+-- 
+-- sg.setup()
+
+-- Set up Copilot.
+copilot.setup()
 
 local cmp_sources_2 = {}
 for _, source in ipairs(cmp_sources) do
