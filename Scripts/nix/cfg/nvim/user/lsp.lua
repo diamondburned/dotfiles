@@ -2,8 +2,11 @@ local lspconfig = require("lspconfig")
 local lsp_signature = require("lsp_signature")
 local lsp_inlayhints = require("lsp-inlayhints")
 local cmp = require("cmp")
+local cmptypes = require("cmp.types")
 local cmp_nvim_lsp = require("cmp_nvim_lsp")
 local snippy = require("snippy")
+local sg = require("sg")
+
 -- local copilot_suggestion = require("copilot.suggestion")
 
 -- I might be the only person in this planet who has a sane LSP configuration
@@ -55,12 +58,20 @@ local lsp_local_mappings = {
 
 -- This table contains all autocompletion sources.
 local cmp_sources = {
+	{name = "cody", keyword_length = 0},
 	"nvim_lsp",
 	"snippy",
 	"path",
 }
 
 local cmp_opts = {
+	enabled = function()
+		return true
+	end,
+	autocomplete = {
+		cmptypes.cmp.TriggerEvent.TextChanged,
+		cmptypes.cmp.TriggerEvent.InsertEnter,
+	}
 	-- view = {
 	-- 	entries = "native",
 	-- },
@@ -83,6 +94,9 @@ local cmp_opts = {
 		expand = function(args)
 			snippy.expand_snippet(args.body)
 		end,
+	},
+	experimental = {
+		ghost_text = true,
 	},
 	mapping = cmp.mapping.preset.insert({
 		-- Ignore Tab.
@@ -116,6 +130,13 @@ local cmp_opts = {
 				behavior = cmp.ConfirmBehavior.Replace,
 			}),
 		}),
+		["<C-a>"] = cmp.mapping.complete {
+			config = {
+				sources = {
+					{ name = "cody" },
+				}
+			}
+		},
 	}),
 }
 
@@ -202,9 +223,15 @@ lsp_signature.setup({
 -- Set up inlay hints.
 lsp_inlayhints.setup({})
 
+-- Set up Cody.
+
 local cmp_sources_2 = {}
 for _, source in ipairs(cmp_sources) do
-	table.insert(cmp_sources_2, { name = source })
+	if type(source) == "string" then
+		table.insert(cmp_sources_2, { name = source })
+	else
+		table.insert(cmp_sources_2, source)
+	end
 end
 cmp_opts.sources = cmp.config.sources(cmp_sources_2)
 cmp.setup(cmp_opts)
