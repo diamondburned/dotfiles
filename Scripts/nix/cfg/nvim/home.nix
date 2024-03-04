@@ -11,7 +11,7 @@ let
 				};
 				aarch64-linux = pkgs.fetchzip {
 					url = "https://github.com/sourcegraph/sg.nvim/releases/download/v1.0.8/sg-aarch64-unknown-linux-gnu.tar.xz";
-					sha256 = "";
+					sha256 = "sha256-YMqvPqh7QqvGEGdNQGU1u1T6lrcfb1Z7rPfJOZ5QQMo=";
 				};
 			};
 			nativeBinary = pkgs.autoPatchelf {
@@ -50,6 +50,6 @@ in
 
 	home.packages = with pkgs; [
 		neovide
-		sg_nvim
+		# sg_nvim
 	];
 }

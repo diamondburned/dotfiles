@@ -34,11 +34,7 @@
 		config = {
 			allowUnfree = true;
 		};
-		overlays = [
-			(import <dotfiles/overlays/overrides.nix>)
-			(import <dotfiles/overlays/overrides-all.nix>)
-			(import <dotfiles/overlays/packages.nix>)
-		];
+		overlays = import ./overlays.nix;
 	};
 
 	programs.dconf.enable = true;

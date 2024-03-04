@@ -15,7 +15,12 @@
 			./cfg/firefox/home.nix
 		];
 
-		nixpkgs.config.allowUnfree = true;
+		nixpkgs = {
+			config = {
+				allowUnfree = true;
+			};
+			overlays = import ./overlays.nix;
+		};
 
 		programs.direnv = {
 			enable = true;

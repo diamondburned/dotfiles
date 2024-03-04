@@ -36,4 +36,8 @@
 			pager.difftool = true;
 		};
 	};
+
+	home.packages = with pkgs; [
+		github-cli
+	];
 }

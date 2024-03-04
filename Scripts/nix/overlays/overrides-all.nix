@@ -7,7 +7,7 @@ in
 {
 	gnvim = super.callPackage ./packages/gnvim { };
 
-    autoPatchelf =
+  autoPatchelf =
 		{ pkg, buildInputs ? [] }:
 
 		super.stdenv.mkDerivation {
