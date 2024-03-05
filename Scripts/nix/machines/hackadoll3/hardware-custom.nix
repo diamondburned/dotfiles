@@ -106,7 +106,8 @@ in {
 	boot.kernelModules = [
 		"v4l2loopback"
 		"i2c-dev"
-		# "ddcci-driver"
+		"8852au"
+		"ddcci-driver"
 	];
 
 	boot.extraModulePackages =
@@ -114,8 +115,19 @@ in {
 		with config.boot.kernelPackages;
 		[
 			rtl8188gu
+			rtl8852au
 			ddcci-driver
+
+			# (config.boot.kernelPackages.callPackage
+			# 	(pkgs.fetchurl {
+			# 		url = "https://github.com/NixOS/nixpkgs/blob/21d7f272cd2263f69eae26220d07e37d30e4c6e3/pkgs/os-specific/linux/rtl8852au/default.nix";
+			# 		sha256 = "1m28cdfs2qy3qaa1pjy0bn91is3g91qiji0ycflr8vkhvkwks361";
+			# 	})
+			# 	{ })
 		];
+
+	# Prevent the wrong Realtek driver from loading.
+	boot.blacklistedKernelModules = [ "rtl8xxxu" ];
 
 	# Refer to unstable.nix.
 	# boot.kernelPackages = pkgs.nixpkgs_unstable.linuxKernel.packages.linux_xanmod_latest;

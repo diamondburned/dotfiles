@@ -1,18 +1,19 @@
+{ pname, version, sha256 }:
+
 { stdenv, lib, fetchFromGitHub, kernel, bc }:
 
 let
 	modDestDir = "$out/lib/modules/${kernel.modDirVersion}/kernel/drivers/net/wireless/realtek/rtl8188gu";
 in
 
-stdenv.mkDerivation rec {
-	pname = "rtl8188gu";
-	version = "699d0ccedf2e26c3f8fcca36cca45029585aa746";
+stdenv.mkDerivation {
+	inherit pname version;
 
 	src = fetchFromGitHub {
 		owner = "lwfinger";
-		repo = "rtl8188gu";
+		repo = pname;
 		rev = version;
-		sha256 = "sha256-bcFGhtSQMX2M9h2zLSzoRT1UXYxiSH0WGLtC/JuPKTM=";
+		inherit sha256;
 	};
 
 	hardeningDisable = [ "pic" ];
@@ -22,8 +23,9 @@ stdenv.mkDerivation rec {
 	enableParallelBuilding = true;
 
 	makeFlags = [
+		"ARCH=${stdenv.hostPlatform.linuxArch}"
 		"KVER=${kernel.modDirVersion}"
-		"KSRC=${kernel.dev}"
+		"KSRC=${kernel.dev}/lib/modules/${kernel.modDirVersion}/build"
 		"MODDESTDIR=${modDestDir}"
 	];
 
@@ -34,7 +36,6 @@ stdenv.mkDerivation rec {
 	'';
 
 	meta = with lib; {
-		description = "Realtek RTL8188GU driver";
 		platforms = platforms.linux;
 	};
 }

@@ -10,6 +10,6 @@
 		./packages/caddyv1/caddy.nix
 		./packages/ghproxy/ghproxy.nix
 		./packages/drone-ci/drone-ci.nix
-		./packages/rtl8188gu/rtl8188gu.nix
+		./packages/realtek/realtek.nix
 	];
 }
