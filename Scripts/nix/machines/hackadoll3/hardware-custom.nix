@@ -10,18 +10,6 @@ let utils = import <dotfiles/utils> { inherit lib; };
 	# 	rev = "79a35253e6d81b840c3d9db8f3b0095e8a449b81";
 	# };
 
-	rtl8188gu = config.boot.kernelPackages.rtl88x2bu.overrideAttrs (old: {
-		pname = "rtl8188gu";
-		version = "bb3292d";
-
-		src = pkgs.fetchFromGitHub {
-			owner  = "McMCCRU";
-			repo   = "rtl8188gu";
-			rev    = "bb3292d";
-			sha256 = "1d7giqxpvzks97r1hixl50mxd05sxy5fja8i6jjxlkd4g2zvq6wb";
-		};
-	});
-
 	wl-grab = device: mode:
 		let pkg = pkgs.writeShellApplication {
 			name = "wl-grab";
@@ -121,26 +109,13 @@ in {
 		# "ddcci-driver"
 	];
 
-	boot.extraModulePackages = with config.boot.kernelPackages; [
-		# Add the camera loopback drivers.
-		# v4l2loopback
-		# Add DDC/CI backlight control.
-		# ddcci-driver
-
-		# Realtek driver builds itself on latest kernel challenge impossible.
-		# rtl8188gu
-
-		# Driver for the TP-Link Archer T3U.
-		# (rtl88x2bu.overrideAttrs (old: {
-		# 	src = pkgs.fetchFromGitHub {
-		# 		owner  = "RinCat";
-		# 		repo   = "RTL88x2BU-Linux-Driver";
-		# 		rev    = "657b7cfde9958e273febdeaeac579902e407f577";
-		# 		sha256 = "15gkgwp2ghg1wdp8n04a047kd8kp73y566fdc254dgxbk3ggz4xa";
-		# 	};
-		# 	patches = [];
-		# }))
-	];
+	boot.extraModulePackages =
+		with pkgs;
+		with config.boot.kernelPackages;
+		[
+			rtl8188gu
+			ddcci-driver
+		];
 
 	# Refer to unstable.nix.
 	# boot.kernelPackages = pkgs.nixpkgs_unstable.linuxKernel.packages.linux_xanmod_latest;
