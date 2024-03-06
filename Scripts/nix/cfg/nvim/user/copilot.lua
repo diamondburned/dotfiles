@@ -1,28 +1,18 @@
 local copilot = require("copilot")
 
 copilot.setup({
-	suggestion = {
-		enabled = true,
-		auto_trigger = true,
-		keymap = {
-			accept = false, -- handled in lsp.lua
-			accept_word = false,
-			accept_line = false,
-		},
-	},
 	panel = {
-		enabled = true,
-		auto_refresh = true,
+		enabled = false,
+	},
+	suggestion = {
+		enabled = false,
 	},
 	filetypes = {
-		yaml = true,
-		markdown = true,
-		gitcommit = true,
-		gitrebase = true,
-		sh = function()
+		sh = function ()
 			-- Disable for .env files
 			return not string.match(vim.fs.basename(vim.api.nvim_buf_get_name(0)), '^%.env.*')
 		end,
+		["*"] = true,
 	},
 })
 

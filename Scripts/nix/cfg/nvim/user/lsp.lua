@@ -8,27 +8,6 @@ local snippy = require("snippy")
 local copilot = require("copilot")
 local copilot_cmp = require("copilot_cmp")
 
--- Set up Copilot.
-copilot.setup({
-	panel = {
-		enabled = false,
-	},
-	suggestion = {
-		enabled = false,
-	},
-	filetypes = {
-		sh = function ()
-			-- disable for .env files
-			if string.match(vim.fs.basename(vim.api.nvim_buf_get_name(0)), '^%.env.*') then
-				return false
-			end
-			return true
-		end,
-		["*"] = true,
-	},
-})
-copilot_cmp.setup()
-
 -- I might be the only person in this planet who has a sane LSP configuration
 -- for Neovim, bruh. ALE has this behavior, vim-lsp has this behavior, so why
 -- can't nvim-lsp have this behavior? Why is every stock config a dance of
@@ -261,6 +240,9 @@ lsp_inlayhints.setup({})
 -- Set up Cody.
 -- 
 -- sg.setup()
+
+-- Set up Copilot.
+copilot_cmp.setup()
 
 local cmp_sources_2 = {}
 for _, source in ipairs(cmp_sources) do
