@@ -431,6 +431,7 @@ in {
 			<dotfiles/overlays/home-manager>
 			<dotfiles/secrets/diamond>
 			<dotfiles/cfg/firefox>
+			<dotfiles/cfg/chromium/home.nix>
 			<dotfiles/cfg/wayfire/home.nix>
 			<dotfiles/cfg/hm-blackbox-terminal.nix>
 			<dotfiles/cfg/hm-gnome-terminal.nix>
@@ -660,7 +661,7 @@ in {
 			lollypop
 			komikku
 			# ytmdesktop # not until v2 is ready
-			(youtube-music.override { electron_25 = electron; })
+			youtube-music
 			monophony
 			spotify
 
