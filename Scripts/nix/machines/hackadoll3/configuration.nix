@@ -425,6 +425,18 @@ in {
 		dbPath = "/nix/var/nix/profiles/per-user/root/channels/unstable/programs.sqlite";
 	};
 
+	# Get a newer VTE with SIXEL for ourself.
+	system.replaceRuntimeDependencies = [
+		{
+			original = pkgs.vte-gtk4;
+			replacement = pkgs.callPackage <dotfiles/overlays/packages/vte_0.75.nix> { vte = pkgs.vte-gtk4; };
+		}
+		{
+			original = pkgs.vte;
+			replacement = pkgs.callPackage <dotfiles/overlays/packages/vte_0.75.nix> { vte = pkgs.vte; };
+		}
+	];
+
 	home-manager.users.diamond = {
 		imports = [
 			<dotfiles/overlays>

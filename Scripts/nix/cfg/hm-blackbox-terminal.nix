@@ -1,9 +1,16 @@
 { config, lib, pkgs, ... }:
 
-let withBlackboxTheme = { name, ... }@args: {
-	xdg.enable = true;
-	xdg.dataFile."blackbox/schemes/${lib.toLower name}.json".text = builtins.toJSON args;
-};
+let
+	withBlackboxTheme = { name, ... }@args: {
+		xdg.enable = true;
+		xdg.dataFile."blackbox/schemes/${lib.toLower name}.json".text = builtins.toJSON args;
+	};
+
+	blackbox-terminal = pkgs.blackbox-terminal.override {
+		vte-gtk4 = pkgs.callPackage <dotfiles/overlays/packages/vte_0.75.nix> {
+			vte = pkgs.vte-gtk4;
+		};
+	};
 
 in {
 	imports = [
@@ -23,5 +30,7 @@ in {
 		})
 	];
 
-	home.packages = [ pkgs.nixpkgs_unstable_real.blackbox-terminal ];
+	home.packages = [
+		blackbox-terminal
+	];
 }
