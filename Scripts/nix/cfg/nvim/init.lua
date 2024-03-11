@@ -21,6 +21,7 @@ require("colorizer").setup({
 -- 	require("shade").setup({ overlay_opacity = 60 })
 -- end
 
+require("user.greet")
 require("user.copilot")
 require("user.lsp")
 require("user.cokeline")

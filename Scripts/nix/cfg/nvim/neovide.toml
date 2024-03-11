@@ -1,0 +1,14 @@
+srgb = false
+
+[font]
+size = 15
+width = -1.5
+allow_float_size = true
+
+[font.normal]
+family = "Inconsolata"
+style = "Normal"
+
+[font.features]
+Monospace   = ["+dlig", "+salt"]
+Inconsolata = ["+dlig", "+salt"]

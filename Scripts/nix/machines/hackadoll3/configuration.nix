@@ -443,7 +443,7 @@ in {
 			<dotfiles/overlays/home-manager>
 			<dotfiles/secrets/diamond>
 			<dotfiles/cfg/firefox>
-			<dotfiles/cfg/chromium/home.nix>
+			<dotfiles/cfg/google-chrome/home.nix>
 			<dotfiles/cfg/wayfire/home.nix>
 			<dotfiles/cfg/hm-blackbox-terminal.nix>
 			<dotfiles/cfg/hm-gnome-terminal.nix>
@@ -645,7 +645,7 @@ in {
 			virt-manager
 			xorg.xauth
 			grun
-			neovide
+			# neovide
 			# neovim-gtk
 
 			protonup
@@ -698,7 +698,7 @@ in {
 
 			# Applications
 			gcolor3
-			google-chrome
+			# google-chrome
 
 			# Themes
 			papirus-icon-theme

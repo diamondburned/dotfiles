@@ -19,6 +19,7 @@ Plug 'aymericbeaumet/vim-symlink'
 Plug 'moll/vim-bbye' " optional dependency
 Plug 'sunjon/shade.nvim'
 Plug 'NvChad/nvim-colorizer.lua'
+Plug 'goolord/alpha-nvim'
 
 "Cokeline and its dependencies"
 Plug 'nvim-lua/plenary.nvim'

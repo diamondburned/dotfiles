@@ -24,6 +24,17 @@ let
 			cp -ra --no-preserve=mode $nativeBinary/sg-* $out/bin/
 			chmod +x $out/bin/*
 		'';
+
+	neovideArgs = [ "--size" "900x600" ];
+
+	neovide = pkgs.runCommandLocal "neovide" {}	''
+		mkdir -p $out/bin
+
+		ln -s ${pkgs.neovide}/share $out/share
+		ln -s ${pkgs.writeShellScript "neovide-wrapped" ''
+			exec ${pkgs.neovide}/bin/neovide ${lib.escapeShellArgs neovideArgs} "$@"
+		''} $out/bin/neovide
+	'';
 in
 
 {
@@ -47,10 +58,14 @@ in
 		source = ./user;
 		recursive = true;
 	};
+	xdg.configFile."nvim/arts" = {
+		source = ./arts;
+		recursive = true;
+	};
 
-	home.packages = with pkgs; [
+	home.packages = [
 		neovide
-		# sg_nvim
+		sg_nvim
 	];
 
 	xdg.configFile."neovide/config.toml" = {
