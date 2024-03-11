@@ -179,13 +179,13 @@ endif
 
 "I fucking hate it when Nvim makes things harder than they need to be.
 "See https://github.com/vhakulinen/gnvim/issues/97#issuecomment-536731701.
-function! s:gnvimInit()
-	if get(v:event, "chan") == 1
-		set guifont=Monospace\ 11
-		set linespace=2
-	endif
-endfunction
-autocmd UIEnter * call s:gnvimInit()
+" function! s:gnvimInit()
+" 	if get(v:event, "chan") == 1
+" 		set guifont=Monospace\ 11
+" 		set linespace=2
+" 	endif
+" endfunction
+" autocmd UIEnter * call s:gnvimInit()
 
 "Nvim Tree configs"
 "TODO: move this into user/file-tree.lua"
@@ -300,7 +300,8 @@ if exists('g:GtkGuiLoaded')
 endif
 
 if exists("g:neovide")
-	set guifont=Monospace:h11.5
+	" See neovide.toml
+	" set guifont=Monospace:h11.5
 	set linespace=1
 
 	let g:neovide_padding_top = 10
@@ -310,6 +311,7 @@ if exists("g:neovide")
 	let g:neovide_remember_window_size = v:false
 	let g:neovide_cursor_animation_length = 0
 	let g:neovide_cursor_trail_size = 0
+	let g:neovide_scroll_animation_length = 0.05
 endif
 
 "Autoindentation"

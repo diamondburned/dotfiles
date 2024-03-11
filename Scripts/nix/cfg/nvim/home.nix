@@ -52,4 +52,9 @@ in
 		neovide
 		# sg_nvim
 	];
+
+	xdg.configFile."neovide/config.toml" = {
+		enable = true;
+		source = ./neovide.toml;
+	};
 }
