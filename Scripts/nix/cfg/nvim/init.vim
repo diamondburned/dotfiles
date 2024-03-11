@@ -302,8 +302,9 @@ endif
 
 if exists("g:neovide")
 	" See neovide.toml
-	" set guifont=Monospace:h11.5
+	set guifont=Monospace:h11:w-0.5:#h-full
 	set linespace=1
+
 	set columns=110
 	set lines=35
 
@@ -315,6 +316,7 @@ if exists("g:neovide")
 	let g:neovide_cursor_animation_length = 0
 	let g:neovide_cursor_trail_size = 0
 	let g:neovide_scroll_animation_length = 0.05
+	let g:neovide_floating_shadow = v:false
 endif
 
 "Autoindentation"
