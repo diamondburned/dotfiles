@@ -303,6 +303,8 @@ if exists("g:neovide")
 	" See neovide.toml
 	" set guifont=Monospace:h11.5
 	set linespace=1
+	set columns=110
+	set lines=35
 
 	let g:neovide_padding_top = 10
 	let g:neovide_padding_bottom = 10
