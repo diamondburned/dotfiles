@@ -390,7 +390,7 @@ __lineprompt_set_title() {
 }
 
 __lineprompt_middleware() {
-	__lineprompt_set_title "$THIS_COMMAND : ../$(basename "$PWD")/"
+	__lineprompt_set_title "$THIS_COMMAND : $(basename "$PWD")"
 }
 
 __lineprompt_debug_handler() {
@@ -455,10 +455,10 @@ __lineprompt_main() {
 	# [[ -d "$1" ]] && cd "$1"
 
 	# terminal title
-	[[ "$cmd" == "__lineprompt_main" ]] && __lineprompt_set_title "$PWD" || {
+	[[ "$cmd" == "__lineprompt_main" ]] && __lineprompt_set_title "$(basename "$PWD")" || {
 		[[ "$sig" == 0 ]]                                                  \
-			&& __lineprompt_set_title "Exited $cmd : ../$(basename "$PWD")/" \
-			|| __lineprompt_set_title "Failed with status $sig : $PWD" 
+			&& __lineprompt_set_title "$(basename "$PWD")" \
+			|| __lineprompt_set_title "exit $sig : $(basename "$PWD")"
 	}
 }
 
