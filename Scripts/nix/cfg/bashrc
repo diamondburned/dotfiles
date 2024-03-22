@@ -468,12 +468,13 @@ __lineprompt_cmps() {
 	local sig=0
 
 	for var in "$@"; {
-		local oldvar="__old_$var"
+		local oldvar
+		oldvar="__old_${var}"
 
 		# If this variable is unchanged.
-		[[ "${!var}" == "${!oldvar}" ]] && {
+		if [[ "${!var}" == "${!oldvar}" ]]; then
 			continue
-		}
+		fi
 	
 		# Update the variable if they're changed.
 		printf -v "$oldvar" "%s" "${!var}"
@@ -618,6 +619,31 @@ cd() {
 		return
 	fi
 	pushd "$@" &> /dev/null
+}
+
+at() {
+	if (( $# == 0 )); then
+		echo "Usage: at <time> <command...>" >&2
+		echo "Example: at 12:00 echo 'Hello, world!'" >&2
+	fi
+
+	local now time command
+	printf -v now '%(%s)T'
+
+	time=$(date -d "$1" +%s) || return 1
+	command=("${@:2}")
+
+	offset=$((time - now))
+	if (( offset < 0 )); then
+		echo "Time has already passed." >&2
+		return 1
+	fi
+
+	echo "Sleeping for $offset seconds..." >&2
+	sleep $offset
+
+	echo "Executing command..." >&2
+	"${command[@]}"
 }
 
 echo Welcome
