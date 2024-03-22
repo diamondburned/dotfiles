@@ -426,10 +426,11 @@ hi! GitGutterChangeDelete guibg=NONE ctermbg=NONE guifg=#6c6c6c ctermfg=245
 let g:conflict_marker_begin = '^<<<<<<< .*$'
 let g:conflict_marker_end   = '^>>>>>>> .*$'
 
-highlight ConflictMarkerBegin  ctermbg=28
-highlight ConflictMarkerOurs   ctermbg=22
-highlight ConflictMarkerTheirs ctermbg=23
-highlight ConflictMarkerEnd    ctermbg=30
+highlight ConflictMarkerBegin               guibg=#2f7366
+highlight ConflictMarkerOurs                guibg=#2e5049
+highlight ConflictMarkerTheirs              guibg=#344f69
+highlight ConflictMarkerEnd                 guibg=#2f628e
+highlight ConflictMarkerCommonAncestorsHunk guibg=#754a81
 
 "Line number color to match Limelight"
 highlight LineNr guifg=#6c6c6c ctermfg=242
