@@ -5,12 +5,25 @@ let
 	chromePackage = pkgs.google-chrome;
 
 	google-chrome = pkgs.runCommandLocal "google-chrome-wrapped" {} ''
-		mkdir -p $out/bin
+		mkdir -p $out
 
-		ln -s ${chromePackage}/share $out/share
-		ln -s ${pkgs.writeShellScript "google-chrome-launcher" ''
+		cp --no-preserve=ownership -Rs ${chromePackage}/. $out/
+		chmod -R u+w $out
+
+		${pkgs.tree}/bin/tree $out
+
+		# Wrap the binary.
+		rm $out/bin/google-chrome-stable
+		cp ${pkgs.writeShellScript "google-chrome-launcher" ''
 			exec ${chromePackage}/bin/google-chrome-stable ${lib.escapeShellArgs chromeArgs} "$@"
 		''} $out/bin/google-chrome-stable
+
+		# Patch the .desktop file.
+		sed -e 's|^Exec=.*|Exec='"$out"'|g' \
+			${chromePackage}/share/applications/google-chrome.desktop \
+			> $out/share/applications/google-chrome.desktop
+
+		${pkgs.tree}/bin/tree $out
 	'';
 in
 
