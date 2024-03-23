@@ -19,7 +19,8 @@ let
 		''} $out/bin/google-chrome-stable
 
 		# Patch the .desktop file.
-		sed -e 's|^Exec=.*|Exec='"$out"'|g' \
+		rm $out/share/applications/google-chrome.desktop
+		sed -e 's|^Exec=.*|Exec='"$out"'/bin/google-chrome-stable|g' \
 			${chromePackage}/share/applications/google-chrome.desktop \
 			> $out/share/applications/google-chrome.desktop
 
