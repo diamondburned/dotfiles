@@ -7,6 +7,7 @@
 		extraGSettingsOverrides = ''
 			[org.gnome.desktop.wm.preferences]
 			auto-raise = false
+			focus-new-windows = 'strict'
 		'';
 	};
 
