@@ -8,20 +8,28 @@
 		[ (modulesPath + "/installer/scan/not-detected.nix")
 		];
 
+	boot.initrd.systemd.enable = true;
 	boot.initrd.availableKernelModules = [ "usb_storage" ];
 	boot.initrd.kernelModules = [ "dm-snapshot" ];
 	boot.kernelModules = [ ];
 	boot.extraModulePackages = [ ];
 
-	boot.initrd.luks.devices = {
-		main = {
-			device = "/dev/disk/by-uuid/aae5595b-9597-4259-ac94-be73694d2712";
-			bypassWorkqueues = true;
-			crypttabExtraOpts = {
-				# TODO
+	boot.initrd.luks.devices =
+		let
+			crypttabExtraOpts = [
+				"fido2-device=auto"
+				"cipher=aes-xts-plain:sha256"
+				"rd.luks.options=timeout=0"
+				"rootflags=x-systemd.device-timeout=0"
+			];
+		in
+		{
+			main = {
+				device = "/dev/disk/by-uuid/aae5595b-9597-4259-ac94-be73694d2712";
+				bypassWorkqueues = true;
+				inherit crypttabExtraOpts;
 			};
 		};
-	};
 
 	fileSystems."/" =
 		{ device = "/dev/main/root";

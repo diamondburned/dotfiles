@@ -42,9 +42,31 @@
 
 	programs.fuse.userAllowOther = true;
 
+	# Make the Fn key Ctrl like on a normal keyboard.
+	# The Ctrl key is swapped with the Fn key.
 	boot.extraModprobeConfig = ''
 		options hid-apple swap_fn_leftctrl=1
 	'';
+
+	# Silent boot.
+	boot.consoleLogLevel = 0;
+	boot.initrd.verbose = false;
+	boot.kernelParams = [
+		"quiet"
+		"udev.log_priority=3"
+		"systemd.show_status=auto"
+	];
+
+	# Hide systemd-boot by default.
+	# In case of emergency, hold down the Space key during boot.
+	boot.loader.timeout = 0;
+
+	# OEM-style splash screen.
+	boot.plymouth = {
+		enable = true;
+		theme = "bgrt";
+		font = "${pkgs.inconsolata}/share/fonts/truetype/inconsolata/Inconsolata-Medium.ttf";
+	};
 
 	environment.systemPackages = with pkgs; [
 		nix-search
