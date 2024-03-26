@@ -40,8 +40,6 @@
 	programs.dconf.enable = true;
 	services.dbus.packages = with pkgs; [ dconf ];
 
-	programs.fuse.userAllowOther = true;
-
 	# Make the Fn key Ctrl like on a normal keyboard.
 	# The Ctrl key is swapped with the Fn key.
 	boot.extraModprobeConfig = ''
@@ -53,7 +51,8 @@
 	boot.initrd.verbose = false;
 	boot.kernelParams = [
 		"quiet"
-		"udev.log_priority=3"
+		# "plymouth.debug"
+		"udev.log_level=3"
 		"systemd.show_status=auto"
 	];
 
@@ -62,11 +61,13 @@
 	boot.loader.timeout = 0;
 
 	# OEM-style splash screen.
-	boot.plymouth = {
-		enable = true;
-		theme = "bgrt";
-		font = "${pkgs.inconsolata}/share/fonts/truetype/inconsolata/Inconsolata-Medium.ttf";
-	};
+	# TODO: this doesn't work yet.
+	# boot.plymouth = {
+	# 	enable = true;
+	# 	extraConfig = ''
+	# 		DeviceScale=2
+	# 	'';
+	# };
 
 	environment.systemPackages = with pkgs; [
 		nix-search
