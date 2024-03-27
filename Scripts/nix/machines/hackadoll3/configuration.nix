@@ -74,6 +74,7 @@ in {
 		<dotfiles/cfg/fonts>
 		# <dotfiles/cfg/wayfire>
 		<dotfiles/cfg/localhost>
+		<dotfiles/cfg/networking>
 		<dotfiles/cfg/keyd>
 		<dotfiles/cfg/avahi>
 		<dotfiles/cfg/gps>
@@ -181,31 +182,6 @@ in {
 	boot.loader.efi.canTouchEfiVariables = true;
 
 	networking.hostName = "hackadoll3"; # Define your hostname.
-	networking.networkmanager = {
-		enable = true;
-		dns = "default";
-	};
-	# networking.nameservers = [
-	# 	"1.1.1.1" "1.0.0.1"
-	# ];
-	networking.firewall = {
-		enable = true;
-		checkReversePath = false;
-		allowedTCPPortRanges = [
-			{ from = 1714; to = 1764; } # GSConnect
-		];
-		allowedUDPPortRanges = [
-			{ from = 1714; to = 1764; } # GSConnect;
-		];
-		#                   v  Steam  v
-		allowedTCPPorts = [ 27036 27037 ];
-		allowedUDPPorts = [ 27031 27036 ];
-		# Allow any ports for Tailscale.
-		interfaces.tailscale0 = {
-			allowedTCPPortRanges = [ { from = 0; to = 65535; } ];
-			allowedUDPPortRanges = [ { from = 0; to = 65535; } ];
-		};
-	};
 
 	# This doesn't really work.
 	systemd.services.NetworkManager-wait-online.enable = false;
@@ -214,14 +190,6 @@ in {
 		enable = true;
 		internalInterfaces = [ "ve-+" ];                                                                                            
 	};
-
-	services.tailscale = {
-		enable = true;
-	};
-
-	security.pki.certificateFiles = [
-		<dotfiles/secrets/ssl/otokonoko.local/otokonoko.local+1.pem>
-	];
 
 	i18n = {
 		inputMethod = {
