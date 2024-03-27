@@ -8,27 +8,25 @@ let
 
 	trailingDot = name: if name == "" then "" else "${name}.";
 
+	domains = [
+		"libdb.so"
+		"dia.cat"
+		"diamondx.pet"
+	];
+
 	subdomain = name:
 		with lib;
 		concatStringsSep ", " [
 			"http://${trailingDot name}${hostname}.ts.libdb.so"
-			"http://${trailingDot name}${hostname}.ts.arikawa-hi.me"
-			# "https://${optionalString (name != "") (name + ".")}${hostname}.ts.libdb.so"
-			# "https://${optionalString (name != "") (name + ".")}${hostname}.ts.arikawa-hi.me"
+			"http://${trailingDot name}${hostname}.ts.dia.cat"
+			"http://${trailingDot name}${hostname}.ts.diamondx.pet"
+			"http://${name}"
 		];
 
 	subdomains = subdomains:
 		with lib;
 		with builtins;
 		concatStringsSep ", " (map subdomain subdomains);
-
-	tailscaleTLS =
-		with lib;
-		with builtins;
-		concatStringsSep " " [
-			"${<dotfiles/secrets/ssl/skate-gopher.ts.net>}/${hostname}.skate-gopher.ts.net.crt"
-			"${<dotfiles/secrets/ssl/skate-gopher.ts.net>}/${hostname}.skate-gopher.ts.net.key"
-		];
 
 	bulbremote = pkgs.fetchzip {
 		url = "https://github.com/diamondburned/bulbremote/releases/download/v0.0.3/dist.tar.gz";
@@ -46,6 +44,11 @@ let
 in
 
 {
+	# Permit Caddy to use Tailscale for its certificates.
+	services.tailscale.permitCertUid = "caddy";
+
+	# TODO: set up caddy-tailscale.
+
 	services.diamondburned.caddy = {
 		enable = true;
 		environmentFile = <dotfiles/secrets/caddy.env>;
@@ -63,10 +66,7 @@ in
 					domains {
 						# Specifically put the machine in .ts.libdb.so for Tailscale, as
 						# opposed to .s.libdb.so, which is a direct IP alias.
-						${dynamicSubdomains
-							["libdb.so" "arikawa-hi.me" "diamondx.pet"]
-							["" "test" "dol" "bulb" "esp"]
-						}
+						${dynamicSubdomains domains ["" "test" "dol" "bulb" "esp"]}
 					}
 
 					dynamic_domains
@@ -75,7 +75,6 @@ in
 		'';
 		sites = {
 			${subdomains ["" "test"]} = ''
-				# tls ${tailscaleTLS}
 				respond "Hello from ${hostname}!"
 			'';
 			${subdomains ["dol"]} = ''

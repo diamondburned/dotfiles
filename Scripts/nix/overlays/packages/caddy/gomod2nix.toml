@@ -53,11 +53,11 @@ schema = 3
     version = "v1.0.2"
     hash = "sha256-TQYQ+lZo/TqEA3eucmuQH8IzdxWnSVvU7JKQ2D7j7Ec="
   [mod."github.com/caddyserver/caddy/v2"]
-    version = "v2.7.5"
-    hash = "sha256-9yxApHQf8kIzp7QKflfOULA9xJk/3iNt3zlg8PT8FdU="
+    version = "v2.7.6"
+    hash = "sha256-9teEdXArE1d/H4HYEEBUlI2eCSjSJnitMR+S9vmT4zE="
   [mod."github.com/caddyserver/certmagic"]
-    version = "v0.19.2"
-    hash = "sha256-ruz2oG5E834tMjyL/HdFPaWlNuwBg/fxqVitZX3sQR0="
+    version = "v0.20.0"
+    hash = "sha256-jWizMptX2/wuYPZwnjK9ffCv5/prVMH6EWi6IkdQsEA="
   [mod."github.com/cenkalti/backoff/v4"]
     version = "v4.2.1"
     hash = "sha256-CKogmPe0pCcAdpztzPwr24rLTJZfq8QVZ9AUduwAcoA="
@@ -97,9 +97,6 @@ schema = 3
   [mod."github.com/fxamacker/cbor/v2"]
     version = "v2.5.0"
     hash = "sha256-2rhvuNZjeidDP+Og6Q0u4ROiaPrEOjoI5wCb17XRnOQ="
-  [mod."github.com/go-chi/chi"]
-    version = "v4.1.2+incompatible"
-    hash = "sha256-KpvSwEqRBeUBZae9r7J3sMCpJMqyaKtEn1KKfKTa0O0="
   [mod."github.com/go-chi/chi/v5"]
     version = "v5.0.10"
     hash = "sha256-HBYdF9Sy9CJ0PsiyczfxNvXrFK1Uh0QyBhcnoReoqYY="
@@ -113,8 +110,8 @@ schema = 3
     version = "v0.6.0"
     hash = "sha256-RtIG2qARd5sT10WQ7F3LR8YJhS8exs+KiuUiVf75bWg="
   [mod."github.com/go-logr/logr"]
-    version = "v1.2.4"
-    hash = "sha256-+FhzmqKsAnsra5p8LuxENXJBHSeuWjQG8Tzhpyd/ps4="
+    version = "v1.3.0"
+    hash = "sha256-N8JYtQlwpLWTaCczfhfA/YmHExko0ObPMYVGw8JwbSw="
   [mod."github.com/go-logr/stdr"]
     version = "v1.2.2"
     hash = "sha256-rRweAP7XIb4egtT1f2gkz4sYOu7LDHmcJ5iNsJUd0sE="
@@ -308,11 +305,11 @@ schema = 3
     version = "v0.4.0"
     hash = "sha256-QWIumzmHD94DlNp9G3AQf9QCtF+Kv0pShT1+FH7/I/c="
   [mod."github.com/quic-go/qtls-go1-20"]
-    version = "v0.3.4"
-    hash = "sha256-NsefY+cj2A4w4yN0ka44MU2y/t6FbEXHU88zxMP2gzo="
+    version = "v0.4.1"
+    hash = "sha256-UKr02Kqbsijc9FBbIAiIq1R+eBV4KsJ6baCdd7udORk="
   [mod."github.com/quic-go/quic-go"]
-    version = "v0.39.1"
-    hash = "sha256-pXv1iiJNKi0RgwZ7H14j9kHCpwENx1K4NjNfQxXc/Bc="
+    version = "v0.40.0"
+    hash = "sha256-fqDZPXsIIqqcLNa3KXA4Ethddixob4AaQHMycA/wFHk="
   [mod."github.com/rs/xid"]
     version = "v1.5.0"
     hash = "sha256-u0QLm2YFMJqEjUhpWcLwfoS9lNHUxc2A79MObsqVbVU="
@@ -407,23 +404,23 @@ schema = 3
     version = "v1.20.0"
     hash = "sha256-Wb7YKyPpJO7917QFUatXCqHEFwFxA9SbRlslOVz7xeA="
   [mod."go.opentelemetry.io/otel"]
-    version = "v1.19.0"
-    hash = "sha256-y51fwO/y73QBdwwRnCp+wrvVuWLeqfSnU/I8i4mBK84="
+    version = "v1.21.0"
+    hash = "sha256-MWC1fp41z3w3Y1wlECY12Q7sLeU4PRACZEesWTmDD9E="
   [mod."go.opentelemetry.io/otel/exporters/otlp/otlptrace"]
-    version = "v1.19.0"
-    hash = "sha256-1DNL3JFdOmuAQqSIlhPT1Y2bNlrqeHfi6AXn4q+uEeA="
+    version = "v1.21.0"
+    hash = "sha256-eljoB40gDVLeNjg/NZdMXi1M7uUKQ/XBcA2MG9pf8pY="
   [mod."go.opentelemetry.io/otel/exporters/otlp/otlptrace/otlptracegrpc"]
-    version = "v1.19.0"
-    hash = "sha256-rmik1CTO+P+Sud7KFMhKk0zoeqTnQ7E5pYSD4uOpjAg="
+    version = "v1.21.0"
+    hash = "sha256-H4MhWbS0c42mHE96vGIxolRe5VVPu2/0sqC4oVjwZ+c="
   [mod."go.opentelemetry.io/otel/metric"]
-    version = "v1.19.0"
-    hash = "sha256-eYeeR8XUPjoF6lY3Yg1VUL0dPum/18KAcpo5k6zY67E="
+    version = "v1.21.0"
+    hash = "sha256-UH5fN59juP5GRiTpr5VUv4JGAE2o47LOyR7Ic6Yl/v4="
   [mod."go.opentelemetry.io/otel/sdk"]
-    version = "v1.19.0"
-    hash = "sha256-d/wjsNJDiWle57nj/b2bnPFtjvNBn4DZ23kp0gil6Oo="
+    version = "v1.21.0"
+    hash = "sha256-zVeXCf3jVEWjLdOYty//nCpzBtejZET0tEOQyONJ3Mo="
   [mod."go.opentelemetry.io/otel/trace"]
-    version = "v1.19.0"
-    hash = "sha256-EVsShx1IO0zpMztSfqYQ32Gm+hV4wrVM8wWkEfHOaoM="
+    version = "v1.21.0"
+    hash = "sha256-vjZsOaQCgTjz6WYim0YZHLnB/PC3CvTSpS97qkL2vz8="
   [mod."go.opentelemetry.io/proto/otlp"]
     version = "v1.0.0"
     hash = "sha256-w2WbhXXshdm/ZmZkg5VpWwXFLjJRBBwSObyHGjJcELQ="
@@ -461,8 +458,8 @@ schema = 3
     version = "v0.4.0"
     hash = "sha256-VCl5IerUva6XZqGXHa0J/r/ewsbOIIP7EBqyh1JGsXY="
   [mod."golang.org/x/sys"]
-    version = "v0.13.0"
-    hash = "sha256-/+RDZ0a0oEfJ0k304VqpJpdrl2ZXa3yFlOxy4mjW7w0="
+    version = "v0.14.0"
+    hash = "sha256-ReIRQmONicRW9idzGVPCBx5TTcKacmQTF1vPC3L4SxY="
   [mod."golang.org/x/term"]
     version = "v0.13.0"
     hash = "sha256-sLN+cjSZN2tfg/Lm9Ae4vYzoXREclMumxfksYFokymQ="
