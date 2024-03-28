@@ -25,7 +25,7 @@ in {
 		};
 
 		sites = mkOption {
-			type = types.attrsOf types.str;
+			type = types.attrsOf (types.either types.str (types.listOf types.str));
 			default = {};
 			example = {
 				"b.example.com" = ''
@@ -69,7 +69,13 @@ in {
 		let sitesConfigFile = pkgs.writeText "caddy-sites"
 			(concatStringsSep "\n"
 				(mapAttrsToList
-					(name: value: "${name} {\n${value}\n}")
+					(name: value:
+						if isList value then
+							# For each site, add the name and the value.
+							concatStringsSep "\n" (map (v: "${name} {\n${v}\n}") value)
+						else
+							"${name} {\n${value}\n}"
+					)
 					(cfg.sites)));
 
 			configPrepare = pkgs.writeShellScript "caddy-wrap" ''
