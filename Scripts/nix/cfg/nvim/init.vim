@@ -439,11 +439,13 @@ highlight LineNr guifg=#6c6c6c ctermfg=242
 command -nargs=1 New :e %:p:h/<args>
 
 ":GitAdd to add the current file to git."
-command GitAdd           :Git add %
-command Ga               :Git add %
-command Gm               :Git commit
-command GitRestoreStaged :Git restore "--staged" %
-command GitUnadd         :Git restore "--staged" %
+command! GitAdd           :Git add %
+command! Ga               :Git add %
+command! Ga!			  :Git add -A
+command! Gm               :Git commit
+command! Gp               :Git push
+command! GitRestoreStaged :Git restore "--staged" %
+command! GitUnadd         :Git restore "--staged" %
 
 "Optimized drawing"
 set ttyfast

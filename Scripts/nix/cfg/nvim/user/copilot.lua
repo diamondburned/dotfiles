@@ -2,7 +2,7 @@ local copilot = require("copilot")
 
 copilot.setup({
 	panel = {
-		enabled = false,
+		enabled = true,
 	},
 	suggestion = {
 		enabled = false,
