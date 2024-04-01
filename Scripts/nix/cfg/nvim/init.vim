@@ -441,7 +441,7 @@ command -nargs=1 New :e %:p:h/<args>
 ":GitAdd to add the current file to git."
 command! GitAdd           :Git add %
 command! Ga               :Git add %
-command! Ga!			  :Git add -A
+command! Gall             :Git add -A
 command! Gm               :Git commit
 command! Gp               :Git push
 command! GitRestoreStaged :Git restore "--staged" %
