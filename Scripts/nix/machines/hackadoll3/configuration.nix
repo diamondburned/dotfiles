@@ -599,6 +599,7 @@ in {
 			go
 			gopls
 			gotools
+			govulncheck
 			licensor
 			mdr
 			# config.boot.kernelPackages.perf
