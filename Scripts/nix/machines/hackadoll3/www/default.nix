@@ -135,7 +135,7 @@ in
 					'';
 				in ''
 					redir /bulb http://192.168.2.124:80 302
-					redir /plug http://192.168.2.238:80 302
+					redir /plug http://192.168.2.239:80 302
 					root * ${fs}
 					file_server
 				'';
