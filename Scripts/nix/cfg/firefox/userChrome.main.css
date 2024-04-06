@@ -116,6 +116,9 @@ body > box {
 #nav-bar[urlbar-exceeds-toolbar-bounds="true"] #urlbar-background {
 	background-color: var(--toolbar--field-non-lwt-bgcolor, Field) !important;
 }
+#nav-bar .notificationbox-stack:empty {
+	width: auto;
+}
 
 /* Some alignment tweaks to do with the URL popout. */
 #urlbar[breakout][breakout-extend] {
