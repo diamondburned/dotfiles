@@ -75,12 +75,6 @@
 		tmux
 	];
 
-	services.openssh.enable = true;
-
-	users.users.diamond.openssh.authorizedKeys.keyFiles = [
-		<dotfiles/public_keys>
-	];
-
 	networking.firewall = {
 		enable = true;
 		# Allow ports for Tailscale.

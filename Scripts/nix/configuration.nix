@@ -56,6 +56,8 @@ in
 	# See https://github.com/tailscale/tailscale/issues/1548.
 	systemd.services.tailscaled.serviceConfig.StandardOutput = "null";
 
+	users.users.diamond.openssh.authorizedKeys.keyFiles = [ ./public_keys ];
+
 	services.xserver.gdk-pixbuf.modulePackages = with pkgs; [
 		librsvg
 		webp-pixbuf-loader
