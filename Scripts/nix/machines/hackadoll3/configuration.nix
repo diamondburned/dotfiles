@@ -481,6 +481,13 @@ in {
 			};
 		};
 
+		programs.yt-dlp = {
+			enable = true;
+			extraConfig = ''
+				--netrc-cmd "gpg --decrypt ~/.netrc.gpg"
+			'';
+		};
+
 		# programs.obs-studio = {
 		# 	enable  = true;
 		# 	plugins = with pkgs; [
@@ -560,7 +567,6 @@ in {
 			fragments
 			alarm-clock-applet
 			# mixxx
-			yt-dlp
 			(nixpkgs_unstable_newer.callPackage <dotfiles/overlays/packages/mixxx/beta.nix> {})
 
 			# System
