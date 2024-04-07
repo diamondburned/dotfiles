@@ -99,6 +99,9 @@ body > box {
 #nav-bar toolbaritem:not(#urlbar) {
 	-moz-window-dragging: drag !important;
 }
+#navigator-toolbox .notificationbox-stack:empty {
+	width: auto;
+}
 #urlbar {
 	color: black !important;
 	top: 1px !important;
@@ -115,9 +118,6 @@ body > box {
 }
 #nav-bar[urlbar-exceeds-toolbar-bounds="true"] #urlbar-background {
 	background-color: var(--toolbar--field-non-lwt-bgcolor, Field) !important;
-}
-#nav-bar .notificationbox-stack:empty {
-	width: auto;
 }
 
 /* Some alignment tweaks to do with the URL popout. */
