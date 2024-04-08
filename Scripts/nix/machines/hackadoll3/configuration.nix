@@ -615,7 +615,7 @@ in {
 			graphviz
 			gnuplot
 			vimHugeX
-			clang-tools
+			# clang-tools
 			xclip
 			virt-manager
 			xorg.xauth
