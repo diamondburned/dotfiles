@@ -100,7 +100,7 @@ body > box {
 	-moz-window-dragging: drag !important;
 }
 #navigator-toolbox .notificationbox-stack:empty {
-	width: auto;
+	width: auto !important;
 }
 #urlbar {
 	color: black !important;
