@@ -110,7 +110,7 @@ in {
 	# };
 
 	buildLocalGoModule = { GOPATH ? GOPATH, ... }@args: super.buildGoModule {
-		vendorSha256 = null;
+		vendorHash = null;
 		postConfigure = ''
 			export GOPATH=${GOPATH}
 			${args.postConfigure or ""}

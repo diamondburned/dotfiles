@@ -47,7 +47,7 @@ in buildGoModule {
 
 	src = srcGenerated;
 
-	vendorSha256 = null;
+	vendorHash = null;
 
 	doCheck = false;
 

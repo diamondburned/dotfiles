@@ -36,7 +36,7 @@ with lib;
 					url = "https://gitlab.com/diamondburned/nixie.git";
 					rev = cfg.commit;
 				};
-				vendorSha256 = cfg.modSha256;
+				vendorHash = cfg.modSha256;
 
 				subPackages = [ "." ];
 				meta = {

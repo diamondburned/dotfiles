@@ -24,5 +24,5 @@ in pkgs.buildGoModule {
 		pkg-config
 	];
 
-	vendorSha256 = "18bpxzwpplz9xbgjwz1n704fcqgw3fplqsjzc587ibk25crv7w19";
+	vendorHash = "18bpxzwpplz9xbgjwz1n704fcqgw3fplqsjzc587ibk25crv7w19";
 }

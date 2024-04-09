@@ -10,5 +10,5 @@ buildGoModule {
 		ref = "tunnel";
 	};
 
-	vendorSha256 = "066fisgpicxv8dx9s2n6kvrrlfg5whvckgqi7bgmw3vh1jsy0qv9";
+	vendorHash = "066fisgpicxv8dx9s2n6kvrrlfg5whvckgqi7bgmw3vh1jsy0qv9";
 }

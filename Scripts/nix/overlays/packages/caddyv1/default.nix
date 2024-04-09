@@ -22,13 +22,13 @@ ${imports}
 
 	version = "v1.0.5";
 
-	vendorSha256 = (if (modSha256 != "") then modSha256 else
+	vendorHash = (if (modSha256 != "") then modSha256 else
 		"09ccjcdybjcc0nl9gcd91f4kf61h8ydcc7lwp9m0yzmgv6w15gpr"
 	);
 
 in buildGoModule rec {
 	name = "caddy";
-	inherit version vendorSha256;
+	inherit version vendorHash;
 
 	overrideModAttrs = (_: {
 		postInstall = "cp go.sum go.mod $out/ && ls $out/";

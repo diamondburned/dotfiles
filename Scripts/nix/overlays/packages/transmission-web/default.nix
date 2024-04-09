@@ -12,7 +12,7 @@ in buildGoModule rec {
 		rev = "906085cebb3da43d64a9e65ddaf394bfd19cbeca";
 	};
 
-	vendorSha256 = "017zm4pqyq2ldzqwmd7m67qlhygckjvslsi9bbh308svyb439jrv";
+	vendorHash = "017zm4pqyq2ldzqwmd7m67qlhygckjvslsi9bbh308svyb439jrv";
 	subPackages = [ "." ];
 
 	meta = {

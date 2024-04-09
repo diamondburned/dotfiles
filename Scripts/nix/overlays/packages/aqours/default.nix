@@ -25,5 +25,5 @@ in pkgs.buildGo117Module {
 		wrapGAppsHook
 	];
 
-	vendorSha256 = "1xxxcalamfcyi6dhqyvr77a7qf5bmgjgmhwvzc63yisir1m9i8dn";
+	vendorHash = "1xxxcalamfcyi6dhqyvr77a7qf5bmgjgmhwvzc63yisir1m9i8dn";
 }

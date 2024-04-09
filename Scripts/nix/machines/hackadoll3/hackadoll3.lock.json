@@ -61,8 +61,8 @@
       "store_hash": "ccb69s0aqifdg0z3a67fbwyayb0g7ikj"
     },
     "github:NixOS/nixpkgs nixos-unstable": {
-      "url": "https://github.com/NixOS/nixpkgs/archive/9df3e30ce24fd28c7b3e2de0d986769db5d6225d.tar.gz",
-      "store_hash": "fmghf20vfjvbwfv7503x7j98hazv4azk"
+      "url": "https://github.com/NixOS/nixpkgs/archive/ff0dbd94265ac470dda06a657d5fe49de93b4599.tar.gz",
+      "store_hash": "qx5q2nfqwdk5i2vlmadv1p3wi10gd111"
     },
     "github:NixOS/nixpkgs staging": {
       "url": "https://github.com/NixOS/nixpkgs/archive/d74654eebef8315a570aee31063af4c8458518d5.tar.gz",
@@ -88,6 +88,14 @@
       "url": "https://github.com/foo-dogsquared/nixpkgs/archive/97ebba6f1a7151a7a5b7b020e2d5f83f6fce0d93.tar.gz",
       "store_hash": "82zymdgmkg8mdq9msj118y4ppndmzvag"
     },
+    "github:lwfinger/rtl8188gu master": {
+      "url": "https://github.com/lwfinger/rtl8188gu/archive/699d0ccedf2e26c3f8fcca36cca45029585aa746.tar.gz",
+      "store_hash": "p2x9g10scw250pr3cliyvv21z7983hn0"
+    },
+    "github:lwfinger/rtl8852au dwa-x1850": {
+      "url": "https://github.com/lwfinger/rtl8852au/archive/1e3a30af4742dcbe1cc125103c77b4be45a4a9ee.tar.gz",
+      "store_hash": "55x2bks78gdx0zs4s4cpb709174vlzg3"
+    },
     "github:mixxxdj/mixxx 2.4-beta": {
       "url": "https://github.com/mixxxdj/mixxx/archive/ab089c5782e3fbba301741be69179a666b71474f.tar.gz",
       "store_hash": "xhvnrrla8rzafdixyf65vljlczndqxlq"
@@ -105,8 +113,8 @@
       "store_hash": "akfavqi4nng8a799z9pgf9c26sf2czd5"
     },
     "github:nix-community/home-manager master": {
-      "url": "https://github.com/nix-community/home-manager/archive/17431970b4ebc75a92657101ccffcfc9e1f9d8f0.tar.gz",
-      "store_hash": "jkizf49f4flfs3lssg4amnshbw03w30v"
+      "url": "https://github.com/nix-community/home-manager/archive/a561ad6ab38578c812cc9af3b04f2cc60ebf48c9.tar.gz",
+      "store_hash": "p3kxcn3yd8wm6d7jprpc93rgf0mq9bb4"
     },
     "github:nix-community/home-manager release-22.11": {
       "url": "https://github.com/nix-community/home-manager/archive/f9edbedaf015013eb35f8caacbe0c9666bbc16af.tar.gz",
@@ -134,7 +142,7 @@
     },
     "https://nixos.org/channels/nixos-unstable": {
       "url": "https://nixos.org/channels/nixos-unstable",
-      "store_hash": "1z771ndxcl3149bng4ikiy65vj0yhdhf"
+      "store_hash": "cgg4kmwifakhi7cfglzprb7z1shja6d9"
     }
   }
 }

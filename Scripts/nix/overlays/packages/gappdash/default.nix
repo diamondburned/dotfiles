@@ -17,7 +17,7 @@ let src = /home/diamond/Scripts/gotk4/gappdash;
 		src  = src;
 		pkgs = pkgs;
 		internalPkgs = pkgs;
-		vendorSha256 = "1wpwisk65rvil49809x7r0c5rdb3lrd21cvq0dhp9y21nrxia8ck";
+		vendorHash = "1wpwisk65rvil49809x7r0c5rdb3lrd21cvq0dhp9y21nrxia8ck";
 	};
 
 in pkg

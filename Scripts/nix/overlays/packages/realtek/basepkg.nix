@@ -1,4 +1,4 @@
-{ pname, version, sha256 }:
+{ pname, src }:
 
 { stdenv, lib, fetchFromGitHub, kernel, bc }:
 
@@ -7,14 +7,7 @@ let
 in
 
 stdenv.mkDerivation {
-	inherit pname version;
-
-	src = fetchFromGitHub {
-		owner = "lwfinger";
-		repo = pname;
-		rev = version;
-		inherit sha256;
-	};
+	inherit pname src;
 
 	hardeningDisable = [ "pic" ];
 

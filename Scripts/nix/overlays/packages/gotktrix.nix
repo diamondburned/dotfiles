@@ -20,6 +20,6 @@ let gotktrix = pkgs.fetchFromGitHub {
 in import "${gotk4-nix}/package.nix" {
 	pkgs = gotk4-pkgs;
 	base = (import "${gotktrix}/.nix/base.nix") // {
-		vendorSha256 = "0cmandfdkczpppmf1kdxliw2b164a48vh9iqb46vizab69ynv7j7";
+		vendorHash = "0cmandfdkczpppmf1kdxliw2b164a48vh9iqb46vizab69ynv7j7";
 	};
 }

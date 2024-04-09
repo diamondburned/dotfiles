@@ -107,7 +107,7 @@ in {
 		"v4l2loopback"
 		"i2c-dev"
 		"8852au"
-		"ddcci-driver"
+		# "ddcci-driver"
 	];
 
 	boot.extraModulePackages =
@@ -116,7 +116,7 @@ in {
 		[
 			rtl8188gu
 			rtl8852au
-			ddcci-driver
+			# ddcci-driver
 
 			# (config.boot.kernelPackages.callPackage
 			# 	(pkgs.fetchurl {
