@@ -4,6 +4,15 @@ let
 	profileName = "default";
 	profilePath = "q1f740f8.default";
 
+	firefox = let
+		pkg = pkgs.firefox-devedition;
+	in
+		pkg.override {
+			cfg = {
+				enableGnomeExtensions = true;
+			};
+		};
+
 	makeFirefoxProfileDesktopFile = {
 		profile,
 		name ? "Firefox (${profile})",
@@ -13,7 +22,7 @@ let
 		# bin/find-desktop Firefox
 		desktopName = name;
 		genericName = "Web Browser (${name})";
-		exec = "firefox -p ${profile} %U";
+		exec = "${firefox.meta.mainProgram} -p ${profile} %U";
 		icon = icon;
 		mimeTypes = [
 			"text/html"
@@ -38,41 +47,7 @@ let
 		# extraNativeMessagingHosts = lib.attrValues nativeMessagingHosts;
 	};
 
-	# firefox-devedition = pkgs.wrapFirefox pkgs.firefox-devedition-bin-unwrapped firefox-attrs;
-	# firefox-devedition = pkgs.firefox-devedition-bin;
-
-	# firefox = pkgs.writeShellScriptBin "firefox" ''
-	# 	${firefox-devedition}/bin/firefox -P default "$@"
-	# '' // {
-	# 	# satisfy home-manager
-	# 	inherit (pkgs) gtk3;
-	# 	# inherit (firefox-attrs) applicationName extraNativeMessagingHosts;
-	# 	inherit (firefox-attrs) applicationName;
-	# 	inherit (firefox-devedition) meta;
-	# };
-
-	# firefox = pkgs.firefox-devedition-bin;
-
-
 in {
-	# nixpkgs.overlays = [ (self: super: {
-	# 	firefox-unwrapped = super.firefoxPackages.firefox.override {
-	# 		crashreporterSupport = true;
-	# 		pipewireSupport = true;
-	# 		debugBuild = true;
-	# 		drmSupport = true;
-	# 	};
-	# }) ];
-
-	# Thanks, Firefox. Seriously.
-	# See https://github.com/NixOS/nixpkgs/issues/47340#issuecomment-440645870.
-	# home.file = lib.flip lib.mapAttrs' nativeMessagingHosts (name: pkg: {
-	# 	name  = ".mozilla/native-messaging-hosts/${name}.json";
-	# 	value = {
-	# 		source = "${pkg}/lib/mozilla/native-messaging-hosts/${name}.json";
-	# 	};
-	# });
-
 	home.packages = with pkgs; [
 		(makeFirefoxProfileDesktopFile {
 			profile = profileName;
@@ -84,11 +59,7 @@ in {
 	];
 
 	programs.firefox.enable = true;
-	programs.firefox.package = pkgs.firefox.override {
-		cfg = {
-			enableGnomeExtensions = true;
-		};
-	};
+	programs.firefox.package = firefox;
 
 	programs.firefox.profiles."Tunneled" = {
 		id = 1;

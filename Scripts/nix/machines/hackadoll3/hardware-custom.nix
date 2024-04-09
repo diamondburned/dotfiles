@@ -129,9 +129,12 @@ in {
 	# Prevent the wrong Realtek driver from loading.
 	boot.blacklistedKernelModules = [ "rtl8xxxu" ];
 
+	# Boot the regular kernel until RTL8188GU drivers fix their shit.
+	boot.kernelPackages = pkgs.linuxPackages;
+
 	# Refer to unstable.nix.
+	# boot.kernelPackages = pkgs.linuxPackages_latest;
 	# boot.kernelPackages = pkgs.nixpkgs_unstable.linuxKernel.packages.linux_xanmod_latest;
-	boot.kernelPackages = pkgs.linuxPackages_latest;
 	# boot.kernelPackages = pkgs.linuxPackages-xanmod;
 	# boot.kernelPackages = pkgs.linuxPackagesFor pkgs.linux_6_3;
 	# boot.kernelPackages = pkgs.linuxPackages_zen;
