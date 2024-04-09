@@ -4,7 +4,7 @@
 	fonts.fontconfig.enable = true;
 	fonts.fontconfig.localConf = builtins.readFile <dotfiles/cfg/fontconfig.xml>;
 
-	fonts.fonts = with pkgs; [
+	fonts.packages = with pkgs; [
 		bakoma_ttf # math
 		# opensans-ttf
 		lexend

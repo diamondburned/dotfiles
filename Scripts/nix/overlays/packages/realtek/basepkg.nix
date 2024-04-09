@@ -1,4 +1,4 @@
-{ pname, src }:
+{ name, src }:
 
 { stdenv, lib, fetchFromGitHub, kernel, bc }:
 
@@ -7,7 +7,7 @@ let
 in
 
 stdenv.mkDerivation {
-	inherit pname src;
+	inherit name src;
 
 	hardeningDisable = [ "pic" ];
 
