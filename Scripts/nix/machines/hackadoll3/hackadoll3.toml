@@ -35,8 +35,6 @@
  gomod2nix = "github:nix-community/gomod2nix master"
  unstable = "https://nixos.org/channels/nixos-unstable"
  nur = "github:nix-community/NUR master"
- rtl8188gu = "github:lwfinger/rtl8188gu master"
- rtl8852au = "github:lwfinger/rtl8852au dwa-x1850"
 
 [users.diamond]
  override-channels = false

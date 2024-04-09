@@ -1,6 +1,6 @@
 { name, src }:
 
-{ stdenv, lib, fetchFromGitHub, kernel, bc }:
+{ stdenv, lib, fetchFromGitHub, kernel, bc, rsync }:
 
 let
 	modDestDir = "$out/lib/modules/${kernel.modDirVersion}/kernel/drivers/net/wireless/realtek/rtl8188gu";
