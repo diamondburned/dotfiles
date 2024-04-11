@@ -113,8 +113,8 @@
       "store_hash": "akfavqi4nng8a799z9pgf9c26sf2czd5"
     },
     "github:nix-community/home-manager master": {
-      "url": "https://github.com/nix-community/home-manager/archive/a561ad6ab38578c812cc9af3b04f2cc60ebf48c9.tar.gz",
-      "store_hash": "p3kxcn3yd8wm6d7jprpc93rgf0mq9bb4"
+      "url": "https://github.com/nix-community/home-manager/archive/31357486b0ef6f4e161e002b6893eeb4fafc3ca9.tar.gz",
+      "store_hash": "smf210a4d7w7agdlisyfb03afpkrszq3"
     },
     "github:nix-community/home-manager release-22.11": {
       "url": "https://github.com/nix-community/home-manager/archive/f9edbedaf015013eb35f8caacbe0c9666bbc16af.tar.gz",
@@ -142,7 +142,7 @@
     },
     "https://nixos.org/channels/nixos-unstable": {
       "url": "https://nixos.org/channels/nixos-unstable",
-      "store_hash": "cgg4kmwifakhi7cfglzprb7z1shja6d9"
+      "store_hash": "28a0qdrby58y84pfq3nby82v56wlc096"
     }
   }
 }
