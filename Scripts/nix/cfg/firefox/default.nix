@@ -5,7 +5,8 @@ let
 	profilePath = "q1f740f8.default";
 
 	firefox = let
-		pkg = pkgs.firefox-devedition;
+		# pkg = pkgs.firefox-devedition;
+		pkg = pkgs.firefox;
 	in
 		pkg.override {
 			cfg = {
