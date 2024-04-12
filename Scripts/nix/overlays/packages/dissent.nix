@@ -14,7 +14,9 @@ let
 				sha256 = "sha256-iwMuZ7Y/Hzn1yAobID+rur1SNl/FEKBvQL6+kUt97zQ=";
 			};
 
-		base = import "${dissent.src}/nix/base.nix";
+		base = import "${dissent.src}/nix/base.nix" {
+			inherit pkgs src;
+		};
 	};
 
 	gotk4-nix = pkgs.fetchFromGitHub {
@@ -53,6 +55,6 @@ in pkgs.stdenv.mkDerivation {
 			$out/share/icons/hicolor/256x256/apps
 		install -Dm644 ${src}/nix/so.libdb.dissent.service $out/share/dbus-1/services/so.libdb.dissent.service
 		install -Dm644 ${files.desktop.path} $out/share/applications/${files.desktop.name}
-		install -Dm644 ${files.logo.path} $out/share/icons/hicolor/256x256/apps/${files.logo.name}
+		cp -r --no-preserve=mode,ownership ${files.icons.path} $out/share/icons
 	'';
 }

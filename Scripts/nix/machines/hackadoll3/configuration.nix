@@ -520,28 +520,6 @@ in {
 			en-science
 			en-computers
 
-		]) ++ (with pkgs.nixpkgs_21_11; [
-
-		]) ++ (with pkgs.nixpkgs_unstable; [
-
-		]) ++ (with pkgs.nixpkgs_unstable_real; [
-			# armcord
-			# vesktop
-			# vencord
-			# (discord.override {
-			# 	withVencord = true;
-			# 	withOpenASAR = false;
-			# })
-			# blackbox-terminal
-			# evolutionWithPlugins
-
-			# xelfviewer
-			# (import <nixpkgs_shotcut> {}).shotcut
-			# gnvim
-
-			# Browsers
-			# google-chrome
-
 		]) ++ (with pkgs; [
 			# Personal stuff
 			gnome.pomodoro
@@ -566,8 +544,7 @@ in {
 			sticky
 			fragments
 			alarm-clock-applet
-			# mixxx
-			(nixpkgs_unstable_newer.callPackage <dotfiles/overlays/packages/mixxx/beta.nix> {})
+			mixxx
 
 			# System
 			xorg.xhost # dependency for wsudo
@@ -595,7 +572,7 @@ in {
 			'')
 
 			# Development tools
-			sommelier
+			# sommelier
 			dos2unix
 			foot
 			silver-searcher
@@ -622,8 +599,8 @@ in {
 			# neovide
 			# neovim-gtk
 
-			protonup
-			gamescope
+			# protonup
+			# gamescope
 			(steam.override ({ extraLibraries ? pkgs': [], ... }: {
 				# Workaround for TF2.
 				# See https://github.com/ValveSoftware/Source-1-Games/issues/5043#issuecomment-1822019817.
@@ -635,7 +612,6 @@ in {
 			# Multimedia
 			# aqours
 			# (succumb-to-libadwaita spot)
-			spot
 			libva-utils
 			# catnip-gtk
 			ffmpeg
@@ -646,20 +622,18 @@ in {
 			easyeffects
 			lollypop
 			komikku
-			# ytmdesktop # not until v2 is ready
-			youtube-music
-			monophony
 			spotify
 
-			# # Chat/Social
-			# # zoom-us
+			# Chat/Social
+			# zoom-us
 			# discord
 			dissent
-			vesktop
+			# vesktop
 			telegram-desktop
 			# (pkgs.callPackage <unstable/pkgs/by-name/ve/vesktop/package.nix> {})
 			# gotktrix
-			# # fractal
+			fractal
+			tuba
 
 			# Office
 			libreoffice
