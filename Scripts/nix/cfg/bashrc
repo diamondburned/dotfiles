@@ -372,7 +372,7 @@ xterm() {
 set-title() {
 	local title="$1"
 	if [[ ! $title ]]; then
-		title="$(basename "$PWD")"
+		title="$(basename "$PWD")/"
 	fi
 	__lineprompt_custom_title="$title"
 	__lineprompt_set_title
@@ -454,10 +454,10 @@ __lineprompt_main() {
 	# [[ -d "$1" ]] && cd "$1"
 
 	# terminal title
-	[[ "$cmd" == "__lineprompt_main" ]] && __lineprompt_set_title "$(basename "$PWD")" || {
+	[[ "$cmd" == "__lineprompt_main" ]] && __lineprompt_set_title "$(basename "$PWD")/" || {
 		[[ "$sig" == 0 ]]                                                  \
-			&& __lineprompt_set_title "$(basename "$PWD")" \
-			|| __lineprompt_set_title "exit $sig : $(basename "$PWD")"
+			&& __lineprompt_set_title "$(basename "$PWD")/" \
+			|| __lineprompt_set_title "exit $sig : $(basename "$PWD")/"
 	}
 }
 
