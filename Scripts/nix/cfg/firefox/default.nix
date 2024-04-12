@@ -48,6 +48,12 @@ let
 		# extraNativeMessagingHosts = lib.attrValues nativeMessagingHosts;
 	};
 
+	userContent = builtins.readFile ./userContent.css;
+	userChrome = builtins.concatStringsSep "\n" (map (f: builtins.readFile f) [
+		# ./userChrome.megabarstyler.css
+		./userChrome.main.css
+	]);
+
 in {
 	home.packages = with pkgs; [
 		(makeFirefoxProfileDesktopFile {
@@ -66,23 +72,15 @@ in {
 		id = 1;
 		name = "Tunneled";
 		path = "Tunneled";
-		userContent = builtins.readFile ./userContent.css;
-		userChrome  = ''
-			${builtins.readFile ./userChrome.megabarstyler.css}
-			${builtins.readFile ./userChrome.main.css}
-		'';
+		inherit userContent userChrome;
 	};
 
 	programs.firefox.profiles."${profileName}" = {
 		id = 0;
 		name = profileName;
 		path = profilePath;
-		isDefault   = true;
-		userContent = builtins.readFile ./userContent.css;
-		userChrome  = ''
-			${builtins.readFile ./userChrome.megabarstyler.css}
-			${builtins.readFile ./userChrome.main.css}
-		'';
+		isDefault = true;
+		inherit userContent userChrome;
 		settings = {
 			"media.av1.enabled" = false;
 			"browser.sessionhistory.max_entries" = 15;
