@@ -447,6 +447,8 @@ command! Gp               :Git push
 command! GitRestoreStaged :Git restore "--staged" %
 command! GitUnadd         :Git restore "--staged" %
 
+command! CleanBuffers :%bd|e#
+
 "Optimized drawing"
 set ttyfast
 set lazyredraw
