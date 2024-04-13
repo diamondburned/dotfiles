@@ -52,7 +52,7 @@ in pkgs.stdenv.mkDerivation {
 		mkdir -p \
 			$out/share/dbus-1/services \
 			$out/share/applications \
-			$out/share/icons/hicolor/256x256/apps
+			$out/share/icons
 		install -Dm644 ${src}/nix/so.libdb.dissent.service $out/share/dbus-1/services/so.libdb.dissent.service
 		install -Dm644 ${files.desktop.path} $out/share/applications/${files.desktop.name}
 		cp -r --no-preserve=mode,ownership ${files.icons.path}/* $out/share/icons/
