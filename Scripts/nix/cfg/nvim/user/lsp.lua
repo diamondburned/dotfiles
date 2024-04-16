@@ -1,11 +1,9 @@
 local lspconfig = require("lspconfig")
-local lsp_signature = require("lsp_signature")
 local lsp_inlayhints = require("lsp-inlayhints")
 local cmp = require("cmp")
 local cmptypes = require("cmp.types")
 local cmp_nvim_lsp = require("cmp_nvim_lsp")
 local snippy = require("snippy")
-local copilot = require("copilot")
 local copilot_cmp = require("copilot_cmp")
 
 -- I might be the only person in this planet who has a sane LSP configuration
@@ -60,6 +58,7 @@ local cmp_sources = {
 	-- {name = "cody", keyword_length = 0},
 	{name = "copilot", keyword_length = 0},
 	"nvim_lsp",
+	"nvim_lsp_signature_help",
 	"snippy",
 	"path",
 }
@@ -84,6 +83,20 @@ local cmp_opts = {
 			cmptypes.cmp.TriggerEvent.TextChanged,
 			cmptypes.cmp.TriggerEvent.InsertEnter,
 		},
+	},
+	performance = {
+		-- For 50 WPM, you get ~250 CPM or ~4.16 CPS.
+		-- This leaves about 24ms per character. We keep the default debounce
+		-- but bump throttle up a bit.
+		debounce = 60,
+		throttle = 60,
+		-- Make fetching a bit more responsive.
+		fetching_timeout = 150,
+		-- Not sure what async_budget is for but 1 seems really low?
+		-- Increase it to 4.
+		async_budget = 4,
+		-- 200 is way too many entries. Reduce it.
+		max_view_entries = 24,
 	},
 	-- view = {
 	-- 	entries = "native",
@@ -226,16 +239,8 @@ vim.api.nvim_create_user_command(
 -- Bordered hover.
 vim.lsp.handlers['textDocument/hover'] = vim.lsp.with(vim.lsp.handlers.hover, {border = 'rounded', focusable = false})
 
--- LSP function signature helper plugin.
-lsp_signature.setup({
-	bind = true,
-	handler_opts = {
-		border = "rounded",
-	},
-})
-
 -- Set up inlay hints.
-lsp_inlayhints.setup({})
+-- lsp_inlayhints.setup({})
 
 -- Set up Cody.
 -- 

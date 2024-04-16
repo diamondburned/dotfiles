@@ -46,10 +46,10 @@ Plug 'neovim/nvim-lspconfig'
 Plug 'hrsh7th/nvim-cmp'
 Plug 'hrsh7th/cmp-nvim-lsp'
 Plug 'hrsh7th/cmp-path'
+Plug 'hrsh7th/cmp-nvim-lsp-signature-help'
 Plug 'dcampos/nvim-snippy'
 Plug 'dcampos/cmp-snippy'
 Plug 'lvimuser/lsp-inlayhints.nvim'
-Plug 'ray-x/lsp_signature.nvim'
 
 "Autocompletion with Copilot"
 " Plug 'github/copilot.vim'
