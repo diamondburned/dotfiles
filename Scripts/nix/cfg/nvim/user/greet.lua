@@ -15,8 +15,8 @@ local function half_padding()
 	return height - (20 / 2)
 end
 
--- dashboard.section.terminal.opts.redraw = true
-dashboard.section.terminal.command = "sh -c cat\\ " .. arts[math.random(#arts)]
+dashboard.section.terminal.opts.redraw = true
+dashboard.section.terminal.command = "sh --noprofile -c cat\\ " .. arts[math.random(#arts)]
 dashboard.section.terminal.width = 80
 dashboard.section.terminal.height = 20
 
