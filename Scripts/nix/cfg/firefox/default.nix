@@ -95,7 +95,7 @@ in {
 			"security.dialog_enable_delay" = 0;
 			"dom.dialog_element.enabled" = true;
 			"toolkit.legacyUserProfileCustomizations.stylesheets" = true;
-			"layout.frame_rate" = 70;
+			"layout.frame_rate" = 60;
 			"layout.css.backdrop-filter.enabled" = true;
 			"intl.accept_languages" = "en-us,en,vi";
 			"findbar.highlightAll" = true;
@@ -127,6 +127,7 @@ in {
 			"privacy.trackingprotection.enabled" = true;
 			"network.trr.mode" = 5;
 			"widget.gtk.rounded-bottom-corners.enabled" = true;
+			"widget.gtk.native-context-menus" = true;
 		};
 	};
 }
