@@ -6,7 +6,7 @@
 		<dotfiles/cfg/keyd>
 		<dotfiles/cfg/fonts>
 		<dotfiles/cfg/gnome>
-		<dotfiles/cfg/tailscale>
+		<dotfiles/cfg/networking>
 		<home-manager/nixos>
 		<nixos-apple-silicon/apple-silicon-support>
 		./base/configuration.nix
