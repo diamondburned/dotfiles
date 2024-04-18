@@ -11,7 +11,7 @@ self: super: {
 	vkmark   = super.callPackage ./packages/vkmark {};
 	aqours   = super.callPackage ./packages/aqours {};
 	ghproxy  = super.callPackage ./packages/ghproxy {};
-	dissent = super.callPackage ./packages/dissent.nix {};
+	dissent  = super.callPackage ./packages/dissent.nix {};
 	openmoji = super.callPackage ./packages/openmoji {};
 	blobmoji = super.callPackage ./packages/blobmoji {};
 	drone-ci = super.callPackage ./packages/drone-ci {};
@@ -39,4 +39,7 @@ self: super: {
 	# gnomeExtensions = super.gnomeExtensions // {
 	# 	easyscreencast = super.callPackage ./packages/gnome-extensions/easyscreencast {};
 	# };
+	go-diamondburned = import ./packages/go-diamondburned {
+		go = super.go_1_22;
+	};
 }

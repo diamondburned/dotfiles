@@ -578,7 +578,7 @@ in {
 			silver-searcher
 			jq
 			gh
-			go
+			go-diamondburned
 			gopls
 			gotools
 			govulncheck
