@@ -149,14 +149,15 @@ local cmp_opts = {
 
 				local selected = cmp.get_selected_entry()
 				-- Ignore completions from signature_help
-				if selected and selected.source ~= "nvim_lsp_signature_help" then
-					cmp.confirm({
-						select = false,
-						behavior = cmp.ConfirmBehavior.Replace,
-					})
-				else
+				if not selected or selected.source.name == "nvim_lsp_signature_help" then
 					fallback()
+					return
 				end
+
+				cmp.confirm({
+					select = false,
+					behavior = cmp.ConfirmBehavior.Replace,
+				})
 			end,
 			s = cmp.mapping.confirm({
 				select = true,
