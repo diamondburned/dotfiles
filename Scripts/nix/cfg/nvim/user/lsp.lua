@@ -84,7 +84,7 @@ local cmp_opts = {
 			cmptypes.cmp.TriggerEvent.InsertEnter,
 		},
 		-- Disable selecting the first item to avoid messing up signature_help.
-		completeopt = "menu,menuone,noselect",
+		completeopt = "menu,menuone,noinsert,noselect",
 	},
 	performance = {
 		-- For 50 WPM, you get ~250 CPM or ~4.16 CPS.
@@ -142,7 +142,14 @@ local cmp_opts = {
 		end, {"i", "s"}),
 		["<CR>"] = cmp.mapping({
 			i = function(fallback)
-				if cmp.visible() and cmp.get_selected_entry() then
+				if not cmp.visible() then
+					fallback()
+					return
+				end
+
+				local selected = cmp.get_selected_entry()
+				-- Ignore completions from signature_help
+				if selected and selected.source ~= "nvim_lsp_signature_help" then
 					cmp.confirm({
 						select = false,
 						behavior = cmp.ConfirmBehavior.Replace,
@@ -153,6 +160,7 @@ local cmp_opts = {
 			end,
 			s = cmp.mapping.confirm({
 				select = true,
+				behavior = cmp.ConfirmBehavior.Replace,
 			}),
 			c = cmp.mapping.confirm({
 				select = true,
