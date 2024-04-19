@@ -83,6 +83,8 @@ local cmp_opts = {
 			cmptypes.cmp.TriggerEvent.TextChanged,
 			cmptypes.cmp.TriggerEvent.InsertEnter,
 		},
+		-- Disable selecting the first item to avoid messing up signature_help.
+		completeopt = "menu,menuone,noselect",
 	},
 	performance = {
 		-- For 50 WPM, you get ~250 CPM or ~4.16 CPS.
