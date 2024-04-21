@@ -575,7 +575,9 @@ in {
 			# sommelier
 			dos2unix
 			foot
-			silver-searcher
+			(writeShellScriptBin "ag" ''
+				exec ${lib.getExe silver-searcher} --noaffinity "$@"
+			'')
 			jq
 			gh
 			go-diamondburned

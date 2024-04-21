@@ -244,7 +244,7 @@ hi SpellBad ctermbg=NONE cterm=undercurl guisp=#FF6961
 hi StatusLine   ctermfg=5  guifg=#F74C6D
 hi StatusLineNC ctermfg=13 guifg=#F7A8B8
 
-hi Special     ctermfg=15 guifg=#EEEEEC
+hi Special     ctermfg=15 guifg=#BFBFBF
 hi SpecialChar ctermfg=5  guifg=#F74C6D
 hi Comment     ctermfg=4  guifg=#3B7ECB
 hi Constant    ctermfg=15 guifg=#EEEEEC
@@ -268,6 +268,9 @@ hi Directory ctermfg=14 guifg=#55CDFC
 
 "NERDTree executable highlight but also something else"
 hi Title ctermfg=10 guifg=#85E6D4
+
+hi diffAdded guifg=#3DCCB2
+hi diffRemoved guifg=#FF473D
 
 "Custom negative number highlighting"
 syntax match negativeNumber '[-+]\d\+\(\.\d*\)\?'
@@ -753,3 +756,7 @@ au BufRead,BufNewFile *.postcss set filetype=postcss
 
 "Use editorconfig"
 let g:editorconfig = v:true
+
+"Ah yes, my favorite orientations: Horizontal and Jertical."
+command! Horizontal wincmd H
+command! Vertical   wincmd J
