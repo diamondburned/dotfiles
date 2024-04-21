@@ -48,6 +48,10 @@ let
 		MOZ_ENABLE_WAYLAND = "1";
 		# SDL_VIDEODRIVER	= "wayland";
 
+		# GNOME still forces scaling for all Xwayland apps. See
+		# https://github.com/ValveSoftware/steam-for-linux/issues/9209.
+		STEAM_FORCE_DESKTOPUI_SCALING = "1";
+
 		# osu settings.
 		WINE_RT = "89";
 		WINE_SRV_RT = "99";
