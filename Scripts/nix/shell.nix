@@ -19,6 +19,7 @@ in
 pkgs.mkShell {
 	buildInputs = with pkgs; [
 		# bonito
+		niv
 		git
 		git-crypt
 		gomod2nix
