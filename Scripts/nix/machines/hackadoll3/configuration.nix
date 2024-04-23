@@ -83,6 +83,7 @@ in {
 		<dotfiles/cfg/avahi>
 		<dotfiles/cfg/gps>
 		<dotfiles/cfg/gnome>
+		<dotfiles/cfg/dol-server>
 	];
 
 	nixpkgs.overlays = import ./overlays;
@@ -426,7 +427,6 @@ in {
 			<dotfiles/cfg/gnome/home.nix>
 			<dotfiles/cfg/fonts/home.nix>
 			<dotfiles/cfg/zellij/home.nix>
-			<dotfiles/cfg/dol-server/home.nix>
 
 			# (import <dotfiles/utils/schedule.nix {
 			# 	name        = "birthdayer-juan";
