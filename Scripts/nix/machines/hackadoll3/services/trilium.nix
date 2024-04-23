@@ -2,22 +2,35 @@
 
 let
 	port = 41875;
-	dataDir = "/run/media/diamond/Secondary/Trilium";
 in
 
 {
 	services.trilium-server = {
-		inherit dataDir port;
 		enable = true;
 		host = "localhost";
+		port = port;
+		dataDir = "/home/trilium";
 		instanceName = config.networking.hostName;
 		noAuthentication = true;
 	};
 
-	systemd.services.trilium-server.serviceConfig = with lib; {
-		User = mkForce "diamond";
-		Group = mkForce "trilium";
+	# services.outline = {
+	# 	enable = true;
+	# 	forceHttps = false;
+	# 	port = port;
+	# 	publicUrl = "http://outline";
+	# 	storage = {
+	# 		storageType = "local";
+	# 		localRootDir = "/home/outline";
+	# 	};
+	# };
+
+	users.users.trilium = {
+		homeMode = "750";
+		createHome = true;
 	};
+
+	users.users.diamond.extraGroups = [ "trilium" ];
 
 	diamond.tailnet-services.trilium = {
 		localPort = port;
