@@ -66,7 +66,7 @@ in
 					domains {
 						# Specifically put the machine in .ts.libdb.so for Tailscale, as
 						# opposed to .s.libdb.so, which is a direct IP alias.
-						${dynamicSubdomains domains ["" "test" "dol" "bulb" "esp"]}
+						${dynamicSubdomains domains ["" "test" "dol" "bulb" "esp" "trilium"]}
 					}
 
 					dynamic_domains
@@ -139,6 +139,9 @@ in
 					root * ${fs}
 					file_server
 				'';
+			${subdomain "trilium"} = ''
+				reverse_proxy * localhost:${config.services.trilium-server.port}
+			'';
 		};
 	};
 }
