@@ -629,6 +629,7 @@ in {
 			lollypop
 			komikku
 			spotify
+			chatterino7
 
 			# Chat/Social
 			# zoom-us

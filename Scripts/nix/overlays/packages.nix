@@ -42,4 +42,5 @@ self: super: {
 	go-diamondburned = import ./packages/go-diamondburned {
 		go = super.go_1_22;
 	};
+	chatterino7 = super.callPackage ./packages/chatterino7.nix {};
 }
