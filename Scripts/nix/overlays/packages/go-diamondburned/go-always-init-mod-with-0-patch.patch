@@ -1,0 +1,8 @@
+diff --git a/src/cmd/vendor/golang.org/x/mod/modfile/rule.go b/src/cmd/vendor/golang.org/x/mod/modfile/rule.go
+index 35fd1f534c..75017ba708 100644
+--- a/src/cmd/vendor/golang.org/x/mod/modfile/rule.go
++++ b/src/cmd/vendor/golang.org/x/mod/modfile/rule.go
+@@ -969,2 +969,3 @@ func (f *File) Cleanup() {
+ func (f *File) AddGoStmt(version string) error {
++	version = lazyregexp.New(`1\.(\d*)\.\d*`).ReplaceAllString(version, "1.$1.0")
+ 	if !GoVersionRE.MatchString(version) {
