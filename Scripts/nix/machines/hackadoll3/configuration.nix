@@ -583,6 +583,7 @@ in {
 				exec ${lib.getExe silver-searcher} --noaffinity "$@"
 			'')
 			jq
+			fx
 			gh
 			go-diamondburned
 			gopls
