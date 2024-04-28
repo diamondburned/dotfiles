@@ -1,18 +1,40 @@
-{ stdenv, lib, buildGoApplication }:
+{ stdenv, system, lib, buildGoModule, fetchFromGitHub, go_1_22 ? null }:
 
 with lib;
 
-buildGoApplication {
-	pname = "caddy";
-	version = "v2";
-	src = ./.;
+let
+	nixpkgs = fetchFromGitHub {
+		owner = "NixOS";
+		repo = "nixpkgs";
+		rev = "77624624058066a324c1ff2ff464b53f43de4b0c"; # nixos-unstable
+		sha256 = "sha256-kEd7Qw/LQcR4fktJHQGGpttPR3PbVNqORBUM7zFzunQ=";
+	};
 
-	modules = ./gomod2nix.toml;
+	go =
+		if go_1_22 != null then
+			go_1_22
+		else
+			lib.warn "Using go_1_22 from local caddy nixpkgs..."
+			(import nixpkgs {
+				inherit system;
+			}).go_1_22;
+
+	buildGoModule' = buildGoModule.override {
+		inherit go;
+	};
+in
+
+buildGoModule' {
+	pname = "caddy";
+	version = "local";
+
+	src = ./.;
 	subPackages = [ "." ];
 
-	doCheck = false;
+	# modules = ./gomod2nix.toml;
+	# allowGoReference = true;
 
-	GOSUMDB = "off";
+	vendorHash = "sha256-aWIp5RMydSZ9gGDJK0VZJDI3VRA0ws+fXxNdnnsR0bQ=";
 
 	meta = with lib; {
 		homepage = https://caddyserver.com;

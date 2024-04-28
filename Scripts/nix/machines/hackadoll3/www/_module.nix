@@ -88,7 +88,7 @@ in
 	config = mkIf (self != {}) {
 		# Permit Caddy to use Tailscale for its certificates.
 		services.tailscale.permitCertUid = "caddy";
-	
+
 		# TODO: set up caddy-tailscale.
 	
 		services.diamondburned.caddy = {
