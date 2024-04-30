@@ -42,6 +42,9 @@ in
 		};
 	};
 
+	# Something is leaking this service, so just restart it every hour.
+	# systemd.
+
 	# systemd.user.services.yubikey-touch-detector.enable = true;
 	# home-manager.users.diamond.systemd.user.services.yubikey-touch-detector.enable = true;
 }
