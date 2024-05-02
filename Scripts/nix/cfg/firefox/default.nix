@@ -63,6 +63,9 @@ in {
 		(makeFirefoxProfileDesktopFile {
 			profile = "Tunneled";
 		})
+		(makeFirefoxProfileDesktopFile {
+			profile = "Jaden";
+		})
 	];
 
 	programs.firefox.enable = true;
@@ -73,6 +76,12 @@ in {
 		name = "Tunneled";
 		path = "Tunneled";
 		inherit userContent userChrome;
+	};
+
+	programs.firefox.profiles."Jaden" = {
+		id = 2;
+		name = "Jaden";
+		path = "Jaden";
 	};
 
 	programs.firefox.profiles."${profileName}" = {

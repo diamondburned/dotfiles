@@ -6,7 +6,7 @@
 		server.enable = true;
 	};
 
-	home.pkgs = with pkgs; [
+	home.packages = with pkgs; [
 		# https://codeberg.org/dnkl/foot/issues/1598
 		(pkgs.writeShellScriptBin "foot" ''
 			export XCURSOR_SIZE=16
