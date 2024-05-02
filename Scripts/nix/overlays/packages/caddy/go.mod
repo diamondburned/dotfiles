@@ -8,12 +8,12 @@ require (
 	github.com/caddy-dns/namecheap v0.0.0-20211109044219-3e5991606a7a
 	github.com/caddy-dns/netlify v1.0.1
 	github.com/caddyserver/caddy/v2 v2.7.6
-	github.com/mholt/caddy-dynamicdns v0.0.0-20240411202905-a0a258134505
 )
 
 require (
 	github.com/caddy-dns/cloudflare v0.0.0-20221129173028-ed330a80c094
 	github.com/diamondburned/caddy-htmlauth v0.0.0-20210613055041-60b55cb41d4c
+	github.com/mholt/caddy-dynamicdns v0.0.0-20240411202905-a0a258134505
 	github.com/mholt/caddy-ratelimit v0.0.0-20221205182038-bc4310e7cef5
 	github.com/mholt/caddy-webdav v0.0.0-20221206035947-75a603bc6978
 	github.com/tailscale/caddy-tailscale v0.0.0-20240324222951-7b5a952a5b8b
@@ -156,7 +156,7 @@ require (
 	github.com/prometheus/common v0.53.0 // indirect
 	github.com/prometheus/procfs v0.14.0 // indirect
 	github.com/quic-go/qpack v0.4.0 // indirect
-	github.com/quic-go/quic-go v0.43.0 // indirect
+	github.com/quic-go/quic-go v0.42.0 // indirect
 	github.com/rs/xid v1.5.0 // indirect
 	github.com/russross/blackfriday/v2 v2.1.0 // indirect
 	github.com/safchain/ethtool v0.3.0 // indirect

@@ -488,7 +488,7 @@ in {
 		programs.yt-dlp = {
 			enable = true;
 			extraConfig = ''
-				--netrc-cmd "gpg --decrypt ~/.netrc.gpg"
+				--cookies-from-browser firefox:q1f740f8.default
 			'';
 		};
 
