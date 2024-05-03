@@ -34,7 +34,7 @@ buildGoModule' {
 	# modules = ./gomod2nix.toml;
 	# allowGoReference = true;
 
-	vendorHash = "sha256-+2r9gGwb2XFguB/FyEEl6PrWM+c/TFsC4joqfzAodD8=";
+	vendorHash = "sha256-aWIp5RMydSZ9gGDJK0VZJDI3VRA0ws+fXxNdnnsR0bQ=";
 
 	meta = with lib; {
 		homepage = https://caddyserver.com;
