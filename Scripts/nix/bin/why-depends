@@ -1,0 +1,18 @@
+#!/usr/bin/env nix-shell
+#!nix-shell -i bash -p graphviz imagemagick coreutils fzf
+#
+# https://github.com/NixOS/nix/issues/1918#issuecomment-652396149
+
+# Drv that depends on the thing in question is the first argument
+DRV="$1"
+[[ -z "$DRV" ]] && echo "Usage: $0 <drv>" && exit 1
+# Write the graph into a tempfile for further processing
+GRAPH_FILE="$( mktemp )"
+nix-store -q --graph "$DRV" > "$GRAPH_FILE"
+
+DEPENDENCY=$(nix-instantiate '<nixpkgs/nixos>' -A system)
+
+# Use dijkstra to find the paths, dot to render and imagemagick to display.
+# https://github.com/NixOS/nix/issues/1918
+dijkstra -da "$DEPENDENCY" "$GRAPH_FILE" | gvpr -c 'N[dist>1000.0]{delete(NULL, $)}' | dot -Tsvg | display
+rm "$GRAPH_FILE"

@@ -102,8 +102,8 @@ in
 						provider cloudflare {env.CLOUDFLARE_API_KEY}
 	
 						# Specifically use the Tailscale interface for its IP.
-						ip_source command echo 100.116.203.28
-						# ip_source interface tailscale0
+						# ip_source command echo 100.116.203.28
+						ip_source interface tailscale0
 						versions ipv4
 	
 						domains {

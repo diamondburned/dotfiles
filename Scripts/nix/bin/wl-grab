@@ -1,0 +1,83 @@
+#!/usr/bin/env bash
+set -e
+
+printf -v outfile "/tmp/wl-grab.log"
+[[ -t 1 ]] || exec &>> "$outfile"
+
+main() {
+	assert_commands evtest ps grep sed
+
+	if (( $# < 2 )); then
+		echo "Usage: $0 <device> [on|off]"
+		exit 1
+	fi
+	
+	device="$1"
+	toggle="$2"
+
+	if [[ "$toggle" != "on" && "$toggle" != "off" ]]; then
+		usage
+	fi
+
+	if (( EUID != 0 )); then
+		echo "Please run as root."
+		exit 1
+	fi
+	
+	log "Toggling $toggle for device $device..."
+	printf -v cmd "evtest --grab %q" "$device"
+	
+	case "$toggle" in
+	on)
+		if ! process_exists "$cmd"; then
+			$cmd &>> "$outfile" & disown
+		else
+			log "Already running."
+		fi
+		;;
+	off)
+		if ! kill_process "$cmd"; then
+			log "Not running."
+		fi
+		;;
+	*)
+		usage
+		;;
+	esac
+}
+
+assert_commands() {
+	for cmd in "$@"; do
+		if ! command -v "$cmd" &> /dev/null; then
+			log "Missing dependency: $cmd"
+			exit 1
+		fi
+	done
+}
+
+log() {
+	echo "$@" >&2
+}
+
+usage() {
+	log "Usage: $0 <device> [on|off]"
+	exit 1
+}
+
+process_exists() {
+	pkill -0 -rDRS -fx "$1" &> /dev/null
+}
+
+kill_process() {
+	pkill -TERM -rDRS -fx "$1" &> /dev/null
+}
+
+on() {
+	ensure_killed	
+}
+
+off() {
+	ensure_killed
+}
+
+main "$@"

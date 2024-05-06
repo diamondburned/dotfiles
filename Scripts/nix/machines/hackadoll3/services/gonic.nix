@@ -8,7 +8,7 @@
 				"/run/media/diamond/Tertiary/Music"
 				"/run/media/diamond/Tertiary/MusicCollections"
 			];
-			playlist-path = [];
+			playlists-path = [];
 			podcast-path = [ "/var/gonic/podcasts" ];
 			cache-path = "/var/cache/gonic";
 			listen-addr = "100.116.203.28:4747";

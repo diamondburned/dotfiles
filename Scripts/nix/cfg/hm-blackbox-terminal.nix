@@ -6,11 +6,13 @@ let
 		xdg.dataFile."blackbox/schemes/${lib.toLower name}.json".text = builtins.toJSON args;
 	};
 
-	blackbox-terminal = pkgs.blackbox-terminal.override {
-		vte-gtk4 = pkgs.callPackage <dotfiles/overlays/packages/vte_0.75.nix> {
-			vte = pkgs.vte-gtk4;
-		};
-	};
+	# blackbox-terminal = pkgs.blackbox-terminal.override {
+	# 	vte-gtk4 = pkgs.callPackage <dotfiles/overlays/packages/vte_0.75.nix> {
+	# 		vte = pkgs.vte-gtk4;
+	# 	};
+	# };
+
+	blackbox-terminal = pkgs.blackbox-terminal;
 
 in {
 	imports = [

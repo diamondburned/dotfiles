@@ -1,0 +1,16 @@
+#!/usr/bin/env bash
+targetName="$1"
+[[ ! "$targetName" ]] && {
+	echo "Usage: find-desktop <desktop name>"
+	exit 1
+}
+
+IFS=: data_dirs=( $XDG_DATA_DIRS  )
+# readarray -d ':' data_dirs <<< "$XDG_DATA_DIRS"
+
+for data_dir in "${data_dirs[@]}"; {
+	while read -r desktop; do
+		name="$(sed -n 's/^Name=\(.*\)/\1/p' "$desktop" | head -n1)"
+		[[ "$targetName" == "$name" ]] && echo "$desktop"
+	done < <(find "$data_dir/applications" -name '*.desktop' 2> /dev/null || true) || true
+}

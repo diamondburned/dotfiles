@@ -76,7 +76,7 @@ in {
 		<dotfiles/cfg/udev>
 		<dotfiles/cfg/nokbd>
 		<dotfiles/cfg/fonts>
-		# <dotfiles/cfg/wayfire>
+		<dotfiles/cfg/wayfire>
 		<dotfiles/cfg/localhost>
 		<dotfiles/cfg/networking>
 		<dotfiles/cfg/keyd>
@@ -399,16 +399,17 @@ in {
 	};
 
 	# Get a newer VTE with SIXEL for ourself.
-	system.replaceRuntimeDependencies = [
-		{
-			original = pkgs.vte-gtk4;
-			replacement = pkgs.callPackage <dotfiles/overlays/packages/vte_0.75.nix> { vte = pkgs.vte-gtk4; };
-		}
-		{
-			original = pkgs.vte;
-			replacement = pkgs.callPackage <dotfiles/overlays/packages/vte_0.75.nix> { vte = pkgs.vte; };
-		}
-	];
+	# Disabled due to a regression: https://gitlab.gnome.org/GNOME/vte/-/issues/2717.
+	# system.replaceRuntimeDependencies = [
+	# 	{
+	# 		original = pkgs.vte-gtk4;
+	# 		replacement = pkgs.callPackage <dotfiles/overlays/packages/vte_sixel.nix> { vte = pkgs.vte-gtk4; };
+	# 	}
+	# 	{
+	# 		original = pkgs.vte;
+	# 		replacement = pkgs.callPackage <dotfiles/overlays/packages/vte_sixel.nix> { vte = pkgs.vte; };
+	# 	}
+	# ];
 
 	home-manager.users.diamond = {
 		imports = [
@@ -417,8 +418,7 @@ in {
 			<dotfiles/secrets/diamond>
 			<dotfiles/cfg/firefox>
 			<dotfiles/cfg/google-chrome/home.nix>
-			<dotfiles/cfg/wayfire/home.nix>
-			<dotfiles/cfg/hm-blackbox-terminal.nix>
+			# <dotfiles/cfg/hm-blackbox-terminal.nix>
 			<dotfiles/cfg/hm-gnome-terminal.nix>
 			<dotfiles/cfg/hm-alacritty.nix>
 			<dotfiles/cfg/git/home.nix>

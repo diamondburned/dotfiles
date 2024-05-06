@@ -42,4 +42,10 @@
 		polkit_gnome
 		wlr-randr
 	];
+
+	home-manager.sharedModules = [
+		{
+			imports = [ ./home.nix ];
+		}
+	];
 }
