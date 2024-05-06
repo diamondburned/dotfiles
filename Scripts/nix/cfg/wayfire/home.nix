@@ -90,7 +90,7 @@ in {
 				scrot
 				screenrec;
 		})
-		# (import ./overlay.nix)
+		(import ./overlay.nix)
 	];
 
 	home.packages = with pkgs; [
@@ -108,6 +108,7 @@ in {
 		mako
 		wlsunset
 		wlogout
+		wdisplays
 	];
 
 	services.kanshi = {
@@ -120,41 +121,8 @@ in {
 		longitude = -117.9;
 	};
 
-	# services.mako = {
-	# 	enable   = true;
-	# 	font     = "Sans 11";
-	# 	anchor   = "top-center";
-	# 	format   = "<b>%s<dotfiles/b>\\n%b";
-	# 	width    = 400;
-	# 	borderSize = 2;
-	# 	defaultTimeout = 10000;
-	# 	iconPath = "${pkgs.papirus-icon-theme}/share/icons/Papirus-Dark";
-	# 	groupBy  = "app-name";
-	# 	# extraConfig = 
-	# 	# 	"[grouped]\n" +
-	# 	# 	"format=\"${f}\"";
-	# };
-
 	xdg.configFile = {
-		"wayfire.ini" = {
-			source = pkgs.callPackage ./wayfire.ini.nix { };
-		};
-		# "wf-shell.ini" = {
-		# 	source = pkgs.substituteAll {
-		# 		src = ./wf-panel/wf-shell.ini;
-		# 		css = ./wf-panel/wf-panel.css;
-		# 		scrot = "${scrot}/bin/scrot.sh";
-		# 		menu_icon = ./wf-panel/menu.png;
-		# 	};
-		# };
+		"wayfire.ini".source = pkgs.callPackage ./wayfire.ini.nix { };
+		"wf-shell.ini".source = pkgs.callPackage ./wf-panel/wf-shell.ini.nix { };
 	};
-
-	# systemd.user.targets.wayfire-session = {
-	# 	Unit = {
-	# 		Description = "wayfire compositor session";
-	# 		BindsTo = [ "graphical-session.target" ];
-	# 		Wants = [ "graphical-session-pre.target" ];
-	# 		After = [ "graphical-session-pre.target" ];
-	# 	};
-	# };
 }

@@ -31,7 +31,6 @@ let
 	userEnv = {
 		LC_TIME = "en_GB.UTF-8";
 		NIX_AUTO_RUN = "1";
-		GTK_THEME = config.home-manager.users.diamond.gtk.theme.name;
 		# STEAM_RUNTIME = "0";
 		# XDG_CURRENT_DESKTOP = "Wayfire";
 
@@ -76,7 +75,6 @@ in {
 		<dotfiles/cfg/udev>
 		<dotfiles/cfg/nokbd>
 		<dotfiles/cfg/fonts>
-		<dotfiles/cfg/wayfire>
 		<dotfiles/cfg/localhost>
 		<dotfiles/cfg/networking>
 		<dotfiles/cfg/keyd>
@@ -84,6 +82,10 @@ in {
 		<dotfiles/cfg/gps>
 		<dotfiles/cfg/gnome>
 		<dotfiles/cfg/dol-server>
+
+		# This shit's still garbage.
+		# <dotfiles/cfg/wayfire>
+		# <dotfiles/cfg/greetd>
 	];
 
 	nixpkgs.overlays = import ./overlays;
@@ -410,6 +412,9 @@ in {
 	# 		replacement = pkgs.callPackage <dotfiles/overlays/packages/vte_sixel.nix> { vte = pkgs.vte; };
 	# 	}
 	# ];
+
+	# TODO: fix this:
+	# home-manager.useGlobalPkgs = true;
 
 	home-manager.users.diamond = {
 		imports = [

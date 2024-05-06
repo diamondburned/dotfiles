@@ -20,7 +20,6 @@ plugins = \
 	switcher \
 	vswitch \
 	window-rules \
-	wobbly \
 	zoom
 
 vwidth  = 1
@@ -34,25 +33,32 @@ vheight = 1
 # execute a single file, yet it fails to do that properly. Holy fucking shit.
 00 = ${writeShellScript "wayfire-autostart" ''
 	set +e
+
+	# dbus-update-activation-environment --systemd DISPLAY WAYLAND_DISPLAY XDG_CURRENT_DESKTOP
+	# systemctl --user import-environment
+
 	fork() { $@ & disown; }
 
 	echo Forking...
 
 	fork ${getExe dex} -a -s /home/diamond/.config/autostart/
+	fork ${getExe walker} --gapplication-service
 	fork ${polkit_gnome}/libexec/polkit-gnome-authentication-agent-1
-	# fork ${xdg-desktop-portal-wlr}/libexec/xdg-desktop-portal-wlr
-	fork ${wayfirePlugins.wf-shell}/bin/wf-background
+	fork ${xdg-desktop-portal-wlr}/libexec/xdg-desktop-portal-wlr
+	fork ${xdg-desktop-portal-gtk}/libexec/xdg-desktop-portal-gtk
+	# fork ${wayfirePlugins.wf-shell}/bin/wf-background
+	fork ${getExe wlsunset}
 	fork ${getExe fcitx5}
 	fork ${getExe swaynotificationcenter}
 	fork ${getExe xfce.xfce4-panel}
 
 	echo Forked everything.
 ''}
-# dbus-uenv = dbus-update-activation-environment --systemd DISPLAY WAYLAND_DISPLAY XDG_CURRENT_DESKTOP
-# sysd-envv = systemctl --user import-environment; systemctl --user start wayfire-session.target
+dbus-uenv = dbus-update-activation-environment --systemd DISPLAY WAYLAND_DISPLAY XDG_CURRENT_DESKTOP
+sysd-envv = systemctl --user import-environment
 
 [workarounds]
-use_external_output_configuration = true
+# use_external_output_configuration = true
 
 [input]
 kb_repeat_delay = 200
@@ -67,7 +73,8 @@ click_method = clickfinger
 scroll_method = two-finger
 natural_scroll = true
 
-cursor_theme = Ardoise_shadow_87
+# cursor_theme = Ardoise_shadow_87
+cursor_theme = Catppuccin-Mocha-Pink-Cursors
 cursor_size = 24
 
 [command]

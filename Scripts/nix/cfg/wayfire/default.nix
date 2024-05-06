@@ -1,6 +1,10 @@
 { config, lib, pkgs, ... }: 
 
 {
+	nixpkgs.overlays = [
+		(import ./overlay.nix)
+	];
+
 	programs.wayfire = {
 		enable = true;
 		plugins = with pkgs.wayfirePlugins; [
@@ -14,13 +18,7 @@
 		enable = true;
 		sessionPackages = with pkgs; [
 			wayfire
-			wayfire-session
 		];
-	};
-
-	services.xserver.displayManager.gdm = {
-		enable  = true;
-		wayland = true;
 	};
 
 	xdg.portal = {
@@ -31,7 +29,6 @@
 
 	environment.systemPackages = with pkgs; [
 		wayfire
-		wayfire-session
 		polkit_gnome
 		wlr-randr
 	];

@@ -114,8 +114,8 @@ in {
 		with pkgs;
 		with config.boot.kernelPackages;
 		[
-			rtl8188gu
-			rtl8852au
+			pkgs.rtl8188gu
+			pkgs.rtl8852au
 			# ddcci-driver
 
 			# (config.boot.kernelPackages.callPackage

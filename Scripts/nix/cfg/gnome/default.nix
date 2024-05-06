@@ -13,7 +13,7 @@
 
 	# Enable GDM.
 	services.xserver.displayManager.gdm.enable = true;
-	services.xserver.displayManager.gdm.autoSuspend = true;
+	services.xserver.displayManager.gdm.autoSuspend = false;
 
 	# More GNOME things
 	services.gnome = {

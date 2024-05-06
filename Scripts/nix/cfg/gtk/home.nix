@@ -34,11 +34,9 @@ in
 		font.name = "Nunito";
 		font.size = 11;
 
-		theme = {
-			inherit (theme) name;
-			# name = "Colloid-Light";
-			# package = theme;
-		};
+		# theme = {
+		# 	inherit (theme) name package;
+		# };
 
 		iconTheme = {
 			# name = "Papirus-Light";
