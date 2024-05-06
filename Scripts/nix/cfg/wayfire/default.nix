@@ -1,32 +1,29 @@
 { config, lib, pkgs, ... }: 
 
 {
+	programs.wayfire = {
+		enable = true;
+		plugins = with pkgs.wayfirePlugins; [
+			wcm
+			wayfire-plugins-extra
+		];
+	};
+
 	services.xserver.displayManager = {
 		gdm = {
 			enable  = true;
 			wayland = true;
 		};
-		sessionPackages = with pkgs; [
-			wayfire-session
-		];
+		# sessionPackages = with pkgs; [
+		# 	wayfire-session
+		# ];
 	};
-
-	nix.binaryCachePublicKeys = [
-		"nixpkgs-wayland.cachix.org-1:3lwxaILxMRkVhehr5StQprHdEo4IrE8sRho9R9HOLYA="
-	];
-	nix.binaryCaches = [
-		"https://nixpkgs-wayland.cachix.org"
-	];
 
 	xdg.portal = {
 		enable = true;
 		extraPortals = with pkgs; [ xdg-desktop-portal-wlr ];
 		gtkUsePortal = false;
 	};
-
-	nixpkgs.overlays = [
-		(import ./overlay.nix)
-	];
 
 	# Extracted from Unstable's programs.xwayland.
 	environment.pathsToLink = [
@@ -35,10 +32,8 @@
 	];
 
 	environment.systemPackages = with pkgs; [
-		# labwc
-		# labwc-session
-		wayfire
-		wayfire-session
+		# wayfire
+		# wayfire-session
 		polkit_gnome
 		wlr-randr
 	];
