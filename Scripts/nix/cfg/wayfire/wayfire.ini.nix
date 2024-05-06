@@ -13,6 +13,7 @@ plugins = \
 	fast-switcher \
 	idle \
 	move \
+	grid \
 	oswitch \
 	place \
 	resize \
@@ -31,21 +32,21 @@ vheight = 1
 # Wayfire you piece of shit, literally nothing ever works. Why is this so badly
 # designed? I crammed this into a fucking shell script so all it has to do is
 # execute a single file, yet it fails to do that properly. Holy fucking shit.
-00 = ${writeBashScript "wayfire-autostart" ''
-		set +e
-		fork() { $@ & disown; }
+00 = ${writeShellScript "wayfire-autostart" ''
+	set +e
+	fork() { $@ & disown; }
 
-		echo Forking...
+	echo Forking...
 
-		fork ${getExe dex} -a -s /home/diamond/.config/autostart/
-		fork ${polkit_gnome}/libexec/polkit-gnome-authentication-agent-1
-		# fork ${xdg-desktop-portal-wlr}/libexec/xdg-desktop-portal-wlr
-		fork ${getExe wf-background}
-		fork ${getExe fcitx}
-		fork ${getExe swaynotificationcenter}
-		fork ${getExe xfce.xfce4-panel}
+	fork ${getExe dex} -a -s /home/diamond/.config/autostart/
+	fork ${polkit_gnome}/libexec/polkit-gnome-authentication-agent-1
+	# fork ${xdg-desktop-portal-wlr}/libexec/xdg-desktop-portal-wlr
+	fork ${wayfirePlugins.wf-shell}/bin/wf-background
+	fork ${getExe fcitx5}
+	fork ${getExe swaynotificationcenter}
+	fork ${getExe xfce.xfce4-panel}
 
-		echo Forked everything.
+	echo Forked everything.
 ''}
 # dbus-uenv = dbus-update-activation-environment --systemd DISPLAY WAYLAND_DISPLAY XDG_CURRENT_DESKTOP
 # sysd-envv = systemctl --user import-environment; systemctl --user start wayfire-session.target
@@ -100,9 +101,15 @@ speed = 0.01
 smoothing_duration = 150
 
 [move]
-activate = <super>
+activate = <super> BTN_LEFT
 enable_snap = true
 enable_snap_off = true
+
+[grid]
+duration = 150
+
+[resize]
+activate = <super> BTN_RIGHT
 
 [animate]
 open_animation = zoom

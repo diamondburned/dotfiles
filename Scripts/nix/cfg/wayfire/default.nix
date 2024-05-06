@@ -5,35 +5,33 @@
 		enable = true;
 		plugins = with pkgs.wayfirePlugins; [
 			wcm
+			wf-shell
 			wayfire-plugins-extra
 		];
 	};
 
-	services.xserver.displayManager = {
-		gdm = {
-			enable  = true;
-			wayland = true;
-		};
-		# sessionPackages = with pkgs; [
-		# 	wayfire-session
-		# ];
+	services.displayManager = {
+		enable = true;
+		sessionPackages = with pkgs; [
+			wayfire
+			wayfire-session
+		];
+	};
+
+	services.xserver.displayManager.gdm = {
+		enable  = true;
+		wayland = true;
 	};
 
 	xdg.portal = {
 		enable = true;
-		extraPortals = with pkgs; [ xdg-desktop-portal-wlr ];
-		gtkUsePortal = false;
+		gtkUsePortal = true;
+		# extraPortals = with pkgs; [ xdg-desktop-portal-wlr ];
 	};
 
-	# Extracted from Unstable's programs.xwayland.
-	environment.pathsToLink = [
-		"/share/X11"
-		"/libexec" # polkit
-	];
-
 	environment.systemPackages = with pkgs; [
-		# wayfire
-		# wayfire-session
+		wayfire
+		wayfire-session
 		polkit_gnome
 		wlr-randr
 	];

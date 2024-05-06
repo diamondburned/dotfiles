@@ -42,7 +42,7 @@ let
 			slurp
 			grim
 			libnotify
-			xdg-open
+			xdg-utils
 		];
 	};
 
