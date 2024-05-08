@@ -238,11 +238,42 @@ vim.api.nvim_create_autocmd("LspAttach", {
 	end
 })
 
--- Set up :Rename command.
 vim.api.nvim_create_user_command(
 	"Rename",
 	function(args)
 		vim.lsp.buf.rename()
+	end,
+	{}
+)
+
+vim.api.nvim_create_user_command(
+	"ShowReferences",
+	function(args)
+		vim.lsp.buf.references()
+	end,
+	{}
+)
+
+vim.api.nvim_create_user_command(
+	"ShowDefinition",
+	function(args)
+		vim.lsp.buf.definition()
+	end,
+	{}
+)
+
+vim.api.nvim_create_user_command(
+	"ShowImplementation",
+	function(args)
+		vim.lsp.buf.implementation()
+	end,
+	{}
+)
+
+vim.api.nvim_create_user_command(
+	"ShowDeclaration",
+	function(args)
+		vim.lsp.buf.declaration()
 	end,
 	{}
 )
