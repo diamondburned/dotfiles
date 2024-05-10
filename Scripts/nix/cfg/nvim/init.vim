@@ -607,7 +607,8 @@ execute ale#fix#registry#Add('denojsonc', 'FixDenoJSONC', ['jsonc'], 'deno fmt f
 execute ale#fix#registry#Add('prettier', 'ale#fixers#prettier#Fix', ['markdown'], 'prettier for markdown')
 execute ale#fix#registry#Add('prettier', 'ale#fixers#prettier#Fix', ['postcss'], 'prettier for postcss')
 execute ale#fix#registry#Add('prettier', 'ale#fixers#prettier#Fix', ['astro'], 'prettier for astro')
-execute ale#fix#registry#Add('prettier', 'ale#fixers#prettier#Fix', ['scss'], 'prettier for scss')
+execute ale#fix#registry#Add('prettier', 'ale#fixers#prettier#Fix', ['javascriptreact'], 'prettier for javascriptreact')
+execute ale#fix#registry#Add('prettier', 'ale#fixers#prettier#Fix', ['typescriptreact'], 'prettier for typescriptreact')
 execute ale#fix#registry#Add('cmark', 'FixCMark', ['markdown'], 'cmark for markdown')
 execute ale#fix#registry#Add('cmark-gfm', 'FixCMarkGFM', ['markdown'], 'cmark-gfm for markdown')
 execute ale#fix#registry#Add('templ', 'FixTempl', ['templ'], 'templ fmt for templ')
@@ -656,6 +657,8 @@ let g:ale_fixers = {
 			\ 'markdown':   [ "cmark-gfm", "cmark", "prettier" ],
 			\ 'javascript': [ "deno", "prettier", "prettier_standard", "eslint" ],
 			\ 'typescript': [ "deno", "prettier", "prettier_standard", "eslint" ],
+			\ 'javascriptreact': [ "prettier" ],
+			\ 'typescriptreact': [ "prettier" ],
 			\ }
 let g:ale_completion_enabled = 0 
 let g:ale_disable_lsp = 1 "Use nvim's built-in LSP"
