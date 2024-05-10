@@ -420,10 +420,10 @@ require('gitsigns').setup({
 EOF
 
 "245 is a grey-ish shade."
-hi! GitGutterAdd          guibg=NONE ctermbg=NONE guifg=#6c6c6c ctermfg=245
-hi! GitGutterChange       guibg=NONE ctermbg=NONE guifg=#6c6c6c ctermfg=245
-hi! GitGutterDelete       guibg=NONE ctermbg=NONE guifg=#6c6c6c ctermfg=245
-hi! GitGutterChangeDelete guibg=NONE ctermbg=NONE guifg=#6c6c6c ctermfg=245
+hi! GitSignsAdd          guibg=NONE ctermbg=NONE guifg=#3DCCB2 ctermfg=2
+hi! GitSignsChange       guibg=NONE ctermbg=NONE guifg=#00B5FC ctermfg=6
+hi! GitSignsDelete       guibg=NONE ctermbg=NONE guifg=#FF473D ctermfg=9
+hi! GitSignsChangeDelete guibg=NONE ctermbg=NONE guifg=#FF473D ctermfg=9
 
 "Cooler git conflicts"
 let g:conflict_marker_begin = '^<<<<<<< .*$'
