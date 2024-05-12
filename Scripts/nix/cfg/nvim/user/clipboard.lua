@@ -2,8 +2,7 @@ local osc52 = require("osc52")
 local is_ssh = vim.fn.getenv("SSH_CONNECTION") ~= ""
 local is_vte = vim.fn.getenv("VTE_VERSION") ~= ""
 
--- TODO: detect GNOME Terminal
-if not vim.g.neovide and not is_vte then
+if is_ssh or (not vim.g.neovide and not is_vte) then
 	osc52.setup {
 		max_length = 0,
 		silent = true,
