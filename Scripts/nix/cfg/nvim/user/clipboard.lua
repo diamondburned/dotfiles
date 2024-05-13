@@ -1,6 +1,6 @@
 local osc52 = require("osc52")
-local is_ssh = vim.fn.getenv("SSH_CONNECTION") ~= ""
-local is_vte = vim.fn.getenv("VTE_VERSION") ~= ""
+local is_ssh = vim.fn.getenv("SSH_CONNECTION") ~= vim.NIL
+local is_vte = vim.fn.getenv("VTE_VERSION") ~= vim.NIL
 
 if is_ssh or (not vim.g.neovide and not is_vte) then
 	osc52.setup {
