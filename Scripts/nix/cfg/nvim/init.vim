@@ -610,6 +610,7 @@ execute ale#fix#registry#Add('denojsonc', 'FixDenoJSONC', ['jsonc'], 'deno fmt f
 execute ale#fix#registry#Add('prettier', 'ale#fixers#prettier#Fix', ['markdown'], 'prettier for markdown')
 execute ale#fix#registry#Add('prettier', 'ale#fixers#prettier#Fix', ['postcss'], 'prettier for postcss')
 execute ale#fix#registry#Add('prettier', 'ale#fixers#prettier#Fix', ['astro'], 'prettier for astro')
+execute ale#fix#registry#Add('prettier', 'ale#fixers#prettier#Fix', ['handlebars'], 'prettier for handlebars')
 execute ale#fix#registry#Add('prettier', 'ale#fixers#prettier#Fix', ['javascriptreact'], 'prettier for javascriptreact')
 execute ale#fix#registry#Add('prettier', 'ale#fixers#prettier#Fix', ['typescriptreact'], 'prettier for typescriptreact')
 execute ale#fix#registry#Add('cmark', 'FixCMark', ['markdown'], 'cmark for markdown')
@@ -658,6 +659,7 @@ let g:ale_fixers = {
 			\ 'haskell':    [ "ormolu" ],
 			\ 'jsonnet':    [ "jsonnetfmt" ],
 			\ 'markdown':   [ "cmark-gfm", "cmark", "prettier" ],
+			\ 'handlebars': [ "prettier" ],
 			\ 'javascript': [ "deno", "prettier", "prettier_standard", "eslint" ],
 			\ 'typescript': [ "deno", "prettier", "prettier_standard", "eslint" ],
 			\ 'javascriptreact': [ "prettier" ],
