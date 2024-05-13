@@ -12,6 +12,7 @@ Plug 'plasticboy/vim-markdown'
 Plug 'godlygeek/tabular'
 Plug 'bogado/file-line'
 Plug 'rhysd/conflict-marker.vim'
+Plug 'rhysd/vim-grammarous'
 Plug 'folke/todo-comments.nvim'
 Plug 'luochen1990/rainbow'
 Plug 'ojroques/nvim-osc52'
@@ -117,6 +118,8 @@ autocmd BufRead,BufNewFile *.nix    setlocal textwidth=100
 autocmd BufRead,BufNewFile *.md     setlocal spell
 autocmd BufRead,BufNewFile *.md     setlocal wrap
 autocmd BufRead,BufNewFile *.md     setlocal textwidth=0
+"For some reason, tree-sitter's highlight for Markdown is flipped?"
+autocmd BufRead,BufNewFile *.md     TSBufDisable highlight
 autocmd BufRead,BufNewFile *.txt    setlocal spell
 autocmd BufRead,BufNewFile *.vue    syntax sync fromstart
 autocmd BufRead,BufNewFile *.vugu   setlocal filetype=html
