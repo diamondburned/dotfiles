@@ -34,7 +34,7 @@ tabs 4
 
 f() {
 	(( $# == 0 )) && return 1
-	"$@" &>> /tmp/forked-"$1".log || return &
+	"$@" &>> /tmp/forked-"$(basename "$1")".log || return &
 	disown
 }
 
