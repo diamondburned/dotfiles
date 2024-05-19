@@ -1,16 +1,9 @@
 { config, lib, pkgs, ...}:
 
 {
-	services.tailscale = {
-		enable = true;
-		extraUpFlags = [
-			"--ssh"
-			"--accept-dns"
-			"--advertise-exit-node"
-			"--operator=diamond"
-		];
-		useRoutingFeatures = "client";
-	};
+	imports = [
+		./tailscale.nix
+	];
 
 	# Comment out all the DNS-over-TLS bits below.
 	#

@@ -4,10 +4,11 @@
 	# Enable the GNOME desktop environment
 	services.xserver.desktopManager.gnome = {
 		enable = true;
-		extraGSettingsOverrides = ''
-			[org.gnome.desktop.wm.preferences]
-			focus-new-windows = 'strict'
-		'';
+		# extraGSettingsOverrides = ''
+		# 	[org.gnome.desktop.wm.preferences]
+		# 	auto-raise = false
+		# 	focus-new-windows = 'strict'
+		# '';
 	};
 
 	# Enable GDM.
