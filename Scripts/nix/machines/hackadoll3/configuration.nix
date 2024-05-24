@@ -642,7 +642,8 @@ in {
 			# discord
 			dissent
 			# vesktop
-			telegram-desktop
+			# telegram-desktop
+			kotatogram-desktop
 			# (pkgs.callPackage <unstable/pkgs/by-name/ve/vesktop/package.nix> {})
 			# gotktrix
 			fractal
