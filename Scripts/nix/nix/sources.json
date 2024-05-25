@@ -6,6 +6,18 @@
         "submodules": true,
         "type": "git"
     },
+    "comd": {
+        "branch": "main",
+        "description": "comd implements a Command Daemon that listens for HTTP requests to execute commands.",
+        "homepage": null,
+        "owner": "diamondburned",
+        "repo": "comd",
+        "rev": "9b223d2f7c4f2c4c95b0db2026b19ae1ef476851",
+        "sha256": "1cvnp9p0jj4yn6jpmgpw955q4ls24bjsx381llds198dm149si0q",
+        "type": "tarball",
+        "url": "https://github.com/diamondburned/comd/archive/9b223d2f7c4f2c4c95b0db2026b19ae1ef476851.tar.gz",
+        "url_template": "https://github.com/<owner>/<repo>/archive/<rev>.tar.gz"
+    },
     "flake-compat": {
         "branch": "master",
         "description": null,
