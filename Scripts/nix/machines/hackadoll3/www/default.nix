@@ -6,6 +6,7 @@
 {
 	imports = [
 		./_module.nix
+		./comd.nix
 		./esp.nix
 		./bulb.nix
 	];
