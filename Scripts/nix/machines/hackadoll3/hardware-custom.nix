@@ -62,7 +62,7 @@ in {
 		requires = [ "systemd-modules-load.service" ];
 		wantedBy = [ "multi-user.target" ];
 		script = ''
-			echo 1 > /sys/devices/platform/lg-laptop/fan_mode
+			# echo 1 > /sys/devices/platform/lg-laptop/fan_mode
 			echo 80 > /sys/devices/platform/lg-laptop/battery_care_limit
 		'';
 		serviceConfig = {
@@ -215,10 +215,10 @@ in {
 	# };
 
 	# Use auto-cpufreq instead of TLP.
-	services.auto-cpufreq.enable = true;
+	# services.auto-cpufreq.enable = true;
 
-	# services.power-profiles-daemon.enable = true;
-	services.power-profiles-daemon.enable = lib.mkForce false;
+	services.power-profiles-daemon.enable = true;
+	# services.power-profiles-daemon.enable = lib.mkForce false;
 	# services.tlp = {
 	# 	enable = true;
 	# 	settings = {
