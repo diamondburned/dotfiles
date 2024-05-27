@@ -12,10 +12,10 @@
         "homepage": null,
         "owner": "diamondburned",
         "repo": "comd",
-        "rev": "34f523c0b5a564f475216df0eee5ce67be8af762",
-        "sha256": "1q5fybz13n5kwvjm0h937spfhn8wdgwi3hmdiirsa97a8vhg94jg",
+        "rev": "40b95f935ca1d0b2ff4f6aed94f47b9076804579",
+        "sha256": "0dx8zcj2sqha78lmv0jc9crjxq3kxmadlj2g6fcrh5a6zqiwbyps",
         "type": "tarball",
-        "url": "https://github.com/diamondburned/comd/archive/34f523c0b5a564f475216df0eee5ce67be8af762.tar.gz",
+        "url": "https://github.com/diamondburned/comd/archive/40b95f935ca1d0b2ff4f6aed94f47b9076804579.tar.gz",
         "url_template": "https://github.com/<owner>/<repo>/archive/<rev>.tar.gz"
     },
     "flake-compat": {

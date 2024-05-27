@@ -4,17 +4,58 @@ with lib;
 with builtins;
 
 let
+	commands = {
+		diamond = [
+			{
+				name = "volume_up";
+				icon = "volume_up";
+				text = "Volume Up";
+				exec = "${pkgs.pulseaudio}/bin/pactl set-sink-volume @DEFAULT_SINK@ +2%";
+			}
+			{
+				name = "volume_down";
+				icon = "volume_down";
+				text = "Volume Down";
+				exec = "${pkgs.pulseaudio}/bin/pactl set-sink-volume @DEFAULT_SINK@ -2%";
+			}
+			{
+				name = "obliterate_firefox";
+				icon = "delete_forever";
+				text = "Obliterate Firefox";
+				exec = "${pkgs.procps}/bin/pkill -INT firefox";
+			}
+			{
+				name = "check_temperature";
+				icon = "thermostat";
+				text = "Check Temperature";
+				exec = "${pkgs.lm_sensors}/bin/sensors";
+			}
+			{
+				name = "view_htop";
+				icon = "memory";
+				text = "View htop";
+				exec = pkgs.writeShellScript "view-htop" ''
+					export LINES=80
+					export COLUMNS=120
+					${pkgs.util-linux}/bin/script -qfc "echo q | "${getExe pkgs.htop} \
+						| ${getExe pkgs.aha} --black --line-fix --title "htop"
+				'';
+			}
+		];
+	};
+
 	sources = import <dotfiles/nix/sources.nix> { inherit pkgs; };
 	comd = (import sources.flake-compat { src = sources.comd; }).defaultNix;
 
-	htmlDir =
-		pkgs.writeTextDir "index.html" ''
+	htmlDir = pkgs.linkFarm "comd-root" (mapAttrsToList (name: path: { inherit name path; }) {
+		"index.html" = pkgs.writeText "comd-root-index.html" ''
 			<!DOCTYPE html>
 			<meta charset="utf-8">
 			<meta name="viewport" content="width=device-width, initial-scale=1">
 			<meta name="color-scheme" content="light dark" />
 			<meta name="darkreader-lock">
 			<title>${config.networking.hostName} - comd</title>
+			<link rel="icon" href="/favicon.png" />
 			<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@picocss/pico@2/css/pico.classless.min.css" />
 			<link rel="stylesheet "href="https://fonts.googleapis.com/icon?family=Material+Icons">
 	
@@ -70,27 +111,12 @@ let
 				}
 
 				.material-icons {
-					vertical-align: bottom;
+					vertical-align: text-bottom;
 				}
 			</style>
 		'';
-	
-	commands = {
-		diamond = [
-			{
-				name = "volume_up";
-				icon = "volume_up";
-				text = "Volume Up";
-				exec = "${pkgs.pulseaudio}/bin/pactl set-sink-volume @DEFAULT_SINK@ +5%";
-			}
-			{
-				name = "volume_down";
-				icon = "volume_down";
-				text = "Volume Down";
-				exec = "${pkgs.pulseaudio}/bin/pactl set-sink-volume @DEFAULT_SINK@ -5%";
-			}
-		];
-	};
+		"favicon.png" = <dotfiles/static/gears-icon.png>;
+	});
 in
 
 {
