@@ -35,10 +35,14 @@ let
 				icon = "memory";
 				text = "View htop";
 				exec = pkgs.writeShellScript "view-htop" ''
-					export LINES=80
-					export COLUMNS=120
-					${pkgs.util-linux}/bin/script -qfc "echo q | "${getExe pkgs.htop} \
-						| ${getExe pkgs.aha} --black --line-fix --title "htop"
+					if [[ "$1" == "socat" ]]; then
+						stty rows 80 cols 120
+						echo q \
+							| ${getExe pkgs.htop} \
+							| ${getExe pkgs.aha} --black --line-fix --title "htop"
+					else
+						${getExe pkgs.socat} - EXEC:"$BASH_SOURCE socat",pty,setsid,ctty
+					fi
 				'';
 			}
 		];
