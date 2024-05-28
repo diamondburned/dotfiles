@@ -36,6 +36,18 @@
         "rev": "cf5661259209afb06e0a34960c10e8dcdf21d022",
         "type": "git"
     },
+    "mtkclient": {
+        "branch": "main",
+        "description": "MTK reverse engineering and flash tool",
+        "homepage": "",
+        "owner": "bkerler",
+        "repo": "mtkclient",
+        "rev": "31819b814d331e8612fff3d8cfb838912861612e",
+        "sha256": "07436gpvdfmvbqcffgi6rs74a24wwgx70v15zl3fgvy1dx7h7y8s",
+        "type": "tarball",
+        "url": "https://github.com/bkerler/mtkclient/archive/31819b814d331e8612fff3d8cfb838912861612e.tar.gz",
+        "url_template": "https://github.com/<owner>/<repo>/archive/<rev>.tar.gz"
+    },
     "nixpkgs": {
         "branch": "nixos-unstable",
         "description": "Nix Packages collection",
