@@ -483,9 +483,11 @@ in {
 				gpu-api = "auto";
 				gpu-context = "auto";
 				vo = "gpu";
-				dither-depth = 8;
+				# vo = "dmabuf-wayland";
+				hwdec = "auto-safe";
+				dither-depth = "auto";
 				# fbo-format = "rgba32f";
-				scale = "lanczos";
+				# scale = "lanczos";
 				script-opts = "ytdl_hook-ytdl_path=yt-dlp";
 			};
 		};

@@ -38,7 +38,9 @@ in
 		description = "Detects when your YubiKey is waiting for a touch";
 		serviceConfig = {
 			ExecStart = "${pkgs.yubikey-touch-detector}/bin/yubikey-touch-detector --libnotify";
+			# Restart the service every hour to prevent it from leaking CPU.
 			Restart = "always";
+			RuntimeMaxSec = "1h";
 		};
 	};
 
