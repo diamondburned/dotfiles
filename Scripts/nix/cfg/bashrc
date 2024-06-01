@@ -278,6 +278,8 @@ export GO111MODULE=on
 
 export PATH="$HOME/.bin:${PATH//::/:}"
 
+cf() { cd "$(fzf)" || return; }
+
 alias ga="git add -A"
 alias gp="git push origin"
 
@@ -368,7 +370,6 @@ xterm() {
 #PS1='\n\[\033[00;36m\]${HOSTNAME} \[\033[01;32m\]\w/\[\033[00;32m\]$(__git_ps1) \[\033[0m\]'
 # PS1="\n\\$ \[\033[m\]\[\033[38;5;32m\]\h\[\033[m\]\[\033[38;5;15m\] @ \[\033[m\]\[\033[38;5;2m\]\w\[\033[m\]\[\033[38;5;15m\] :\[\033[m\]\[\033[38;5;22m\]\$(__git_ps1)\n \[\033[m\]\[\033[38;5;241m\] >\[\033[m\] "
 
-
 set-title() {
 	local title="$1"
 	if [[ ! $title ]]; then
@@ -376,6 +377,22 @@ set-title() {
 	fi
 	__lineprompt_custom_title="$title"
 	__lineprompt_set_title
+}
+alias set_title=set-title
+
+osc7_cwd() {
+    local strlen=${#PWD}
+    local encoded=""
+    local pos c o
+    for (( pos=0; pos<strlen; pos++ )); do
+        c=${PWD:$pos:1}
+        case "$c" in
+            [-/:_.!\'\(\)~[:alnum:]] ) o="${c}" ;;
+            * ) printf -v o '%%%02X' "'${c}" ;;
+        esac
+        encoded+="${o}"
+    done
+    printf '\e]7;file://%s%s\e\\' "${HOSTNAME}" "${encoded}"
 }
 
 __lineprompt_set_title() {
@@ -403,14 +420,46 @@ __lineprompt_debug_handler() {
 __lineprompt_init() {
 	_color_cyan="\033[38;2;85;205;252m"
 	_color_pink="\033[38;2;247;157;208m"
+	printf -v _foot_prompt_marker '\e]133;A\e\\'
 
 	# _arrow="\[\033[9m\]\[$_color_cyan\] ❤ \[\033[0m\]\[$_color_pink\]▶\[\033[m\] "
-	_arrow="\[$_color_cyan\]―❤―\[\033[0m\]\[$_color_pink\]▶\[\033[m\] "
+	_arrow="\[${_color_cyan}\]―❤―\[\033[0m\]\[${_color_pink}\]▶\[\033[m\] "
 	trap '__lineprompt_debug_handler "$BASH_COMMAND"' DEBUG
 
 	# Disabled because glitchy.
 	# Redraw on resize.
 	# trap 'echo -e "\033[2J\033[H"; __lineprompt_redraw; echo -en "${PS1@P}"' WINCH
+
+	__lineprompt_welcome
+}
+
+__lineprompt_main() {
+	# local commands
+	local sig=$?
+	local cmd="$PREVIOUS_COMMAND"
+
+	# add to history right away
+	history -n
+	history -a
+
+	# exit status 0
+	(( sig > 0 )) && echo "exit status $sig"
+
+	# Redraw the prompt
+	__lineprompt_redraw
+
+	# OSC 7 current directory for foot
+	osc7_cwd
+
+	# Quick cd
+	# [[ -d "$1" ]] && cd "$1"
+
+	# terminal title
+	[[ "$cmd" == "__lineprompt_main" ]] && __lineprompt_set_title "$(basename "$PWD")/" || {
+		[[ "$sig" == 0 ]]                                                  \
+			&& __lineprompt_set_title "$(basename "$PWD")/" \
+			|| __lineprompt_set_title "exit $sig : $(basename "$PWD")/"
+	}
 }
 
 __lineprompt_redraw() {
@@ -432,33 +481,7 @@ __lineprompt_redraw() {
 	}
 
 	# set PS1
-	printf -v PS1 "\n%s\n%s" "$_prompt" "$_arrow"
-}
-
-__lineprompt_main() {
-	# local commands
-	local sig=$?
-	local cmd="$PREVIOUS_COMMAND"
-
-	# add to history right away
-	history -n
-	history -a
-
-	# exit status 0
-	(( sig > 0 )) && echo "exit status $sig"
-
-	# Redraw the prompt
-	__lineprompt_redraw
-
-	# Quick cd
-	# [[ -d "$1" ]] && cd "$1"
-
-	# terminal title
-	[[ "$cmd" == "__lineprompt_main" ]] && __lineprompt_set_title "$(basename "$PWD")/" || {
-		[[ "$sig" == 0 ]]                                                  \
-			&& __lineprompt_set_title "$(basename "$PWD")/" \
-			|| __lineprompt_set_title "exit $sig : $(basename "$PWD")/"
-	}
+	printf -v PS1 "\n%s\n%s" "${_foot_prompt_marker}${_prompt}" "${_arrow}"
 }
 
 # Bash multiple compare. $@ var name, returns 1 if var is changed
@@ -487,9 +510,6 @@ __lineprompt_cmps() {
 
 # Redraw the prompt on resize.
 # trap '__lineprompt_main' WINCH
-
-__lineprompt_init
-PROMPT_COMMAND=__lineprompt_main
 
 # Ignore sensitive information
 HISTIGNORE='export *TOKEN*'
@@ -645,4 +665,49 @@ at() {
 	"${command[@]}"
 }
 
-echo Welcome
+# print-centered
+# print-centered WIDTH
+print-centered() {
+	local width=${1:-0}
+	local widthl
+	local offset
+
+	while read -d $'\n' -r line; do
+		widthl=${width}
+		if (( widthl == 0 )); then
+			widthl=${#line}
+		fi
+		offset=$[ (COLUMNS - widthl) / 2 ]
+		for ((i = 0; i < offset; i++)); do
+			echo -n " "
+		done
+		echo "$line"
+	done
+}
+
+__lineprompt_welcome() {
+	tput bold
+	echo
+	echo "~~ Welcome ~~" | print-centered
+	echo
+	tput sgr0
+	
+	if [[ -d ~/Scripts/nix ]]; then
+		# TODO: migrate this to Nix Flake then use the proper abs path.
+		_ART_WIDTH=80
+		_ART_HEIGHT=24
+		if (( COLUMNS > _ART_WIDTH )); then
+			cat ~/Scripts/nix/static/arts/needystreamer_2x1.txt | print-centered $_ART_WIDTH
+		fi
+	fi
+	
+	tput bold
+	echo
+	printf "${_color_pink}"
+	echo "<3" | print-centered
+	echo
+	tput sgr0
+}
+
+__lineprompt_init
+PROMPT_COMMAND=__lineprompt_main

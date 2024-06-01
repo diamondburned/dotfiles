@@ -59,7 +59,7 @@ in
 		recursive = true;
 	};
 	xdg.configFile."nvim/arts" = {
-		source = ./arts;
+		source = <dotfiles/static/arts>;
 		recursive = true;
 	};
 

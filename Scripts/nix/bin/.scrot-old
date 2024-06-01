@@ -1,0 +1,12 @@
+#!/usr/bin/env bash
+set -e
+
+if [[ $1 == -a ]]; then
+	slurp -w 0 -b '#00000088' -s '#00000000' | grim -g - -c - | wl-copy
+else
+	grim -t jpeg -q 100 - | wl-copy
+fi
+
+notify-send \
+	"Screenshot taken." \
+	"Saved to your clipboard."

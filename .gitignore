@@ -2,8 +2,14 @@
 /*
 /*/
 
+# Don't ignore the Scripts directory but ignore all files in it.
+# This allows us to selectively allow Scripts/nix.
+!/Scripts
+Scripts/*
+
 # Except the Nix configuration
 !/Scripts/nix
 !/Scripts/nix/*
 
 .Rproj.user
+.direnv
