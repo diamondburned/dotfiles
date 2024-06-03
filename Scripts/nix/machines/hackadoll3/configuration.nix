@@ -558,6 +558,7 @@ in {
 			mixxx
 
 			# System
+			ncdu
 			xorg.xhost # dependency for wsudo
 			ddcutil
 			powertop
