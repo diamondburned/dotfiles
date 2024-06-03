@@ -104,7 +104,6 @@ in {
 
 	# This needs to be manually stated, for some reason.
 	boot.kernelModules = [
-		"v4l2loopback"
 		"i2c-dev"
 		"8852au"
 		# "ddcci-driver"

@@ -72,6 +72,7 @@ in {
 		<dotfiles/overlays>
 		<dotfiles/overlays/services.nix>
 		<dotfiles/secrets>
+		<dotfiles/cfg/v4l2>
 		<dotfiles/cfg/udev>
 		<dotfiles/cfg/nokbd>
 		<dotfiles/cfg/fonts>
