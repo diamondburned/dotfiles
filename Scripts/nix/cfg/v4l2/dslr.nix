@@ -30,7 +30,7 @@ in
 			script = ''
 				set -eo pipefail
 				gphoto2 --stdout --capture-movie | \
-				ffmpeg -vcodec rawvideo -pix_fmt yuv420p -f v4l2 /dev/video0
+				ffmpeg -i - -vcodec copy -f v4l2 /dev/video0
 			'';
 			path = with pkgs; [
 				gphoto2

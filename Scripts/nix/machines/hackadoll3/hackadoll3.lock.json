@@ -61,8 +61,8 @@
       "store_hash": "ccb69s0aqifdg0z3a67fbwyayb0g7ikj"
     },
     "github:NixOS/nixpkgs nixos-unstable": {
-      "url": "https://github.com/NixOS/nixpkgs/archive/25865a40d14b3f9cf19f19b924e2ab4069b09588.tar.gz",
-      "store_hash": "77qq29f04v1bymc48xvivk32vf0i2q9s"
+      "url": "https://github.com/NixOS/nixpkgs/archive/57610d2f8f0937f39dbd72251e9614b1561942d8.tar.gz",
+      "store_hash": "b3lx5z5vb6788nh20fz9mngfhcf7rx09"
     },
     "github:NixOS/nixpkgs staging": {
       "url": "https://github.com/NixOS/nixpkgs/archive/d74654eebef8315a570aee31063af4c8458518d5.tar.gz",
@@ -113,8 +113,8 @@
       "store_hash": "akfavqi4nng8a799z9pgf9c26sf2czd5"
     },
     "github:nix-community/home-manager master": {
-      "url": "https://github.com/nix-community/home-manager/archive/3dfe05aa9b5646995ace887931fa60269a039777.tar.gz",
-      "store_hash": "fcq0fhmdprkl9bz6ri94x1533hd73bd5"
+      "url": "https://github.com/nix-community/home-manager/archive/9b53a10f4c91892f5af87cf55d08fba59ca086af.tar.gz",
+      "store_hash": "qzfh82ni4kd4axkbz31c4h2ym73ny70m"
     },
     "github:nix-community/home-manager release-22.11": {
       "url": "https://github.com/nix-community/home-manager/archive/f9edbedaf015013eb35f8caacbe0c9666bbc16af.tar.gz",
@@ -142,7 +142,7 @@
     },
     "https://nixos.org/channels/nixos-unstable": {
       "url": "https://nixos.org/channels/nixos-unstable",
-      "store_hash": "yqdff2x1i99yhpli3whp13k20gaqyk7s"
+      "store_hash": "5wmgxvw4kbjsjwrc01b2cll7xq3s98lz"
     }
   }
 }
