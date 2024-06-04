@@ -559,6 +559,7 @@ in {
 			mixxx
 
 			# System
+			deja-dup
 			ncdu
 			xorg.xhost # dependency for wsudo
 			ddcutil
