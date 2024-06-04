@@ -640,7 +640,8 @@ in {
 			lollypop
 			komikku
 			spotify
-			chatterino7
+			chatterino2
+			# chatterino7
 
 			# Chat/Social
 			# zoom-us
