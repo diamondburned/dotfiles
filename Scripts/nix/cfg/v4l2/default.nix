@@ -1,10 +1,10 @@
 { config, lib, pkgs, ... }:
 
 let
-	cameraDevice = {
-		idVendor = "04a9";
-		idProduct = "3270";
-	};
+	# cameraDevice = {
+	# 	idVendor = "04a9";
+	# 	idProduct = "3270";
+	# };
 in
 
 {
