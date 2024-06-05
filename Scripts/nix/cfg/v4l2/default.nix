@@ -10,7 +10,7 @@ let
 		name = "dslr-loopback";
 		text = ''
 			local videoDevice=''${1:-/dev/video10}
-			gphoto2 --stdout --capture-movie | ffmpeg -i - -vcodec copy -f v4l2 $videoDevice
+			gphoto2 --stdout --capture-movie | ffmpeg -i - -vcodec copy -f v4l2 "$videoDevice"
 		'';
 	};
 in
@@ -30,6 +30,7 @@ in
 	environment.systemPackages = with pkgs; [
 		config.boot.kernelPackages.v4l2loopback
 		gnome.cheese
+		dslr-loopback
 	];
 
 	# Canon DSLR configuration.

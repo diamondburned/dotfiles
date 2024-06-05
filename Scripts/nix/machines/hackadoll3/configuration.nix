@@ -647,6 +647,7 @@ in {
 			# zoom-us
 			# discord
 			dissent
+			# Use eclairevoyant/nixpkgs which contains a fix for armcord's Wayland issue.
 			(import (pkgs.fetchFromGitHub {
 				owner = "eclairevoyant";
 				repo  = "nixpkgs";

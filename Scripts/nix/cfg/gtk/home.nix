@@ -34,9 +34,9 @@ in
 		font.name = "Nunito";
 		font.size = 11;
 
-		# theme = {
-		# 	inherit (theme) name package;
-		# };
+		theme = {
+			inherit (theme) name package;
+		};
 
 		iconTheme = {
 			# name = "Papirus-Light";
@@ -44,10 +44,10 @@ in
 			package = pkgs.papirus-icon-theme;
 		};
 
-		# cursorTheme = {
-		# 	name = "Catppuccin-Mocha-Pink-Cursors";
-		# 	size = 32;
-		# };
+		cursorTheme = {
+			name = "Catppuccin-mocha-pink-cursors";
+			size = 32;
+		};
 
 		gtk3 = {
 			extraConfig = {
@@ -64,7 +64,7 @@ in
 
 	home.pointerCursor = {
 		package = pkgs.catppuccin-cursors.mochaPink;
-		name = "Catppuccin-Mocha-Pink-Cursors";
+		name = "Catppuccin-mocha-pink-cursors";
 		size = 32;
 		gtk.enable = true;
 		x11.enable = true;
