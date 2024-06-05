@@ -9,11 +9,13 @@ let
 	dslr-webcam-start = pkgs.writeShellApplication {
 		name = "dslr-webcam-start";
 		text = ''
-			videoDevice=''${1:-/dev/video10}
-			gphoto2 --stdout --capture-movie | ffmpeg -i - -vcodec copy -f v4l2 "$videoDevice"
+			gphoto2 --stdout --capture-movie | gst-launch-1.0 \
+				fdsrc ! \
+				decodebin ! \
+				pipewiresink stream-properties="p,node.description=DSLR,node.name=DSLR,media.role=Camera,media.class=Video/Source"
 		'';
 		runtimeInputs = with pkgs; [
-			ffmpeg
+			gst_all_1.gstreamer
 			gphoto2
 		];
 	};
