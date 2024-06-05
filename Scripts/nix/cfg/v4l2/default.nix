@@ -12,6 +12,10 @@ let
 			videoDevice=''${1:-/dev/video10}
 			gphoto2 --stdout --capture-movie | ffmpeg -i - -vcodec copy -f v4l2 "$videoDevice"
 		'';
+		runtimeInputs = with pkgs; [
+			ffmpeg
+			gphoto2
+		];
 	};
 in
 

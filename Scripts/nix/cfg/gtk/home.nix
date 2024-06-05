@@ -44,10 +44,10 @@ in
 			package = pkgs.papirus-icon-theme;
 		};
 
-		cursorTheme = {
-			name = "Catppuccin-mocha-pink-cursors";
-			size = 32;
-		};
+		# cursorTheme = {
+		# 	name = "Catppuccin-mocha-pink-cursors";
+		# 	size = 32;
+		# };
 
 		gtk3 = {
 			extraConfig = {
@@ -64,7 +64,7 @@ in
 
 	home.pointerCursor = {
 		package = pkgs.catppuccin-cursors.mochaPink;
-		name = "Catppuccin-mocha-pink-cursors";
+		name = "Catppuccin-Mocha-Pink";
 		size = 32;
 		gtk.enable = true;
 		x11.enable = true;
