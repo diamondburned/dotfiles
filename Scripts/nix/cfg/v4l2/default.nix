@@ -5,6 +5,14 @@ let
 	# 	idVendor = "04a9";
 	# 	idProduct = "3270";
 	# };
+
+	dslr-loopback = pkgs.writeShellApplication {
+		name = "dslr-loopback";
+		text = ''
+			local videoDevice=''${1:-/dev/video10}
+			gphoto2 --stdout --capture-movie | ffmpeg -i - -vcodec copy -f v4l2 $videoDevice
+		'';
+	};
 in
 
 {

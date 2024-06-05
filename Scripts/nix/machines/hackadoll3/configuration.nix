@@ -647,6 +647,13 @@ in {
 			# zoom-us
 			# discord
 			dissent
+			(import (pkgs.fetchFromGitHub {
+				owner = "eclairevoyant";
+				repo  = "nixpkgs";
+				rev   = "c05c203df716f444fa075e121bb9cf362b694db0";
+				hash  = "sha256-GlbRXv6g9YmrWAzs198Bhdl/W0pjCAuKLBg+iZ0qgAk=";
+			}) {}).armcord
+			# armcord
 			# vesktop
 			# telegram-desktop
 			kotatogram-desktop
