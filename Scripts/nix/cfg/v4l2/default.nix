@@ -6,10 +6,10 @@ let
 	# 	idProduct = "3270";
 	# };
 
-	dslr-loopback = pkgs.writeShellApplication {
-		name = "dslr-loopback";
+	dslr-webcam-start = pkgs.writeShellApplication {
+		name = "dslr-webcam-start";
 		text = ''
-			local videoDevice=''${1:-/dev/video10}
+			videoDevice=''${1:-/dev/video10}
 			gphoto2 --stdout --capture-movie | ffmpeg -i - -vcodec copy -f v4l2 "$videoDevice"
 		'';
 	};
@@ -30,7 +30,7 @@ in
 	environment.systemPackages = with pkgs; [
 		config.boot.kernelPackages.v4l2loopback
 		gnome.cheese
-		dslr-loopback
+		dslr-webcam-start
 	];
 
 	# Canon DSLR configuration.
