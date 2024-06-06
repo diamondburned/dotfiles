@@ -64,7 +64,7 @@ in
 
 	home.pointerCursor = {
 		package = pkgs.catppuccin-cursors.mochaPink;
-		name = "Catppuccin-Mocha-Pink";
+		name = "catppuccin-mocha-pink-cursors";
 		size = 32;
 		gtk.enable = true;
 		x11.enable = true;
