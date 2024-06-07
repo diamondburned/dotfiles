@@ -1,14 +1,10 @@
 { config, lib, pkgs, ... }:
 
 let
-	env = {
-		GTK_THEME = theme.name;
-	};
-
-	css = pkgs.concatText "gtk.css" [
+	css = lib.concatStringsSep "\n" (map builtins.readFile [
 		./default.css
 		# ./christmas.css
-	];
+	]);
 
 	theme = {
 		name = "Colloid-Pink-Dark";
@@ -19,9 +15,20 @@ let
 			tweaks = [
 				"rimless"
 				"normal"
+				"float"
 				# "black"
 			];
 		};
+	};
+
+	cursorTheme = {
+		package = pkgs.catppuccin-cursors.mochaPink;
+		name = "catppuccin-mocha-pink-cursors";
+		size = 32;
+	};
+
+	env = {
+		GTK_THEME = theme.name;
 	};
 in
 
@@ -31,41 +38,48 @@ in
 
 	gtk = {
 		enable = true;
-		font.name = "Nunito";
+		font.name = "Sans";
 		font.size = 11;
 
 		theme = {
-			inherit (theme) name package;
+			name = theme.name;
+			# Do not set theme.package here, as this will cause home-manager to insert the theme via
+			# user.css which will not only mess up other application's themes but also override its theme.
+			# This is a GTK issue as they have removed the ability to set the theme normally, so hacks
+			# must be done to set the theme, and hacks are fragile.
 		};
 
 		iconTheme = {
-			# name = "Papirus-Light";
 			name = "Papirus-Dark";
 			package = pkgs.papirus-icon-theme;
 		};
 
-		# cursorTheme = {
-		# 	name = "Catppuccin-mocha-pink-cursors";
-		# 	size = 32;
-		# };
-
 		gtk3 = {
+			extraCss = css;
 			extraConfig = {
-				gtk-application-prefer-dark-theme = 1;
-				# gtk-application-prefer-dark-theme = 0;
+				# gtk-cursor-theme-name = cursorTheme.name;
+				# gtk-cursor-theme-size = cursorTheme.size;
+				# gtk-font-name = config.gtk.font.name + " " + config.gtk.font.size;
+				# gtk-icon-theme-name = config.gtk.iconTheme.name;
+				# gtk-theme-name = theme.name;
+				# gtk-application-prefer-dark-theme = 1;
 			};
-			extraCss = builtins.readFile css;
 		};
 
 		gtk4 = {
-			extraCss = builtins.readFile css;
+			extraCss = css;
+			extraConfig = {
+				# gtk-cursor-theme-name = cursorTheme.name;
+				# gtk-cursor-theme-size = cursorTheme.size;
+				# gtk-font-name = config.gtk.font.name + " " + config.gtk.font.size;
+				# gtk-icon-theme-name = config.gtk.iconTheme.name;
+				# gtk-theme-name = theme.name;
+			};
 		};
 	};
 
 	home.pointerCursor = {
-		package = pkgs.catppuccin-cursors.mochaPink;
-		name = "catppuccin-mocha-pink-cursors";
-		size = 32;
+		inherit (cursorTheme) package name size;
 		gtk.enable = true;
 		x11.enable = true;
 	};
