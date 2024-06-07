@@ -1,12 +1,7 @@
-{ pkgs }:
+{ pkgs, lib }:
 
-# let newpkgs = import (pkgs.fetchFromGitHub {
-# 		owner = "NixOS";
-# 		repo  = "nixpkgs";
-# 		rev   = "614a842";
-# 		hash  = "sha256:0gkpnjdcrh5s4jx0i8dc6679qfkffmz4m719aarzki4jss4l5n5p";
-# 	}) {};
-let newpkgs = pkgs.nixpkgs_unstable_real;
+let
+	newpkgs = pkgs.nixpkgs_unstable_real;
 
 	deps = with newpkgs; [
 		gtk3
@@ -25,10 +20,11 @@ let newpkgs = pkgs.nixpkgs_unstable_real;
 		gst_all_1.gst-plugins-bad
 		gst_all_1.gst-plugins-ugly
 	];
-	
-in pkgs.buildGoPackage {
+in
+
+pkgs.buildGoPackage {
 	name = "grun";
-	src  = pkgs.writeTextDir "main.go" ''
+	src	= pkgs.writeTextDir "main.go" ''
 		package main
 
 		import (
@@ -44,7 +40,7 @@ in pkgs.buildGoPackage {
 			}
 
 			cmd := exec.Command(os.Args[1], os.Args[2:]...)
-			cmd.Stdin  = os.Stdin
+			cmd.Stdin = os.Stdin
 			cmd.Stdout = os.Stdout
 			cmd.Stderr = os.Stderr
 
@@ -70,4 +66,10 @@ in pkgs.buildGoPackage {
 		wrapGAppsHook
 		wrapGAppsHook4
 	] ++ deps;
+
+	preFixup = ''
+		gappsWrapperArgs+=(
+			--prefix LD_LIBRARY_PATH : ${lib.makeLibraryPath deps}
+		)
+	'';
 }
