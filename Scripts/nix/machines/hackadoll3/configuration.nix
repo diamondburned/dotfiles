@@ -74,6 +74,7 @@ in {
 		<dotfiles/secrets>
 		<dotfiles/cfg/v4l2>
 		<dotfiles/cfg/udev>
+		<dotfiles/cfg/sound>
 		<dotfiles/cfg/nokbd>
 		<dotfiles/cfg/fonts>
 		<dotfiles/cfg/localhost>
@@ -510,7 +511,7 @@ in {
 		# 	];
 		# };
 
-		services.easyeffects.enable = true;
+		# services.easyeffects.enable = true;
 
 		# home.file.".icons/default/index.theme".text = ''
 		# 	[icon theme]
