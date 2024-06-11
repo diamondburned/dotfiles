@@ -556,6 +556,7 @@ in {
 			drawing
 			sticky
 			fragments
+			goatcounter
 			alarm-clock-applet
 			mixxx
 

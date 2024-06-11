@@ -22,6 +22,9 @@ self: super: {
 	neovim-gtk = super.callPackage ./packages/neovim-gtk {
 		inherit (super.nixpkgs_unstable_newer) rustPlatform;
 	};
+	goatcounter = super.callPackage ./packages/goatcounter.nix {
+		goatcounter = super.goatcounter or null;
+	};
 	gotab = super.callPackage ./packages/gotab.nix {};
 	oxfs = super.callPackage ./packages/oxfs.nix {};
 	gpt4all = super.qt6Packages.callPackage ./packages/gpt4all.nix {};
