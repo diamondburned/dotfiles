@@ -9,10 +9,10 @@ if goatcounter == null then
 		 owner = "arp242";
 		 repo = pname;
 		 rev = version;
-		 sha256 = "sha256-LzZNDZDgMFy6CYzfc57YNPJY8O5xROZLSFm85GCZIFM";
+		 sha256 = "sha256-lwiLk/YYxX4QwSDjpU/mAikumGXYMzleRzmPjZGruZU=";
 	 };
 
-	 vendorHash = "sha256-u+AXkAoaV3YrHyhpRjNT2CiyDO6gkM3lidgyEQNvGso=";
+	 vendorHash = "sha256-YAb3uBWQc6hWzF1Z5cAg8RzJQSJV+6dkppfczKS832s=";
 
 	 modRoot = ".";
 	 doCheck = false;
