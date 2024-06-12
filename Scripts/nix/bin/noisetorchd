@@ -1,0 +1,98 @@
+#!/usr/bin/env bash
+set -eo pipefail
+
+main() {
+	require \
+		noisetorch \
+		pw-link
+
+	noisetorch::unload_all
+
+	pw-link -mo | while read -r line; do
+		read -r _ device_code <<< "$line"
+		device="${device_code%:*}"
+
+		case "$line" in
+		"= alsa_input."*)
+			noisetorch::load "$device"
+			;;
+		"+ alsa_input."*)
+			noisetorch::load "$device"
+			;;
+		"- alsa_input."*)
+			noisetorch::unload "$device"
+			;;
+		esac
+	done
+}
+
+cleanup() {
+	log "Exiting..."
+	noisetorch::unload_all
+}
+
+
+
+declare -A loaded_devices
+
+# load [device]
+noisetorch::load() {
+	local device="$1"
+
+	if [[ -n "${loaded_devices["$device"]}" ]]; then
+		# log "NoiseTorch already loaded for $device. Skipping..."
+		return
+	fi
+
+	noisetorch -i -s "$device"
+	loaded_devices["$device"]=1
+	log "Loaded NoiseTorch for new device $device"
+}
+
+# unload [device]
+noisetorch::unload() {
+	local device="$1"
+
+	if [[ -n "${loaded_devices["$device"]}" ]]; then
+		noisetorch -u -s "$device"
+		unset 'loaded_devices[$device]'
+		log "Unloaded NoiseTorch for device $device"
+	fi
+}
+
+# unload_all
+noisetorch::unload_all() {
+	while (pw-link -o | grep "^NoiseTorch Microphone" > /dev/null); do
+		log "Found at least one NoiseTorch module. Unloading..."
+		noisetorch -u
+	done
+}
+
+
+
+require() {
+	for cmd in "$@"; do
+		if ! command -v "$cmd" &>/dev/null; then
+			echo "Missing command: $cmd" >&2
+			exit 1
+		fi
+	done
+}
+
+log() {
+	{
+		fg 37
+		printf "[%(%X)T] "
+		fg 0
+		echo "$*"
+	} >&2
+}
+
+fg() {
+	printf '\033[%dm' "$1"
+}
+
+
+
+trap cleanup EXIT
+main "$@"
