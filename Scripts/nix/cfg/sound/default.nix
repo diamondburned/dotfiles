@@ -23,9 +23,9 @@
 				helvum
 			];
 
-			systemd.user.services.noisetorch = {
+			systemd.user.services.noisetorchd = {
 				Unit = {
-					Description = "NoiseTorch user service";
+					Description = "NoiseTorch user daemon service";
 					PartOf = [ "default.target" ];
 					After = [ "pipewire.target" "wireplumber.target" ];
 				};
@@ -33,8 +33,15 @@
 					WantedBy = [ "default.target" ];
 				};
 				Service = {
-					Type = "forking";
-					ExecStart = "${lib.getExe pkgs.noisetorch} -i";
+					ExecStart = pkgs.writeShellApplication {
+						name = "noisetorchd";
+						text = <dotfiles/bin/noisetorchd>;
+						runtimeInputs = with pkgs; [
+							pipewire
+							coreutils
+							noisetorch
+						];
+					};
 					Restart = "on-failure";
 					RestartSec = "5s";
 				};
