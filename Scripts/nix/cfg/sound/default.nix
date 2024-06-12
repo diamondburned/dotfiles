@@ -18,6 +18,10 @@
 	home-manager.sharedModules = [
 		{
 			services.easyeffects.enable = lib.mkForce false;
+
+			home.packages = with pkgs; [
+				helvum
+			];
 		}
 	];
 }
