@@ -638,7 +638,7 @@ in {
 			pavucontrol
 			pulseaudio
 			pamixer
-			easyeffects
+			jamesdsp
 			lollypop
 			komikku
 			spotify

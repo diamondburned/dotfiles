@@ -22,6 +22,23 @@
 			home.packages = with pkgs; [
 				helvum
 			];
+
+			systemd.user.services.noisetorch = {
+				Unit = {
+					Description = "NoiseTorch user service";
+					PartOf = [ "default.target" ];
+					After = [ "pipewire.target" "wireplumber.target" ];
+				};
+				Install = {
+					WantedBy = [ "default.target" ];
+				};
+				Service = {
+					Type = "forking";
+					ExecStart = "${lib.getExe pkgs.noisetorch} -i";
+					Restart = "on-failure";
+					RestartSec = "5s";
+				};
+			};
 		}
 	];
 }
