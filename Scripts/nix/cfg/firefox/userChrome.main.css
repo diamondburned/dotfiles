@@ -92,6 +92,7 @@ body > box {
 	color: black !important;
 	background: transparent !important;
 	box-shadow: none !important;
+	border-top: none !important;
 }
 #navigator-toolbox,
 #titlebar *,
