@@ -33,15 +33,15 @@
 					WantedBy = [ "default.target" ];
 				};
 				Service = {
-					ExecStart = pkgs.writeShellApplication {
+					ExecStart = lib.getExe (pkgs.writeShellApplication {
 						name = "noisetorchd";
-						text = <dotfiles/bin/noisetorchd>;
+						text = builtins.readFile <dotfiles/bin/noisetorchd>;
 						runtimeInputs = with pkgs; [
 							pipewire
 							coreutils
 							noisetorch
 						];
-					};
+					});
 					Restart = "on-failure";
 					RestartSec = "5s";
 				};
