@@ -669,7 +669,7 @@ let g:ale_completion_enabled = 0
 let g:ale_disable_lsp = 1 "Use nvim's built-in LSP"
 "Previously for Go: staticcheck and go vet"
 let g:ale_linters = {
-			\ 'go':         [ "gopls", "staticcheck", "go vet" ],
+			\ 'go':         [ "gopls" ],
 			\ 'zig':        [ "zls" ],
 			\ 'c':          [ "clangd" ],
 			\ 'cpp':        [ "clangd" ],
