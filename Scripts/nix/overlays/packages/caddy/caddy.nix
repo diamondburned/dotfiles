@@ -40,6 +40,19 @@ in {
 			'';
 		};
 
+		snippets = mkOption {
+			type = types.attrsOf types.str;
+			default = {};
+			example = {
+				"logging" = ''
+					log {
+						output file /var/log/caddy.log
+						format json
+					}
+				'';
+			};
+		};
+
 		dataDir = mkOption {
 			default = "/var/lib/caddy";
 			type = types.path;
@@ -67,7 +80,7 @@ in {
 
 	config = mkIf cfg.enable (
 		let sitesConfigFile = pkgs.writeText "caddy-sites"
-			(concatStringsSep "\n"
+			(concatStringsSep "\n" (
 				(mapAttrsToList
 					(name: value:
 						if isList value then
@@ -76,7 +89,11 @@ in {
 						else
 							"${name} {\n${value}\n}"
 					)
-					(cfg.sites)));
+					cfg.sites) ++
+				(mapAttrsToList
+					(name: value: "(${name}) {\n${value}\n}")
+					cfg.snippets)
+			));
 
 			configPrepare = pkgs.writeShellScript "caddy-wrap" ''
 				set -e
