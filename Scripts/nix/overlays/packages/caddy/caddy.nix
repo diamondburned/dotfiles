@@ -82,6 +82,9 @@ in {
 		let sitesConfigFile = pkgs.writeText "caddy-sites"
 			(concatStringsSep "\n" (
 				(mapAttrsToList
+					(name: value: "(${name}) {\n${value}\n}")
+					cfg.snippets) ++
+				(mapAttrsToList
 					(name: value:
 						if isList value then
 							# For each site, add the name and the value.
@@ -89,10 +92,7 @@ in {
 						else
 							"${name} {\n${value}\n}"
 					)
-					cfg.sites) ++
-				(mapAttrsToList
-					(name: value: "(${name}) {\n${value}\n}")
-					cfg.snippets)
+					cfg.sites)
 			));
 
 			configPrepare = pkgs.writeShellScript "caddy-wrap" ''
