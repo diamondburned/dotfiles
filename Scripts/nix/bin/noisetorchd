@@ -1,5 +1,6 @@
 #!/usr/bin/env bash
 set -eo pipefail
+set +u # override Nix behavior
 
 main() {
 	require \
@@ -39,7 +40,7 @@ declare -A loaded_devices
 noisetorch::load() {
 	local device="$1"
 
-	if [[ -n "${loaded_devices["$device"]}" ]]; then
+	if [[ "${loaded_devices["$device"]}" != "" ]]; then
 		# log "NoiseTorch already loaded for $device. Skipping..."
 		return
 	fi
@@ -53,9 +54,9 @@ noisetorch::load() {
 noisetorch::unload() {
 	local device="$1"
 
-	if [[ -n "${loaded_devices["$device"]}" ]]; then
+	if [[ "${loaded_devices["$device"]}" != "" ]]; then
 		noisetorch -u -s "$device"
-		unset 'loaded_devices[$device]'
+		loaded_devices["$device"]=
 		log "Unloaded NoiseTorch for device $device"
 	fi
 }
