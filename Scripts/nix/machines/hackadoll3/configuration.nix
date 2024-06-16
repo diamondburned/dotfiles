@@ -642,6 +642,7 @@ in {
 			lollypop
 			komikku
 			spotify
+			spot
 			chatterino2
 			# chatterino7
 
