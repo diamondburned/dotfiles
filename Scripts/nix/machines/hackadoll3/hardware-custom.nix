@@ -127,6 +127,9 @@ in {
 	# For certain USB WLAN/WWAN adapters.
 	hardware.usb-modeswitch.enable = true;
 
+	# Enable fan control.
+	programs.coolercontrol.enable = true;
+
 	# Prevent the wrong Realtek driver from loading.
 	boot.blacklistedKernelModules = [ "rtl8xxxu" ];
 
