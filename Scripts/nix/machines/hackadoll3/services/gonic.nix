@@ -4,10 +4,7 @@
 	services.gonic = {
 		enable = true;
 		settings = {
-			music-path = [
-				"/run/media/diamond/Tertiary/Music"
-				"/run/media/diamond/Tertiary/MusicCollections"
-			];
+			music-path = [ "/run/media/diamond/Tertiary/Music" ];
 			playlists-path = [ "/run/media/diamond/Tertiary/Playlists" ];
 			podcast-path = [ "/var/gonic/podcasts" ];
 			cache-path = "/var/cache/gonic";
