@@ -106,6 +106,7 @@ in {
 	boot.kernelModules = [
 		"i2c-dev"
 		"8852au"
+		"8188gu"
 		# "ddcci-driver"
 	];
 
@@ -124,6 +125,9 @@ in {
 			# 	})
 			# 	{ })
 		];
+
+	# For certain USB WLAN/WWAN adapters.
+	hardware.usb-modeswitch.enable = true;
 
 	# Prevent the wrong Realtek driver from loading.
 	boot.blacklistedKernelModules = [ "rtl8xxxu" ];
