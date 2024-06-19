@@ -569,6 +569,7 @@ in {
 			ddcutil
 			powertop
 			blueberry
+			mission-center
 			libcanberra-gtk3
 			fcitx5-configtool
 			fcitx5-gtk
