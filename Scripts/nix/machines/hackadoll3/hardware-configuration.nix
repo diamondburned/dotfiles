@@ -32,6 +32,8 @@ in
 		};
 	};
 
+	boot.loader.systemd-boot.enable = true;
+
 	fileSystems."/" = {
 		device	= "/dev/main/root";
 		fsType	= "btrfs";

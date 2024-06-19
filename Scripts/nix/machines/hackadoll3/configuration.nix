@@ -84,6 +84,8 @@ in {
 		<dotfiles/cfg/gps>
 		<dotfiles/cfg/gnome>
 		<dotfiles/cfg/dol-server>
+		# <dotfiles/cfg/secureboot>
+		<dotfiles/cfg/u2f>
 
 		# This shit's still garbage.
 		# <dotfiles/cfg/wayfire>

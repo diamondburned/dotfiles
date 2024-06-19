@@ -27,8 +27,6 @@ in {
 	imports = [
 		# "${blurcam}"
 		# ./cfg/bluetooth-hack
-		<dotfiles/cfg/secureboot>
-		<dotfiles/cfg/u2f>
 	];
 
 	# services.blurcam = {
