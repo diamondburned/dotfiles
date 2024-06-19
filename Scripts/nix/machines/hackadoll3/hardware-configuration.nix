@@ -50,7 +50,9 @@ in
 
 	swapDevices = [
 		{
-			device = "/dev/disk/by-partuuid/44208e84-322c-4cac-ac72-30a747783df6";
+			device = "/var/swapfile";
+			size = 8 * 1024; # MB
+			discardPolicy = "once";
 			randomEncryption = {
 				enable = true;
 				cipher = "aes-xts-plain64";

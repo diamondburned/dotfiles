@@ -229,23 +229,23 @@ in {
 	# 	};
 	# };
 
-	fileSystems."/run/media/diamond/Data" = {
-		device  = "/dev/disk/by-uuid/1cdd8e08-846d-42b1-8fef-500cf4398c4b";
-		fsType  = "auto";
-		options = [ "nosuid" "nodev" "nofail" ];
-	};
+	# fileSystems."/run/media/diamond/Data" = {
+	# 	device  = "/dev/disk/by-uuid/1cdd8e08-846d-42b1-8fef-500cf4398c4b";
+	# 	fsType  = "auto";
+	# 	options = [ "nosuid" "nodev" "nofail" ];
+	# };
 
-	fileSystems."/run/media/diamond/Secondary" = {
-		device  = "/dev/disk/by-uuid/1660b20d-97e1-43ab-acf3-4723d8022dec";
-		fsType  = "auto";
-		options = [ "nosuid" "nodev" "nofail" "x-gvfs-show" "x-gvfs-name=Secondary" ];
-	};
+	# fileSystems."/run/media/diamond/Secondary" = {
+	# 	device  = "/dev/disk/by-uuid/1660b20d-97e1-43ab-acf3-4723d8022dec";
+	# 	fsType  = "auto";
+	# 	options = [ "nosuid" "nodev" "nofail" "x-gvfs-show" "x-gvfs-name=Secondary" ];
+	# };
 
-	fileSystems."/run/media/diamond/Encrypted" = {
-		device  = "/dev/disk/by-uuid/90265a61-e52e-4c34-b5e4-addc58cfc68c";
-		fsType  = "auto";
-		options = [ "nosuid" "nodev" "nofail" "x-gvfs-show" "noauto" ];
-	};
+	# fileSystems."/run/media/diamond/Encrypted" = {
+	# 	device  = "/dev/disk/by-uuid/90265a61-e52e-4c34-b5e4-addc58cfc68c";
+	# 	fsType  = "auto";
+	# 	options = [ "nosuid" "nodev" "nofail" "x-gvfs-show" "noauto" ];
+	# };
 
 	# swapDevices = [ {
 	# 	device = "/swapfile";
