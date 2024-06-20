@@ -105,6 +105,7 @@ in {
 		"i2c-dev"
 		"8852au"
 		"8188gu"
+		"it87"
 		# "ddcci-driver"
 	];
 
@@ -129,6 +130,12 @@ in {
 
 	# Enable fan control.
 	programs.coolercontrol.enable = false;
+
+	# Enable overclocking GUI.
+	programs.tuxclocker = {
+		enable = true;
+		enableAMD = true;
+	};
 
 	# Prevent the wrong Realtek driver from loading.
 	boot.blacklistedKernelModules = [ "rtl8xxxu" ];
