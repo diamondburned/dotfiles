@@ -128,7 +128,7 @@ in {
 	hardware.usb-modeswitch.enable = true;
 
 	# Enable fan control.
-	programs.coolercontrol.enable = true;
+	programs.coolercontrol.enable = false;
 
 	# Prevent the wrong Realtek driver from loading.
 	boot.blacklistedKernelModules = [ "rtl8xxxu" ];

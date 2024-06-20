@@ -13,39 +13,40 @@
 		pulse.enable = true;
 	};
 
-	programs.noisetorch.enable = true;
+	# programs.noisetorch.enable = true;
 
 	home-manager.sharedModules = [
 		{
-			services.easyeffects.enable = lib.mkForce false;
+			services.easyeffects.enable = true;
 
 			home.packages = with pkgs; [
 				helvum
+				jamesdsp
 			];
 
-			systemd.user.services.noisetorchd = {
-				Unit = {
-					Description = "NoiseTorch user daemon service";
-					PartOf = [ "default.target" ];
-					After = [ "pipewire.target" "wireplumber.target" ];
-				};
-				Install = {
-					WantedBy = [ "default.target" ];
-				};
-				Service = {
-					ExecStart = lib.getExe (pkgs.writeShellApplication {
-						name = "noisetorchd";
-						text = builtins.readFile <dotfiles/bin/noisetorchd>;
-						runtimeInputs = with pkgs; [
-							pipewire
-							coreutils
-							noisetorch
-						];
-					});
-					Restart = "on-failure";
-					RestartSec = "5s";
-				};
-			};
+			# systemd.user.services.noisetorchd = {
+			# 	Unit = {
+			# 		Description = "NoiseTorch user daemon service";
+			# 		PartOf = [ "default.target" ];
+			# 		After = [ "pipewire.target" "wireplumber.target" ];
+			# 	};
+			# 	Install = {
+			# 		WantedBy = [ "default.target" ];
+			# 	};
+			# 	Service = {
+			# 		ExecStart = lib.getExe (pkgs.writeShellApplication {
+			# 			name = "noisetorchd";
+			# 			text = builtins.readFile <dotfiles/bin/noisetorchd>;
+			# 			runtimeInputs = with pkgs; [
+			# 				pipewire
+			# 				coreutils
+			# 				noisetorch
+			# 			];
+			# 		});
+			# 		Restart = "on-failure";
+			# 		RestartSec = "5s";
+			# 	};
+			# };
 		}
 	];
 }
