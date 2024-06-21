@@ -86,6 +86,7 @@
 			virt-manager
 			waypipe
 			wl-clipboard
+			telegram-desktop
 			# libreoffice-fresh
 
 			(callPackage ./packages/spot-git.nix {})
