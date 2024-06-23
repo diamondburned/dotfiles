@@ -22,13 +22,7 @@
 		};
 
 		# Enable Firefox Widevine DRM for Asahi Linux.
-		programs.firefox.asahiWidevine = {
-			enable = true;
-			profiles = lib.mapAttrs (name: profile: {
-				inherit name;
-				inherit (profile) path;
-			}) config.programs.firefox.profiles;
-		};
+		programs.firefox.profiles.default.enableAsahiWidevine = true;
 
 		programs.direnv = {
 			enable = true;
