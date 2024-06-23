@@ -12,7 +12,6 @@
 			<dotfiles/cfg/git/home.nix>
 			<dotfiles/cfg/gtk/home.nix>
 			<dotfiles/cfg/hm-gnome-terminal.nix>
-			./cfg/firefox/home.nix
 		];
 
 		nixpkgs = {
@@ -20,6 +19,15 @@
 				allowUnfree = true;
 			};
 			overlays = import ./overlays.nix;
+		};
+
+		# Enable Firefox Widevine DRM for Asahi Linux.
+		programs.firefox.asahiWidevine = {
+			enable = true;
+			profiles = lib.mapAttrs (name: profile: {
+				inherit name;
+				inherit (profile) path;
+			}) config.programs.firefox.profiles;
 		};
 
 		programs.direnv = {

@@ -55,6 +55,10 @@ let
 	]);
 
 in {
+	imports = [
+		./asahi-widevine.nix
+	];
+
 	home.packages = with pkgs; [
 		(makeFirefoxProfileDesktopFile {
 			profile = profileName;
