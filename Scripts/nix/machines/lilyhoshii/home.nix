@@ -74,6 +74,7 @@
 			gopls
 			gotab
 			dissent
+			armcord
 			jq
 			htop
 			dnsutils

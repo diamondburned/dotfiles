@@ -126,6 +126,7 @@ in {
 			"browser.aboutConfig.showWarning" = false;
 			"browser.in-content.dark-mode" = true;
 			"browser.menu.showViewImageInfo" = true;
+			"browser.urlbar.update2.engineAliasRefresh" = true; # add search engine button
 			"privacy.resistFingerprinting" = false; # breaks dark theme
 			"privacy.antitracking.testing" = true;
 			"privacy.trackingprotection.enabled" = true;

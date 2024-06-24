@@ -13,8 +13,8 @@
       "store_hash": "fy4abddr91sf163n65f4m88wd35f7jw1"
     },
     "github:NixOS/nixpkgs nixos-unstable": {
-      "url": "https://github.com/NixOS/nixpkgs/archive/13aff9b34cc32e59d35c62ac9356e4a41198a538.tar.gz",
-      "store_hash": "9dvgcw7mh6afadnsk56ns6hvjs44nfa7"
+      "url": "https://github.com/NixOS/nixpkgs/archive/a71e967ef3694799d0c418c98332f7ff4cc5f6af.tar.gz",
+      "store_hash": "832njwrcp1pzh455c57132yrqbf317dl"
     },
     "github:NixOS/nixpkgs staging": {
       "url": "https://github.com/NixOS/nixpkgs/archive/b3460d2cb765845b73019ccde3a598dfab889b2d.tar.gz",
@@ -32,6 +32,10 @@
       "url": "https://github.com/asahilinux/linux/archive/ff2d348a4a3b06fab9a425f26537fedfdf162341.tar.gz",
       "store_hash": "4cvflrnygw4iv399gbjbmkcxa6i2z358"
     },
+    "github:edolstra/flake-compat 0f9255e01c2": {
+      "url": "https://github.com/edolstra/flake-compat/archive/0f9255e01c2.tar.gz",
+      "store_hash": "726glnx4r8d5kf0gqagn4c936p8b2k7f"
+    },
     "github:nix-community/NUR master": {
       "url": "https://github.com/nix-community/NUR/archive/de1f391fb5953123d0244282540eee79bfe4ed0d.tar.gz",
       "store_hash": "4f80yanjklbh4zkqvgj5z3v654m8bygq"
@@ -41,8 +45,8 @@
       "store_hash": "ainbqc9bxfq7biskfc2b0hiy0z6vwxgs"
     },
     "github:nix-community/home-manager master": {
-      "url": "https://github.com/nix-community/home-manager/archive/ae896c810f501bf0c3a2fd7fc2de094dd0addf01.tar.gz",
-      "store_hash": "3m7irgp3q80ipf9igf9jpdcxmcrr2q57"
+      "url": "https://github.com/nix-community/home-manager/archive/6b1f90a8ff92e81638ae6eb48cd62349c3e387bb.tar.gz",
+      "store_hash": "cjwfhanpm9c9id2s5k5nfziv1skimmfp"
     },
     "github:tpwrules/nixos-apple-silicon main": {
       "url": "https://github.com/tpwrules/nixos-apple-silicon/archive/b62f13d67af0f5294cc1921430ebbf97269cfef9.tar.gz",
