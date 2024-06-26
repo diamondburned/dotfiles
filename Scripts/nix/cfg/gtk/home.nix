@@ -23,7 +23,7 @@ let
 
 	cursorTheme = {
 		package = pkgs.catppuccin-cursors.mochaPink;
-		name = "Catppuccin-Mocha-Pink-Cursors";
+		name = "catppuccin-mocha-pink-cursors";
 		size = 32;
 	};
 
