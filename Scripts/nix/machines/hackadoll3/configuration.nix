@@ -85,6 +85,7 @@ in {
 		<dotfiles/cfg/gnome>
 		<dotfiles/cfg/dol-server>
 		# <dotfiles/cfg/secureboot>
+		<dotfiles/cfg/foot>
 		<dotfiles/cfg/u2f>
 
 		# This shit's still garbage.
@@ -593,7 +594,6 @@ in {
 			# Development tools
 			# sommelier
 			dos2unix
-			foot
 			(writeShellScriptBin "ag" ''
 				exec ${lib.getExe silver-searcher} --noaffinity "$@"
 			'')
