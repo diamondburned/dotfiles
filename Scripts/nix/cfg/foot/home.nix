@@ -3,16 +3,20 @@
 {
 	programs.foot = {
 		enable = true;
-		server.enable = true;
+		server = {
+			enable = true;
+		};
+		package = pkgs.runCommandLocal "foot" {
+			nativeBuildInputs = with pkgs; [
+				makeWrapper
+			];
+		} ''
+			cp -r --no-preserve=ownership ${pkgs.foot} $out
+			chmod -R u+w $out
+			wrapProgram $out/bin/foot \
+				--set XCURSOR_SIZE 16
+		'';
 	};
-
-	home.packages = with pkgs; [
-		# https://codeberg.org/dnkl/foot/issues/1598
-		(pkgs.writeShellScriptBin "foot" ''
-			export XCURSOR_SIZE=16
-			exec ${lib.getExe pkgs.foot} "$@"
-		'')
-	];
 
 	xdg = {
 		enable = true;

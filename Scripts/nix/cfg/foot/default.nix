@@ -2,7 +2,7 @@
 
 {
 	environment.systemPackages = with pkgs; [
-		foot
+		# foot
 	];
 
 	home-manager.sharedModules = [
