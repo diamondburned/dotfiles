@@ -3,6 +3,7 @@
 {
 	imports = [
 		./tailscale.nix
+		./mullvad.nix
 	];
 
 	# Comment out all the DNS-over-TLS bits below.
