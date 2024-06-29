@@ -1,13 +1,15 @@
-let
-	currentHostname =
-		assert (lib.assertMsg (builtins.getEnv "HOSTNAME" != null) "hostname must be set");
-		builtins.getEnv "HOSTNAME";
-in
-
 {
-	hostname ? currentHostname,
+	hostname ? builtins.getEnv "HOSTNAME",
+	machine ? hostname,
+	system ? builtins.currentSystem,
 }:
 
 import <nixpkgs/nixos> {
-	configuration = ./configuration.nix;
+	configuration = {
+		imports = [
+			"${./.}/machines/base.nix"
+			"${./.}/machines/${hostname}/configuration.nix"
+		];
+	};
+	inherit system;
 }
