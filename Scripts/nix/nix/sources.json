@@ -48,6 +48,18 @@
         "url": "https://github.com/bkerler/mtkclient/archive/31819b814d331e8612fff3d8cfb838912861612e.tar.gz",
         "url_template": "https://github.com/<owner>/<repo>/archive/<rev>.tar.gz"
     },
+    "nix-flatpak": {
+        "branch": "main",
+        "description": "Install flatpaks declaratively",
+        "homepage": "",
+        "owner": "gmodena",
+        "repo": "nix-flatpak",
+        "rev": "45bf66f7068db79b552da864c0e87452be624d6c",
+        "sha256": "13xqzhibrvd515lkyd88w215zlxm8ra85fsy4ayw853fxf03ix9a",
+        "type": "tarball",
+        "url": "https://github.com/gmodena/nix-flatpak/archive/45bf66f7068db79b552da864c0e87452be624d6c.tar.gz",
+        "url_template": "https://github.com/<owner>/<repo>/archive/<rev>.tar.gz"
+    },
     "nixpkgs": {
         "branch": "nixos-unstable",
         "description": "Nix Packages collection",

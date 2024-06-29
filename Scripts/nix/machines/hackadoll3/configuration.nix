@@ -83,6 +83,8 @@ in {
 		<dotfiles/cfg/avahi>
 		<dotfiles/cfg/gps>
 		<dotfiles/cfg/gnome>
+		<dotfiles/cfg/flatpak>
+		<dotfiles/cfg/flatpak/packages.nix>
 		<dotfiles/cfg/dol-server>
 		# <dotfiles/cfg/secureboot>
 		<dotfiles/cfg/foot>
@@ -325,8 +327,6 @@ in {
 			# '';
 		});
 	};
-
-	services.flatpak.enable = true;
 
 	programs.seahorse.enable = true;
 
@@ -617,7 +617,6 @@ in {
 			xclip
 			virt-manager
 			xorg.xauth
-			grun
 			# neovide
 			# neovim-gtk
 
