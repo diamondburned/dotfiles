@@ -20,16 +20,16 @@
 		# dnsovertls = "true";
 	};
 
-	networking.nameservers = [
-		# Cloudflare DNS with DNS-over-TLS.
-		"1.1.1.1#cloudflare-dns.com"
-		"1.0.0.1#cloudflare-dns.com"
-		# Google DNS with DNS-over-TLS.
-		"8.8.8.8#dns.google"
-		"8.8.4.4#dns.google"
-		# Tailscale DNS.
-		"100.100.100.100"
-	];
+	# networking.nameservers = [
+	# 	# Cloudflare DNS with DNS-over-TLS.
+	# 	"1.1.1.1#cloudflare-dns.com"
+	# 	"1.0.0.1#cloudflare-dns.com"
+	# 	# Google DNS with DNS-over-TLS.
+	# 	"8.8.8.8#dns.google"
+	# 	"8.8.4.4#dns.google"
+	# 	# Tailscale DNS.
+	# 	"100.100.100.100"
+	# ];
 
 	networking.networkmanager = {
 		enable = true;
@@ -41,10 +41,7 @@
 		#                   v  Steam  v
 		allowedTCPPorts = [ 27036 27037 ];
 		allowedUDPPorts = [ 27031 27036 ];
-		# Allow any ports for Tailscale.
-		interfaces.tailscale0 = {
-			allowedTCPPortRanges = [ { from = 0; to = 65535; } ];
-			allowedUDPPortRanges = [ { from = 0; to = 65535; } ];
-		};
 	};
+
+	networking.nftables.enable = true;
 }
