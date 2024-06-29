@@ -18,28 +18,18 @@
 		enable = true;
 		# dnssec = "true";
 		# dnsovertls = "true";
-
-		# Is this needed?
-		# fallbackDns = config.networking.nameservers;
 	};
 
-	# networking.search = [
-	# 	# Add our Tailnet domain.
-	# 	"~skate-gopher.ts.net"
-	# 	"~ts.net"
-	# ];
-	#
-	# networking.nameservers = [
-	# 		# Cloudflare DNS with DNS-over-TLS.
-	# 		"1.1.1.1#cloudflare-dns.com"
-	# 		"1.0.0.1#cloudflare-dns.com"
-	# 		# Google DNS with DNS-over-TLS.
-	# 		"8.8.8.8#dns.google"
-	# 		"8.8.4.4#dns.google"
-	# 		# Tailscale DNS.
-	# 		"100.100.100.100%tailscale0"
-	# 		"100.100.100.100%tailscale0#skate-gopher.ts.net"
-	# ];
+	networking.nameservers = [
+		# Cloudflare DNS with DNS-over-TLS.
+		"1.1.1.1#cloudflare-dns.com"
+		"1.0.0.1#cloudflare-dns.com"
+		# Google DNS with DNS-over-TLS.
+		"8.8.8.8#dns.google"
+		"8.8.4.4#dns.google"
+		# Tailscale DNS.
+		"100.100.100.100"
+	];
 
 	networking.networkmanager = {
 		enable = true;
