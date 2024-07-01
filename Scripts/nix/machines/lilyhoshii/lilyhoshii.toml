@@ -23,8 +23,6 @@
  nixpkgs_older_rust = "github:NixOS/nixpkgs 85f1ba3e51676"
  nixos-apple-silicon = "github:tpwrules/nixos-apple-silicon main"
  flake-compat = "github:edolstra/flake-compat 0f9255e01c2" # v1.0.1
- asahilinux = "github:asahilinux/linux refs/tags/asahi-6.5-*"
- asahilinux-6_6 = "github:asahilinux/linux refs/tags/asahi-6.6-*"
  nur = "github:nix-community/NUR master"
  gomod2nix = "github:nix-community/gomod2nix master"
 
