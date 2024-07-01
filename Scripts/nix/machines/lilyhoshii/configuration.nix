@@ -6,6 +6,7 @@
 		<dotfiles/cfg/keyd>
 		<dotfiles/cfg/fonts>
 		<dotfiles/cfg/gnome>
+		<dotfiles/cfg/locale>
 		<dotfiles/cfg/wireshark>
 		<dotfiles/cfg/networking>
 		<home-manager/nixos>
