@@ -1,7 +1,7 @@
 { config, lib, pkgs, ... }:
 
 let
-	rootDir = ./..;
+	rootDir = builtins.toString ./..;
 in
 
 {
@@ -27,10 +27,9 @@ in
 	nix.settings.experimental-features = [ "nix-command" "flakes" ];
 
 	nix.nixPath = [
-		"dotfiles=${rootDir}"
-		"nixpkgs=/nix/var/nix/profiles/per-user/root/channels/nixos"
-		"nixos-config=${rootDir}/configuration.nix"
 		"/nix/var/nix/profiles/per-user/root/channels"
+		"dotfiles=${rootDir}"
+		"nixos-config=${rootDir}/configuration.nix"
 	];
 
 	# Inject our config root. Use as nix.configRoot.

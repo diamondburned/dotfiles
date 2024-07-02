@@ -14,6 +14,15 @@ let
 			(filterAttrs
 				(name: type: hasSuffix ".toml" name)
 				(builtins.readDir ./.));
+
+	lib = pkgs.lib;
+
+	nixPath = lib.concatStringsSep ":" [
+		"/home/diamond/.nix-defexpr/channels"
+		"/nix/var/nix/profiles/per-user/root/channels"
+		"dotfiles=${builtins.toString ./.}"
+		"nixos-config=${builtins.toString ./.}/configuration.nix"
+	];
 in
 
 pkgs.mkShell {
@@ -25,14 +34,20 @@ pkgs.mkShell {
 		gomod2nix
 		nix-output-monitor
 		lua-language-server
+
+		(writeShellScriptBin "switch" ''
+			export NIX_PATH=${lib.escapeShellArg nixPath}
+			sudo bash -c 'nixos-rebuild --log-format internal-json -v switch |& nom --json'
+		'')
 	];
+
 	shellHook = ''
 		if [[ $HOSTNAME == "nixos" ]]; then
 			echo "You probably want to manually set your \$HOSTNAME."
 		else
 			export HOSTNAME
 		fi
-		export NIX_PATH="$NIX_PATH:dotfiles=${builtins.toString ./.}"
+		export NIX_PATH=${lib.escapeShellArg nixPath}
 		export MACHINES="${builtins.concatStringsSep " " machines}"
 	'';
 }
