@@ -21,7 +21,6 @@
 
 			home.packages = with pkgs; [
 				helvum
-				jamesdsp
 			];
 
 			# systemd.user.services.noisetorchd = {
