@@ -106,7 +106,7 @@ in {
 		"8852au"
 		"8188gu"
 		"it87"
-		# "ddcci-driver"
+		"ddcci-driver"
 	];
 
 	boot.extraModulePackages =
@@ -115,7 +115,7 @@ in {
 		[
 			pkgs.rtl8188gu
 			pkgs.rtl8852au
-			# ddcci-driver
+			ddcci-driver
 
 			# (config.boot.kernelPackages.callPackage
 			# 	(pkgs.fetchurl {
