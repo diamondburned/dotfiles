@@ -176,8 +176,8 @@ in {
 	services.earlyoom = {
 		enable = true;
 		enableNotifications = true;
-		freeSwapThreshold = 15;
-		freeSwapKillThreshold = 5;
+		freeSwapThreshold = 20;
+		freeSwapKillThreshold = 10;
 	};
 
 	# This is already a thing in Linux.
