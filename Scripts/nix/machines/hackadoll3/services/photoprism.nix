@@ -56,7 +56,7 @@ in
 	users.users.photoprism = {
 		group = "users";
 		home = "${drivePath}/.photoprism";
-		createHome = true;
+		createHome = false;
 		isNormalUser = true;
 	};
 
