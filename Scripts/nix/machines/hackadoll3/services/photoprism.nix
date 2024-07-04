@@ -8,9 +8,9 @@ in
 	services.photoprism = {
 		enable = true;
 		port = 34876;
-		originalsPath = "${drivePath}/Pictures";
-		importPath = "${drivePath}/Pictures/Photoprism";
-		storagePath = "${drivePath}/.photoprism";
+		importPath = "/pictures/Photoprism";
+		originalsPath = "/pictures";
+		storagePath = "/photoprism";
 		settings = {
 			PHOTOPRISM_AUTH_MODE = "public";
 			PHOTOPRISM_ADMIN_USER = "diamond";
@@ -27,7 +27,7 @@ in
 			PHOTOPRISM_SITE_TITLE = "Photoprism";
 			PHOTOPRISM_SITE_DESCRIPTION = "Hosted on ${config.networking.hostName}.";
 			PHOTOPRISM_DATABASE_DRIVER = "sqlite";
-			PHOTOPRISM_DATABASE_DSN = "${drivePath}/.photoprism";
+			PHOTOPRISM_DATABASE_DSN = "/photoprism";
 			PHOTOPRISM_JPEG_QUALITY = "91";
 			PHOTOPRISM_JPEG_SIZE = "1920";
 			PHOTOPRISM_PNG_SIZE = "1920";
@@ -43,27 +43,14 @@ in
 			Group = lib.mkForce "users";
 			UMask = lib.mkForce "0006";
 			DynamicUser = lib.mkForce false;
-		};
-	};
-
-	systemd.services.photoprism-init = {
-		serviceConfig = {
-			Type = "oneshot";
-			UMask = "0006";
+			BindPaths = [
+				"${drivePath}/.photoprism:/photoprism:rbind"
+				"${drivePath}/Pictures:/pictures:rbind"
+			];
 		};
 		unitConfig = {
 			RequiresMountsFor = [ drivePath ];
 		};
-		before = [ "photoprism.service" ];
-		requiredBy = [ "photoprism.service" ];
-		script = ''
-			set -ex
-			baseDir=${lib.escapeShellArg drivePath}/.photoprism
-			if [[ ! -d "$baseDir" ]]; then
-				mkdir "$baseDir"
-				chown -R photoprism:users "$baseDir"
-			fi
-		'';
 	};
 
 	users.users.photoprism = {
