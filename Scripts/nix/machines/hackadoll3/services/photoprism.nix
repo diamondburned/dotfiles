@@ -10,7 +10,8 @@ in
 		enable = true;
 		port = 34876;
 		originalsPath = "${drivePath}/Pictures";
-		storagePath = "${drivePath}/.photoprism/storage";
+		importPath = "${drivePath}/Pictures/Photoprism";
+		storagePath = "${drivePath}/.photoprism";
 		settings = {
 			PHOTOPRISM_AUTH_MODE = "public";
 			PHOTOPRISM_ADMIN_USER = "diamond";
@@ -26,29 +27,35 @@ in
 			PHOTOPRISM_SITE_TITLE = "Photoprism";
 			PHOTOPRISM_SITE_DESCRIPTION = "Hosted on ${config.networking.hostName}.";
 			PHOTOPRISM_DATABASE_DRIVER = "sqlite";
-			PHOTOPRISM_DATABASE_DSN = "${drivePath}/.photoprism/database";
+			PHOTOPRISM_DATABASE_DSN = "${drivePath}/.photoprism";
 			PHOTOPRISM_JPEG_QUALITY = "91";
 			PHOTOPRISM_JPEG_SIZE = "1920";
 			PHOTOPRISM_PNG_SIZE = "1920";
 		};
 	};
 
-	systemd.services.photoprism-init = {
-		serviceConfig.Type = "oneshot";
-		script = ''
-			set -e
-			# Ensure that the directory exists.
-			[[ -d ${drivePath} ]]
-			# Create the working directories.
-			mkdir -p ${drivePath}/.photoprism/{storage,database}
-		'';
-		# Force this service to run before Photoprism.
-		requiredBy = [ "photoprism.service" ];
-		before = [ "photoprism.service" ];
-		# Require the drive to be mounted.
-		requires = [ driveService ];
-		after = [ driveService ];
-	};
+	# systemd.services.photoprism-mount-init = {
+	# 	serviceConfig = {
+	# 		Type = "oneshot";
+	# 		ReadWritePaths = [ drivePath ];
+	# 	};
+	# 	script = ''
+	# 		set -ex
+	# 		for d in \
+	# 			${drivePath}/.photoprism \
+	# 			${drivePath}/.photoprism/{storage,database}; do
+	#
+	# 			[[ -d "$d" ]] || mkdir "$d"
+	# 		done
+	# 	'';
+	# 	# Ensure that the Photoprism service starts after the drive is mounted and that it does not
+	# 	# start if the drive is not mounted.
+	# 	requiredBy = [ "photoprism.service" ];
+	# 	before = [ "photoprism.service" ];
+	# 	# Require the drive to be mounted.
+	# 	requires = [ driveService ];
+	# 	after = [ driveService ];
+	# };
 
 	# Enable http://photoprism via Tailscale.
 	diamond.tailnet-services.photoprism.localPort = config.services.photoprism.port;
