@@ -63,7 +63,6 @@
 			chromium
 			fcitx5-configtool
 			fcitx5-gtk
-			foot # TODO mgirate to HM
 			gcolor3
 			gimp
 			git-crypt
