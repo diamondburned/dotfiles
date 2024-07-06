@@ -38,14 +38,13 @@ in
 		path = with pkgs; [
 			nftables
 		];
-		serviceConfig.Environment = [
-			"TS_DEBUG_FIREWALL_MODE=nftables"
-		];
+		serviceConfig = {
+			Environment = [ "TS_DEBUG_FIREWALL_MODE=nftables" ];
+			# Suppress Tailscale log printing to prevent disk spamming.
+			# See https://github.com/tailscale/tailscale/issues/1548.
+			StandardOutput = "null";
+		};
 	};
-
-	# Suppress Tailscale log printing to prevent disk spamming.
-	# See https://github.com/tailscale/tailscale/issues/1548.
-	# systemd.services.tailscaled.serviceConfig.StandardOutput = "null";
 
 	home-manager.users.diamond = {
 		systemd.user.services.taildrop-loop = {
