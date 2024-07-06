@@ -16,10 +16,22 @@ require("colorizer").setup({
 	},
 })
 
--- if vim.g.neovide then
--- 	-- Only a GUI client like Neovide can do this.
--- 	require("shade").setup({ overlay_opacity = 60 })
--- end
+if vim.g.neovide then
+	-- Only a GUI client like Neovide can do this.
+	-- require("shade").setup({ overlay_opacity = 60 })
+
+	vim.keymap.set(
+		{'n', 'v', 's', 'x', 'o', 'i', 'l', 'c', 't'},
+		'<C-S-v>',
+		function()
+			vim.api.nvim_paste(vim.fn.getreg('+'), true, -1)
+		end,
+		{
+			noremap = true,
+			silent = true,
+		}
+	)
+end
 
 require("user.greet")
 require("user.copilot")
