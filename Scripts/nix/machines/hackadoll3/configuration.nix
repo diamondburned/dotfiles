@@ -87,7 +87,7 @@ in {
 		<dotfiles/cfg/flatpak>
 		<dotfiles/cfg/flatpak/packages.nix>
 		<dotfiles/cfg/dol-server>
-		# <dotfiles/cfg/secureboot>
+		<dotfiles/cfg/secureboot>
 		<dotfiles/cfg/foot>
 		<dotfiles/cfg/u2f>
 

@@ -11,7 +11,11 @@ let
 in
 
 {
-	imports = [ (modulesPath + "/installer/scan/not-detected.nix") ];
+	imports = [
+		(modulesPath + "/installer/scan/not-detected.nix")
+		./hardware/aorus-pro.nix
+		./hardware/tertiary.nix
+	];
 
 	boot.initrd.systemd.enable = true;
 	boot.initrd.availableKernelModules = [ "xhci_pci" "thunderbolt" "ahci" "nvme" "usb_storage" "sd_mod" "rtsx_pci_sdmmc" ];
@@ -53,7 +57,7 @@ in
 	swapDevices = [
 		{
 			device = "/var/swapfile";
-			size = 8 * 1024; # MB
+			size = 16 * 1024; # MB
 			discardPolicy = "once";
 			randomEncryption = {
 				enable = true;

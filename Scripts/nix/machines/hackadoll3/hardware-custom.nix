@@ -38,42 +38,6 @@ in {
 
 	services.sysprof.enable = true;
 
-	services.hardware.bolt.enable = true;
-
-	# LG Gram tweaks.
-	# systemd.tmpfiles.rules = [
-	# 	# https://01.org/linuxgraphics/gfx-docs/drm/admin-guide/laptops/lg-laptop.html
-	# 	"w /sys/devices/platform/lg-laptop/battery_care_limit - - - - 80"
-	# ];
-
-	# Supposedly allow the fan to ramp up to 100%.
-	# We can't change this after boot for some reason.
-	# boot.initrd.postMountCommands = ''
-	# 	echo 1 > /sys/devices/platform/lg-laptop/fan_mode
-	# 	echo 80 > /sys/devices/platform/lg-laptop/battery_care_limit
-	# '';
-
-	# Do this instead for newer NixOS versions.
-	boot.initrd.systemd.services."lg-gram-tweaks" = {
-		description = "LG Gram tweaks";
-		after = [ "systemd-modules-load.service" ];
-		requires = [ "systemd-modules-load.service" ];
-		wantedBy = [ "multi-user.target" ];
-		script = ''
-			# echo 1 > /sys/devices/platform/lg-laptop/fan_mode
-			echo 80 > /sys/devices/platform/lg-laptop/battery_care_limit
-		'';
-		serviceConfig = {
-			Type = "oneshot";
-			RemainAfterExit = true;
-		};
-	};
-
-	# Do not suspend on lid close.
-	# services.logind.lidSwitch = "ignore";
-
-	hardware.cpu.intel.updateMicrocode = true;
-
 	environment.systemPackages = with pkgs; [
 		qmk
 		qmk-udev-rules
@@ -103,18 +67,14 @@ in {
 	# This needs to be manually stated, for some reason.
 	boot.kernelModules = [
 		"i2c-dev"
-		"8852au"
-		"8188gu"
-		"it87"
-		"ddcci-driver"
+		"ddcci"
+		"ddcci_backlight"
 	];
 
 	boot.extraModulePackages =
 		with pkgs;
 		with config.boot.kernelPackages;
 		[
-			pkgs.rtl8188gu
-			pkgs.rtl8852au
 			ddcci-driver
 
 			# (config.boot.kernelPackages.callPackage
@@ -124,21 +84,6 @@ in {
 			# 	})
 			# 	{ })
 		];
-
-	# For certain USB WLAN/WWAN adapters.
-	hardware.usb-modeswitch.enable = true;
-
-	# Enable fan control.
-	programs.coolercontrol.enable = false;
-
-	# Enable overclocking GUI.
-	programs.tuxclocker = {
-		enable = true;
-		enableAMD = true;
-	};
-
-	# Prevent the wrong Realtek driver from loading.
-	boot.blacklistedKernelModules = [ "rtl8xxxu" ];
 
 	# Boot the regular kernel until RTL8188GU drivers fix their shit.
 	boot.kernelPackages = pkgs.linuxPackages;
@@ -179,12 +124,6 @@ in {
 		freeSwapThreshold = 20;
 		freeSwapKillThreshold = 10;
 	};
-
-	# This is already a thing in Linux.
-	# services.irqbalance.enable = true;
-
-	# We don't want to sacrifice battery for the above.
-	powerManagement.cpuFreqGovernor = lib.mkForce "powersave";
 
 	hardware.i2c.enable = true;
 
@@ -278,9 +217,6 @@ in {
 		"usbcore.autosuspend=-1"
 		"btusb.enable_autosuspend=0"
 		"mitigations=off"
-		"i915.enable_guc=2"
-		"i915.enable_psr=0"
-		"i915.verbose_state_checks=1"
 	];
 
 	# Requires the real-time kernel patches in Musnix.
@@ -295,8 +231,6 @@ in {
 	# hardware.acpilight.enable = false;
 	# services.illum.enable = true;
 
-	services.xserver.videoDrivers = [ "intel" ];
-	# boot.initrd.kernelModules = [ "i915" ];
 	# Crypto modules.
 	boot.initrd.availableKernelModules = [
 		"aesni_intel" "cryptd"
@@ -315,9 +249,6 @@ in {
 	# 	tertiary = {
 	# 		device = "/dev/disk/by-uuid/ecd642fd-9c6e-40b0-a43a-ff05bb2b671c";
 	# 	};
-
-	# Powertop is bad because of its aggressive power saving.
-	powerManagement.powertop.enable = false;
 
 	# systemd.services."unfuck-powertop" = {
 	# 	description = "Script to undo Powertop disabling USB ports";

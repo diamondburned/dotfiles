@@ -140,6 +140,11 @@
       "store_hash": "9ng69xm929jmx1vn0b0xrrc0lm7c60kq",
       "store_path": "/nix/store/9ng69xm929jmx1vn0b0xrrc0lm7c60kq-bonito-vJw8wwgBXzMk6bOe-lanzaboote/bonito-vJw8wwgBXzMk6bOe-lanzaboote"
     },
+    "github:nix-community/lanzaboote b627ccd": {
+      "url": "https://github.com/nix-community/lanzaboote/archive/b627ccd.tar.gz",
+      "store_hash": "9fq5xqz7kwpkld5nb9d0fyr237hrkx1g",
+      "store_path": "/nix/store/9fq5xqz7kwpkld5nb9d0fyr237hrkx1g-bonito-Rigfhx-zAU7bAOzH-lanzaboote/bonito-Rigfhx-zAU7bAOzH-lanzaboote"
+    },
     "github:nix-community/lanzaboote master": {
       "url": "https://github.com/nix-community/lanzaboote/archive/c758cdad465e0c8174db57dc493f51a89f0e3372.tar.gz",
       "store_hash": "88k4nb3pksnpmfx6rf4qihglm7chfq4w"
@@ -160,8 +165,8 @@
     },
     "https://nixos.org/channels/nixos-unstable": {
       "url": "https://nixos.org/channels/nixos-unstable",
-      "store_hash": "i3wh9caw5dsm5ij9cv943r9cgr20gx3f",
-      "store_path": "/nix/store/i3wh9caw5dsm5ij9cv943r9cgr20gx3f-bonito-0LA2u0aZJx_8kcg--nixos-unstable/bonito-0LA2u0aZJx_8kcg--nixos-unstable"
+      "store_hash": "iwkc326wgrcbky1i78zjd8sv5dkkg9gh",
+      "store_path": "/nix/store/iwkc326wgrcbky1i78zjd8sv5dkkg9gh-bonito-0LA2u0aZJx_8kcg--nixos-unstable/bonito-0LA2u0aZJx_8kcg--nixos-unstable"
     }
   }
 }
