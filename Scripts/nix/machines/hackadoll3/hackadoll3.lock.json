@@ -149,6 +149,11 @@
       "url": "https://github.com/nix-community/lanzaboote/archive/c758cdad465e0c8174db57dc493f51a89f0e3372.tar.gz",
       "store_hash": "88k4nb3pksnpmfx6rf4qihglm7chfq4w"
     },
+    "github:nix-community/lanzaboote v0.4.1": {
+      "url": "https://github.com/nix-community/lanzaboote/archive/b627ccd97d0159214cee5c7db1412b75e4be6086.tar.gz",
+      "store_hash": "i65qxxgj99s7j6ps1i3jyym56wilswjb",
+      "store_path": "/nix/store/i65qxxgj99s7j6ps1i3jyym56wilswjb-bonito-9JCP3KK-K77efUa--lanzaboote/bonito-9JCP3KK-K77efUa--lanzaboote"
+    },
     "github:nix-community/nixGL main": {
       "url": "https://github.com/nix-community/nixGL/archive/17a49af8132965773fd3828563c633d2dd77d014.tar.gz",
       "store_hash": "psg0vg3q4g0csh7faz4cfk7m2x8p52ig",

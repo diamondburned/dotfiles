@@ -28,7 +28,7 @@
  nixpkgs_gradience = "github:foo-dogsquared/nixpkgs add-gradience-app"
  nixpkgs_shotcut = "github:MatthewCroughan/nixpkgs 6c3dbb326eeff83b11d7cb353c3cead30820e373"
  nix-wayland = "github:nix-community/nixpkgs-wayland master"
- lanzaboote = "github:nix-community/lanzaboote b627ccd" # v0.4.1
+ lanzaboote = "github:nix-community/lanzaboote v0.4.1"
  flake-compat = "github:edolstra/flake-compat 0f9255e01c2" # v1.0.1
  prismlauncher = "github:PrismLauncher/PrismLauncher develop"
  mixxx2_4-beta = "github:mixxxdj/mixxx refs/tags/2.4-beta"
