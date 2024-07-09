@@ -27,10 +27,10 @@ in
 	nix = {
 		settings = {
 			substituters = [
-				# Prefer the S3 directly rather than the CloudFront distribution, as that's US-only so it's
-				# really slow.
-				# https://releases.nixos.org/nix-dev/2016-October/022029.html
-				"https://nix-cache.s3.amazonaws.com/"
+				# Prefer Nixpkgs mirror in China over the actual CloudFront one.
+				# Surely this is a good idea.
+				"https://mirrors.ustc.edu.cn/nix-channels/store/"
+				"https://mirrors.bfsu.edu.cn/nix-channels/store/"
 				"https://cache.nixos.org/"
 			];
 			experimental-features = [ "nix-command" "flakes" ];
