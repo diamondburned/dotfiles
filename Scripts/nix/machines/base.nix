@@ -24,13 +24,23 @@ in
 		HOSTNAME = config.networking.hostName;
 	};
 
-	nix.settings.experimental-features = [ "nix-command" "flakes" ];
-
-	nix.nixPath = [
-		"/nix/var/nix/profiles/per-user/root/channels"
-		"dotfiles=${rootDir}"
-		"nixos-config=${rootDir}/configuration.nix"
-	];
+	nix = {
+		settings = {
+			substituters = [
+				# Prefer the S3 directly rather than the CloudFront distribution, as that's US-only so it's
+				# really slow.
+				# https://releases.nixos.org/nix-dev/2016-October/022029.html
+				"https://nix-cache.s3.amazonaws.com/"
+				"https://cache.nixos.org/"
+			];
+			experimental-features = [ "nix-command" "flakes" ];
+		};
+		nixPath = [
+			"/nix/var/nix/profiles/per-user/root/channels"
+			"dotfiles=${rootDir}"
+			"nixos-config=${rootDir}/configuration.nix"
+		];
+	};
 
 	# Inject our config root. Use as nix.configRoot.
 	# options = {
@@ -52,5 +62,4 @@ in
 		librsvg
 		webp-pixbuf-loader
 	];
-
 }
