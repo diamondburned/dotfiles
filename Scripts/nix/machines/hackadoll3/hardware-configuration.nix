@@ -58,7 +58,6 @@ in
 		{
 			device = "/var/swapfile";
 			size = 16 * 1024; # MB
-			discardPolicy = "once";
 			randomEncryption = {
 				enable = true;
 				cipher = "aes-xts-plain64";
