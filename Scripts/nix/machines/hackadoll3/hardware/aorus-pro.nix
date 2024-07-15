@@ -1,11 +1,12 @@
 { config, lib, pkgs, ... }:
 
 {
+	boot.kernelModules = [ "it87" "amd-pstate" ];
+
 	boot.kernelParams = [
 		"acpi_enforce_resources=lax"
+		"amd_pstate=active"
 	];
-
-	boot.kernelModules = [ "it87" ];
 
 	environment.systemPackages = with pkgs; [
 		lm_sensors
