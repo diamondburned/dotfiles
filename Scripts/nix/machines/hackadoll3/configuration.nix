@@ -429,8 +429,9 @@ in {
 		];
 
 		nixpkgs.config = {
-			allowUnfree = true;
 			overlays = import ./overlays;
+			allowUnfree = true;
+			rocmSupport = true;
 		};
 
 		programs.direnv = {
