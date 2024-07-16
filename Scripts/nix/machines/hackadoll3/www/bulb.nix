@@ -15,7 +15,7 @@ let
 in
 
 {
-	diamond.tailnet-services.bulb = ''
+	diamond.tailnetServices.bulb = ''
 		handle * {
 			root * ${bulbremote}
 			file_server

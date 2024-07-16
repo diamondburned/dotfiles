@@ -32,7 +32,7 @@ in
 
 	users.users.diamond.extraGroups = [ "trilium" ];
 
-	diamond.tailnet-services.trilium = {
+	diamond.tailnetServices.trilium = {
 		localPort = port;
 	};
 }

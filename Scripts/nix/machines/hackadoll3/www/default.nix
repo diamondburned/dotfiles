@@ -11,7 +11,7 @@
 		./bulb.nix
 	];
 
-	diamond.tailnet-services = {
+	diamond.tailnetServices = {
 		test = {
 			subdomains = [ "" "test" ];
 			caddyConfig = ''

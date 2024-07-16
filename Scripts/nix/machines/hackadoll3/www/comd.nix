@@ -146,7 +146,7 @@ in
 		};
 	};
 
-	diamond.tailnet-services.comd.caddyConfig = ''
+	diamond.tailnetServices.comd.caddyConfig = ''
 		handle /api/commands* {
 			reverse_proxy * localhost:28475
 		}

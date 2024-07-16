@@ -61,5 +61,5 @@ in
 	};
 
 	# Enable http://photoprism via Tailscale.
-	diamond.tailnet-services.photoprism.localPort = config.services.photoprism.port;
+	diamond.tailnetServices.photoprism.localPort = config.services.photoprism.port;
 }

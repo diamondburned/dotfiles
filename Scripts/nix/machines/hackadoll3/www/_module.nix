@@ -5,7 +5,9 @@ with lib.types;
 with builtins;
 
 let
-	self = config.diamond.tailnet-services;
+	inherit (config.diamond)
+		tailnetServices
+		localhostConfig;
 
 	services = mapAttrsToList (name: service: {
 		subdomains =
@@ -23,7 +25,7 @@ let
 					"reverse_proxy * localhost:${toString service.localPort}"}
 				${service.caddyConfig}
 			'';
-	}) self;
+	}) tailnetServices;
 
 	hostname = config.networking.hostName;
 
@@ -62,30 +64,37 @@ let
 in
 
 {
-	options.diamond.tailnet-services = mkOption {
-		description = "Declare local services via Caddy and Tailscale";
-		type = attrsOf (either str (submodule {
-			options = {
-				subdomains = mkOption {
-					type = types.listOf types.str;
-					default = [];
-					description = "The subdomains to use for the service, or null to use the service name";
+	options.diamond = {
+		tailnetServices = mkOption {
+			description = "Declare local services via Caddy and Tailscale";
+			type = attrsOf (either str (submodule {
+				options = {
+					subdomains = mkOption {
+						type = types.listOf types.str;
+						default = [];
+						description = "The subdomains to use for the service, or null to use the service name";
+					};
+					localPort = mkOption {
+						type = types.nullOr types.int;
+						default = null;
+						description = "The port to reverse proxy to";
+					};
+					caddyConfig = mkOption {
+						type = types.str;
+						default = "";
+						description = "Additional Caddy configuration";
+					};
 				};
-				localPort = mkOption {
-					type = types.nullOr types.int;
-					default = null;
-					description = "The port to reverse proxy to";
-				};
-				caddyConfig = mkOption {
-					type = types.str;
-					default = "";
-					description = "Additional Caddy configuration";
-				};
-			};
-		}));
+			}));
+		};
+		localhostConfig = mkOption {
+			description = "Additional Caddy configuration for the current host";
+			type = types.str;
+			default = '''';
+		};
 	};
 
-	config = mkIf (self != {}) {
+	config = mkIf (tailnetServices != {}) {
 		# Permit Caddy to use Tailscale for its certificates.
 		services.tailscale.permitCertUid = "caddy";
 
@@ -118,10 +127,18 @@ in
 					}
 				}
 			'';
-			sites = listToAttrs (map (service: {
-				name  = subdomains service.subdomains;
-				value = service.caddyConfig;
-			}) services);
+			sites =
+				(listToAttrs (map (service: {
+					name  = subdomains service.subdomains;
+					value = service.caddyConfig;
+				}) services)) // {
+					"http://${hostname}, http://${hostname}.skate-gopher.ts.net" = ''
+						${localhostConfig}
+						handle {
+							respond "Hello from "
+						}
+					'';
+				};
 		};
 	};
 }

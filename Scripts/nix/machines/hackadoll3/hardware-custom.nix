@@ -44,26 +44,6 @@ in {
 		# vkmark
 	];
 
-	hardware.opengl = {
-		enable = true;
-		driSupport      = true;
-		driSupport32Bit = true;
-		extraPackages = with pkgs; [
-			mesa
-			libva
-			libva-utils
-			vaapiIntel
-			vaapi-intel-hybrid
-			intel-media-driver
-			libvdpau-va-gl
-		];
-		extraPackages32 = with pkgs.pkgsi686Linux; [
-			libva
-			libva-utils
-			vaapiIntel
-		];
-	};
-
 	# This needs to be manually stated, for some reason.
 	boot.kernelModules = [
 		"i2c-dev"

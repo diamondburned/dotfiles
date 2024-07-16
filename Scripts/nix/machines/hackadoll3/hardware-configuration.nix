@@ -15,6 +15,7 @@ in
 		(modulesPath + "/installer/scan/not-detected.nix")
 		./hardware/aorus-pro.nix
 		./hardware/tertiary.nix
+		./hardware/graphics.nix
 	];
 
 	boot.initrd.systemd.enable = true;

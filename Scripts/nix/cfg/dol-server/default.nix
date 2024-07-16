@@ -5,7 +5,7 @@
 		(import ./home.nix args)
 	];
 
-	diamond.tailnet-services.dol = {
+	diamond.tailnetServices.dol = {
 		caddyConfig = ''
 			# TODO: move this to a systemd service and use a reverse proxy to the
 			# Unix socket.
