@@ -9,16 +9,20 @@
 		driSupport32Bit = true;
 		extraPackages = with pkgs; [
 			mesa
-			pocl
 			libva
 			libva-utils
 			libvdpau-va-gl
+
 			# AMD GPU stuff
 			amdvlk
 			rocmPackages.clr.icd
+
 			# Intel GPU stuff
 			# vaapiIntel
 			# vaapi-intel-hybrid
+
+			# Intel CPU stuff
+			intel-compute-runtime
 		];
 		extraPackages32 = with pkgs.pkgsi686Linux; [
 			libva

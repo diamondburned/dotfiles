@@ -10,19 +10,13 @@ in
 	# https://dataswamp.org/~solene/2022-09-16-netdata-cloud-nixos.html
 	services.netdata = {
 		enable = true;
-		config =
-			with lib;
-			with builtins;
-			let
-				concat = l: concatStringsSep " " (flatten l);
-				config = {
-					web = rec {
-						"web server threads" = 6;
-						"default port" = 19999;
-						"bind to" = concat [ "127.0.0.1" ];
-					};
-				};
-			in config;
+		config = {
+			web = {
+				"web server threads" = 6;
+				"default port" = 19999;
+				"bind to" = "127.0.0.1";
+			};
+		};
 		configDir = {
 			"stream.conf" = pkgs.writeText "stream.conf" ''
 				[stream]

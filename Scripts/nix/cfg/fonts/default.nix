@@ -5,6 +5,7 @@
 	fonts.fontconfig.localConf = builtins.readFile <dotfiles/cfg/fontconfig.xml>;
 
 	fonts.packages = with pkgs; [
+		corefonts
 		bakoma_ttf # math
 		# opensans-ttf
 		lexend
