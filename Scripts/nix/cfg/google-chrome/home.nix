@@ -2,37 +2,49 @@
 
 let
 	chromeArgs = [ "--gtk-version=4" ];
-	chromePackage = pkgs.google-chrome;
 
-	desktopFile = "google-chrome.desktop";
-	binaryName = "google-chrome-stable";
+	chrome = {
+		package = pkgs.google-chrome;
+		binaryName = "google-chrome-stable";
+		desktopFile = "google-chrome.desktop";
+	};
 
-	google-chrome = pkgs.runCommandLocal "google-chrome-wrapped" {} ''
-		mkdir -p $out
+	chromium = {
+		package = pkgs.chromium;
+		binaryName = "chromium";
+		desktopFile = "chromium-browser.desktop";
+	};
 
-		cp --no-preserve=ownership -Rs ${chromePackage}/. $out/
+	# package = chrome;
+	package = chromium;
+
+	wrapped = pkgs.runCommandLocal "google-chrome-wrapped" { } ''
+		mkdir $out
+
+		cp --no-preserve=ownership -rL ${package.package}/* $out/
 		chmod -R u+w $out
+		rm -r $out/bin/*
 
+		echo BEFORE
 		${pkgs.tree}/bin/tree $out
 
 		# Wrap the binary.
-		rm $out/bin/${binaryName}
 		cp ${pkgs.writeShellScript "google-chrome-launcher" ''
-			exec ${chromePackage}/bin/${binaryName} ${lib.escapeShellArgs chromeArgs} "$@"
-		''} $out/bin/${binaryName}
+			exec ${package.package}/bin/${package.binaryName} ${lib.escapeShellArgs chromeArgs} "$@"
+		''} $out/bin/${package.binaryName}
 
 		# Patch the .desktop file.
-		rm $out/share/applications/${desktopFile}
-		sed -e 's|^Exec=[^ ]*|Exec='"$out"'/bin/${binaryName}|g' \
-			${chromePackage}/share/applications/${desktopFile} \
-			> $out/share/applications/${desktopFile}
+		rm $out/share/applications/${package.desktopFile}
+		sed -e \
+			"s|^Exec=[^ ]*|Exec=$out/bin/${package.binaryName}|g" \
+			  ${package.package}/share/applications/${package.desktopFile} \
+			> $out/share/applications/${package.desktopFile}
 
+		echo AFTER
 		${pkgs.tree}/bin/tree $out
 	'';
 in
 
 {
-	home.packages = [
-		google-chrome
-	];
+	home.packages = [ wrapped ];
 }
