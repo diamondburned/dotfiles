@@ -4,6 +4,9 @@ let
 	chromeArgs = [ "--gtk-version=4" ];
 	chromePackage = pkgs.google-chrome;
 
+	desktopFile = "google-chrome.desktop";
+	binaryName = "google-chrome-stable";
+
 	google-chrome = pkgs.runCommandLocal "google-chrome-wrapped" {} ''
 		mkdir -p $out
 
@@ -13,16 +16,16 @@ let
 		${pkgs.tree}/bin/tree $out
 
 		# Wrap the binary.
-		rm $out/bin/google-chrome-stable
+		rm $out/bin/${binaryName}
 		cp ${pkgs.writeShellScript "google-chrome-launcher" ''
-			exec ${chromePackage}/bin/google-chrome-stable ${lib.escapeShellArgs chromeArgs} "$@"
-		''} $out/bin/google-chrome-stable
+			exec ${chromePackage}/bin/${binaryName} ${lib.escapeShellArgs chromeArgs} "$@"
+		''} $out/bin/${binaryName}
 
 		# Patch the .desktop file.
-		rm $out/share/applications/google-chrome.desktop
-		sed -e 's|^Exec=[^ ]*|Exec='"$out"'/bin/google-chrome-stable|g' \
-			${chromePackage}/share/applications/google-chrome.desktop \
-			> $out/share/applications/google-chrome.desktop
+		rm $out/share/applications/${desktopFile}
+		sed -e 's|^Exec=[^ ]*|Exec='"$out"'/bin/${binaryName}|g' \
+			${chromePackage}/share/applications/${desktopFile} \
+			> $out/share/applications/${desktopFile}
 
 		${pkgs.tree}/bin/tree $out
 	'';

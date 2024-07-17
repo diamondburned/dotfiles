@@ -60,7 +60,6 @@
 
 		home.packages = with pkgs; [
 			celluloid
-			chromium
 			fcitx5-configtool
 			fcitx5-gtk
 			gcolor3

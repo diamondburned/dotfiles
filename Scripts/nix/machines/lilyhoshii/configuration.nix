@@ -9,6 +9,7 @@
 		<dotfiles/cfg/locale>
 		<dotfiles/cfg/wireshark>
 		<dotfiles/cfg/networking>
+		<dotfiles/cfg/google-chrome>
 		<home-manager/nixos>
 		<nixos-apple-silicon/apple-silicon-support>
 		./base/configuration.nix
