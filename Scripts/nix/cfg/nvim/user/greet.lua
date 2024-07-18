@@ -2,7 +2,12 @@ local alpha = require("alpha")
 local dashboard = require("alpha.themes.dashboard")
 require("alpha.term")
 
-local artsDir = os.getenv("XDG_CONFIG_HOME") .. "/nvim/arts/"
+local configHome = os.getenv("XDG_CONFIG_HOME")
+if not configHome then
+	configHome = os.getenv("HOME") .. "/.config"
+end
+
+local artsDir = configHome .. "/nvim/arts/"
 local arts = {
 	-- artsDir .. "astolfo_2x1.txt",
 	-- artsDir .. "astolfo_watch_2x1.txt",
@@ -15,10 +20,18 @@ local function half_padding()
 	return height - (20 / 2)
 end
 
-dashboard.section.terminal.opts.redraw = true
-dashboard.section.terminal.command = "sh --noprofile -c cat\\ " .. arts[math.random(#arts)]
-dashboard.section.terminal.width = 80
-dashboard.section.terminal.height = 20
+local chosenArt = arts[math.random(#arts)]
+if vim.fn.filereadable(chosenArt) then
+	dashboard.section.terminal.opts.redraw = true
+	dashboard.section.terminal.command = "sh --noprofile -c cat\\ " .. chosenArt
+	dashboard.section.terminal.width = 80
+	dashboard.section.terminal.height = 20
+else
+	dashboard.section.terminal = {
+		type = "padding",
+		val = 0,
+	}
+end
 
 dashboard.config.layout = {
 	{ type = "padding", val = half_padding },
