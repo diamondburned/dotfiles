@@ -21,32 +21,40 @@ local function half_padding()
 end
 
 local chosenArt = arts[math.random(#arts)]
-if vim.fn.filereadable(chosenArt) then
+if vim.fn.filereadable(chosenArt) == 1 then
+	dashboard.config.layout = {
+		{ type = "padding", val = 1 },
+		{
+			type = "text",
+			val = "<3",
+			opts = {
+				position = "center",
+				hl = "GreetFooter",
+			},
+		},
+		{ type = "padding", val = 1 },
+	}
+else
 	dashboard.section.terminal.opts.redraw = true
 	dashboard.section.terminal.command = "sh --noprofile -c cat\\ " .. chosenArt
 	dashboard.section.terminal.width = 80
 	dashboard.section.terminal.height = 20
-else
-	dashboard.section.terminal = {
-		type = "padding",
-		val = 0,
+
+	dashboard.config.layout = {
+		{ type = "padding", val = half_padding },
+		dashboard.section.terminal,
+		{ type = "padding", val = 2 },
+		{
+			type = "text",
+			val = "<3",
+			opts = {
+				position = "center",
+				hl = "GreetFooter",
+			},
+		},
+		{ type = "padding", val = 1 },
 	}
 end
-
-dashboard.config.layout = {
-	{ type = "padding", val = half_padding },
-	dashboard.section.terminal,
-	{ type = "padding", val = 2 },
-	{
-		type = "text",
-		val = "<3",
-		opts = {
-			position = "center",
-			hl = "GreetFooter",
-		},
-	},
-	{ type = "padding", val = 1 },
-}
 
 vim.cmd([[hi GreetFooter gui=bold guifg=#FFD1DC]])
 
