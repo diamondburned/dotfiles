@@ -5,6 +5,11 @@
 	fonts.fontconfig.localConf = builtins.readFile <dotfiles/cfg/fontconfig.xml>;
 
 	fonts.packages = with pkgs; [
+<<<<<<< HEAD
+=======
+		# corefonts
+		wqy_zenhei # for TF2
+>>>>>>> 949d01b (Update)
 		bakoma_ttf # math
 		# opensans-ttf
 		lexend
