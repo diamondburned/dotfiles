@@ -29,8 +29,8 @@ in
 			substituters = [
 				# Prefer Nixpkgs mirror in China over the actual CloudFront one.
 				# Surely this is a good idea.
-				"https://mirrors.ustc.edu.cn/nix-channels/store/"
-				"https://mirrors.bfsu.edu.cn/nix-channels/store/"
+				# "https://mirrors.ustc.edu.cn/nix-channels/store/"
+				# "https://mirrors.bfsu.edu.cn/nix-channels/store/"
 				"https://cache.nixos.org/"
 			];
 			experimental-features = [ "nix-command" "flakes" ];

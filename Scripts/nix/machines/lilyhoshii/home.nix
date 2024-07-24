@@ -1,6 +1,8 @@
 { config, lib, pkgs, ... }:
 
 {
+	home-manager.backupFileExtension = "bak";
+
 	home-manager.users.diamond = {
 		imports = [
 			<dotfiles/cfg/firefox>
