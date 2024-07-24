@@ -90,6 +90,7 @@ in {
 		<dotfiles/cfg/secureboot>
 		<dotfiles/cfg/foot>
 		<dotfiles/cfg/u2f>
+		<dotfiles/cfg/nushell>
 
 		# This shit's still garbage.
 		# <dotfiles/cfg/wayfire>
