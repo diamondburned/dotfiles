@@ -11,12 +11,12 @@
 		./bulb.nix
 	];
 
-	diamond.tailnetServices = {
-		test = {
-			subdomains = [ "" "test" ];
-			caddyConfig = ''
-				respond "Hello from ${config.networking.hostName}!"
-			'';
-		};
-	};
+	# diamond.tailnetServices = {
+	# 	test = {
+	# 		subdomains = [ "" "test" ];
+	# 		caddyConfig = ''
+	# 			respond "Hello from ${config.networking.hostName}!"
+	# 		'';
+	# 	};
+	# };
 }
