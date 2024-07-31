@@ -8,9 +8,8 @@ in
 	services.photoprism = {
 		enable = true;
 		port = 34876;
-		importPath = "/pictures/Photoprism";
-		originalsPath = "/pictures";
-		storagePath = "/photoprism";
+		originalsPath = "/var/lib/private/photoprism/originals";
+		importPath = "/var/lib/private/photoprism/import";
 		settings = {
 			PHOTOPRISM_AUTH_MODE = "public";
 			PHOTOPRISM_ADMIN_USER = "diamond";
@@ -26,8 +25,6 @@ in
 			PHOTOPRISM_SITE_URL = "http://photoprism/";
 			PHOTOPRISM_SITE_TITLE = "Photoprism";
 			PHOTOPRISM_SITE_DESCRIPTION = "Hosted on ${config.networking.hostName}.";
-			PHOTOPRISM_DATABASE_DRIVER = "sqlite";
-			PHOTOPRISM_DATABASE_DSN = "/photoprism";
 			PHOTOPRISM_JPEG_QUALITY = "91";
 			PHOTOPRISM_JPEG_SIZE = "1920";
 			PHOTOPRISM_PNG_SIZE = "1920";
@@ -36,28 +33,15 @@ in
 		};
 	};
 
-	systemd.services.photoprism = {
-		serviceConfig = {
-			# We already manually create the user and group.
-			User = lib.mkForce "photoprism";
-			Group = lib.mkForce "users";
-			UMask = lib.mkForce "0006";
-			DynamicUser = lib.mkForce false;
-			BindPaths = [
-				"${drivePath}/.photoprism:/photoprism:rbind"
-				"${drivePath}/Pictures:/pictures:rbind"
-			];
-		};
-		unitConfig = {
-			RequiresMountsFor = [ drivePath ];
-		};
-	};
-
-	users.users.photoprism = {
-		group = "users";
-		home = "${drivePath}/.photoprism";
-		createHome = false;
-		isNormalUser = true;
+	fileSystems = {
+		"/var/lib/private/photoprism" = {
+			device = "/run/media/diamond/Tertiary/.photoprism";
+  	  options = [ "bind" ];
+  	};
+		"/var/lib/private/photoprism/originals" = {
+			device = "/run/media/diamond/Tertiary/Pictures";
+  	  options = [ "bind" ];
+  	};
 	};
 
 	# Enable http://photoprism via Tailscale.
