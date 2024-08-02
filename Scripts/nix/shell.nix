@@ -37,7 +37,7 @@ pkgs.mkShell {
 
 		(writeShellScriptBin "switch" ''
 			export NIX_PATH=${lib.escapeShellArg nixPath}
-			sudo bash -c "nixos-rebuild --log-format internal-json -v $* switch |& nom --json"
+			sudo nixos-rebuild --log-format internal-json -v "$@" switch |& nom --json
 		'')
 	];
 
