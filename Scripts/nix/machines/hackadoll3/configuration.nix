@@ -537,6 +537,7 @@ in {
 			gnomeExtensions.expandable-notifications
 			gnomeExtensions.notification-banner-reloaded
 			keepassxc
+			sticky
 			# gimp-with-plugins
 			gimp
 			git-crypt
