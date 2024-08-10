@@ -194,13 +194,12 @@ in {
 	hardware.opentabletdriver.enable = false;
 
 	boot.kernelParams = [
-		"usbcore.autosuspend=-1"
-		"btusb.enable_autosuspend=0"
 		"mitigations=off"
 	];
 
 	# Requires the real-time kernel patches in Musnix.
 	# security.rtkit.enable = true;
+	security.rtkit.enable = false;
 
 	# # Trivial graphics options.
 	# boot.extraModprobeConfig = ''

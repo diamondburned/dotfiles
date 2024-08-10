@@ -4,7 +4,7 @@
 	boot.kernelModules = [ "it87" "amd-pstate" ];
 
 	boot.kernelParams = [
-		"acpi_enforce_resources=lax"
+		# "acpi_enforce_resources=lax"
 		"amd_pstate=active"
 	];
 
