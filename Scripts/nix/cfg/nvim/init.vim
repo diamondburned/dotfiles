@@ -360,7 +360,8 @@ nmap <C-/> gcc
 vmap <C-_> gc<CR>gv
 vmap <C-/> gc<CR>gv
 nmap <C-j> =G
-nnoremap f :F<CR>
+nmap <C-f> :FZF<CR>
+nnoremap f :FZF<CR>
 
 vnoremap ' :s/\%V.*\%V./'&'/<CR>
 vnoremap " :s/\%V.*\%V./"&"/<CR>
