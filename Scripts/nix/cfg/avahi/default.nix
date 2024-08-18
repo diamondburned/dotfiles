@@ -3,13 +3,13 @@
 {
 	services.avahi = {
 		enable = true;
-		nssmdns = true;
+		nssmdns4 = true;
 		publish = {
-			enable = true;
-			domain = true;
-			addresses = true;
-			workstation = true;
-			userServices = true;
+			enable = false;
+			# domain = true;
+			# addresses = true;
+			# workstation = true;
+			# userServices = true;
 		};
 	};
 

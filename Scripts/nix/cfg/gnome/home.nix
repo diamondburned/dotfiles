@@ -3,7 +3,6 @@
 {
 	home.packages = with pkgs; [
 		gnome-usage
-		gnome.polari
 		gnomeExtensions.vitals
 		gnomeExtensions.caffeine
 		gnomeExtensions.worksets

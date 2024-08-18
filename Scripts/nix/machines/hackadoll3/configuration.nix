@@ -85,7 +85,6 @@ in {
 		<dotfiles/cfg/gps>
 		<dotfiles/cfg/gnome>
 		<dotfiles/cfg/flatpak>
-		<dotfiles/cfg/flatpak/packages.nix>
 		<dotfiles/cfg/dol-server>
 		<dotfiles/cfg/secureboot>
 		<dotfiles/cfg/foot>
@@ -274,8 +273,7 @@ in {
 		];
 	};
 
-	# Enable the X11 windowing system.
-	services.xserver.layout = "us";
+	services.xserver.xkb.layout = "us";
 
 	fonts.fontconfig = {
 		enable = true;
@@ -299,8 +297,7 @@ in {
 
 	services.xserver.enable = true;
 
-	# Enable touchpad support.
-	services.xserver.libinput.enable = true;
+	services.libinput.enable = true;
 
 	programs.xwayland = {
 		enable = true;
@@ -422,6 +419,7 @@ in {
 			<dotfiles/cfg/gnome/home.nix>
 			<dotfiles/cfg/fonts/home.nix>
 			<dotfiles/cfg/zellij/home.nix>
+			<dotfiles/cfg/flatpak/packages.nix>
 
 			# (import <dotfiles/utils/schedule.nix {
 			# 	name        = "birthdayer-juan";
@@ -524,10 +522,9 @@ in {
 
 		]) ++ (with pkgs; [
 			# Personal stuff
-			gnome.pomodoro
+			pomodoro
 			gnome-usage
-			gnome.polari
-			gnome.pomodoro
+			pomodoro
 			gnomeExtensions.gsconnect
 			gnomeExtensions.dash-to-panel
 			gnomeExtensions.tiling-assistant
@@ -689,13 +686,13 @@ in {
 			glib-networking
 			celluloid
 			gnome.gnome-power-manager
-			gnome.eog
 			gnome.vinagre
-			gnome.file-roller
-			gnome.nautilus
+			eog
+			file-roller
+			nautilus
 			nautilus-open-any-terminal
-			gnome.gnome-disk-utility
-			gnome.gnome-tweaks
+			gnome-disk-utility
+			gnome-tweaks
 			gnome.gnome-boxes
 
 			# Everything in ./bn

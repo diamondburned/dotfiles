@@ -58,7 +58,7 @@ in
 		"${rootDir}/public_keys"
 	];
 
-	services.xserver.gdk-pixbuf.modulePackages = with pkgs; [
+	programs.gdk-pixbuf.modulePackages = with pkgs; [
 		librsvg
 		webp-pixbuf-loader
 	];

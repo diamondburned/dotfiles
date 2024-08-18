@@ -39,7 +39,7 @@
 
 	# xdg.portal.gtkUsePortal = true; # make GTK use GNOME's portal
 
-	environment.gnome.excludePackages = with pkgs; with pkgs.gnome; [
+	environment.gnome.excludePackages = with pkgs.gnome; with pkgs; [
 		gnome-contacts
 		gnome-initial-setup
 		gnome-calendar

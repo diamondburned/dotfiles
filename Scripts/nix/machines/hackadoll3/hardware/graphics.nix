@@ -3,7 +3,7 @@
 {
 	boot.initrd.kernelModules = [ "amdgpu" ];
 
-	hardware.opengl = {
+	hardware.graphics = {
 		enable = true;
 		extraPackages = with pkgs; [
 			mesa
