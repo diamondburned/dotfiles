@@ -1,6 +1,36 @@
 { config, lib, pkgs, ... }:
 
+let
+	hunspellDicts = with pkgs.hunspellDicts; [
+		en-us
+		en-us-large
+	];
+
+	aspellDicts = with pkgs.aspellDicts; [
+		en
+		en-science
+		en-computers
+		vi
+	];
+in
+
 {
+	environment = {
+		sessionVariables = {
+			# Hunspell support.
+			# DICPATH = pkgs.lib.makeSearchPath "share/hunspell" hunspellDicts;
+			# Aspell support.
+			ASPELL_CONF = "dict-dir ${pkgs.symlinkJoin {
+				name = "aspell-dicts";
+				paths = aspellDicts;
+			}}/lib/aspell";
+		};
+		systemPackages = with pkgs; [
+			# (hunspellWithDicts hunspellDicts)
+			# (aspellWithDicts aspellDicts)
+		];
+	};
+
 	i18n = {
 		inputMethod = {
 			enable = true;
