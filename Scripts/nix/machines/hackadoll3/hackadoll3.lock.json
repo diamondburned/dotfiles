@@ -67,9 +67,9 @@
       "store_path": "/nix/store/ccb69s0aqifdg0z3a67fbwyayb0g7ikj-bonito-cSEMPyf_dRQyWpwp-nixpkgs/bonito-cSEMPyf_dRQyWpwp-nixpkgs"
     },
     "github:NixOS/nixpkgs nixos-unstable": {
-      "url": "https://github.com/NixOS/nixpkgs/archive/d04953086551086b44b6f3c6b7eeb26294f207da.tar.gz",
-      "store_hash": "jpxsac8ambq2hp2w9svh39jy8621i3my",
-      "store_path": "/nix/store/jpxsac8ambq2hp2w9svh39jy8621i3my-bonito-QxKQKS7Drbtflhcd-nixpkgs/bonito-QxKQKS7Drbtflhcd-nixpkgs"
+      "url": "https://github.com/NixOS/nixpkgs/archive/c3aa7b8938b17aebd2deecf7be0636000d62a2b9.tar.gz",
+      "store_hash": "av97if1k11l8ps3asg24l796xi91f63g",
+      "store_path": "/nix/store/av97if1k11l8ps3asg24l796xi91f63g-bonito-1Q41Ek3OEUFNTvd2-nixpkgs/bonito-1Q41Ek3OEUFNTvd2-nixpkgs"
     },
     "github:NixOS/nixpkgs staging": {
       "url": "https://github.com/NixOS/nixpkgs/archive/d74654eebef8315a570aee31063af4c8458518d5.tar.gz",
@@ -127,9 +127,9 @@
       "store_path": "/nix/store/akfavqi4nng8a799z9pgf9c26sf2czd5-bonito-bKssh7t4NXAZB44E-gomod2nix/bonito-bKssh7t4NXAZB44E-gomod2nix"
     },
     "github:nix-community/home-manager master": {
-      "url": "https://github.com/nix-community/home-manager/archive/afc892db74d65042031a093adb6010c4c3378422.tar.gz",
-      "store_hash": "v1aig32zkyclyn0dhvwcxglclhckg3v1",
-      "store_path": "/nix/store/v1aig32zkyclyn0dhvwcxglclhckg3v1-bonito-wf1S_Ga0eDmzntXy-home-manager/bonito-wf1S_Ga0eDmzntXy-home-manager"
+      "url": "https://github.com/nix-community/home-manager/archive/2598861031b78aadb4da7269df7ca9ddfc3e1671.tar.gz",
+      "store_hash": "az2yk8j9im070jw4jb06dwg6agi6j7zr",
+      "store_path": "/nix/store/az2yk8j9im070jw4jb06dwg6agi6j7zr-bonito-1JxrEMwWo8GupH8J-home-manager/bonito-1JxrEMwWo8GupH8J-home-manager"
     },
     "github:nix-community/home-manager release-22.11": {
       "url": "https://github.com/nix-community/home-manager/archive/f9edbedaf015013eb35f8caacbe0c9666bbc16af.tar.gz",
@@ -175,8 +175,8 @@
     },
     "https://nixos.org/channels/nixos-unstable": {
       "url": "https://nixos.org/channels/nixos-unstable",
-      "store_hash": "3q6q3lcljalzxsrkll7n0jffmhhg5kmh",
-      "store_path": "/nix/store/3q6q3lcljalzxsrkll7n0jffmhhg5kmh-bonito-0LA2u0aZJx_8kcg--nixos-unstable/bonito-0LA2u0aZJx_8kcg--nixos-unstable"
+      "store_hash": "ssci2r9glcz4kapyrs6d23xgrdvh1523",
+      "store_path": "/nix/store/ssci2r9glcz4kapyrs6d23xgrdvh1523-bonito-0LA2u0aZJx_8kcg--nixos-unstable/bonito-0LA2u0aZJx_8kcg--nixos-unstable"
     }
   }
 }
