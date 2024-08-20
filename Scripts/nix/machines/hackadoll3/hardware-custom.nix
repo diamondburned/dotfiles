@@ -39,7 +39,7 @@ in {
 	services.sysprof.enable = true;
 
 	environment.systemPackages = with pkgs; [
-		qmk
+		# qmk
 		qmk-udev-rules
 		# vkmark
 	];
