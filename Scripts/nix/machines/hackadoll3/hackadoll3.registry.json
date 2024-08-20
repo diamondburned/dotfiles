@@ -36,7 +36,7 @@
     },
     "to": {
       "type": "path",
-      "path": "/nix/store/av97if1k11l8ps3asg24l796xi91f63g-bonito-1Q41Ek3OEUFNTvd2-nixpkgs/bonito-1Q41Ek3OEUFNTvd2-nixpkgs"
+      "path": "/nix/store/1xiibn1g45jn7r3c9j4kq8w8bd69rclf-bonito--WGiF4vu6Q3EiwpQ-nixpkgs/bonito--WGiF4vu6Q3EiwpQ-nixpkgs"
     }
   },
   "bonito:nixpkgs": {
@@ -46,7 +46,7 @@
     },
     "to": {
       "type": "path",
-      "path": "/nix/store/av97if1k11l8ps3asg24l796xi91f63g-bonito-1Q41Ek3OEUFNTvd2-nixpkgs/bonito-1Q41Ek3OEUFNTvd2-nixpkgs"
+      "path": "/nix/store/1xiibn1g45jn7r3c9j4kq8w8bd69rclf-bonito--WGiF4vu6Q3EiwpQ-nixpkgs/bonito--WGiF4vu6Q3EiwpQ-nixpkgs"
     }
   },
   "bonito:nixpkgs_gnome": {
@@ -66,7 +66,7 @@
     },
     "to": {
       "type": "path",
-      "path": "/nix/store/av97if1k11l8ps3asg24l796xi91f63g-bonito-1Q41Ek3OEUFNTvd2-nixpkgs/bonito-1Q41Ek3OEUFNTvd2-nixpkgs"
+      "path": "/nix/store/1xiibn1g45jn7r3c9j4kq8w8bd69rclf-bonito--WGiF4vu6Q3EiwpQ-nixpkgs/bonito--WGiF4vu6Q3EiwpQ-nixpkgs"
     }
   },
   "bonito:nixpkgs_unstable_newer": {

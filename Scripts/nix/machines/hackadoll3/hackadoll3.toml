@@ -1,5 +1,8 @@
 [global.channels]
- nixpkgs_unstable = "github:NixOS/nixpkgs nixos-unstable"
+ # nixpkgs_unstable = "github:NixOS/nixpkgs nixos-unstable"
+ # TODO: take this off in about a few weeks
+ # https://github.com/NixOS/nixpkgs/pull/334838
+ nixpkgs_unstable = "github:NixOS/nixpkgs 2977a6a5b1486f6cbd801837a3e370ef52d0421f"
  nixpkgs_unstable_older = "github:NixOS/nixpkgs 7409480d5c"
  # nixpkgs_unstable_older = "github:NixOS/nixpkgs 1b1f50645af2a70dc93ea"
  nixpkgs_unstable_newer = "github:NixOS/nixpkgs 1c9db9710c"
