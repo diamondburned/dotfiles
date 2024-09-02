@@ -82,6 +82,7 @@
 			komikku
 			nix-output-monitor
 			oxfs
+			helvum
 			pavucontrol
 			playerctl
 			qalculate-gtk
