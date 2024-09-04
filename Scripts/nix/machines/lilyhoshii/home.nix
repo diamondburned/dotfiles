@@ -75,6 +75,7 @@
 			gotab
 			dissent
 			armcord
+			signal-desktop
 			jq
 			htop
 			dnsutils
