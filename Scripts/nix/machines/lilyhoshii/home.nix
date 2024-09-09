@@ -67,9 +67,9 @@
 			gcolor3
 			gimp
 			git-crypt
-			gnome.gnome-disk-utility
-			gnome.gnome-power-manager
-			gnome.gnome-tweaks
+			gnome-disk-utility
+			gnome-power-manager
+			gnome-tweaks
 			go
 			gopls
 			gotab

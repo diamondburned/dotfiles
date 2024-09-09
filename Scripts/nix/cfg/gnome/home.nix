@@ -3,6 +3,7 @@
 {
 	home.packages = with pkgs; [
 		gnome-usage
+		gnome-sound-recorder
 		gnomeExtensions.vitals
 		gnomeExtensions.caffeine
 		gnomeExtensions.worksets
