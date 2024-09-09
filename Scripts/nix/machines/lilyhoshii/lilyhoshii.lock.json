@@ -13,8 +13,8 @@
       "store_hash": "fy4abddr91sf163n65f4m88wd35f7jw1"
     },
     "github:NixOS/nixpkgs nixos-unstable": {
-      "url": "https://github.com/NixOS/nixpkgs/archive/12228ff1752d7b7624a54e9c1af4b222b3c1073b.tar.gz",
-      "store_hash": "w55vzs02a8bq4nwizxb0z008y20lnhrj"
+      "url": "https://github.com/NixOS/nixpkgs/archive/574d1eac1c200690e27b8eb4e24887f8df7ac27c.tar.gz",
+      "store_hash": "fxdl9lziy37xfpq5pcdpk6xkzrbxnzjq"
     },
     "github:NixOS/nixpkgs staging": {
       "url": "https://github.com/NixOS/nixpkgs/archive/b3460d2cb765845b73019ccde3a598dfab889b2d.tar.gz",
@@ -45,12 +45,12 @@
       "store_hash": "ainbqc9bxfq7biskfc2b0hiy0z6vwxgs"
     },
     "github:nix-community/home-manager master": {
-      "url": "https://github.com/nix-community/home-manager/archive/471e3eb0a114265bcd62d11d58ba8d3421ee68eb.tar.gz",
-      "store_hash": "bgw8y21ghmwlphypfxhyaqdg8pcb078g"
+      "url": "https://github.com/nix-community/home-manager/archive/8a175a89137fe798b33c476d4dae17dba5fb3fd3.tar.gz",
+      "store_hash": "drq4905l9464l38krkxfirlcdw3zv9ps"
     },
     "github:tpwrules/nixos-apple-silicon main": {
-      "url": "https://github.com/tpwrules/nixos-apple-silicon/archive/b0a2376f6c164a0af963d47386c064cc6fdcd5ea.tar.gz",
-      "store_hash": "3dffi98z5567zf2znqc0bx8adiyhb7pv"
+      "url": "https://github.com/tpwrules/nixos-apple-silicon/archive/c5f944f49a052232015bb3c03524b69e3fdd2aa4.tar.gz",
+      "store_hash": "dqbyl3x9yk1bicga5pwfl0rvh97czy23"
     }
   }
 }

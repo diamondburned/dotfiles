@@ -44,4 +44,6 @@
 	};
 
 	networking.nftables.enable = true;
+
+	programs.openvpn3.enable = true;
 }

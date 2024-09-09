@@ -28,7 +28,7 @@
 		# Online stuff
 		gnome-user-share.enable = true;
 		gnome-online-accounts.enable = true;
-		gnome-online-miners.enable = true;
+		# gnome-online-miners.enable = true;
 		gnome-browser-connector.enable = true;
 
 		# Disable garbage
