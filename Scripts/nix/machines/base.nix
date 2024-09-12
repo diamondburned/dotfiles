@@ -24,6 +24,15 @@ in
 		HOSTNAME = config.networking.hostName;
 	};
 
+	hardware = {
+		enableAllFirmware = true; 
+		enableRedistributableFirmware = true;
+	};
+
+	nixpkgs.config = {
+		allowUnfree = true;
+	};
+
 	nix = {
 		settings = {
 			substituters = [
