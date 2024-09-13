@@ -144,4 +144,6 @@
 	# Note: the displaylink module breaks suspend.
 	# We don't have it enabled right now.
 	services.logind.lidSwitch = "hybrid-sleep";
+
+	programs.mosh.enable = true;
 }
