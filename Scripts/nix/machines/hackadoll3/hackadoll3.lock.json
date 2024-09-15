@@ -132,9 +132,9 @@
       "store_path": "/nix/store/akfavqi4nng8a799z9pgf9c26sf2czd5-bonito-bKssh7t4NXAZB44E-gomod2nix/bonito-bKssh7t4NXAZB44E-gomod2nix"
     },
     "github:nix-community/home-manager master": {
-      "url": "https://github.com/nix-community/home-manager/archive/2598861031b78aadb4da7269df7ca9ddfc3e1671.tar.gz",
-      "store_hash": "az2yk8j9im070jw4jb06dwg6agi6j7zr",
-      "store_path": "/nix/store/az2yk8j9im070jw4jb06dwg6agi6j7zr-bonito-1JxrEMwWo8GupH8J-home-manager/bonito-1JxrEMwWo8GupH8J-home-manager"
+      "url": "https://github.com/nix-community/home-manager/archive/e524c57b1fa55d6ca9d8354c6ce1e538d2a1f47f.tar.gz",
+      "store_hash": "xz55cmsc1yc5998csm729m68k3bcg96k",
+      "store_path": "/nix/store/xz55cmsc1yc5998csm729m68k3bcg96k-bonito-sT9ax8IKFizHZkZt-home-manager/bonito-sT9ax8IKFizHZkZt-home-manager"
     },
     "github:nix-community/home-manager release-22.11": {
       "url": "https://github.com/nix-community/home-manager/archive/f9edbedaf015013eb35f8caacbe0c9666bbc16af.tar.gz",
@@ -180,8 +180,8 @@
     },
     "https://nixos.org/channels/nixos-unstable": {
       "url": "https://nixos.org/channels/nixos-unstable",
-      "store_hash": "8a8mi4hm0m3xic6fvhap503z19x6swwx",
-      "store_path": "/nix/store/8a8mi4hm0m3xic6fvhap503z19x6swwx-bonito-0LA2u0aZJx_8kcg--nixos-unstable/bonito-0LA2u0aZJx_8kcg--nixos-unstable"
+      "store_hash": "3njivgm4qy8w6zasm8xyfmhdqyz03fs6",
+      "store_path": "/nix/store/3njivgm4qy8w6zasm8xyfmhdqyz03fs6-bonito-0LA2u0aZJx_8kcg--nixos-unstable/bonito-0LA2u0aZJx_8kcg--nixos-unstable"
     }
   }
 }
