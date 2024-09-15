@@ -72,9 +72,9 @@
       "store_path": "/nix/store/ccb69s0aqifdg0z3a67fbwyayb0g7ikj-bonito-cSEMPyf_dRQyWpwp-nixpkgs/bonito-cSEMPyf_dRQyWpwp-nixpkgs"
     },
     "github:NixOS/nixpkgs nixos-unstable": {
-      "url": "https://github.com/NixOS/nixpkgs/archive/c3aa7b8938b17aebd2deecf7be0636000d62a2b9.tar.gz",
-      "store_hash": "av97if1k11l8ps3asg24l796xi91f63g",
-      "store_path": "/nix/store/av97if1k11l8ps3asg24l796xi91f63g-bonito-1Q41Ek3OEUFNTvd2-nixpkgs/bonito-1Q41Ek3OEUFNTvd2-nixpkgs"
+      "url": "https://github.com/NixOS/nixpkgs/archive/345c263f2f53a3710abe117f28a5cb86d0ba4059.tar.gz",
+      "store_hash": "51y47l7mwwfxcn91c8542plmgjd7vf0b",
+      "store_path": "/nix/store/51y47l7mwwfxcn91c8542plmgjd7vf0b-bonito-G2ZcPJakwasxFZ8y-nixpkgs/bonito-G2ZcPJakwasxFZ8y-nixpkgs"
     },
     "github:NixOS/nixpkgs staging": {
       "url": "https://github.com/NixOS/nixpkgs/archive/d74654eebef8315a570aee31063af4c8458518d5.tar.gz",
