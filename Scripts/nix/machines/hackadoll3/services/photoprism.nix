@@ -44,6 +44,8 @@ in
   	};
 	};
 
+	users.users.diamond.extraGroups = [ "photoprism" ];
+
 	# Enable http://photoprism via Tailscale.
 	diamond.tailnetServices.photoprism.localPort = config.services.photoprism.port;
 }
