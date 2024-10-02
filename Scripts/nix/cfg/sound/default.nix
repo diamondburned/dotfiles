@@ -2,6 +2,7 @@
 
 {
 	hardware.pulseaudio.enable = false;	
+	hardware.pulseaudio.support32Bit = true;
 
 	services.pipewire = {
 		enable = true;
