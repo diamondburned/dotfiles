@@ -13,8 +13,8 @@
       "store_hash": "fy4abddr91sf163n65f4m88wd35f7jw1"
     },
     "github:NixOS/nixpkgs nixos-unstable": {
-      "url": "https://github.com/NixOS/nixpkgs/archive/574d1eac1c200690e27b8eb4e24887f8df7ac27c.tar.gz",
-      "store_hash": "fxdl9lziy37xfpq5pcdpk6xkzrbxnzjq"
+      "url": "https://github.com/NixOS/nixpkgs/archive/bc947f541ae55e999ffdb4013441347d83b00feb.tar.gz",
+      "store_hash": "7crb9dq0536vm7v8xwzfsdsf4505iyqr"
     },
     "github:NixOS/nixpkgs staging": {
       "url": "https://github.com/NixOS/nixpkgs/archive/b3460d2cb765845b73019ccde3a598dfab889b2d.tar.gz",
