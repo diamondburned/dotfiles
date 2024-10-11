@@ -41,6 +41,29 @@ local lsp_configurations = {
 			},
 		},
 	},
+	lua_ls = {
+		on_init = function(client)
+			if client.workspace_folders then
+				local path = client.workspace_folders[1].name
+				if vim.uv.fs_stat(path..'/.luarc.json') or vim.uv.fs_stat(path..'/.luarc.jsonc') then
+					return
+				end
+			end
+
+			client.config.settings.Lua = vim.tbl_deep_extend('force', client.config.settings.Lua, {
+				runtime = {
+					version = 'LuaJIT'
+				},
+				workspace = {
+					checkThirdParty = false,
+					library = vim.api.nvim_get_runtime_file("", true)
+				}
+			})
+		end,
+		settings = {
+			Lua = {}
+		},
+	}
 }
 
 -- This table defines LSP keybindings that are local to the buffer.
@@ -213,15 +236,17 @@ local function load_lsp(name)
 		unpack(lsp_configurations[name] or {}),
 	}
 	if vim.fn.executable(binary) == 1 then
-		-- print("LSP " .. name .. " is available through " .. binary .. ", loading it.")
+		-- vim.notify("LSP " .. name .. " is available through " .. binary .. ", loading it.", vim.log.levels.DEBUG)
 		lspconfig[name].setup(config)
+	else
+		-- vim.notify("LSP " .. name .. " is not available, skipping it.", vim.log.levels.DEBUG)
 	end
 end
 
 -- Try to load everything that is available in PATH.
 for _, name in ipairs(find_all_lsp_modules()) do
 	if not pcall(load_lsp, name) then
-		-- print("Failed to load LSP " .. name .. ".")
+		-- vim.notify("Failed to load LSP " .. name .. ".", vim.log.levels.DEBUG)
 	end
 end
 
