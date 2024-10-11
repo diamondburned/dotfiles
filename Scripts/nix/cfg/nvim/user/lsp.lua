@@ -197,7 +197,7 @@ local function find_all_lsp_modules()
 	end
 
 	local lsp_modules = {}
-	local lspconfig_servers_dir = lspconfig_path .. "/lua/lspconfig/server_configurations"
+	local lspconfig_servers_dir = lspconfig_path .. "/lua/lspconfig/configs"
 	for _, file in ipairs(vim.fn.globpath(lspconfig_servers_dir, "*", true, true)) do
 		local name = vim.fn.fnamemodify(file, ":t:r")
 		table.insert(lsp_modules, name)

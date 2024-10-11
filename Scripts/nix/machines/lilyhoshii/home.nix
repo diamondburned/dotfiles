@@ -73,6 +73,7 @@
 			go
 			gopls
 			gotab
+			fzf
 			dissent
 			armcord
 			signal-desktop
