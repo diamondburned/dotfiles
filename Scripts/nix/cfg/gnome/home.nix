@@ -15,6 +15,7 @@
 		gnomeExtensions.rounded-window-corners
 		gnomeExtensions.expandable-notifications
 		gnomeExtensions.notification-banner-reloaded
+		gnomeExtensions.bluetooth-battery-meter
 	];
 
 	pam.sessionVariables = {
