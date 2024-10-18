@@ -14,7 +14,6 @@ Plug 'bogado/file-line'
 Plug 'rhysd/conflict-marker.vim'
 Plug 'rhysd/vim-grammarous'
 Plug 'folke/todo-comments.nvim'
-Plug 'luochen1990/rainbow'
 Plug 'ojroques/nvim-osc52'
 Plug 'aymericbeaumet/vim-symlink'
 Plug 'moll/vim-bbye' " optional dependency
@@ -35,6 +34,7 @@ Plug 'junegunn/fzf.vim'
 "Better highlighting"
 Plug 'nvim-treesitter/nvim-treesitter', {'do': ':TSUpdate'}
 Plug 'nvim-treesitter/nvim-treesitter-refactor'
+Plug 'https://gitlab.com/HiPhish/rainbow-delimiters.nvim.git'
 
 "Autocomplete brackets/parens/etc like vscode"
 Plug 'windwp/nvim-autopairs'
@@ -716,9 +716,6 @@ let g:copilot_filetypes = {
 "nnoremap <M-p> :cprev<CR>zz
 
 nmap ; :
-
-"Lambda Calculus moment"
-let g:rainbow_active = 1
 
 "Support the garbage that is PostCSS"
 au BufRead,BufNewFile *.postcss set filetype=postcss

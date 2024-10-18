@@ -33,6 +33,18 @@ if vim.g.neovide then
 	)
 end
 
+local rainbow_delimiters = require('rainbow-delimiters')
+require('rainbow-delimiters.setup').setup {
+	strategy = {
+		[''] = rainbow_delimiters.strategy['global'],
+		-- commonlisp = rainbow_delimiters.strategy['local'],
+	},
+	query = {
+		[''] = 'rainbow-delimiters',
+		xml = 'rainbow-blocks',
+	},
+}
+
 require("user.greet")
 require("user.copilot")
 require("user.lsp")
