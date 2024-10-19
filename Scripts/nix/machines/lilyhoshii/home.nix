@@ -75,7 +75,8 @@
 			gotab
 			fzf
 			dissent
-			armcord
+			# armcord
+			# legcord
 			signal-desktop
 			jq
 			htop
