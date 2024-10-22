@@ -3,14 +3,20 @@
 let
 	chromeArgs = [ "--gtk-version=4" ];
 
+	chromePkgs = pkgs.extend (self: super: {
+		widevine-cdm = super.callPackage ./widevine-cdm.nix { };
+	});
+
 	chrome = {
-		package = pkgs.google-chrome;
+		package = chromePkgs.google-chrome;
 		binaryName = "google-chrome-stable";
 		desktopFile = "google-chrome.desktop";
 	};
 
 	chromium = {
-		package = pkgs.chromium;
+		package = chromePkgs.chromium.override {
+			enableWideVine = true;
+		};
 		binaryName = "chromium";
 		desktopFile = "chromium-browser.desktop";
 	};

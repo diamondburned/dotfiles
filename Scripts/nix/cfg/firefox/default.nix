@@ -37,11 +37,6 @@ let
 		categories = [ "Network" "WebBrowser" ];
 	};
 
-	# nativeMessagingHosts = {
-	# 	"org.gnome.shell.extensions.gsconnect" = pkgs.gnomeExtensions.gsconnect;
-	# 	"org.gnome.chrome_gnome_shell"         = pkgs.chrome-gnome-shell;
-	# };
-
 	firefox-attrs = {
 		applicationName = "firefox";
 		forceWayland = true;
@@ -55,10 +50,6 @@ let
 	]);
 
 in {
-	imports = [
-		./asahi-widevine.nix
-	];
-
 	home.packages = with pkgs; [
 		(makeFirefoxProfileDesktopFile {
 			profile = profileName;

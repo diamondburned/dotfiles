@@ -23,9 +23,6 @@
 			overlays = import ./overlays.nix;
 		};
 
-		# Enable Firefox Widevine DRM for Asahi Linux.
-		programs.firefox.profiles.default.enableAsahiWidevine = true;
-
 		programs.direnv = {
 			enable = true;
 			config.load_dotenv = false;
