@@ -6,19 +6,28 @@
     },
     "github:NixOS/nixpkgs 85f1ba3e51676": {
       "url": "https://github.com/NixOS/nixpkgs/archive/85f1ba3e51676.tar.gz",
-      "store_hash": "jni203jz4lwaj273bl2dm9kz34lqzng1"
+      "store_hash": "jni203jz4lwaj273bl2dm9kz34lqzng1",
+      "store_path": "/nix/store/jni203jz4lwaj273bl2dm9kz34lqzng1-bonito-vO74GRa5BTD541de-nixpkgs/bonito-vO74GRa5BTD541de-nixpkgs"
+    },
+    "github:NixOS/nixpkgs 9bf032ab9db6810d601053b9cda32f8bdd0a5eb1": {
+      "url": "https://github.com/NixOS/nixpkgs/archive/9bf032ab9db6810d601053b9cda32f8bdd0a5eb1.tar.gz",
+      "store_hash": "kcap1vgiwfns1dk405n8ny15ig193mq1",
+      "store_path": "/nix/store/kcap1vgiwfns1dk405n8ny15ig193mq1-bonito-_TZTyCs_Qfn1KSVq-nixpkgs/bonito-_TZTyCs_Qfn1KSVq-nixpkgs"
     },
     "github:NixOS/nixpkgs gnome": {
       "url": "https://github.com/NixOS/nixpkgs/archive/8bb5f1d812b1844bbf24fa8abecea432d937f42e.tar.gz",
-      "store_hash": "fy4abddr91sf163n65f4m88wd35f7jw1"
+      "store_hash": "fy4abddr91sf163n65f4m88wd35f7jw1",
+      "store_path": "/nix/store/fy4abddr91sf163n65f4m88wd35f7jw1-bonito-OI1rzSgkolTeR-LS-nixpkgs/bonito-OI1rzSgkolTeR-LS-nixpkgs"
     },
     "github:NixOS/nixpkgs nixos-unstable": {
       "url": "https://github.com/NixOS/nixpkgs/archive/5785b6bb5eaae44e627d541023034e1601455827.tar.gz",
-      "store_hash": "f7hk0yk4v0jksinjx421fpbzba1z9909"
+      "store_hash": "f7hk0yk4v0jksinjx421fpbzba1z9909",
+      "store_path": "/nix/store/f7hk0yk4v0jksinjx421fpbzba1z9909-bonito-K90uGIk-BNm38vlV-nixpkgs/bonito-K90uGIk-BNm38vlV-nixpkgs"
     },
     "github:NixOS/nixpkgs staging": {
       "url": "https://github.com/NixOS/nixpkgs/archive/b3460d2cb765845b73019ccde3a598dfab889b2d.tar.gz",
-      "store_hash": "ar24g34g5ix5rxpmqkw1qh9ali33rlmv"
+      "store_hash": "ar24g34g5ix5rxpmqkw1qh9ali33rlmv",
+      "store_path": "/nix/store/ar24g34g5ix5rxpmqkw1qh9ali33rlmv-bonito-XTLXmMHEHcImHIC6-nixpkgs/bonito-XTLXmMHEHcImHIC6-nixpkgs"
     },
     "github:asahilinux/linux refs/tags/asahi-6.*": {
       "url": "https://github.com/asahilinux/linux/archive/ff2d348a4a3b06fab9a425f26537fedfdf162341.tar.gz",
@@ -34,23 +43,28 @@
     },
     "github:edolstra/flake-compat 0f9255e01c2": {
       "url": "https://github.com/edolstra/flake-compat/archive/0f9255e01c2.tar.gz",
-      "store_hash": "726glnx4r8d5kf0gqagn4c936p8b2k7f"
+      "store_hash": "726glnx4r8d5kf0gqagn4c936p8b2k7f",
+      "store_path": "/nix/store/726glnx4r8d5kf0gqagn4c936p8b2k7f-bonito-o654seCpdfWEk6wy-flake-compat/bonito-o654seCpdfWEk6wy-flake-compat"
     },
     "github:nix-community/NUR master": {
       "url": "https://github.com/nix-community/NUR/archive/de1f391fb5953123d0244282540eee79bfe4ed0d.tar.gz",
-      "store_hash": "4f80yanjklbh4zkqvgj5z3v654m8bygq"
+      "store_hash": "4f80yanjklbh4zkqvgj5z3v654m8bygq",
+      "store_path": "/nix/store/4f80yanjklbh4zkqvgj5z3v654m8bygq-bonito-9BkBDv3Ej7STkPZc-NUR/bonito-9BkBDv3Ej7STkPZc-NUR"
     },
     "github:nix-community/gomod2nix master": {
       "url": "https://github.com/nix-community/gomod2nix/archive/f95720e89af6165c8c0aa77f180461fe786f3c21.tar.gz",
-      "store_hash": "ainbqc9bxfq7biskfc2b0hiy0z6vwxgs"
+      "store_hash": "ainbqc9bxfq7biskfc2b0hiy0z6vwxgs",
+      "store_path": "/nix/store/ainbqc9bxfq7biskfc2b0hiy0z6vwxgs-bonito-9DRbWFt7g5PS975i-gomod2nix/bonito-9DRbWFt7g5PS975i-gomod2nix"
     },
     "github:nix-community/home-manager master": {
       "url": "https://github.com/nix-community/home-manager/archive/5ec753a1fc4454df9285d8b3ec0809234defb975.tar.gz",
-      "store_hash": "mf2x34f0p903g06k4lfww9rvgggaq63y"
+      "store_hash": "mf2x34f0p903g06k4lfww9rvgggaq63y",
+      "store_path": "/nix/store/mf2x34f0p903g06k4lfww9rvgggaq63y-bonito-Ee7aaVftA_JOaKhr-home-manager/bonito-Ee7aaVftA_JOaKhr-home-manager"
     },
     "github:tpwrules/nixos-apple-silicon main": {
       "url": "https://github.com/tpwrules/nixos-apple-silicon/archive/c5f944f49a052232015bb3c03524b69e3fdd2aa4.tar.gz",
-      "store_hash": "dqbyl3x9yk1bicga5pwfl0rvh97czy23"
+      "store_hash": "dqbyl3x9yk1bicga5pwfl0rvh97czy23",
+      "store_path": "/nix/store/dqbyl3x9yk1bicga5pwfl0rvh97czy23-bonito-Xwz2FLO-lKLoFSNJ-nixos-apple-silicon/bonito-Xwz2FLO-lKLoFSNJ-nixos-apple-silicon"
     }
   }
 }
