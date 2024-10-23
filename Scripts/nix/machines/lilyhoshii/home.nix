@@ -69,6 +69,7 @@
 			gnome-tweaks
 			go
 			gopls
+			gotools
 			gotab
 			fzf
 			dissent

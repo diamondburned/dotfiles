@@ -1,7 +1,8 @@
 [global.channels]
  nixpkgs_gnome = "github:NixOS/nixpkgs gnome"
  nixpkgs_staging = "github:NixOS/nixpkgs staging"
- nixpkgs_unstable = "github:NixOS/nixpkgs nixos-unstable"
+ # nixpkgs_unstable = "github:NixOS/nixpkgs nixos-unstable"
+ nixpkgs_unstable = "github:NixOS/nixpkgs 9bf032ab9db6810d601053b9cda32f8bdd0a5eb1"
  home-manager_unstable = "github:nix-community/home-manager master"
 
 [global.aliases]

@@ -45,8 +45,8 @@
       "store_hash": "ainbqc9bxfq7biskfc2b0hiy0z6vwxgs"
     },
     "github:nix-community/home-manager master": {
-      "url": "https://github.com/nix-community/home-manager/archive/09a0c0c02953318bf94425738c7061ffdc4cba75.tar.gz",
-      "store_hash": "d2g5cx2hh41g1f8vxk6p0vi6nv3n8pp2"
+      "url": "https://github.com/nix-community/home-manager/archive/5ec753a1fc4454df9285d8b3ec0809234defb975.tar.gz",
+      "store_hash": "mf2x34f0p903g06k4lfww9rvgggaq63y"
     },
     "github:tpwrules/nixos-apple-silicon main": {
       "url": "https://github.com/tpwrules/nixos-apple-silicon/archive/c5f944f49a052232015bb3c03524b69e3fdd2aa4.tar.gz",
