@@ -1,6 +1,6 @@
 { pkgs, lib }:
 
-pkgs.buildGoPackage rec {
+pkgs.buildGoModule rec {
 	pname = "gotab";
 	version = "909ef36";
 
@@ -11,5 +11,15 @@ pkgs.buildGoPackage rec {
 		sha256 = "sha256-Prjb/P0F4wDMINSC+77rOrXFIg67kxI+pbMOtz494pk=";
 	};
 
-	goPackagePath = "github.com/dsnet/gotab";
+	patchPhase = ''
+		runHook prePatch
+
+		cat<<-EOF > go.mod
+		module github.com/dsnet/gotab
+		EOF
+
+		runHook postPatch
+	'';
+
+	vendorHash = null;
 }

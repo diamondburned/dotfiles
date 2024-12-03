@@ -186,7 +186,7 @@ in {
 	# };
 
 	gotktrix = self.callPackage ./packages/gotktrix.nix {};
-	grun     = self.callPackage ./packages/grun.nix {};
+	# grun     = self.callPackage ./packages/grun.nix {};
 
 	# Broken
 	# spotify = self.callPackage (import "${spicetify}/package.nix") {
