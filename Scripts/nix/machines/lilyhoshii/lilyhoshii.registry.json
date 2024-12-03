@@ -6,7 +6,7 @@
     },
     "to": {
       "type": "path",
-      "path": "/nix/store/mf2x34f0p903g06k4lfww9rvgggaq63y-bonito-Ee7aaVftA_JOaKhr-home-manager/bonito-Ee7aaVftA_JOaKhr-home-manager"
+      "path": "/nix/store/x7awxnrpmams1zcd966g8b2ijjsgl9cm-bonito-VhY69Uq18mwugQ53-home-manager/bonito-VhY69Uq18mwugQ53-home-manager"
     }
   },
   "bonito:home-manager_unstable": {
@@ -16,7 +16,7 @@
     },
     "to": {
       "type": "path",
-      "path": "/nix/store/mf2x34f0p903g06k4lfww9rvgggaq63y-bonito-Ee7aaVftA_JOaKhr-home-manager/bonito-Ee7aaVftA_JOaKhr-home-manager"
+      "path": "/nix/store/x7awxnrpmams1zcd966g8b2ijjsgl9cm-bonito-VhY69Uq18mwugQ53-home-manager/bonito-VhY69Uq18mwugQ53-home-manager"
     }
   },
   "bonito:nixos": {
@@ -26,7 +26,7 @@
     },
     "to": {
       "type": "path",
-      "path": "/nix/store/kcap1vgiwfns1dk405n8ny15ig193mq1-bonito-_TZTyCs_Qfn1KSVq-nixpkgs/bonito-_TZTyCs_Qfn1KSVq-nixpkgs"
+      "path": "/nix/store/c1313qrrgwjkdagf0rkrhm1injyk245q-bonito-2rbHnXlUGTbgTkIw-nixpkgs/bonito-2rbHnXlUGTbgTkIw-nixpkgs"
     }
   },
   "bonito:nixpkgs": {
@@ -36,7 +36,7 @@
     },
     "to": {
       "type": "path",
-      "path": "/nix/store/kcap1vgiwfns1dk405n8ny15ig193mq1-bonito-_TZTyCs_Qfn1KSVq-nixpkgs/bonito-_TZTyCs_Qfn1KSVq-nixpkgs"
+      "path": "/nix/store/c1313qrrgwjkdagf0rkrhm1injyk245q-bonito-2rbHnXlUGTbgTkIw-nixpkgs/bonito-2rbHnXlUGTbgTkIw-nixpkgs"
     }
   },
   "bonito:nixpkgs_gnome": {
@@ -66,7 +66,7 @@
     },
     "to": {
       "type": "path",
-      "path": "/nix/store/kcap1vgiwfns1dk405n8ny15ig193mq1-bonito-_TZTyCs_Qfn1KSVq-nixpkgs/bonito-_TZTyCs_Qfn1KSVq-nixpkgs"
+      "path": "/nix/store/c1313qrrgwjkdagf0rkrhm1injyk245q-bonito-2rbHnXlUGTbgTkIw-nixpkgs/bonito-2rbHnXlUGTbgTkIw-nixpkgs"
     }
   }
 }

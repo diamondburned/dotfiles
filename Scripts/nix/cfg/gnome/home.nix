@@ -12,7 +12,7 @@
 		gnomeExtensions.tiling-assistant
 		gnomeExtensions.brightness-control-using-ddcutil
 		gnomeExtensions.search-light
-		gnomeExtensions.rounded-window-corners
+		# gnomeExtensions.rounded-window-corners
 		gnomeExtensions.expandable-notifications
 		gnomeExtensions.notification-banner-reloaded
 		gnomeExtensions.bluetooth-battery-meter

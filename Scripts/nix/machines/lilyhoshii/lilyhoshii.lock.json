@@ -20,9 +20,9 @@
       "store_path": "/nix/store/fy4abddr91sf163n65f4m88wd35f7jw1-bonito-OI1rzSgkolTeR-LS-nixpkgs/bonito-OI1rzSgkolTeR-LS-nixpkgs"
     },
     "github:NixOS/nixpkgs nixos-unstable": {
-      "url": "https://github.com/NixOS/nixpkgs/archive/5785b6bb5eaae44e627d541023034e1601455827.tar.gz",
-      "store_hash": "f7hk0yk4v0jksinjx421fpbzba1z9909",
-      "store_path": "/nix/store/f7hk0yk4v0jksinjx421fpbzba1z9909-bonito-K90uGIk-BNm38vlV-nixpkgs/bonito-K90uGIk-BNm38vlV-nixpkgs"
+      "url": "https://github.com/NixOS/nixpkgs/archive/ac35b104800bff9028425fec3b6e8a41de2bbfff.tar.gz",
+      "store_hash": "c1313qrrgwjkdagf0rkrhm1injyk245q",
+      "store_path": "/nix/store/c1313qrrgwjkdagf0rkrhm1injyk245q-bonito-2rbHnXlUGTbgTkIw-nixpkgs/bonito-2rbHnXlUGTbgTkIw-nixpkgs"
     },
     "github:NixOS/nixpkgs staging": {
       "url": "https://github.com/NixOS/nixpkgs/archive/b3460d2cb765845b73019ccde3a598dfab889b2d.tar.gz",
@@ -57,9 +57,9 @@
       "store_path": "/nix/store/ainbqc9bxfq7biskfc2b0hiy0z6vwxgs-bonito-9DRbWFt7g5PS975i-gomod2nix/bonito-9DRbWFt7g5PS975i-gomod2nix"
     },
     "github:nix-community/home-manager master": {
-      "url": "https://github.com/nix-community/home-manager/archive/5ec753a1fc4454df9285d8b3ec0809234defb975.tar.gz",
-      "store_hash": "mf2x34f0p903g06k4lfww9rvgggaq63y",
-      "store_path": "/nix/store/mf2x34f0p903g06k4lfww9rvgggaq63y-bonito-Ee7aaVftA_JOaKhr-home-manager/bonito-Ee7aaVftA_JOaKhr-home-manager"
+      "url": "https://github.com/nix-community/home-manager/archive/bf23fe41082aa0289c209169302afd3397092f22.tar.gz",
+      "store_hash": "x7awxnrpmams1zcd966g8b2ijjsgl9cm",
+      "store_path": "/nix/store/x7awxnrpmams1zcd966g8b2ijjsgl9cm-bonito-VhY69Uq18mwugQ53-home-manager/bonito-VhY69Uq18mwugQ53-home-manager"
     },
     "github:tpwrules/nixos-apple-silicon main": {
       "url": "https://github.com/tpwrules/nixos-apple-silicon/archive/c5f944f49a052232015bb3c03524b69e3fdd2aa4.tar.gz",
