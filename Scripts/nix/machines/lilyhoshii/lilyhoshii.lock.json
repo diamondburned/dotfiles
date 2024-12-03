@@ -62,9 +62,9 @@
       "store_path": "/nix/store/x7awxnrpmams1zcd966g8b2ijjsgl9cm-bonito-VhY69Uq18mwugQ53-home-manager/bonito-VhY69Uq18mwugQ53-home-manager"
     },
     "github:tpwrules/nixos-apple-silicon main": {
-      "url": "https://github.com/tpwrules/nixos-apple-silicon/archive/c5f944f49a052232015bb3c03524b69e3fdd2aa4.tar.gz",
-      "store_hash": "dqbyl3x9yk1bicga5pwfl0rvh97czy23",
-      "store_path": "/nix/store/dqbyl3x9yk1bicga5pwfl0rvh97czy23-bonito-Xwz2FLO-lKLoFSNJ-nixos-apple-silicon/bonito-Xwz2FLO-lKLoFSNJ-nixos-apple-silicon"
+      "url": "https://github.com/tpwrules/nixos-apple-silicon/archive/455b13ef013b4c0e27d6e2f6572350d4cb83162d.tar.gz",
+      "store_hash": "a0sl6aga65034i9cf65z2pnz48cmcykn",
+      "store_path": "/nix/store/a0sl6aga65034i9cf65z2pnz48cmcykn-bonito-l7OqC0P4sCCjeDxf-nixos-apple-silicon/bonito-l7OqC0P4sCCjeDxf-nixos-apple-silicon"
     }
   }
 }

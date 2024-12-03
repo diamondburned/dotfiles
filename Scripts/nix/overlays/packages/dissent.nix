@@ -26,6 +26,18 @@ let
 		hash  = "sha256:0009jbdj2y2vqi522a3r64xf4drp44ghbidf32j6bslswqf3wy4m";
 	};
 
+  libspelling_2_1 = pkgs.libspelling.overrideAttrs {
+    version = "0.2.1";
+
+    src = pkgs.fetchFromGitLab {
+      domain = "gitlab.gnome.org";
+      owner = "GNOME";
+      repo = "libspelling";
+      rev = "refs/tags/0.2.1";
+      hash = "sha256-0OGcwPGWtYYf0XmvzXEaQgebBOW/6JWcDuF4MlQjCZQ=";
+    };
+  };
+
 in pkgs.stdenv.mkDerivation {
 	pname = dissent.base.pname;
 	inherit (dissent) version src;
@@ -39,6 +51,8 @@ in pkgs.stdenv.mkDerivation {
 			gdk-pixbuf
 			gobject-introspection
 			hicolor-icon-theme
+			libspelling_2_1
+			gtksourceview5
 		]);
 
 	nativeBuildInputs =
