@@ -420,6 +420,7 @@ in {
 			<dotfiles/cfg/fonts/home.nix>
 			<dotfiles/cfg/zellij/home.nix>
 			<dotfiles/cfg/flatpak/packages.nix>
+			<dotfiles/cfg/blackbox-terminal/home.nix>
 
 			# (import <dotfiles/utils/schedule.nix {
 			# 	name        = "birthdayer-juan";
@@ -432,7 +433,7 @@ in {
 		nixpkgs.config = {
 			overlays = import ./overlays;
 			allowUnfree = true;
-			rocmSupport = true;
+			# rocmSupport = true;
 		};
 
 		programs.direnv = {
@@ -525,14 +526,6 @@ in {
 			pomodoro
 			gnome-usage
 			pomodoro
-			gnomeExtensions.gsconnect
-			gnomeExtensions.dash-to-panel
-			gnomeExtensions.tiling-assistant
-			gnomeExtensions.brightness-control-using-ddcutil
-			gnomeExtensions.search-light
-			gnomeExtensions.rounded-window-corners
-			gnomeExtensions.expandable-notifications
-			gnomeExtensions.notification-banner-reloaded
 			keepassxc
 			sticky
 			# gimp-with-plugins
@@ -588,6 +581,7 @@ in {
 			gopls
 			gotools
 			govulncheck
+			nixfmt-rfc-style
 			licensor
 			mdr
 			# config.boot.kernelPackages.perf
@@ -629,22 +623,16 @@ in {
 			spotify
 			spot
 			chatterino2
-			# chatterino7
 
 			# Chat/Social
 			# zoom-us
 			# discord
+			discord-canary # working Wayland audio support
 			dissent
-			# Use eclairevoyant/nixpkgs which contains a fix for armcord's Wayland issue.
-			(import (pkgs.fetchFromGitHub {
-				owner = "eclairevoyant";
-				repo  = "nixpkgs";
-				rev   = "c05c203df716f444fa075e121bb9cf362b694db0";
-				hash  = "sha256-GlbRXv6g9YmrWAzs198Bhdl/W0pjCAuKLBg+iZ0qgAk=";
-			}) {}).armcord
 			# armcord
-			# vesktop
 			# telegram-desktop
+			# legcord
+			# vesktop
 			kotatogram-desktop
 			signal-desktop
 			# (pkgs.callPackage <unstable/pkgs/by-name/ve/vesktop/package.nix> {})
@@ -686,15 +674,14 @@ in {
 			snapshot
 			glib-networking
 			celluloid
-			gnome.gnome-power-manager
-			gnome.vinagre
+			gnome-power-manager
 			eog
 			file-roller
 			nautilus
 			nautilus-open-any-terminal
 			gnome-disk-utility
 			gnome-tweaks
-			gnome.gnome-boxes
+			gnome-boxes
 
 			# Everything in ./bn
 			(runCommand "diamond-bin" {} ''

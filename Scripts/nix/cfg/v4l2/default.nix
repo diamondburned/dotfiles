@@ -35,7 +35,7 @@ in
 
 	environment.systemPackages = with pkgs; [
 		config.boot.kernelPackages.v4l2loopback
-		gnome.cheese
+		cheese
 		dslr-webcam-start
 	];
 

@@ -13,7 +13,7 @@ in
 {
 	imports = [
 		(modulesPath + "/installer/scan/not-detected.nix")
-		./hardware/aorus-pro.nix
+		./hardware/asus-tuf.nix
 		./hardware/tertiary.nix
 		./hardware/graphics.nix
 	];

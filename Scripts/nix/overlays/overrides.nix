@@ -173,29 +173,8 @@ in {
 		exec ${pkg}/bin/${bin} "$@"
 	'';
 
-	# Spotify
-	# spotify-unwrapped = self.callPackage ./packages/spotify-adblocked.nix {
-	# 	curl = super.curl.override {
-	# 		gnutlsSupport  = true;
-	# 		# sslSupport = false;
-	# 		opensslSupport = false;
-	# 	};
-	# };
-	# spotify = self.callPackage "${super.path}/pkgs/applications/audio/spotify/wrapper.nix" {
-	# 	inherit (self) spotify-unwrapped;
-	# };
-
 	gotktrix = self.callPackage ./packages/gotktrix.nix {};
 	# grun     = self.callPackage ./packages/grun.nix {};
-
-	# Broken
-	# spotify = self.callPackage (import "${spicetify}/package.nix") {
-	# 	theme = "Fluent";
-	# 	colorScheme = "Dark";
-	# 	thirdParyThemes = {
-	# 		"Fluent" = "${spicetify-themes}/Fluent";
-	# 	};
-	# };
 
 	# This might be causing painful rebuilds.
 	# vte = vte super;

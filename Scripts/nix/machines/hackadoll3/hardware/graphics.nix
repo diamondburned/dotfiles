@@ -14,7 +14,7 @@
 
 			# AMD GPU stuff
 			amdvlk
-			rocmPackages.clr.icd
+			# rocmPackages.clr.icd
 
 			# Intel GPU stuff
 			# vaapiIntel
@@ -29,7 +29,7 @@
 		];
 	};
 
-	systemd.tmpfiles.rules = [
-		"L+ /opt/rocm/hip - - - - ${pkgs.rocmPackages.clr}"
-  ];
+	# systemd.tmpfiles.rules = [
+	# 	"L+ /opt/rocm/hip - - - - ${pkgs.rocmPackages.clr}"
+ #  ];
 }

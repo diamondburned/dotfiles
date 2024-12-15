@@ -6,29 +6,29 @@ let
 		# ./christmas.css
 	]);
 
-	theme = {
-		name = "Colloid-Pink-Dark";
-		package = pkgs.colloid-gtk-theme.override {
-			themeVariants = [ "all" ];
-			colorVariants = [ "standard" "light" "dark" ];
-			sizeVariants  = [ "standard" "compact" ];
-			tweaks = [
-				"rimless"
-				"normal"
-				"float"
-				# "black"
-			];
-		};
-	};
+	# theme = {
+	# 	name = "Colloid-Pink-Dark";
+	# 	package = pkgs.colloid-gtk-theme.override {
+	# 		themeVariants = [ "all" ];
+	# 		colorVariants = [ "standard" "light" "dark" ];
+	# 		sizeVariants  = [ "standard" "compact" ];
+	# 		tweaks = [
+	# 			"rimless"
+	# 			"normal"
+	# 			"float"
+	# 			# "black"
+	# 		];
+	# 	};
+	# };
 
 	cursorTheme = {
 		package = pkgs.catppuccin-cursors.mochaPink;
 		name = "catppuccin-mocha-pink-cursors";
-		size = 24;
+		# size = 24;
 	};
 
 	env = {
-		GTK_THEME = theme.name;
+		# GTK_THEME = theme.name;
 	};
 in
 
@@ -41,13 +41,14 @@ in
 		font.name = "Sans";
 		font.size = 11;
 
-		theme = {
-			name = theme.name;
-			# Do not set theme.package here, as this will cause home-manager to insert the theme via
-			# user.css which will not only mess up other application's themes but also override its theme.
-			# This is a GTK issue as they have removed the ability to set the theme normally, so hacks
-			# must be done to set the theme, and hacks are fragile.
-		};
+		# theme = {
+		# 	inherit (theme) name;
+		#
+		# 	# Do not set theme.package here, as this will cause home-manager to insert the theme via
+		# 	# user.css which will not only mess up other application's themes but also override its theme.
+		# 	# This is a GTK issue as they have removed the ability to set the theme normally, so hacks
+		# 	# must be done to set the theme, and hacks are fragile.
+		# };
 
 		iconTheme = {
 			name = "Papirus-Dark";
@@ -79,7 +80,8 @@ in
 	};
 
 	home.pointerCursor = {
-		inherit (cursorTheme) package name size;
+		# inherit (cursorTheme) package name size;
+		inherit (cursorTheme) package name;
 		gtk.enable = true;
 		x11.enable = true;
 	};
@@ -103,6 +105,6 @@ in
 		catppuccin-cursors.macchiatoFlamingo
 		catppuccin-gtk
 	] ++ [
-		theme.package
+		# theme.package
 	];
 }
