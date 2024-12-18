@@ -1,35 +1,44 @@
-{ config, lib, pkgs, ... }:
+{
+  config,
+  lib,
+  pkgs,
+  ...
+}:
+
+let
+  rocmEnv = pkgs.symlinkJoin {
+    name = "rocm-combined";
+    paths = with pkgs.rocmPackages; [
+      rocblas
+      hipblas
+      clr
+    ];
+  };
+in
 
 {
-	boot.initrd.kernelModules = [ "amdgpu" ];
+  boot.initrd.kernelModules = [ "amdgpu" ];
 
-	hardware.graphics = {
-		enable = true;
-		enable32Bit = true;
-		extraPackages = with pkgs; [
-			mesa
-			libva
-			libva-utils
-			libvdpau-va-gl
+  hardware.graphics = {
+    enable = true;
+    enable32Bit = true;
+    extraPackages = with pkgs; [
+      mesa
+      libva
+      libva-utils
+      libvdpau-va-gl
 
-			# AMD GPU stuff
-			amdvlk
-			# rocmPackages.clr.icd
+      # AMD GPU stuff
+      # amdvlk
+      # rocmPackages.clr.icd
+    ];
+    extraPackages32 = with pkgs.pkgsi686Linux; [
+      libva
+      libva-utils
+    ];
+  };
 
-			# Intel GPU stuff
-			# vaapiIntel
-			# vaapi-intel-hybrid
-
-			# Intel CPU stuff
-			intel-compute-runtime
-		];
-		extraPackages32 = with pkgs.pkgsi686Linux; [
-			libva
-			libva-utils
-		];
-	};
-
-	# systemd.tmpfiles.rules = [
-	# 	"L+ /opt/rocm/hip - - - - ${pkgs.rocmPackages.clr}"
- #  ];
+  systemd.tmpfiles.rules = [
+    "L+    /opt/rocm   -    -    -     -    ${rocmEnv}"
+  ];
 }
