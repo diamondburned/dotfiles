@@ -28,7 +28,6 @@
                 type = "lvm_pv";
                 vg = "hackadoll3-pool";
               };
-
             };
           };
         };
