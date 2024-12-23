@@ -94,6 +94,7 @@ in
     <dotfiles/cfg/secureboot>
     <dotfiles/cfg/foot>
     <dotfiles/cfg/u2f>
+    <dotfiles/cfg/steam>
     <dotfiles/cfg/nushell>
 
     # This shit's still garbage.
@@ -436,7 +437,7 @@ in
       <dotfiles/overlays>
       <dotfiles/overlays/home-manager>
       <dotfiles/secrets/diamond>
-      <dotfiles/cfg/firefox>
+      <dotfiles/cfg/firefox/home.nix>
       <dotfiles/cfg/google-chrome/home.nix>
       # <dotfiles/cfg/hm-blackbox-terminal.nix>
       <dotfiles/cfg/hm-gnome-terminal.nix>
@@ -630,25 +631,6 @@ in
         xorg.xauth
         # neovide
         # neovim-gtk
-
-        # protonup
-        # gamescope
-        (steam.override (
-          {
-            extraLibraries ? pkgs': [ ],
-            ...
-          }:
-          {
-            # Workaround for TF2.
-            # See https://github.com/ValveSoftware/Source-1-Games/issues/5043#issuecomment-1822019817.
-            extraLibraries =
-              pkgs':
-              (extraLibraries pkgs')
-              ++ ([
-                pkgs'.gperftools
-              ]);
-          }
-        ))
 
         # Multimedia
         # aqours

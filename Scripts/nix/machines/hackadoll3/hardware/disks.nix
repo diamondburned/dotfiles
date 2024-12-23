@@ -2,7 +2,7 @@
 
 let
   sources = import ../../../nix/sources.nix { inherit pkgs; };
-  disko = builtins.trace (builtins.toJSON sources.disko) sources.disko;
+  disko = sources.disko;
 in
 
 {
