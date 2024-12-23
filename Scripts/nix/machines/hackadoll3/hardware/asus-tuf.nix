@@ -1,24 +1,33 @@
-{ config, lib, pkgs, ... }:
+{
+  config,
+  lib,
+  pkgs,
+  ...
+}:
 
 {
-	boot.kernelModules = [ "it87" "amd-pstate" ];
+  boot.kernelModules = [
+    "it87"
+    "amd-pstate"
+    "kvm-amd"
+  ];
 
-	boot.kernelParams = [
-		# "acpi_enforce_resources=lax"
-		# "amd_pstate=active"
-	];
+  boot.kernelParams = [
+    # "acpi_enforce_resources=lax"
+    # "amd_pstate=active"
+  ];
 
-	environment.systemPackages = with pkgs; [
-		lm_sensors
-	];
+  environment.systemPackages = with pkgs; [
+    lm_sensors
+  ];
 
-	hardware.cpu.amd = {
-		updateMicrocode = true;
-		sev.enable = true;
-	};
+  hardware.cpu.amd = {
+    updateMicrocode = true;
+    sev.enable = true;
+  };
 
-	services.hardware.openrgb = {
-		enable = true;
-		motherboard = "amd";
-	};
+  services.hardware.openrgb = {
+    enable = true;
+    motherboard = "amd";
+  };
 }

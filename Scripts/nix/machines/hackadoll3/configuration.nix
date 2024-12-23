@@ -1,741 +1,783 @@
 # Edit this configuration file to define what should be installed on
-# your system.	Help is available in the configuration.nix(5) man page
+# your system.  Help is available in the configuration.nix(5) man page
 # and in the NixOS manual (accessible by running ‘nixos-help’).
 
-{ config, pkgs, lib, ... }:
+{
+  config,
+  pkgs,
+  lib,
+  ...
+}:
 
 let
-	# # TODO: fix this.
-	# tdeo = import (builtins.fetchGit {
-	# 	url = "https://github.com/tadeokondrak/nix-overlay";
-	# 	rev = "0d05c53204da3b576f810ef2e1312b19bf2420b7";
-	# });
-
-	utils = import <dotfiles/utils> { inherit config pkgs lib; };
-
-	# GIMP v2.99 Nixpkgs
-	gimpMesonPkgs = import (pkgs.fetchFromGitHub {
-		owner  = "jtojnar";
-		repo   = "nixpkgs";
-		rev    = "6cb2cce589e1effb0f9983d99132c4f8cc2f4d32"; # gimp-meson
-		sha256 = "0wg44l0lkrymsp68s10sx1r4fqd3yvn0lswkhn1zkd3qv6s42nmd";
-	}) {};
-
-	gnome-41 = import (pkgs.fetchFromGitHub {
-		owner  = "NixOS";
-		repo   = "nixpkgs";
-		rev    = "3fdd780";
-		sha256 = lib.fakeSha256;
-	}) {};
-
-	userEnv = {
-		LC_TIME = "en_GB.UTF-8";
-		NIX_AUTO_RUN = "1";
-		# STEAM_RUNTIME = "0";
-		# XDG_CURRENT_DESKTOP = "Wayfire";
-
-		GOPATH = "/home/diamond/.go";
-		GOBIN  = "/home/diamond/.go/bin";
-		CGO_ENABLED = "0";
-
-		# Disable VSync.
-		vblank_mode = "0";
-
-		# Enforce Wayland.
-		NIXOS_OZONE_WL = "1";
-		QT_QPA_PLATFORM = "wayland";
-		MOZ_ENABLE_WAYLAND = "1";
-		# SDL_VIDEODRIVER	= "wayland";
-
-		# GNOME still forces scaling for all Xwayland apps. See
-		# https://github.com/ValveSoftware/steam-for-linux/issues/9209.
-		STEAM_FORCE_DESKTOPUI_SCALING = "1";
-
-		# osu settings.
-		WINE_RT = "89";
-		WINE_SRV_RT = "99";
-		STAGING_SHARED_MEMORY = "1";
-		STAGING_RT_PRIORITY_BASE = "89";
-		STAGING_RT_PRIORITY_SERVER = "99";
-		STAGING_PA_DURATION = "250000";
-		STAGING_PA_PERIOD = "8192";
-   	STAGING_PA_LATENCY_USEC = "128";
-	};
-
-in {
-	imports = [
-		<home-manager/nixos>
-		./hardware-configuration.nix
-		./hardware-custom.nix
-		./services
-		./www
-		<dotfiles/overlays>
-		<dotfiles/overlays/services.nix>
-		<dotfiles/secrets>
-		<dotfiles/cfg/v4l2>
-		<dotfiles/cfg/udev>
-		<dotfiles/cfg/sound>
-		<dotfiles/cfg/nokbd>
-		<dotfiles/cfg/fonts>
-		<dotfiles/cfg/locale>
-		<dotfiles/cfg/localhost>
-		<dotfiles/cfg/networking>
-		<dotfiles/cfg/keyd>
-		<dotfiles/cfg/avahi>
-		<dotfiles/cfg/gps>
-		<dotfiles/cfg/gnome>
-		<dotfiles/cfg/flatpak>
-		<dotfiles/cfg/dol-server>
-		<dotfiles/cfg/secureboot>
-		<dotfiles/cfg/foot>
-		<dotfiles/cfg/u2f>
-		<dotfiles/cfg/nushell>
-
-		# This shit's still garbage.
-		# <dotfiles/cfg/wayfire>
-		# <dotfiles/cfg/greetd>
-	];
-
-	nixpkgs.overlays = import ./overlays;
-	nixpkgs.config = {
-		allowUnfree = true;
-	};
-
-	# Remote build server.
-	nix = {
-		# I don't understand the newer versions. Why do they break literally everything? Let's make
-		# everything Flakes, but then since they're Flakes now that means they're experimental, so
-		# let's break everything! Bruh.
-		# package = pkgs.nix_2_3;
-		# package = pkgs.nixFlakes;
-		buildMachines = [
-			# {
-			# 	hostName = "hanaharu";
-			# 	systems = [ "x86_64-linux" "i686-linux" ];
-			# 	maxJobs = 2;
-			# 	speedFactor = 1;
-			# 	supportedFeatures = [ "nixos-test" "benchmark" "big-parallel" "kvm" ];
-			# }
-			# {
-			# 	hostName = "bridget";
-			# 	systems  = [ "aarch64-linux" ];
-			# 	maxJobs  = 1;
-			# 	speedFactor = 2;
-			# 	supportedFeatures = [ "nixos-test" ];
-			# }
-			# {
-			# 	hostName = "otokonoko";
-			# 	systems = [ "x86_64-linux" "i686-linux" ];
-			# 	maxJobs = 2;
-			# 	speedFactor = 5;
-			# 	supportedFeatures = [ "nixos-test" "benchmark" "big-parallel" "kvm" ];
-			# }
-		];
-		distributedBuilds = true;
-		extraOptions = ''
-			builders-use-substitutes = true
-		'';
-		registry = builtins.fromJSON (builtins.readFile ./hackadoll3.registry.json);
-		settings = {
-			substituters = [
-				# Cachix uses zstd, which Nix 2.3 does not support. Disable it.
-				# "https://nix-community.cachix.org"
-				"https://cache.nixos.org/"
-			];
-			trusted-users = [ "root" "diamond" ];
-			trusted-public-keys = [
-				# "nix-community.cachix.org-1:mB9FSh9qf2dCimDSUo8Zy7bkq5CX+/rkCWyvRCYg3Fs="
-			];
-		};
-	};
-
-	# Allow aarch64 emulation.
-	boot.binfmt.emulatedSystems = [ "aarch64-linux" ];
-
-	# Group to change SSH keys to.
-	users.groups.ssh-trusted.members = [ "diamond" "root" ] ++
-		(utils.formatInts 1 32 (i: "nixbld${toString i}"));
-
-	# services.ghproxy = {
-	# 	username = "diamondburned";
-	# 	address  = "unix:///tmp/ghproxy.sock";
-	# };
-
-	# Enable MySQL
-	# services.postgresql = {
-	# 	enable = true;
-	# 	enableTCPIP = false;
-	# 	ensureDatabases = ["facechat"];
-	# 	ensureUsers = [{
-	# 		name = "diamond";
-	# 		ensurePermissions = {
-	# 			"DATABASE facechat" = "ALL PRIVILEGES";
-	# 		};
-	# 	}];
-	# 	initialScript = pkgs.writeText "init.sql" ''
-	# 		CREATE USER diamond;
-	# 		ALTER  USER diamond WITH SUPERUSER;
-	# 	'';
-	# };
-
-	# NTFS support
-	boot.supportedFilesystems = [ "exfat" "ntfs" ];
-
-	# Tired of this.
-	systemd.extraConfig = ''
-		DefaultTimeoutStopSec=5s
-	'';
-
-	services.journald.extraConfig = ''
-		SystemMaxUse=2G
-		MaxRetentionSec=3month
-	'';
-
-	# systemd-boot not used. See cfg/secureboot.
-	# boot.loader.systemd-boot.enable = true;
-	boot.loader.systemd-boot.configurationLimit = 25;
-	boot.loader.efi.canTouchEfiVariables = true;
-
-	networking.hostName = "hackadoll3"; # Define your hostname.
-
-	# This doesn't really work.
-	systemd.services.NetworkManager-wait-online.enable = false;
-
-	networking.nat = {
-		enable = true;
-		internalInterfaces = [ "ve-+" ];                                                                                            
-	};
-
-	console.font = "Lat2-Terminus16";
-	console.keyMap = "us";
-
-	# services.keyd = {
-	# 	enable = true;
-	# 	configuration = {
-	# 		"default.conf" = ''
-	# 			[ids]
-	# 			*
-	# 			[main]
-	# 			capslock = esc
-	# 		'';
-	# 	};
-	# };
-
-	environment.enableDebugInfo = true;
-
-	# List packages installed in system profile. To search, run:
-	# $ nix search wget
-	environment.systemPackages = with pkgs; [
-		# System packages
-		wget
-		nix-index
-		nixGL
-		# nix-index-update
-
-		# Utilities
-		htop
-		git
-		compsize
-
-		qgnomeplatform
-		keyd
-	];
-
-	# Some programs need SUID wrappers, can be configured further or are
-	# started in user sessions.
-	programs.mtr.enable = true;
-	programs.gnupg.agent = { enable = true; };
-
-	# List services that you want to enable:
-
-	# Enable the OpenSSH daemon.
-	services.openssh = {
-		enable = true;
-		ports  = [ 22 ];
-		settings = {
-			PasswordAuthentication = false;
-			X11Forwarding = true;
-		};
-	};
-
-	# Enable CUPS to print documents.
-	services.printing = {
-		enable = true;
-		drivers = with pkgs; [
-			# gutenprint
-			# hplip
-			# cups-filters
-			# cups-bjnp
-
-			# Canon
-			# cnijfilter2
-			# canon-cups-ufr2
-		];
-	};
-
-	services.xserver.xkb.layout = "us";
-
-	fonts.fontconfig = {
-		enable = true;
-		allowBitmaps = true;
-		useEmbeddedBitmaps = true; # emojis
-		# See fontconfig.xml.
-		# subpixel = {
-		# 	# http://www.spasche.net/files/lcdfiltering/
-		# 	lcdfilter = "legacy";
-		# 	rgba = "none";
-		# };
-		includeUserConf = true;
-	};
-
-	security.sudo.extraConfig = ''
-		Defaults env_reset,pwfeedback
-	'';
-
-	# gnu = true;
-	gtk.iconCache.enable = true;
-
-	services.xserver.enable = true;
-
-	services.libinput.enable = true;
-
-	programs.xwayland = {
-		enable = true;
-		package = pkgs.xwayland.overrideAttrs (old: {
-			# preConfigure = (old.preConfigure or "") + ''
-			# 	patch -p1 < ${./patches/xwayland-fps.patch}
-			# '';
-		});
-	};
-
-	programs.seahorse.enable = true;
-
-	services.gvfs.enable = true;
-	programs.gnome-disks.enable = true;
-	programs.file-roller.enable = true;
-
-	# dbus things
-	services.dbus.packages = with pkgs; [ dconf ];
-	programs.dconf.enable = true;
-
-	# Enable Polkit
-	security.polkit.enable = true;
-
-	/*
-	# Enable MySQL
-	services.mysql = {
-		enable = true;
-		package = pkgs.mariadb;
-	};
-
-	services.mysql = {
-		enable = true;
-		package = pkgs.mariadb;
-	};
-	*/
-
-	virtualisation.docker.enable = true;
-	virtualisation.spiceUSBRedirection.enable = true;
-
-	services.sysprof.enable = true;
-
-	virtualisation.libvirtd = {
-		enable = true;
-		qemu.runAsRoot = false;
-	};
-
-	# Enable the Android debug bridge.
-	programs.adb.enable = true;
-
-	# Define a user account. Don't forget to set a password with ‘passwd’.
-	users.users.diamond = {
-		isNormalUser = true;
-		extraGroups = [
-			"wheel" "networkmanager" "docker" "storage" "audio" "adbusers" "libvirtd" "i2c"
-			"wireshark" "dialout" "input" "plugdev" "photoprism"
-		];
-	};
-
-	xdg.portal = {
-		enable = true;
-		extraPortals = with pkgs; [
-			# xdg-desktop-portal-gtk
-			xdg-desktop-portal-gnome
-		];
-	};
-
-	# Enable PAM user environments for GDM.
-	security.pam.services.gdm-password.text = ''
-        auth      substack      login
-        account   include       login
-        password  substack      login
-        session   include       login
-				session   required      pam_env.so user_readenv=1
-	'';
-
-	programs.wireshark = {
-		enable  = true;
-		package = pkgs.wireshark-qt;
-	};
-
-	programs.command-not-found = {
-		enable = true;
-		# programs.sqlite is only available if we use the nixos.org channels.
-		# See hackadoll3.toml.
-		dbPath = "/nix/var/nix/profiles/per-user/root/channels/unstable/programs.sqlite";
-	};
-
-	# Get a newer VTE with SIXEL for ourself.
-	# Disabled due to a regression: https://gitlab.gnome.org/GNOME/vte/-/issues/2717.
-	# system.replaceRuntimeDependencies = [
-	# 	{
-	# 		original = pkgs.vte-gtk4;
-	# 		replacement = pkgs.callPackage <dotfiles/overlays/packages/vte_sixel.nix> { vte = pkgs.vte-gtk4; };
-	# 	}
-	# 	{
-	# 		original = pkgs.vte;
-	# 		replacement = pkgs.callPackage <dotfiles/overlays/packages/vte_sixel.nix> { vte = pkgs.vte; };
-	# 	}
-	# ];
-
-	# TODO: fix this:
-	# home-manager.useGlobalPkgs = true;
-
-	home-manager.backupFileExtension = "bak";
-
-	home-manager.users.diamond = {
-		imports = [
-			<dotfiles/overlays>
-			<dotfiles/overlays/home-manager>
-			<dotfiles/secrets/diamond>
-			<dotfiles/cfg/firefox>
-			<dotfiles/cfg/google-chrome/home.nix>
-			# <dotfiles/cfg/hm-blackbox-terminal.nix>
-			<dotfiles/cfg/hm-gnome-terminal.nix>
-			<dotfiles/cfg/hm-alacritty.nix>
-			<dotfiles/cfg/git/home.nix>
-			<dotfiles/cfg/gtk/home.nix>
-			<dotfiles/cfg/nvim/home.nix>
-			<dotfiles/cfg/gnome/home.nix>
-			<dotfiles/cfg/fonts/home.nix>
-			<dotfiles/cfg/zellij/home.nix>
-			<dotfiles/cfg/flatpak/packages.nix>
-			<dotfiles/cfg/blackbox-terminal/home.nix>
-
-			# (import <dotfiles/utils/schedule.nix {
-			# 	name        = "birthdayer-juan";
-			# 	description = "Delete once Juan gets annoyed";
-			# 	calendar    = "daily";
-			# 	command     = "/home/diamond/.go/bin/birthdayer";
-			# })
-		];
-
-		nixpkgs.config = {
-			overlays = import ./overlays;
-			allowUnfree = true;
-			# rocmSupport = true;
-		};
-
-		programs.direnv = {
-			enable = true;
-			config = { load_dotenv = false; };
-			nix-direnv.enable = true;
-		};
-
-		programs.bash = {
-			enable = true;
-			initExtra = builtins.readFile <dotfiles/cfg/bashrc>;
-			historySize = 500000;
-			historyFileSize = 1000000;
-		};
-
-		# programs.vscode-css = {
-		# 	files = [ ./cfg/vscode.css ];
-		# };
-		programs.vscode = {
-			# enable = true;
-			# package = pkgs.nixpkgs_unstable_newer.vscode;
-			# userSettings = {
-			# 	"telemetry.enableTelemetry" = false;
-			# 	"window.menuBarVisibility"  = "toggle";
-			# 	"breadcrumbs.enabled"	   = false;
-			# 	"editor.minimap.enabled"	= false;
-			# };
-		};
-
-		programs.mpv = {
-			enable = true;
-			# package = pkgs.mpv-next;
-			config = {
-				osd-font = "Sans";
-				osd-status-msg = "\${playback-time/full} / \${duration} (\${percent-pos}%)\\nframe: \${estimated-frame-number} / \${estimated-frame-count}";
-				# profile = "gpu-hq";
-				gpu-api = "auto";
-				gpu-context = "auto";
-				vo = "gpu";
-				# vo = "dmabuf-wayland";
-				hwdec = "auto-safe";
-				dither-depth = "auto";
-				# fbo-format = "rgba32f";
-				# scale = "lanczos";
-				script-opts = "ytdl_hook-ytdl_path=yt-dlp";
-			};
-		};
-
-		programs.yt-dlp = {
-			enable = true;
-			extraConfig = ''
-				--cookies-from-browser firefox:q1f740f8.default
-			'';
-		};
-
-		# programs.obs-studio = {
-		# 	enable  = true;
-		# 	plugins = with pkgs; [
-		# 		# obs-backgroundremoval
-		# 		# obs-studio-plugins.obs-websocket
-		# 		# obs-wlrobs
-		# 		# obs-v4l2sink
-		# 	];
-		# };
-
-		# services.easyeffects.enable = true;
-
-		# home.file.".icons/default/index.theme".text = ''
-		# 	[icon theme]
-		# 	Name=Default
-		# 	Comment=Default Cursor Theme
-		# 	Inherits=Ardoise_shadow_87
-		# '';
-
-		# Home is for no DM, PAM is for gdm.
-		# home.sessionVariables = userEnv;         # for no DM.
-		pam.sessionVariables = userEnv;          # for GDM + GNOME.
-		systemd.user.sessionVariables = userEnv; # for GDM + Wayfire.
-
-		home.packages = ([
-			# gimpMesonPkgs.gimp-with-plugins
-
-		]) ++ (with pkgs.aspellDicts; [
-			en
-			en-science
-			en-computers
-
-		]) ++ (with pkgs; [
-			# Personal stuff
-			pomodoro
-			gnome-usage
-			pomodoro
-			keepassxc
-			sticky
-			# gimp-with-plugins
-			gimp
-			git-crypt
-			gnupg
-			gnuplot
-			drawing
-			sticky
-			fragments
-			goatcounter
-			alarm-clock-applet
-			mixxx
-
-			# System
-			deja-dup
-			ncdu
-			xorg.xhost # dependency for wsudo
-			ddcutil
-			powertop
-			blueberry
-			mission-center
-			libcanberra-gtk3
-			fcitx5-configtool
-			fcitx5-gtk
-			libsForQt5.fcitx5-qt
-			wl-clipboard
-			playerctl
-			waypipe
-			bottles
-			# gatttool
-
-			rmtrash
-			# Force rm to use rmtrash.
-			(pkgs.writeShellScriptBin "rm" ''
-				if [[ "$USER" == diamond ]]; then
-					exec ${rmtrash}/bin/rmtrash --forbid-root=ask-forbid "$@"
-				else
-					exec ${pkgs.coreutils}/bin/rm "$@"
-				fi
-			'')
-
-			# Development tools
-			# sommelier
-			dos2unix
-			(writeShellScriptBin "ag" ''
-				exec ${lib.getExe silver-searcher} --noaffinity "$@"
-			'')
-			jq
-			fx
-			gh
-			go-diamondburned
-			gopls
-			gotools
-			govulncheck
-			nixfmt-rfc-style
-			licensor
-			mdr
-			# config.boot.kernelPackages.perf
-			# perf_data_converter
-			tree
-			fzf
-			graphviz
-			gnuplot
-			vimHugeX
-			# clang-tools
-			xclip
-			virt-manager
-			xorg.xauth
-			# neovide
-			# neovim-gtk
-
-			# protonup
-			# gamescope
-			(steam.override ({ extraLibraries ? pkgs': [], ... }: {
-				# Workaround for TF2.
-				# See https://github.com/ValveSoftware/Source-1-Games/issues/5043#issuecomment-1822019817.
-        extraLibraries = pkgs': (extraLibraries pkgs') ++ ( [
-          pkgs'.gperftools
-        ]);
-      }))
-
-			# Multimedia
-			# aqours
-			# (succumb-to-libadwaita spot)
-			libva-utils
-			# catnip-gtk
-			ffmpeg
-			v4l-utils
-			pavucontrol
-			pulseaudio
-			pamixer
-			lollypop
-			komikku
-			spotify
-			spot
-			chatterino2
-
-			# Chat/Social
-			# zoom-us
-			# discord
-			discord-canary # working Wayland audio support
-			dissent
-			# armcord
-			# telegram-desktop
-			# legcord
-			# vesktop
-			kotatogram-desktop
-			signal-desktop
-			# (pkgs.callPackage <unstable/pkgs/by-name/ve/vesktop/package.nix> {})
-			# gotktrix
-			fractal
-			tuba
-
-			# Office
-			libreoffice
-			nixpkgs_unstable_older.qalculate-gtk
-			onlyoffice-bin
-			evince
-			aspell
-			nixpkgs_unstable_newer.marker
-			graphviz
-			# foliate
-
-			# Applications
-			gcolor3
-			# google-chrome
-
-			# Themes
-			papirus-icon-theme
-			material-design-icons
-			catppuccin-cursors.mochaPink
-			catppuccin-cursors.macchiatoPink
-			catppuccin-cursors.mochaFlamingo
-			catppuccin-cursors.macchiatoFlamingo
-			catppuccin-gtk
-
-			# Games
-			# polymc
-			prismlauncher
-			# osu-wine
-			# osu-wine-realistik
-
-			# GNOME things
-			kooha
-			snapshot
-			glib-networking
-			celluloid
-			gnome-power-manager
-			eog
-			file-roller
-			nautilus
-			nautilus-open-any-terminal
-			gnome-disk-utility
-			gnome-tweaks
-			gnome-boxes
-
-			# Everything in ./bn
-			(runCommand "diamond-bin" {} ''
-				mkdir -p $out/bin
-				cp -r ${<dotfiles/bin>}/* $out/bin
-			'')
-		]);
-
-		systemd.user.services = {
-			# terminal = utils.waylandService "gnome-terminal";
-			# nautilus = utils.waylandService "nautilus --gapplication-service";
-		};
-
-		fonts.fontconfig.enable = lib.mkForce true;
-
-		xdg = {
-			enable = true;
-			mime.enable = true;
-			# mimeApps = {
-			# 	enable = true;
-			# 	defaultApplications = {
-			# 		"default-web-browser" = [ "firefox.desktop" ];
-			# 	};
-			# };
-			configFile = {
-				"zls.json".text = builtins.toJSON {
-					enable_snippets = false;
-					zig_exe_path = "${pkgs.zig}/bin/zig";
-					zig_lib_path = "${pkgs.zig}/lib/zig";
-					warn_style = true;
-					enable_semantic_tokens = true;
-				};
-				"fontconfig/fonts.conf".source = <dotfiles/cfg/fontconfig.xml>;
-				"autostart/autostart.desktop".text = utils.mkDesktopFile {
-					name = "autostart-init";
-					exec = <dotfiles/bin/autostart>;
-					type = "Application";
-					comment = "An autostart script in ~/Scripts/nix/bin/autostart";
-					extraEntries = ''
-						NotShowIn=desktop-name
-						X-GNOME-Autostart-enabled=true
-					'';
-				};
-				# Allow non-free for user
-				"nixpkgs/config.nix".text = "{ allowUnfree = true; }";
-				"nix/nix.conf".text = ''
-					experimental-features = nix-command flakes
-				'';
-			};
-		};
-
-		home.stateVersion = "20.09";
-	};
-
-	# system.stateVersion = "20.03"; # DO NOT TOUCH
-	system.stateVersion = "20.09"; # I TOUCHED.
+  # # TODO: fix this.
+  # tdeo = import (builtins.fetchGit {
+  #   url = "https://github.com/tadeokondrak/nix-overlay";
+  #   rev = "0d05c53204da3b576f810ef2e1312b19bf2420b7";
+  # });
+
+  utils = import <dotfiles/utils> { inherit config pkgs lib; };
+
+  # GIMP v2.99 Nixpkgs
+  gimpMesonPkgs = import (pkgs.fetchFromGitHub {
+    owner = "jtojnar";
+    repo = "nixpkgs";
+    rev = "6cb2cce589e1effb0f9983d99132c4f8cc2f4d32"; # gimp-meson
+    sha256 = "0wg44l0lkrymsp68s10sx1r4fqd3yvn0lswkhn1zkd3qv6s42nmd";
+  }) { };
+
+  gnome-41 = import (pkgs.fetchFromGitHub {
+    owner = "NixOS";
+    repo = "nixpkgs";
+    rev = "3fdd780";
+    sha256 = lib.fakeSha256;
+  }) { };
+
+  userEnv = {
+    LC_TIME = "en_GB.UTF-8";
+    NIX_AUTO_RUN = "1";
+    # STEAM_RUNTIME = "0";
+    # XDG_CURRENT_DESKTOP = "Wayfire";
+
+    GOPATH = "/home/diamond/.go";
+    GOBIN = "/home/diamond/.go/bin";
+    CGO_ENABLED = "0";
+
+    # Disable VSync.
+    vblank_mode = "0";
+
+    # Enforce Wayland.
+    NIXOS_OZONE_WL = "1";
+    QT_QPA_PLATFORM = "wayland";
+    MOZ_ENABLE_WAYLAND = "1";
+    # SDL_VIDEODRIVER  = "wayland";
+
+    # GNOME still forces scaling for all Xwayland apps. See
+    # https://github.com/ValveSoftware/steam-for-linux/issues/9209.
+    STEAM_FORCE_DESKTOPUI_SCALING = "1";
+
+    # osu settings.
+    WINE_RT = "89";
+    WINE_SRV_RT = "99";
+    STAGING_SHARED_MEMORY = "1";
+    STAGING_RT_PRIORITY_BASE = "89";
+    STAGING_RT_PRIORITY_SERVER = "99";
+    STAGING_PA_DURATION = "250000";
+    STAGING_PA_PERIOD = "8192";
+    STAGING_PA_LATENCY_USEC = "128";
+  };
+
+in
+{
+  imports = [
+    <home-manager/nixos>
+    ./hardware-configuration.nix
+    ./services
+    ./www
+    <dotfiles/overlays>
+    <dotfiles/overlays/services.nix>
+    <dotfiles/secrets>
+    <dotfiles/cfg/v4l2>
+    <dotfiles/cfg/udev>
+    <dotfiles/cfg/sound>
+    <dotfiles/cfg/nokbd>
+    <dotfiles/cfg/fonts>
+    <dotfiles/cfg/locale>
+    <dotfiles/cfg/localhost>
+    <dotfiles/cfg/networking>
+    <dotfiles/cfg/keyd>
+    <dotfiles/cfg/avahi>
+    <dotfiles/cfg/gps>
+    <dotfiles/cfg/gnome>
+    <dotfiles/cfg/flatpak>
+    <dotfiles/cfg/dol-server>
+    # <dotfiles/cfg/secureboot>
+    <dotfiles/cfg/foot>
+    <dotfiles/cfg/u2f>
+    <dotfiles/cfg/nushell>
+
+    # This shit's still garbage.
+    # <dotfiles/cfg/wayfire>
+    # <dotfiles/cfg/greetd>
+  ];
+
+  nixpkgs.overlays = import ./overlays;
+  nixpkgs.config = {
+    allowUnfree = true;
+  };
+
+  # Remote build server.
+  nix = {
+    # I don't understand the newer versions. Why do they break literally everything? Let's make
+    # everything Flakes, but then since they're Flakes now that means they're experimental, so
+    # let's break everything! Bruh.
+    # package = pkgs.nix_2_3;
+    # package = pkgs.nixFlakes;
+    buildMachines = [
+      # {
+      #   hostName = "hanaharu";
+      #   systems = [ "x86_64-linux" "i686-linux" ];
+      #   maxJobs = 2;
+      #   speedFactor = 1;
+      #   supportedFeatures = [ "nixos-test" "benchmark" "big-parallel" "kvm" ];
+      # }
+      # {
+      #   hostName = "bridget";
+      #   systems  = [ "aarch64-linux" ];
+      #   maxJobs  = 1;
+      #   speedFactor = 2;
+      #   supportedFeatures = [ "nixos-test" ];
+      # }
+      # {
+      #   hostName = "otokonoko";
+      #   systems = [ "x86_64-linux" "i686-linux" ];
+      #   maxJobs = 2;
+      #   speedFactor = 5;
+      #   supportedFeatures = [ "nixos-test" "benchmark" "big-parallel" "kvm" ];
+      # }
+    ];
+    distributedBuilds = true;
+    extraOptions = ''
+      builders-use-substitutes = true
+    '';
+    registry = builtins.fromJSON (builtins.readFile ./hackadoll3.registry.json);
+    settings = {
+      substituters = [
+        # Cachix uses zstd, which Nix 2.3 does not support. Disable it.
+        # "https://nix-community.cachix.org"
+        "https://cache.nixos.org/"
+      ];
+      trusted-users = [
+        "root"
+        "diamond"
+      ];
+      trusted-public-keys = [
+        # "nix-community.cachix.org-1:mB9FSh9qf2dCimDSUo8Zy7bkq5CX+/rkCWyvRCYg3Fs="
+      ];
+    };
+  };
+
+  # Allow aarch64 emulation.
+  boot.binfmt.emulatedSystems = [ "aarch64-linux" ];
+
+  # Group to change SSH keys to.
+  users.groups.ssh-trusted.members = [
+    "diamond"
+    "root"
+  ] ++ (utils.formatInts 1 32 (i: "nixbld${toString i}"));
+
+  # services.ghproxy = {
+  #   username = "diamondburned";
+  #   address  = "unix:///tmp/ghproxy.sock";
+  # };
+
+  # Enable MySQL
+  # services.postgresql = {
+  #   enable = true;
+  #   enableTCPIP = false;
+  #   ensureDatabases = ["facechat"];
+  #   ensureUsers = [{
+  #     name = "diamond";
+  #     ensurePermissions = {
+  #       "DATABASE facechat" = "ALL PRIVILEGES";
+  #     };
+  #   }];
+  #   initialScript = pkgs.writeText "init.sql" ''
+  #     CREATE USER diamond;
+  #     ALTER  USER diamond WITH SUPERUSER;
+  #   '';
+  # };
+
+  # NTFS support
+  boot.supportedFilesystems = [
+    "exfat"
+    "ntfs"
+  ];
+
+  # Tired of this.
+  systemd.extraConfig = ''
+    DefaultTimeoutStopSec=5s
+  '';
+
+  services.journald.extraConfig = ''
+    SystemMaxUse=2G
+    MaxRetentionSec=3month
+  '';
+
+  networking.hostName = "hackadoll3"; # Define your hostname.
+
+  # This doesn't really work.
+  systemd.services.NetworkManager-wait-online.enable = false;
+
+  networking.nat = {
+    enable = true;
+    internalInterfaces = [ "ve-+" ];
+  };
+
+  console.font = "Lat2-Terminus16";
+  console.keyMap = "us";
+
+  # services.keyd = {
+  #   enable = true;
+  #   configuration = {
+  #     "default.conf" = ''
+  #       [ids]
+  #       *
+  #       [main]
+  #       capslock = esc
+  #     '';
+  #   };
+  # };
+
+  environment.enableDebugInfo = true;
+
+  # List packages installed in system profile. To search, run:
+  # $ nix search wget
+  environment.systemPackages = with pkgs; [
+    # System packages
+    wget
+    nix-index
+    nixGL
+    # nix-index-update
+
+    # Utilities
+    htop
+    git
+    compsize
+
+    qgnomeplatform
+    keyd
+  ];
+
+  # Some programs need SUID wrappers, can be configured further or are
+  # started in user sessions.
+  programs.mtr.enable = true;
+  programs.gnupg.agent = {
+    enable = true;
+  };
+
+  # List services that you want to enable:
+
+  # Enable the OpenSSH daemon.
+  services.openssh = {
+    enable = true;
+    ports = [ 22 ];
+    settings = {
+      PasswordAuthentication = false;
+      X11Forwarding = true;
+    };
+  };
+
+  # Enable CUPS to print documents.
+  services.printing = {
+    enable = true;
+    drivers = with pkgs; [
+      # gutenprint
+      # hplip
+      # cups-filters
+      # cups-bjnp
+
+      # Canon
+      # cnijfilter2
+      # canon-cups-ufr2
+    ];
+  };
+
+  services.xserver.xkb.layout = "us";
+
+  fonts.fontconfig = {
+    enable = true;
+    allowBitmaps = true;
+    useEmbeddedBitmaps = true; # emojis
+    # See fontconfig.xml.
+    # subpixel = {
+    #   # http://www.spasche.net/files/lcdfiltering/
+    #   lcdfilter = "legacy";
+    #   rgba = "none";
+    # };
+    includeUserConf = true;
+  };
+
+  security.sudo.extraConfig = ''
+    Defaults env_reset,pwfeedback
+  '';
+
+  # gnu = true;
+  gtk.iconCache.enable = true;
+
+  services.xserver.enable = true;
+
+  services.libinput.enable = true;
+
+  programs.xwayland = {
+    enable = true;
+    package = pkgs.xwayland.overrideAttrs (old: {
+      # preConfigure = (old.preConfigure or "") + ''
+      #   patch -p1 < ${./patches/xwayland-fps.patch}
+      # '';
+    });
+  };
+
+  programs.seahorse.enable = true;
+
+  services.gvfs.enable = true;
+  programs.gnome-disks.enable = true;
+  programs.file-roller.enable = true;
+
+  # dbus things
+  services.dbus.packages = with pkgs; [ dconf ];
+  programs.dconf.enable = true;
+
+  # Enable Polkit
+  security.polkit.enable = true;
+
+  /*
+      # Enable MySQL
+      services.mysql = {
+        enable = true;
+        package = pkgs.mariadb;
+      };
+
+      services.mysql = {
+        enable = true;
+        package = pkgs.mariadb;
+      };
+  */
+
+  virtualisation.docker.enable = true;
+  virtualisation.spiceUSBRedirection.enable = true;
+
+  services.sysprof.enable = true;
+
+  virtualisation.libvirtd = {
+    enable = true;
+    qemu.runAsRoot = false;
+  };
+
+  # Enable the Android debug bridge.
+  programs.adb.enable = true;
+
+  # Define a user account. Don't forget to set a password with ‘passwd’.
+  users.users.diamond = {
+    isNormalUser = true;
+    extraGroups = [
+      "wheel"
+      "networkmanager"
+      "docker"
+      "storage"
+      "audio"
+      "adbusers"
+      "libvirtd"
+      "i2c"
+      "wireshark"
+      "dialout"
+      "input"
+      "plugdev"
+      "photoprism"
+    ];
+  };
+
+  xdg.portal = {
+    enable = true;
+    extraPortals = with pkgs; [
+      # xdg-desktop-portal-gtk
+      xdg-desktop-portal-gnome
+    ];
+  };
+
+  # Enable PAM user environments for GDM.
+  security.pam.services.gdm-password.text = ''
+    auth      substack      login
+    account   include       login
+    password  substack      login
+    session   include       login
+    session   required      pam_env.so user_readenv=1
+  '';
+
+  programs.wireshark = {
+    enable = true;
+    package = pkgs.wireshark-qt;
+  };
+
+  programs.command-not-found = {
+    enable = true;
+    # programs.sqlite is only available if we use the nixos.org channels.
+    # See hackadoll3.toml.
+    dbPath = "/nix/var/nix/profiles/per-user/root/channels/unstable/programs.sqlite";
+  };
+
+  services.earlyoom = {
+    enable = true;
+    enableNotifications = true;
+    freeSwapThreshold = 20;
+    freeSwapKillThreshold = 10;
+  };
+
+  # Get a newer VTE with SIXEL for ourself.
+  # Disabled due to a regression: https://gitlab.gnome.org/GNOME/vte/-/issues/2717.
+  # system.replaceRuntimeDependencies = [
+  #   {
+  #     original = pkgs.vte-gtk4;
+  #     replacement = pkgs.callPackage <dotfiles/overlays/packages/vte_sixel.nix> { vte = pkgs.vte-gtk4; };
+  #   }
+  #   {
+  #     original = pkgs.vte;
+  #     replacement = pkgs.callPackage <dotfiles/overlays/packages/vte_sixel.nix> { vte = pkgs.vte; };
+  #   }
+  # ];
+
+  # TODO: fix this:
+  # home-manager.useGlobalPkgs = true;
+
+  home-manager.backupFileExtension = "bak";
+
+  home-manager.users.diamond = {
+    imports = [
+      <dotfiles/overlays>
+      <dotfiles/overlays/home-manager>
+      <dotfiles/secrets/diamond>
+      <dotfiles/cfg/firefox>
+      <dotfiles/cfg/google-chrome/home.nix>
+      # <dotfiles/cfg/hm-blackbox-terminal.nix>
+      <dotfiles/cfg/hm-gnome-terminal.nix>
+      <dotfiles/cfg/hm-alacritty.nix>
+      <dotfiles/cfg/git/home.nix>
+      <dotfiles/cfg/gtk/home.nix>
+      <dotfiles/cfg/nvim/home.nix>
+      <dotfiles/cfg/gnome/home.nix>
+      <dotfiles/cfg/fonts/home.nix>
+      <dotfiles/cfg/zellij/home.nix>
+      <dotfiles/cfg/flatpak/packages.nix>
+      <dotfiles/cfg/blackbox-terminal/home.nix>
+
+      # (import <dotfiles/utils/schedule.nix {
+      #   name        = "birthdayer-juan";
+      #   description = "Delete once Juan gets annoyed";
+      #   calendar    = "daily";
+      #   command     = "/home/diamond/.go/bin/birthdayer";
+      # })
+    ];
+
+    nixpkgs.config = {
+      overlays = import ./overlays;
+      allowUnfree = true;
+      # rocmSupport = true;
+    };
+
+    programs.direnv = {
+      enable = true;
+      config = {
+        load_dotenv = false;
+      };
+      nix-direnv.enable = true;
+    };
+
+    programs.bash = {
+      enable = true;
+      initExtra = builtins.readFile <dotfiles/cfg/bashrc>;
+      historySize = 500000;
+      historyFileSize = 1000000;
+    };
+
+    # programs.vscode-css = {
+    #   files = [ ./cfg/vscode.css ];
+    # };
+    programs.vscode = {
+      # enable = true;
+      # package = pkgs.nixpkgs_unstable_newer.vscode;
+      # userSettings = {
+      #   "telemetry.enableTelemetry" = false;
+      #   "window.menuBarVisibility"  = "toggle";
+      #   "breadcrumbs.enabled"     = false;
+      #   "editor.minimap.enabled"  = false;
+      # };
+    };
+
+    programs.mpv = {
+      enable = true;
+      # package = pkgs.mpv-next;
+      config = {
+        osd-font = "Sans";
+        osd-status-msg = "\${playback-time/full} / \${duration} (\${percent-pos}%)\\nframe: \${estimated-frame-number} / \${estimated-frame-count}";
+        # profile = "gpu-hq";
+        gpu-api = "auto";
+        gpu-context = "auto";
+        vo = "gpu";
+        # vo = "dmabuf-wayland";
+        hwdec = "auto-safe";
+        dither-depth = "auto";
+        # fbo-format = "rgba32f";
+        # scale = "lanczos";
+        script-opts = "ytdl_hook-ytdl_path=yt-dlp";
+      };
+    };
+
+    programs.yt-dlp = {
+      enable = true;
+      extraConfig = ''
+        --cookies-from-browser firefox:q1f740f8.default
+      '';
+    };
+
+    # programs.obs-studio = {
+    #   enable  = true;
+    #   plugins = with pkgs; [
+    #     # obs-backgroundremoval
+    #     # obs-studio-plugins.obs-websocket
+    #     # obs-wlrobs
+    #     # obs-v4l2sink
+    #   ];
+    # };
+
+    # services.easyeffects.enable = true;
+
+    # home.file.".icons/default/index.theme".text = ''
+    #   [icon theme]
+    #   Name=Default
+    #   Comment=Default Cursor Theme
+    #   Inherits=Ardoise_shadow_87
+    # '';
+
+    # Home is for no DM, PAM is for gdm.
+    # home.sessionVariables = userEnv;         # for no DM.
+    pam.sessionVariables = userEnv; # for GDM + GNOME.
+    systemd.user.sessionVariables = userEnv; # for GDM + Wayfire.
+
+    home.packages =
+      ([
+        # gimpMesonPkgs.gimp-with-plugins
+
+      ])
+      ++ (with pkgs.aspellDicts; [
+        en
+        en-science
+        en-computers
+
+      ])
+      ++ (with pkgs; [
+        # Personal stuff
+        pomodoro
+        gnome-usage
+        pomodoro
+        keepassxc
+        sticky
+        # gimp-with-plugins
+        gimp
+        git-crypt
+        gnupg
+        gnuplot
+        drawing
+        sticky
+        fragments
+        goatcounter
+        alarm-clock-applet
+        mixxx
+
+        # System
+        deja-dup
+        ncdu
+        xorg.xhost # dependency for wsudo
+        ddcutil
+        powertop
+        blueberry
+        mission-center
+        libcanberra-gtk3
+        fcitx5-configtool
+        fcitx5-gtk
+        libsForQt5.fcitx5-qt
+        wl-clipboard
+        playerctl
+        waypipe
+        bottles
+        # gatttool
+
+        rmtrash
+        # Force rm to use rmtrash.
+        (pkgs.writeShellScriptBin "rm" ''
+          if [[ "$USER" == diamond ]]; then
+            exec ${rmtrash}/bin/rmtrash --forbid-root=ask-forbid "$@"
+          else
+            exec ${pkgs.coreutils}/bin/rm "$@"
+          fi
+        '')
+
+        # Development tools
+        # sommelier
+        dos2unix
+        (writeShellScriptBin "ag" ''
+          exec ${lib.getExe silver-searcher} --noaffinity "$@"
+        '')
+        jq
+        fx
+        gh
+        go-diamondburned
+        gopls
+        gotools
+        govulncheck
+        nixfmt-rfc-style
+        licensor
+        mdr
+        # config.boot.kernelPackages.perf
+        # perf_data_converter
+        tree
+        fzf
+        graphviz
+        gnuplot
+        vimHugeX
+        # clang-tools
+        xclip
+        virt-manager
+        xorg.xauth
+        # neovide
+        # neovim-gtk
+
+        # protonup
+        # gamescope
+        (steam.override (
+          {
+            extraLibraries ? pkgs': [ ],
+            ...
+          }:
+          {
+            # Workaround for TF2.
+            # See https://github.com/ValveSoftware/Source-1-Games/issues/5043#issuecomment-1822019817.
+            extraLibraries =
+              pkgs':
+              (extraLibraries pkgs')
+              ++ ([
+                pkgs'.gperftools
+              ]);
+          }
+        ))
+
+        # Multimedia
+        # aqours
+        # (succumb-to-libadwaita spot)
+        libva-utils
+        # catnip-gtk
+        ffmpeg
+        v4l-utils
+        pavucontrol
+        pulseaudio
+        pamixer
+        lollypop
+        komikku
+        spotify
+        spot
+        chatterino2
+
+        # Chat/Social
+        # zoom-us
+        # discord
+        discord-canary # working Wayland audio support
+        dissent
+        # armcord
+        # telegram-desktop
+        # legcord
+        # vesktop
+        kotatogram-desktop
+        signal-desktop
+        # (pkgs.callPackage <unstable/pkgs/by-name/ve/vesktop/package.nix> {})
+        # gotktrix
+        fractal
+        tuba
+
+        # Office
+        libreoffice
+        nixpkgs_unstable_older.qalculate-gtk
+        onlyoffice-bin
+        evince
+        aspell
+        nixpkgs_unstable_newer.marker
+        graphviz
+        # foliate
+
+        # Applications
+        gcolor3
+        # google-chrome
+
+        # Themes
+        papirus-icon-theme
+        material-design-icons
+        catppuccin-cursors.mochaPink
+        catppuccin-cursors.macchiatoPink
+        catppuccin-cursors.mochaFlamingo
+        catppuccin-cursors.macchiatoFlamingo
+        catppuccin-gtk
+
+        # Games
+        # polymc
+        prismlauncher
+        # osu-wine
+        # osu-wine-realistik
+
+        # GNOME things
+        kooha
+        snapshot
+        glib-networking
+        celluloid
+        gnome-power-manager
+        eog
+        file-roller
+        nautilus
+        nautilus-open-any-terminal
+        gnome-disk-utility
+        gnome-tweaks
+        gnome-boxes
+
+        # Everything in ./bn
+        (runCommand "diamond-bin" { } ''
+          mkdir -p $out/bin
+          cp -r ${<dotfiles/bin>}/* $out/bin
+        '')
+      ]);
+
+    systemd.user.services = {
+      # terminal = utils.waylandService "gnome-terminal";
+      # nautilus = utils.waylandService "nautilus --gapplication-service";
+    };
+
+    fonts.fontconfig.enable = lib.mkForce true;
+
+    xdg = {
+      enable = true;
+      mime.enable = true;
+      # mimeApps = {
+      #   enable = true;
+      #   defaultApplications = {
+      #     "default-web-browser" = [ "firefox.desktop" ];
+      #   };
+      # };
+      configFile = {
+        "zls.json".text = builtins.toJSON {
+          enable_snippets = false;
+          zig_exe_path = "${pkgs.zig}/bin/zig";
+          zig_lib_path = "${pkgs.zig}/lib/zig";
+          warn_style = true;
+          enable_semantic_tokens = true;
+        };
+        "fontconfig/fonts.conf".source = <dotfiles/cfg/fontconfig.xml>;
+        "autostart/autostart.desktop".text = utils.mkDesktopFile {
+          name = "autostart-init";
+          exec = <dotfiles/bin/autostart>;
+          type = "Application";
+          comment = "An autostart script in ~/Scripts/nix/bin/autostart";
+          extraEntries = ''
+            NotShowIn=desktop-name
+            X-GNOME-Autostart-enabled=true
+          '';
+        };
+        # Allow non-free for user
+        "nixpkgs/config.nix".text = "{ allowUnfree = true; }";
+        "nix/nix.conf".text = ''
+          experimental-features = nix-command flakes
+        '';
+      };
+    };
+
+    home.stateVersion = "20.09";
+  };
+
+  # system.stateVersion = "20.03"; # DO NOT TOUCH
+  system.stateVersion = "20.09"; # I TOUCHED.
 }

@@ -36,18 +36,18 @@ pkgs.mkShell {
     lua-language-server
 
     (writeShellScriptBin "switch" ''
-      			export NIX_PATH=${lib.escapeShellArg nixPath}
-      			sudo nixos-rebuild --log-format internal-json -v "$@" switch |& nom --json
-      		'')
+      export NIX_PATH=${lib.escapeShellArg nixPath}
+      sudo nixos-rebuild --log-format internal-json -v "$@" switch |& nom --json
+    '')
   ];
 
   shellHook = ''
-    		if [[ $HOSTNAME == "nixos" ]]; then
-    			echo "You probably want to manually set your \$HOSTNAME."
-    		else
-    			export HOSTNAME
-    		fi
-    		export NIX_PATH=${lib.escapeShellArg nixPath}
-    		export MACHINES="${builtins.concatStringsSep " " machines}"
-    	'';
+    if [[ $HOSTNAME == "nixos" ]]; then
+      echo "You probably want to manually set your \$HOSTNAME."
+    else
+      export HOSTNAME
+    fi
+    export NIX_PATH=${lib.escapeShellArg nixPath}
+    export MACHINES="${builtins.concatStringsSep " " machines}"
+  '';
 }

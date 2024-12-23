@@ -18,6 +18,18 @@
         "url": "https://github.com/diamondburned/comd/archive/4acbe334c89c732a64f2f629fc5aaa846483f3dd.tar.gz",
         "url_template": "https://github.com/<owner>/<repo>/archive/<rev>.tar.gz"
     },
+    "disko": {
+        "branch": "master",
+        "description": "Declarative disk partitioning and formatting using nix [maintainers=@Lassulus @Enzime @iFreilicht]",
+        "homepage": "",
+        "owner": "nix-community",
+        "repo": "disko",
+        "rev": "2ee76c861af3b895b3b104bae04777b61397485b",
+        "sha256": "0nacwqg0g412xfjykv0xr7df4g969215hs6albhkzlpm2nh2nkc6",
+        "type": "tarball",
+        "url": "https://github.com/nix-community/disko/archive/2ee76c861af3b895b3b104bae04777b61397485b.tar.gz",
+        "url_template": "https://github.com/<owner>/<repo>/archive/<rev>.tar.gz"
+    },
     "flake-compat": {
         "branch": "master",
         "description": null,
@@ -28,6 +40,18 @@
         "sha256": "0m9grvfsbwmvgwaxvdzv6cmyvjnlww004gfxjvcl806ndqaxzy4j",
         "type": "tarball",
         "url": "https://github.com/edolstra/flake-compat/archive/0f9255e01c2351cc7d116c072cb317785dd33b33.tar.gz",
+        "url_template": "https://github.com/<owner>/<repo>/archive/<rev>.tar.gz"
+    },
+    "lanzaboote": {
+        "branch": "master",
+        "description": "Secure Boot for NixOS [maintainers=@blitz @raitobezarius @nikstur]",
+        "homepage": "",
+        "owner": "nix-community",
+        "repo": "lanzaboote",
+        "rev": "26a59c1b037e43f82b0fada2a218aeb128bc5d21",
+        "sha256": "184smfgv3y8i0nnm9c0x1zn534wa7l18lwiafs50vsqvasfychxa",
+        "type": "tarball",
+        "url": "https://github.com/nix-community/lanzaboote/archive/26a59c1b037e43f82b0fada2a218aeb128bc5d21.tar.gz",
         "url_template": "https://github.com/<owner>/<repo>/archive/<rev>.tar.gz"
     },
     "message-for-me": {

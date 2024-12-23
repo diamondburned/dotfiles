@@ -1,8 +1,13 @@
-{ ... }:
+{ pkgs, ... }:
+
+let
+  sources = import ../../../nix/sources.nix { inherit pkgs; };
+  disko = builtins.trace (builtins.toJSON sources.disko) sources.disko;
+in
 
 {
   imports = [
-    "${builtins.fetchTarball "https://github.com/nix-community/disko/archive/master.tar.gz"}/module.nix"
+    "${disko}/module.nix"
     ./disko/4tb-nvme.nix
   ];
 
