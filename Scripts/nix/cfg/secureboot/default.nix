@@ -21,8 +21,11 @@ in
     loader.systemd-boot.enable = lib.mkForce false;
     lanzaboote = {
       enable = true;
-      pkiBundle = "/etc/secureboot";
       configurationLimit = 15;
+
+      # Fix bug with sbctl. See:
+      # https://github.com/nix-community/lanzaboote/issues/413
+      pkiBundle = "/var/lib/sbctl";
     };
   };
 

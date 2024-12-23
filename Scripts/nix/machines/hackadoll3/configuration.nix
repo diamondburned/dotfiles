@@ -91,7 +91,7 @@ in
     <dotfiles/cfg/gnome>
     <dotfiles/cfg/flatpak>
     <dotfiles/cfg/dol-server>
-    # <dotfiles/cfg/secureboot>
+    <dotfiles/cfg/secureboot>
     <dotfiles/cfg/foot>
     <dotfiles/cfg/u2f>
     <dotfiles/cfg/nushell>
