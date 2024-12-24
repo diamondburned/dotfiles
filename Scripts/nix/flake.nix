@@ -27,20 +27,6 @@
     }@inputs:
 
     let
-      mkPkgs =
-        system:
-        import nixpkgs {
-          inherit system;
-          config = {
-            allowUnfree = true;
-          };
-          overlays = [
-            self.overlays.overrides
-            self.overlays.packages
-            inputs.gomod2nix.overlays.default
-          ];
-        };
-
       # combinedInputs contains all the inputs from the flake and the niv inputs
       # updated using `niv` commands.
       combinedInputs =
@@ -55,7 +41,21 @@
         # Flake inputs are already marked with a _type:
         // (inputs);
 
-      eachSystem =
+      mkPkgs =
+        system:
+        import nixpkgs {
+          inherit system;
+          config = {
+            allowUnfree = true;
+          };
+          overlays = [
+            self.overlays.overrides
+            self.overlays.packages
+            inputs.gomod2nix.overlays.default
+          ];
+        };
+
+      eachDefaultSystem =
         pkgsFunc:
         builtins.listToAttrs (
           map (system: {
@@ -109,11 +109,11 @@
               ];
             };
         in
-        eachSystem (pkgs: {
+        eachDefaultSystem (pkgs: {
           default = devShell pkgs;
         });
 
-      packages = eachSystem (
+      packages = eachDefaultSystem (
         pkgs:
         import ./overlays/packages.nix {
           inherit pkgs;
