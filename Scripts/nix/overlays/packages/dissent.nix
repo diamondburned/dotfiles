@@ -1,30 +1,25 @@
-{ pkgs, lib }:
+{
+  pkgs,
+  lib,
+  _inputs,
+}:
 
 let
-	dissent = rec {
-		version = "0.0.15";
+  dissent = {
+    version = "0.0.15";
+    src = _inputs.dissent;
+    base = import "${dissent.src}/nix/base.nix" {
+      inherit pkgs;
+      inherit (dissent) src;
+    };
+  };
 
-		src =
-			if (builtins.pathExists /home/diamond/Scripts/gotk4/dissent) then
-				/home/diamond/Scripts/gotk4/dissent
-			else pkgs.fetchFromGitHub {
-				owner  = "diamondburned";
-				repo   = "dissent";
-				rev    = "d5ceba11c52ffae801cdbde569416bcff246f3f0";
-				sha256 = "sha256-iwMuZ7Y/Hzn1yAobID+rur1SNl/FEKBvQL6+kUt97zQ=";
-			};
-
-		base = import "${dissent.src}/nix/base.nix" {
-			inherit pkgs src;
-		};
-	};
-
-	gotk4-nix = pkgs.fetchFromGitHub {
-		owner = "diamondburned";
-		repo  = "gotk4-nix";
-		rev   = "4f498cd56a726dc2ecb19af471cb43bb759708bb";
-		hash  = "sha256:0009jbdj2y2vqi522a3r64xf4drp44ghbidf32j6bslswqf3wy4m";
-	};
+  gotk4-nix = pkgs.fetchFromGitHub {
+    owner = "diamondburned";
+    repo = "gotk4-nix";
+    rev = "4f498cd56a726dc2ecb19af471cb43bb759708bb";
+    hash = "sha256:0009jbdj2y2vqi522a3r64xf4drp44ghbidf32j6bslswqf3wy4m";
+  };
 
   libspelling_2_1 = pkgs.libspelling.overrideAttrs {
     version = "0.2.1";
@@ -37,38 +32,42 @@ let
       hash = "sha256-0OGcwPGWtYYf0XmvzXEaQgebBOW/6JWcDuF4MlQjCZQ=";
     };
   };
+in
 
-in pkgs.stdenv.mkDerivation {
-	pname = dissent.base.pname;
-	inherit (dissent) version src;
+pkgs.stdenv.mkDerivation {
+  pname = dissent.base.pname;
+  inherit (dissent) version src;
 
-	buildInputs = 
-		(dissent.base.buildInputs or (_: [])) pkgs ++
-		(with pkgs; [
-			gtk4
-			glib
-			librsvg
-			gdk-pixbuf
-			gobject-introspection
-			hicolor-icon-theme
-			libspelling_2_1
-			gtksourceview5
-		]);
+  buildInputs =
+    (dissent.base.buildInputs or (_: [ ])) pkgs
+    ++ (with pkgs; [
+      gtk4
+      glib
+      librsvg
+      gdk-pixbuf
+      gobject-introspection
+      hicolor-icon-theme
+      libspelling_2_1
+      gtksourceview5
+    ]);
 
-	nativeBuildInputs =
-		(dissent.base.nativeBuildInputs or (_: [])) pkgs ++
-		(with pkgs; [ wrapGAppsHook autoPatchelfHook ]);
+  nativeBuildInputs =
+    (dissent.base.nativeBuildInputs or (_: [ ])) pkgs
+    ++ (with pkgs; [
+      wrapGAppsHook
+      autoPatchelfHook
+    ]);
 
-	sourceRoot = ".";
+  sourceRoot = ".";
 
-	buildPhase = with dissent.base; ''
-		install -Dm755 "$src/${pname}" "$out/bin/${pname}"
-		mkdir -p \
-			$out/share/dbus-1/services \
-			$out/share/applications \
-			$out/share/icons
-		install -Dm644 ${src}/nix/so.libdb.dissent.service $out/share/dbus-1/services/so.libdb.dissent.service
-		install -Dm644 ${files.desktop.path} $out/share/applications/${files.desktop.name}
-		cp -r --no-preserve=mode,ownership ${files.icons.path}/* $out/share/icons/
-	'';
+  buildPhase = with dissent.base; ''
+    		install -Dm755 "$src/${pname}" "$out/bin/${pname}"
+    		mkdir -p \
+    			$out/share/dbus-1/services \
+    			$out/share/applications \
+    			$out/share/icons
+    		install -Dm644 ${src}/nix/so.libdb.dissent.service $out/share/dbus-1/services/so.libdb.dissent.service
+    		install -Dm644 ${files.desktop.path} $out/share/applications/${files.desktop.name}
+    		cp -r --no-preserve=mode,ownership ${files.icons.path}/* $out/share/icons/
+    	'';
 }

@@ -30,6 +30,18 @@
         "url": "https://github.com/nix-community/disko/archive/2ee76c861af3b895b3b104bae04777b61397485b.tar.gz",
         "url_template": "https://github.com/<owner>/<repo>/archive/<rev>.tar.gz"
     },
+    "dissent": {
+        "branch": "main",
+        "description": "Tiny native Discord app",
+        "homepage": "https://flathub.org/apps/details/so.libdb.dissent",
+        "owner": "diamondburned",
+        "repo": "dissent",
+        "rev": "33d54288a1f565e73163c1ea59b10b4cc0d19ef8",
+        "sha256": "1y8p5dw56lkf40y9991gx5sv79v2rjibcp803aaf6zj355vg81yk",
+        "type": "tarball",
+        "url": "https://github.com/diamondburned/dissent/archive/33d54288a1f565e73163c1ea59b10b4cc0d19ef8.tar.gz",
+        "url_template": "https://github.com/<owner>/<repo>/archive/<rev>.tar.gz"
+    },
     "flake-compat": {
         "branch": "master",
         "description": null,

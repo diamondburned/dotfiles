@@ -1,14 +1,14 @@
-{ inputs, buildGoModule }:
+{ buildGoModule, _inputs }:
 
 let
-  src = inputs.bonito;
+  inherit (_inputs) nix-bonito;
 in
 
 buildGoModule {
   pname = "bonito";
-  version = builtins.substring 0 7 src.rev;
-  inherit src;
+  src = nix-bonito;
+  version = builtins.substring 0 7 nix-bonito.rev;
 
   subPackages = [ "cmd/bonito" ];
-  vendorHash = "";
+  vendorHash = "sha256-ZFYcxa85vvI6w1NMHfgyqfKdyiBtCUYUqU9c+APCFZ8=";
 }
