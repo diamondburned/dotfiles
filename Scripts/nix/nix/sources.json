@@ -72,6 +72,18 @@
         "url": "https://github.com/bkerler/mtkclient/archive/31819b814d331e8612fff3d8cfb838912861612e.tar.gz",
         "url_template": "https://github.com/<owner>/<repo>/archive/<rev>.tar.gz"
     },
+    "nix-bonito": {
+        "branch": "main",
+        "description": "Declarative Nix channel manager",
+        "homepage": null,
+        "owner": "diamondburned",
+        "repo": "nix-bonito",
+        "rev": "4fd83217b5201daaa8ef5a1e40efcc79b96df47c",
+        "sha256": "0yr0i25ghviqwdh64306nczd2zdlq5n93wj54f12fz53sxz3gwvk",
+        "type": "tarball",
+        "url": "https://github.com/diamondburned/nix-bonito/archive/4fd83217b5201daaa8ef5a1e40efcc79b96df47c.tar.gz",
+        "url_template": "https://github.com/<owner>/<repo>/archive/<rev>.tar.gz"
+    },
     "nix-flatpak": {
         "branch": "main",
         "description": "Install flatpaks declaratively",

@@ -5,6 +5,12 @@
     nixpkgs.url = "github:nixos/nixpkgs?rev=5d67ea6b4b63378b9c13be21e2ec9d1afc921713"; # nixos-unstable
 
     flake-utils.url = "github:numtide/flake-utils";
+
+    gomod2nix.url = "github:nix-community/gomod2nix";
+    gomod2nix.inputs = {
+      nixpkgs.follows = "nixpkgs";
+      flake-utils.follows = "flake-utils";
+    };
   };
 
   outputs =
@@ -14,23 +20,89 @@
       flake-utils,
       ...
     }@inputs:
+
+    let
+      mkPkgs =
+        system:
+        import nixpkgs {
+          inherit system;
+          config.allowUnfree = true;
+          overlays = [
+            self.overlays.overrides
+            self.overlays.packages
+          ];
+        };
+
+      eachSystem =
+        pkgsFunc:
+        builtins.listToAttrs (
+          map (system: {
+            name = system;
+            value = pkgsFunc (mkPkgs system);
+          }) flake-utils.lib.defaultSystems
+        );
+    in
     {
       nixosConfigurations = {
-        hackadoll3 = nixpkgs.lib.nixosSystem {
+        hackadoll3 = nixpkgs.lib.nixosSystem rec {
+          pkgs = mkPkgs system;
           system = "x86_64-linux";
           modules = [ ./machines/hackadoll3/configuration.nix ];
+          specialArgs = {
+            inherit self inputs;
+          };
         };
-        lilyhoshii = nixpkgs.lib.nixosSystem {
+        lilyhoshii = nixpkgs.lib.nixosSystem rec {
+          pkgs = mkPkgs system;
           system = "aarch64-linux";
           modules = [ ./machines/lilyhoshii/configuration.nix ];
+          specialArgs = {
+            inherit self inputs;
+          };
         };
       };
-    }
-    // (flake-utils.lib.eachDefaultSystem (
-      system:
-      let
-        pkgs = nixpkgs.legacyPackages.${system};
-      in
-      { }
-    ));
+
+      devShells =
+        let
+          devShell =
+            pkgs:
+            pkgs.mkShell {
+              buildInputs = with pkgs; [
+                bonito
+                disko
+                niv
+                git
+                git-crypt
+                gomod2nix
+                nixfmt-rfc-style
+                nix-output-monitor
+                lua-language-server
+
+                # (writeShellScriptBin "switch" ''
+                #   export NIX_PATH=${lib.escapeShellArg nixPath}
+                #   sudo nixos-rebuild --log-format internal-json -v "$@" switch |& nom --json
+                # '')
+              ];
+            };
+        in
+        eachSystem (pkgs: {
+          default = devShell pkgs;
+        });
+
+      packages = eachSystem (
+        pkgs:
+        import ./overlays/packages.nix {
+          inherit pkgs inputs;
+        }
+      );
+
+      overlays = {
+        overrides = import ./overlays/overrides.nix;
+        packages =
+          _: pkgs:
+          import ./overlays/packages.nix {
+            inherit pkgs inputs;
+          };
+      };
+    };
 }

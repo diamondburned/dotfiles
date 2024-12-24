@@ -1,49 +1,60 @@
-self: super: {
-	transmission-web = super.callPackage ./packages/transmission-web {};
-	audacious-3-5 = super.callPackage ./packages/audacious-3-5 {};
-	ytmdesktop = super.callPackage ./packages/ytmdesktop.nix {};
-	tagtool  = super.callPackage ./packages/tagtool.nix {};
-	ymuse    = super.callPackage ./packages/ymuse {};
-	srain    = super.callPackage ./packages/srain {};
-	caddy    = super.callPackage ./packages/caddy {};
-	xcaddy   = super.callPackage ./packages/xcaddy {};
-	caddyv1  = super.callPakcage ./packages/caddyv1 {};
-	vkmark   = super.callPackage ./packages/vkmark {};
-	aqours   = super.callPackage ./packages/aqours {};
-	ghproxy  = super.callPackage ./packages/ghproxy {};
-	dissent  = super.callPackage ./packages/dissent.nix {};
-	openmoji = super.callPackage ./packages/openmoji {};
-	blobmoji = super.callPackage ./packages/blobmoji {};
-	drone-ci = super.callPackage ./packages/drone-ci {};
-	gappdash = super.callPackage ./packages/gappdash {};
-	gotktrix = super.callPackage ./packages/gotktrix.nix {};
-	osu-wine = super.callPackage ./packages/osu-wine {};
-	osu-wineprefix = super.callPackage ./packages/osu-wineprefix {};
-	neovim-gtk = super.callPackage ./packages/neovim-gtk {
-		inherit (super.nixpkgs_unstable_newer) rustPlatform;
-	};
-	goatcounter = super.callPackage ./packages/goatcounter.nix {
-		goatcounter = super.goatcounter or null;
-	};
-	gotab = super.callPackage ./packages/gotab.nix {};
-	oxfs = super.callPackage ./packages/oxfs.nix {};
-	gpt4all = super.qt6Packages.callPackage ./packages/gpt4all.nix {};
-	nix-search = super.callPackage ./packages/nix-search.nix {};
-	inconsolata = super.callPackage ./packages/inconsolata.nix {};
-	intiface-cli = super.callPackage ./packages/intiface-cli {};
-	catnip-gtk = super.callPackage ./packages/catnip-gtk {};
-	passwordsafe = super.callPackage ./packages/gnome-passwordsafe {};
-	google-chrome-ozone = super.callPackage ./packages/google-chrome-ozone {};
-	lightdm-elephant-greeter = super.callPackage ./packages/lightdm-elephant-greeter;
-	rhythmbox-alternative-toolbar = super.callPackage ./packages/rhythmbox-alternative-toolbar {};
-	perf_data_converter = super.callPackage ./packages/perf_data_converter.nix {};
-	typescript-transpile-only = super.callPackage ./packages/typescript-transpile-only {};
-	xelfviewer = super.callPackage (builtins.fetchurl "https://raw.githubusercontent.com/xieby1/nix_config/fedd0cbdc5e49b55768d9fc3781e47f66f8e5e04/usr/gui/xelfviewer.nix") {};
-	# gnomeExtensions = super.gnomeExtensions // {
-	# 	easyscreencast = super.callPackage ./packages/gnome-extensions/easyscreencast {};
-	# };
-	go-diamondburned = import ./packages/go-diamondburned {
-		go = super.go_1_22;
-	};
-	chatterino7 = super.callPackage ./packages/chatterino7 {};
+{
+  pkgs,
+  inputs,
+}:
+
+let
+  inherit (inputs) self;
+
+  sources = import "${self}/nix/sources.nix" {
+    inherit (pkgs) system;
+  };
+
+  combinedInputs =
+    { }
+    # Mark Niv inputs with a _type:
+    // (pkgs.lib.mapAttrs (src: src // { _type = "niv"; }) sources)
+    # Flake inputs are already marked with a _type:
+    // (inputs);
+
+  callPackage = pkgs.callPackageWith (
+    pkgs
+    // {
+      inputs = combinedInputs;
+    }
+  );
+in
+
+{
+  transmission-web = callPackage ./packages/transmission-web { };
+  ytmdesktop = callPackage ./packages/ytmdesktop.nix { };
+  tagtool = callPackage ./packages/tagtool.nix { };
+  ymuse = callPackage ./packages/ymuse { };
+  srain = callPackage ./packages/srain { };
+  caddy = callPackage ./packages/caddy { };
+  xcaddy = callPackage ./packages/xcaddy { };
+  caddyv1 = callPackage ./packages/caddyv1 { };
+  vkmark = callPackage ./packages/vkmark { };
+  bonito = callPackage ./packages/bonito { };
+  ghproxy = callPackage ./packages/ghproxy { };
+  dissent = callPackage ./packages/dissent.nix { };
+  openmoji = callPackage ./packages/openmoji { };
+  blobmoji = callPackage ./packages/blobmoji { };
+  drone-ci = callPackage ./packages/drone-ci { };
+  gappdash = callPackage ./packages/gappdash { };
+  gotktrix = callPackage ./packages/gotktrix.nix { };
+  osu-wine = callPackage ./packages/osu-wine { };
+  osu-wineprefix = callPackage ./packages/osu-wineprefix { };
+  gotab = callPackage ./packages/gotab.nix { };
+  oxfs = callPackage ./packages/oxfs.nix { };
+  nix-search = callPackage ./packages/nix-search.nix { };
+  inconsolata = callPackage ./packages/inconsolata.nix { };
+  intiface-cli = callPackage ./packages/intiface-cli { };
+  catnip-gtk = callPackage ./packages/catnip-gtk { };
+  passwordsafe = callPackage ./packages/gnome-passwordsafe { };
+  google-chrome-ozone = callPackage ./packages/google-chrome-ozone { };
+  lightdm-elephant-greeter = callPackage ./packages/lightdm-elephant-greeter;
+  rhythmbox-alternative-toolbar = callPackage ./packages/rhythmbox-alternative-toolbar { };
+  perf_data_converter = callPackage ./packages/perf_data_converter.nix { };
+  typescript-transpile-only = callPackage ./packages/typescript-transpile-only { };
 }
