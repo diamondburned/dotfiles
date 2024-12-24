@@ -7,13 +7,18 @@
 
     home-manager.url = "github:nix-community/home-manager";
     home-manager.inputs = {
-      inputs.nixpkgs.follows = "nixpkgs";
+      nixpkgs.follows = "nixpkgs";
     };
 
     gomod2nix.url = "github:nix-community/gomod2nix";
     gomod2nix.inputs = {
       nixpkgs.follows = "nixpkgs";
       flake-utils.follows = "flake-utils";
+    };
+
+    globset.url = "github:pdtpartners/globset";
+    globset.inputs = {
+      nixpkgs-lib.follows = "nixpkgs";
     };
   };
 
@@ -23,23 +28,52 @@
       nixpkgs,
       flake-utils,
       home-manager,
+      globset,
       ...
     }@inputs:
 
     let
-      # combinedInputs contains all the inputs from the flake and the niv inputs
-      # updated using `niv` commands.
-      combinedInputs =
+      nixosConfigurations = {
+        hackadoll3 = nixpkgs.lib.nixosSystem rec {
+          pkgs = mkPkgs system;
+          system = "x86_64-linux";
+          modules = [ ./machines/hackadoll3/configuration.nix ];
+          specialArgs = {
+            inherit self;
+            inputs = combinedInputs pkgs;
+          };
+        };
+        lilyhoshii = nixpkgs.lib.nixosSystem rec {
+          pkgs = mkPkgs system;
+          system = "aarch64-linux";
+          modules = [ ./machines/lilyhoshii/configuration.nix ];
+          specialArgs = {
+            inherit self;
+            inputs = combinedInputs pkgs;
+          };
+        };
+      };
+
+      mkDevShell =
         pkgs:
-        { }
-        # Mark Niv inputs with a _type:
-        // (nixpkgs.lib.mapAttrs (_: src: src // { _type = "niv"; }) (
-          import "${self}/nix/sources.nix" {
-            inherit (pkgs) system;
-          }
-        ))
-        # Flake inputs are already marked with a _type:
-        // (inputs);
+        pkgs.mkShell {
+          buildInputs = with pkgs; [
+            bonito
+            disko
+            niv
+            git
+            git-crypt
+            gomod2nix
+            nixfmt-rfc-style
+            nix-output-monitor
+            lua-language-server
+
+            # (writeShellScriptBin "switch" ''
+            #   export NIX_PATH=${lib.escapeShellArg nixPath}
+            #   sudo nixos-rebuild --log-format internal-json -v "$@" switch |& nom --json
+            # '')
+          ];
+        };
 
       mkPkgs =
         system:
@@ -55,6 +89,62 @@
           ];
         };
 
+      packages = eachDefaultSystem (
+        pkgs:
+        import ./overlays/packages.nix {
+          inherit pkgs;
+          inputs = combinedInputs pkgs;
+        }
+      );
+
+      overlays = {
+        overrides = import ./overlays/overrides.nix;
+        packages =
+          _: pkgs:
+          import ./overlays/packages.nix {
+            inherit pkgs;
+            inputs = combinedInputs pkgs;
+          };
+      };
+
+      nixosModules = (searchCfgModules "*/default.nix") // {
+        # Add missing modules here.
+      };
+
+      homeModules = (searchCfgModules "*/home.nix") // {
+        # Add missing modules here.
+      };
+
+      searchCfgModules =
+        with builtins;
+        glob:
+        let
+          modules = lib.fileset.toSource {
+            root = ./cfg;
+            fileset = globset.lib.glob ./cfg glob;
+          };
+        in
+        listToAttrs (
+          (map (dir: {
+            name = baseNameOf (dirOf f);
+            value = import f;
+          }) (builtins.readDir modules))
+        );
+
+      # combinedInputs contains all the inputs from the flake and the niv inputs
+      # updated using `niv` commands.
+      combinedInputs =
+        pkgs:
+        { }
+        # Mark Niv inputs with a _type:
+        // (nixpkgs.lib.mapAttrs (_: src: src // { _type = "niv"; }) (
+          import "${self}/nix/sources.nix" {
+            inherit (pkgs) system;
+          }
+        ))
+        # Flake inputs are already marked with a _type:
+        // (inputs);
+
       eachDefaultSystem =
         pkgsFunc:
         builtins.listToAttrs (
@@ -65,70 +155,16 @@
         );
     in
     {
-      nixosConfigurations = {
-        hackadoll3 = nixpkgs.lib.nixosSystem rec {
-          pkgs = mkPkgs system;
-          system = "x86_64-linux";
-          modules = [ ./machines/hackadoll3/configuration.nix ];
-          specialArgs = {
-            inherit self;
-            inputs = combinedInputs;
-          };
-        };
-        lilyhoshii = nixpkgs.lib.nixosSystem rec {
-          pkgs = mkPkgs system;
-          system = "aarch64-linux";
-          modules = [ ./machines/lilyhoshii/configuration.nix ];
-          specialArgs = {
-            inherit self;
-            inputs = combinedInputs;
-          };
-        };
-      };
+      inherit nixosConfigurations;
 
-      devShells =
-        let
-          devShell =
-            pkgs:
-            pkgs.mkShell {
-              buildInputs = with pkgs; [
-                bonito
-                disko
-                niv
-                git
-                git-crypt
-                gomod2nix
-                nixfmt-rfc-style
-                nix-output-monitor
-                lua-language-server
+      inherit nixosModules;
+      inherit homeModules;
 
-                # (writeShellScriptBin "switch" ''
-                #   export NIX_PATH=${lib.escapeShellArg nixPath}
-                #   sudo nixos-rebuild --log-format internal-json -v "$@" switch |& nom --json
-                # '')
-              ];
-            };
-        in
-        eachDefaultSystem (pkgs: {
-          default = devShell pkgs;
-        });
+      inherit packages;
+      inherit overlays;
 
-      packages = eachDefaultSystem (
-        pkgs:
-        import ./overlays/packages.nix {
-          inherit pkgs;
-          inputs = combinedInputs;
-        }
-      );
-
-      overlays = {
-        overrides = import ./overlays/overrides.nix;
-        packages =
-          _: pkgs:
-          import ./overlays/packages.nix {
-            inherit pkgs;
-            inputs = combinedInputs;
-          };
-      };
+      devShells = eachDefaultSystem (pkgs: {
+        default = mkDevShell pkgs;
+      });
     };
 }

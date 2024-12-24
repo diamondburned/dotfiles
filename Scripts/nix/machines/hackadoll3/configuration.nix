@@ -473,13 +473,6 @@ in
       nix-direnv.enable = true;
     };
 
-    programs.bash = {
-      enable = true;
-      initExtra = builtins.readFile <dotfiles/cfg/bashrc>;
-      historySize = 500000;
-      historyFileSize = 1000000;
-    };
-
     # programs.vscode-css = {
     #   files = [ ./cfg/vscode.css ];
     # };
