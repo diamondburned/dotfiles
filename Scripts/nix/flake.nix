@@ -107,29 +107,27 @@
           };
       };
 
-      nixosModules = (searchCfgModules "*/default.nix") // {
+      nixosModules = (searchModules "default.nix") // {
+        # Add missing modules here.
+        overlays = import ./overlays/services.nix;
+      };
+
+      homeModules = (searchModules "home.nix") // {
         # Add missing modules here.
       };
 
-      homeModules = (searchCfgModules "*/home.nix") // {
-        # Add missing modules here.
-      };
-
-      searchCfgModules =
+      searchModules =
         with builtins;
-        glob:
+        with nixpkgs.lib;
+        nixFile:
         let
-          modules = lib.fileset.toSource {
-            root = ./cfg;
-            fileset = globset.lib.glob ./cfg glob;
+          root = ./modules;
+          modules = nixpkgs.lib.fileset.toSource {
+            inherit root;
+            fileset = globset.lib.glob root "*/${nixFile}";
           };
         in
-        listToAttrs (
-          (map (dir: {
-            name = baseNameOf (dirOf f);
-            value = import f;
-          }) (builtins.readDir modules))
-        );
+        mapAttrs (name: _: import (root + "/${name}/${nixFile}")) (builtins.readDir modules);
 
       # combinedInputs contains all the inputs from the flake and the niv inputs
       # updated using `niv` commands.
