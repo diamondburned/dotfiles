@@ -2,16 +2,17 @@
   config,
   lib,
   pkgs,
+  inputs,
   ...
 }:
 
 let
-  sources = import <dotfiles/nix/sources.nix> { inherit pkgs; };
+  inherit (inputs) lanzaboote;
 in
 
 {
   imports = [
-    (import sources.lanzaboote).nixosModules.lanzaboote
+    lanzaboote.nixosModules.lanzaboote
   ];
 
   services.fwupd.enable = true;

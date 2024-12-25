@@ -1,10 +1,9 @@
 {
   pkgs,
+  lib,
 }:
 
 let
-  inherit (pkgs) lib;
-
   writeBashScript' =
     pkg: name: text: pkgList:
     pkg name ''

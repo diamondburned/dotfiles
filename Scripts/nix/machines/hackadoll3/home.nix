@@ -3,7 +3,6 @@
   lib,
   pkgs,
   self,
-  utils,
   ...
 }:
 
@@ -74,20 +73,6 @@ in
       load_dotenv = false;
     };
     nix-direnv.enable = true;
-  };
-
-  # programs.vscode-css = {
-  #   files = [ ./cfg/vscode.css ];
-  # };
-  programs.vscode = {
-    # enable = true;
-    # package = pkgs.nixpkgs_unstable_newer.vscode;
-    # userSettings = {
-    #   "telemetry.enableTelemetry" = false;
-    #   "window.menuBarVisibility"  = "toggle";
-    #   "breadcrumbs.enabled"     = false;
-    #   "editor.minimap.enabled"  = false;
-    # };
   };
 
   programs.mpv = {
@@ -308,11 +293,6 @@ in
       '')
     ]);
 
-  systemd.user.services = {
-    # terminal = utils.waylandService "gnome-terminal";
-    # nautilus = utils.waylandService "nautilus --gapplication-service";
-  };
-
   fonts.fontconfig.enable = lib.mkForce true;
 
   xdg = {
@@ -332,7 +312,7 @@ in
         warn_style = true;
         enable_semantic_tokens = true;
       };
-      "autostart/autostart.desktop".text = utils.mkDesktopFile {
+      "autostart/autostart.desktop".text = lib.x.mkDesktopFile {
         name = "autostart-init";
         exec = self.lib.bin "autostart";
         type = "Application";

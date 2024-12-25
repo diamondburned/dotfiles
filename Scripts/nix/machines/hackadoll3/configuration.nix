@@ -4,7 +4,6 @@
   lib,
   self,
   inputs,
-  utils,
   ...
 }:
 
@@ -14,6 +13,7 @@
 
     ./hardware-configuration.nix
     ./services
+    ./overlays
     ./www
 
     self.nixosModules.overlays
@@ -38,7 +38,6 @@
     self.nixosModules.nushell
   ];
 
-  nixpkgs.overlays = import ./overlays;
   nixpkgs.config = {
     allowUnfree = true;
   };
@@ -101,7 +100,7 @@
   users.groups.ssh-trusted.members = [
     "diamond"
     "root"
-  ] ++ (utils.formatInts 1 32 (i: "nixbld${toString i}"));
+  ] ++ (lib.x.formatInts 1 32 (i: "nixbld${toString i}"));
 
   # services.ghproxy = {
   #   username = "diamondburned";

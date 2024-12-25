@@ -2,8 +2,9 @@
   description = "A very basic flake";
 
   inputs = {
-    nixpkgs.url = "github:nixos/nixpkgs?rev=5d67ea6b4b63378b9c13be21e2ec9d1afc921713"; # nixos-unstable
+    nixpkgs.url = "github:nixos/nixpkgs/nixos-unstable";
     flake-utils.url = "github:numtide/flake-utils";
+    flake-compat.url = "github:edolstra/flake-compat";
 
     home-manager.url = "github:nix-community/home-manager";
     home-manager.inputs = {
@@ -27,6 +28,14 @@
       flake-utils.follows = "flake-utils";
     };
 
+    nix-flatpak.url = "github:gmodena/nix-flatpak";
+
+    nix-bonito.url = "github:diamondburned/nix-bonito";
+    nix-bonito.inputs = {
+      nixpkgs.follows = "nixpkgs";
+      flake-utils.follows = "flake-utils";
+    };
+
     comd.url = "github:diamondburned/comd";
     comd.inputs = {
       nixpkgs.follows = "nixpkgs";
@@ -36,6 +45,12 @@
     disko.url = "github:nix-community/disko";
     disko.inputs = {
       nixpkgs.follows = "nixpkgs";
+    };
+
+    lanzaboote.url = "github:nix-community/lanzaboote";
+    lanzaboote.inputs = {
+      nixpkgs.follows = "nixpkgs";
+      flake-compat.follows = "flake-compat";
     };
   };
 
@@ -67,8 +82,12 @@
 
       mkNixOSArgs = pkgs: {
         inherit self;
-        inputs = combinedInputs pkgs;
-        utils = import ./utils { inherit pkgs; };
+        lib = pkgs.lib // {
+          x = import ./utils { inherit pkgs; };
+        };
+        inputs = combinedInputs {
+          inherit pkgs;
+        };
       };
 
       mkDevShell =
@@ -105,7 +124,9 @@
         pkgs:
         import ./overlays/packages.nix {
           inherit pkgs;
-          inputs = combinedInputs pkgs;
+          inputs = combinedInputs {
+            inherit pkgs;
+          };
         }
       );
 
@@ -115,17 +136,18 @@
           _: pkgs:
           import ./overlays/packages.nix {
             inherit pkgs;
-            inputs = combinedInputs pkgs;
+            inputs = combinedInputs {
+              inherit pkgs;
+            };
           };
       };
 
       nixosModules = (searchModules "default.nix") // {
-        # Add missing modules here.
-        overlays = import ./overlays/services.nix;
+        overlays = import ./overlays/packageModules.nix;
       };
 
       homeModules = (searchModules "home.nix") // {
-        # Add missing modules here.
+        overlays = import ./overlays/packageModules.nix;
       };
 
       searchModules =
@@ -144,7 +166,7 @@
       # combinedInputs contains all the inputs from the flake and the niv inputs
       # updated using `niv` commands.
       combinedInputs =
-        pkgs:
+        { pkgs }:
         { }
         # Mark Niv inputs with a _type:
         // (nixpkgs.lib.mapAttrs (_: src: src // { _type = "niv"; }) (
