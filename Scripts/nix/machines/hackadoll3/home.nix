@@ -44,8 +44,6 @@ in
 
 {
   imports = [
-    self.nixosModules.overlays
-
     self.homeModules.firefox
     self.homeModules.google-chrome
     self.homeModules.blackbox-terminal

@@ -1,5 +1,30 @@
 { pkgs, inputs, ... }:
 
+let
+  overlays = [
+    # packages
+    (
+      self: super:
+      import ./packages.nix {
+        inherit inputs;
+        pkgs = super;
+      }
+    )
+
+    # lib
+    (_: prev: {
+      lib = prev.lib.extend (
+        _: prevlib: {
+          x = import ./lib/x.nix {
+            pkgs = prev;
+            lib = prevlib;
+          };
+        }
+      );
+    })
+  ];
+in
+
 {
   imports = [
     ./packages/transmission-web/service.nix
@@ -13,26 +38,15 @@
     ./packages/realtek/realtek.nix
   ];
 
-  nixpkgs.overlays = [
-    # packages
-    (
-      self: super:
-      import ./packages.nix {
-        inherit inputs;
-        pkgs = super;
-      }
-    )
+  nixpkgs = {
+    inherit overlays;
+  };
 
-    # lib
-    (self: super: {
-      lib = super.lib.extend (
-        selflib: superlib: {
-          x = import ./lib/x.nix {
-            inherit inputs;
-            pkgs = super;
-          };
-        }
-      );
-    })
+  home-manager.sharedModules = [
+    {
+      nixpkgs = {
+        inherit overlays;
+      };
+    }
   ];
 }

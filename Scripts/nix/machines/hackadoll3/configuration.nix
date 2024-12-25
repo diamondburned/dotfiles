@@ -9,14 +9,6 @@
 
 {
   imports = [
-    inputs.home-manager.nixosModules.home-manager
-
-    ./hardware-configuration.nix
-    ./services
-    ./overlays
-    ./www
-
-    self.nixosModules.overlays
     self.nixosModules.v4l2
     self.nixosModules.udev
     self.nixosModules.sound
@@ -36,6 +28,11 @@
     self.nixosModules.u2f
     self.nixosModules.steam
     self.nixosModules.nushell
+
+    ./hardware-configuration.nix
+    ./services
+    ./overlays
+    ./www
   ];
 
   nixpkgs.config = {

@@ -69,25 +69,26 @@
         hackadoll3 = nixpkgs.lib.nixosSystem rec {
           pkgs = mkPkgs system;
           system = "x86_64-linux";
-          modules = [ ./machines/hackadoll3/configuration.nix ];
+          modules = [
+            ./machines/base.nix
+            ./machines/hackadoll3/configuration.nix
+          ];
           specialArgs = mkNixOSArgs pkgs;
         };
         lilyhoshii = nixpkgs.lib.nixosSystem rec {
           pkgs = mkPkgs system;
           system = "aarch64-linux";
-          modules = [ ./machines/lilyhoshii/configuration.nix ];
+          modules = [
+            ./machines/base.nix
+            ./machines/lilyhoshii/configuration.nix
+          ];
           specialArgs = mkNixOSArgs pkgs;
         };
       };
 
       mkNixOSArgs = pkgs: {
         inherit self;
-        lib = pkgs.lib // {
-          x = import ./utils { inherit pkgs; };
-        };
-        inputs = combinedInputs {
-          inherit pkgs;
-        };
+        inputs = combinedInputs { inherit pkgs; };
       };
 
       mkDevShell =
@@ -120,15 +121,7 @@
           ];
         };
 
-      packages = eachDefaultSystem (
-        pkgs:
-        import ./overlays/packages.nix {
-          inherit pkgs;
-          inputs = combinedInputs {
-            inherit pkgs;
-          };
-        }
-      );
+      packages = eachDefaultSystem (pkgs: self.overlays.packages null pkgs);
 
       overlays = {
         overrides = import ./overlays/overrides.nix;
@@ -143,12 +136,10 @@
       };
 
       nixosModules = (searchModules "default.nix") // {
-        overlays = import ./overlays/packageModules.nix;
+        overlays = import ./overlays;
       };
 
-      homeModules = (searchModules "home.nix") // {
-        overlays = import ./overlays/packageModules.nix;
-      };
+      homeModules = (searchModules "home.nix") // { };
 
       searchModules =
         with builtins;

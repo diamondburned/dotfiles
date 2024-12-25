@@ -1,74 +1,70 @@
-{ config, lib, pkgs, ... }:
+{
+  config,
+  lib,
+  pkgs,
+  self,
+  inputs,
+  ...
+}:
 
 let
-	rootDir = builtins.toString ./..;
+  inherit (inputs) home-manager;
 in
 
 {
-	home-manager.users.diamond = {
-		imports = [
-			# Automatically push dotfiles.
-			(import <dotfiles/utils/schedule.nix> {
-				name        = "dotfiles-pusher";
-				description = "Automatically push dotfiles";
-				calendar    = "hourly";
-				command     = ''
-					cd ~/ && git add -A && git commit -m Update && git pull --rebase && git push origin
-					exit 0
-				'';
-			})
-		];
-	};
+  imports = [
+    home-manager.nixosModules.home-manager
+    self.nixosModules.overlays
+  ];
 
-	environment.sessionVariables = {
-		HOSTNAME = config.networking.hostName;
-	};
+  home-manager.extraSpecialArgs = {
+    inherit self inputs;
+  };
 
-	hardware = {
-		enableAllFirmware = true; 
-		enableRedistributableFirmware = true;
-	};
+  home-manager.users.diamond = {
+    imports = [
+      self.homeModules.schedules
+    ];
 
-	nixpkgs.config = {
-		allowUnfree = true;
-	};
+    # Automatically push dotfiles.
+    services.user.schedules."dotfiles-pusher" = {
+      description = "Automatically push dotfiles";
+      calendar = "hourly";
+      command = ''
+        cd ~/ && git add -A && git commit -m Update && git pull --rebase && git push origin
+        exit 0
+      '';
+    };
+  };
 
-	nix = {
-		settings = {
-			substituters = [
-				# Prefer Nixpkgs mirror in China over the actual CloudFront one.
-				# Surely this is a good idea.
-				# "https://mirrors.ustc.edu.cn/nix-channels/store/"
-				# "https://mirrors.bfsu.edu.cn/nix-channels/store/"
-				"https://cache.nixos.org/"
-			];
-			experimental-features = [ "nix-command" "flakes" ];
-		};
-		nixPath = [
-			"/nix/var/nix/profiles/per-user/root/channels"
-			"dotfiles=${rootDir}"
-			"nixos-config=${rootDir}/configuration.nix"
-		];
-	};
+  hardware = {
+    enableAllFirmware = true;
+    enableRedistributableFirmware = true;
+  };
 
-	# Inject our config root. Use as nix.configRoot.
-	# options = {
-	# 	root = lib.mkOption {
-	# 		default  = builtins.toString ./.;
-	# 		readOnly = true;
-	# 	};
-	# };
+  nixpkgs.config = {
+    allowUnfree = true;
+  };
 
-	# Disable split lock detection since it penalizes the performance of certain
-	# apps for arbitrary reasons.
-	boot.kernelParams = [ "split_lock_detect=off" ];
+  nix.settings = {
+    substituters = [
+      # Prefer Nixpkgs mirror in China over the actual CloudFront one.
+      # Surely this is a good idea.
+      # "https://mirrors.ustc.edu.cn/nix-channels/store/"
+      # "https://mirrors.bfsu.edu.cn/nix-channels/store/"
+      "https://cache.nixos.org/"
+    ];
+    experimental-features = [
+      "nix-command"
+      "flakes"
+    ];
+  };
 
-	users.users.diamond.openssh.authorizedKeys.keyFiles = [
-		"${rootDir}/public_keys"
-	];
+  # Disable split lock detection since it penalizes the performance of certain
+  # apps for arbitrary reasons.
+  boot.kernelParams = [ "split_lock_detect=off" ];
 
-	programs.gdk-pixbuf.modulePackages = with pkgs; [
-		librsvg
-		webp-pixbuf-loader
-	];
+  users.users.diamond.openssh.authorizedKeys.keyFiles = [
+    "${self}/public_keys"
+  ];
 }
