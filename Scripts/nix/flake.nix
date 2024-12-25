@@ -38,20 +38,20 @@
           pkgs = mkPkgs system;
           system = "x86_64-linux";
           modules = [ ./machines/hackadoll3/configuration.nix ];
-          specialArgs = {
-            inherit self;
-            inputs = combinedInputs pkgs;
-          };
+          specialArgs = mkNixOSArgs pkgs;
         };
         lilyhoshii = nixpkgs.lib.nixosSystem rec {
           pkgs = mkPkgs system;
           system = "aarch64-linux";
           modules = [ ./machines/lilyhoshii/configuration.nix ];
-          specialArgs = {
-            inherit self;
-            inputs = combinedInputs pkgs;
-          };
+          specialArgs = mkNixOSArgs pkgs;
         };
+      };
+
+      mkNixOSArgs = pkgs: {
+        inherit self;
+        inputs = combinedInputs pkgs;
+        utils = import ./utils { inherit pkgs; };
       };
 
       mkDevShell =
@@ -67,11 +67,6 @@
             nixfmt-rfc-style
             nix-output-monitor
             lua-language-server
-
-            # (writeShellScriptBin "switch" ''
-            #   export NIX_PATH=${lib.escapeShellArg nixPath}
-            #   sudo nixos-rebuild --log-format internal-json -v "$@" switch |& nom --json
-            # '')
           ];
         };
 
