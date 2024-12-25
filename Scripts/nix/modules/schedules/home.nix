@@ -17,33 +17,36 @@ in
     description = ''
       Allows users to schedule tasks using systemd timers.
     '';
-    type = types.submodule (
-      { name, ... }:
-      {
-        options = {
-          name = mkOption {
-            type = types.str;
-            default = name;
+    type = types.attrsOf (
+      types.submodule (
+        { name, ... }:
+        {
+          options = {
+            name = mkOption {
+              type = types.str;
+              default = name;
+            };
+            description = mkOption {
+              type = types.str;
+              default = "";
+            };
+            calendar = mkOption {
+              type = types.str;
+              description = ''
+                A systemd calendar expression. See `man systemd.time` for more information.
+              '';
+            };
+            script = mkOption {
+              type = types.str;
+              description = ''
+                The command to run.
+              '';
+            };
           };
-          description = mkOption {
-            type = types.str;
-            default = "";
-          };
-          calendar = mkOption {
-            type = types.str;
-            description = ''
-              A systemd calendar expression. See `man systemd.time` for more information.
-            '';
-          };
-          script = mkOption {
-            type = types.str;
-            description = ''
-              The command to run.
-            '';
-          };
-        };
-      }
+        }
+      )
     );
+    default = { };
   };
 
   config = {

@@ -39,7 +39,6 @@
     comd.url = "github:diamondburned/comd";
     comd.inputs = {
       nixpkgs.follows = "nixpkgs";
-      flake-utils.follows = "flake-utils";
     };
 
     disko.url = "github:nix-community/disko";
@@ -67,32 +66,49 @@
     let
       nixosConfigurations = {
         hackadoll3 = nixpkgs.lib.nixosSystem rec {
-          pkgs = mkPkgs system;
           system = "x86_64-linux";
           modules = [
             ./machines/base.nix
             ./machines/hackadoll3/configuration.nix
           ];
-          specialArgs = mkNixOSArgs pkgs;
+          specialArgs = mkNixOSArgs {
+            inherit system;
+          };
         };
         lilyhoshii = nixpkgs.lib.nixosSystem rec {
-          pkgs = mkPkgs system;
           system = "aarch64-linux";
           modules = [
             ./machines/base.nix
             ./machines/lilyhoshii/configuration.nix
           ];
-          specialArgs = mkNixOSArgs pkgs;
+          specialArgs = mkNixOSArgs {
+            inherit system;
+          };
         };
       };
 
-      mkNixOSArgs = pkgs: {
-        inherit self;
-        inputs = combinedInputs { inherit pkgs; };
-      };
+      mkNixOSArgs =
+        { system }:
+        {
+          inherit self;
+          inputs = combinedInputs {
+            pkgs = nixpkgs.legacyPackages.${system};
+          };
+        };
 
       mkDevShell =
-        pkgs:
+        system:
+        let
+          pkgs = import nixpkgs {
+            inherit system;
+            config.allowUnfree = true;
+            overlays = [
+              inputs.gomod2nix.overlays.default
+              self.overlays.overrides
+              self.overlays.packages
+            ];
+          };
+        in
         pkgs.mkShell {
           buildInputs = with pkgs; [
             bonito
@@ -107,30 +123,28 @@
           ];
         };
 
-      mkPkgs =
+      packages = eachDefaultSystem (
         system:
-        import nixpkgs {
-          inherit system;
-          config = {
-            allowUnfree = true;
-          };
-          overlays = [
-            self.overlays.overrides
-            self.overlays.packages
-            inputs.gomod2nix.overlays.default
-          ];
-        };
-
-      packages = eachDefaultSystem (pkgs: self.overlays.packages null pkgs);
+        self.overlays.packages null (
+          import nixpkgs {
+            inherit system;
+            config.allowUnfree = true;
+            overlays = [
+              inputs.gomod2nix.overlays.default
+              self.overlays.overrides
+            ];
+          }
+        )
+      );
 
       overlays = {
         overrides = import ./overlays/overrides.nix;
         packages =
-          _: pkgs:
+          final: prev:
           import ./overlays/packages.nix {
-            inherit pkgs;
+            pkgs = prev;
             inputs = combinedInputs {
-              inherit pkgs;
+              pkgs = prev;
             };
           };
       };
@@ -169,11 +183,11 @@
         // (inputs);
 
       eachDefaultSystem =
-        pkgsFunc:
+        systemFunc:
         builtins.listToAttrs (
           map (system: {
             name = system;
-            value = pkgsFunc (mkPkgs system);
+            value = systemFunc system;
           }) flake-utils.lib.defaultSystems
         );
     in
@@ -192,9 +206,9 @@
 
       lib = rec {
         path = {
-          bin = path: ./bin + path;
-          static = path: ./static + path;
-          secret = path: ./secrets + path;
+          bin = path: ./bin + ("/" + path);
+          static = path: ./static + ("/" + path);
+          secret = path: ./secrets + ("/" + path);
         };
       };
     };

@@ -2,6 +2,7 @@
   config,
   lib,
   pkgs,
+  self,
   ...
 }:
 
@@ -67,7 +68,7 @@ in
 
     services.diamondburned.caddy = {
       enable = true;
-      environmentFile = self.lib.secret "caddy.env";
+      environmentFile = self.lib.path.secret "caddy.env";
       configFile = pkgs.writeText "Caddyfile" ''
         {
           auto_https off

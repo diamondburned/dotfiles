@@ -7,28 +7,6 @@ in
   # I don't care!!!!!! Nixpkgs, stop doing this!!
   pkgconfig = self.pkg-config;
 
-  autoPatchelf =
-    {
-      pkg,
-      buildInputs ? [ ],
-    }:
-
-    super.stdenv.mkDerivation {
-      name = "${pkg.name}-patched";
-
-      phases = [
-        "installPhase"
-        "fixupPhase"
-      ];
-      buildInputs = buildInputs;
-      nativeBuildInputs = with super; [ autoPatchelfHook ];
-
-      installPhase = ''
-        mkdir -p $out
-        cp -ra --no-preserve=mode ${pkg}/* $out
-      '';
-    };
-
   makeFirefoxProfileDesktopFile =
     {
       profile,

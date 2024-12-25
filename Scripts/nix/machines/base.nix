@@ -30,7 +30,7 @@ in
     services.user.schedules."dotfiles-pusher" = {
       description = "Automatically push dotfiles";
       calendar = "hourly";
-      command = ''
+      script = ''
         cd ~/ && git add -A && git commit -m Update && git pull --rebase && git push origin
         exit 0
       '';

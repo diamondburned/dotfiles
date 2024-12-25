@@ -20,16 +20,16 @@ let
             sha256 = "sha256-YMqvPqh7QqvGEGdNQGU1u1T6lrcfb1Z7rPfJOZ5QQMo=";
           };
         };
-        nativeBinary = pkgs.autoPatchelf {
+        nativeBinary = lib.x.autoPatchelf {
           pkg = passthru.binaries.${pkgs.system};
           buildInputs = with pkgs; [ libgcc ];
         };
       })
       ''
-        			mkdir -p $out/bin
-        			cp -ra --no-preserve=mode $nativeBinary/sg-* $out/bin/
-        			chmod +x $out/bin/*
-        		'';
+        mkdir -p $out/bin
+        cp -ra --no-preserve=mode $nativeBinary/sg-* $out/bin/
+        chmod +x $out/bin/*
+      '';
 
   neovideArgs = [
     "--size"
@@ -37,13 +37,13 @@ let
   ];
 
   neovide = pkgs.runCommandLocal "neovide" { } ''
-    		mkdir -p $out/bin
+    mkdir -p $out/bin
 
-    		ln -s ${pkgs.neovide}/share $out/share
-    		ln -s ${pkgs.writeShellScript "neovide-wrapped" ''
-        			exec ${pkgs.neovide}/bin/neovide ${lib.escapeShellArgs neovideArgs} "$@"
-        		''} $out/bin/neovide
-    	'';
+    ln -s ${pkgs.neovide}/share $out/share
+    ln -s ${pkgs.writeShellScript "neovide-wrapped" ''
+      exec ${pkgs.neovide}/bin/neovide ${lib.escapeShellArgs neovideArgs} "$@"
+    ''} $out/bin/neovide
+  '';
 in
 
 {

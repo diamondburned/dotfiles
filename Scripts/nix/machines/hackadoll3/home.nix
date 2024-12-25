@@ -125,8 +125,6 @@ in
 
   home.packages =
     ([
-      # gimpMesonPkgs.gimp-with-plugins
-
     ])
     ++ (with pkgs.aspellDicts; [
       en
@@ -189,7 +187,7 @@ in
       jq
       fx
       gh
-      go-diamondburned
+      go
       gopls
       gotools
       govulncheck
@@ -244,11 +242,11 @@ in
 
       # Office
       libreoffice
-      nixpkgs_unstable_older.qalculate-gtk
+      qalculate-gtk
       onlyoffice-bin
       evince
       aspell
-      nixpkgs_unstable_newer.marker
+      marker
       graphviz
       # foliate
 
@@ -312,7 +310,7 @@ in
       };
       "autostart/autostart.desktop".text = lib.x.mkDesktopFile {
         name = "autostart-init";
-        exec = self.lib.bin "autostart";
+        exec = self.lib.path.bin "autostart";
         type = "Application";
         comment = "An autostart script in ~/Scripts/nix/bin/autostart";
         extraEntries = ''

@@ -69,4 +69,26 @@ in
     in
     from: to: fn:
     formatInts' from to fn [ ];
+
+  autoPatchelf =
+    {
+      pkg,
+      buildInputs ? [ ],
+    }:
+
+    pkgs.stdenv.mkDerivation {
+      name = "${pkg.name}-patched";
+
+      phases = [
+        "installPhase"
+        "fixupPhase"
+      ];
+      buildInputs = buildInputs;
+      nativeBuildInputs = with pkgs; [ autoPatchelfHook ];
+
+      installPhase = ''
+        mkdir -p $out
+        cp -ra --no-preserve=mode ${pkg}/* $out
+      '';
+    };
 }

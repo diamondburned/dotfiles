@@ -24,7 +24,6 @@
     self.nixosModules.flatpak
     self.nixosModules.dol-server
     self.nixosModules.secureboot
-    self.nixosModules.foot
     self.nixosModules.u2f
     self.nixosModules.steam
     self.nixosModules.nushell
