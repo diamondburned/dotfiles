@@ -2,15 +2,50 @@
   config,
   lib,
   pkgs,
+  self,
+  utils,
   ...
 }:
 
+let
+  userEnv = {
+    LC_TIME = "en_GB.UTF-8";
+    NIX_AUTO_RUN = "1";
+    # STEAM_RUNTIME = "0";
+    # XDG_CURRENT_DESKTOP = "Wayfire";
+
+    GOPATH = "/home/diamond/.go";
+    GOBIN = "/home/diamond/.go/bin";
+    CGO_ENABLED = "0";
+
+    # Disable VSync.
+    vblank_mode = "0";
+
+    # Enforce Wayland.
+    NIXOS_OZONE_WL = "1";
+    QT_QPA_PLATFORM = "wayland";
+    MOZ_ENABLE_WAYLAND = "1";
+    # SDL_VIDEODRIVER  = "wayland";
+
+    # GNOME still forces scaling for all Xwayland apps. See
+    # https://github.com/ValveSoftware/steam-for-linux/issues/9209.
+    STEAM_FORCE_DESKTOPUI_SCALING = "1";
+
+    # osu settings.
+    WINE_RT = "89";
+    WINE_SRV_RT = "99";
+    STAGING_SHARED_MEMORY = "1";
+    STAGING_RT_PRIORITY_BASE = "89";
+    STAGING_RT_PRIORITY_SERVER = "99";
+    STAGING_PA_DURATION = "250000";
+    STAGING_PA_PERIOD = "8192";
+    STAGING_PA_LATENCY_USEC = "128";
+  };
+in
+
 {
   imports = [
-		self.nixosModules.overlays
-    /overlays>
-    /overlays/home-manager>
-    /secrets/diamond>
+    self.nixosModules.overlays
 
     self.homeModules.firefox
     self.homeModules.google-chrome
@@ -25,8 +60,6 @@
     self.homeModules.zellij
     self.homeModules.flatpak
     self.homeModules.blackbox-terminal
-
-    self
   ];
 
   nixpkgs.config = {
@@ -269,10 +302,9 @@
       gnome-tweaks
       gnome-boxes
 
-      # Everything in ./bn
       (runCommand "diamond-bin" { } ''
         mkdir -p $out/bin
-        cp -r ${<dotfiles/bin>}/* $out/bin
+        cp -r ${self.lib.path.bin "*"} $out/bin
       '')
     ]);
 
@@ -300,10 +332,9 @@
         warn_style = true;
         enable_semantic_tokens = true;
       };
-      "fontconfig/fonts.conf".source = <dotfiles/cfg/fontconfig.xml>;
       "autostart/autostart.desktop".text = utils.mkDesktopFile {
         name = "autostart-init";
-        exec = <dotfiles/bin/autostart>;
+        exec = self.lib.bin "autostart";
         type = "Application";
         comment = "An autostart script in ~/Scripts/nix/bin/autostart";
         extraEntries = ''

@@ -20,6 +20,23 @@
     globset.inputs = {
       nixpkgs-lib.follows = "nixpkgs";
     };
+
+    nixgl.url = "github:nix-community/nixgl";
+    nixgl.inputs = {
+      nixpkgs.follows = "nixpkgs";
+      flake-utils.follows = "flake-utils";
+    };
+
+    comd.url = "github:diamondburned/comd";
+    comd.inputs = {
+      nixpkgs.follows = "nixpkgs";
+      flake-utils.follows = "flake-utils";
+    };
+
+    disko.url = "github:nix-community/disko";
+    disko.inputs = {
+      nixpkgs.follows = "nixpkgs";
+    };
   };
 
   outputs =
@@ -159,5 +176,13 @@
       devShells = eachDefaultSystem (pkgs: {
         default = mkDevShell pkgs;
       });
+
+      lib = rec {
+        path = {
+          bin = path: ./bin + path;
+          static = path: ./static + path;
+          secret = path: ./secrets + path;
+        };
+      };
     };
 }

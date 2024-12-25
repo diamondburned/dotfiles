@@ -1,100 +1,41 @@
-# Edit this configuration file to define what should be installed on
-# your system.  Help is available in the configuration.nix(5) man page
-# and in the NixOS manual (accessible by running ‘nixos-help’).
-
 {
   config,
-  self,
   pkgs,
   lib,
+  self,
+  inputs,
+  utils,
   ...
 }:
 
-let
-  utils = import <dotfiles/utils> { inherit config pkgs lib; };
-
-  # GIMP v2.99 Nixpkgs
-  gimpMesonPkgs = import (pkgs.fetchFromGitHub {
-    owner = "jtojnar";
-    repo = "nixpkgs";
-    rev = "6cb2cce589e1effb0f9983d99132c4f8cc2f4d32"; # gimp-meson
-    sha256 = "0wg44l0lkrymsp68s10sx1r4fqd3yvn0lswkhn1zkd3qv6s42nmd";
-  }) { };
-
-  gnome-41 = import (pkgs.fetchFromGitHub {
-    owner = "NixOS";
-    repo = "nixpkgs";
-    rev = "3fdd780";
-    sha256 = lib.fakeSha256;
-  }) { };
-
-  userEnv = {
-    LC_TIME = "en_GB.UTF-8";
-    NIX_AUTO_RUN = "1";
-    # STEAM_RUNTIME = "0";
-    # XDG_CURRENT_DESKTOP = "Wayfire";
-
-    GOPATH = "/home/diamond/.go";
-    GOBIN = "/home/diamond/.go/bin";
-    CGO_ENABLED = "0";
-
-    # Disable VSync.
-    vblank_mode = "0";
-
-    # Enforce Wayland.
-    NIXOS_OZONE_WL = "1";
-    QT_QPA_PLATFORM = "wayland";
-    MOZ_ENABLE_WAYLAND = "1";
-    # SDL_VIDEODRIVER  = "wayland";
-
-    # GNOME still forces scaling for all Xwayland apps. See
-    # https://github.com/ValveSoftware/steam-for-linux/issues/9209.
-    STEAM_FORCE_DESKTOPUI_SCALING = "1";
-
-    # osu settings.
-    WINE_RT = "89";
-    WINE_SRV_RT = "99";
-    STAGING_SHARED_MEMORY = "1";
-    STAGING_RT_PRIORITY_BASE = "89";
-    STAGING_RT_PRIORITY_SERVER = "99";
-    STAGING_PA_DURATION = "250000";
-    STAGING_PA_PERIOD = "8192";
-    STAGING_PA_LATENCY_USEC = "128";
-  };
-
-in
 {
   imports = [
-    <home-manager/nixos>
+    inputs.home-manager.nixosModules.home-manager
+
     ./hardware-configuration.nix
     ./services
     ./www
-    <dotfiles/overlays>
-    <dotfiles/overlays/services.nix>
-    <dotfiles/secrets>
-    <dotfiles/cfg/v4l2>
-    <dotfiles/cfg/udev>
-    <dotfiles/cfg/sound>
-    <dotfiles/cfg/nokbd>
-    <dotfiles/cfg/fonts>
-    <dotfiles/cfg/locale>
-    <dotfiles/cfg/localhost>
-    <dotfiles/cfg/networking>
-    <dotfiles/cfg/keyd>
-    <dotfiles/cfg/avahi>
-    <dotfiles/cfg/gps>
-    <dotfiles/cfg/gnome>
-    <dotfiles/cfg/flatpak>
-    <dotfiles/cfg/dol-server>
-    <dotfiles/cfg/secureboot>
-    <dotfiles/cfg/foot>
-    <dotfiles/cfg/u2f>
-    <dotfiles/cfg/steam>
-    <dotfiles/cfg/nushell>
 
-    # This shit's still garbage.
-    # <dotfiles/cfg/wayfire>
-    # <dotfiles/cfg/greetd>
+    self.nixosModules.overlays
+    self.nixosModules.v4l2
+    self.nixosModules.udev
+    self.nixosModules.sound
+    self.nixosModules.nokbd
+    self.nixosModules.fonts
+    self.nixosModules.locale
+    self.nixosModules.localhost
+    self.nixosModules.networking
+    self.nixosModules.keyd
+    self.nixosModules.avahi
+    self.nixosModules.gps
+    self.nixosModules.gnome
+    self.nixosModules.flatpak
+    self.nixosModules.dol-server
+    self.nixosModules.secureboot
+    self.nixosModules.foot
+    self.nixosModules.u2f
+    self.nixosModules.steam
+    self.nixosModules.nushell
   ];
 
   nixpkgs.overlays = import ./overlays;
@@ -408,19 +349,6 @@ in
     freeSwapThreshold = 20;
     freeSwapKillThreshold = 10;
   };
-
-  # Get a newer VTE with SIXEL for ourself.
-  # Disabled due to a regression: https://gitlab.gnome.org/GNOME/vte/-/issues/2717.
-  # system.replaceRuntimeDependencies = [
-  #   {
-  #     original = pkgs.vte-gtk4;
-  #     replacement = pkgs.callPackage <dotfiles/overlays/packages/vte_sixel.nix> { vte = pkgs.vte-gtk4; };
-  #   }
-  #   {
-  #     original = pkgs.vte;
-  #     replacement = pkgs.callPackage <dotfiles/overlays/packages/vte_sixel.nix> { vte = pkgs.vte; };
-  #   }
-  # ];
 
   # TODO: fix this:
   # home-manager.useGlobalPkgs = true;

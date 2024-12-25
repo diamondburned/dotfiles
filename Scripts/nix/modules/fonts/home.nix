@@ -1,10 +1,15 @@
-{ config, lib, pkgs, ... }:
+{
+  config,
+  lib,
+  pkgs,
+  ...
+}:
 
 {
-	fonts.fontconfig.enable = true;
-	xdg.configFile."fontconfig/fonts.conf".source = <dotfiles/cfg/fontconfig.xml>;
+  fonts.fontconfig.enable = true;
+  xdg.configFile."fontconfig/fonts.conf".source = ./fontconfig.xml;
 
-	home.packages = with pkgs; [
-		gucharmap
-	];
+  home.packages = with pkgs; [
+    gucharmap
+  ];
 }
