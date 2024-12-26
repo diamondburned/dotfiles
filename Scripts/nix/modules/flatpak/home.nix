@@ -45,6 +45,7 @@ in
           "/run/current-system/sw/share/X11/fonts:ro"
           # Expose user fonts.
           "${config.home.homeDirectory}/.fonts:ro"
+          "${config.home.homeDirectory}/.config/fontconfig:ro"
           "${config.home.homeDirectory}/.local/share/fonts:ro"
           # Expose user icons.
           "${config.home.homeDirectory}/.icons:ro"

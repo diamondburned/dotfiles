@@ -164,16 +164,11 @@ nix_exec() {
 	nix-build "${@:2}" -E "with import <nixpkgs> {}; (callPackage ./$1 {}).all"
 }
 
-alias nixshbuild="nix-shell '<nixpkgs>' -A"
-alias nixbuild="nix-build '<nixpkgs>' -A package"
-# alias nixrl="sudo nixos-rebuild switch --max-jobs 0"
-# alias nixrl="(cd $HOME/Scripts/nix && sudo nix-shell --run 'nixos-rebuild switch')"
-alias nixgc="sudo nix-collect-garbage -d"
-
-nixrl() (
-	cd "$HOME/Scripts/nix"
-	sudo nix-shell --run 'nixos-rebuild --log-format internal-json -v switch |& nom --json'
-)
+# nixrl() (
+# 	cd "$HOME/Scripts/nix"
+# 	sudo nix-shell --run 'nixos-rebuild --log-format internal-json -v switch |& nom --json'
+# )
+alias nixrl="sudo bash -c 'nixos-rebuild --log-format internal-json switch --flake $HOME/Scripts/nix |& nom --json'"
 
 # lol fuck node
 # NPM_PACKAGES="${HOME}/.npm-packages"
@@ -380,21 +375,6 @@ set-title() {
 }
 alias set_title=set-title
 
-osc7_cwd() {
-    local strlen=${#PWD}
-    local encoded=""
-    local pos c o
-    for (( pos=0; pos<strlen; pos++ )); do
-        c=${PWD:$pos:1}
-        case "$c" in
-            [-/:_.!\'\(\)~[:alnum:]] ) o="${c}" ;;
-            * ) printf -v o '%%%02X' "'${c}" ;;
-        esac
-        encoded+="${o}"
-    done
-    printf '\e]7;file://%s%s\e\\' "${HOSTNAME}" "${encoded}"
-}
-
 __lineprompt_set_title() {
 	local p
 	p="${__lineprompt_custom_title:-$1}"
@@ -406,7 +386,9 @@ __lineprompt_set_title() {
 }
 
 __lineprompt_middleware() {
-	__lineprompt_set_title "$THIS_COMMAND : $(basename "$PWD")"
+	if [[ "$cmd" != __* && ! $__lineprompt_busy ]]; then
+		__lineprompt_set_title "$THIS_COMMAND : $(basename "$PWD")"
+	fi
 }
 
 __lineprompt_debug_handler() {
@@ -434,6 +416,8 @@ __lineprompt_init() {
 }
 
 __lineprompt_main() {
+	__lineprompt_busy=1
+
 	# local commands
 	local sig=$?
 	local cmd="$PREVIOUS_COMMAND"
@@ -442,24 +426,26 @@ __lineprompt_main() {
 	history -n
 	history -a
 
-	# exit status 0
-	(( sig > 0 )) && echo "exit status $sig"
+	# # exit status 0
+	# (( sig > 0 )) && echo "exit status $sig"
 
 	# Redraw the prompt
 	__lineprompt_redraw
 
 	# OSC 7 current directory for foot
-	osc7_cwd
+	# osc7_cwd
 
 	# Quick cd
 	# [[ -d "$1" ]] && cd "$1"
 
 	# terminal title
-	[[ "$cmd" == "__lineprompt_main" ]] && __lineprompt_set_title "$(basename "$PWD")/" || {
-		[[ "$sig" == 0 ]]                                                  \
-			&& __lineprompt_set_title "$(basename "$PWD")/" \
-			|| __lineprompt_set_title "exit $sig : $(basename "$PWD")/"
-	}
+	if [[ $sig == 0 ]]; then
+		__lineprompt_set_title "$(basename "$PWD")/"
+	else
+		__lineprompt_set_title "exit $sig : $(basename "$PWD")/"
+	fi
+
+	__lineprompt_busy=
 }
 
 __lineprompt_redraw() {
@@ -469,7 +455,12 @@ __lineprompt_redraw() {
 
 	# Count number of jobs.
 	local j=( $(jobs -p) )
-	(( ${#j[@]} > 0 )) && JOBS=" (${#j[@]} jobs)" || JOBS=
+	local jn=${#j[@]}
+	if (( jn > 0 )); then
+		JOBS=" (${jn} jobs)"
+	else
+		JOBS=
+	fi
 
 	# Calculate direnv status.
 	[[ "$DIRENV_DIR" ]] && direnv_status="+ direnv" || direnv_status=
@@ -506,6 +497,50 @@ __lineprompt_cmps() {
 	}
 
 	return $sig
+}
+
+__lineprompt_welcome() {
+	tput bold
+	echo
+	echo "~~ Welcome ~~" | print-centered
+	echo
+	tput sgr0
+	
+	if [[ -d ~/Scripts/nix ]]; then
+		# TODO: migrate this to Nix Flake then use the proper abs path.
+		_ART_WIDTH=80
+		_ART_HEIGHT=24
+		if (( COLUMNS > _ART_WIDTH )); then
+			cat ~/Scripts/nix/static/arts/needystreamer_2x1.txt | print-centered $_ART_WIDTH
+		fi
+	fi
+	
+	tput bold
+	echo
+	printf "${_color_pink}"
+	echo "<3" | print-centered
+	echo
+	tput sgr0
+}
+
+# print-centered
+# print-centered WIDTH
+print-centered() {
+	local width=${1:-0}
+	local widthl
+	local offset
+
+	while read -d $'\n' -r line; do
+		widthl=${width}
+		if (( widthl == 0 )); then
+			widthl=${#line}
+		fi
+		offset=$[ (COLUMNS - widthl) / 2 ]
+		for ((i = 0; i < offset; i++)); do
+			echo -n " "
+		done
+		echo "$line"
+	done
 }
 
 # Redraw the prompt on resize.
@@ -665,49 +700,6 @@ at() {
 	"${command[@]}"
 }
 
-# print-centered
-# print-centered WIDTH
-print-centered() {
-	local width=${1:-0}
-	local widthl
-	local offset
-
-	while read -d $'\n' -r line; do
-		widthl=${width}
-		if (( widthl == 0 )); then
-			widthl=${#line}
-		fi
-		offset=$[ (COLUMNS - widthl) / 2 ]
-		for ((i = 0; i < offset; i++)); do
-			echo -n " "
-		done
-		echo "$line"
-	done
-}
-
-__lineprompt_welcome() {
-	tput bold
-	echo
-	echo "~~ Welcome ~~" | print-centered
-	echo
-	tput sgr0
-	
-	if [[ -d ~/Scripts/nix ]]; then
-		# TODO: migrate this to Nix Flake then use the proper abs path.
-		_ART_WIDTH=80
-		_ART_HEIGHT=24
-		if (( COLUMNS > _ART_WIDTH )); then
-			cat ~/Scripts/nix/static/arts/needystreamer_2x1.txt | print-centered $_ART_WIDTH
-		fi
-	fi
-	
-	tput bold
-	echo
-	printf "${_color_pink}"
-	echo "<3" | print-centered
-	echo
-	tput sgr0
-}
 
 __lineprompt_init
 PROMPT_COMMAND=__lineprompt_main

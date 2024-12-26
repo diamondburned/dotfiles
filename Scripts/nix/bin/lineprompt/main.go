@@ -14,13 +14,13 @@ func main() {
 		text = os.Args[1]
 	}
 
-	var output = bufio.NewWriterSize(os.Stdout, 512)
+	output := bufio.NewWriterSize(os.Stdout, 512)
 	defer output.Flush()
 
 	columns := lineprompt.Columns()
 	opts := lineprompt.Opts{
 		// Lower means more details, must be higher than len(blends)
-		LOD: 35,
+		LOD:       35,
 		Underline: true,
 	}
 
@@ -32,28 +32,6 @@ func main() {
 		rgba(247, 148, 168, 1),
 	}, opts)
 }
-
-/*
-func parseColor(color string) (colorful.Color, error) {
-	switch {
-	case strings.HasPrefix(color, "#"):
-		return colorful.Hex(color)
-
-	case strings.HasPrefix(color, "rgb"):
-		var r, g, b float64
-		_, err := fmt.Sscanf(color, "rgb(%f, %f, %f)", &r, &g, &b)
-		return colorful.FastLinearRgb(r, g, b), err
-
-	case strings.HasPrefix(color, "rgba"):
-		var r, g, b, a float64
-		_, err := fmt.Sscanf(color, "rgba(%f, %f, %f, %f)", &r, &g, &b, &a)
-		return colorful.FastLinearRgb(r, g, b), err
-
-	default:
-		return colorful.Color{}, fmt.Errorf("unknown error %q", color)
-	}
-}
-*/
 
 func rgba(r, g, b, a uint8) colorful.Color {
 	return colorful.Color{
