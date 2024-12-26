@@ -65,7 +65,7 @@ in
 
     systemd.user.services = mapAttrs (name: schedule: {
       Unit = {
-        Description = description;
+        Description = schedule.description;
       };
       Service = {
         Type = "oneshot";

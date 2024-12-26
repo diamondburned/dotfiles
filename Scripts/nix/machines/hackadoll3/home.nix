@@ -285,7 +285,7 @@ in
 
       (runCommand "diamond-bin" { } ''
         mkdir -p $out/bin
-        cp -r ${self.lib.path.bin "*"} $out/bin
+        cp -r ${self.lib.path.bin ""}/* $out/bin
       '')
     ]);
 

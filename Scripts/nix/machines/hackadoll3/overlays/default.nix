@@ -1,9 +1,13 @@
 { inputs, ... }:
 
+let
+  inherit (inputs) nixgl;
+in
+
 {
   nixpkgs.overlays = [
     (self: super: {
-      nixGL = inputs.nixGL.packages.${super.system}.nixGLIntel;
+      nixGL = nixgl.packages.${super.system}.nixGLIntel;
       nixGLWrap =
         {
           pkg,

@@ -38,36 +38,35 @@ pkgs.stdenv.mkDerivation {
   pname = dissent.base.pname;
   inherit (dissent) version src;
 
-  buildInputs =
-    (dissent.base.buildInputs or (_: [ ])) pkgs
-    ++ (with pkgs; [
-      gtk4
-      glib
-      librsvg
-      gdk-pixbuf
-      gobject-introspection
-      hicolor-icon-theme
-      libspelling_2_1
-      gtksourceview5
-    ]);
-
-  nativeBuildInputs =
-    (dissent.base.nativeBuildInputs or (_: [ ])) pkgs
-    ++ (with pkgs; [
-      wrapGAppsHook
-      autoPatchelfHook
-    ]);
+  # buildInputs =
+  #   (dissent.base.buildInputs or (_: [ ])) pkgs
+  #   ++ (with pkgs; [
+  #     gtk4
+  #     glib
+  #     librsvg
+  #     gdk-pixbuf
+  #     gobject-introspection
+  #     hicolor-icon-theme
+  #     libspelling_2_1
+  #     gtksourceview5
+  #   ]);
+  #
+  # nativeBuildInputs =
+  #   (dissent.base.nativeBuildInputs or (_: [ ])) pkgs
+  #   ++ (with pkgs; [
+  #     wrapGAppsHook
+  #     autoPatchelfHook
+  #   ]);
 
   sourceRoot = ".";
 
   buildPhase = with dissent.base; ''
-    		install -Dm755 "$src/${pname}" "$out/bin/${pname}"
-    		mkdir -p \
-    			$out/share/dbus-1/services \
-    			$out/share/applications \
-    			$out/share/icons
-    		install -Dm644 ${src}/nix/so.libdb.dissent.service $out/share/dbus-1/services/so.libdb.dissent.service
-    		install -Dm644 ${files.desktop.path} $out/share/applications/${files.desktop.name}
-    		cp -r --no-preserve=mode,ownership ${files.icons.path}/* $out/share/icons/
-    	'';
+    mkdir -p \
+    	$out/share/dbus-1/services \
+    	$out/share/applications \
+    	$out/share/icons
+    install -Dm644 ${src}/nix/so.libdb.dissent.service $out/share/dbus-1/services/so.libdb.dissent.service
+    install -Dm644 ${files.desktop.path} $out/share/applications/${files.desktop.name}
+    cp -r --no-preserve=mode,ownership ${files.icons.path}/* $out/share/icons/
+  '';
 }
