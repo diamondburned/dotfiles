@@ -1,27 +1,23 @@
-{ pkgs, inputs, ... }:
+{
+  lib,
+  pkgs,
+  self,
+  inputs,
+  ...
+}:
 
 let
-  overlays = [
-    # packages
-    (
-      self: super:
-      import ./packages.nix {
-        inherit inputs;
-        pkgs = super;
-      }
-    )
+  inherit (inputs)
+    nixpkgs
+    home-manager
+    ;
 
-    # lib
-    (_: prev: {
-      lib = prev.lib.extend (
-        _: prevlib: {
-          x = import ./lib/x.nix {
-            pkgs = prev;
-            lib = prevlib;
-          };
-        }
-      );
-    })
+  overlays = [
+    self.overlays.overrides
+    self.overlays.packages
+
+    # lib already overridden by flake.nix's specialArgs.
+    (final: prev: { inherit lib; })
   ];
 in
 

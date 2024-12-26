@@ -94,6 +94,17 @@
           inputs = combinedInputs {
             pkgs = nixpkgs.legacyPackages.${system};
           };
+          lib = nixpkgs.lib.extend (
+            final: prev:
+            {
+              x = import ./overlays/lib/x.nix {
+                pkgs = nixpkgs.legacyPackages.${system};
+                lib = prev;
+              };
+            }
+            // self.lib
+            // home-manager.lib
+          );
         };
 
       mkDevShell =
@@ -139,6 +150,7 @@
 
       overlays = {
         overrides = import ./overlays/overrides.nix;
+
         packages =
           final: prev:
           import ./overlays/packages.nix {
