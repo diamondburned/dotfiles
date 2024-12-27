@@ -4,6 +4,7 @@ import (
 	"bytes"
 	"io"
 	"math"
+	"strconv"
 
 	_ "unsafe"
 
@@ -165,13 +166,6 @@ func rgbString(w Writer, intbuf []byte, r, g, b uint8) {
 	w.WriteByte('m')
 }
 
-// WHAT THE FUCK AAAAAAAAAAAAAAAAAAAAa
-
-//go:linkname formatBits strconv.formatBits
-//go:noescape
-func formatBits(dst []byte, u uint64, base int, neg, append_ bool) (d []byte, s string)
-
 func itoau8(dst []byte, n uint8) []byte {
-	d, _ := formatBits(dst, uint64(n), 10, false, true)
-	return d
+	return strconv.AppendUint(dst, uint64(n), 10)
 }

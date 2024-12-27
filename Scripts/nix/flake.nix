@@ -134,35 +134,35 @@
           ];
         };
 
+      mkPackages =
+        pkgs:
+        import ./packages/all-packages.nix {
+          pkgs = pkgs.appendOverlays [
+            inputs.gomod2nix.overlays.default
+            self.overlays.overrides
+          ];
+          inputs = combinedInputs {
+            inherit pkgs;
+          };
+        };
+
       packages = eachDefaultSystem (
         system:
-        self.overlays.packages null (
+        mkPackages (
           import nixpkgs {
             inherit system;
             config.allowUnfree = true;
-            overlays = [
-              inputs.gomod2nix.overlays.default
-              self.overlays.overrides
-            ];
           }
         )
       );
 
       overlays = {
         overrides = import ./overlays/overrides.nix;
-
-        packages =
-          final: prev:
-          import ./overlays/packages.nix {
-            pkgs = prev;
-            inputs = combinedInputs {
-              pkgs = prev;
-            };
-          };
+        packages = (final: prev: mkPackages prev);
       };
 
       nixosModules = (searchModules "default.nix") // {
-        overlays = import ./overlays;
+        packages = import ./packages;
       };
 
       homeModules = (searchModules "home.nix") // { };

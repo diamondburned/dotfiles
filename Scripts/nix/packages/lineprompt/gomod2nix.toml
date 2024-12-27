@@ -1,0 +1,12 @@
+schema = 3
+
+[mod]
+  [mod."github.com/DATA-DOG/go-sqlmock"]
+    version = "v1.3.3"
+    hash = "sha256-SCT9f0koRFJ4E9cL35NL2+D9EIQ71rlakq8GX7fwNPc="
+  [mod."github.com/lucasb-eyer/go-colorful"]
+    version = "v1.0.2"
+    hash = "sha256-gp4FDhcLvt5fKgmpd3QjWenUyT4iECkSDXMvgJABLzo="
+  [mod."golang.org/x/sys"]
+    version = "v0.0.0-20200602225109-6fdc65e7d980"
+    hash = "sha256-wxLoVUyuimYwJTql6GWYzmLzBuElHzv9qZwZKnNC724="

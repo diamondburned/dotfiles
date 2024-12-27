@@ -1,44 +1,15 @@
-{
-  lib,
-  pkgs,
-  self,
-  inputs,
-  ...
-}:
-
-let
-  inherit (inputs)
-    nixpkgs
-    home-manager
-    ;
-
-  overlays = [
-    self.overlays.packages
-  ];
-in
+{ ... }:
 
 {
   imports = [
-    ./packages/transmission-web/service.nix
-    ./packages/nixie/service.nix
-    ./packages/butterfly/service.nix
-    ./packages/caddy/caddy.nix
-    ./packages/xcaddy/xcaddy.nix
-    ./packages/caddyv1/caddy.nix
-    ./packages/ghproxy/ghproxy.nix
-    ./packages/drone-ci/drone-ci.nix
-    ./packages/realtek/realtek.nix
-  ];
-
-  nixpkgs = {
-    inherit overlays;
-  };
-
-  home-manager.sharedModules = [
-    {
-      nixpkgs = {
-        inherit overlays;
-      };
-    }
+    ./transmission-web/service.nix
+    ./nixie/service.nix
+    ./butterfly/service.nix
+    ./caddy/caddy.nix
+    ./xcaddy/xcaddy.nix
+    ./caddyv1/caddy.nix
+    ./ghproxy/ghproxy.nix
+    ./drone-ci/drone-ci.nix
+    ./realtek/realtek.nix
   ];
 }

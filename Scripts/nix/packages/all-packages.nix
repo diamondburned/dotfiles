@@ -7,7 +7,6 @@ let
   callPackage = pkgs.lib.callPackageWith (
     pkgs
     // {
-      _self = inputs.self;
       _inputs = inputs;
     }
   );
@@ -25,10 +24,9 @@ in
   gotab = callPackage ./gotab.nix { };
   inconsolata = callPackage ./inconsolata.nix { };
   intiface-cli = callPackage ./intiface-cli { };
+  lineprompt = callPackage ./lineprompt { };
   nix-search = callPackage ./nix-search.nix { };
   openmoji = callPackage ./openmoji { };
-  osu-wine = callPackage ./osu-wine { };
-  osu-wineprefix = callPackage ./osu-wineprefix { };
   oxfs = callPackage ./oxfs.nix { };
   passwordsafe = callPackage ./gnome-passwordsafe { };
   perf_data_converter = callPackage ./perf_data_converter.nix { };

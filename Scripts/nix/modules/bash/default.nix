@@ -23,5 +23,6 @@
 
   environment.systemPackages = with pkgs; [
     nix-output-monitor # for nixrl
+    lineprompt
   ];
 }

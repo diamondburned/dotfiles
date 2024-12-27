@@ -14,7 +14,31 @@ in
 {
   imports = [
     home-manager.nixosModules.home-manager
-    self.nixosModules.overlays
+    self.nixosModules.packages
+  ];
+
+  nixpkgs = {
+    overlays = [
+      self.overlays.overrides
+      self.overlays.packages
+    ];
+    config = {
+      allowUnfree = true;
+    };
+  };
+
+  home-manager.sharedModules = [
+    {
+      nixpkgs = {
+        overlays = [
+          self.overlays.overrides
+          self.overlays.packages
+        ];
+        config = {
+          allowUnfree = true;
+        };
+      };
+    }
   ];
 
   home-manager.extraSpecialArgs = {
@@ -40,10 +64,6 @@ in
   hardware = {
     enableAllFirmware = true;
     enableRedistributableFirmware = true;
-  };
-
-  nixpkgs.config = {
-    allowUnfree = true;
   };
 
   nix.settings = {
