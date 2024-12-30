@@ -110,8 +110,8 @@ au BufNew * call HighlightLong()
 hi Comment cterm=none
 
 "Auto-commands for type-specific files"
-autocmd BufRead,BufNewFile *.nix    setlocal noautoindent
-autocmd BufRead,BufNewFile *.nix    setlocal noexpandtab
+autocmd BufRead,BufNewFile *.nix    setlocal autoindent
+autocmd BufRead,BufNewFile *.nix    setlocal expandtab
 autocmd BufRead,BufNewFile *.nix    setlocal shiftwidth=2
 autocmd BufRead,BufNewFile *.nix    setlocal tabstop=2
 autocmd BufRead,BufNewFile *.nix    setlocal textwidth=100
