@@ -34,6 +34,7 @@ in
       (flathub "app.drey.Biblioteca")
       (flathub "com.github.tchx84.Flatseal")
       (flathub "so.libdb.dissent")
+			(flathub "com.yubico.yubioath")
       (flathubBeta "org.gimp.GIMP")
     ];
     update.auto = {
