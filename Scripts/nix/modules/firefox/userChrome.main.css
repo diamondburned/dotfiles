@@ -48,6 +48,8 @@ body > box {
 	/* Transitions don't work for some reason. */
     min-width: var(--thin-tab-width) !important;
     max-width: var(--thin-tab-width) !important;
+	/* Fix for later Firefox clipping the sidebar. */
+	z-index: 100;
 }
 #sidebar-box:hover {
     min-width: var(--wide-tab-width) !important;
