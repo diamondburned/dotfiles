@@ -73,6 +73,10 @@ in
         pkgs.writeText "Caddyfile" ''
           {
             auto_https off
+
+            tailscale {
+                
+            }
           }
         ''
       );

@@ -108,9 +108,8 @@ au BufNew * call HighlightLong()
 hi Comment cterm=none
 
 "Auto-commands for type-specific files"
-autocmd BufRead,BufNewFile *.md     set spell
-autocmd BufRead,BufNewFile *.md     set wrap
-autocmd BufRead,BufNewFile *.md     set textwidth=0
+autocmd BufRead,BufNewFile *.nix set autoindent expandtab shiftwidth=2 tabstop=2 textwidth=80
+autocmd BufRead,BufNewFile *.md  set spell wrap textwidth=0
 "For some reason, tree-sitter's highlight for Markdown is flipped?"
 autocmd BufRead,BufNewFile *.md     TSBufDisable highlight
 autocmd BufRead,BufNewFile *.txt    setlocal spell
