@@ -73,8 +73,6 @@ Plug 'zbirenbaum/copilot-cmp'
 "Languages"
 Plug 'makerj/vim-pdf'
 Plug 'cespare/vim-toml'
-Plug 'LnL7/vim-nix'
-Plug 'symphorien/vim-nixhash'
 " Plug 'evanleck/vim-svelte'
 Plug 'mattn/vim-gotmpl'
 Plug 'sago35/tinygo.vim'
@@ -110,11 +108,6 @@ au BufNew * call HighlightLong()
 hi Comment cterm=none
 
 "Auto-commands for type-specific files"
-autocmd BufRead,BufNewFile *.nix    set autoindent
-autocmd BufRead,BufNewFile *.nix    set expandtab
-autocmd BufRead,BufNewFile *.nix    set shiftwidth=2
-autocmd BufRead,BufNewFile *.nix    set tabstop=2
-autocmd BufRead,BufNewFile *.nix    set textwidth=80
 autocmd BufRead,BufNewFile *.md     set spell
 autocmd BufRead,BufNewFile *.md     set wrap
 autocmd BufRead,BufNewFile *.md     set textwidth=0
