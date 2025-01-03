@@ -12,6 +12,7 @@
     ./hardware/asus-tuf.nix
     ./hardware/tertiary.nix
     ./hardware/graphics.nix
+    ./hardware/scarlett.nix
     ./hardware/disks.nix
   ];
 
