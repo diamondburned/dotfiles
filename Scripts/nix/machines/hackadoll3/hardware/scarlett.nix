@@ -6,6 +6,9 @@
   ...
 }:
 
+with builtins;
+with lib;
+
 let
   allowedSampleRates = [
     44100
@@ -39,8 +42,6 @@ in
         "stream.properties" = {
           "node.latency" = "512/48000"; # default
           "resample.quality" = 10;
-          # "audio.format" = "S24_LE";
-          # "audio.allowed-rates" = allowedSampleRates;
         };
       };
     };
@@ -54,7 +55,7 @@ in
           apply_properties = {
             ["audio.format"] = "S24LE",
             ["audio.rate"] = 48000,
-            ["audio.allowed-rates"] = { 44100, 48000, 88200, 96000, 176400, 192000 },
+            ["audio.allowed-rates"] = { ${concatStringsSep ", " (map toString allowedSampleRates)} },
             ["api.alsa.period-num"] = 2,
             ["api.alsa.period-size"] = 2,
           },
