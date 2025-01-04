@@ -18,7 +18,7 @@ let
     CGO_ENABLED = "0";
 
     # Disable VSync.
-    vblank_mode = "0";
+    # vblank_mode = "0";
 
     # Enforce Wayland.
     NIXOS_OZONE_WL = "1";
