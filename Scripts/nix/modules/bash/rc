@@ -15,8 +15,8 @@ shopt -s extglob
 shopt -s globstar
 shopt -s checkjobs
 
-# This is annoying to get used to.
 bleopt complete_auto_complete=
+bleopt prompt_command_changes_layout=1
 
 xset r rate 200 50 &> /dev/null
 gsettings set org.gnome.desktop.peripherals.keyboard repeat-interval 25
@@ -365,166 +365,166 @@ xterm() {
 #PROMPT_COMMAND=$'checkcalc'
 
 
-#PS1='\n\[\033[00;36m\]${HOSTNAME} \[\033[01;32m\]\w/\[\033[00;32m\]$(__git_ps1) \[\033[0m\]'
-# PS1="\n\\$ \[\033[m\]\[\033[38;5;32m\]\h\[\033[m\]\[\033[38;5;15m\] @ \[\033[m\]\[\033[38;5;2m\]\w\[\033[m\]\[\033[38;5;15m\] :\[\033[m\]\[\033[38;5;22m\]\$(__git_ps1)\n \[\033[m\]\[\033[38;5;241m\] >\[\033[m\] "
+# PS1='\n\[\033[00;36m\]${HOSTNAME} \[\033[01;32m\]\w/\[\033[00;32m\]$(__git_ps1) \[\033[0m\]'
+PS1="\n\\$ \[\033[m\]\[\033[38;5;32m\]\h\[\033[m\]\[\033[38;5;15m\] @ \[\033[m\]\[\033[38;5;2m\]\w\[\033[m\]\[\033[38;5;15m\] :\[\033[m\]\[\033[38;5;22m\]\$(__git_ps1)\n \[\033[m\]\[\033[38;5;241m\] >\[\033[m\] "
 
-set-title() {
-	local title="$1"
-	if [[ ! $title ]]; then
-		title="$(basename "$PWD")/"
-	fi
-	__lineprompt_custom_title="$title"
-	__lineprompt_set_title
-}
-alias set_title=set-title
-
-__lineprompt_set_title() {
-	local p
-	p="${__lineprompt_custom_title:-$1}"
-	# Sanitize the title by stripping control characters.
-	p="${p//[^[:print:]]/}"
-	p="${p//\\/\\\\}"
-	echo -ne "\033]0;$p\007"
-	# echo -ne "\033]0;${1//[^[:print:]]/}\007"
-}
-
-__lineprompt_middleware() {
-	if [[ "$cmd" != __* && ! $__lineprompt_busy ]]; then
-		__lineprompt_set_title "$THIS_COMMAND : $(basename "$PWD")"
-	fi
-}
-
-__lineprompt_debug_handler() {
-	# Create a 2-level-deep command history using variables.
-	PREVIOUS_COMMAND="$THIS_COMMAND"
-	THIS_COMMAND="$1"
-	# Run the middleware.
-	__lineprompt_middleware
-}
-
-__lineprompt_init() {
-	_color_cyan="\033[38;2;85;205;252m"
-	_color_pink="\033[38;2;247;157;208m"
-	printf -v _foot_prompt_marker '\e]133;A\e\\'
-
-	# _arrow="\[\033[9m\]\[$_color_cyan\] ❤ \[\033[0m\]\[$_color_pink\]▶\[\033[m\] "
-	_arrow="\[${_color_cyan}\]―❤―\[\033[0m\]\[${_color_pink}\]▶\[\033[m\] "
-	trap '__lineprompt_debug_handler "$BASH_COMMAND"' DEBUG
-
-	# Disabled because glitchy.
-	# Redraw on resize.
-	# trap 'echo -e "\033[2J\033[H"; __lineprompt_redraw; echo -en "${PS1@P}"' WINCH
-
-	__lineprompt_welcome
-}
-
-__lineprompt_main() {
-	__lineprompt_busy=1
-
-	# local commands
-	local sig=$?
-	local cmd="$PREVIOUS_COMMAND"
-
-	# add to history right away
-	history -n
-	history -a
-
-	# # exit status 0
-	# (( sig > 0 )) && echo "exit status $sig"
-
-	# Redraw the prompt
-	__lineprompt_redraw
-
-	# OSC 7 current directory for foot
-	# osc7_cwd
-
-	# Quick cd
-	# [[ -d "$1" ]] && cd "$1"
-
-	# terminal title
-	if [[ $sig == 0 ]]; then
-		__lineprompt_set_title "$(basename "$PWD")/"
-	else
-		__lineprompt_set_title "exit $sig : $(basename "$PWD")/"
-	fi
-
-	__lineprompt_busy=
-}
-
-__lineprompt_redraw() {
-	# git branch
-	local git_branch
-	git_branch=" : ($(__git_ps1))" || git_branch=
-
-	# Count number of jobs.
-	local j=( $(jobs -p) )
-	local jn=${#j[@]}
-	if (( jn > 0 )); then
-		JOBS=" (${jn} jobs)"
-	else
-		JOBS=
-	fi
-
-	# Calculate direnv status.
-	[[ "$DIRENV_DIR" ]] && direnv_status="+ direnv" || direnv_status=
-
-	# rainbow prompt
-	__lineprompt_cmps COLUMNS PWD SHLVL JOBS git_branch direnv_status || {
-		__shlvl="$[ (SHLVL + 1) / 2 ]" # account for nix-shell --run bash
-		_prompt="$(lineprompt "$ $HOSTNAME ~ ${__shlvl}$JOBS @ ${PWD}$git_branch $direnv_status")"
-	}
-
-	# set PS1
-	printf -v PS1 "\n%s\n%s" "${_foot_prompt_marker}${_prompt}" "${_arrow}"
-}
-
-# Bash multiple compare. $@ var name, returns 1 if var is changed
-# fn COLUMNS PWD ... -> [0|1]
-__lineprompt_cmps() {
-	local sig=0
-
-	for var in "$@"; {
-		local oldvar
-		oldvar="__old_${var}"
-
-		# If this variable is unchanged.
-		if [[ "${!var}" == "${!oldvar}" ]]; then
-			continue
-		fi
-	
-		# Update the variable if they're changed.
-		printf -v "$oldvar" "%s" "${!var}"
-
-		# Set the return signal to 1.
-		sig=1
-	}
-
-	return $sig
-}
-
-__lineprompt_welcome() {
-	tput bold
-	echo
-	echo "~~ Welcome ~~" | print-centered
-	echo
-	tput sgr0
-	
-	if [[ -d ~/Scripts/nix ]]; then
-		# TODO: migrate this to Nix Flake then use the proper abs path.
-		_ART_WIDTH=80
-		_ART_HEIGHT=24
-		if (( COLUMNS > _ART_WIDTH )); then
-			cat ~/Scripts/nix/static/arts/needystreamer_2x1.txt | print-centered $_ART_WIDTH
-		fi
-	fi
-	
-	tput bold
-	echo
-	printf "${_color_pink}"
-	echo "<3" | print-centered
-	echo
-	tput sgr0
-}
+# set-title() {
+# 	local title="$1"
+# 	if [[ ! $title ]]; then
+# 		title="$(basename "$PWD")/"
+# 	fi
+# 	__lineprompt_custom_title="$title"
+# 	__lineprompt_set_title
+# }
+# alias set_title=set-title
+#
+# __lineprompt_set_title() {
+# 	local p
+# 	p="${__lineprompt_custom_title:-$1}"
+# 	# Sanitize the title by stripping control characters.
+# 	p="${p//[^[:print:]]/}"
+# 	p="${p//\\/\\\\}"
+# 	echo -ne "\033]0;$p\007"
+# 	# echo -ne "\033]0;${1//[^[:print:]]/}\007"
+# }
+#
+# __lineprompt_middleware() {
+# 	if [[ "$cmd" != __* && ! $__lineprompt_busy ]]; then
+# 		__lineprompt_set_title "$THIS_COMMAND : $(basename "$PWD")"
+# 	fi
+# }
+#
+# __lineprompt_debug_handler() {
+# 	# Create a 2-level-deep command history using variables.
+# 	PREVIOUS_COMMAND="$THIS_COMMAND"
+# 	THIS_COMMAND="$1"
+# 	# Run the middleware.
+# 	__lineprompt_middleware
+# }
+#
+# __lineprompt_init() {
+# 	_color_cyan="\033[38;2;85;205;252m"
+# 	_color_pink="\033[38;2;247;157;208m"
+# 	printf -v _foot_prompt_marker '\e]133;A\e\\'
+#
+# 	# _arrow="\[\033[9m\]\[$_color_cyan\] ❤ \[\033[0m\]\[$_color_pink\]▶\[\033[m\] "
+# 	_arrow="\[${_color_cyan}\]―❤―\[\033[0m\]\[${_color_pink}\]▶\[\033[m\] "
+# 	trap '__lineprompt_debug_handler "$BASH_COMMAND"' DEBUG
+#
+# 	# Disabled because glitchy.
+# 	# Redraw on resize.
+# 	# trap 'echo -e "\033[2J\033[H"; __lineprompt_redraw; echo -en "${PS1@P}"' WINCH
+#
+# 	__lineprompt_welcome
+# }
+#
+# __lineprompt_main() {
+# 	__lineprompt_busy=1
+#
+# 	# local commands
+# 	local sig=$?
+# 	local cmd="$PREVIOUS_COMMAND"
+#
+# 	# add to history right away
+# 	history -n
+# 	history -a
+#
+# 	# # exit status 0
+# 	# (( sig > 0 )) && echo "exit status $sig"
+#
+# 	# Redraw the prompt
+# 	__lineprompt_redraw
+#
+# 	# OSC 7 current directory for foot
+# 	# osc7_cwd
+#
+# 	# Quick cd
+# 	# [[ -d "$1" ]] && cd "$1"
+#
+# 	# terminal title
+# 	if [[ $sig == 0 ]]; then
+# 		__lineprompt_set_title "$(basename "$PWD")/"
+# 	else
+# 		__lineprompt_set_title "exit $sig : $(basename "$PWD")/"
+# 	fi
+#
+# 	__lineprompt_busy=
+# }
+#
+# __lineprompt_redraw() {
+# 	# git branch
+# 	local git_branch
+# 	git_branch=" : ($(__git_ps1))" || git_branch=
+#
+# 	# Count number of jobs.
+# 	local j=( $(jobs -p) )
+# 	local jn=${#j[@]}
+# 	if (( jn > 0 )); then
+# 		JOBS=" (${jn} jobs)"
+# 	else
+# 		JOBS=
+# 	fi
+#
+# 	# Calculate direnv status.
+# 	[[ "$DIRENV_DIR" ]] && direnv_status="+ direnv" || direnv_status=
+#
+# 	# rainbow prompt
+# 	__lineprompt_cmps COLUMNS PWD SHLVL JOBS git_branch direnv_status || {
+# 		__shlvl="$[ (SHLVL + 1) / 2 ]" # account for nix-shell --run bash
+# 		_prompt="$(lineprompt "$ $HOSTNAME ~ ${__shlvl}$JOBS @ ${PWD}$git_branch $direnv_status")"
+# 	}
+#
+# 	# set PS1
+# 	printf -v PS1 "\n%s\n%s" "${_foot_prompt_marker}${_prompt}" "${_arrow}"
+# }
+#
+# # Bash multiple compare. $@ var name, returns 1 if var is changed
+# # fn COLUMNS PWD ... -> [0|1]
+# __lineprompt_cmps() {
+# 	local sig=0
+#
+# 	for var in "$@"; {
+# 		local oldvar
+# 		oldvar="__old_${var}"
+#
+# 		# If this variable is unchanged.
+# 		if [[ "${!var}" == "${!oldvar}" ]]; then
+# 			continue
+# 		fi
+# 	
+# 		# Update the variable if they're changed.
+# 		printf -v "$oldvar" "%s" "${!var}"
+#
+# 		# Set the return signal to 1.
+# 		sig=1
+# 	}
+#
+# 	return $sig
+# }
+#
+# __lineprompt_welcome() {
+# 	tput bold
+# 	echo
+# 	echo "~~ Welcome ~~" | print-centered
+# 	echo
+# 	tput sgr0
+# 	
+# 	if [[ -d ~/Scripts/nix ]]; then
+# 		# TODO: migrate this to Nix Flake then use the proper abs path.
+# 		_ART_WIDTH=80
+# 		_ART_HEIGHT=24
+# 		if (( COLUMNS > _ART_WIDTH )); then
+# 			cat ~/Scripts/nix/static/arts/needystreamer_2x1.txt | print-centered $_ART_WIDTH
+# 		fi
+# 	fi
+# 	
+# 	tput bold
+# 	echo
+# 	printf "${_color_pink}"
+# 	echo "<3" | print-centered
+# 	echo
+# 	tput sgr0
+# }
 
 # print-centered
 # print-centered WIDTH
@@ -704,5 +704,5 @@ at() {
 }
 
 
-__lineprompt_init
-PROMPT_COMMAND=__lineprompt_main
+# __lineprompt_init
+# PROMPT_COMMAND=__lineprompt_main
