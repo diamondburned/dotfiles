@@ -282,13 +282,13 @@ alias ga="git add -A"
 alias gp="git push origin"
 
 gm() {
-	[[ $1 ]] && {
+	if [[ "$#" != 0 ]]; then
+		local _msg
 		printf -v _msg "%s\n\n" "$@"
 		git commit -m "$_msg"
-	} || {
+	else
 		git commit
-	}
-
+	fi
 }
 
 ghpr() {
