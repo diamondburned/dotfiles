@@ -15,6 +15,9 @@ shopt -s extglob
 shopt -s globstar
 shopt -s checkjobs
 
+# This is annoying to get used to.
+bleopt complete_auto_complete=
+
 xset r rate 200 50 &> /dev/null
 gsettings set org.gnome.desktop.peripherals.keyboard repeat-interval 25
 gsettings set org.gnome.desktop.peripherals.keyboard delay 200
