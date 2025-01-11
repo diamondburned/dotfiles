@@ -15,9 +15,6 @@ shopt -s extglob
 shopt -s globstar
 shopt -s checkjobs
 
-bleopt complete_auto_complete=
-bleopt prompt_command_changes_layout=1
-
 xset r rate 200 50 &> /dev/null
 gsettings set org.gnome.desktop.peripherals.keyboard repeat-interval 25
 gsettings set org.gnome.desktop.peripherals.keyboard delay 200
@@ -107,39 +104,6 @@ function grepr() {
 #fi
 #unset PID
 
-# traverse traverses the parent directory to find the given file.
-__traverse() {
-	local basename="$1" path pieces
-
-	IFS="/" read -ra pieces <<< "${PWD:1}"
-
-	for ((i = ${#pieces[@]}; i >= 0; i--)); {
-		printf -v path "%s/" "" "${pieces[@]:0:$i}"
-		path+="$basename"
-
-		[[ -e "$path" ]] && {
-			echo -n "$path"
-			return
-		}
-	}
-
-	return 1
-}
-
-# git_ps1 returns the name of the current branch, or empty string and sig 1 if
-# none.
-__git_ps1() {
-	local IFS=' '
-	local path head
-
-	path="$(__traverse .git)" || return 1
-
-	read -r prefix head < "$path/HEAD"
-
-	[[ "$head" == "" ]]        \
-		&& echo -n "${prefix}" \
-		|| echo -n "${head/refs\/heads\//}"
-}
 
 ## NIX SHIT
 
@@ -366,7 +330,7 @@ xterm() {
 
 
 # PS1='\n\[\033[00;36m\]${HOSTNAME} \[\033[01;32m\]\w/\[\033[00;32m\]$(__git_ps1) \[\033[0m\]'
-PS1="\n\\$ \[\033[m\]\[\033[38;5;32m\]\h\[\033[m\]\[\033[38;5;15m\] @ \[\033[m\]\[\033[38;5;2m\]\w\[\033[m\]\[\033[38;5;15m\] :\[\033[m\]\[\033[38;5;22m\]\$(__git_ps1)\n \[\033[m\]\[\033[38;5;241m\] >\[\033[m\] "
+# PS1="\n\\$ \[\033[m\]\[\033[38;5;32m\]\h\[\033[m\]\[\033[38;5;15m\] @ \[\033[m\]\[\033[38;5;2m\]\w\[\033[m\]\[\033[38;5;15m\] :\[\033[m\]\[\033[38;5;22m\]\$(__git_ps1)\n \[\033[m\]\[\033[38;5;241m\] >\[\033[m\] "
 
 # set-title() {
 # 	local title="$1"

@@ -2,7 +2,11 @@
 
 {
   programs.bash = {
-    interactiveShellInit = builtins.readFile ./rc;
+    interactiveShellInit = ''
+      ${builtins.readFile ./rc.d/git}
+      ${builtins.readFile ./rc.d/blesh}
+      ${builtins.readFile ./rc}
+    '';
   };
 
   programs.bash.blesh = {

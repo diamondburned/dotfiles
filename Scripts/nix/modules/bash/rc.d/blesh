@@ -1,0 +1,24 @@
+#!/usr/bin/env bash
+
+bleopt canvas_winch_action=redraw-here
+bleopt complete_auto_complete=
+bleopt prompt_command_changes_layout=1
+
+function ble/prompt/backslash:git_branch() {
+	ble/prompt/unit/add-hash '$PWD'
+	ble/prompt/print "$(git/branch_name)"
+}
+
+function ble/prompt/backslash:njobs() {
+	local j=( $(jobs -p) )
+	ble/prompt/print "${#j[@]}"
+	# if (( jn > 1 )); then
+	# 	ble/prompt/print "${jn} jobs"
+	# elif (( jn == 1 )); then
+	# 	ble/prompt/print "1 job"
+	# fi
+}
+
+PS1=
+bleopt prompt_ps1_transient='$ \h '
+bleopt prompt_rps1_transient='(job:\q{njobs}) (git:\q{git_branch}) (\q{keymap:vi/mode-indicator})'

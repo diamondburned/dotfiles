@@ -1,0 +1,33 @@
+#!/usr/bin/env bash
+
+# traverse traverses the parent directory to find the given file.
+__git_traverse() {
+	local basename="$1" path pieces
+
+	IFS="/" read -ra pieces <<< "${PWD:1}"
+
+	for ((i = ${#pieces[@]}; i >= 0; i--)); {
+		printf -v path "%s/" "" "${pieces[@]:0:$i}"
+		path+="$basename"
+
+		[[ -e "$path" ]] && {
+			echo -n "$path"
+			return
+		}
+	}
+
+	return 1
+}
+
+git/branch_name() {
+	local IFS=' '
+	local path head
+
+	path="$(__git_traverse .git)" || return 1
+
+	read -r prefix head < "$path/HEAD"
+
+	[[ "$head" == "" ]]        \
+		&& echo -n "${prefix}" \
+		|| echo -n "${head/refs\/heads\//}"
+}
