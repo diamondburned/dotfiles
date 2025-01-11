@@ -1,8 +1,28 @@
 #!/usr/bin/env bash
 
+# vim mode (\q{keymap:vi/mode-indicator})
+# set -o vi
+# bleopt prompt_vi_mode_indicator=
+# ble-bind -m vi_nmap -f 'C-c' 'vi-command/cancel'
+# ble-bind -m vi_xmap -f 'C-c' 'vi-command/operator y'
+# ble-bind -m vi_imap -f 'C-v' 'vi_nmap/paste-after'
+
+# bleopt edit_bell=abell,vbell,visual
+bleopt edit_abell=1
+bleopt edit_vbell=1
+
+bleopt vbell_default_message='arf, arf!'
+bleopt vbell_duration=2000
+bleopt vbell_align=right
+
+ble-face vbell_flash='reverse,fg=green'
+
+# bleopt color_scheme=base16
 bleopt canvas_winch_action=redraw-here
 bleopt complete_auto_complete=
 bleopt prompt_command_changes_layout=1
+bleopt history_share=1
+bleopt info_display=bottom
 
 ble/prompt/backslash:r_git() {
 	ble/prompt/unit/add-hash '$PWD'
@@ -42,9 +62,10 @@ ble/prompt/backslash:lineprompt_empty() {
 	ble/prompt/print "$(lineprompt)"
 }
 
-PS1='\q{lineprompt_empty}\n> \q{fullpath}\n\q{userhash} '
-bleopt prompt_ps1_transient=trim
-bleopt prompt_status_line='\h\r\q{r_job}\q{r_git}\t\q{position %d,%d}'
+PS1='\g{bold,fg=14}> \g{fg=14}\q{fullpath}\n\g{bold,fg=5}\q{userhash}\g{none} '
+bleopt prompt_status_line='\h\r\q{r_job}\q{r_git} \q{position %d,%d}'
 bleopt prompt_status_align=$'justify=\r'
+bleopt prompt_ps1_transient=trim
+bleopt prompt_ruler=$'\e[36m▁\e[0m'
 
 ble-face prompt_status_line='fg=37'
