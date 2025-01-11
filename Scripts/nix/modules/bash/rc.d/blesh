@@ -18,7 +18,6 @@ bleopt vbell_align=right
 ble-face vbell_flash='reverse,fg=green'
 
 # bleopt color_scheme=base16
-bleopt canvas_winch_action=redraw-here
 bleopt complete_auto_complete=
 bleopt prompt_command_changes_layout=1
 bleopt history_share=1
@@ -26,20 +25,34 @@ bleopt info_display=bottom
 
 ble/prompt/backslash:r_git() {
 	ble/prompt/unit/add-hash '$PWD'
+	
+	local branch remote
+
 	if git rev-parse --is-inside-work-tree &> /dev/null; then
 		branch=$(git rev-parse --abbrev-ref HEAD)
 
-		remote=$(git remote get-url origin &>/dev/null)
+		remote=$(git remote get-url origin)
 		remote=${remote#*:}
-		remote=${remote%%*.git}
+		remote=${remote%*.git}
 
-		ble/prompt/print " (git:$branch${remote:+/$remote})"
+		ble/prompt/print "   ${remote}/${branch}"
 	fi
 }
 
 ble/prompt/backslash:r_job() {
 	ble/prompt/unit/add-hash '$PWD'
-	ble/prompt/process-prompt-string " (job:\j)"
+
+	local _jobs=( $(jobs -p) )
+	if (( ${#_jobs[@]} )); then
+		ble/prompt/print "    ${#_jobs[@]}"
+	fi
+}
+
+ble/prompt/backslash:r_shlvl() {
+	ble/prompt/unit/add-hash '$SHLVL'
+	if ((SHLVL > 1)); then
+		ble/prompt/print "   $SHLVL"
+	fi
 }
 
 ble/prompt/backslash:fullpath() {
@@ -62,10 +75,12 @@ ble/prompt/backslash:lineprompt_empty() {
 	ble/prompt/print "$(lineprompt)"
 }
 
-PS1='\g{bold,fg=14}> \g{fg=14}\q{fullpath}\n\g{bold,fg=5}\q{userhash}\g{none} '
-bleopt prompt_status_line='\h\r\q{r_job}\q{r_git} \q{position %d,%d}'
+PS1='\g{bold,fg=14}╭╴\g{bold,fg=13}󰟀 \g{fg=13}\q{fullpath}\n\g{bold,fg=14}╰╴\g{none}'
+bleopt prompt_rps1='\g{bold,fg=14}╶╮'
+bleopt prompt_status_line='\r\q{r_shlvl}\q{r_job}\q{r_git}'
 bleopt prompt_status_align=$'justify=\r'
 bleopt prompt_ps1_transient=trim
-bleopt prompt_ruler=$'\e[36m▁\e[0m'
+bleopt prompt_rps1_transient=1
+bleopt prompt_ruler=$'\e[37m╴\e[0m'
 
-ble-face prompt_status_line='fg=37'
+ble-face prompt_status_line='fg=5'
