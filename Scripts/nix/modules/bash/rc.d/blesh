@@ -11,8 +11,8 @@
 bleopt edit_abell=1
 bleopt edit_vbell=1
 
-bleopt vbell_default_message='arf, arf!'
-bleopt vbell_duration=2000
+bleopt vbell_default_message=' ~ arf, arf! 🐾🐕 '
+bleopt vbell_duration=1000
 bleopt vbell_align=right
 
 ble-face vbell_flash='reverse,fg=green'
