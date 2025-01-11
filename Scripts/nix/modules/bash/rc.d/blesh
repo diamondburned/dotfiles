@@ -4,21 +4,47 @@ bleopt canvas_winch_action=redraw-here
 bleopt complete_auto_complete=
 bleopt prompt_command_changes_layout=1
 
-function ble/prompt/backslash:git_branch() {
+ble/prompt/backslash:r_git() {
 	ble/prompt/unit/add-hash '$PWD'
-	ble/prompt/print "$(git/branch_name)"
+	if git rev-parse --is-inside-work-tree &> /dev/null; then
+		branch=$(git rev-parse --abbrev-ref HEAD)
+
+		remote=$(git remote get-url origin &>/dev/null)
+		remote=${remote#*:}
+		remote=${remote%%*.git}
+
+		ble/prompt/print " (git:$branch${remote:+/$remote})"
+	fi
 }
 
-function ble/prompt/backslash:njobs() {
-	local j=( $(jobs -p) )
-	ble/prompt/print "${#j[@]}"
-	# if (( jn > 1 )); then
-	# 	ble/prompt/print "${jn} jobs"
-	# elif (( jn == 1 )); then
-	# 	ble/prompt/print "1 job"
-	# fi
+ble/prompt/backslash:r_job() {
+	ble/prompt/unit/add-hash '$PWD'
+	ble/prompt/process-prompt-string " (job:\j)"
 }
 
-PS1=
-bleopt prompt_ps1_transient='$ \h '
-bleopt prompt_rps1_transient='(job:\q{njobs}) (git:\q{git_branch}) (\q{keymap:vi/mode-indicator})'
+ble/prompt/backslash:fullpath() {
+	ble/prompt/unit/add-hash '$PWD'
+	ble/prompt/print "$PWD"
+}
+
+ble/prompt/backslash:userhash() {
+	ble/prompt/unit/add-hash '$USER'
+
+	case "$USER" in
+	diamond) ble/prompt/print '$' ;;
+	root)    ble/prompt/print '#' ;;
+	*)       ble/prompt/print '?' ;;
+	esac
+}
+
+ble/prompt/backslash:lineprompt_empty() {
+	ble/prompt/unit/add-hash '$WIDTH'
+	ble/prompt/print "$(lineprompt)"
+}
+
+PS1='\q{lineprompt_empty}\n> \q{fullpath}\n\q{userhash} '
+bleopt prompt_ps1_transient=trim
+bleopt prompt_status_line='\h\r\q{r_job}\q{r_git}\t\q{position %d,%d}'
+bleopt prompt_status_align=$'justify=\r'
+
+ble-face prompt_status_line='fg=37'

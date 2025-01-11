@@ -1,7 +1,10 @@
-{ pkgs, ... }:
+{ pkgs, lib, ... }:
 
 {
   programs.bash = {
+    # Use our own prompt from blesh.
+    promptInit = lib.mkForce "";
+    # Load our own rc.d scripts.
     interactiveShellInit = ''
       ${builtins.readFile ./rc.d/git}
       ${builtins.readFile ./rc.d/blesh}
