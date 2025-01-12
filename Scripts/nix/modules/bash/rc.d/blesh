@@ -44,7 +44,7 @@ ble/prompt/backslash:r_job() {
 
 	local _jobs=( $(jobs -p) )
 	if (( ${#_jobs[@]} )); then
-		ble/prompt/print "    ${#_jobs[@]}"
+		ble/prompt/process-prompt-string "    \j"
 	fi
 }
 
