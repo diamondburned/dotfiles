@@ -1,0 +1,44 @@
+#!/usr/bin/env bash
+
+CLASS_ORIGINAL=7c0104
+CLASS_TARGET=240404
+HCI_DEVICE=hci0
+
+set -eo pipefail
+
+main() {
+	if ! command -v hciconfig &> /dev/null; then
+		log "Error: missing hcitool, exiting"
+		return 1
+	fi
+
+	case "$1" in
+	"enable"|"on")
+		sudo hciconfig $HCI_DEVICE class $CLASS_TARGET
+		log "pair hack enabled"
+		;;
+	"disable"|"off")
+		sudo hciconfig $HCI_DEVICE class $CLASS_ORIGINAL
+		log "pair hack disabled"
+		;;
+	"")
+		config=$(hciconfig $HCI_DEVICE class)
+		if grep -q $CLASS_ORIGINAL <<< "$config"; then
+			echo "pair hack is enabled"
+		else
+			echo "pair hack is disabled"
+		fi
+		;;
+	*)
+		log "Usage: $0 [enable|disable]"
+		log "Error: invalid argument, exiting"
+		return 1
+		;;
+	esac
+}
+
+log() {
+	echo "$@" >&2
+}
+
+main "$@"
