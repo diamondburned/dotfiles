@@ -92,6 +92,9 @@
   # Allow aarch64 emulation.
   boot.binfmt.emulatedSystems = [ "aarch64-linux" ];
 
+  # Use latest kernel.
+  boot.kernelPackages = pkgs.linuxPackages_latest;
+
   # Group to change SSH keys to.
   users.groups.ssh-trusted.members = [
     "diamond"

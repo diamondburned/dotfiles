@@ -246,7 +246,6 @@ in
       onlyoffice-bin
       evince
       aspell
-      marker
       graphviz
       # foliate
 
