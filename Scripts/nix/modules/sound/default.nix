@@ -17,7 +17,7 @@
 
 	home-manager.sharedModules = [
 		{
-			services.easyeffects.enable = true;
+			# services.easyeffects.enable = true;
 
 			home.packages = with pkgs; [
 				helvum
