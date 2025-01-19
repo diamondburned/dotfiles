@@ -29,13 +29,13 @@ ble/prompt/backslash:r_git() {
 	local branch remote
 
 	if git rev-parse --is-inside-work-tree &> /dev/null; then
-		branch=$(git rev-parse --abbrev-ref HEAD)
+		branch=$(git rev-parse --abbrev-ref HEAD 2> /dev/null)
 
-		remote=$(git remote get-url origin)
+		remote=$(git remote get-url origin 2> /dev/null)
 		remote=${remote#*:}
 		remote=${remote%*.git}
 
-		ble/prompt/print "   ${remote}/${branch}"
+		ble/prompt/print "   ${remote:+$remote/}${branch}"
 	fi
 }
 
