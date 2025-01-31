@@ -64,21 +64,7 @@ in
     '')
   ];
 
-  # services.pipewire.wireplumber.extraConfig = {
-  #   "99-scarlett" = {
-  #     "monitor.alsa.rules" = [
-  #       {
-  #         matches = [
-  #           {
-  #             "node.name" = "alsa_output.usb-Focusrite_Scarlett_4i4_4th_Gen_S4JQAWG4884F75-00.*";
-  #           }
-  #         ];
-  #         actions.update-props = {
-  #           "audio.format" = "S24LE";
-  #           "audio.allowed-rates" = allowedSampleRates;
-  #         };
-  #       }
-  #     ];
-  #   };
-  # };
+  environment.systemPackages = with pkgs; [
+    alsa-scarlett-gui
+  ];
 }

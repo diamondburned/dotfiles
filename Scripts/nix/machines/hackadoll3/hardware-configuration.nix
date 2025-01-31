@@ -13,6 +13,7 @@
     ./hardware/tertiary.nix
     ./hardware/graphics.nix
     ./hardware/scarlett.nix
+    ./hardware/opencl.nix
     ./hardware/disks.nix
   ];
 

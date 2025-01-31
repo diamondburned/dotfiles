@@ -5,17 +5,6 @@
   ...
 }:
 
-let
-  rocmEnv = pkgs.symlinkJoin {
-    name = "rocm-combined";
-    paths = with pkgs.rocmPackages; [
-      rocblas
-      hipblas
-      clr
-    ];
-  };
-in
-
 {
   boot.initrd.kernelModules = [ "amdgpu" ];
 
@@ -37,8 +26,4 @@ in
       libva-utils
     ];
   };
-
-  systemd.tmpfiles.rules = [
-    "L+    /opt/rocm   -    -    -     -    ${rocmEnv}"
-  ];
 }
