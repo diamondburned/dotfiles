@@ -29,9 +29,6 @@ in
     pipewire = {
       "99-scarlett" = {
         "context.properties" = {
-          "default.clock.quantum" = 512;
-          "default.clock.min-quantum" = 32;
-          "default.clock.max-quantum" = 1024;
           "default.clock.rate" = 48000;
           "default.clock.allowed-rates" = allowedSampleRates;
         };
@@ -40,8 +37,8 @@ in
     pipewire-pulse = {
       "99-scarlett" = {
         "stream.properties" = {
-          "node.latency" = "512/48000"; # default
-          "resample.quality" = 10;
+          # "node.latency" = "512/48000"; # default
+          # "resample.quality" = 10;
         };
       };
     };
@@ -56,8 +53,6 @@ in
             ["audio.format"] = "S24LE",
             ["audio.rate"] = 48000,
             ["audio.allowed-rates"] = { ${concatStringsSep ", " (map toString allowedSampleRates)} },
-            ["api.alsa.period-num"] = 2,
-            ["api.alsa.period-size"] = 2,
           },
         },
       }
