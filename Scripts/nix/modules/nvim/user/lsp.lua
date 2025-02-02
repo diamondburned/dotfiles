@@ -221,9 +221,13 @@ local function find_all_lsp_modules()
 
 	local lsp_modules = {}
 	local lspconfig_servers_dir = lspconfig_path .. "/lua/lspconfig/configs"
+
 	for _, file in ipairs(vim.fn.globpath(lspconfig_servers_dir, "*", true, true)) do
 		local name = vim.fn.fnamemodify(file, ":t:r")
-		table.insert(lsp_modules, name)
+		-- Don't load deprecated servers.
+		if lspconfig.server_aliases(name) == nil then
+			table.insert(lsp_modules, name)
+		end
 	end
 
 	return lsp_modules
