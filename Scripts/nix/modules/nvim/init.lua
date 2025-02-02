@@ -52,9 +52,11 @@ require('rainbow-delimiters.setup').setup {
 	},
 }
 
+require("user.treesitter")
 require("user.greet")
 require("user.copilot")
 require("user.lsp")
 require("user.cokeline")
 require("user.clipboard")
 require("user.file-tree")
+require("user.todo-comments")

@@ -93,6 +93,9 @@ map - dd
 
 set clipboard+=unnamedplus
 
+"Disable slow regexing"
+set re=2
+
 "80/100 column styling"
 set textwidth=80
 hi Column80  ctermfg=3
@@ -186,16 +189,6 @@ endif
 
 "Nvim Tree configs"
 "TODO: move this into user/file-tree.lua"
-
-lua <<EOF
-	require'nvim-treesitter.configs'.setup {
-		indent    = { enable = false },
-		highlight = { enable = true },
-		refactor  = {
-			highlight_definitions = { enable = true },
-		},
-	}
-EOF
 
 "TODO comments"
 lua << EOF
@@ -457,12 +450,9 @@ set lazyredraw
 set redrawtime=500
 
 "Configuring the update delay after buffer updates"
-" set updatetime=150
-" let g:cursorhold_updatetime = 150
-
 "150 might be too low, so I'm setting it to 750."
-set updatetime=750
-let g:cursorhold_updatetime = 750
+set updatetime=1000
+let g:cursorhold_updatetime = 1000
 
 "Undo history"
 set undofile
@@ -477,24 +467,9 @@ set scrolloff=7
 set sidescroll=1
 set sidescrolloff=5
 
-"Tree Sitter configs"
-lua <<EOF
-	local parser_config = require "nvim-treesitter.parsers".get_parser_configs()
-	parser_config.x86asm = {
-		install_info = {
-			url = "https://github.com/bearcove/tree-sitter-x86asm.git",
-			files = {"src/parser.c"},
-			branch = "main",
-			generate_requires_npm = true,
-			requires_generate_from_grammar = false,
-		},
-		filetype = "nasm",
-	}
-EOF
-
 "Auto-reload changed files"
-set autoread
-au CursorHold * checktime
+"set autoread
+"au CursorHold * checktime
 
 "ALE configs"
 " set omnifunc=ale#completion#OmniFunc
