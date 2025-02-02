@@ -88,10 +88,13 @@
       ];
       system-features = [
         "gccarch-x86-64-v4"
-        # "benchmark"
-        # "big-parallel"
-        # "kvm"
-        # "nixos-test"
+        "gccarch-x86-64-v3"
+        "gccarch-x86-64-v2"
+        "gccarch-x86-64"
+        "benchmark"
+        "big-parallel"
+        "kvm"
+        "nixos-test"
       ];
     };
   };
