@@ -86,6 +86,13 @@
       trusted-public-keys = [
         # "nix-community.cachix.org-1:mB9FSh9qf2dCimDSUo8Zy7bkq5CX+/rkCWyvRCYg3Fs="
       ];
+      system-features = [
+        "gccarch-x86-64-v4"
+        # "benchmark"
+        # "big-parallel"
+        # "kvm"
+        # "nixos-test"
+      ];
     };
   };
 
