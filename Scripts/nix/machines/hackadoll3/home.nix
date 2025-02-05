@@ -192,7 +192,6 @@ in
       gotools
       govulncheck
       nixfmt-rfc-style
-      licensor
       mdr
       # config.boot.kernelPackages.perf
       # perf_data_converter
