@@ -38,6 +38,11 @@ let
     # The Vulkan renderer is very buggy. Use the OpenGL renderer instead.
     GSK_RENDERER = "ngl";
 
+    # Set the XCURSOR_SIZE to half the size of the cursor theme.
+    # This accounts for the 2x HiDPI scaling on Wayland.
+    # The actual size is stored in the GTK configurations.
+    XCURSOR_SIZE = "${toString (builtins.div cursorTheme.size 2)}";
+
     # GTK_THEME = theme.name;
   };
 in

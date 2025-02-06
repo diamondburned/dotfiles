@@ -49,14 +49,14 @@ body > box {
     min-width: var(--thin-tab-width) !important;
     max-width: var(--thin-tab-width) !important;
 	/* Fix for later Firefox clipping the sidebar. */
-	z-index: 100;
+	z-index: 100 !important;
 }
 #sidebar-box:hover {
     min-width: var(--wide-tab-width) !important;
     max-width: var(--wide-tab-width) !important;
     margin-right: calc((var(--wide-tab-width) - var(--thin-tab-width)) * -1) !important;
-    z-index: 1;
-	box-shadow: 0px 0px 15px 3px rgba(0, 0, 0, 0.45);
+    z-index: 1 !important;
+	box-shadow: 0px 0px 15px 3px rgba(0, 0, 0, 0.45) !important;
 }
 
 #navigator-toolbox {
