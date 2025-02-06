@@ -31,10 +31,13 @@ let
   cursorTheme = {
     package = pkgs.catppuccin-cursors.mochaPink;
     name = "catppuccin-mocha-pink-cursors";
-    # size = 24;
+    size = 32;
   };
 
   env = {
+    # The Vulkan renderer is very buggy. Use the OpenGL renderer instead.
+    GSK_RENDERER = "ngl";
+
     # GTK_THEME = theme.name;
   };
 in
@@ -65,8 +68,8 @@ in
     gtk3 = {
       extraCss = css;
       extraConfig = {
-        # gtk-cursor-theme-name = cursorTheme.name;
-        # gtk-cursor-theme-size = cursorTheme.size;
+        gtk-cursor-theme-name = cursorTheme.name;
+        gtk-cursor-theme-size = cursorTheme.size;
         # gtk-font-name = config.gtk.font.name + " " + config.gtk.font.size;
         # gtk-icon-theme-name = config.gtk.iconTheme.name;
         # gtk-theme-name = theme.name;
@@ -77,8 +80,8 @@ in
     gtk4 = {
       extraCss = css;
       extraConfig = {
-        # gtk-cursor-theme-name = cursorTheme.name;
-        # gtk-cursor-theme-size = cursorTheme.size;
+        gtk-cursor-theme-name = cursorTheme.name;
+        gtk-cursor-theme-size = cursorTheme.size;
         # gtk-font-name = config.gtk.font.name + " " + config.gtk.font.size;
         # gtk-icon-theme-name = config.gtk.iconTheme.name;
         # gtk-theme-name = theme.name;
