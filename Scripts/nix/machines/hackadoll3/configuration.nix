@@ -9,6 +9,7 @@
 
 {
   imports = [
+    self.nixosModules.home-manager
     self.nixosModules.bash
     self.nixosModules.v4l2
     self.nixosModules.udev

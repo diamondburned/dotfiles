@@ -64,47 +64,47 @@
     }@inputs:
 
     let
-      nixosConfigurations = {
-        hackadoll3 = mkNixOSSystem "x86_64-linux" [
-          ./machines/hackadoll3/configuration.nix
-        ];
-        lilyhoshii = mkNixOSSystem "aarch64-linux" [
-          ./machines/lilyhoshii/configuration.nix
-        ];
-        iorichan = mkNixOSSystem "x86_64-linux" [
-          ./machines/iorichan/configuration.nix
-        ];
-      };
-
-      mkNixOSSystem =
-        system: modules:
-        nixpkgs.lib.nixosSystem rec {
-          inherit system;
-          modules = [ ./machines/base.nix ] ++ modules;
-          specialArgs = mkNixOSArgs {
-            inherit system;
-          };
-        };
-
-      mkNixOSArgs =
-        { system }:
-        {
-          inherit self;
-          inputs = combinedInputs {
-            pkgs = nixpkgs.legacyPackages.${system};
-          };
-          lib = nixpkgs.lib.extend (
-            final: prev:
+      nixosConfigurations =
+        nixpkgs.lib.flip nixpkgs.lib.mapAttrs
+          {
+            # Desktops
+            hackadoll3 = {
+              system = "x86_64-linux";
+            };
+            lilyhoshii = {
+              system = "aarch64-linux";
+            };
+          }
+          (
+            machine:
             {
-              x = import ./overlays/lib/x.nix {
-                pkgs = nixpkgs.legacyPackages.${system};
-                lib = prev;
+              system,
+            }:
+            nixpkgs.lib.nixosSystem {
+              inherit system;
+              modules = [
+                ./machines/base.nix
+                ./machines/${machine}/configuration.nix
+              ];
+              specialArgs = {
+                inherit self;
+                inputs = combinedInputs {
+                  pkgs = nixpkgs.legacyPackages.${system};
+                };
+                lib = nixpkgs.lib.extend (
+                  final: prev:
+                  {
+                    x = import ./overlays/lib/x.nix {
+                      pkgs = nixpkgs.legacyPackages.${system};
+                      lib = prev;
+                    };
+                  }
+                  // self.lib
+                  // home-manager.lib
+                );
               };
             }
-            // self.lib
-            // home-manager.lib
           );
-        };
 
       mkDevShell =
         system:

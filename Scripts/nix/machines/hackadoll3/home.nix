@@ -57,6 +57,7 @@ in
     self.homeModules.zellij
     self.homeModules.flatpak
     self.homeModules.blackbox-terminal
+    self.homeModules.dotfiles-pusher
   ];
 
   nixpkgs.config = {

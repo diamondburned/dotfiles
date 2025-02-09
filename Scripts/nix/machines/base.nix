@@ -3,17 +3,11 @@
   lib,
   pkgs,
   self,
-  inputs,
   ...
 }:
 
-let
-  inherit (inputs) home-manager;
-in
-
 {
   imports = [
-    home-manager.nixosModules.home-manager
     self.nixosModules.packages
   ];
 
@@ -24,40 +18,6 @@ in
     ];
     config = {
       allowUnfree = true;
-    };
-  };
-
-  home-manager.sharedModules = [
-    {
-      nixpkgs = {
-        overlays = [
-          self.overlays.overrides
-          self.overlays.packages
-        ];
-        config = {
-          allowUnfree = true;
-        };
-      };
-    }
-  ];
-
-  home-manager.extraSpecialArgs = {
-    inherit self inputs;
-  };
-
-  home-manager.users.diamond = {
-    imports = [
-      self.homeModules.schedules
-    ];
-
-    # Automatically push dotfiles.
-    services.user.schedules."dotfiles-pusher" = {
-      description = "Automatically push dotfiles";
-      calendar = "hourly";
-      script = ''
-        cd ~/ && git add -A && git commit -m Update && git pull --rebase && git push origin
-        exit 0
-      '';
     };
   };
 
@@ -84,7 +44,18 @@ in
   # apps for arbitrary reasons.
   boot.kernelParams = [ "split_lock_detect=off" ];
 
-  users.users.diamond.openssh.authorizedKeys.keyFiles = [
+  users.users.root.openssh.authorizedKeys.keyFiles = [
     "${self}/public_keys"
   ];
+
+  services.openssh = {
+    enable = true;
+    extraConfig = ''
+      ClientAliveInterval 30
+      ClientAliveCountMax 100
+      AllowTcpForwarding yes
+      PasswordAuthentication no
+    '';
+    knownHosts = (import ./secrets/ssh.nix).knownHosts;
+  };
 }
