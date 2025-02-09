@@ -64,6 +64,19 @@
     }@inputs:
 
     let
+      mkPackages =
+        pkgs:
+        import ./packages/all-packages.nix {
+          pkgs = pkgs.appendOverlays [
+            inputs.gomod2nix.overlays.default
+            self.overlays.overrides
+          ];
+          inputs = self.lib.combinedInputs {
+            inherit pkgs;
+          };
+        };
+    in
+    {
       nixosConfigurations =
         nixpkgs.lib.flip nixpkgs.lib.mapAttrs
           {
@@ -88,64 +101,39 @@
               ];
               specialArgs = {
                 inherit self;
-                inputs = combinedInputs {
+                inputs = self.lib.combinedInputs {
                   pkgs = nixpkgs.legacyPackages.${system};
                 };
                 lib = nixpkgs.lib.extend (
                   final: prev:
                   {
+                    # extra system utilities.
                     x = import ./overlays/lib/x.nix {
                       pkgs = nixpkgs.legacyPackages.${system};
                       lib = prev;
                     };
+                    inherit (self.lib) path;
                   }
-                  // self.lib
                   // home-manager.lib
                 );
               };
             }
           );
 
-      mkDevShell =
-        system:
-        let
-          pkgs = import nixpkgs {
-            inherit system;
-            config.allowUnfree = true;
-            overlays = [
-              inputs.gomod2nix.overlays.default
-              self.overlays.overrides
-              self.overlays.packages
-            ];
-          };
-        in
-        pkgs.mkShell {
-          buildInputs = with pkgs; [
-            bonito
-            disko
-            niv
-            git
-            git-crypt
-            gomod2nix
-            nixfmt-rfc-style
-            nix-output-monitor
-            lua-language-server
-          ];
+      nixosModules = self.lib.searchModules {
+        root = ./modules;
+        nixFile = "default.nix";
+        extraModules = {
+          packages = import ./packages;
         };
+      };
 
-      mkPackages =
-        pkgs:
-        import ./packages/all-packages.nix {
-          pkgs = pkgs.appendOverlays [
-            inputs.gomod2nix.overlays.default
-            self.overlays.overrides
-          ];
-          inputs = combinedInputs {
-            inherit pkgs;
-          };
-        };
+      homeModules = self.lib.searchModules {
+        root = ./modules;
+        nixFile = "home.nix";
+      };
 
-      packages = eachDefaultSystem (
+      packages = self.lib.systems.eachSystem (
         system:
         mkPackages (
           import nixpkgs {
@@ -160,62 +148,39 @@
         packages = (final: prev: mkPackages prev);
       };
 
-      nixosModules = (searchModules "default.nix") // {
-        packages = import ./packages;
-      };
-
-      homeModules = (searchModules "home.nix") // { };
-
-      searchModules =
-        with builtins;
-        with nixpkgs.lib;
-        nixFile:
+      devShells = self.lib.systems.eachSystemAsDefault (
+        system:
         let
-          root = ./modules;
-          modules = nixpkgs.lib.fileset.toSource {
-            inherit root;
-            fileset = globset.lib.glob root "*/${nixFile}";
+          pkgs = import nixpkgs {
+            inherit system;
+            overlays = [
+              inputs.gomod2nix.overlays.default
+              self.overlays.overrides
+              self.overlays.packages
+            ];
+            config.allowUnfree = true;
           };
         in
-        mapAttrs (name: _: import (root + "/${name}/${nixFile}")) (builtins.readDir modules);
+        pkgs.mkShell {
+          buildInputs = with pkgs; [
+            bonito
+            disko
+            niv
+            git
+            git-crypt
+            gomod2nix
+            nixfmt-rfc-style
+            nix-output-monitor
+            lua-language-server
+          ];
+        }
+      );
 
-      # combinedInputs contains all the inputs from the flake and the niv inputs
-      # updated using `niv` commands.
-      combinedInputs =
-        { pkgs }:
-        { }
-        # Mark Niv inputs with a _type:
-        // (nixpkgs.lib.mapAttrs (_: src: src // { _type = "niv"; }) (
-          import "${self}/nix/sources.nix" {
-            inherit (pkgs) system;
-          }
-        ))
-        # Flake inputs are already marked with a _type:
-        // (inputs);
+      lib = {
+        combinedInputs = import ./nix/lib/combined-inputs.nix inputs;
+        searchModules = import ./nix/lib/search-modules.nix inputs;
+        systems = import ./nix/lib/systems.nix inputs;
 
-      eachDefaultSystem =
-        systemFunc:
-        builtins.listToAttrs (
-          map (system: {
-            name = system;
-            value = systemFunc system;
-          }) flake-utils.lib.defaultSystems
-        );
-    in
-    {
-      inherit nixosConfigurations;
-
-      inherit nixosModules;
-      inherit homeModules;
-
-      inherit packages;
-      inherit overlays;
-
-      devShells = eachDefaultSystem (pkgs: {
-        default = mkDevShell pkgs;
-      });
-
-      lib = rec {
         path = {
           bin = path: ./bin + ("/" + path);
           static = path: ./static + ("/" + path);

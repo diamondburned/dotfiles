@@ -56,6 +56,5 @@
       AllowTcpForwarding yes
       PasswordAuthentication no
     '';
-    knownHosts = (import ./secrets/ssh.nix).knownHosts;
   };
 }
