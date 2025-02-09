@@ -65,27 +65,26 @@
 
     let
       nixosConfigurations = {
-        hackadoll3 = nixpkgs.lib.nixosSystem rec {
-          system = "x86_64-linux";
-          modules = [
-            ./machines/base.nix
-            ./machines/hackadoll3/configuration.nix
-          ];
-          specialArgs = mkNixOSArgs {
-            inherit system;
-          };
-        };
-        lilyhoshii = nixpkgs.lib.nixosSystem rec {
-          system = "aarch64-linux";
-          modules = [
-            ./machines/base.nix
-            ./machines/lilyhoshii/configuration.nix
-          ];
-          specialArgs = mkNixOSArgs {
-            inherit system;
-          };
-        };
+        hackadoll3 = mkNixOSSystem "x86_64-linux" [
+          ./machines/hackadoll3/configuration.nix
+        ];
+        lilyhoshii = mkNixOSSystem "aarch64-linux" [
+          ./machines/lilyhoshii/configuration.nix
+        ];
+        iorichan = mkNixOSSystem "x86_64-linux" [
+          ./machines/iorichan/configuration.nix
+        ];
       };
+
+      mkNixOSSystem =
+        system: modules:
+        nixpkgs.lib.nixosSystem rec {
+          inherit system;
+          modules = [ ./machines/base.nix ] ++ modules;
+          specialArgs = mkNixOSArgs {
+            inherit system;
+          };
+        };
 
       mkNixOSArgs =
         { system }:
