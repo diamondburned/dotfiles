@@ -15,10 +15,29 @@ with builtins;
 with nixpkgs.lib;
 
 let
-  modules = nixpkgs.lib.fileset.toSource {
-    inherit root;
-    fileset = globset.lib.glob root "*/${nixFile}";
-  };
+  isNixModule = nixFile == "default.nix";
+
+  globToDir =
+    glob:
+    builtins.readDir (
+      nixpkgs.lib.fileset.toSource {
+        inherit root;
+        fileset = globset.lib.glob root glob;
+      }
+    );
 in
-(mapAttrs (name: _: import (root + "/${name}/${nixFile}")) (builtins.readDir modules))
+{ }
+
+// (mapAttrs (name: _: {
+  inherit name;
+  value = import (root + "/${name}/${nixFile}");
+}) (globToDir "*/${nixFile}"))
+
+// (optionalAttrs isNixModule (
+  mapAttrs' (name: _: {
+    name = builtins.replaceStrings [ ".nix" ] [ "" ] name;
+    value = import (root + "/${name}");
+  }) (globToDir "*.nix")
+))
+
 // extraModules
