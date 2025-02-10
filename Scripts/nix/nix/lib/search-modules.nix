@@ -28,7 +28,7 @@ let
 in
 { }
 
-// (mapAttrs (name: _: {
+// (mapAttrs' (name: _: {
   inherit name;
   value = import (root + "/${name}/${nixFile}");
 }) (globToDir "*/${nixFile}"))
