@@ -72,7 +72,7 @@
             self.overlays.overrides
           ];
           inputs = self.lib.combinedInputs {
-            inherit pkgs;
+            inherit pkgs inputs;
           };
         };
     in
@@ -103,6 +103,7 @@
                 inherit self;
                 inputs = self.lib.combinedInputs {
                   pkgs = nixpkgs.legacyPackages.${system};
+                  inherit inputs;
                 };
                 lib = nixpkgs.lib.extend (
                   final: prev:
@@ -177,7 +178,7 @@
       );
 
       lib = {
-        combinedInputs = import ./nix/lib/combined-inputs.nix inputs;
+        combinedInputs = import ./nix/lib/combined-inputs.nix;
         searchModules = import ./nix/lib/search-modules.nix inputs;
         systems = import ./nix/lib/systems.nix inputs;
 

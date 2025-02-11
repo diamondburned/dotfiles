@@ -1,9 +1,11 @@
 # combinedInputs contains all the inputs from the flake and the niv inputs
 # updated using `niv` commands.
 
-{ self, nixpkgs, ... }@inputs:
+{ pkgs, inputs }:
 
-{ pkgs }:
+let
+  inherit (inputs) self nixpkgs;
+in
 
 {
 }
