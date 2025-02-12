@@ -51,7 +51,7 @@ ble/prompt/backslash:r_job() {
 ble/prompt/backslash:r_shlvl() {
 	ble/prompt/unit/add-hash '$SHLVL'
 	if ((SHLVL > 1)); then
-		ble/prompt/print "   $SHLVL"
+		ble/prompt/print "   +$[SHLVL - 1]"
 	fi
 }
 
