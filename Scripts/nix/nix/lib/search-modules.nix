@@ -19,10 +19,12 @@ let
 
   globToDir =
     glob:
-    nixpkgs.lib.fileset.toSource {
-      inherit root;
-      fileset = globset.lib.glob root glob;
-    };
+    builtins.readDir (
+      nixpkgs.lib.fileset.toSource {
+        inherit root;
+        fileset = globset.lib.glob root glob;
+      }
+    );
 in
 { }
 

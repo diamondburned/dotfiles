@@ -33,7 +33,7 @@ Plug 'junegunn/fzf.vim'
 
 "Better highlighting"
 Plug 'nvim-treesitter/nvim-treesitter', {'do': ':TSUpdate'}
-Plug 'nvim-treesitter/nvim-treesitter-refactor'
+Plug 'nvim-treesitter/nvim-treesitter-context'
 Plug 'https://gitlab.com/HiPhish/rainbow-delimiters.nvim.git'
 
 "Autocomplete brackets/parens/etc like vscode"
