@@ -45,6 +45,7 @@ in
 {
   imports = [
     self.homeModules.firefox
+    self.homeModules.firefox-cast
     self.homeModules.google-chrome
     self.homeModules.blackbox-terminal
     self.homeModules.gnome-terminal

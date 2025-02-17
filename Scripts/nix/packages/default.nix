@@ -10,6 +10,5 @@
     ./caddyv1/caddy.nix
     ./ghproxy/ghproxy.nix
     ./drone-ci/drone-ci.nix
-    ./realtek/realtek.nix
   ];
 }

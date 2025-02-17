@@ -2,15 +2,20 @@
 # your system.  Help is available in the configuration.nix(5) man page
 # and in the NixOS manual (accessible by running `nixos-help`).
 
-{ config, lib, pkgs, ... }:
+{
+  config,
+  lib,
+  pkgs,
+  ...
+}:
 
 {
-  imports =
-    [ # Include the results of the hardware scan.
-      ./hardware-configuration.nix
-      # Apple Silicon support.
-      # ./apple-silicon-support
-    ];
+  imports = [
+    # Include the results of the hardware scan.
+    ./hardware-configuration.nix
+    # Apple Silicon support.
+    # ./apple-silicon-support
+  ];
 
   # Use the systemd-boot EFI boot loader.
   boot.loader.systemd-boot.enable = true;
@@ -24,7 +29,7 @@
   console = {
     # font = "ter-v32b";
     # packages = with pkgs; [ terminus_font ];
-		# earlySetup = true;
+    # earlySetup = true;
     # useXkbConfig = true; # use xkbOptions in tty.
   };
 
@@ -35,26 +40,29 @@
     desktopManager.gnome.enable = true;
   };
 
-  environment.gnome.excludePackages = with pkgs.gnome; with pkgs; [
-    cheese
-    gnome-music
-    gnome-tour
-    gnome-photos
-    gedit
-    epiphany
-    geary
-    totem
-    tali
-    iagno
-    hitori
-    atomix
-  ];
+  environment.gnome.excludePackages =
+    with pkgs.gnome;
+    with pkgs;
+    [
+      cheese
+      gnome-music
+      gnome-tour
+      gnome-photos
+      gedit
+      epiphany
+      geary
+      totem
+      tali
+      iagno
+      hitori
+      atomix
+    ];
 
   programs.dconf.enable = true;
-  
+
   # Enable sound.
   # sound.enable = true;
-  hardware.pulseaudio.enable = lib.mkForce false;
+  # hardware.pulseaudio.enable = lib.mkForce false;
   services.pipewire = {
     enable = true;
     alsa.enable = true;
@@ -66,7 +74,10 @@
   # Define a user account. Don't forget to set a password with ‘passwd’.
   users.users.diamond = {
     isNormalUser = true;
-    extraGroups = [ "wheel" "networkmanager" ]; # Enable ‘sudo’ for the user.
+    extraGroups = [
+      "wheel"
+      "networkmanager"
+    ]; # Enable ‘sudo’ for the user.
     packages = with pkgs; [
       firefox
       tree
@@ -97,7 +108,8 @@
   # # Copy the NixOS configuration file and link it from the resulting system
   # (/run/current-system/configuration.nix). This is useful in case you
   # accidentally delete configuration.nix.
-  system.copySystemConfiguration = true;
+  # system.copySystemConfiguration = true;
+  hardware.asahi.peripheralFirmwareDirectory = /boot/asahi;
 
   # This value determines the NixOS release from which the default
   # settings for stateful data, like file locations and database versions

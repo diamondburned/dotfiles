@@ -36,6 +36,12 @@
       flake-utils.follows = "flake-utils";
     };
 
+    nixos-apple-silicon.url = "github:tpwrules/nixos-apple-silicon";
+    nixos-apple-silicon.inputs = {
+      nixpkgs.follows = "nixpkgs";
+      flake-compat.follows = "flake-compat";
+    };
+
     comd.url = "github:diamondburned/comd";
     comd.inputs = {
       nixpkgs.follows = "nixpkgs";

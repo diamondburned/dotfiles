@@ -2,21 +2,30 @@
   config,
   lib,
   pkgs,
+  self,
+  inputs,
   ...
 }:
 
+let
+  inherit (inputs)
+    nixos-apple-silicon
+    ;
+in
+
 {
   imports = [
-    <dotfiles/secrets>
-    <dotfiles/cfg/keyd>
-    <dotfiles/cfg/fonts>
-    <dotfiles/cfg/gnome>
-    <dotfiles/cfg/locale>
-    <dotfiles/cfg/wireshark>
-    <dotfiles/cfg/networking>
-    <dotfiles/cfg/google-chrome>
-    <home-manager/nixos>
-    <nixos-apple-silicon/apple-silicon-support>
+    nixos-apple-silicon.nixosModules.default
+
+    self.nixosModules.keyd
+    self.nixosModules.fonts
+    self.nixosModules.gnome
+    self.nixosModules.locale
+    self.nixosModules.wireshark
+    self.nixosModules.networking
+    self.nixosModules.google-chrome
+    self.nixosModules.home-manager
+
     ./base/configuration.nix
     ./cfg/virtualization.nix
     ./cfg/displaylink.nix
@@ -41,7 +50,6 @@
     config = {
       allowUnfree = true;
     };
-    overlays = import ./overlays.nix;
   };
 
   programs.dconf.enable = true;

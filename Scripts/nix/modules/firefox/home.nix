@@ -71,15 +71,12 @@ in
     (makeFirefoxProfileDesktopFile {
       profile = "Tunneled";
     })
-
-    fx-cast-bridge
   ];
 
   programs.firefox.enable = true;
   programs.firefox.package = firefox;
 
   programs.firefox.nativeMessagingHosts = with pkgs; [
-    fx-cast-bridge
     gnomeExtensions.gsconnect
   ];
 

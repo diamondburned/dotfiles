@@ -1,111 +1,106 @@
-{ config, lib, pkgs, ... }:
+{
+  config,
+  lib,
+  pkgs,
+  self,
+  ...
+}:
 
 {
-	home-manager.backupFileExtension = "bak";
+  home-manager.backupFileExtension = "bak";
 
-	home-manager.users.diamond = {
-		imports = [
-			<dotfiles/cfg/firefox>
-			<dotfiles/cfg/zellij/home.nix>
-			<dotfiles/cfg/fonts/home.nix>
-			<dotfiles/cfg/gnome/home.nix>
-			<dotfiles/cfg/nvim/home.nix>
-			<dotfiles/cfg/foot/home.nix>
-			<dotfiles/cfg/git/home.nix>
-			<dotfiles/cfg/gtk/home.nix>
-			<dotfiles/cfg/hm-gnome-terminal.nix>
-		];
+  home-manager.users.diamond = {
+    imports = [
+      self.homeModules.firefox
+      self.homeModules.zellij
+      self.homeModules.fonts
+      self.homeModules.gnome
+      self.homeModules.nvim
+      self.homeModules.foot
+      self.homeModules.git
+      self.homeModules.gtk
+      self.homeModules.nvim
+      self.homeModules.gnome-terminal
+    ];
 
-		nixpkgs = {
-			config = {
-				allowUnfree = true;
-			};
-			overlays = import ./overlays.nix;
-		};
+    nixpkgs = {
+      config = {
+        allowUnfree = true;
+      };
+    };
 
-		programs.direnv = {
-			enable = true;
-			config.load_dotenv = false;
-			nix-direnv.enable = true;
-		};
+    programs.direnv = {
+      enable = true;
+      config.load_dotenv = false;
+      nix-direnv.enable = true;
+    };
 
-		programs.bash = {
-			enable = true;
-			initExtra = builtins.readFile <dotfiles/cfg/bashrc>;
-		};
+    programs.mpv = {
+      enable = true;
+      config = {
+        osd-font = "Sans";
+        osd-status-msg = "\${playback-time/full} / \${duration} (\${percent-pos}%)\\nframe: \${estimated-frame-number} / \${estimated-frame-count}";
+        gpu-api = "auto";
+        gpu-context = "auto";
+        vo = "gpu";
+        dither-depth = 8;
+        scale = "lanczos";
+        script-opts = "ytdl_hook-ytdl_path=yt-dlp";
+      };
+    };
 
-		gtk = {
-			enable = true;
-			# font.name = "Sans";
-			font.size = 11;
-		};
+    # Breaks speakers.
+    # services.easyeffects.enable = true;
 
-		programs.mpv = {
-			enable = true;
-			config = {
-				osd-font = "Sans";
-				osd-status-msg = "\${playback-time/full} / \${duration} (\${percent-pos}%)\\nframe: \${estimated-frame-number} / \${estimated-frame-count}";
-				gpu-api = "auto";
-				gpu-context = "auto";
-				vo = "gpu";
-				dither-depth = 8;
-				scale = "lanczos";
-				script-opts = "ytdl_hook-ytdl_path=yt-dlp";
-			};
-		};
+    home.packages = with pkgs; [
+      celluloid
+      fcitx5-configtool
+      fcitx5-gtk
+      gcolor3
+      gimp
+      git-crypt
+      gnome-disk-utility
+      gnome-power-manager
+      gnome-tweaks
+      go
+      gopls
+      gotools
+      gotab
+      fzf
+      dissent
+      # armcord
+      # legcord
+      signal-desktop
+      jq
+      htop
+      dnsutils
+      keepassxc
+      komikku
+      nix-output-monitor
+      oxfs
+      helvum
+      pavucontrol
+      playerctl
+      qalculate-gtk
+      silver-searcher
+      virt-manager
+      waypipe
+      wl-clipboard
+      telegram-desktop
+      # libreoffice-fresh
 
-		# Breaks speakers.
-		# services.easyeffects.enable = true;
+      # (callPackage ./packages/spot-git.nix { })
+    ];
+    home.stateVersion = "23.11";
 
-		home.packages = with pkgs; [
-			celluloid
-			fcitx5-configtool
-			fcitx5-gtk
-			gcolor3
-			gimp
-			git-crypt
-			gnome-disk-utility
-			gnome-power-manager
-			gnome-tweaks
-			go
-			gopls
-			gotools
-			gotab
-			fzf
-			dissent
-			# armcord
-			# legcord
-			signal-desktop
-			jq
-			htop
-			dnsutils
-			keepassxc
-			komikku
-			nix-output-monitor
-			oxfs
-			helvum
-			pavucontrol
-			playerctl
-			qalculate-gtk
-			silver-searcher
-			virt-manager
-			waypipe
-			wl-clipboard
-			telegram-desktop
-			# libreoffice-fresh
+    fonts.fontconfig.enable = true;
 
-			(callPackage ./packages/spot-git.nix {})
-		];
-		home.stateVersion = "23.11";
-
-		fonts.fontconfig.enable = true;
-
-		xdg = {
-			enable = true;
-			mime.enable = true;
-			configFile = {
-				"nixpkgs/config.nix".text = "{ allowUnfree = true; }";
-			};
-		};
-	};
+    xdg = {
+      enable = true;
+      mime.enable = true;
+      configFile = {
+        "nixpkgs/config.nix".text = "{ allowUnfree = true; }";
+      };
+    };
+  };
 }
