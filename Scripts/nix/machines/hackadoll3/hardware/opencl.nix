@@ -14,9 +14,9 @@
       # khronos-ocl-icd-loader
 
       amdvlk
-      rocmPackages_5.clr.icd
-      rocmPackages_5.clr
-      rocmPackages_5.rocm-runtime
+      # rocmPackages_5.clr.icd
+      # rocmPackages_5.clr
+      # rocmPackages_5.rocm-runtime
 
       # rocmPackages.clr
       # rocmPackages.rpp-opencl
@@ -24,9 +24,9 @@
     ];
   };
 
-  systemd.tmpfiles.rules = [
-    "L+    /opt/rocm/hip   -    -    -     -    ${pkgs.rocmPackages_5.clr}"
-  ];
+  # systemd.tmpfiles.rules = [
+  #   "L+    /opt/rocm/hip   -    -    -     -    ${pkgs.rocmPackages_5.clr}"
+  # ];
 
   environment.systemPackages = with pkgs; [
     lact
