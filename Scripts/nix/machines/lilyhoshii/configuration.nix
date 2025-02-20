@@ -18,6 +18,7 @@ in
     nixos-apple-silicon.nixosModules.default
 
     self.nixosModules.keyd
+    self.nixosModules.bash
     self.nixosModules.fonts
     self.nixosModules.gnome
     self.nixosModules.locale

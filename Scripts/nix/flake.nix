@@ -170,7 +170,7 @@
         in
         pkgs.mkShell {
           buildInputs = with pkgs; [
-            bonito
+            # bonito
             disko
             niv
             git

@@ -71,6 +71,7 @@
       # armcord
       # legcord
       signal-desktop
+      mission-center
       jq
       htop
       dnsutils

@@ -135,7 +135,7 @@ nix_exec() {
 # 	cd "$HOME/Scripts/nix"
 # 	sudo nix-shell --run 'nixos-rebuild --log-format internal-json -v switch |& nom --json'
 # )
-alias nixrl="sudo bash -c 'nixos-rebuild --log-format internal-json switch --flake $HOME/Scripts/nix |& nom --json'"
+alias nixrl="sudo bash -c 'nixos-rebuild --log-format internal-json switch --flake $HOME/Scripts/nix --impure |& nom --json'"
 
 # lol fuck node
 # NPM_PACKAGES="${HOME}/.npm-packages"

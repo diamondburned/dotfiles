@@ -190,22 +190,6 @@ endif
 "Nvim Tree configs"
 "TODO: move this into user/file-tree.lua"
 
-"TODO comments"
-lua << EOF
-	require("todo-comments").setup {
-		signs = true,
-		keywords = {
-			FIX  = { icon = "" },
-			TODO = { icon = "" },
-			HACK = { icon = "" },
-			WARN = { icon = "" },
-			PERF = { icon = "" },
-			NOTE = { icon = "" },
-			TEST = { icon = "" },
-		},
-	}
-EOF
-
 " backgroundColor = "#1D1D1D";
 " foregroundColor = "#FFFFFF";
 " palette = [
@@ -395,18 +379,6 @@ set fillchars=vert:\▏
 " let g:gitgutter_sign_removed_first_line='-'
 " let g:gitgutter_sign_modified_removed='-'
 " let g:gitgutter_override_sign_column_highlight = 0
-lua << EOF
-require('gitsigns').setup({
-	signs = {
-		add          = { text = '+' },
-		change       = { text = '¦' },
-		delete       = { text = '-' },
-		topdelete    = { text = '-' },
-		changedelete = { text = '-' },
-		untracked    = { text = ' ' },
-	}
-})
-EOF
 
 "245 is a grey-ish shade."
 hi! GitSignsAdd          guibg=NONE ctermbg=NONE guifg=#3DCCB2 ctermfg=2
@@ -428,7 +400,7 @@ highlight ConflictMarkerCommonAncestorsHunk guibg=#754a81
 highlight LineNr guifg=#6c6c6c ctermfg=242
 
 "New file in buffer directory"
-command -nargs=1 New :e %:p:h/<args>
+command! -nargs=1 New :e %:p:h/<args>
 
 ":GitAdd to add the current file to git."
 command! GitAdd           :Git add %

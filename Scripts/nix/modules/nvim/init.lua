@@ -52,6 +52,30 @@ require('rainbow-delimiters.setup').setup {
 	},
 }
 
+require("todo-comments").setup {
+	signs = true,
+	keywords = {
+		FIX  = { icon = "" },
+		TODO = { icon = "" },
+		HACK = { icon = "" },
+		WARN = { icon = "" },
+		PERF = { icon = "" },
+		NOTE = { icon = "" },
+		TEST = { icon = "" },
+	},
+}
+
+require('gitsigns').setup({
+	signs = {
+		add          = { text = '+' },
+		change       = { text = '¦' },
+		delete       = { text = '-' },
+		topdelete    = { text = '-' },
+		changedelete = { text = '-' },
+		untracked    = { text = ' ' },
+	}
+})
+
 require("user.treesitter")
 require("user.greet")
 require("user.copilot")
